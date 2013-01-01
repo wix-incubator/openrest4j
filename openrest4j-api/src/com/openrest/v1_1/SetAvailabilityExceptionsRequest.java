@@ -3,8 +3,9 @@ package com.openrest.v1_1;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SetAvailabilityExceptionsRequest extends Request {
@@ -32,15 +33,15 @@ public class SetAvailabilityExceptionsRequest extends Request {
     	return new SetAvailabilityExceptionsRequest(accessToken, null, itemId, exceptions);
     }
     
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String accessToken;
     
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String organizationId;
 
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String itemId;
 
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public List<DateTimeWindow> exceptions = new ArrayList<DateTimeWindow>();
 }

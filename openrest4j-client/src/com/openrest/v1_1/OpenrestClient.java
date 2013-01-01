@@ -2,8 +2,7 @@ package com.openrest.v1_1;
 
 import java.io.IOException;
 
-import org.codehaus.jackson.type.TypeReference;
-
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.api.client.http.HttpRequestFactory;
 
 /**

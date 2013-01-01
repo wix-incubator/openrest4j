@@ -1,10 +1,11 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 public class SearchResponse implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -16,6 +17,6 @@ public class SearchResponse implements Serializable {
     	this.results = results;
     }
 
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-	public List<SearchResult> results = Collections.emptyList();
+    @JsonInclude(Include.NON_DEFAULT)
+	public List<SearchResult> results = new ArrayList<SearchResult>();
 }

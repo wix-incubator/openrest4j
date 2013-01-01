@@ -5,8 +5,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Notification implements Serializable {
@@ -49,29 +50,29 @@ public class Notification implements Serializable {
         return new Notification(NOTIFICATION_TYPE_DELAYED_ORDER, contact, durationMins, acceptOrder);
     }
 
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String restaurantId;
 
     /** Notification type. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String type;
 
     /** Who should be notified. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Contact contact;
 
     /**
      * Event duration for triggering a notification, e.g. "after 15 minutes of
      * not handling an incoming order".
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Integer durationMins = 0;
     
     /**
      * For orders-related notifications, whether or not the order should be
      * marked as accepted upon successful transmission of the notification.
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Boolean acceptOrder = Boolean.FALSE;
     
     @Override

@@ -1,11 +1,12 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Menu implements Serializable {
@@ -36,14 +37,14 @@ public class Menu implements Serializable {
     /** Default constructor for JSON deserialization. */
     public Menu() {}
 
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<Item> items = Collections.emptyList();
+    @JsonInclude(Include.NON_DEFAULT)
+    public List<Item> items = new ArrayList<Item>();
 
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<Tag> tags = Collections.emptyList();
+    @JsonInclude(Include.NON_DEFAULT)
+    public List<Tag> tags = new ArrayList<Tag>();
 
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<Category> categories = Collections.emptyList();
+    @JsonInclude(Include.NON_DEFAULT)
+    public List<Category> categories = new ArrayList<Category>();
 
     private static final long serialVersionUID = 1L;
 }

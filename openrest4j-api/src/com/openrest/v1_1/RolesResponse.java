@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 public class RolesResponse implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -17,9 +18,9 @@ public class RolesResponse implements Serializable {
     	this.roles = roles;
     }
     
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
 	public String userId;
 
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
 	public List<Role> roles = new ArrayList<Role>();
 }

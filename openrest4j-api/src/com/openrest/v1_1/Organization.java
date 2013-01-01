@@ -9,8 +9,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TimeZone;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
  * Base class for Restaurants, Chains, Distributers, etc.
@@ -87,7 +88,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable {
     }
     
     /** The organization's unique id. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String id;
     
     /**
@@ -96,31 +97,31 @@ public abstract class Organization extends OpenrestObject implements Cloneable {
      * 
      * Developers should use unique keys, e.g. "com.company.product".
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> externalIds = new HashMap<String, String>();
     
     /** The organization's creation timestamp. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Long created;
     
     /** The organization's last modification timestamp. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Long modified;
     
     /** The organization's title in various locales. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> title = new HashMap<String, String>();
 
     /** The organization's description or tagline in various locales. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> description = new HashMap<String, String>();
     
     /** The color scheme. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public ColorScheme colorScheme;
 
     /** The organization's contact. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Contact contact;
     
     /**
@@ -129,18 +130,18 @@ public abstract class Organization extends OpenrestObject implements Cloneable {
      * 
      * Developers should use unique keys, e.g. "com.company.product".
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Map<String, Contact> externalContacts = new HashMap<String, Contact>();
 
     /** The address of this organization. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Address address;
     
     /**
      * The restaurant's timezone.
      * @see http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String timezone;
     
     public TimeZone timezone() {
@@ -148,65 +149,65 @@ public abstract class Organization extends OpenrestObject implements Cloneable {
     }
     
     /** The organization's currency (ISO 4217). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String currency;
     
     /** The organization's default locale, e.g. "en_US". */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String locale;
     
     /** The organization's supported locales. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Set<String> locales = new HashSet<String>();
     
     /** Maps message types (e.g. MESSAGE_TYPE_WELCOME) to their text in various locales. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Map<String, Map<String, String>> messages = new HashMap<String, Map<String, String>>();
     
     /** The organization's main web-site URL. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String link;
     
     /** The organization's online ordering domain. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String domain;
     
     /**
      * The organization's online ordering alternative / legacy domains.
      * These should redirect to the main domain.
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Set<String> altDomains = new HashSet<String>(); 
     
     /** The organization's picture URL (direct link), or null if unavailable. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String picture;
     
     /** The organization's icon URL (direct link), or null if unavailable. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String icon;
     
     /** The picture shown when a picture is missing. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String noImagePicture;
     
     /** The organization's applications. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public List<AppInfo> apps = new ArrayList<AppInfo>();
     
     /** SEO information. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Seo seo;
     
     /**
      * Map of user-defined extended properties. Developers should use unique
      * keys, e.g. "com.googlecode.openrestext".
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> properties = new HashMap<String, String>();
     
     /** The organization's Openrest rank (higher is better). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Double rank;
     
     public static int compareRank(Double rank1, Double rank2) {

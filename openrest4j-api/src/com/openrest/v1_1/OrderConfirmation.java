@@ -1,11 +1,12 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderConfirmation implements Serializable {
@@ -18,12 +19,12 @@ public class OrderConfirmation implements Serializable {
     public OrderConfirmation() {}
 
     /** The confirmed order. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Order order;
 
     /** The restaurant's confirmation message in various locales. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Map<String, String> message = Collections.emptyMap();
+    @JsonInclude(Include.NON_DEFAULT)
+    public Map<String, String> message = new HashMap<String, String>();
     
     private static final long serialVersionUID = 1L;
 }

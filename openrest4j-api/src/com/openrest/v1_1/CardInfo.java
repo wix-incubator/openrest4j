@@ -2,8 +2,9 @@ package com.openrest.v1_1;
 
 import java.io.Serializable;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CardInfo implements Serializable, Cloneable {
@@ -26,10 +27,10 @@ public class CardInfo implements Serializable, Cloneable {
      * The credit card form-id (one of CreditCard.ALL_FORMS) specifying the required
      * details to clear cards of that specific network.
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String formId;
     
     /** Whether or not cards of that specific network are supported. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Boolean active = Boolean.TRUE;
 }

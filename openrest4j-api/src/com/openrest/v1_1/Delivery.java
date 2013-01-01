@@ -5,8 +5,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Delivery implements Serializable {
@@ -33,15 +34,15 @@ public class Delivery implements Serializable {
     public Delivery() {}
 
     /** Delivery type. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String type;
 
     /** Address to deliver to (valid only if type is DELIVERY_TYPE_DELIVERY) */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Address address;
     
     /** Timestamp by which the order will be delivered or ready for pick-up. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Long time;
     
     public java.util.Date time() {
@@ -49,6 +50,6 @@ public class Delivery implements Serializable {
     }
     
     /** The delivery charge (in "cents"). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Integer charge = 0;
 }

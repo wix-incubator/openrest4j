@@ -2,8 +2,9 @@ package com.openrest.v1_1;
 
 import java.io.Serializable;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
  * An entry in a change-log.
@@ -21,15 +22,15 @@ public class LogEntry implements Serializable {
     public LogEntry() {}
 
     /** The log entry's timestamp. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Long timestamp;
     
     /** The user making the changes. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public User user;
     
     /** Optional comment documenting the change. */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String comment;
     
     private static final long serialVersionUID = 1L;

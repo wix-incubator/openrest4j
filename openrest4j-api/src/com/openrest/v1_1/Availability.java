@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
  * Time availability of some resource, e.g. a restaurant or an item.
@@ -50,11 +51,11 @@ public class Availability implements Serializable, Cloneable {
 	}
     
     /** Weekly availability times. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public List<WeeklyTimeWindow> weekly = Collections.emptyList();
     
     /** Availability exceptions. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public List<DateTimeWindow> exceptions = Collections.emptyList();
 
     @Override

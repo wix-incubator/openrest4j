@@ -11,8 +11,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
  * Restaurant information.
@@ -157,39 +158,39 @@ public class Restaurant extends Organization implements Comparable<Restaurant>{
     
 
     /** The distributor in charge of this restaurant. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String distributorId;
     
     /** The chain this restaurant is part of. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String chainId;
     
     /** Restaurant availability. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Availability openTimes = new Availability();
 
     /** Deliveries availability. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Availability deliveryTimes = new Availability();
 
     /** Whether the restaurant is deactivated (i.e. suspended or disabled). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Boolean inactive = Boolean.FALSE;
 
     /** Information regarding the different delivery destinations. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public List<DeliveryInfo> deliveryInfos = new ArrayList<DeliveryInfo>();
 
     /** The current status. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Status status;
 
     /** The current delivery status. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Status deliveryStatus;
 
     /** Available payment methods. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Set<String> paymentTypes = new HashSet<String>();
     
     /**
@@ -201,7 +202,7 @@ public class Restaurant extends Organization implements Comparable<Restaurant>{
      * For the complete list of credit card networks, see
      * http://code.google.com/p/creditcard/
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Map<String, CardInfo> cardInfos = new HashMap<String, CardInfo>();
 
     /**
@@ -209,11 +210,11 @@ public class Restaurant extends Organization implements Comparable<Restaurant>{
      * "credit cards can only be used for paying $5 or more". Non-referenced
      * payment types have zero minimum by default.
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Map<String, Integer> minPayments = new HashMap<String, Integer>();
 
     /** @see ALL_STATES */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public String state = STATE_OPERATIONAL;
     
     /**
@@ -223,14 +224,14 @@ public class Restaurant extends Organization implements Comparable<Restaurant>{
      * For example, a restaurant with "hamburger" feature = 3.7 will appear before a
      * restaurant with the same feature = 2.3 when customers search for hamburgers.
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Map<String, Double> features = new HashMap<String, Double>();
     
     /**
      * Whether or not the restaurant's orders should be submitted / displayed
      * with a legacy "2-level hierarchy".
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Boolean legacyHierarchy = Boolean.FALSE;
     
     public static int compareState(String state1, String state2) {

@@ -1,6 +1,7 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -9,8 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Order implements Serializable {
@@ -97,119 +99,119 @@ public class Order implements Serializable {
     }
 
     /** The order's unique id. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String id;
     
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> externalIds = new HashMap<String, String>();
 
     /** The restaurant's unique id. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String restaurantId;
     
     /** The order's locale. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String locale;
 
     /** The ordered items. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<OrderItem> orderItems = Collections.emptyList();
+    @JsonInclude(Include.NON_DEFAULT)
+    public List<OrderItem> orderItems = new ArrayList<OrderItem>();
 
     /** Comment to the restaurant (as opposed to the delivery person!). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String comment;
 
     /** Total price of the order. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Integer price;
 
     /* Delivery method. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Delivery delivery;
 
     /* Contact details. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Contact contact;
 
     /* Payments. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<Payment> payments = Collections.emptyList();
+    @JsonInclude(Include.NON_DEFAULT)
+    public List<Payment> payments = new ArrayList<Payment>();
 
     /**
      * Number of "takeout packs" (e.g. cutlery and condiments) to deliver with the order.
      * For environmental reasons, clients should be encouraged to set this to 0.
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Integer takeoutPacks;
     
     /**
 	 * Extra charges or discounts associated with the order, ordered by priority
 	 * in descending order.
 	 */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<Charge> charges = Collections.emptyList();
+    @JsonInclude(Include.NON_DEFAULT)
+    public List<Charge> charges = new ArrayList<Charge>();
 
     /** The order's creation timestamp. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Long created;
     
     /**
      * Timestamp in which the order was marked as "new" in the syste. This may differ from the
      * order's creation timestamp for orders that were pending upon creation.
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Long received;
 
     /** The order's last modification timestamp. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Long modified;
 
     /** The ordering user. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public User user;
     
     /** The ordering club member. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public ClubMember clubMember;
 
     /** The order's status. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String status;
 
     /** The order's share-token. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String shareToken;
     
     /** Affiliate-id, for orders that came through affiliate marketing. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String affiliate;
     
     /**
      * Affiliate-specific referrer-id for performance tracking, e.g. 
      * Facebook campaign id, iPhone application id, self-service station id.
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String ref;
     
     /**
      * Whether or not the order was submitted and should be displayed with a
      * legacy "2-level hierarchy".
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Boolean legacyHierarchy = Boolean.FALSE;
     
     /**
      * Map of user-defined extended properties. Developers should use unique
      * keys, e.g. "com.googlecode.openrestext".
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> properties = new HashMap<String, String>();
     
     /** Change log for this order. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<LogEntry> log = Collections.emptyList();
+    @JsonInclude(Include.NON_DEFAULT)
+    public List<LogEntry> log = new ArrayList<LogEntry>();
     
     /** The order in HTML format. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String html;
 }

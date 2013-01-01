@@ -1,10 +1,12 @@
 package com.openrest.v1_1;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RestaurantFullInfo extends OpenrestObject {
@@ -13,7 +15,7 @@ public class RestaurantFullInfo extends OpenrestObject {
     private static final long serialVersionUID = 1L;
     
     public RestaurantFullInfo(Restaurant restaurant, Menu menu, List<Charge> charges,
-    		Chain chain, Distributor distributor, List<String> fbAdmins) {
+    		Chain chain, Distributor distributor, Set<String> fbAdmins) {
     	this.restaurant = restaurant;
     	this.menu = menu;
     	this.charges = charges;
@@ -26,26 +28,26 @@ public class RestaurantFullInfo extends OpenrestObject {
     public RestaurantFullInfo() {}
     
     /** The restaurant. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Restaurant restaurant;
     
     /** The menu. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Menu menu;
     
     /** The charges. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public List<Charge> charges;
     
     /** The distributor. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Distributor distributor;
     
     /** The chain. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Chain chain;
     
     /** The restaurant's Facebook admins. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<String> fbAdmins = Collections.emptyList();
+    @JsonInclude(Include.NON_DEFAULT)
+    public Set<String> fbAdmins = new HashSet<String>();
 }

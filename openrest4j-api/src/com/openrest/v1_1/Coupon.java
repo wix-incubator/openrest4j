@@ -6,9 +6,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
- 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
  
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Coupon implements Serializable {
@@ -34,23 +35,23 @@ public class Coupon implements Serializable {
     public Coupon() {}
    
     /** The coupon's type. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String type;
    
     /** The coupon's user-friendly short name in various locales. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> title = Collections.emptyMap();
     
     /** The coupon's user-friendly description in various locales. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> description = Collections.emptyMap();
     
     /** Maximum number of times this coupon can be used in a single order. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Integer maxNumAllowed = Integer.MAX_VALUE;
    
     /** Whether or not other coupons can be used with this one. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Boolean othersAllowed = Boolean.TRUE;
     
     @Override

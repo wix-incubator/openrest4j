@@ -1,7 +1,8 @@
 package com.openrest.v1_1;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PortalFullInfo extends OpenrestObject {
@@ -18,10 +19,10 @@ public class PortalFullInfo extends OpenrestObject {
     public PortalFullInfo() {}
     
     /** The portal. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Portal portal;
     
     /** The distributor. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Distributor distributor;
 }

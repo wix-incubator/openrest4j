@@ -5,8 +5,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
  * An extra charge or a discount associated with an order.
@@ -86,39 +87,39 @@ public class Charge implements Serializable {
     public Charge() {}
 
     /** Charge id. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String id;
     
     /** Restaurant id. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String restaurantId;
     
     /** Charge type. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String type;
 
     /** Charge priority. Higher numbers appear first in the list. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Double priority = 0.0;
     
     /** Optional activation code (GoDaddy-style). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String code;
     
     /** Optional internal club-id. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String clubId;
     
     /** Items for which the charge applies, null if applies for every item. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String tagId;
    
     /** Tag mode: inclusive or exclusive. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public String tagMode = Tag.TAG_MODE_INCLUDE;
     
     /** Charge amount rule type. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public String amountRuleType = AMOUNT_RULE_TYPE_VARIABLE;
     
     /**
@@ -129,34 +130,34 @@ public class Charge implements Serializable {
      * 
      * Positive numbers are extra charges, negatives are discounts.
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Integer amountRule;
     
     /** Coupon information (valid for CHARGE_TYPE_COUPON and CHARGE_TYPE_CLUB_COUPON). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Coupon coupon;
     
     /** The time windows in which this charge can / should be applied. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Availability availability = new Availability();
     
     /** Whether or not the charge is deactivated (i.e. suspended or disabled). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Boolean inactive = Boolean.FALSE;
     
     /** The referrer-ids this charge applies to (null means any). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Set<String> refs;
     
     /**
      * The delivery-types this charge applies to (null means any).
      * @see Delivery.ALL_DELIVERY_TYPES
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Set<String> deliveryTypes;
     
     /** Bottom-line charge amount (in cents). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Integer amount;
     
 	public boolean equalsIgnoreAmount(Charge other) {

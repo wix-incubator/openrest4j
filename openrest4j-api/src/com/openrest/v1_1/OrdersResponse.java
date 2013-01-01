@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 public class OrdersResponse implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -16,6 +17,6 @@ public class OrdersResponse implements Serializable {
     	this.results = results;
     }
 
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
 	public List<Order> results = new ArrayList<Order>();
 }

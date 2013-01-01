@@ -6,8 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchResult extends Restaurant {
@@ -39,14 +40,14 @@ public class SearchResult extends Restaurant {
     /** Default constructor for JSON deserialization. */
     public SearchResult() {}
     
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public List<TopItem> topItems = new ArrayList<TopItem>();
     
     /** Supported delivery types (optimization to avoid getting the entire deliveryInfos field). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Set<String> deliveryTypes = new HashSet<String>();
     
     /** Available charges (for discounts search). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public List<Charge> charges = new ArrayList<Charge>();
 }

@@ -4,10 +4,9 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Map;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
-import com.openrest.v1_1.Charge;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Cost implements Serializable, Comparable<Cost> {
@@ -43,31 +42,31 @@ public class Cost implements Serializable, Comparable<Cost> {
     public Cost() {}
     
     /** Cost type. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String type;
     
     /** Cost key, e.g. channel type for COST_TYPE_CHANNEL or "ref" for COST_TYPE_COMISSION. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String key;
     
     /** Optional cost title (multi-locale). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> title = Collections.emptyMap();
     
     /** Year in which this cost was incurred (relevant mostly for one-time costs). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Integer year;
     
     /** Month in which this cost was incurred (relevant mostly for one-time costs). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Integer month;
     
     /** Cost priority. Higher numbers appear first in the list. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Double priority = 0.0;
     
     /** Base cost amount rule type (@see Charge.amountRuleType) . */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public String amountRuleType = Charge.AMOUNT_RULE_TYPE_VARIABLE;
     
     /**
@@ -76,23 +75,23 @@ public class Cost implements Serializable, Comparable<Cost> {
      * 
      * Basis points are 1/100th of a percentage, e.g. 500 bp refers to 5% commission. 
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Integer amountRule = 0;
     
     /** Bottom-line cost amount (in cents, before enforcing minimum). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Integer amount = 0;
     
     /** Discount to cost amount (in basis points, e.g. 5000 means 50% discount). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Integer discountRule = 0;
     
     /** Bottom-line discount amount (in cents). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Integer discount = 0;
     
     /** Minimum cost amount (in cents). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Integer minimum = 0;
     
 	public int compareTo(Cost other) {

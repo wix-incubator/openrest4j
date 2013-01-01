@@ -1,11 +1,12 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderItem implements Serializable {
@@ -23,7 +24,7 @@ public class OrderItem implements Serializable {
     public OrderItem() {}
 
     /** Item id. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String itemId;
 
     /**
@@ -32,15 +33,15 @@ public class OrderItem implements Serializable {
      * Submitting an OrderItem with empty variations means the defaults should be assumed
      * for variationsChoices.
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<Variation> variations = Collections.emptyList();
+    @JsonInclude(Include.NON_DEFAULT)
+    public List<Variation> variations = new ArrayList<Variation>();
 
     /** The ordered-item's chosen variations. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<List<OrderItem>> variationsChoices = Collections.emptyList();
+    @JsonInclude(Include.NON_DEFAULT)
+    public List<List<OrderItem>> variationsChoices = new ArrayList<List<OrderItem>>();
 
     /** Textual comment regarding the item. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String comment;
 
     /**
@@ -50,11 +51,11 @@ public class OrderItem implements Serializable {
      * variationsChoices and recursively summing the prices for sub-items
      * (multiplying by the correct counts, if needed).
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Integer price = 0;
 
     /** Number of times this order-item was ordered. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Integer count = 1;
 
     private static final long serialVersionUID = 1L;

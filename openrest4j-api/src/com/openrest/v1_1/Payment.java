@@ -5,8 +5,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Payment implements Serializable {
@@ -45,23 +46,23 @@ public class Payment implements Serializable {
     public Payment() {}
 
     /** Payment type. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String type;
 
     /** Amount to pay. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Integer amount = 0;
 
     /** Credit card details (not valid for PAYMENT_TYPE_CASH or PAYMENT_CARD_DEBIT) */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public CreditCard card;
     
     /** The user's Facebook id (for saved payments). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String userId;
     
     /** Payment unique id (for saved payments). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String id;
 
     /**
@@ -70,7 +71,7 @@ public class Payment implements Serializable {
      * For anonymized saved payments, this would either be missing (null) to indicate
      * no password, or empty ("") to indicate a password exists and was anonymized.
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String password;
 
     private static final long serialVersionUID = 1L;

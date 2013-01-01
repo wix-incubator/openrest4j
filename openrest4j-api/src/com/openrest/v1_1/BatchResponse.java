@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /** TODO: Response should include type information to allow deserialization to typed Java object. */
 public class BatchResponse implements Serializable {
@@ -17,6 +18,6 @@ public class BatchResponse implements Serializable {
     	this.responses = responses;
     }
 
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
 	public List<Response<?>> responses = new ArrayList<Response<?>>();
 }

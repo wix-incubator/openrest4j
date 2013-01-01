@@ -1,12 +1,12 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TopItem implements Serializable, Cloneable {
@@ -33,15 +33,15 @@ public class TopItem implements Serializable, Cloneable {
     			price, picture);
 	}
     
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String id;
     
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Map<String, String> title = Collections.emptyMap();
+    @JsonInclude(Include.NON_DEFAULT)
+    public Map<String, String> title = new HashMap<String, String>();
     
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Integer price = 0;
     
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String picture;
 }

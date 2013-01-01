@@ -1,10 +1,11 @@
 package com.openrest.v1_1;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RegisterForEventRequest extends Request {
@@ -20,12 +21,12 @@ public class RegisterForEventRequest extends Request {
     	this.organizationIds = organizationIds;
     }
     
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String accessToken;
     
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String jid;
 
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Set<String> organizationIds = Collections.emptySet();
+    @JsonInclude(Include.NON_DEFAULT)
+    public Set<String> organizationIds = new HashSet<String>();
 }

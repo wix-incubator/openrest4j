@@ -1,15 +1,17 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
  * A set of items that go together, e.g. "sides", "drinks", "toppings".
@@ -48,25 +50,25 @@ public class Tag implements Serializable {
     public Tag() {}
 
     /** The tag's unique id. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String id;
 
     /** The restaurant's id. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String restaurantId;
 
     /** The tag's name in various locales, e.g. "drink", "sides". */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Map<String, String> title = Collections.emptyMap();
+    @JsonInclude(Include.NON_DEFAULT)
+    public Map<String, String> title = new HashMap<String, String>();
 
     /** Item ids. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<String> itemIds = Collections.emptyList();
+    @JsonInclude(Include.NON_DEFAULT)
+    public List<String> itemIds = new ArrayList<String>();
 
     /**
      * Map of user-defined extended properties. Developers should use unique
      * keys, e.g. "com.googlecode.openrestext".
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Map<String, String> properties = Collections.emptyMap();
+    @JsonInclude(Include.NON_DEFAULT)
+    public Map<String, String> properties = new HashMap<String, String>();
 }

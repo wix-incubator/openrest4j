@@ -2,10 +2,10 @@ package com.openrest.v1_1;
 
 import java.io.Serializable;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonSubTypes;
-import org.codehaus.jackson.annotate.JsonSubTypes.Type;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(
@@ -31,6 +31,8 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 	@Type(value = QueryClubMembersRequest.class, name = QueryClubMembersRequest.TYPE),
 	@Type(value = SubmitFeedbackRequest.class, name = SubmitFeedbackRequest.TYPE),
 	@Type(value = AddPaymentRequest.class, name = AddPaymentRequest.TYPE),
+	@Type(value = DeletePaymentRequest.class, name = DeletePaymentRequest.TYPE),
+	@Type(value = GetPaymentsRequest.class, name = GetPaymentsRequest.TYPE),
 	@Type(value = CopyMenuRequest.class, name = CopyMenuRequest.TYPE),
 	@Type(value = RegisterForEventRequest.class, name = RegisterForEventRequest.TYPE),
 	@Type(value = RegisterForPushNotificationsRequest.class, name = RegisterForPushNotificationsRequest.TYPE),

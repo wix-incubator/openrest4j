@@ -2,13 +2,13 @@ package com.openrest.v1_1;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ClientInfo implements Serializable, Cloneable {
@@ -60,23 +60,23 @@ public class ClientInfo implements Serializable, Cloneable {
 	}
     
     /** Saved contact details. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<Contact> contacts = Collections.emptyList();
+    @JsonInclude(Include.NON_DEFAULT)
+    public List<Contact> contacts = new ArrayList<Contact>();
     
     /** Saved addresses. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<Address> addresses = Collections.emptyList();
+    @JsonInclude(Include.NON_DEFAULT)
+    public List<Address> addresses = new ArrayList<Address>();
     
     /** Saved club memberships. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<ClubMember> memberships = Collections.emptyList();
+    @JsonInclude(Include.NON_DEFAULT)
+    public List<ClubMember> memberships = new ArrayList<ClubMember>();
 
     /**
      * Map of user-defined extended properties. Developers should use unique
      * keys, e.g. "com.googlecode.openrestext".
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Map<String, String> properties = Collections.emptyMap();
+    @JsonInclude(Include.NON_DEFAULT)
+    public Map<String, String> properties = new HashMap<String, String>();
     
     private static final long serialVersionUID = 1L;
 }

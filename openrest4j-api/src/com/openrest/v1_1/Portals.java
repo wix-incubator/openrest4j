@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 public class Portals implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -16,6 +17,6 @@ public class Portals implements Serializable {
     	this.portals = portals;
     }
 
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
 	public List<Portal> portals = new ArrayList<Portal>();
 }

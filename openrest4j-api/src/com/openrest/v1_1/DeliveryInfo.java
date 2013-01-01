@@ -2,8 +2,9 @@ package com.openrest.v1_1;
 
 import java.io.Serializable;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
  * Information regarding a delivery destination: type, area, requirements, etc.
@@ -34,31 +35,31 @@ public class DeliveryInfo implements Serializable, Cloneable {
 	}
     
     /** Delivery type, one of Delivery.ALL_DELIVERY_TYPES. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String type;
     
     /** Optional delivery area (for type = Delivery.DELIVERY_TYPE_DELIVERY). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public Area area;
     
     /** The minimum allowed order price (in "cents"). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Integer minOrderPrice = 0;
     
     /** The delivery charge (in "cents"). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Integer charge = 0;
     
     /** Delivery time (maximum number of minutes till order arrives). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Integer delayMins = 0;
     
     /** Whether the delivery destination is deactivated (i.e. suspended or disabled). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Boolean inactive = Boolean.FALSE;
    
     /** Time windows in which this item is regularly available. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Availability availability = new Availability();
     
 	@Override

@@ -2,13 +2,14 @@ package com.openrest.v1_1;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
  * A possible modification to an item, e.g. "choice of sides" for a happy-meal
@@ -44,31 +45,31 @@ public class Variation implements Serializable {
     public Variation() {}
 
     /** The variations's name in various locales, e.g. "sides", "degree of cooking". */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Map<String, String> title;
+    @JsonInclude(Include.NON_DEFAULT)
+    public Map<String, String> title = new HashMap<String, String>();
 
     /** The set's name, e.g. "drink", "sides". */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     public String tagId;
 
     /** Minimum number of items to select. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Integer minNumAllowed = 0;
 
     /** Maximum number of items to select. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Integer maxNumAllowed = Integer.MAX_VALUE;
 
     /** Items' base prices. Non-referenced items are free by default. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Map<String, Integer> prices = Collections.emptyMap();
+    @JsonInclude(Include.NON_DEFAULT)
+    public Map<String, Integer> prices = new HashMap<String, Integer>();
 
     /** Default selected item ids. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Set<String> defaults = Collections.emptySet();
+    @JsonInclude(Include.NON_DEFAULT)
+    public Set<String> defaults = new HashSet<String>();
 
     /** Display type for human-readable printing. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public String displayType = VARIATION_DISPLAY_TYPE_CHOICE;
 
     @Override

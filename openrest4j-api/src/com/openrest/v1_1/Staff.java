@@ -11,8 +11,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Staff implements Serializable, Cloneable {
@@ -80,7 +81,7 @@ public class Staff implements Serializable, Cloneable {
     }
 
     /** Maps roles (see above) to list of user-ids. */
-    @JsonSerialize(include=JsonSerialize.Inclusion.NON_DEFAULT)
+    @JsonInclude(Include.NON_DEFAULT)
     public Map<String, List<String>> staff = new HashMap<String, List<String>>();
 
     private static final long serialVersionUID = 1L;
