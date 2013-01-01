@@ -50,6 +50,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@Type(value = BatchRequest.class, name = BatchRequest.TYPE),
 	@Type(value = AddItemRequest.class, name = AddItemRequest.TYPE),
 	@Type(value = SetItemRequest.class, name = SetItemRequest.TYPE),
+	@Type(value = AddTagRequest.class, name = AddTagRequest.TYPE),
+	@Type(value = DeleteTagRequest.class, name = DeleteTagRequest.TYPE),
 	@Type(value = SetTagRequest.class, name = SetTagRequest.TYPE),
 	@Type(value = SetCategoriesRequest.class, name = SetCategoriesRequest.TYPE),
 	@Type(value = GetStatsRequest.class, name = GetStatsRequest.TYPE),
