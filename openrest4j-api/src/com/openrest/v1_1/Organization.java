@@ -30,12 +30,14 @@ public abstract class Organization extends OpenrestObject implements Cloneable {
     public static final String BLOB_TYPE_LOGO = "logo";
 	/** Square (1:1) logo image. */
     public static final String BLOB_TYPE_LOGO_SQUARE = "logo_square";
+	/** Wide (4:1) logo image. */
+    public static final String BLOB_TYPE_LOGO_WIDE = "logo_wide";
 	/** Standard (4:3) image place holder. */
     public static final String BLOB_TYPE_NO_IMAGE = "no_image";
     
     /** All known blob types. */
     public static final Set<String> ALL_BLOB_TYPES = new HashSet<String>(Arrays.asList(
-    		BLOB_TYPE_LOGO, BLOB_TYPE_LOGO_SQUARE, BLOB_TYPE_NO_IMAGE));
+    		BLOB_TYPE_LOGO, BLOB_TYPE_LOGO_SQUARE, BLOB_TYPE_LOGO_WIDE, BLOB_TYPE_NO_IMAGE));
 	
     /** Default constructor for JSON deserialization. */
     public Organization() {}
@@ -47,7 +49,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable {
     		Address address, String timezone, String currency,
     		String link, String domain, Set<String> altDomains,
     		List<AppInfo> apps, Seo seo, Map<String, String> properties,
-    		String picture, String icon, String noImagePicture, Double rank) {
+    		String picture, String icon, String wideLogo, String noImagePicture, Double rank) {
 
     	this.id = id;
     	this.externalIds = externalIds;
@@ -72,6 +74,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable {
     	this.properties = properties;
     	this.picture = picture;
     	this.icon = icon;
+    	this.wideLogo = wideLogo;
     	this.noImagePicture = noImagePicture;
     	this.rank = rank;
     }
@@ -186,6 +189,10 @@ public abstract class Organization extends OpenrestObject implements Cloneable {
     /** The organization's icon URL (direct link), or null if unavailable. */
     @JsonInclude(Include.NON_NULL)
     public String icon;
+    
+    /** The organization's wide logo URL (direct link), or null if unavailable. */
+    @JsonInclude(Include.NON_NULL)
+    public String wideLogo;
     
     /** The picture shown when a picture is missing. */
     @JsonInclude(Include.NON_NULL)

@@ -32,10 +32,10 @@ public class Distributor extends Organization {
     		Contact contact, Map<String, Contact> externalContacts, Address address, String timezone, String currency,
     		String link, String domain, Set<String> altDomains,
     		List<AppInfo> apps, Seo seo, Map<String, String> properties, String facebookAppId,
-    		String picture, String icon, String noImagePicture, Double rank) {
+    		String picture, String icon, String wideLogo, String noImagePicture, Double rank) {
     	super(id, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties,
-    			picture, icon, noImagePicture, rank);
+    			picture, icon, wideLogo, noImagePicture, rank);
     	
     	this.facebookAppId = facebookAppId;
     }
@@ -92,6 +92,6 @@ public class Distributor extends Organization {
     			clonedApps,
     			((seo != null) ? (Seo) seo.clone() : null),
     			((properties != null) ? new HashMap<String, String>(properties) : null),
-    			facebookAppId, picture, icon, noImagePicture, rank);
+    			facebookAppId, picture, icon, wideLogo, noImagePicture, rank);
 	}
 }

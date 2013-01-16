@@ -48,12 +48,12 @@ public class Restaurant extends Organization implements Comparable<Restaurant>{
             String timezone, String currency, String locale, Set<String> locales,
             Set<String> paymentTypes, Map<String, CardInfo> cardInfos, Map<String, Integer> minPayments,
             String link, String domain, Set<String> altDomains,
-            String picture, String icon, String noImagePicture,
+            String picture, String icon, String wideLogo, String noImagePicture,
             List<AppInfo> apps, Seo seo, Map<String, String> properties,
             String state, Map<String, Double> features, Boolean legacyHierarchy, Double rank) {
     	super(id, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties,
-    			picture, icon, noImagePicture, rank);
+    			picture, icon, wideLogo, noImagePicture, rank);
         
     	this.distributorId = distributorId;
     	this.chainId = chainId;
@@ -148,7 +148,7 @@ public class Restaurant extends Organization implements Comparable<Restaurant>{
     			((minPayments != null) ? new HashMap<String, Integer>(minPayments) : null),
     			link, domain,
     			((altDomains != null) ? new HashSet<String>(altDomains) : null),
-    			picture, icon, noImagePicture,
+    			picture, icon, wideLogo, noImagePicture,
     			clonedApps,
     			((seo != null) ? (Seo) seo.clone() : null),
     			((properties != null) ? new HashMap<String, String>(properties) : null), state,

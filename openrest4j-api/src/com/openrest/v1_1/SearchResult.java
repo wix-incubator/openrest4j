@@ -23,17 +23,19 @@ public class SearchResult extends Restaurant {
             String timezone, String currency, String locale, Set<String> locales,
             Set<String> paymentTypes, Map<String, CardInfo> cardInfos, Map<String, Integer> minPayments,
             String link, String domain, Set<String> altDomains,
-            String picture, String icon, String noImagePicture,
+            String picture, String icon, String wideLogo, String noImagePicture,
             List<AppInfo> apps, Seo seo, Map<String, String> properties,
             String state, Map<String, Double> features, Boolean legacyHierarchy, Double rank, List<TopItem> topItems,
-            Set<String> deliveryTypes, List<Charge> charges) {
+            Set<String> deliveryTypes, DeliveryInfo deliveryInfo, List<Charge> charges) {
     	super(id, externalIds, created, modified, distributorId, chainId, title, description, contact, externalContacts,
     			address, messages, colorScheme, openTimes, deliveryTimes, inactive, deliveryInfos, status, deliveryStatus, timezone,
-    			currency, locale, locales, paymentTypes, cardInfos, minPayments, link, domain, altDomains, picture, icon, noImagePicture,
+    			currency, locale, locales, paymentTypes, cardInfos, minPayments, link, domain, altDomains,
+    			picture, icon, wideLogo, noImagePicture,
     			apps, seo, properties, state, features, legacyHierarchy, rank);
     	
     	this.topItems = topItems;
     	this.deliveryTypes = deliveryTypes;
+    	this.deliveryInfo = deliveryInfo;
     	this.charges = charges;
     }
     
@@ -46,6 +48,10 @@ public class SearchResult extends Restaurant {
     /** Supported delivery types (optimization to avoid getting the entire deliveryInfos field). */
     @JsonInclude(Include.NON_DEFAULT)
     public Set<String> deliveryTypes = new HashSet<String>();
+    
+    /** The "most optimistic" delivery info (optimization to avoid getting the entire deliveryInfos field). */
+    @JsonInclude(Include.NON_NULL)
+    public DeliveryInfo deliveryInfo;
     
     /** Available charges (for discounts search). */
     @JsonInclude(Include.NON_DEFAULT)

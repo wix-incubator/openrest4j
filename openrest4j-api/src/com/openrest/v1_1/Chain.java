@@ -32,10 +32,10 @@ public class Chain extends Organization {
     		Contact contact, Map<String, Contact> externalContacts, Address address, String timezone, String currency,
     		String link, String domain, Set<String> altDomains,
     		List<AppInfo> apps, Seo seo, Map<String, String> properties,
-    		String picture, String icon, String noImagePicture, Double rank) {
+    		String picture, String icon, String wideLogo, String noImagePicture, Double rank) {
     	super(id, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties,
-    			picture, icon, noImagePicture, rank);
+    			picture, icon, wideLogo, noImagePicture, rank);
     	
     	this.distributorId = distributorId;
     }
@@ -88,7 +88,7 @@ public class Chain extends Organization {
     			clonedApps,
     			((seo != null) ? (Seo) seo.clone() : null),
     			((properties != null) ? new HashMap<String, String>(properties) : null),
-    			picture, icon, noImagePicture, rank);
+    			picture, icon, wideLogo, noImagePicture, rank);
 	}
     
     /** The distributor in charge of this chain. */

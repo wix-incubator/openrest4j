@@ -16,7 +16,7 @@ public class GetOrderRequest extends Request {
     
     public GetOrderRequest(String accessToken, String orderId, Boolean restaurantView, String shareToken,
     		Boolean anonymize, Set<String> fields, String locale, Viewport viewport, Boolean embed,
-    		Boolean printConfirmation, Boolean printHeader) {
+    		Boolean printConfirmation, Boolean printHeader, Boolean printCsc) {
     	this.accessToken = accessToken;
     	this.orderId = orderId;
     	this.restaurantView = restaurantView;
@@ -28,12 +28,13 @@ public class GetOrderRequest extends Request {
     	this.embed = embed;
     	this.printConfirmation = printConfirmation;
     	this.printHeader = printHeader;
+    	this.printCsc = printCsc;
     }
     
     public GetOrderRequest(String accessToken, String orderId, Boolean restaurantView, String shareToken,
     		Boolean anonymize, Set<String> fields) {
     	this(accessToken, orderId, restaurantView, shareToken, anonymize, fields, shareToken,
-    			null, Boolean.FALSE, Boolean.FALSE, Boolean.FALSE);
+    			null, Boolean.FALSE, Boolean.FALSE, Boolean.FALSE, Boolean.FALSE);
     }
     
     @JsonInclude(Include.NON_NULL)
@@ -70,6 +71,10 @@ public class GetOrderRequest extends Request {
     /** For Order.html. */
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean printHeader = Boolean.FALSE;
+    
+    /** For Order.html. */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Boolean printCsc = Boolean.FALSE;
     
     @JsonInclude(Include.NON_NULL)
 	public Set<String> fields;
