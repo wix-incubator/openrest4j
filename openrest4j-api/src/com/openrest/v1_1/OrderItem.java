@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class OrderItem implements Serializable {
+public class OrderItem implements Serializable, Cloneable {
     public OrderItem(String itemId, List<Variation> variations, List<List<OrderItem>> variationsChoices,
             String comment, Integer price, Integer count) {
         this.itemId = itemId;
@@ -22,6 +22,35 @@ public class OrderItem implements Serializable {
 
     /** Default constructor for JSON deserialization. */
     public OrderItem() {}
+    
+    @Override
+	public Object clone() {
+    	final List<Variation> clonedVariations;
+    	if (variations != null) {
+    		clonedVariations = new ArrayList<Variation>(variations.size());
+    		for (Variation variation : variations) {
+    			clonedVariations.add((Variation) variation.clone());
+    		}
+    	} else {
+    		clonedVariations = null;
+    	}
+    	
+    	final List<List<OrderItem>> clonedVariationsChoices;
+    	if (variationsChoices != null) {
+    		clonedVariationsChoices = new ArrayList<List<OrderItem>>(variationsChoices.size());
+    		for (List<OrderItem> orderItems : variationsChoices) {
+    			final List<OrderItem> clonedOrderItems = new ArrayList<OrderItem>(orderItems.size());
+    			for (OrderItem orderItem : orderItems) {
+    				clonedOrderItems.add((OrderItem) orderItem.clone());
+    			}
+    			clonedVariationsChoices.add(clonedOrderItems);
+    		}
+    	} else {
+    		clonedVariationsChoices = null;
+    	}
+    	
+    	return new OrderItem(itemId, clonedVariations, clonedVariationsChoices, comment, price, count);
+	}
 
     /** Item id. */
     @JsonInclude(Include.NON_NULL)

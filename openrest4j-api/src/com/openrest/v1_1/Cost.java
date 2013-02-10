@@ -1,7 +1,7 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Cost implements Serializable, Comparable<Cost> {
+public class Cost implements Serializable, Comparable<Cost>, Cloneable  {
 	private static final long serialVersionUID = 1L;
     
     public static final String COST_TYPE_COMMISSION = "commission";
@@ -41,6 +41,13 @@ public class Cost implements Serializable, Comparable<Cost> {
     /** Default constructor for JSON deserialization. */
     public Cost() {}
     
+    @Override
+	public Object clone() {
+    	return new Cost(type, key,
+    			((title != null) ? new HashMap<String, String>(title) : null),
+    			year, month, priority, amountRuleType, amountRule, minimum, discountRule);
+	}
+    
     /** Cost type. */
     @JsonInclude(Include.NON_NULL)
     public String type;
@@ -51,7 +58,7 @@ public class Cost implements Serializable, Comparable<Cost> {
     
     /** Optional cost title (multi-locale). */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title = Collections.emptyMap();
+    public Map<String, String> title = new HashMap<String, String>();
     
     /** Year in which this cost was incurred (relevant mostly for one-time costs). */
     @JsonInclude(Include.NON_NULL)

@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  * @author DL
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Variation implements Serializable {
+public class Variation implements Serializable, Cloneable {
     public static final String VARIATION_DISPLAY_TYPE_DIFF = "diff";
     public static final String VARIATION_DISPLAY_TYPE_CHOICE = "choice";
     /**
@@ -43,6 +43,16 @@ public class Variation implements Serializable {
 
     /** Default constructor for JSON deserialization. */
     public Variation() {}
+    
+    @Override
+	public Object clone() {
+    	return new Variation(
+    			((title != null) ? new HashMap<String, String>(title) : null),
+    			tagId, minNumAllowed, maxNumAllowed,
+    			((prices != null) ? new HashMap<String, Integer>(prices) : null),
+    			((defaults != null) ? new HashSet<String>(defaults) : null),
+    			displayType);
+	}
 
     /** The variations's name in various locales, e.g. "sides", "degree of cooking". */
     @JsonInclude(Include.NON_DEFAULT)
