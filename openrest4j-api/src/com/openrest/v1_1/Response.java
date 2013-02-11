@@ -18,6 +18,8 @@ public class Response<T> implements Serializable {
     public static final String RESPONSE_ERROR_CC_EXPIRED = "cc_expired";
     /** Credit card number is invalid. */
     public static final String RESPONSE_ERROR_INVALID_CC_NUMBER = "invalid_cc_number";
+    /** Credit card was rejected. */
+    public static final String RESPONSE_ERROR_CC_REJECTED = "cc_rejected";
     /** User entered illegal date (e.g. 35/5/2010). */
     public static final String RESPONSE_ERROR_INVALID_DATE = "invalid_date";
 	/**
