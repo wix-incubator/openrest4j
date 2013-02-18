@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  * @author DL
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Charge implements Serializable {
+public class Charge implements Serializable, Cloneable {
 	/** Delivery charge. */
     public static final String CHARGE_TYPE_DELIVERY = "delivery";
     /** Discount coupon. */
@@ -85,6 +85,17 @@ public class Charge implements Serializable {
 
 	/** Default constructor for JSON deserialization. */
     public Charge() {}
+    
+    @Override
+	public Object clone() {
+    	return new Charge(id, restaurantId, type, priority, code, clubId, tagId, tagMode, amountRuleType, amountRule,
+    			((coupon != null) ? (Coupon) coupon.clone() : null),
+    			((availability != null) ? (Availability) availability.clone() : null),
+    			inactive,
+    			((refs != null) ? new HashSet<String>(refs) : null),
+    			((deliveryTypes != null) ? new HashSet<String>(deliveryTypes) : null),
+    			amount);
+	}
 
     /** Charge id. */
     @JsonInclude(Include.NON_NULL)

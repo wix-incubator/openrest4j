@@ -2,7 +2,7 @@ package com.openrest.v1_1;
  
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -12,7 +12,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
  
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Coupon implements Serializable {
+public class Coupon implements Serializable, Cloneable {
+    private static final long serialVersionUID = 1L;
+    
 	/** Discount coupon. */
     public static final String COUPON_TYPE_DISCOUNT = "discount";
     /** M+N coupon. */
@@ -33,6 +35,14 @@ public class Coupon implements Serializable {
     
 	/** Default constructor for JSON deserialization. */
     public Coupon() {}
+    
+    @Override
+	public Object clone() {
+    	return new Coupon(type,
+    			((title != null) ? new HashMap<String, String>(title) : null),
+    			((description != null) ? new HashMap<String, String>(description) : null),
+    			maxNumAllowed, othersAllowed);
+	}
    
     /** The coupon's type. */
     @JsonInclude(Include.NON_NULL)
@@ -40,11 +50,11 @@ public class Coupon implements Serializable {
    
     /** The coupon's user-friendly short name in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title = Collections.emptyMap();
+    public Map<String, String> title = new HashMap<String, String>();
     
     /** The coupon's user-friendly description in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> description = Collections.emptyMap();
+    public Map<String, String> description = new HashMap<String, String>();
     
     /** Maximum number of times this coupon can be used in a single order. */
     @JsonInclude(Include.NON_DEFAULT)
@@ -105,6 +115,4 @@ public class Coupon implements Serializable {
 			return false;
 		return true;
 	}
-
-    private static final long serialVersionUID = 1L;
 }

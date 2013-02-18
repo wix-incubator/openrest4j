@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Payment implements Serializable {
+public class Payment implements Serializable, Cloneable {
+    private static final long serialVersionUID = 1L;
+    
     /** Cash payment. */
     public static final String PAYMENT_TYPE_CASH = "cash";
     /** Credit card payment. */
@@ -27,23 +29,31 @@ public class Payment implements Serializable {
 
     /** Constructs a new one-time payment. */
     public Payment(String type, Integer amount, CreditCard card) {
-        this.type = type;
-        this.amount = amount;
-        this.card = card;
+    	this(null, null, null, type, amount, card);
     }
     
     /** Constructs a user's saved payment. */
     public Payment(String id, String userId, String password, String type, CreditCard card) {
+    	this(id, userId, password, type, 0, card);
+    }
+    
+    /** Constructs a user's saved payment. */
+    public Payment(String id, String userId, String password, String type, Integer amount, CreditCard card) {
     	this.id = id;
     	this.userId = userId;
     	this.password = password;
     	this.type = type;
+    	this.amount = amount;
     	this.card = card;
-    	// amount defaults to 0
     }
 
     /** Default constructor for JSON deserialization. */
     public Payment() {}
+    
+    @Override
+	public Object clone() {
+    	return new Payment(id, userId, password, type, amount, ((card != null) ? (CreditCard) card.clone() : null));
+	}
 
     /** Payment type. */
     @JsonInclude(Include.NON_NULL)
@@ -73,6 +83,4 @@ public class Payment implements Serializable {
      */
     @JsonInclude(Include.NON_NULL)
     public String password;
-
-    private static final long serialVersionUID = 1L;
 }

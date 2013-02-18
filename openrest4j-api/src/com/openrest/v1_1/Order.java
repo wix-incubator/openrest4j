@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Order implements Serializable {
+public class Order implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
     
     /**
@@ -85,6 +85,61 @@ public class Order implements Serializable {
 
     /** Default constructor for JSON deserialization. */
     public Order() {}
+    
+    @Override
+	public Object clone() {
+    	final List<OrderItem> clonedOrderItems;
+    	if (orderItems != null) {
+    		clonedOrderItems = new ArrayList<OrderItem>(orderItems.size());
+    		for (OrderItem orderItem : orderItems) {
+    			clonedOrderItems.add((OrderItem) orderItem.clone());
+    		}
+    	} else {
+    		clonedOrderItems = null;
+    	}
+    	
+    	final List<Payment> clonedPayments;
+    	if (payments != null) {
+    		clonedPayments = new ArrayList<Payment>(payments.size());
+    		for (Payment payment : payments) {
+    			clonedPayments.add((Payment) payment.clone());
+    		}
+    	} else {
+    		clonedPayments = null;
+    	}
+    	
+    	final List<Charge> clonedCharges;
+    	if (charges != null) {
+    		clonedCharges = new ArrayList<Charge>(charges.size());
+    		for (Charge charge : charges) {
+    			clonedCharges.add((Charge) charge.clone());
+    		}
+    	} else {
+    		clonedCharges = null;
+    	}
+    	
+    	final List<LogEntry> clonedLog;
+    	if (log != null) {
+    		clonedLog = new ArrayList<LogEntry>(log.size());
+    		for (LogEntry logEntry : log) {
+    			clonedLog.add((LogEntry) logEntry.clone());
+    		}
+    	} else {
+    		clonedLog = null;
+    	}
+    	
+    	return new Order(id,
+    			((externalIds != null) ? new HashMap<String, String>(externalIds) : null),
+    			restaurantId, locale, clonedOrderItems, comment, price,
+    			((delivery != null) ? (Delivery) delivery.clone() : null),
+    			((contact != null) ? (Contact) contact.clone() : null),
+    			clonedPayments, takeoutPacks, clonedCharges, created(), received(), modified(),
+    			((user != null) ? (User) user.clone() : null),
+    			((clubMember != null) ? (ClubMember) clubMember.clone() : null),
+    			status, shareToken, affiliate, ref, legacyHierarchy,
+    			((properties != null) ? new HashMap<String, String>(properties) : null),
+    			clonedLog);
+	}
     
     public java.util.Date created() {
         return ((created != null) ? new java.util.Date(created.longValue()) : null);

@@ -11,17 +11,27 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  * @author DL
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class User implements Serializable {
+public class User implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
     
-    public User(String id, String ipAddress, String fwdIpAddresses) {
+    public User(String id, Boolean idIsInferred, String ipAddress, String fwdIpAddresses) {
         this.id = id;
+        this.idIsInferred = idIsInferred;
         this.ipAddress = ipAddress;
         this.fwdIpAddresses = fwdIpAddresses;
+    }
+    
+    public User(String id, String ipAddress, String fwdIpAddresses) {
+    	this(id, Boolean.FALSE, ipAddress, fwdIpAddresses);
     }
 
     /** Default constructor for JSON deserialization. */
     public User() {}
+    
+    @Override
+	public Object clone() {
+    	return new User(id, ipAddress, fwdIpAddresses);
+	}
 
     /** The user's Facebook id. */
     @JsonInclude(Include.NON_NULL)

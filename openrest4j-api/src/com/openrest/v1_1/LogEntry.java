@@ -11,7 +11,9 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  * @author DL
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class LogEntry implements Serializable {
+public class LogEntry implements Serializable, Cloneable {
+    private static final long serialVersionUID = 1L;
+    
     public LogEntry(Long timestamp, User user, String comment) {
         this.timestamp = timestamp;
         this.user = user;
@@ -20,6 +22,11 @@ public class LogEntry implements Serializable {
     
     /** Default constructor for JSON deserialization. */
     public LogEntry() {}
+    
+    @Override
+	public Object clone() {
+    	return new LogEntry(timestamp, ((user != null) ? (User) user.clone() : null), comment);
+	}
 
     /** The log entry's timestamp. */
     @JsonInclude(Include.NON_NULL)
@@ -32,6 +39,4 @@ public class LogEntry implements Serializable {
     /** Optional comment documenting the change. */
     @JsonInclude(Include.NON_NULL)
     public String comment;
-    
-    private static final long serialVersionUID = 1L;
 }

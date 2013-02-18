@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Delivery implements Serializable {
+public class Delivery implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
     
     /** Delivery to an address of your choice. */
@@ -32,6 +32,11 @@ public class Delivery implements Serializable {
 
     /** Default constructor for JSON deserialization. */
     public Delivery() {}
+    
+    @Override
+	public Object clone() {
+    	return new Delivery(type, ((address != null) ? (Address) address.clone() : null), time, charge);
+	}
 
     /** Delivery type. */
     @JsonInclude(Include.NON_NULL)
