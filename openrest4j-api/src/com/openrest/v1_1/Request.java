@@ -37,6 +37,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@Type(value = CopyMenuRequest.class, name = CopyMenuRequest.TYPE),
 	@Type(value = RegisterForEventRequest.class, name = RegisterForEventRequest.TYPE),
 	@Type(value = RegisterForPushNotificationsRequest.class, name = RegisterForPushNotificationsRequest.TYPE),
+	@Type(value = GetAppCredentialsRequest.class, name = GetAppCredentialsRequest.TYPE),
+	@Type(value = SetAppCredentialsRequest.class, name = SetAppCredentialsRequest.TYPE),
 	@Type(value = SetAppMappingRequest.class, name = SetAppMappingRequest.TYPE),
 	@Type(value = GetAppMappedObjectRequest.class, name = GetAppMappedObjectRequest.TYPE),
 	@Type(value = SetDomainMappingRequest.class, name = SetDomainMappingRequest.TYPE),
