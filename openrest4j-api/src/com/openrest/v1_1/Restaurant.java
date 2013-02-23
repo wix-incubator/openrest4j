@@ -1,8 +1,6 @@
 package com.openrest.v1_1;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -23,21 +21,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Restaurant extends Organization implements Comparable<Restaurant>{
 	public static final String TYPE = "restaurant";
 	private static final long serialVersionUID = 1L;
-    
-	/** Restaurant system is used for demonstration only. Orders will not be handled. */
-    public static final String STATE_DEMO = "demo";
-    /** Restaurant system is under construction. Orders will not be handled. */
-    public static final String STATE_UNDER_CONSTRUCTION = "under_construction";
-    /** Restaurant system is operational. Orders are accepted. */
-    public static final String STATE_OPERATIONAL = "operational";
-    /** Restaurant system is permanently closed. Orders will not be handled. */
-    public static final String STATE_CLOSED = "closed";
-    /** Restaurant system is operational, but only used to display information. */
-    public static final String STATE_INFO = "info";
-    
-    /** All known statuses. */
-    public static final Set<String> ALL_STATES = new HashSet<String>(Arrays.asList(
-    		STATE_DEMO, STATE_UNDER_CONSTRUCTION, STATE_OPERATIONAL, STATE_CLOSED, STATE_INFO));
     
     public Restaurant(String id, Map<String, String> externalIds, Long created, Long modified,
     		String distributorId, String chainId, Map<String, String> title,
@@ -213,9 +196,9 @@ public class Restaurant extends Organization implements Comparable<Restaurant>{
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, Integer> minPayments = new HashMap<String, Integer>();
 
-    /** @see ALL_STATES */
+    /** @see State.ALL_STATES */
     @JsonInclude(Include.NON_DEFAULT)
-    public String state = STATE_OPERATIONAL;
+    public String state = State.STATE_OPERATIONAL;
     
     /**
      * Maps feature-IDs to their values. The values correspond to how strongly the feature
@@ -234,32 +217,11 @@ public class Restaurant extends Organization implements Comparable<Restaurant>{
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean legacyHierarchy = Boolean.FALSE;
     
-    public static int compareState(String state1, String state2) {
-    	return getStateRank(state1) - getStateRank(state2);
-    }
-    
-    private static Map<String, Integer> getStateRanksMap() {
-    	final Map<String, Integer> ranks = new HashMap<String, Integer>();
-    	ranks.put(STATE_OPERATIONAL, 0);
-    	ranks.put(STATE_INFO, 1);
-    	ranks.put(STATE_UNDER_CONSTRUCTION, 2);
-    	ranks.put(STATE_DEMO, 3);
-    	ranks.put(STATE_CLOSED, 4);
-    	return Collections.unmodifiableMap(ranks);
-    }
-    private static Map<String, Integer> STATE_RANKS = getStateRanksMap();
-    private static int getStateRank(String state) {
-    	if (state == null) {
-    		return Integer.MAX_VALUE;
-    	}
-    	final Integer rank = STATE_RANKS.get(state);
-    	return ((rank != null) ? rank.intValue() : Integer.MAX_VALUE);
-    }
     
 	public int compareTo(Restaurant other) {
 		int result = compareRank(rank, other.rank);
 		if (result == 0) {
-			result = compareState(state, other.state);
+			result = State.compare(state, other.state);
 		}
 		return result;
 	}

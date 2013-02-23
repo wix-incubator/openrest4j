@@ -37,13 +37,13 @@ public class AppInfo implements Serializable, Cloneable {
     		APP_TYPE_CLIENT, APP_TYPE_EMPLOYEE
     }));
     
-    public AppInfo(String type, String platform, String id,
-    		String version, String link) {
+    public AppInfo(String type, String platform, String id, String version, String link, String state) {
     	this.type = type;
         this.platform = platform;
         this.id = id;
         this.version = version;
         this.link = link;
+        this.state = state;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -51,7 +51,7 @@ public class AppInfo implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	return new AppInfo(type, platform, id, version, link);
+    	return new AppInfo(type, platform, id, version, link, state);
 	}
 
     /** Application type (@see ALL_APP_TYPES) */
@@ -76,4 +76,8 @@ public class AppInfo implements Serializable, Cloneable {
     /** The application's download link. */
     @JsonInclude(Include.NON_NULL)
     public String link;
+    
+    /** @see State.ALL_STATES */
+    @JsonInclude(Include.NON_DEFAULT)
+    public String state = State.STATE_OPERATIONAL;
 }
