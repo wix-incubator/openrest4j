@@ -1,5 +1,7 @@
 package com.openrest.v1_1;
 
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -12,10 +14,20 @@ public class GetAppMappedObjectRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public GetAppMappedObjectRequest() {}
     
-    public GetAppMappedObjectRequest(AppId appId) {
+    public GetAppMappedObjectRequest(AppId appId, Boolean full, Set<String> fields) {
     	this.appId = appId;
+    	this.full = full;
+    	this.fields = fields;
     }
     
     @JsonInclude(Include.NON_NULL)
     public AppId appId;
+    
+    /** Whether or not the "full" organization object is requested. */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Boolean full = Boolean.TRUE;
+
+    /** If full=true */
+    @JsonInclude(Include.NON_NULL)
+    public Set<String> fields;
 }
