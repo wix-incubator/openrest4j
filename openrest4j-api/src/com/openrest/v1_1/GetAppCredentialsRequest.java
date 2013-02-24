@@ -1,5 +1,8 @@
 package com.openrest.v1_1;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -12,14 +15,14 @@ public class GetAppCredentialsRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public GetAppCredentialsRequest() {}
     
-    public GetAppCredentialsRequest(String accessToken, AppId appId) {
+    public GetAppCredentialsRequest(String accessToken, List<AppId> appIds) {
     	this.accessToken = accessToken;
-    	this.appId = appId;
+    	this.appIds = appIds;
     }
     
     @JsonInclude(Include.NON_NULL)
     public String accessToken;
     
-    @JsonInclude(Include.NON_NULL)
-    public AppId appId;
+    @JsonInclude(Include.NON_DEFAULT)
+    public List<AppId> appIds = new LinkedList<AppId>();
 }
