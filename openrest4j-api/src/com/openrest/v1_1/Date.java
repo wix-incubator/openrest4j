@@ -68,33 +68,7 @@ public class Date implements Serializable, Cloneable, Comparable<Date> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Date other = (Date) obj;
-		if (day == null) {
-			if (other.day != null)
-				return false;
-		} else if (!day.equals(other.day))
-			return false;
-		if (hour == null) {
-			if (other.hour != null)
-				return false;
-		} else if (!hour.equals(other.hour))
-			return false;
-		if (minute == null) {
-			if (other.minute != null)
-				return false;
-		} else if (!minute.equals(other.minute))
-			return false;
-		if (month == null) {
-			if (other.month != null)
-				return false;
-		} else if (!month.equals(other.month))
-			return false;
-		if (year == null) {
-			if (other.year != null)
-				return false;
-		} else if (!year.equals(other.year))
-			return false;
-		return true;
+		return (compareTo((Date) obj) == 0);
 	}
 	
 	private static int compare(Integer int1, Integer int2) {
@@ -105,21 +79,25 @@ public class Date implements Serializable, Cloneable, Comparable<Date> {
 		}
 	}
 	
-	public int compareTo(Date other) {
-		int result = compare(year, other.year);
+	public static int compare(Date date1, Date date2) {
+		int result = compare(date1.year, date2.year);
 		if (result == 0) {
-			result = compare(month, other.month);
+			result = compare(date1.month, date2.month);
 			if (result == 0) {
-				result = compare(day, other.day);
+				result = compare(date1.day, date2.day);
 				if (result == 0) {
-					result = compare(hour, other.hour);
+					result = compare(date1.hour, date2.hour);
 					if (result == 0) {
-						result = compare(minute, other.minute);
+						result = compare(date1.minute, date2.minute);
 					}
 				}
 			}
 		}
 		return result;
+	}
+	
+	public int compareTo(Date other) {
+		return compare(this, other);
 	}
 
     @JsonInclude(Include.NON_NULL)
