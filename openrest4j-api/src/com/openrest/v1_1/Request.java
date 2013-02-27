@@ -69,6 +69,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@Type(value = GetBillingRequest.class, name = GetBillingRequest.TYPE),
 	@Type(value = SetBillingRequest.class, name = SetBillingRequest.TYPE),
 	@Type(value = GetBalanceLinesRequest.class, name = GetBalanceLinesRequest.TYPE),
+	@Type(value = AddBalanceLineRequest.class, name = AddBalanceLineRequest.TYPE),
 	@Type(value = AddCostRequest.class, name = AddCostRequest.TYPE),
 	@Type(value = SetChargesRequest.class, name = SetChargesRequest.TYPE)
 })

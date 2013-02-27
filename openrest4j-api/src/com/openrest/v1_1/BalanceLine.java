@@ -1,6 +1,9 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -61,6 +64,10 @@ public class BalanceLine implements Serializable, Cloneable, Comparable<BalanceL
 	public static final String BALANCE_LINE_TYPE_BILL = "bill";
 	public static final String BALANCE_LINE_TYPE_TRANSACTION = "transaction";
 	public static final String BALANCE_LINE_TYPE_CHANGE = "change";
+	
+    /** All known statuses. */
+    public static final Set<String> ALL_TYPES = new HashSet<String>(Arrays.asList(
+    		BALANCE_LINE_TYPE_BILL, BALANCE_LINE_TYPE_TRANSACTION, BALANCE_LINE_TYPE_CHANGE));
 	
     public BalanceLine(String id, Long created, String type, String customerId, String supplierId,
     		Date date, Date forDate, Integer money, Integer credit, Integer debt, String currency, String comment) {
@@ -129,16 +136,16 @@ public class BalanceLine implements Serializable, Cloneable, Comparable<BalanceL
     public Date forDate;
     
     /** The change (diff) to the customer's money account, in "cents". */
-    @JsonInclude(Include.NON_NULL)
-    public Integer money;
+    @JsonInclude(Include.NON_DEFAULT)
+    public Integer money = 0;
     
     /** The change (diff) to the customer's credit account, in "cents". */
-    @JsonInclude(Include.NON_NULL)
-    public Integer credit;
+    @JsonInclude(Include.NON_DEFAULT)
+    public Integer credit = 0;
     
     /** The change (diff) to the customer's debt account, in "cents". */
-    @JsonInclude(Include.NON_NULL)
-    public Integer debt;
+    @JsonInclude(Include.NON_DEFAULT)
+    public Integer debt = 0;
     
     @JsonInclude(Include.NON_NULL)
     public String currency;
