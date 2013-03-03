@@ -5,16 +5,17 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GetBillingRequest extends Request {
-	public static final String TYPE = "get_billing";
+public class CalculateBillRequest extends Request {
+	public static final String TYPE = "calculate_bill";
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */
-    public GetBillingRequest() {}
+    public CalculateBillRequest() {}
     
-    public GetBillingRequest(String accessToken, String organizationId) {
+    public CalculateBillRequest(String accessToken, String organizationId, Date forDate) {
     	this.accessToken = accessToken;
     	this.organizationId = organizationId;
+    	this.forDate = forDate;
     }
     
     @JsonInclude(Include.NON_NULL)
@@ -22,4 +23,7 @@ public class GetBillingRequest extends Request {
     
     @JsonInclude(Include.NON_NULL)
     public String organizationId;
+    
+    @JsonInclude(Include.NON_NULL)
+    public Date forDate;
 }

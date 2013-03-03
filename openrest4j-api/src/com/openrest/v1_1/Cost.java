@@ -12,8 +12,13 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Cost implements Serializable, Comparable<Cost>, Cloneable  {
 	private static final long serialVersionUID = 1L;
     
+	/** Commission charged for online orders. */
     public static final String COST_TYPE_COMMISSION = "commission";
+	/** Costs for masked phone calls. */
+    public static final String COST_TYPE_PHONE = "phone";
+	/** Communication costs, e.g. SMS, fax, voice calls. */
     public static final String COST_TYPE_CHANNEL = "channel";
+	/** Other costs, e.g. adwords, domain purchase. */
     public static final String COST_TYPE_OTHER = "other";
     
     public static final String COST_KEY_COMMISSION_OWN = "";
@@ -25,7 +30,7 @@ public class Cost implements Serializable, Comparable<Cost>, Cloneable  {
     public static final String COST_KEY_OTHER_DOMAIN = "domain";
     
     public Cost(String type, String key, Map<String, String> title, Integer year, Integer month, Double priority, 
-    		String amountRuleType, Integer amountRule, Integer minimum, Integer discountRule) {
+    		String amountRuleType, Integer amountRule, Integer minimum, Integer discountRule, Integer amount, Integer discount) {
     	this.type = type;
     	this.key = key;
     	this.title = title;
@@ -36,6 +41,8 @@ public class Cost implements Serializable, Comparable<Cost>, Cloneable  {
     	this.amountRule = amountRule;
     	this.minimum = minimum;
     	this.discountRule = discountRule;
+    	this.amount = amount;
+    	this.discount = discount;
     }
     
     /** Default constructor for JSON deserialization. */
@@ -45,7 +52,7 @@ public class Cost implements Serializable, Comparable<Cost>, Cloneable  {
 	public Object clone() {
     	return new Cost(type, key,
     			((title != null) ? new HashMap<String, String>(title) : null),
-    			year, month, priority, amountRuleType, amountRule, minimum, discountRule);
+    			year, month, priority, amountRuleType, amountRule, minimum, discountRule, amount, discount);
 	}
     
     /** Cost type. */

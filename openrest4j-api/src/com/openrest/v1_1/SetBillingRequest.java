@@ -12,17 +12,13 @@ public class SetBillingRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public SetBillingRequest() {}
     
-    public SetBillingRequest(String accessToken, String organizationId, Billing billing) {
+    public SetBillingRequest(String accessToken, Billing billing) {
     	this.accessToken = accessToken;
-    	this.organizationId = organizationId;
     	this.billing = billing;
     }
     
     @JsonInclude(Include.NON_NULL)
     public String accessToken;
-    
-    @JsonInclude(Include.NON_NULL)
-    public String organizationId;
     
     @JsonInclude(Include.NON_NULL)
     public Billing billing;

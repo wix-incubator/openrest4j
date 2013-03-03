@@ -2,7 +2,8 @@ package com.openrest.v1_1;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,23 +12,38 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Billing implements Serializable {
+public class Billing implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
     
-    public Billing(String restaurantId, List<Cost> costs, Map<String, String> method, Integer year, Integer month) {
-    	this.restaurantId = restaurantId;
+    public Billing(String organizationId, Boolean notBilled, List<Cost> costs, Map<String, String> method) {
+    	this.organizationId = organizationId;
+    	this.notBilled = notBilled;
     	this.costs = costs;
     	this.method = method;
-    	this.year = year;
-    	this.month = month;
     }
     
     /** Default constructor for JSON deserialization. */
     public Billing() {}
     
-    /** The restaurant unique id. */
+    @Override
+	public Object clone() {
+    	final List<Cost> clonedCosts;
+    	if (costs != null) {
+    		clonedCosts = new ArrayList<Cost>(costs.size());
+    		for (Cost cost : costs) {
+    			clonedCosts.add((Cost) cost.clone());
+    		}
+    	} else {
+    		clonedCosts = null;
+    	}
+    	
+    	return new Billing(organizationId, notBilled, clonedCosts,
+    			((method != null) ? new HashMap<String, String>(method) : null));
+	}
+    
+    /** The organization's unique id. */
     @JsonInclude(Include.NON_NULL)
-    public String restaurantId;
+    public String organizationId;
     
     /** Whether the organization is not billed (or billed as part of a different organization). */
     @JsonInclude(Include.NON_DEFAULT)
@@ -35,21 +51,9 @@ public class Billing implements Serializable {
     
     /** The costs. */
     @JsonInclude(Include.NON_DEFAULT)
-    public List<Cost> costs = new ArrayList<Cost>();
+    public List<Cost> costs = new LinkedList<Cost>();
     
     /** Payment method (free text, multi-locale). */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> method = Collections.emptyMap();
-    
-    /** The restaurant unique id. */
-    @JsonInclude(Include.NON_NULL)
-    public Integer year;
-
-    /** The restaurant unique id. */
-    @JsonInclude(Include.NON_NULL)
-    public Integer month;
-    
-    /** The billing in HTML format. */
-    @JsonInclude(Include.NON_NULL)
-    public String html;
+    public Map<String, String> method = new HashMap<String, String>();
 }
