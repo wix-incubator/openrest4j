@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	    property = "type")  
 @JsonSubTypes({
 	@Type(value = GetOrganizationRequest.class, name = GetOrganizationRequest.TYPE),
+	@Type(value = GetOrganizationsRequest.class, name = GetOrganizationsRequest.TYPE),
 	@Type(value = SetOrganizationRequest.class, name = SetOrganizationRequest.TYPE),
 	@Type(value = AddOrganizationRequest.class, name = AddOrganizationRequest.TYPE),
 	@Type(value = GetChainsRequest.class, name = GetChainsRequest.TYPE),

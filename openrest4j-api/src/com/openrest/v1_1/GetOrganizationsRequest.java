@@ -7,27 +7,21 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GetAppMappedObjectRequest extends Request {
-	public static final String TYPE = "get_app_mapped_object";
+public class GetOrganizationsRequest extends Request {
+	public static final String TYPE = "get_organizations";
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */
-    public GetAppMappedObjectRequest() {}
+    public GetOrganizationsRequest() {}
     
-    public GetAppMappedObjectRequest(AppId appId, Boolean full, Set<String> fields) {
-    	this.appId = appId;
-    	this.full = full;
+    public GetOrganizationsRequest(String distributorId, Set<String> fields) {
+    	this.distributorId = distributorId;
     	this.fields = fields;
     }
     
     @JsonInclude(Include.NON_NULL)
-    public AppId appId;
-    
-    /** Whether or not the "full" organization object is requested. */
-    @JsonInclude(Include.NON_DEFAULT)
-    public Boolean full = Boolean.TRUE;
+    public String distributorId;
 
-    /** If full=false */
     @JsonInclude(Include.NON_NULL)
     public Set<String> fields;
 }
