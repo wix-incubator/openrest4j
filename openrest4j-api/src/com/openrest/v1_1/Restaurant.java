@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  * @author DL
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Restaurant extends Organization implements Comparable<Restaurant>{
+public class Restaurant extends Organization {
 	public static final String TYPE = "restaurant";
 	private static final long serialVersionUID = 1L;
     
@@ -36,7 +36,7 @@ public class Restaurant extends Organization implements Comparable<Restaurant>{
             String state, Map<String, Double> features, Boolean legacyHierarchy, Double rank) {
     	super(id, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties,
-    			picture, icon, wideLogo, noImagePicture, rank);
+    			picture, icon, wideLogo, noImagePicture, state, rank);
         
     	this.distributorId = distributorId;
     	this.chainId = chainId;
@@ -49,7 +49,6 @@ public class Restaurant extends Organization implements Comparable<Restaurant>{
         this.paymentTypes = paymentTypes;
         this.cardInfos = cardInfos;
         this.minPayments = minPayments;
-        this.state = state;
         this.features = features;
         this.legacyHierarchy = legacyHierarchy;
     }
@@ -196,10 +195,6 @@ public class Restaurant extends Organization implements Comparable<Restaurant>{
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, Integer> minPayments = new HashMap<String, Integer>();
 
-    /** @see State.ALL_STATES */
-    @JsonInclude(Include.NON_DEFAULT)
-    public String state = State.STATE_OPERATIONAL;
-    
     /**
      * Maps feature-IDs to their values. The values correspond to how strongly the feature
      * is relevant for the restaurant, which influences its position in search results.
@@ -216,13 +211,4 @@ public class Restaurant extends Organization implements Comparable<Restaurant>{
      */
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean legacyHierarchy = Boolean.FALSE;
-    
-    
-	public int compareTo(Restaurant other) {
-		int result = compareRank(rank, other.rank);
-		if (result == 0) {
-			result = State.compare(state, other.state);
-		}
-		return result;
-	}
 }

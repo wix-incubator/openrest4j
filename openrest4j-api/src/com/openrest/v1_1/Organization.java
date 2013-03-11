@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  * @author DL
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public abstract class Organization extends OpenrestObject implements Cloneable {
+public abstract class Organization extends OpenrestObject implements Cloneable, Comparable<Organization> {
 	private static final long serialVersionUID = 1L;
 	
     /** The organization's welcome message. */
@@ -49,7 +49,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable {
     		Address address, String timezone, String currency,
     		String link, String domain, Set<String> altDomains,
     		List<AppInfo> apps, Seo seo, Map<String, String> properties,
-    		String picture, String icon, String wideLogo, String noImagePicture, Double rank) {
+    		String picture, String icon, String wideLogo, String noImagePicture, String state, Double rank) {
 
     	this.id = id;
     	this.externalIds = externalIds;
@@ -76,6 +76,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable {
     	this.icon = icon;
     	this.wideLogo = wideLogo;
     	this.noImagePicture = noImagePicture;
+    	this.state = state;
     	this.rank = rank;
     }
     
@@ -213,6 +214,10 @@ public abstract class Organization extends OpenrestObject implements Cloneable {
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> properties = new HashMap<String, String>();
     
+    /** @see State.ALL_STATES */
+    @JsonInclude(Include.NON_DEFAULT)
+    public String state = State.STATE_OPERATIONAL;
+    
     /** The organization's Openrest rank (higher is better). */
     @JsonInclude(Include.NON_NULL)
     public Double rank;
@@ -224,4 +229,12 @@ public abstract class Organization extends OpenrestObject implements Cloneable {
 			return ((rank2 == null) ? (0) : 1);
 		}
     }
+    
+	public int compareTo(Organization other) {
+		int result = compareRank(rank, other.rank);
+		if (result == 0) {
+			result = State.compare(state, other.state);
+		}
+		return result;
+	}
 }
