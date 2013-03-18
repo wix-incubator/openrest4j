@@ -12,10 +12,11 @@ public class GetBillRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public GetBillRequest() {}
     
-    public GetBillRequest(String accessToken, String organizationId, Date forDate) {
+    public GetBillRequest(String accessToken, String organizationId, Date forDate, String locale) {
     	this.accessToken = accessToken;
     	this.organizationId = organizationId;
     	this.forDate = forDate;
+    	this.locale = locale;
     }
     
     @JsonInclude(Include.NON_NULL)
@@ -26,4 +27,8 @@ public class GetBillRequest extends Request {
     
     @JsonInclude(Include.NON_NULL)
     public Date forDate;
+    
+    /** For Bill.html, if null Organization.locale will be used. */
+    @JsonInclude(Include.NON_NULL)
+	public String locale;
 }
