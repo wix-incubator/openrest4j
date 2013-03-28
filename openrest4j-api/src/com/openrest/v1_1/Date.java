@@ -80,6 +80,12 @@ public class Date implements Serializable, Cloneable, Comparable<Date> {
 	}
 	
 	public static int compare(Date date1, Date date2) {
+		if (date1 == null) {
+			return ((date2 == null) ? 0 : 1);
+		} else if (date2 == null) {
+			return -1;
+		}
+		
 		int result = compare(date1.year, date2.year);
 		if (result == 0) {
 			result = compare(date1.month, date2.month);
