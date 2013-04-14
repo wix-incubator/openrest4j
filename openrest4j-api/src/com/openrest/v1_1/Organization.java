@@ -1,7 +1,6 @@
 package com.openrest.v1_1;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -35,10 +34,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
 	/** Standard (4:3) image place holder. */
     public static final String BLOB_TYPE_NO_IMAGE = "no_image";
     
-    /** All known blob types. */
-    public static final Set<String> ALL_BLOB_TYPES = new HashSet<String>(Arrays.asList(
-    		BLOB_TYPE_LOGO, BLOB_TYPE_LOGO_SQUARE, BLOB_TYPE_LOGO_WIDE, BLOB_TYPE_NO_IMAGE));
-	
     /** Default constructor for JSON deserialization. */
     public Organization() {}
     
@@ -49,7 +44,8 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     		Address address, String timezone, String currency,
     		String link, String domain, Set<String> altDomains,
     		List<AppInfo> apps, Seo seo, Map<String, String> properties,
-    		String picture, String icon, String wideLogo, String noImagePicture, String state, Double rank) {
+    		String picture, String icon, String wideLogo, String noImagePicture,
+    		Map<String, Blob> blobs, String state, Double rank) {
 
     	this.id = id;
     	this.externalIds = externalIds;
@@ -76,6 +72,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     	this.icon = icon;
     	this.wideLogo = wideLogo;
     	this.noImagePicture = noImagePicture;
+    	this.blobs = blobs;
     	this.state = state;
     	this.rank = rank;
     }
@@ -213,6 +210,13 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
      */
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> properties = new HashMap<String, String>();
+    
+    /**
+     * Maps blob-types to blobs.
+     * @see GetBlobUploadUrlRequest#blobType
+     */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Map<String, Blob> blobs = new HashMap<String, Blob>();
     
     /** @see State.ALL_STATES */
     @JsonInclude(Include.NON_DEFAULT)

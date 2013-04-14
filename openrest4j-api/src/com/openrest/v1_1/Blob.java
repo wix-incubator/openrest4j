@@ -7,16 +7,25 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Blob implements Serializable {
+public class Blob implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
     
-    public Blob(String id) {
+    public Blob(String id, String url) {
     	this.id = id;
+    	this.url = url;
     }
+    
+    @Override
+	public Object clone() {
+    	return new Blob(id, url);
+	}
     
     /** Default constructor for JSON deserialization. */
     public Blob() {}
     
     @JsonInclude(Include.NON_NULL)
     public String id;
+    
+    @JsonInclude(Include.NON_NULL)
+    public String url;
 }

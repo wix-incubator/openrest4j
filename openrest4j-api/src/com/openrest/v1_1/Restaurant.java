@@ -31,12 +31,12 @@ public class Restaurant extends Organization {
             String timezone, String currency, String locale, Set<String> locales,
             Set<String> paymentTypes, Map<String, CardInfo> cardInfos, Map<String, Integer> minPayments,
             String link, String domain, Set<String> altDomains,
-            String picture, String icon, String wideLogo, String noImagePicture,
+            String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
             List<AppInfo> apps, Seo seo, Map<String, String> properties,
             String state, Map<String, Double> features, Boolean legacyHierarchy, Double rank) {
     	super(id, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties,
-    			picture, icon, wideLogo, noImagePicture, state, rank);
+    			picture, icon, wideLogo, noImagePicture, blobs, state, rank);
         
     	this.distributorId = distributorId;
     	this.chainId = chainId;
@@ -108,6 +108,16 @@ public class Restaurant extends Organization {
     	} else {
     		clonedExternalContacts = null;
     	}    	
+    	
+    	final Map<String, Blob> clonedBlobs;
+    	if (blobs != null) {
+    		clonedBlobs = new LinkedHashMap<String, Blob>(blobs.size());
+    		for (Entry<String, Blob> entry : blobs.entrySet()) {
+    			clonedBlobs.put(entry.getKey(), (Blob) entry.getValue().clone());
+    		}
+    	} else {
+    		clonedBlobs = null;
+    	}
 
     	return new Restaurant(id,
     			((externalIds != null) ? new HashMap<String, String>(externalIds) : null),    			
@@ -130,7 +140,7 @@ public class Restaurant extends Organization {
     			((minPayments != null) ? new HashMap<String, Integer>(minPayments) : null),
     			link, domain,
     			((altDomains != null) ? new HashSet<String>(altDomains) : null),
-    			picture, icon, wideLogo, noImagePicture,
+    			picture, icon, wideLogo, noImagePicture, clonedBlobs,
     			clonedApps,
     			((seo != null) ? (Seo) seo.clone() : null),
     			((properties != null) ? new HashMap<String, String>(properties) : null), state,

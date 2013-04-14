@@ -32,10 +32,11 @@ public class Portal extends Organization {
     		Contact contact, Map<String, Contact> externalContacts, Address address, String timezone, String currency,
     		String link, String domain, Set<String> altDomains,
     		List<AppInfo> apps, Seo seo, Map<String, String> properties,
-    		String picture, String icon, String wideLogo, String noImagePicture, String state, Double rank) {
+    		String picture, String icon, String wideLogo, String noImagePicture,
+    		Map<String, Blob> blobs, String state, Double rank) {
     	super(id, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties,
-    			picture, icon, wideLogo, noImagePicture, state, rank);
+    			picture, icon, wideLogo, noImagePicture, blobs, state, rank);
     	
     	this.distributorId = distributorId;
     }
@@ -72,6 +73,16 @@ public class Portal extends Organization {
     		clonedExternalContacts = null;
     	}    	
     	
+    	final Map<String, Blob> clonedBlobs;
+    	if (blobs != null) {
+    		clonedBlobs = new LinkedHashMap<String, Blob>(blobs.size());
+    		for (Entry<String, Blob> entry : blobs.entrySet()) {
+    			clonedBlobs.put(entry.getKey(), (Blob) entry.getValue().clone());
+    		}
+    	} else {
+    		clonedBlobs = null;
+    	}
+    	
     	return new Portal(id,
     			((externalIds != null) ? new HashMap<String, String>(externalIds) : null),
     			created, modified, distributorId,
@@ -88,7 +99,8 @@ public class Portal extends Organization {
     			clonedApps,
     			((seo != null) ? (Seo) seo.clone() : null),
     			((properties != null) ? new HashMap<String, String>(properties) : null),
-    			picture, icon, wideLogo, noImagePicture, state, rank);
+    			picture, icon, wideLogo, noImagePicture, clonedBlobs,
+    			state, rank);
 	}
     
     /** The distributor in charge of this portal. */

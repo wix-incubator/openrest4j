@@ -23,14 +23,14 @@ public class SearchResult extends Restaurant {
             String timezone, String currency, String locale, Set<String> locales,
             Set<String> paymentTypes, Map<String, CardInfo> cardInfos, Map<String, Integer> minPayments,
             String link, String domain, Set<String> altDomains,
-            String picture, String icon, String wideLogo, String noImagePicture,
+            String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
             List<AppInfo> apps, Seo seo, Map<String, String> properties,
             String state, Map<String, Double> features, Boolean legacyHierarchy, Double rank, List<TopItem> topItems,
             Set<String> deliveryTypes, DeliveryInfo deliveryInfo, List<Charge> charges) {
     	super(id, externalIds, created, modified, distributorId, chainId, title, description, contact, externalContacts,
     			address, messages, colorScheme, openTimes, deliveryTimes, inactive, deliveryInfos, status, deliveryStatus, timezone,
     			currency, locale, locales, paymentTypes, cardInfos, minPayments, link, domain, altDomains,
-    			picture, icon, wideLogo, noImagePicture,
+    			picture, icon, wideLogo, noImagePicture, blobs,
     			apps, seo, properties, state, features, legacyHierarchy, rank);
     	
     	this.topItems = topItems;
