@@ -14,6 +14,10 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class User implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
     
+    public static final String FACEBOOK_PREFIX = "";
+    public static final String OPENREST_PREFIX = "spice|";
+    public static final String PHONE_PREFIX = "tel|";
+    
     public User(String id, Boolean idIsInferred, String ipAddress, String fwdIpAddresses) {
         this.id = id;
         this.idIsInferred = idIsInferred;

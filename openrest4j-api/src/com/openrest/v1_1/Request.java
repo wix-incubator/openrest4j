@@ -53,6 +53,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@Type(value = GetRolesRequest.class, name = GetRolesRequest.TYPE),
 	@Type(value = GetClientInfoRequest.class, name = GetClientInfoRequest.TYPE),
 	@Type(value = SetClientInfoRequest.class, name = SetClientInfoRequest.TYPE),
+	@Type(value = SetClientInfoCommentsRequest.class, name = SetClientInfoCommentsRequest.TYPE),
 	@Type(value = SetAvailabilityExceptionsRequest.class, name = SetAvailabilityExceptionsRequest.TYPE),
 	@Type(value = QueryEmailRequest.class, name = QueryEmailRequest.TYPE),
 	@Type(value = DeferredRequest.class, name = DeferredRequest.TYPE),
