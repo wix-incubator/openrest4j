@@ -21,10 +21,19 @@ public class Payment implements Serializable, Cloneable {
     public static final String PAYMENT_TYPE_DEBIT = "debit";
     /** Payment by 10bis card (@see www.10bis.co.il). */
     public static final String PAYMENT_TYPE_10BIS = "10bis";
+    /** Payment by check. */
+    public static final String PAYMENT_TYPE_CHECK = "check";
+    /** Payment by offsetting against external (reverse) payments. */
+    public static final String PAYMENT_TYPE_OFFSET = "offset";
+    /** Payment by direct debit. */
+    public static final String PAYMENT_TYPE_DIRECT_DEBIT = "direct_debit";
+    /** PayPal payment. */
+    public static final String PAYMENT_TYPE_PAYPAL = "paypal";
 
     /** All known payment methods. */
     public static final Set<String> ALL_PAYMENT_TYPES = new HashSet<String>(Arrays.asList(
-    		PAYMENT_TYPE_CASH, PAYMENT_TYPE_CREDIT, PAYMENT_TYPE_DEBIT, PAYMENT_TYPE_10BIS
+    		PAYMENT_TYPE_CASH, PAYMENT_TYPE_CREDIT, PAYMENT_TYPE_DEBIT, PAYMENT_TYPE_10BIS,
+    		PAYMENT_TYPE_CHECK, PAYMENT_TYPE_OFFSET, PAYMENT_TYPE_DIRECT_DEBIT, PAYMENT_TYPE_PAYPAL
     ));
 
     /** Constructs a new one-time payment. */
