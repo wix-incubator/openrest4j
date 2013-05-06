@@ -2,10 +2,8 @@ package com.openrest.v1_1;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -15,11 +13,11 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Billing implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
     
-    public Billing(String organizationId, Boolean notBilled, List<Cost> costs, Map<String, String> method) {
+    public Billing(String organizationId, Boolean notBilled, List<Cost> costs, String paymentMethod) {
     	this.organizationId = organizationId;
     	this.notBilled = notBilled;
     	this.costs = costs;
-    	this.method = method;
+    	this.paymentMethod = paymentMethod;
     }
     
     /** Default constructor for JSON deserialization. */
@@ -37,8 +35,7 @@ public class Billing implements Serializable, Cloneable {
     		clonedCosts = null;
     	}
     	
-    	return new Billing(organizationId, notBilled, clonedCosts,
-    			((method != null) ? new HashMap<String, String>(method) : null));
+    	return new Billing(organizationId, notBilled, clonedCosts, paymentMethod);
 	}
     
     /** The organization's unique id. */
@@ -53,7 +50,7 @@ public class Billing implements Serializable, Cloneable {
     @JsonInclude(Include.NON_DEFAULT)
     public List<Cost> costs = new LinkedList<Cost>();
     
-    /** Payment method (free text, multi-locale). */
-    @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> method = new HashMap<String, String>();
+    /** Payment method (@see Payment.ALL_PAYMENT_TYPES). */
+    @JsonInclude(Include.NON_NULL)
+    public String paymentMethod;
 }
