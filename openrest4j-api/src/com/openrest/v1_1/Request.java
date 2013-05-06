@@ -76,7 +76,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@Type(value = GetBalanceLinesRequest.class, name = GetBalanceLinesRequest.TYPE),
 	@Type(value = AddBalanceLineRequest.class, name = AddBalanceLineRequest.TYPE),
 	@Type(value = AddCostRequest.class, name = AddCostRequest.TYPE),
-	@Type(value = SetChargesRequest.class, name = SetChargesRequest.TYPE)
+	@Type(value = SetChargesRequest.class, name = SetChargesRequest.TYPE),
+	@Type(value = ExtendAccessTokenRequest.class, name = ExtendAccessTokenRequest.TYPE)
 })
 public abstract class Request implements Serializable {
     private static final long serialVersionUID = 1L;
