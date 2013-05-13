@@ -11,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Notification implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     /** Triggered when a new order is received. Duration is always 0. */
     public static final String NOTIFICATION_TYPE_NEW_ORDER = "new_order";
     /** Triggered when a new order is not handled for some duration. */
@@ -31,37 +33,35 @@ public class Notification implements Serializable {
     ));
 
     /** Constructs a previously submitted notification from persisted data. */
-    public Notification(String restaurantId, String type, Contact contact,
-    		Integer durationMins, Boolean acceptOrder) {
-        this.restaurantId = restaurantId;
+    public Notification(String organizationId, String type, String channelId, String channelParam,
+    		Integer durationMins, Boolean acceptOrder, String comment, String state) {
+        this.organizationId = organizationId;
         this.type = type;
-        this.contact = contact;
+        this.channelId = channelId;
+        this.channelParam = channelParam;
         this.durationMins = durationMins;
         this.acceptOrder = acceptOrder;
+        this.comment = comment;
+        this.state = state;
     }
 
-    /** Constructs a new notification to be submitted. */
-    public Notification(String type, Contact contact, Integer durationMins, Boolean acceptOrder) {
-        this(null, type, contact, durationMins, acceptOrder);
-    }
-    
     /** Default constructor for JSON deserialization. */
     public Notification() {}
-
-    public Notification delayedOrderNotification(Contact contact, Integer durationMins, Boolean acceptOrder) {
-        return new Notification(NOTIFICATION_TYPE_DELAYED_ORDER, contact, durationMins, acceptOrder);
-    }
-
+    
     @JsonInclude(Include.NON_NULL)
-    public String restaurantId;
+    public String organizationId;    
 
     /** Notification type. */
     @JsonInclude(Include.NON_NULL)
     public String type;
-
-    /** Who should be notified. */
+    
+    /** @see Channel.ALL_CHANNELS */
     @JsonInclude(Include.NON_NULL)
-    public Contact contact;
+    public String channelId;
+    
+    /** @see Channel */
+    @JsonInclude(Include.NON_NULL)
+    public String channelParam;
 
     /**
      * Event duration for triggering a notification, e.g. "after 15 minutes of
@@ -77,12 +77,19 @@ public class Notification implements Serializable {
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean acceptOrder = Boolean.FALSE;
     
+    /** Free-text comment, e.g. who is notified. */
+    @JsonInclude(Include.NON_NULL)
+    public String comment;
+    
+    /** @see State.ALL_STATES */
+    @JsonInclude(Include.NON_DEFAULT)
+    public String state = State.STATE_OPERATIONAL;
+    
     @Override
 	public String toString() {
-		return "Notification [restaurantId=" + restaurantId + ", type=" + type
-				+ ", contact=" + contact + ", durationMins=" + durationMins
-				+ ", acceptOrder=" + acceptOrder + "]";
+		return "Notification [organizationId=" + organizationId + ", type=" + type
+				+ ", channelId=" + channelId + ", channelParam=" + channelParam
+				+ ", durationMins=" + durationMins + ", acceptOrder=" + acceptOrder
+				+ ", comment=" + comment + ", state=" + state + "]";
 	}
-
-    private static final long serialVersionUID = 1L;
 }
