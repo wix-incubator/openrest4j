@@ -23,7 +23,7 @@ public class Feedback implements Serializable {
     	this.organizationId = organizationId;
     	this.ref = ref;
     	this.type = type;
-    	this.created = created.getTime();
+    	this.created = ((created != null) ? created.getTime() : null);
     	this.contact = contact;
     	this.comment = comment;
     	this.user = user;
