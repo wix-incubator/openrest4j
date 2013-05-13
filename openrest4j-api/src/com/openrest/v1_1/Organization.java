@@ -34,6 +34,12 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
 	/** Standard (4:3) image place holder. */
     public static final String BLOB_TYPE_NO_IMAGE = "no_image";
     
+	/**
+	 * Sound recording for automated phone calls.
+	 * @see Notification.NOTIFICATION_TYPE_DELAYED_ORDER
+	 */
+    public static final String BLOB_TYPE_NOTIFICATION_VOICE = "notification_voice";
+    
     /** Default constructor for JSON deserialization. */
     public Organization() {}
     
