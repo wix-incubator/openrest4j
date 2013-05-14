@@ -35,5 +35,5 @@ public class Channel {
 	
     /** All known channels. */
     public static final Set<String> ALL_CHANNELS = new HashSet<String>(Arrays.asList(
-    		CHANNEL_FAX, CHANNEL_SMS, CHANNEL_VOICE, CHANNEL_RESTCLOUD));
+    		CHANNEL_EMAIL, CHANNEL_FAX, CHANNEL_SMS, CHANNEL_VOICE, CHANNEL_RESTCLOUD));
 }
