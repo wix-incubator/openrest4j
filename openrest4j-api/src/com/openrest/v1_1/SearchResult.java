@@ -9,6 +9,8 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.openrest.availability.Availability;
+import com.openrest.availability.Status;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchResult extends Restaurant {
