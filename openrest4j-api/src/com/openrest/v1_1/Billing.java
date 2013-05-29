@@ -13,11 +13,12 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Billing implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
     
-    public Billing(String organizationId, Boolean notBilled, List<Cost> costs, String paymentMethod) {
+    public Billing(String organizationId, Boolean notBilled, List<Cost> costs, String paymentMethod, String comment) {
     	this.organizationId = organizationId;
     	this.notBilled = notBilled;
     	this.costs = costs;
     	this.paymentMethod = paymentMethod;
+    	this.comment = comment;
     }
     
     /** Default constructor for JSON deserialization. */
@@ -35,7 +36,7 @@ public class Billing implements Serializable, Cloneable {
     		clonedCosts = null;
     	}
     	
-    	return new Billing(organizationId, notBilled, clonedCosts, paymentMethod);
+    	return new Billing(organizationId, notBilled, clonedCosts, paymentMethod, comment);
 	}
     
     /** The organization's unique id. */
@@ -53,4 +54,8 @@ public class Billing implements Serializable, Cloneable {
     /** Payment method (@see Payment.ALL_PAYMENT_TYPES). */
     @JsonInclude(Include.NON_NULL)
     public String paymentMethod;
+    
+    /** Free-text comment. */
+    @JsonInclude(Include.NON_NULL)
+    public String comment;
 }
