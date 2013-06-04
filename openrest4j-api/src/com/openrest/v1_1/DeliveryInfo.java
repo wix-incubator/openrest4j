@@ -43,7 +43,10 @@ public class DeliveryInfo implements Serializable, Cloneable {
     @JsonInclude(Include.NON_NULL)
     public Area area;
     
-    /** The minimum allowed order price (in "cents"). */
+    /**
+     * The minimum allowed order price (in "cents"), taking into account all order-items and all charges,
+     * except for delivery charges (duh) and taxes.
+     */
     @JsonInclude(Include.NON_DEFAULT)
     public Integer minOrderPrice = 0;
     
