@@ -33,6 +33,8 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     public static final String BLOB_TYPE_LOGO_WIDE = "logo_wide";
 	/** Standard (4:3) image place holder. */
     public static final String BLOB_TYPE_NO_IMAGE = "no_image";
+	/** Cover (7:4) image. */
+    public static final String BLOB_TYPE_COVER = "cover";
     
 	/**
 	 * Sound recording for automated phone calls.
