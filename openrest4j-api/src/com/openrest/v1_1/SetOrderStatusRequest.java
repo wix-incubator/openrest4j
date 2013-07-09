@@ -34,6 +34,10 @@ public class SetOrderStatusRequest extends Request {
     @JsonInclude(Include.NON_NULL)
     public String orderId;
     
+    /**
+     * @see Order.ALL_ORDER_STATUSES
+     * null means "no change" (for comment only statuses)
+     */
     @JsonInclude(Include.NON_NULL)
     public String status;
     
