@@ -10,6 +10,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Menu implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     public Menu(List<Item> items, List<Tag> tags, List<Category> categories) {
         this.items = items;
         this.tags = tags;
@@ -45,6 +47,4 @@ public class Menu implements Serializable {
 
     @JsonInclude(Include.NON_DEFAULT)
     public List<Category> categories = new ArrayList<Category>();
-
-    private static final long serialVersionUID = 1L;
 }
