@@ -15,8 +15,6 @@ import com.openrest.availability.Availability;
  * Examples: state tax, discount coupon.
  * 
  * For legacy reasons, delivery charges are not part of this.
- * 
- * @author DL
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Charge implements Serializable, Cloneable {
@@ -28,10 +26,12 @@ public class Charge implements Serializable, Cloneable {
     public static final String CHARGE_TYPE_CLUB_COUPON = "club_coupon";
 	/** Tax. */
     public static final String CHARGE_TYPE_TAX = "tax";
+	/** Service charge ("convenience fee"). */
+    public static final String CHARGE_TYPE_SERVICE = "service";
     
     /** All known charges. */
     public static final Set<String> ALL_CHARGE_TYPES = new HashSet<String>(Arrays.asList(new String[] {
-    		CHARGE_TYPE_DELIVERY, CHARGE_TYPE_COUPON, CHARGE_TYPE_CLUB_COUPON, CHARGE_TYPE_TAX
+    		CHARGE_TYPE_DELIVERY, CHARGE_TYPE_COUPON, CHARGE_TYPE_CLUB_COUPON, CHARGE_TYPE_TAX, CHARGE_TYPE_SERVICE
     }));
     
 	/** Amount rule is a fixed number that's added once to all applicable items. */
