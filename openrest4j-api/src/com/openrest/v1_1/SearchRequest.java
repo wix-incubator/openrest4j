@@ -14,11 +14,9 @@ public class SearchRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public SearchRequest() {}
     
-    public SearchRequest(String distributorId, String chainId, LatLng latLng, Set<String> states, Set<String> features, String query,
+    public SearchRequest(Filter filter, Set<String> states, Set<String> features, String query,
     		Set<String> chargeTypes, Set<String> fields, Integer limit, Set<String> excludeIds) {
-    	this.distributorId = distributorId;
-    	this.chainId = chainId;
-    	this.latLng = latLng;
+    	this.filter = filter;
     	this.states = states;
     	this.features = features;
     	this.query = query;
@@ -28,12 +26,21 @@ public class SearchRequest extends Request {
     	this.excludeIds = excludeIds;
     }
     
+    @JsonInclude(Include.NON_DEFAULT)
+    public Filter filter = new Filter();
+    
+    /** Use filter.distributorId */
+    @Deprecated
     @JsonInclude(Include.NON_NULL)
     public String distributorId;
 
+    /** Use filter.chainId */
+    @Deprecated
     @JsonInclude(Include.NON_NULL)
     public String chainId;
     
+    /** Use filter.latLng */
+    @Deprecated
     @JsonInclude(Include.NON_NULL)
     public LatLng latLng;
     

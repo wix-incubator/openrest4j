@@ -13,10 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-/**
- * Restaurant chain information.
- * @author DL
- */
+/** Portal information. */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Portal extends Organization {
 	public static final String TYPE = "portal";
@@ -26,7 +23,8 @@ public class Portal extends Organization {
     /** Default constructor for JSON deserialization. */
     public Portal() {}
     
-    public Portal(String id, Map<String, String> externalIds, Long created, Long modified, String distributorId,
+    public Portal(String id, Map<String, String> externalIds, Long created, Long modified,
+    		String distributorId, Filter filter,
     		Map<String, String> title, Map<String, String> description,
     		String locale, Set<String> locales, Map<String, Map<String, String>> messages, ColorScheme colorScheme,
     		Contact contact, Map<String, Contact> externalContacts, Address address, String timezone, String currency,
@@ -39,6 +37,7 @@ public class Portal extends Organization {
     			picture, icon, wideLogo, noImagePicture, blobs, state, rank);
     	
     	this.distributorId = distributorId;
+    	this.filter = filter;
     }
     
     @Override
@@ -86,6 +85,7 @@ public class Portal extends Organization {
     	return new Portal(id,
     			((externalIds != null) ? new HashMap<String, String>(externalIds) : null),
     			created, modified, distributorId,
+    			((filter != null) ? (Filter) filter.clone() : null),
     			((title != null) ? new HashMap<String, String>(title) : null),
     			((description != null) ? new HashMap<String, String>(description) : null),
     			locale,
@@ -106,4 +106,8 @@ public class Portal extends Organization {
     /** The distributor in charge of this portal. */
     @JsonInclude(Include.NON_NULL)
     public String distributorId;
+    
+    /** The filter associated with this portal. */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Filter filter = new Filter();
 }
