@@ -16,7 +16,7 @@ public class GetStatsRequest extends Request {
     public GetStatsRequest() {}
     
     public GetStatsRequest(String accessToken, String distributorId, String chainId, Set<String> restaurantIds,
-    		Date since, Date until, String granularity, String ref) {
+    		Date since, Date until, String granularity, String source, String platform, String ref) {
     	this.accessToken = accessToken;
     	this.distributorId = distributorId;
     	this.chainId = chainId;
@@ -24,6 +24,8 @@ public class GetStatsRequest extends Request {
     	this.since = since;
     	this.until = until;
     	this.granularity = granularity;
+    	this.source = source;
+    	this.platform = platform;
     	this.ref = ref;
     }
     
@@ -48,6 +50,14 @@ public class GetStatsRequest extends Request {
     @JsonInclude(Include.NON_NULL)
     public String granularity;
     
+    @JsonInclude(Include.NON_NULL)
+    public String source;
+
+    @JsonInclude(Include.NON_NULL)
+    public String platform;
+    
+    /** Use source and platform */
+    @Deprecated
     @JsonInclude(Include.NON_NULL)
     public String ref;
 }
