@@ -21,10 +21,14 @@ public class AppId implements Serializable, Cloneable {
     public static final String PLATFORM_ANDROID = "android";
 	/** iOS platform. */
     public static final String PLATFORM_IOS = "ios";
+	/** Web platform. */
+    public static final String PLATFORM_WEB = "web";
+	/** Mobileweb platform. */
+    public static final String PLATFORM_MOBILEWEB = "mobileweb";
     
     /** All known platforms. */
     public static final Set<String> ALL_PLATFORMS = new HashSet<String>(Arrays.asList(
-    		PLATFORM_ANDROID, PLATFORM_IOS
+    		PLATFORM_ANDROID, PLATFORM_IOS, PLATFORM_WEB, PLATFORM_MOBILEWEB
     ));
     
     public AppId(String platform, String id, String version) {
