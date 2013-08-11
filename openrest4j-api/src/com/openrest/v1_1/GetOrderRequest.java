@@ -14,12 +14,12 @@ public class GetOrderRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public GetOrderRequest() {}
     
-    public GetOrderRequest(String accessToken, String orderId, Boolean restaurantView, String shareToken,
+    public GetOrderRequest(String accessToken, String orderId, String viewMode, String shareToken,
     		Boolean anonymize, Set<String> fields, String locale, Viewport viewport, Boolean embed,
     		Boolean printConfirmation, Boolean printHeader, Boolean printCsc) {
     	this.accessToken = accessToken;
     	this.orderId = orderId;
-    	this.restaurantView = restaurantView;
+    	this.viewMode = viewMode;
     	this.shareToken = shareToken;
     	this.anonymize = anonymize;
     	this.fields = fields;
@@ -31,9 +31,9 @@ public class GetOrderRequest extends Request {
     	this.printCsc = printCsc;
     }
     
-    public GetOrderRequest(String accessToken, String orderId, Boolean restaurantView, String shareToken,
+    public GetOrderRequest(String accessToken, String orderId, String viewMode, String shareToken,
     		Boolean anonymize, Set<String> fields) {
-    	this(accessToken, orderId, restaurantView, shareToken, anonymize, fields, shareToken,
+    	this(accessToken, orderId, viewMode, shareToken, anonymize, fields, shareToken,
     			null, Boolean.FALSE, Boolean.FALSE, Boolean.FALSE, Boolean.FALSE);
     }
     
@@ -43,6 +43,12 @@ public class GetOrderRequest extends Request {
     @JsonInclude(Include.NON_NULL)
     public String orderId;
     
+    /** @see Order.ALL_ORDER_VIEW_MODES */
+    @JsonInclude(Include.NON_NULL)
+    public String viewMode;
+    
+    /** Use viewMode */
+    @Deprecated
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean restaurantView = Boolean.FALSE;
     

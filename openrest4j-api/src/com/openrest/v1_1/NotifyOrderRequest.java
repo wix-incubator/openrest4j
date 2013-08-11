@@ -13,12 +13,12 @@ public class NotifyOrderRequest extends Request {
     public NotifyOrderRequest() {}
     
     public NotifyOrderRequest(String accessToken, String orderId, Contact contact, String locale, 
-    		Boolean restaurantView, Boolean anonymize, Boolean printConfirmation, Boolean printHeader, Boolean printCsc) {
+    		String viewMode, Boolean anonymize, Boolean printConfirmation, Boolean printHeader, Boolean printCsc) {
     	this.accessToken = accessToken;
     	this.orderId = orderId;
     	this.contact = contact;
     	this.locale = locale;
-    	this.restaurantView = restaurantView;
+    	this.viewMode = viewMode;
     	this.anonymize = anonymize;
     	this.printConfirmation = printConfirmation;
     	this.printHeader = printHeader;
@@ -37,6 +37,12 @@ public class NotifyOrderRequest extends Request {
     @JsonInclude(Include.NON_NULL)
     public String locale;
     
+    /** @see Order.ALL_ORDER_VIEW_MODES */
+    @JsonInclude(Include.NON_NULL)
+    public String viewMode;
+    
+    /** Use viewMode */
+    @Deprecated
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean restaurantView = Boolean.FALSE;
     

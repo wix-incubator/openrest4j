@@ -39,6 +39,20 @@ public class Order implements Serializable, Cloneable {
     public static final Set<String> ALL_ORDER_STATUSES = new HashSet<String>(Arrays.asList(new String[] {
     		ORDER_STATUS_SUBMITTED, ORDER_STATUS_PENDING, ORDER_STATUS_NEW, ORDER_STATUS_ACCEPTED, ORDER_STATUS_CANCELLED
     }));
+    
+    /** View the order as the restaurant. */
+    public static final String ORDER_VIEW_MODE_RESTAURANT = "restaurant";
+    /** View the order as the customer. */
+    public static final String ORDER_VIEW_MODE_CUSTOMER = "customer";
+    /** View the order as privately shared on social networks. */
+    public static final String ORDER_VIEW_MODE_SHARE = "share";
+    /** View the order as third-party source, e.g. portal. */
+    public static final String ORDER_VIEW_MODE_SOURCE = "source";
+    
+    /** All known order statuses. */
+    public static final Set<String> ALL_ORDER_VIEW_MODES = new HashSet<String>(Arrays.asList(new String[] {
+    		ORDER_VIEW_MODE_RESTAURANT, ORDER_VIEW_MODE_CUSTOMER, ORDER_VIEW_MODE_SHARE, ORDER_VIEW_MODE_SOURCE
+    }));
 
     /** Constructs a previously submitted order from persisted data. */
     public Order(String id, Map<String, String> externalIds, String restaurantId, String locale, List<OrderItem> orderItems,
@@ -46,7 +60,7 @@ public class Order implements Serializable, Cloneable {
             Integer takeoutPacks, List<Charge> charges,
             java.util.Date created, java.util.Date received, java.util.Date modified, java.util.Date submitAt,
             User user, ClubMember clubMember, String status, String shareToken,
-            String affiliate, String ref, Boolean legacyHierarchy, Map<String, String> properties, List<LogEntry> log) {
+            String affiliate, String source, String platform, String ref, Boolean legacyHierarchy, Map<String, String> properties, List<LogEntry> log) {
 
         this.id = id;
         this.externalIds = externalIds;
@@ -69,6 +83,8 @@ public class Order implements Serializable, Cloneable {
         this.status = status;
         this.shareToken = shareToken;
         this.affiliate = affiliate;
+        this.source = source;
+        this.platform = platform;
         this.ref = ref;
         this.legacyHierarchy = legacyHierarchy;
         this.properties = properties;
@@ -78,11 +94,12 @@ public class Order implements Serializable, Cloneable {
     /** Constructs a new order to be submitted. */
     public Order(String locale, List<OrderItem> orderItems, String comment, Integer price,
             Delivery delivery, Contact contact, List<Payment> payments,
-            Integer takeoutPacks, List<Charge> charges, ClubMember clubMember, String affiliate, String ref,
+            Integer takeoutPacks, List<Charge> charges, ClubMember clubMember,
+            String affiliate, String source, String platform, String ref,
             Boolean legacyHierarchy, Map<String, String> properties) {
         this(null, new HashMap<String, String>(), null, locale, orderItems, comment, price, delivery, contact, payments,
         		takeoutPacks, charges, null, null, null, null, null, clubMember, null, null,
-        		affiliate, ref, legacyHierarchy, properties, Collections.<LogEntry>emptyList());
+        		affiliate, source, platform, ref, legacyHierarchy, properties, Collections.<LogEntry>emptyList());
     }
 
     /** Default constructor for JSON deserialization. */
@@ -138,7 +155,7 @@ public class Order implements Serializable, Cloneable {
     			clonedPayments, takeoutPacks, clonedCharges, created(), received(), modified(), submitAt(),
     			((user != null) ? (User) user.clone() : null),
     			((clubMember != null) ? (ClubMember) clubMember.clone() : null),
-    			status, shareToken, affiliate, ref, legacyHierarchy,
+    			status, shareToken, affiliate, source, platform, ref, legacyHierarchy,
     			((properties != null) ? new HashMap<String, String>(properties) : null),
     			clonedLog);
 	}
@@ -254,6 +271,17 @@ public class Order implements Serializable, Cloneable {
     /** Affiliate-id, for orders that came through affiliate marketing. */
     @JsonInclude(Include.NON_NULL)
     public String affiliate;
+    
+    /**
+     * The organization-id from which the customer ordered.
+     * An empty String means the restaurant's (or chain's) white-label system.
+     */
+    @JsonInclude(Include.NON_NULL)
+    public String source;
+    
+    /** @see AppId.ALL_PLATFORMS */
+    @JsonInclude(Include.NON_NULL)
+    public String platform;
     
     /**
      * Affiliate-specific referrer-id for performance tracking, e.g. 

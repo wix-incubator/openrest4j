@@ -17,7 +17,7 @@ public class QueryOrdersRequest extends Request {
     public QueryOrdersRequest() {}
     
     public QueryOrdersRequest(String accessToken, String distributorId, String chainId, Collection<String> restaurantIds, ClientId clientId,
-    		String status, String ref, Long since, Long until, String query, Boolean restaurantView, String ordering, Set<String> fields,
+    		String status, String source, String platform, String ref, Long since, Long until, String query, String viewMode, String ordering, Set<String> fields,
     		Integer limit) {
     	this.accessToken = accessToken;
     	this.distributorId = distributorId;
@@ -25,11 +25,13 @@ public class QueryOrdersRequest extends Request {
     	this.restaurantIds = restaurantIds;
     	this.clientId = clientId;
     	this.status = status;
+    	this.source = source;
+    	this.platform = platform;
     	this.ref = ref;
     	this.since = since;
     	this.until = until;
     	this.query = query;
-    	this.restaurantView = restaurantView;
+    	this.viewMode = viewMode;
     	this.ordering = ordering;
     	this.fields = fields;
     	this.limit = limit;
@@ -59,6 +61,14 @@ public class QueryOrdersRequest extends Request {
     public String status;
     
     @JsonInclude(Include.NON_NULL)
+    public String source;
+    
+    @JsonInclude(Include.NON_NULL)
+    public String platform;
+    
+    /** Use source and platform */
+    @Deprecated
+    @JsonInclude(Include.NON_NULL)
     public String ref;
 
     @JsonInclude(Include.NON_NULL)
@@ -78,6 +88,12 @@ public class QueryOrdersRequest extends Request {
     @JsonInclude(Include.NON_NULL)
     public String query;
     
+    /** @see Order.ALL_ORDER_VIEW_MODES */
+    @JsonInclude(Include.NON_NULL)
+    public String viewMode;
+    
+    /** Use viewMode */
+    @Deprecated
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean restaurantView = Boolean.FALSE;
     
