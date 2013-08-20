@@ -12,11 +12,12 @@ public class GetBlobUploadUrlRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public GetBlobUploadUrlRequest() {}
     
-    public GetBlobUploadUrlRequest(String accessToken, String organizationId, String itemId, String blobType) {
+    public GetBlobUploadUrlRequest(String accessToken, String organizationId, String itemId, String blobType, Boolean noLegacy) {
     	this.accessToken = accessToken;
     	this.organizationId = organizationId;
     	this.itemId = itemId;
     	this.blobType = blobType;
+    	this.noLegacy = noLegacy;
     }
     
     @JsonInclude(Include.NON_NULL)
@@ -31,4 +32,11 @@ public class GetBlobUploadUrlRequest extends Request {
     /** One of Organization.ALL_BLOB_TYPES */
     @JsonInclude(Include.NON_NULL)
     public String blobType;
+    
+    /**
+     * If false, the response JSON will be embedded in HTML.
+     * Legacy responses will be deprecated on 2013-12-01.
+     */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Boolean noLegacy = Boolean.FALSE;
 }
