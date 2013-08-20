@@ -29,31 +29,24 @@ public class Payment implements Serializable, Cloneable {
     public static final String PAYMENT_TYPE_DIRECT_DEBIT = "direct_debit";
     /** PayPal payment. */
     public static final String PAYMENT_TYPE_PAYPAL = "paypal";
+    /** Cellarix payment (@see www.cellarix.com). */
+    public static final String PAYMENT_TYPE_CELLARIX = "com.cellarix";
 
     /** All known payment methods. */
     public static final Set<String> ALL_PAYMENT_TYPES = new HashSet<String>(Arrays.asList(
     		PAYMENT_TYPE_CASH, PAYMENT_TYPE_CREDIT, PAYMENT_TYPE_DEBIT, PAYMENT_TYPE_10BIS,
-    		PAYMENT_TYPE_CHECK, PAYMENT_TYPE_OFFSET, PAYMENT_TYPE_DIRECT_DEBIT, PAYMENT_TYPE_PAYPAL
+    		PAYMENT_TYPE_CHECK, PAYMENT_TYPE_OFFSET, PAYMENT_TYPE_DIRECT_DEBIT, PAYMENT_TYPE_PAYPAL,
+    		PAYMENT_TYPE_CELLARIX
     ));
-
-    /** Constructs a new one-time payment. */
-    public Payment(String type, Integer amount, CreditCard card) {
-    	this(null, null, null, type, amount, card);
-    }
     
-    /** Constructs a user's saved payment. */
-    public Payment(String id, String userId, String password, String type, CreditCard card) {
-    	this(id, userId, password, type, 0, card);
-    }
-    
-    /** Constructs a user's saved payment. */
-    public Payment(String id, String userId, String password, String type, Integer amount, CreditCard card) {
-    	this.id = id;
-    	this.userId = userId;
-    	this.password = password;
+    public Payment(String type, Integer amount, CreditCard card, String token, String userId, String id, String password) {
     	this.type = type;
     	this.amount = amount;
     	this.card = card;
+    	this.token = token;
+    	this.userId = userId;
+    	this.id = id;
+    	this.password = password;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -61,7 +54,9 @@ public class Payment implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	return new Payment(id, userId, password, type, amount, ((card != null) ? (CreditCard) card.clone() : null));
+    	return new Payment(type, amount,
+    			((card != null) ? (CreditCard) card.clone() : null),
+    			token, userId, id, password);
 	}
 
     /** Payment type. */
@@ -72,9 +67,13 @@ public class Payment implements Serializable, Cloneable {
     @JsonInclude(Include.NON_DEFAULT)
     public Integer amount = 0;
 
-    /** Credit card details (not valid for PAYMENT_TYPE_CASH or PAYMENT_CARD_DEBIT) */
+    /** Credit card details (for PAYMENT_TYPE_CREDIT, PAYMENT_TYPE_10BIS) */
     @JsonInclude(Include.NON_NULL)
     public CreditCard card;
+    
+    /** Payment token (for PAYMENT_TYPE_CELLARIX) */
+    @JsonInclude(Include.NON_NULL)
+    public String token;
     
     /** The user's Facebook id (for saved payments). */
     @JsonInclude(Include.NON_NULL)
