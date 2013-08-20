@@ -18,11 +18,12 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Filter implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
 
-    public Filter(String distributorId, String chainId, Set<String> features, LatLng latLng) {
+    public Filter(String distributorId, String chainId, Set<String> features, LatLng latLng, Double radius) {
     	this.distributorId = distributorId;
     	this.chainId = chainId;
     	this.features = features;
     	this.latLng = latLng;
+    	this.radius = radius;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -32,9 +33,9 @@ public class Filter implements Serializable, Cloneable {
 	public Object clone() {
     	return new Filter(distributorId, chainId,
     			((features != null) ? new HashSet<String>(features) : null),
-    			((latLng != null) ? (LatLng) latLng.clone() : null));
+    			((latLng != null) ? (LatLng) latLng.clone() : null), radius);
 	}
-    
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -45,6 +46,7 @@ public class Filter implements Serializable, Cloneable {
 		result = prime * result
 				+ ((features == null) ? 0 : features.hashCode());
 		result = prime * result + ((latLng == null) ? 0 : latLng.hashCode());
+		result = prime * result + ((radius == null) ? 0 : radius.hashCode());
 		return result;
 	}
 
@@ -77,18 +79,31 @@ public class Filter implements Serializable, Cloneable {
 				return false;
 		} else if (!latLng.equals(other.latLng))
 			return false;
+		if (radius == null) {
+			if (other.radius != null)
+				return false;
+		} else if (!radius.equals(other.radius))
+			return false;
 		return true;
 	}
     
+	/** Exclude organizations that are not under this distributor */
     @JsonInclude(Include.NON_NULL)
     public String distributorId;
 
+	/** Exclude organizations not under this chain */
     @JsonInclude(Include.NON_NULL)
     public String chainId;
     
+	/** Exclude organizations that have none of these features */
     @JsonInclude(Include.NON_NULL)
     public Set<String> features;
     
+	/** Include organizations that deliver to this location. */
     @JsonInclude(Include.NON_NULL)
     public LatLng latLng;
+    
+	/** Include organizations whose distance from latLng is lower than this number (in meters). */
+    @JsonInclude(Include.NON_NULL)
+    public Double radius;
 }
