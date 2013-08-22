@@ -8,6 +8,11 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LatLng implements Serializable, Cloneable {
+	@Override
+	public String toString() {
+		return "{\"lat\":" + lat + ",\"lng\":" + lng + "}";
+	}
+
 	public LatLng(Double lat, Double lng) {
         this.lat = lat;
         this.lng = lng;
@@ -17,7 +22,7 @@ public class LatLng implements Serializable, Cloneable {
     public LatLng() {}
     
     @Override
-	protected Object clone() {
+	public Object clone() {
     	return new LatLng(lat, lng);
 	}
 
