@@ -38,9 +38,15 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     
 	/**
 	 * Sound recording for automated phone calls.
-	 * @see Notification.NOTIFICATION_TYPE_DELAYED_ORDER
+	 * @see Notification.NOTIFICATION_TYPE_DELAYED_ORDER, Notification.NOTIFICATION_TYPE_NEW_ORDER
 	 */
     public static final String BLOB_TYPE_NOTIFICATION_VOICE = "notification_voice";
+    
+	/**
+	 * Sound recording for automated phone calls.
+	 * @see Notification.NOTIFICATION_TYPE_POS_ERROR
+	 */
+    public static final String BLOB_TYPE_NOTIFICATION_POS_ERROR = "notification_pos_error";
     
     /** Default constructor for JSON deserialization. */
     public Organization() {}
