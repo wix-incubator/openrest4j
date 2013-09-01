@@ -12,12 +12,13 @@ public class SetBlobRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public SetBlobRequest() {}
     
-    public SetBlobRequest(String accessToken, String organizationId, String itemId, String blobType, String blobId) {
+    public SetBlobRequest(String accessToken, String organizationId, String itemId, String blobType, String blobId, String url) {
     	this.accessToken = accessToken;
     	this.organizationId = organizationId;
     	this.itemId = itemId;
     	this.blobType = blobType;
     	this.blobId = blobId;
+    	this.url = url;
     }
     
     @JsonInclude(Include.NON_NULL)
