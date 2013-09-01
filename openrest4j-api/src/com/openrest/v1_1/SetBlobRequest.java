@@ -33,6 +33,11 @@ public class SetBlobRequest extends Request {
     @JsonInclude(Include.NON_NULL)
     public String blobType;
 
+    /** Existing blob-id to link to. Leave null if using url. */
     @JsonInclude(Include.NON_NULL)
     public String blobId;
+    
+    /** External url to retrieve blob data from. Leave null if using blobId. */
+    @JsonInclude(Include.NON_NULL)
+    public String url;
 }
