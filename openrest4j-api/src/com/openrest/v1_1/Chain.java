@@ -13,10 +13,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-/**
- * Restaurant chain information.
- * @author DL
- */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Chain extends Organization {
 	public static final String TYPE = "chain";

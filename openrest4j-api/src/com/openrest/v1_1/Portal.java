@@ -13,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-/** Portal information. */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Portal extends Organization {
 	public static final String TYPE = "portal";

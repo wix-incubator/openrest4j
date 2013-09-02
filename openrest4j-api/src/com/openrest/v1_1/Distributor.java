@@ -13,10 +13,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-/**
- * Distributor information.
- * @author DL
- */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Distributor extends Organization {
 	public static final String TYPE = "distributor";

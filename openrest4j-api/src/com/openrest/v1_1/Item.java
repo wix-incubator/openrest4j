@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.openrest.availability.Availability;
-import com.openrest.availability.Status;
 
 /**
  * An item that can be ordered, e.g. a main dish ("hamburger"), a side ("fries")
@@ -26,7 +25,7 @@ public class Item implements Serializable, Comparable<Item> {
 	/** Constructs a previously submitted item from persisted data. */
     public Item(String id, String restaurantId, Map<String, String> title,
     		Map<String, String> description, Integer price, List<Variation> variations,
-    		Availability availability, Boolean inactive, String picture, Status status,
+    		Availability availability, Boolean inactive, String picture,
     		Map<String, String> externalIds, Set<String> labels,
     		Map<String, String> properties, Double rank) {
         this.id = id;
@@ -38,20 +37,10 @@ public class Item implements Serializable, Comparable<Item> {
         this.availability = availability;
         this.inactive = inactive;
         this.picture = picture;
-        this.status = status;
         this.externalIds = externalIds;
         this.labels = labels;
         this.properties = properties;
         this.rank = rank;
-    }
-
-    /** Constructs a new item to be submitted. */
-    public Item(Map<String, String> title, Map<String, String>description,
-    		Integer price, List<Variation> variations, Availability availability,
-    		Boolean inactive, Map<String, String> externalIds, Set<String> labels,
-    		Map<String, String> properties) {
-        this(null, null, title, description, price, variations, availability, inactive,
-        		null, null, externalIds, labels, properties, null);
     }
 
 	/** Default constructor for JSON deserialization. */
@@ -93,10 +82,6 @@ public class Item implements Serializable, Comparable<Item> {
     @JsonInclude(Include.NON_NULL)
     public String picture;
 
-    /** The current status. */
-    @JsonInclude(Include.NON_NULL)
-    public Status status;
-    
     /**
      * Map of externally-defined item ids referring to this item.
      * For example, the item-id in the restaurant's PoS system.
@@ -140,7 +125,6 @@ public class Item implements Serializable, Comparable<Item> {
 		result = prime * result + ((rank == null) ? 0 : rank.hashCode());
 		result = prime * result
 				+ ((restaurantId == null) ? 0 : restaurantId.hashCode());
-		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result
 				+ ((variations == null) ? 0 : variations.hashCode());
@@ -205,11 +189,6 @@ public class Item implements Serializable, Comparable<Item> {
 			if (other.restaurantId != null)
 				return false;
 		} else if (!restaurantId.equals(other.restaurantId))
-			return false;
-		if (status == null) {
-			if (other.status != null)
-				return false;
-		} else if (!status.equals(other.status))
 			return false;
 		if (title == null) {
 			if (other.title != null)

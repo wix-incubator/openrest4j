@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.openrest.availability.Availability;
-import com.openrest.availability.Status;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchResult extends Restaurant {
@@ -21,7 +20,7 @@ public class SearchResult extends Restaurant {
     		Map<String, String> description, Contact contact, Map<String, Contact> externalContacts, Address address,
     		Map<String, Map<String, String>> messages, ColorScheme colorScheme,
     		Availability openTimes, Availability deliveryTimes,
-            Boolean inactive, List<DeliveryInfo> deliveryInfos, Status status, Status deliveryStatus,
+            Boolean inactive, List<DeliveryInfo> deliveryInfos,
             String timezone, String currency, String locale, Set<String> locales,
             Set<String> paymentTypes, Map<String, CardInfo> cardInfos, Map<String, Integer> minPayments,
             String link, String domain, Set<String> altDomains,
@@ -30,7 +29,7 @@ public class SearchResult extends Restaurant {
             String state, Map<String, Double> features, Boolean legacyHierarchy, Double rank, List<TopItem> topItems,
             Set<String> deliveryTypes, DeliveryInfo deliveryInfo, List<Charge> charges) {
     	super(id, externalIds, created, modified, distributorId, chainId, title, description, contact, externalContacts,
-    			address, messages, colorScheme, openTimes, deliveryTimes, inactive, deliveryInfos, status, deliveryStatus, timezone,
+    			address, messages, colorScheme, openTimes, deliveryTimes, inactive, deliveryInfos, timezone,
     			currency, locale, locales, paymentTypes, cardInfos, minPayments, link, domain, altDomains,
     			picture, icon, wideLogo, noImagePicture, blobs,
     			apps, seo, properties, state, features, legacyHierarchy, rank);

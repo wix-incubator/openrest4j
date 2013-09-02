@@ -13,12 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.openrest.availability.Availability;
-import com.openrest.availability.Status;
 
-/**
- * Restaurant information.
- * @author DL
- */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Restaurant extends Organization {
 	public static final String TYPE = "restaurant";
@@ -29,7 +24,7 @@ public class Restaurant extends Organization {
     		Map<String, String> description, Contact contact, Map<String, Contact> externalContacts, Address address,
     		Map<String, Map<String, String>> messages, ColorScheme colorScheme,
     		Availability openTimes, Availability deliveryTimes,
-            Boolean inactive, List<DeliveryInfo> deliveryInfos, Status status, Status deliveryStatus,
+            Boolean inactive, List<DeliveryInfo> deliveryInfos,
             String timezone, String currency, String locale, Set<String> locales,
             Set<String> paymentTypes, Map<String, CardInfo> cardInfos, Map<String, Integer> minPayments,
             String link, String domain, Set<String> altDomains,
@@ -46,8 +41,6 @@ public class Restaurant extends Organization {
         this.deliveryTimes = deliveryTimes;
         this.inactive = inactive;
         this.deliveryInfos = deliveryInfos;
-        this.status = status;
-        this.deliveryStatus = deliveryStatus;
         this.paymentTypes = paymentTypes;
         this.cardInfos = cardInfos;
         this.minPayments = minPayments;
@@ -133,8 +126,6 @@ public class Restaurant extends Organization {
     			((openTimes != null) ? (Availability) openTimes.clone() : null),
     			((deliveryTimes != null) ? (Availability) deliveryTimes.clone() : null),
     			inactive, clonedDeliveryInfos,
-    			((status != null) ? (Status) status.clone() : null),
-    			((deliveryStatus != null) ? (Status) deliveryStatus.clone() : null),
     			timezone, currency, locale,
     			((locales != null) ? new HashSet<String>(locales) : null),
     			((paymentTypes != null) ? new HashSet<String>(paymentTypes) : null),
@@ -174,14 +165,6 @@ public class Restaurant extends Organization {
     /** Information regarding the different delivery destinations. */
     @JsonInclude(Include.NON_DEFAULT)
     public List<DeliveryInfo> deliveryInfos = new ArrayList<DeliveryInfo>();
-
-    /** The current status. */
-    @JsonInclude(Include.NON_NULL)
-    public Status status;
-
-    /** The current delivery status. */
-    @JsonInclude(Include.NON_NULL)
-    public Status deliveryStatus;
 
     /** Available payment methods. */
     @JsonInclude(Include.NON_DEFAULT)
