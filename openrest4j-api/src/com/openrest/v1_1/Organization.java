@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TimeZone;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -155,13 +154,11 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     /**
      * The restaurant's timezone.
      * @see http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+     * 
+     * Use java.util.TimeZone.getTimeZone to create a Java TimeZone object.
      */
     @JsonInclude(Include.NON_NULL)
     public String timezone;
-    
-    public TimeZone timezone() {
-        return TimeZone.getTimeZone(timezone);
-    }
     
     /** The organization's currency (ISO 4217). */
     @JsonInclude(Include.NON_NULL)
