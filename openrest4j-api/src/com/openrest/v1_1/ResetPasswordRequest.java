@@ -12,14 +12,18 @@ public class ResetPasswordRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public ResetPasswordRequest() {}
     
-    public ResetPasswordRequest(String locale, String email) {
+    public ResetPasswordRequest(String locale, String distributorId, ClientId clientId) {
     	this.locale = locale;
-    	this.email = email;
+    	this.distributorId = distributorId;
+    	this.clientId = clientId;
     }
     
     @JsonInclude(Include.NON_NULL)
     public String locale;
     
     @JsonInclude(Include.NON_NULL)
-    public String email;
+    public String distributorId;
+    
+    @JsonInclude(Include.NON_NULL)
+    public ClientId clientId;
 }

@@ -12,14 +12,18 @@ public class SignUpRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public SignUpRequest() {}
     
-    public SignUpRequest(String locale, String email, String password) {
+    public SignUpRequest(String locale, String distributorId, String email, String password) {
     	this.locale = locale;
+    	this.distributorId = distributorId;
     	this.email = email;
     	this.password = password;
     }
     
     @JsonInclude(Include.NON_NULL)
     public String locale;
+    
+    @JsonInclude(Include.NON_NULL)
+    public String distributorId;
     
     @JsonInclude(Include.NON_NULL)
     public String email;
