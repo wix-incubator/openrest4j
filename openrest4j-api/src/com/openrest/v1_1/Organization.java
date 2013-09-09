@@ -23,6 +23,14 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     public static final String MESSAGE_TYPE_WELCOME = "welcome";
     /** The organization's order confirmation message. */
     public static final String MESSAGE_TYPE_ORDER_CONFIRMATION = "order_confirmation";
+    
+    /**
+     * External-id key for specifying the organization's notifications ("no-reply") email.
+     * For the value's format, @see http://en.wikipedia.org/wiki/Email_address
+     * 
+     * @see Organization.externalIds
+     */
+    public static final String EXTERNAL_ID_EMAIL_NOREPLY = "email.noreply";
 	
 	/** Standard (4:3) logo image. */
     public static final String BLOB_TYPE_LOGO = "logo";
@@ -34,13 +42,11 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     public static final String BLOB_TYPE_NO_IMAGE = "no_image";
 	/** Cover (7:4) image. */
     public static final String BLOB_TYPE_COVER = "cover";
-    
 	/**
 	 * Sound recording for automated phone calls.
 	 * @see Notification.NOTIFICATION_TYPE_DELAYED_ORDER, Notification.NOTIFICATION_TYPE_NEW_ORDER
 	 */
     public static final String BLOB_TYPE_NOTIFICATION_VOICE = "notification_voice";
-    
 	/**
 	 * Sound recording for automated phone calls.
 	 * @see Notification.NOTIFICATION_TYPE_POS_ERROR
