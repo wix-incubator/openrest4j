@@ -16,7 +16,6 @@ import com.openrest.availability.Availability;
 /**
  * An item that can be ordered, e.g. a main dish ("hamburger"), a side ("fries")
  * or a dish variation ("well done").
- * @author DL
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Item implements Serializable, Comparable<Item> {
@@ -120,9 +119,7 @@ public class Item implements Serializable, Comparable<Item> {
 		result = prime * result
 				+ ((inactive == null) ? 0 : inactive.hashCode());
 		result = prime * result + ((labels == null) ? 0 : labels.hashCode());
-		result = prime * result + ((picture == null) ? 0 : picture.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
-		result = prime * result + ((rank == null) ? 0 : rank.hashCode());
 		result = prime * result
 				+ ((restaurantId == null) ? 0 : restaurantId.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
@@ -170,20 +167,10 @@ public class Item implements Serializable, Comparable<Item> {
 				return false;
 		} else if (!labels.equals(other.labels))
 			return false;
-		if (picture == null) {
-			if (other.picture != null)
-				return false;
-		} else if (!picture.equals(other.picture))
-			return false;
 		if (price == null) {
 			if (other.price != null)
 				return false;
 		} else if (!price.equals(other.price))
-			return false;
-		if (rank == null) {
-			if (other.rank != null)
-				return false;
-		} else if (!rank.equals(other.rank))
 			return false;
 		if (restaurantId == null) {
 			if (other.restaurantId != null)
