@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Tag implements Serializable {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
     
 	/** Inclusive: tag refers to given items. */
 	public static final String TAG_MODE_INCLUDE = "include";
@@ -71,4 +71,55 @@ public class Tag implements Serializable {
      */
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> properties = new HashMap<String, String>();
+    
+    @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((itemIds == null) ? 0 : itemIds.hashCode());
+		result = prime * result
+				+ ((properties == null) ? 0 : properties.hashCode());
+		result = prime * result
+				+ ((restaurantId == null) ? 0 : restaurantId.hashCode());
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Tag other = (Tag) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (itemIds == null) {
+			if (other.itemIds != null)
+				return false;
+		} else if (!itemIds.equals(other.itemIds))
+			return false;
+		if (properties == null) {
+			if (other.properties != null)
+				return false;
+		} else if (!properties.equals(other.properties))
+			return false;
+		if (restaurantId == null) {
+			if (other.restaurantId != null)
+				return false;
+		} else if (!restaurantId.equals(other.restaurantId))
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
+		return true;
+	}
 }
