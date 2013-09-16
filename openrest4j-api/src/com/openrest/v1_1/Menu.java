@@ -1,7 +1,7 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -40,11 +40,11 @@ public class Menu implements Serializable {
     public Menu() {}
 
     @JsonInclude(Include.NON_DEFAULT)
-    public List<Item> items = new ArrayList<Item>();
+    public List<Item> items = new LinkedList<Item>();
 
     @JsonInclude(Include.NON_DEFAULT)
-    public List<Tag> tags = new ArrayList<Tag>();
+    public List<Tag> tags = new LinkedList<Tag>();
 
     @JsonInclude(Include.NON_DEFAULT)
-    public List<Category> categories = new ArrayList<Category>();
+    public List<Category> categories = new LinkedList<Category>();
 }
