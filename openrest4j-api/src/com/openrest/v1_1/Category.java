@@ -2,8 +2,8 @@ package com.openrest.v1_1;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +13,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Category implements Serializable, Cloneable, Comparable<Category> {
+    private static final long serialVersionUID = 1L;
+    
 	/** Constructs a previously submitted category from persisted data. */
     public Category(String id, String restaurantId, Map<String, String> title,
     		Map<String, String> description, String parentCategoryId,
@@ -138,11 +140,11 @@ public class Category implements Serializable, Cloneable, Comparable<Category> {
 
     /** The category's title in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title;
+    public Map<String, String> title = new HashMap<String, String>();
 
     /** The category's description in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> description;
+    public Map<String, String> description = new HashMap<String, String>();
 
     /** The parent category's id. */
     @JsonInclude(Include.NON_NULL)
@@ -150,7 +152,7 @@ public class Category implements Serializable, Cloneable, Comparable<Category> {
 
     /** The item-ids in this category. */
     @JsonInclude(Include.NON_DEFAULT)
-    public List<String> itemIds = Collections.emptyList();
+    public List<String> itemIds = new LinkedList<String>();
 
     /** Order priority. Lower numbers appear first in the list. */
     @JsonInclude(Include.NON_DEFAULT)
@@ -161,7 +163,5 @@ public class Category implements Serializable, Cloneable, Comparable<Category> {
      * keys, e.g. "com.googlecode.openrestext".
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> properties = Collections.emptyMap();
-    
-    private static final long serialVersionUID = 1L;
+    public Map<String, String> properties = new HashMap<String, String>();
 }
