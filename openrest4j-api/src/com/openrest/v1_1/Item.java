@@ -27,7 +27,7 @@ public class Item implements Serializable, Comparable<Item> {
 	/** Constructs a previously submitted item from persisted data. */
     public Item(String id, String restaurantId, Map<String, String> title,
     		Map<String, String> description, Integer price, List<Variation> variations,
-    		Availability availability, Boolean inactive, String picture,
+    		Availability availability, Boolean inactive, String picture, Map<String, Blob> blobs,
     		Map<String, String> externalIds, Set<String> labels,
     		Map<String, String> properties, Double rank) {
         this.id = id;
@@ -39,6 +39,7 @@ public class Item implements Serializable, Comparable<Item> {
         this.availability = availability;
         this.inactive = inactive;
         this.picture = picture;
+        this.blobs = blobs;
         this.externalIds = externalIds;
         this.labels = labels;
         this.properties = properties;
@@ -83,6 +84,13 @@ public class Item implements Serializable, Comparable<Item> {
     /** Item picture URL (direct link). */
     @JsonInclude(Include.NON_NULL)
     public String picture;
+    
+    /**
+     * Maps blob-types to blobs.
+     * @see GetBlobUploadUrlRequest#blobType
+     */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Map<String, Blob> blobs = new HashMap<String, Blob>();
 
     /**
      * Map of externally-defined item ids referring to this item.

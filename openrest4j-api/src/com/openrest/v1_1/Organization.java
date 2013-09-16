@@ -11,10 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-/**
- * Base class for Restaurants, Chains, Distributers, etc.
- * @author DL
- */
+/** Base class for Restaurants, Chains, Portals, Distributers. */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class Organization extends OpenrestObject implements Cloneable, Comparable<Organization> {
 	private static final long serialVersionUID = 1L;
