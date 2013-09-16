@@ -18,6 +18,8 @@ import com.openrest.availability.Availability;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Charge implements Serializable, Cloneable {
+    private static final long serialVersionUID = 1L;
+    
 	/** Delivery charge. */
     public static final String CHARGE_TYPE_DELIVERY = "delivery";
     /** Discount coupon. */
@@ -50,7 +52,6 @@ public class Charge implements Serializable, Cloneable {
     		AMOUNT_RULE_TYPE_FIXED, AMOUNT_RULE_TYPE_FIXED_PER_ITEM, AMOUNT_RULE_TYPE_PERCENTAGE, AMOUNT_RULE_TYPE_ANY, AMOUNT_RULE_TYPE_VARIABLE
     }));
 
-    /** Constructs a previously submitted charge from persisted data. */
     public Charge(String id, String restaurantId, String type, Double priority,
     		String code, String clubId,
     		String tagId, String tagMode,
@@ -75,15 +76,6 @@ public class Charge implements Serializable, Cloneable {
         this.amount = amount;
     }
     
-    /** Constructs a new charge to be submitted. */
-    public Charge(String type, Double priority, String code, String clubId,
-    		String tagId, String tagMode,
-    		String amountRuleType, Integer amountRule, Coupon coupon,
-    		Availability availability, Boolean inactive, Set<String> refs, Set<String> deliveryTypes) {
-    	this(null, null, type, priority, code, clubId, tagId, tagMode, amountRuleType, amountRule, coupon,
-    			availability, inactive, refs, deliveryTypes, null);
-    }
-
 	/** Default constructor for JSON deserialization. */
     public Charge() {}
     
@@ -300,6 +292,4 @@ public class Charge implements Serializable, Cloneable {
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
-    
-    private static final long serialVersionUID = 1L;
 }
