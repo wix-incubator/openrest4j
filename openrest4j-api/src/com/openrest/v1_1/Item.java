@@ -1,9 +1,9 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -20,6 +20,9 @@ import com.openrest.availability.Availability;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Item implements Serializable, Comparable<Item> {
 	private static final long serialVersionUID = 1L;
+	
+	/** Label to mark a featured item ("flag dish"). */
+	public static final String LABEL_FEATURED = "featured";
     
 	/** Constructs a previously submitted item from persisted data. */
     public Item(String id, String restaurantId, Map<String, String> title,
@@ -67,7 +70,7 @@ public class Item implements Serializable, Comparable<Item> {
 
     /** List of possible variations. */
     @JsonInclude(Include.NON_DEFAULT)
-    public List<Variation> variations = new ArrayList<Variation>();
+    public List<Variation> variations = new LinkedList<Variation>();
 
     /** Time windows in which this item is regularly available. */
     @JsonInclude(Include.NON_DEFAULT)
