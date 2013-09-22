@@ -1,7 +1,7 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -20,5 +20,5 @@ public class Charges implements Serializable {
     public Charges() {}
 
     @JsonInclude(Include.NON_DEFAULT)
-    public List<Charge> charges = new ArrayList<Charge>();
+    public List<Charge> charges = new LinkedList<Charge>();
 }

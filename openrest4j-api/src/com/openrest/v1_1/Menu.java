@@ -12,10 +12,12 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Menu implements Serializable {
     private static final long serialVersionUID = 1L;
     
-    public Menu(List<Item> items, List<Tag> tags, List<Category> categories) {
+    public Menu(Long modified, List<Item> items, List<Tag> tags, List<Category> categories, List<Charge> charges) {
+    	this.modified = modified;
         this.items = items;
         this.tags = tags;
         this.categories = categories;
+        this.charges = charges;
     }
 
     public static Menu fromCategories(List<Category> categories) {
@@ -35,9 +37,19 @@ public class Menu implements Serializable {
         menu.tags = tags;
         return menu;
     }
+    
+    public static Menu fromCharges(List<Charge> charges) {
+        final Menu menu = new Menu();
+        menu.charges = charges;
+        return menu;
+    }
 
     /** Default constructor for JSON deserialization. */
     public Menu() {}
+    
+    /** The menu's last modification timestamp. */
+    @JsonInclude(Include.NON_NULL)
+    public Long modified;
 
     @JsonInclude(Include.NON_DEFAULT)
     public List<Item> items = new LinkedList<Item>();
@@ -47,4 +59,7 @@ public class Menu implements Serializable {
 
     @JsonInclude(Include.NON_DEFAULT)
     public List<Category> categories = new LinkedList<Category>();
+    
+    @JsonInclude(Include.NON_DEFAULT)
+    public List<Charge> charges = new LinkedList<Charge>();
 }

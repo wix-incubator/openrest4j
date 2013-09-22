@@ -1,8 +1,5 @@
 package com.openrest.v1_1;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -15,11 +12,10 @@ public class SetMenuRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public SetMenuRequest() {}
     
-    public SetMenuRequest(String accessToken, String organizationId, Menu menu, List<Charge> charges, Boolean optimize) {
+    public SetMenuRequest(String accessToken, String organizationId, Menu menu, Boolean optimize) {
     	this.accessToken = accessToken;
     	this.organizationId = organizationId;
     	this.menu = menu;
-    	this.charges = charges;
     	this.optimize = optimize;
     }
     
@@ -29,11 +25,12 @@ public class SetMenuRequest extends Request {
     @JsonInclude(Include.NON_NULL)
     public String organizationId;
     
+    /**
+     * The menu to set. If the 'modified' field is not null, the menu will only
+     * be set if the current version hasn't changed.
+     */
     @JsonInclude(Include.NON_NULL)
     public Menu menu;
-    
-    @JsonInclude(Include.NON_DEFAULT)
-    public List<Charge> charges = new LinkedList<Charge>();
     
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean optimize = Boolean.FALSE;

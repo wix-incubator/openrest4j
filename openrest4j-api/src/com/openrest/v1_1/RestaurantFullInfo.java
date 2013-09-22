@@ -35,7 +35,8 @@ public class RestaurantFullInfo extends OpenrestObject {
     @JsonInclude(Include.NON_NULL)
     public Menu menu;
     
-    /** The charges. */
+    /** Use menu.charges (will be removed 2014-01-01) */
+    @Deprecated
     @JsonInclude(Include.NON_NULL)
     public List<Charge> charges;
     

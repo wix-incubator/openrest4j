@@ -41,8 +41,8 @@ public class Response<T> implements Serializable {
     public static final String RESPONSE_ERROR_NOT_FOUND = "not_found";
     /** Uploaded file is too big. */
     public static final String RESPONSE_ERROR_FILE_SIZE_EXCEEDS_LIMIT = "file_size_exceeds_limit";
-    /** Admin tried to add a restaurant with id identical to existing restaurant. */
-    public static final String RESPONSE_ERROR_RESTAURANT_ID_EXISTS = "restaurant_id_exists";
+    /** User tried to add a resource with an id identical to existing resource. */
+    public static final String RESPONSE_ERROR_ALREADY_EXISTS = "already_exists";
     /** Something really bad happened (e.g. GAE failed). Please try again later. */
     public static final String RESPONSE_ERROR_INTERNAL = "internal";
     /** Address could not be resolved. User can try entering a different address. */
@@ -59,6 +59,8 @@ public class Response<T> implements Serializable {
      * Should probably reload the page and try again.
      */
     public static final String RESPONSE_ERROR_PAYMENT_METHOD_UNAVAILABLE = "payment_method_unavailable";
+    /** Multiple users attempted to concurrently change a resource. */
+    public static final String RESPONSE_ERROR_CONFLICT = "conflict";
 
     public Response(T value) {
         this.timestamp = new java.util.Date().getTime();
