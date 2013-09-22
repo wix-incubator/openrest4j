@@ -46,6 +46,7 @@ public class Feedback implements Serializable {
     @JsonInclude(Include.NON_NULL)
     public String organizationId;
     
+    /** Use organizationId (will be removed 2014-01-01) */
     @Deprecated
     @JsonInclude(Include.NON_NULL)
     public String restaurantId;
