@@ -12,11 +12,12 @@ public class NotifyOrderRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public NotifyOrderRequest() {}
     
-    public NotifyOrderRequest(String accessToken, String orderId, Contact contact, String locale, 
+    public NotifyOrderRequest(String accessToken, String orderId, String channelId, String channelParam, String locale, 
     		String viewMode, Boolean anonymize, Boolean printConfirmation, Boolean printHeader, Boolean printCsc) {
     	this.accessToken = accessToken;
     	this.orderId = orderId;
-    	this.contact = contact;
+    	this.channelId = channelId;
+    	this.channelParam = channelParam;
     	this.locale = locale;
     	this.viewMode = viewMode;
     	this.anonymize = anonymize;
@@ -32,7 +33,10 @@ public class NotifyOrderRequest extends Request {
     public String orderId;
     
     @JsonInclude(Include.NON_NULL)
-    public Contact contact;
+    public String channelId;
+    
+    @JsonInclude(Include.NON_NULL)
+    public String channelParam;
     
     @JsonInclude(Include.NON_NULL)
     public String locale;
@@ -40,11 +44,6 @@ public class NotifyOrderRequest extends Request {
     /** @see Order.ALL_ORDER_VIEW_MODES */
     @JsonInclude(Include.NON_NULL)
     public String viewMode;
-    
-    /** Use viewMode */
-    @Deprecated
-    @JsonInclude(Include.NON_DEFAULT)
-    public Boolean restaurantView = Boolean.FALSE;
     
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean anonymize = Boolean.FALSE;
