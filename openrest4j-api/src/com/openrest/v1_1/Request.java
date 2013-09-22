@@ -27,6 +27,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@Type(value = QueryOrdersRequest.class, name = QueryOrdersRequest.TYPE),
 	@Type(value = GetOrderRequest.class, name = GetOrderRequest.TYPE),
 	@Type(value = DisplayOrderRequest.class, name = DisplayOrderRequest.TYPE),
+	@Type(value = NotifyRequest.class, name = NotifyRequest.TYPE),
 	@Type(value = NotifyOrderRequest.class, name = NotifyOrderRequest.TYPE),
 	@Type(value = SubmitOrderRequest.class, name = SubmitOrderRequest.TYPE),
 	@Type(value = SetOrderStatusRequest.class, name = SetOrderStatusRequest.TYPE),
