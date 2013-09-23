@@ -1,5 +1,8 @@
 package com.openrest.v1_1;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -12,11 +15,12 @@ public class SetMenuRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public SetMenuRequest() {}
     
-    public SetMenuRequest(String accessToken, String organizationId, Menu menu, Boolean optimize) {
+    public SetMenuRequest(String accessToken, String organizationId, Menu menu, Boolean optimize, List<BlobCopy> setBlobs) {
     	this.accessToken = accessToken;
     	this.organizationId = organizationId;
     	this.menu = menu;
     	this.optimize = optimize;
+    	this.setBlobs = setBlobs;
     }
     
     @JsonInclude(Include.NON_NULL)
@@ -34,4 +38,7 @@ public class SetMenuRequest extends Request {
     
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean optimize = Boolean.FALSE;
+    
+    @JsonInclude(Include.NON_DEFAULT)
+    public List<BlobCopy> setBlobs = new LinkedList<BlobCopy>();
 }
