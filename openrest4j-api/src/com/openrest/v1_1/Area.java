@@ -2,8 +2,8 @@ package com.openrest.v1_1;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -44,11 +44,11 @@ public class Area implements Serializable, Cloneable {
     
     /** The area's human-readable title in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title = Collections.emptyMap();
+    public Map<String, String> title = new HashMap<String, String>();
     
     /** The area (polygon vertices). */
     @JsonInclude(Include.NON_DEFAULT)
-    public List<LatLng> polygon = Collections.emptyList();
+    public List<LatLng> polygon = new LinkedList<LatLng>();
     
     @Override
 	public int hashCode() {
