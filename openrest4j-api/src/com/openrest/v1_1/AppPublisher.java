@@ -11,11 +11,13 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class AppPublisher implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
     
-    public AppPublisher(String title, String url, String copyright, Certificate certificate) {
+    public AppPublisher(String title, String url, String copyright, Certificate androidCertificate, Certificate iosCertificate, Certificate iosPrivateKey) {
     	this.title = title;
     	this.url = url;
     	this.copyright = copyright;
-    	this.certificate = certificate;
+    	this.androidCertificate = androidCertificate;
+    	this.iosCertificate = iosCertificate;
+    	this.iosPrivateKey = iosPrivateKey;
     }
     
     /** Default constructor for JSON deserialization. */
@@ -24,7 +26,9 @@ public class AppPublisher implements Serializable, Cloneable {
     @Override
 	public Object clone() {
     	return new AppPublisher(title, url, copyright,
-    			((certificate != null) ? (Certificate) certificate.clone() : null));
+    			((androidCertificate != null) ? (Certificate) androidCertificate.clone() : null),
+    			((iosCertificate != null) ? (Certificate) iosCertificate.clone() : null),
+    			((iosPrivateKey != null) ? (Certificate) iosPrivateKey.clone() : null));
 	}
     
     @JsonInclude(Include.NON_NULL)
@@ -37,5 +41,11 @@ public class AppPublisher implements Serializable, Cloneable {
     public String copyright;
 
     @JsonInclude(Include.NON_NULL)
-    public Certificate certificate;
+    public Certificate androidCertificate;
+    
+    @JsonInclude(Include.NON_NULL)
+    public Certificate iosCertificate;
+    
+    @JsonInclude(Include.NON_NULL)
+    public Certificate iosPrivateKey;
 }
