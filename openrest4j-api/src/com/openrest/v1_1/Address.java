@@ -10,9 +10,10 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Address implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
 
-    public Address(String country, String city, String street, String number,
+    public Address(String formatted, String country, String city, String street, String number,
     		String apt, String floor, String entrance, String comment, LatLng latLng,
     		String countryCode, String postalCode) {
+    	this.formatted = formatted;
     	this.country = country;
         this.city = city;
         this.street = street;
@@ -31,7 +32,7 @@ public class Address implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	return new Address(country, city, street, number, apt, floor, entrance, comment,
+    	return new Address(formatted, country, city, street, number, apt, floor, entrance, comment,
     			((latLng != null) ? (LatLng) latLng.clone() : null),
     			countryCode, postalCode);
 	}
@@ -52,6 +53,10 @@ public class Address implements Serializable, Cloneable {
     	
     	return builder.toString();
     }
+    
+    /** The human-readable address of this location (the reverse geocode of the 'latLng' field). */
+    @JsonInclude(Include.NON_NULL)
+    public String formatted;
 
     @JsonInclude(Include.NON_NULL)
     public String country;
@@ -76,7 +81,8 @@ public class Address implements Serializable, Cloneable {
 
     @JsonInclude(Include.NON_NULL)
     public String comment;
-
+    
+    /** The geocode of the 'formatted' field. */
     @JsonInclude(Include.NON_NULL)
     public LatLng latLng;
     
@@ -103,6 +109,7 @@ public class Address implements Serializable, Cloneable {
 		result = prime * result
 				+ ((entrance == null) ? 0 : entrance.hashCode());
 		result = prime * result + ((floor == null) ? 0 : floor.hashCode());
+		result = prime * result + ((formatted == null) ? 0 : formatted.hashCode());
 		result = prime * result + ((latLng == null) ? 0 : latLng.hashCode());
 		result = prime * result + ((number == null) ? 0 : number.hashCode());
 		result = prime * result
@@ -154,6 +161,11 @@ public class Address implements Serializable, Cloneable {
 			if (other.floor != null)
 				return false;
 		} else if (!floor.equals(other.floor))
+			return false;
+		if (formatted == null) {
+			if (other.formatted != null)
+				return false;
+		} else if (!formatted.equals(other.formatted))
 			return false;
 		if (latLng == null) {
 			if (other.latLng != null)
