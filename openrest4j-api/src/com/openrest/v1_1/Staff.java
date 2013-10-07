@@ -17,6 +17,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Staff implements Serializable, Cloneable {
+    private static final long serialVersionUID = 1L;
+    
     public static final String STAFF_ADMIN = "admin";
     public static final String STAFF_DISTRIBUTOR = "distributor";
     public static final String STAFF_MANAGER = "manager";
@@ -83,6 +85,4 @@ public class Staff implements Serializable, Cloneable {
     /** Maps roles (see above) to list of user-ids. */
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, List<String>> staff = new HashMap<String, List<String>>();
-
-    private static final long serialVersionUID = 1L;
 }

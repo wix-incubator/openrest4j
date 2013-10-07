@@ -35,7 +35,6 @@ public class RestJsonClient {
     public RestJsonClient(HttpRequestFactory requestFactory) {
     	this(requestFactory, null, null);
     }
-    
 
     public <T> T post(String url, Object requestObj, TypeReference<T> responseType) throws IOException {
     	final HttpContent content = new ByteArrayContent("application/json", mapper.writeValueAsString(requestObj).getBytes("UTF-8"));
