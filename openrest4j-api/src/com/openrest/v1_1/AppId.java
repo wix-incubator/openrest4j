@@ -25,10 +25,12 @@ public class AppId implements Serializable, Cloneable {
     public static final String PLATFORM_WEB = "web";
 	/** Mobileweb platform. */
     public static final String PLATFORM_MOBILEWEB = "mobileweb";
+	/** Facebook platform. */
+    public static final String PLATFORM_FACEBOOK = "facebook";
     
     /** All known platforms. */
     public static final Set<String> ALL_PLATFORMS = new HashSet<String>(Arrays.asList(
-    		PLATFORM_ANDROID, PLATFORM_IOS, PLATFORM_WEB, PLATFORM_MOBILEWEB
+    		PLATFORM_ANDROID, PLATFORM_IOS, PLATFORM_WEB, PLATFORM_MOBILEWEB, PLATFORM_FACEBOOK
     ));
     
     public AppId(String platform, String id, String version) {
