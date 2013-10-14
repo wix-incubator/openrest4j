@@ -5,17 +5,17 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class VerifyRequest extends Request {
-	public static final String TYPE = "verify";
+public class SignedRequest extends Request {
+	public static final String TYPE = "signed";
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */
-    public VerifyRequest() {}
+    public SignedRequest() {}
     
-    public VerifyRequest(String token) {
-    	this.token = token;
+    public SignedRequest(String data) {
+    	this.data = data;
     }
     
     @JsonInclude(Include.NON_NULL)
-    public String token;
+    public String data;
 }

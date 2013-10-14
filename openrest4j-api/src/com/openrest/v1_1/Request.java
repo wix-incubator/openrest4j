@@ -82,7 +82,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@Type(value = ExtendAccessTokenRequest.class, name = ExtendAccessTokenRequest.TYPE),
 	@Type(value = SubscribeToMailingListRequest.class, name = SubscribeToMailingListRequest.TYPE),
 	@Type(value = SignUpRequest.class, name = SignUpRequest.TYPE),
-	@Type(value = VerifyRequest.class, name = VerifyRequest.TYPE),
+	@Type(value = SignedRequest.class, name = SignedRequest.TYPE),
 	@Type(value = ResetPasswordRequest.class, name = ResetPasswordRequest.TYPE),
 	@Type(value = SetPasswordRequest.class, name = SetPasswordRequest.TYPE),
 	@Type(value = GetAppPublisherRequest.class, name = GetAppPublisherRequest.TYPE)
