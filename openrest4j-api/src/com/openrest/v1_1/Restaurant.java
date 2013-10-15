@@ -165,6 +165,14 @@ public class Restaurant extends Organization {
     /** Information regarding the different delivery destinations. */
     @JsonInclude(Include.NON_DEFAULT)
     public List<DeliveryInfo> deliveryInfos = new ArrayList<DeliveryInfo>();
+    
+    /**
+     * Latest time up to which future orders will be accepted. For example, a value of 4320 means
+     * that the restaurant is willing to accept future orders up to 3 days in advance. The default
+     * value of 0 means that the restaurant does not allow future orders.
+     */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Integer maxFutureOrderDelayMins = 0;
 
     /** Available payment methods. */
     @JsonInclude(Include.NON_DEFAULT)
