@@ -7,10 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.openrest.availability.Availability;
 
-/**
- * Information regarding a delivery destination: type, area, requirements, etc.
- * @author DL
- */
+/** Information regarding a delivery destination: type, area, requirements, etc. */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DeliveryInfo implements Serializable, Cloneable {
 	public DeliveryInfo(String type, Area area, Integer minOrderPrice, Integer charge,
