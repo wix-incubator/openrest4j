@@ -25,11 +25,13 @@ public class Notification implements Serializable {
     public static final String NOTIFICATION_TYPE_POS_ERROR = "pos_error";
     /** Triggered when a new feedback is received. Duration is always 0. */
     public static final String NOTIFICATION_TYPE_FEEDBACK = "feedback";
+    /** Triggered when a new user subscribes to the organization's mailing list (Duration is always 0). */
+    public static final String NOTIFICATION_TYPE_SUBSCRIPTION = "subscription";
 
     /** All known notification types. */
     public static final Set<String> ALL_NOTIFICATION_TYPES = new HashSet<String>(Arrays.asList(
     		NOTIFICATION_TYPE_NEW_ORDER, NOTIFICATION_TYPE_DELAYED_ORDER, NOTIFICATION_TYPE_CANCELED_ORDER,
-    		NOTIFICATION_TYPE_OFFLINE, NOTIFICATION_TYPE_POS_ERROR, NOTIFICATION_TYPE_FEEDBACK
+    		NOTIFICATION_TYPE_OFFLINE, NOTIFICATION_TYPE_POS_ERROR, NOTIFICATION_TYPE_FEEDBACK, NOTIFICATION_TYPE_SUBSCRIPTION
     ));
 
     /** Constructs a previously submitted notification from persisted data. */
