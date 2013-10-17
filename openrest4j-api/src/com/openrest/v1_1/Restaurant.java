@@ -24,7 +24,7 @@ public class Restaurant extends Organization {
     		Map<String, String> description, Contact contact, Map<String, Contact> externalContacts, Address address,
     		Map<String, Map<String, String>> messages, ColorScheme colorScheme,
     		Availability openTimes, Availability deliveryTimes,
-            Boolean inactive, List<DeliveryInfo> deliveryInfos,
+            Boolean inactive, List<DeliveryInfo> deliveryInfos, Integer maxFutureOrderDelayMins,
             String timezone, String currency, String locale, Set<String> locales,
             Set<String> paymentTypes, Map<String, CardInfo> cardInfos, Map<String, Integer> minPayments,
             String link, String domain, Set<String> altDomains,
@@ -41,6 +41,7 @@ public class Restaurant extends Organization {
         this.deliveryTimes = deliveryTimes;
         this.inactive = inactive;
         this.deliveryInfos = deliveryInfos;
+        this.maxFutureOrderDelayMins = maxFutureOrderDelayMins;
         this.paymentTypes = paymentTypes;
         this.cardInfos = cardInfos;
         this.minPayments = minPayments;
@@ -125,7 +126,7 @@ public class Restaurant extends Organization {
     			((colorScheme != null) ? (ColorScheme) colorScheme.clone() : null),
     			((openTimes != null) ? (Availability) openTimes.clone() : null),
     			((deliveryTimes != null) ? (Availability) deliveryTimes.clone() : null),
-    			inactive, clonedDeliveryInfos,
+    			inactive, clonedDeliveryInfos, maxFutureOrderDelayMins,
     			timezone, currency, locale,
     			((locales != null) ? new HashSet<String>(locales) : null),
     			((paymentTypes != null) ? new HashSet<String>(paymentTypes) : null),
