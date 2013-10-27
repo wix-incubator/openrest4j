@@ -53,6 +53,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@Type(value = SetBlobRequest.class, name = SetBlobRequest.TYPE),
 	@Type(value = GetBlobUploadUrlRequest.class, name = GetBlobUploadUrlRequest.TYPE),
 	@Type(value = GetRolesRequest.class, name = GetRolesRequest.TYPE),
+	@Type(value = GetClientIdRequest.class, name = GetClientIdRequest.TYPE),
 	@Type(value = GetClientInfoRequest.class, name = GetClientInfoRequest.TYPE),
 	@Type(value = SetClientInfoRequest.class, name = SetClientInfoRequest.TYPE),
 	@Type(value = SetClientInfoCommentsRequest.class, name = SetClientInfoCommentsRequest.TYPE),
