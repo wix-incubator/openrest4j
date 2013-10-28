@@ -36,4 +36,7 @@ public class Channel {
     /** All known channels. */
     public static final Set<String> ALL_CHANNELS = new HashSet<String>(Arrays.asList(
     		CHANNEL_EMAIL, CHANNEL_FAX, CHANNEL_SMS, CHANNEL_VOICE, CHANNEL_RESTCLOUD));
+    
+    /** Special channel param that's used as placeholder for the customer's details, e.g. by notifications. */
+    public static final String CHANNEL_PARAM_CUSTOMER = "_customer_";
 }
