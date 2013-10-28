@@ -9,10 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-/**
- * Application (e.g. iPhone app) information.
- * @author DL
- */
+/** Application (e.g. iPhone app) information. */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AppId implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
