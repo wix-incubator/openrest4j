@@ -3,7 +3,6 @@ package com.openrest.v1_1;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -89,17 +88,6 @@ public class Order implements Serializable, Cloneable {
         this.legacyHierarchy = legacyHierarchy;
         this.properties = properties;
         this.log = log;
-    }
-
-    /** Constructs a new order to be submitted. */
-    public Order(String locale, List<OrderItem> orderItems, String comment, Integer price,
-            Delivery delivery, Contact contact, List<Payment> payments,
-            Integer takeoutPacks, List<Charge> charges, ClubMember clubMember,
-            String affiliate, String source, String platform, String ref,
-            Boolean legacyHierarchy, Map<String, String> properties) {
-        this(null, new HashMap<String, String>(), null, locale, orderItems, comment, price, delivery, contact, payments,
-        		takeoutPacks, charges, null, null, null, null, null, clubMember, null, null,
-        		affiliate, source, platform, ref, legacyHierarchy, properties, Collections.<LogEntry>emptyList());
     }
 
     /** Default constructor for JSON deserialization. */
