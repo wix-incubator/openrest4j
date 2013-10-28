@@ -15,9 +15,13 @@ public class Notification implements Serializable {
     
     /** Triggered when a new order is received. Duration is always 0. */
     public static final String NOTIFICATION_TYPE_NEW_ORDER = "new_order";
+    /** Triggered when a new order is submitted to the restaurant. Duration is always 0. */
+    public static final String NOTIFICATION_TYPE_SUBMITTED_ORDER = "submitted_order";
     /** Triggered when a new order is not handled for some duration. */
     public static final String NOTIFICATION_TYPE_DELAYED_ORDER = "delayed_order";
-    /** Triggered when an order is canceled. Duration is always 0. */
+    /** Triggered when an order is accepted. Duration is always 0. */
+    public static final String NOTIFICATION_TYPE_ACCEPTED_ORDER = "accepted_order";
+    /** Triggered when no one checks for existence of new orders for some duration. */
     public static final String NOTIFICATION_TYPE_CANCELED_ORDER = "canceled_order";
     /** Triggered when no one checks for existence of new orders for some duration. */
     public static final String NOTIFICATION_TYPE_OFFLINE = "offline";
@@ -30,7 +34,8 @@ public class Notification implements Serializable {
 
     /** All known notification types. */
     public static final Set<String> ALL_NOTIFICATION_TYPES = new HashSet<String>(Arrays.asList(
-    		NOTIFICATION_TYPE_NEW_ORDER, NOTIFICATION_TYPE_DELAYED_ORDER, NOTIFICATION_TYPE_CANCELED_ORDER,
+    		NOTIFICATION_TYPE_NEW_ORDER, NOTIFICATION_TYPE_SUBMITTED_ORDER, NOTIFICATION_TYPE_DELAYED_ORDER,
+    		NOTIFICATION_TYPE_ACCEPTED_ORDER, NOTIFICATION_TYPE_CANCELED_ORDER,
     		NOTIFICATION_TYPE_OFFLINE, NOTIFICATION_TYPE_POS_ERROR, NOTIFICATION_TYPE_FEEDBACK, NOTIFICATION_TYPE_SUBSCRIPTION
     ));
 
