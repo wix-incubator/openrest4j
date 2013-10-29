@@ -26,8 +26,8 @@ public class Restaurant extends Organization {
     		Availability openTimes, Availability deliveryTimes,
             Boolean inactive, List<DeliveryInfo> deliveryInfos, Integer maxFutureOrderDelayMins,
             String timezone, String currency, String locale, Set<String> locales,
-            Set<String> paymentTypes, Map<String, CardInfo> cardInfos, Map<String, Integer> minPayments,
-            String link, String domain, Set<String> altDomains,
+            Set<String> paymentTypes, Boolean multiPaymentDisabled, Map<String, CardInfo> cardInfos,
+            Map<String, Integer> minPayments, String link, String domain, Set<String> altDomains,
             String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
             List<AppInfo> apps, Seo seo, Map<String, String> properties,
             String state, Map<String, Double> features, Boolean legacyHierarchy, Double rank) {
@@ -43,6 +43,7 @@ public class Restaurant extends Organization {
         this.deliveryInfos = deliveryInfos;
         this.maxFutureOrderDelayMins = maxFutureOrderDelayMins;
         this.paymentTypes = paymentTypes;
+        this.multiPaymentDisabled = multiPaymentDisabled;
         this.cardInfos = cardInfos;
         this.minPayments = minPayments;
         this.features = features;
@@ -130,7 +131,7 @@ public class Restaurant extends Organization {
     			timezone, currency, locale,
     			((locales != null) ? new HashSet<String>(locales) : null),
     			((paymentTypes != null) ? new HashSet<String>(paymentTypes) : null),
-    			clonedCardInfos,
+    			multiPaymentDisabled, clonedCardInfos,
     			((minPayments != null) ? new HashMap<String, Integer>(minPayments) : null),
     			link, domain,
     			((altDomains != null) ? new HashSet<String>(altDomains) : null),
@@ -179,6 +180,10 @@ public class Restaurant extends Organization {
     @JsonInclude(Include.NON_DEFAULT)
     public Set<String> paymentTypes = new HashSet<String>();
     
+    /** Whether or not the restaurant supports multiple payments in a single order. */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Boolean multiPaymentDisabled = Boolean.FALSE;
+    
     /**
      * Maps credit card networks (e.g. "visa", "amex" etc) to the information
      * required to clear cards of that network.
@@ -198,7 +203,7 @@ public class Restaurant extends Organization {
      */
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, Integer> minPayments = new HashMap<String, Integer>();
-
+    
     /**
      * Maps feature-IDs to their values. The values correspond to how strongly the feature
      * is relevant for the restaurant, which influences its position in search results.
