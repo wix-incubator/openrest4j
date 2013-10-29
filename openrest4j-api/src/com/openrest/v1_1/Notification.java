@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Notification implements Serializable {
+public class Notification implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
     
     /** Triggered when a new order is received. Duration is always 0. */
@@ -54,6 +54,11 @@ public class Notification implements Serializable {
 
     /** Default constructor for JSON deserialization. */
     public Notification() {}
+    
+    @Override
+	public Object clone() {
+    	return new Notification(organizationId, type, channelId, channelParam, durationMins, acceptOrder, comment, state);
+	}
     
     @JsonInclude(Include.NON_NULL)
     public String organizationId;    
