@@ -32,10 +32,20 @@ public class Channel {
 	 * param: restcloud restaurant-id.
 	 */
     public static final String CHANNEL_RESTCLOUD = "net.restcloud";
+	/**
+	 * FRSvision POS (standard).
+	 * param: port number in FRSvision's router.
+	 */
+    public static final String CHANNEL_FRSVISION_POS = "com.frsvision.pos";
+	/**
+	 * FRSvision POS (burgeranch).
+	 * param: burgeranch branch number.
+	 */
+    public static final String CHANNEL_FRSVISION_BURGERANCH = "com.frsvision.burgeranch";
 	
     /** All known channels. */
     public static final Set<String> ALL_CHANNELS = new HashSet<String>(Arrays.asList(
-    		CHANNEL_EMAIL, CHANNEL_FAX, CHANNEL_SMS, CHANNEL_VOICE, CHANNEL_RESTCLOUD));
+    		CHANNEL_EMAIL, CHANNEL_FAX, CHANNEL_SMS, CHANNEL_VOICE, CHANNEL_RESTCLOUD, CHANNEL_FRSVISION_POS, CHANNEL_FRSVISION_BURGERANCH));
     
     /** Special channel param that's used as placeholder for the customer's details, e.g. by notifications. */
     public static final String CHANNEL_PARAM_CUSTOMER = "_customer_";

@@ -15,6 +15,8 @@ public class Notification implements Serializable, Cloneable {
     
     /** Triggered when a new order is received. Duration is always 0. */
     public static final String NOTIFICATION_TYPE_NEW_ORDER = "new_order";
+    /** Triggered when a new order is received. Blocking notification for POS push integrations. */
+    public static final String NOTIFICATION_TYPE_POS_PUSH = "pos_push";
     /** Triggered when a new order is submitted to the restaurant. Duration is always 0. */
     public static final String NOTIFICATION_TYPE_SUBMITTED_ORDER = "submitted_order";
     /** Triggered when a new order is not handled for some duration. */
@@ -34,8 +36,8 @@ public class Notification implements Serializable, Cloneable {
 
     /** All known notification types. */
     public static final Set<String> ALL_NOTIFICATION_TYPES = new HashSet<String>(Arrays.asList(
-    		NOTIFICATION_TYPE_NEW_ORDER, NOTIFICATION_TYPE_SUBMITTED_ORDER, NOTIFICATION_TYPE_DELAYED_ORDER,
-    		NOTIFICATION_TYPE_ACCEPTED_ORDER, NOTIFICATION_TYPE_CANCELED_ORDER,
+    		NOTIFICATION_TYPE_NEW_ORDER, NOTIFICATION_TYPE_POS_PUSH, NOTIFICATION_TYPE_SUBMITTED_ORDER,
+    		NOTIFICATION_TYPE_DELAYED_ORDER, NOTIFICATION_TYPE_ACCEPTED_ORDER, NOTIFICATION_TYPE_CANCELED_ORDER,
     		NOTIFICATION_TYPE_OFFLINE, NOTIFICATION_TYPE_POS_ERROR, NOTIFICATION_TYPE_FEEDBACK, NOTIFICATION_TYPE_SUBSCRIPTION
     ));
 
