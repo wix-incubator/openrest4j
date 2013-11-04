@@ -12,13 +12,17 @@ public class QueryAppsRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public QueryAppsRequest() {}
     
-    public QueryAppsRequest(String accessToken, String ownerId) {
+    public QueryAppsRequest(String accessToken, String distributorId, String ownerId) {
     	this.accessToken = accessToken;
+    	this.distributorId = distributorId;
     	this.ownerId = ownerId;
     }
     
     @JsonInclude(Include.NON_NULL)
     public String accessToken;
+    
+    @JsonInclude(Include.NON_NULL)
+    public String distributorId;
     
     @JsonInclude(Include.NON_NULL)
     public String ownerId;
