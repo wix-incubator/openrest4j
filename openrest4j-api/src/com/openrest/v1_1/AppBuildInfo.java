@@ -18,13 +18,14 @@ public class AppBuildInfo implements Serializable, Cloneable {
 	/** TODO */
 	public static final String STATE_NEW = "new";
 	
-    public AppBuildInfo(String id, Long created, Long modified, String ownerId, String type, String link,
+    public AppBuildInfo(String id, Long created, Long modified, String distributorId, String ownerId, String type, String link,
     		AppId appId, String internalId, String filename, String locale, Map<String, String> title,
     		Map<String, String> description, Map<String, AppstoreInfo> storeInfos, Map<String, String> properties,
     		Map<String, Blob> blobs, String state) {
     	this.id = id;
     	this.created = created;
     	this.modified = modified;
+    	this.distributorId = distributorId;
     	this.ownerId = ownerId;
     	this.type = type;
     	this.link = link;
@@ -65,7 +66,7 @@ public class AppBuildInfo implements Serializable, Cloneable {
     		clonedBlobs = null;
     	}
 
-    	return new AppBuildInfo(id, created, modified, ownerId, type, link,
+    	return new AppBuildInfo(id, created, modified, distributorId, ownerId, type, link,
     			((appId != null) ? (AppId) appId.clone() : null),
     			internalId, filename, locale,
     			((title != null) ? new HashMap<String, String>(title) : null),
@@ -86,6 +87,10 @@ public class AppBuildInfo implements Serializable, Cloneable {
     /** Last modification timestamp. */
     @JsonInclude(Include.NON_NULL)
     public Long modified;
+    
+    /** Distributor in charge of publishing this app. */
+    @JsonInclude(Include.NON_NULL)
+    public String distributorId;
     
     /**
      * Organization-id that "owns" the app.
