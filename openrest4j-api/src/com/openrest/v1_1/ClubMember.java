@@ -8,10 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-/**
- * Identifies a club member to the restaurant.
- * @author DL
- */
+/** Identifies a club member to the restaurant. */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ClubMember implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
