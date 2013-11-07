@@ -34,6 +34,18 @@ public class Error {
      */
     public static final String ERROR_CANNOT_SUBMIT_ORDER = "cannot_submit_order";
     
+    /** Restaurant is currently unavailable, e.g. closed down for the day. */
+    public static final String ERROR_UNAVAILABLE = "unavailable";
+    
+    /** Delivery method is currently unavailable. */
+    public static final String ERROR_DELIVERY_UNAVAILABLE = "delivery_unavailable";
+    
+    /** Item is currently unavailable, e.g. just went out of stock. */
+    public static final String ERROR_ITEM_UNAVAILABLE = "item_unavailable";
+    
+    /** Charge is currently unavailable. */
+    public static final String ERROR_CHARGE_UNAVAILABLE = "charge_unavailable";
+    
     /** Address is outside of delivery area. User can try to enter a different address */
     public static final String ERROR_ADDRESS_NOT_IN_RANGE = "address_not_in_range";
     

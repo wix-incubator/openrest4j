@@ -13,9 +13,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Category implements Serializable, Cloneable, Comparable<Category> {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
     
-	/** Constructs a previously submitted category from persisted data. */
     public Category(String id, String restaurantId, Map<String, String> title,
     		Map<String, String> description, String parentCategoryId,
     		List<String> itemIds, Double priority, Map<String, String> properties) {
@@ -27,13 +26,6 @@ public class Category implements Serializable, Cloneable, Comparable<Category> {
         this.itemIds = itemIds;
         this.priority = priority;
         this.properties = properties;
-    }
-
-    /** Constructs a new category to be submitted. */
-    public Category(Map<String, String> title, Map<String, String> description,
-    		String parentCategoryId, List<String> itemIds, Double priority,
-    		Map<String, String> properties) {
-        this(null, null, title, description, parentCategoryId, itemIds, priority, properties);
     }
 
     /** Default constructor for JSON deserialization. */
@@ -49,8 +41,8 @@ public class Category implements Serializable, Cloneable, Comparable<Category> {
     			priority,
     			((properties != null) ? new HashMap<String, String>(properties) : null));
 	}
-	
-	@Override
+    
+    @Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -63,6 +55,8 @@ public class Category implements Serializable, Cloneable, Comparable<Category> {
 				+ ((parentCategoryId == null) ? 0 : parentCategoryId.hashCode());
 		result = prime * result
 				+ ((priority == null) ? 0 : priority.hashCode());
+		result = prime * result
+				+ ((properties == null) ? 0 : properties.hashCode());
 		result = prime * result
 				+ ((restaurantId == null) ? 0 : restaurantId.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
@@ -103,6 +97,11 @@ public class Category implements Serializable, Cloneable, Comparable<Category> {
 				return false;
 		} else if (!priority.equals(other.priority))
 			return false;
+		if (properties == null) {
+			if (other.properties != null)
+				return false;
+		} else if (!properties.equals(other.properties))
+			return false;
 		if (restaurantId == null) {
 			if (other.restaurantId != null)
 				return false;
@@ -115,7 +114,7 @@ public class Category implements Serializable, Cloneable, Comparable<Category> {
 			return false;
 		return true;
 	}
-
+	
 	public int compareTo(Category other) {
 		return Double.compare(
 				((priority != null) ? priority.doubleValue() : 0),
@@ -144,7 +143,7 @@ public class Category implements Serializable, Cloneable, Comparable<Category> {
 
     /** The category's description in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> description = new HashMap<String, String>();
+    public Map<String, String> description = null; // TODO: new HashMap<String, String>();
 
     /** The parent category's id. */
     @JsonInclude(Include.NON_NULL)
