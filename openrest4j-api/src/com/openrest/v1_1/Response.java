@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Response<T> implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
     public Response(T value) {
         this.timestamp = new java.util.Date().getTime();
         this.value = value;
@@ -46,6 +48,4 @@ public class Response<T> implements Serializable {
     /** The returned value, if no error occurred. */
     @JsonInclude(Include.NON_NULL)
     public T value;
-    
-	private static final long serialVersionUID = 1L;
 }
