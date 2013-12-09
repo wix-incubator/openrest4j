@@ -1,5 +1,8 @@
 package com.openrest.v1_1;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -12,9 +15,10 @@ public class SubmitAppRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public SubmitAppRequest() {}
     
-    public SubmitAppRequest(String accessToken, AppBuildInfo appBuildInfo) {
+    public SubmitAppRequest(String accessToken, AppBuildInfo appBuildInfo, List<BlobCopy> setBlobs) {
     	this.accessToken = accessToken;
     	this.appBuildInfo = appBuildInfo;
+    	this.setBlobs = setBlobs;
     }
     
     @JsonInclude(Include.NON_NULL)
@@ -22,4 +26,7 @@ public class SubmitAppRequest extends Request {
     
     @JsonInclude(Include.NON_NULL)
     public AppBuildInfo appBuildInfo;
+    
+    @JsonInclude(Include.NON_DEFAULT)
+    public List<BlobCopy> setBlobs = new LinkedList<BlobCopy>();
 }
