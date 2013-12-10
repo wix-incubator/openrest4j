@@ -12,14 +12,18 @@ public class GetAppPublisherRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public GetAppPublisherRequest() {}
     
-    public GetAppPublisherRequest(String accessToken, AppId appId) {
+    public GetAppPublisherRequest(String accessToken, String distributorId, AppId appId) {
     	this.accessToken = accessToken;
+    	this.distributorId = distributorId;
     	this.appId = appId;
     }
     
     @JsonInclude(Include.NON_NULL)
     public String accessToken;
 
+    @JsonInclude(Include.NON_NULL)
+    public String distributorId;
+    
     @JsonInclude(Include.NON_NULL)
     public AppId appId;
 }
