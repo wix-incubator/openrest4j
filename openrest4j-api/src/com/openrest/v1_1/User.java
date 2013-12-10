@@ -6,10 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-/**
- * Information regarding a remote user of the system.
- * @author DL
- */
+/** Information regarding a remote user of the system. */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;

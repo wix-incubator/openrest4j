@@ -6,10 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-/**
- * An entry in a change-log.
- * @author DL
- */
+/** An entry in a change-log. */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LogEntry implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;

@@ -15,10 +15,11 @@ public class SetAppRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public SetAppRequest() {}
     
-    public SetAppRequest(String accessToken, AppBuildInfo appBuildInfo, List<BlobCopy> setBlobs) {
+    public SetAppRequest(String accessToken, AppBuildInfo appBuildInfo, List<BlobCopy> setBlobs, String comment) {
     	this.accessToken = accessToken;
     	this.appBuildInfo = appBuildInfo;
     	this.setBlobs = setBlobs;
+    	this.comment = comment;
     }
     
     @JsonInclude(Include.NON_NULL)
@@ -29,4 +30,7 @@ public class SetAppRequest extends Request {
     
     @JsonInclude(Include.NON_DEFAULT)
     public List<BlobCopy> setBlobs = new LinkedList<BlobCopy>();
+    
+    @JsonInclude(Include.NON_NULL)
+    public String comment;
 }

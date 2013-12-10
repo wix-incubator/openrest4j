@@ -1,8 +1,11 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -21,7 +24,7 @@ public class AppBuildInfo implements Serializable, Cloneable {
     public AppBuildInfo(String id, Long created, Long modified, String distributorId, String ownerId, String type, String link,
     		AppId appId, String internalId, String filename, String locale, Map<String, String> title,
     		Map<String, String> description, Map<String, AppstoreInfo> storeInfos, Map<String, String> properties,
-    		Map<String, Blob> blobs, String state) {
+    		Map<String, Blob> blobs, String state, List<LogEntry> log) {
     	this.id = id;
     	this.created = created;
     	this.modified = modified;
@@ -39,6 +42,7 @@ public class AppBuildInfo implements Serializable, Cloneable {
     	this.properties = properties;
     	this.blobs = blobs;
     	this.state = state;
+    	this.log = log;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -65,6 +69,16 @@ public class AppBuildInfo implements Serializable, Cloneable {
     	} else {
     		clonedBlobs = null;
     	}
+    	
+    	final List<LogEntry> clonedLog;
+    	if (log != null) {
+    		clonedLog = new ArrayList<LogEntry>(log.size());
+    		for (LogEntry logEntry : log) {
+    			clonedLog.add((LogEntry) logEntry.clone());
+    		}
+    	} else {
+    		clonedLog = null;
+    	}
 
     	return new AppBuildInfo(id, created, modified, distributorId, ownerId, type, link,
     			((appId != null) ? (AppId) appId.clone() : null),
@@ -73,7 +87,7 @@ public class AppBuildInfo implements Serializable, Cloneable {
     			((description != null) ? new HashMap<String, String>(description) : null),
     			clonedStoreInfos,
     			((properties != null) ? new HashMap<String, String>(properties) : null), 
-    			clonedBlobs, state);
+    			clonedBlobs, state, clonedLog);
 	}
     
     /** Unique id for this app build info. */
@@ -152,4 +166,8 @@ public class AppBuildInfo implements Serializable, Cloneable {
     /** @see ALL_STATES */
     @JsonInclude(Include.NON_NULL)
     public String state;
+    
+    /** Change log. */
+    @JsonInclude(Include.NON_DEFAULT)
+    public List<LogEntry> log = new LinkedList<LogEntry>();
 }
