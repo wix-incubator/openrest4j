@@ -11,10 +11,12 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class AppPublisher implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
     
-    public AppPublisher(String title, String url, String copyright, Certificate androidCertificate, Certificate iosCertificate, Certificate iosPrivateKey) {
+    public AppPublisher(String title, String url, String copyright, String androidAccountId,
+    		Certificate androidCertificate, Certificate iosCertificate, Certificate iosPrivateKey) {
     	this.title = title;
     	this.url = url;
     	this.copyright = copyright;
+    	this.androidAccountId = androidAccountId;
     	this.androidCertificate = androidCertificate;
     	this.iosCertificate = iosCertificate;
     	this.iosPrivateKey = iosPrivateKey;
@@ -25,7 +27,7 @@ public class AppPublisher implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	return new AppPublisher(title, url, copyright,
+    	return new AppPublisher(title, url, copyright, androidAccountId,
     			((androidCertificate != null) ? (Certificate) androidCertificate.clone() : null),
     			((iosCertificate != null) ? (Certificate) iosCertificate.clone() : null),
     			((iosPrivateKey != null) ? (Certificate) iosPrivateKey.clone() : null));
@@ -39,6 +41,10 @@ public class AppPublisher implements Serializable, Cloneable {
     
     @JsonInclude(Include.NON_NULL)
     public String copyright;
+    
+    /** Taken from https://play.google.com/apps/publish/?dev_acc=[XXX] */
+    @JsonInclude(Include.NON_NULL)
+    public String androidAccountId;
 
     @JsonInclude(Include.NON_NULL)
     public Certificate androidCertificate;
