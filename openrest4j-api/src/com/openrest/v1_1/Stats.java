@@ -24,7 +24,7 @@ public class Stats implements Serializable, Cloneable {
     		STATS_GRANULARITY_DAY, STATS_GRANULARITY_WEEK, STATS_GRANULARITY_MONTH, STATS_GRANULARITY_YEAR
     }));
 
-    public Stats(Date date, Integer count, Integer total) {
+    public Stats(Date date, Integer count, Long total) {
         this.date = date;
         this.count = count;
         this.total = total;
@@ -45,5 +45,5 @@ public class Stats implements Serializable, Cloneable {
     public Integer count = 0;
 
     @JsonInclude(Include.NON_DEFAULT)
-    public Integer total = 0;
+    public Long total = 0L;
 }
