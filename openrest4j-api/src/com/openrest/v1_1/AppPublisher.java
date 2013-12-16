@@ -11,10 +11,11 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class AppPublisher implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
     
-    public AppPublisher(String title, String url, String copyright, String androidAccountId,
+    public AppPublisher(String title, String url, Contact contact, String copyright, String androidAccountId,
     		Certificate androidCertificate, Certificate iosCertificate, Certificate iosPrivateKey) {
     	this.title = title;
     	this.url = url;
+    	this.contact = contact;
     	this.copyright = copyright;
     	this.androidAccountId = androidAccountId;
     	this.androidCertificate = androidCertificate;
@@ -27,7 +28,9 @@ public class AppPublisher implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	return new AppPublisher(title, url, copyright, androidAccountId,
+    	return new AppPublisher(title, url,
+    			((contact != null) ? (Contact) contact.clone() : null),
+    			copyright, androidAccountId,
     			((androidCertificate != null) ? (Certificate) androidCertificate.clone() : null),
     			((iosCertificate != null) ? (Certificate) iosCertificate.clone() : null),
     			((iosPrivateKey != null) ? (Certificate) iosPrivateKey.clone() : null));
@@ -38,6 +41,9 @@ public class AppPublisher implements Serializable, Cloneable {
     
     @JsonInclude(Include.NON_NULL)
     public String url;
+    
+    @JsonInclude(Include.NON_NULL)
+    public Contact contact;
     
     @JsonInclude(Include.NON_NULL)
     public String copyright;
