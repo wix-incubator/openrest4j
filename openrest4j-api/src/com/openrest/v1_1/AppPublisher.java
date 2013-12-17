@@ -1,6 +1,9 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -10,17 +13,48 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AppPublisher implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
+	
+    /**
+     * External-id key for specifying the publisher's Play Store developer account.
+     * Taken from https://play.google.com/apps/publish/?dev_acc=[XXX]
+     * 
+     * @see AppPublisher.externalIds
+     */
+    public static final String EXTERNAL_ID_GOOGLE_PLAY = "com.google.play";
     
-    public AppPublisher(String title, String url, Contact contact, String copyright, String androidAccountId,
-    		Certificate androidCertificate, Certificate iosCertificate, Certificate iosPrivateKey) {
+    /**
+     * Used to sign Android apps.
+     * @see AppPublisher.certificates
+     */
+    public static final String CERTIFICATE_ANDROID = "android";
+    
+    /**
+     * Used to sign iOS apps.
+     * @see AppPublisher.externalIds
+     */
+    public static final String CERTIFICATE_IOS = "ios";
+    
+    /**
+     * Used to sign iOS apps.
+     * @see AppPublisher.externalIds
+     */
+    public static final String CERTIFICATE_IOS_PRIVATE = "ios.private";
+    
+    /** 
+     * Urban Airship .
+     * @see AppPublisher.logins
+     */
+    public static final String LOGIN_URBANAIRSHIP = "com.urbanairship";
+    
+    public AppPublisher(String title, String url, Contact contact, String copyright, Map<String, String> externalIds,
+    		Map<String, Login> logins, Map<String, Certificate> certificates) {
     	this.title = title;
     	this.url = url;
     	this.contact = contact;
     	this.copyright = copyright;
-    	this.androidAccountId = androidAccountId;
-    	this.androidCertificate = androidCertificate;
-    	this.iosCertificate = iosCertificate;
-    	this.iosPrivateKey = iosPrivateKey;
+    	this.externalIds = externalIds;
+    	this.logins = logins;
+    	this.certificates = certificates;
     }
     
     /** Default constructor for JSON deserialization. */
@@ -28,12 +62,31 @@ public class AppPublisher implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
+    	final Map<String, Login> clonedLogins;
+    	if (logins != null) {
+    		clonedLogins = new HashMap<String, Login>(logins.size());
+    		for (Entry<String, Login> entry : logins.entrySet()) {
+    			clonedLogins.put(entry.getKey(), (Login) entry.getValue().clone());
+    		}
+    	} else {
+    		clonedLogins = null;
+    	}
+    	
+    	final Map<String, Certificate> clonedCertificates;
+    	if (certificates != null) {
+    		clonedCertificates = new HashMap<String, Certificate>(certificates.size());
+    		for (Entry<String, Certificate> entry : certificates.entrySet()) {
+    			clonedCertificates.put(entry.getKey(), (Certificate) entry.getValue().clone());
+    		}
+    	} else {
+    		clonedCertificates = null;
+    	}
+    	
     	return new AppPublisher(title, url,
     			((contact != null) ? (Contact) contact.clone() : null),
-    			copyright, androidAccountId,
-    			((androidCertificate != null) ? (Certificate) androidCertificate.clone() : null),
-    			((iosCertificate != null) ? (Certificate) iosCertificate.clone() : null),
-    			((iosPrivateKey != null) ? (Certificate) iosPrivateKey.clone() : null));
+    			copyright,
+    			((externalIds != null) ? new HashMap<String, String>(externalIds) : null),
+    			clonedLogins, clonedCertificates);
 	}
     
     @JsonInclude(Include.NON_NULL)
@@ -48,16 +101,18 @@ public class AppPublisher implements Serializable, Cloneable {
     @JsonInclude(Include.NON_NULL)
     public String copyright;
     
-    /** Taken from https://play.google.com/apps/publish/?dev_acc=[XXX] */
-    @JsonInclude(Include.NON_NULL)
-    public String androidAccountId;
-
-    @JsonInclude(Include.NON_NULL)
-    public Certificate androidCertificate;
+    /**
+     * Map of externally-defined ids referring to this publisher.
+     * For example, the publisher-id in some app store.
+     * 
+     * Developers should use unique keys, e.g. "com.company.product".
+     */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Map<String, String> externalIds = new HashMap<String, String>();
     
-    @JsonInclude(Include.NON_NULL)
-    public Certificate iosCertificate;
+    @JsonInclude(Include.NON_DEFAULT)
+    public Map<String, Login> logins = new HashMap<String, Login>();
     
-    @JsonInclude(Include.NON_NULL)
-    public Certificate iosPrivateKey;
+    @JsonInclude(Include.NON_DEFAULT)
+    public Map<String, Certificate> certificates = new HashMap<String, Certificate>();
 }
