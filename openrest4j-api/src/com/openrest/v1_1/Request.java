@@ -87,6 +87,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@Type(value = ResetPasswordRequest.class, name = ResetPasswordRequest.TYPE),
 	@Type(value = SetPasswordRequest.class, name = SetPasswordRequest.TYPE),
 	@Type(value = GetAppPublisherRequest.class, name = GetAppPublisherRequest.TYPE),
+	@Type(value = SetAppPublisherRequest.class, name = SetAppPublisherRequest.TYPE),
 	@Type(value = SubmitAppRequest.class, name = SubmitAppRequest.TYPE),
 	@Type(value = SetAppRequest.class, name = SetAppRequest.TYPE),
 	@Type(value = QueryAppsRequest.class, name = QueryAppsRequest.TYPE)
