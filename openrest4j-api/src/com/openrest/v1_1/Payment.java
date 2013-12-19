@@ -13,6 +13,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Payment implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
     
+    /** Payment is done at the time of actual delivery (@see http://en.wikipedia.org/wiki/Collect_on_delivery) */
+    public static final String PAYMENT_TYPE_COD = "cod";
     /** Cash payment. */
     public static final String PAYMENT_TYPE_CASH = "cash";
     /** Credit card payment. */
@@ -36,7 +38,7 @@ public class Payment implements Serializable, Cloneable {
 
     /** All known payment methods. */
     public static final Set<String> ALL_PAYMENT_TYPES = new HashSet<String>(Arrays.asList(
-    		PAYMENT_TYPE_CASH, PAYMENT_TYPE_CREDIT, PAYMENT_TYPE_DEBIT, PAYMENT_TYPE_10BIS,
+    		PAYMENT_TYPE_COD, PAYMENT_TYPE_CASH, PAYMENT_TYPE_CREDIT, PAYMENT_TYPE_DEBIT, PAYMENT_TYPE_10BIS,
     		PAYMENT_TYPE_CHECK, PAYMENT_TYPE_OFFSET, PAYMENT_TYPE_DIRECT_DEBIT, PAYMENT_TYPE_PAYPAL,
     		PAYMENT_TYPE_CELLARIX, PAYMENT_TYPE_BITSOFGOLD
     ));
