@@ -41,7 +41,13 @@ public class AppPublisher implements Serializable, Cloneable {
     public static final String CERTIFICATE_IOS_PRIVATE = "ios.private";
     
     /** 
-     * Urban Airship .
+     * Apple (developer id).
+     * @see AppPublisher.logins
+     */
+    public static final String LOGIN_APPLE = "com.apple";
+    
+    /** 
+     * Urban Airship.
      * @see AppPublisher.logins
      */
     public static final String LOGIN_URBANAIRSHIP = "com.urbanairship";
