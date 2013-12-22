@@ -14,7 +14,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 /**
  * A possible modification to an item, e.g. "choice of sides" for a happy-meal
  * or "degree of cooking" for a hamburger.
- * @author DL
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Variation implements Serializable, Cloneable {

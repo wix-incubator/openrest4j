@@ -1,10 +1,10 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -13,12 +13,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-/**
- * A set of items that go together, e.g. "sides", "drinks", "toppings".
- * @author DL
- */
+/** A set of items that go together, e.g. "sides", "drinks", "toppings". */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Tag implements Serializable {
+public class Tag implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
     
 	/** Inclusive: tag refers to given items. */
@@ -41,10 +38,13 @@ public class Tag implements Serializable {
         this.properties = properties;
     }
 
-    /** Constructs a new tag to be submitted. */
-    public Tag(Map<String, String> title, List<String> itemIds, Map<String, String> properties) {
-        this(null, null, title, itemIds, properties);
-    }
+    @Override
+	public Object clone() {
+    	return new Tag(id, restaurantId,
+    			((title != null) ? new HashMap<String, String>(title) : null),
+    			new LinkedList<String>(itemIds),
+    			((properties != null) ? new HashMap<String, String>(properties) : null));
+	}
 
     /** Default constructor for JSON deserialization. */
     public Tag() {}
@@ -63,7 +63,7 @@ public class Tag implements Serializable {
 
     /** Item ids. */
     @JsonInclude(Include.NON_DEFAULT)
-    public List<String> itemIds = new ArrayList<String>();
+    public List<String> itemIds = new LinkedList<String>();
 
     /**
      * Map of user-defined extended properties. Developers should use unique
