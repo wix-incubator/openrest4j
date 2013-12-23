@@ -27,7 +27,7 @@ public class Item implements Serializable, Comparable<Item> {
 	/** Constructs a previously submitted item from persisted data. */
     public Item(String id, String restaurantId, Map<String, String> title,
     		Map<String, String> description, Integer price, List<Variation> variations,
-    		Availability availability, Boolean inactive, String picture, Map<String, Blob> blobs,
+    		Availability availability, String picture, Map<String, Blob> blobs,
     		Map<String, String> externalIds, Set<String> labels,
     		Map<String, String> properties, Double rank) {
         this.id = id;
@@ -37,7 +37,6 @@ public class Item implements Serializable, Comparable<Item> {
         this.price = price;
         this.variations = variations;
         this.availability = availability;
-        this.inactive = inactive;
         this.picture = picture;
         this.blobs = blobs;
         this.externalIds = externalIds;
@@ -77,10 +76,6 @@ public class Item implements Serializable, Comparable<Item> {
     @JsonInclude(Include.NON_DEFAULT)
     public Availability availability = new Availability();
 
-    /** Whether the item is deactivated (i.e. suspended or disabled). */
-    @JsonInclude(Include.NON_DEFAULT)
-    public Boolean inactive = Boolean.FALSE;
-    
     /** Item picture URL (direct link). */
     @JsonInclude(Include.NON_NULL)
     public String picture;
@@ -127,8 +122,6 @@ public class Item implements Serializable, Comparable<Item> {
 		result = prime * result
 				+ ((externalIds == null) ? 0 : externalIds.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((inactive == null) ? 0 : inactive.hashCode());
 		result = prime * result + ((labels == null) ? 0 : labels.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
 		result = prime * result
@@ -167,11 +160,6 @@ public class Item implements Serializable, Comparable<Item> {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (inactive == null) {
-			if (other.inactive != null)
-				return false;
-		} else if (!inactive.equals(other.inactive))
 			return false;
 		if (labels == null) {
 			if (other.labels != null)
