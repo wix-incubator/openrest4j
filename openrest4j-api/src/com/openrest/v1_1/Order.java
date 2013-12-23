@@ -54,15 +54,19 @@ public class Order implements Serializable, Cloneable {
     }));
 
     /** Constructs a previously submitted order from persisted data. */
-    public Order(String id, Map<String, String> externalIds, String restaurantId, String locale, List<OrderItem> orderItems,
+    public Order(String id, Map<String, String> externalIds, String distributorId, String chainId, String restaurantId,
+    		String locale, List<OrderItem> orderItems,
     		String comment, Integer price, Delivery delivery, Contact contact, List<Payment> payments,
             Integer takeoutPacks, List<Charge> charges,
             java.util.Date created, java.util.Date received, java.util.Date modified, java.util.Date submitAt,
             User user, ClubMember clubMember, String status, String shareToken,
-            String affiliate, String source, String platform, String ref, Boolean legacyHierarchy, Map<String, String> properties, List<LogEntry> log) {
+            String affiliate, String developer, String source, String platform, String ref,
+            Boolean legacyHierarchy, Map<String, String> properties, List<LogEntry> log) {
 
         this.id = id;
         this.externalIds = externalIds;
+        this.distributorId = distributorId;
+        this.chainId = chainId;
         this.restaurantId = restaurantId;
         this.locale = locale;
         this.orderItems = orderItems;
@@ -82,6 +86,7 @@ public class Order implements Serializable, Cloneable {
         this.status = status;
         this.shareToken = shareToken;
         this.affiliate = affiliate;
+        this.developer = developer;
         this.source = source;
         this.platform = platform;
         this.ref = ref;
@@ -137,13 +142,13 @@ public class Order implements Serializable, Cloneable {
     	
     	return new Order(id,
     			((externalIds != null) ? new HashMap<String, String>(externalIds) : null),
-    			restaurantId, locale, clonedOrderItems, comment, price,
+    			distributorId, chainId, restaurantId, locale, clonedOrderItems, comment, price,
     			((delivery != null) ? (Delivery) delivery.clone() : null),
     			((contact != null) ? (Contact) contact.clone() : null),
     			clonedPayments, takeoutPacks, clonedCharges, created(), received(), modified(), submitAt(),
     			((user != null) ? (User) user.clone() : null),
     			((clubMember != null) ? (ClubMember) clubMember.clone() : null),
-    			status, shareToken, affiliate, source, platform, ref, legacyHierarchy,
+    			status, shareToken, affiliate, developer, source, platform, ref, legacyHierarchy,
     			((properties != null) ? new HashMap<String, String>(properties) : null),
     			clonedLog);
 	}
@@ -163,7 +168,6 @@ public class Order implements Serializable, Cloneable {
     public java.util.Date submitAt() {
         return ((submitAt != null) ? new java.util.Date(submitAt.longValue()) : null);
     }
-    
 
     /** The order's unique id. */
     @JsonInclude(Include.NON_NULL)
@@ -171,6 +175,14 @@ public class Order implements Serializable, Cloneable {
     
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> externalIds = new HashMap<String, String>();
+
+    /** The distributor's unique id. */
+    @JsonInclude(Include.NON_NULL)
+    public String distributorId;
+    
+    /** The chain's unique id (can be null). */
+    @JsonInclude(Include.NON_NULL)
+    public String chainId;
 
     /** The restaurant's unique id. */
     @JsonInclude(Include.NON_NULL)
@@ -206,7 +218,7 @@ public class Order implements Serializable, Cloneable {
 
     /**
      * Number of "takeout packs" (e.g. cutlery and condiments) to deliver with the order.
-     * For environmental reasons, clients should be encouraged to set this to 0.
+     * For environmental reasons, customers should be encouraged to set this to 0.
      */
     @JsonInclude(Include.NON_NULL)
     public Integer takeoutPacks;
@@ -259,6 +271,10 @@ public class Order implements Serializable, Cloneable {
     /** Affiliate-id, for orders that came through affiliate marketing. */
     @JsonInclude(Include.NON_NULL)
     public String affiliate;
+    
+    /** The client's developer id. */
+    @JsonInclude(Include.NON_NULL)
+    public String developer;
     
     /**
      * The organization-id from which the customer ordered.
