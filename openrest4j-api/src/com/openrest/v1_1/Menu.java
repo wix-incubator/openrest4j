@@ -12,10 +12,9 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Menu implements Serializable {
     private static final long serialVersionUID = 1L;
     
-    public Menu(Long modified, List<Item> items, List<Tag> tags, List<Category> categories, List<Charge> charges) {
+    public Menu(Long modified, List<Item> items, List<Category> categories, List<Charge> charges) {
     	this.modified = modified;
         this.items = items;
-        this.tags = tags;
         this.categories = categories;
         this.charges = charges;
     }
@@ -32,6 +31,7 @@ public class Menu implements Serializable {
         return menu;
     }
 
+    @Deprecated
     public static Menu fromTags(List<Tag> tags) {
         final Menu menu = new Menu();
         menu.tags = tags;
@@ -53,7 +53,9 @@ public class Menu implements Serializable {
 
     @JsonInclude(Include.NON_DEFAULT)
     public List<Item> items = new LinkedList<Item>();
-
+    
+    /** Scheduled for deprecation on 2014-04-01 (use Item.itemIds and Charge.itemIds) */
+    @Deprecated
     @JsonInclude(Include.NON_DEFAULT)
     public List<Tag> tags = new LinkedList<Tag>();
 

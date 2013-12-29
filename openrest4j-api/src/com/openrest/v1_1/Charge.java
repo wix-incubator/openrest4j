@@ -36,6 +36,16 @@ public class Charge implements Serializable, Cloneable {
     		CHARGE_TYPE_DELIVERY, CHARGE_TYPE_COUPON, CHARGE_TYPE_CLUB_COUPON, CHARGE_TYPE_TAX, CHARGE_TYPE_SERVICE
     }));
     
+	/** Inclusive: tag refers to given items. */
+	public static final String MODE_INCLUDE = "include";
+    /** Exclusive: tag refers to anything but the given items. */
+    public static final String MODE_EXCLUDE = "exclude";
+    
+    /** All known tag modes */
+    public static final Set<String> ALL_MODES = new HashSet<String>(Arrays.asList(
+    		MODE_INCLUDE, MODE_EXCLUDE
+    ));
+    
 	/** Amount rule is a fixed number that's added once to all applicable items. */
     public static final String AMOUNT_RULE_TYPE_FIXED = "fixed";
 	/** Amount rule is a fixed number that's added to each applicable item individually. */
@@ -54,7 +64,7 @@ public class Charge implements Serializable, Cloneable {
 
     public Charge(String id, String restaurantId, String type, Double priority,
     		String code, String clubId,
-    		String tagId, String tagMode,
+    		Set<String> itemIds, String mode,
     		String amountRuleType, Integer amountRule, Coupon coupon,
     		Availability availability, Boolean inactive, Set<String> refs, Set<String> deliveryTypes,
     		Integer amount) {
@@ -64,8 +74,8 @@ public class Charge implements Serializable, Cloneable {
         this.priority = priority;
         this.code = code;
         this.clubId = clubId;
-        this.tagId = tagId;
-        this.tagMode = tagMode;
+        this.itemIds = itemIds;
+        this.mode = mode;
         this.amountRuleType = amountRuleType;
         this.amountRule = amountRule;
         this.coupon = coupon;
@@ -81,7 +91,9 @@ public class Charge implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	return new Charge(id, restaurantId, type, priority, code, clubId, tagId, tagMode, amountRuleType, amountRule,
+    	return new Charge(id, restaurantId, type, priority, code, clubId,
+    			((itemIds != null) ? new HashSet<String>(itemIds) : null),
+    			mode, amountRuleType, amountRule,
     			((coupon != null) ? (Coupon) coupon.clone() : null),
     			((availability != null) ? (Availability) availability.clone() : null),
     			inactive,
@@ -114,13 +126,23 @@ public class Charge implements Serializable, Cloneable {
     @JsonInclude(Include.NON_NULL)
     public String clubId;
     
-    /** Items for which the charge applies, null if applies for every item. */
+    /** Scheduled for deprecation on 2014-04-01 (use itemIds instead) */
+    @Deprecated
     @JsonInclude(Include.NON_NULL)
     public String tagId;
    
-    /** Tag mode: inclusive or exclusive. */
+    /** Scheduled for deprecation on 2014-04-01 (use mode instead) */
+    @Deprecated
     @JsonInclude(Include.NON_DEFAULT)
     public String tagMode = Tag.TAG_MODE_INCLUDE;
+    
+    /** Items for which the charge applies, null if applies for every item. */
+    @JsonInclude(Include.NON_NULL)
+    public Set<String> itemIds;
+    
+    /** Items mode: inclusive or exclusive. */
+    @JsonInclude(Include.NON_DEFAULT)
+    public String mode = MODE_INCLUDE;
     
     /** Charge amount rule type. */
     @JsonInclude(Include.NON_DEFAULT)
@@ -229,15 +251,15 @@ public class Charge implements Serializable, Cloneable {
 				return false;
 		} else if (!clubId.equals(other.clubId))
 			return false;
-		if (tagId == null) {
-			if (other.tagId != null)
+		if (itemIds == null) {
+			if (other.itemIds != null)
 				return false;
-		} else if (!tagId.equals(other.tagId))
+		} else if (!itemIds.equals(other.itemIds))
 			return false;
-		if (tagMode == null) {
-			if (other.tagMode != null)
+		if (mode == null) {
+			if (other.mode != null)
 				return false;
-		} else if (!tagMode.equals(other.tagMode))
+		} else if (!mode.equals(other.mode))
 			return false;
 		if (type == null) {
 			if (other.type != null)
@@ -287,8 +309,8 @@ public class Charge implements Serializable, Cloneable {
 				+ ((priority == null) ? 0 : priority.hashCode());
 		result = prime * result
 				+ ((restaurantId == null) ? 0 : restaurantId.hashCode());
-		result = prime * result + ((tagId == null) ? 0 : tagId.hashCode());
-		result = prime * result + ((tagMode == null) ? 0 : tagMode.hashCode());
+		result = prime * result + ((itemIds == null) ? 0 : itemIds.hashCode());
+		result = prime * result + ((mode == null) ? 0 : mode.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}

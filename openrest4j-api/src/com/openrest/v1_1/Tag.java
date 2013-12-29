@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /** A set of items that go together, e.g. "sides", "drinks", "toppings". */
+@Deprecated
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Tag implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;

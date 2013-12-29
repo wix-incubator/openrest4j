@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -29,10 +31,10 @@ public class Variation implements Serializable, Cloneable {
     public static final Set<String> ALL_VARIATION_DISPLAY_TYPES = new HashSet<String>(
     		Arrays.asList(VARIATION_DISPLAY_TYPE_DIFF, VARIATION_DISPLAY_TYPE_CHOICE, VARIATION_DISPLAY_TYPE_HIDDEN));
 
-    public Variation(Map<String, String> title, String tagId, Integer minNumAllowed,
+    public Variation(Map<String, String> title, List<String> itemIds, Integer minNumAllowed,
     		Integer maxNumAllowed, Map<String, Integer> prices, Set<String> defaults, String displayType) {
         this.title = title;
-        this.tagId = tagId;
+        this.itemIds = itemIds;
         this.minNumAllowed = minNumAllowed;
         this.maxNumAllowed = maxNumAllowed;
         this.prices = prices;
@@ -47,7 +49,8 @@ public class Variation implements Serializable, Cloneable {
 	public Object clone() {
     	return new Variation(
     			((title != null) ? new HashMap<String, String>(title) : null),
-    			tagId, minNumAllowed, maxNumAllowed,
+    			((itemIds != null) ? new LinkedList<String>(itemIds) : null),
+    			minNumAllowed, maxNumAllowed,
     			((prices != null) ? new HashMap<String, Integer>(prices) : null),
     			((defaults != null) ? new HashSet<String>(defaults) : null),
     			displayType);
@@ -58,6 +61,11 @@ public class Variation implements Serializable, Cloneable {
     public Map<String, String> title = new HashMap<String, String>();
 
     /** The set's name, e.g. "drink", "sides". */
+    @JsonInclude(Include.NON_NULL)
+    public List<String> itemIds = new LinkedList<String>();
+    
+    /** Scheduled for deprecation on 2014-04-01 (use itemIds instead) */
+    @Deprecated
     @JsonInclude(Include.NON_NULL)
     public String tagId;
 
@@ -93,7 +101,7 @@ public class Variation implements Serializable, Cloneable {
         if ((this.title == null) ? (other.title != null) : !this.title.equals(other.title)) {
             return false;
         }
-        if ((this.tagId == null) ? (other.tagId != null) : !this.tagId.equals(other.tagId)) {
+        if ((this.itemIds == null) ? (other.itemIds != null) : !this.itemIds.equals(other.itemIds)) {
             return false;
         }
         if (this.minNumAllowed != other.minNumAllowed && (this.minNumAllowed == null || !this.minNumAllowed.equals(other.minNumAllowed))) {
@@ -118,7 +126,7 @@ public class Variation implements Serializable, Cloneable {
     public int hashCode() {
         int hash = 7;
         hash = 97 * hash + (this.title != null ? this.title.hashCode() : 0);
-        hash = 97 * hash + (this.tagId != null ? this.tagId.hashCode() : 0);
+        hash = 97 * hash + (this.itemIds != null ? this.itemIds.hashCode() : 0);
         hash = 97 * hash + (this.minNumAllowed != null ? this.minNumAllowed.hashCode() : 0);
         hash = 97 * hash + (this.maxNumAllowed != null ? this.maxNumAllowed.hashCode() : 0);
         hash = 97 * hash + (this.prices != null ? this.prices.hashCode() : 0);
