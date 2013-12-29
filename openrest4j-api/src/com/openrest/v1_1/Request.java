@@ -49,7 +49,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@Type(value = GetAppMappedObjectRequest.class, name = GetAppMappedObjectRequest.TYPE),
 	@Type(value = SetDomainMappingRequest.class, name = SetDomainMappingRequest.TYPE),
 	@Type(value = GetDomainMappedObjectRequest.class, name = GetDomainMappedObjectRequest.TYPE),
-	@Type(value = GetBlobRequest.class, name = GetBlobRequest.TYPE),
 	@Type(value = SetBlobRequest.class, name = SetBlobRequest.TYPE),
 	@Type(value = GetBlobUploadUrlRequest.class, name = GetBlobUploadUrlRequest.TYPE),
 	@Type(value = GetRolesRequest.class, name = GetRolesRequest.TYPE),
