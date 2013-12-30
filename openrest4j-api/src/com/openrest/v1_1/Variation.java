@@ -47,13 +47,15 @@ public class Variation implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	return new Variation(
+    	final Variation cloned = new Variation(
     			((title != null) ? new HashMap<String, String>(title) : null),
     			((itemIds != null) ? new LinkedList<String>(itemIds) : null),
     			minNumAllowed, maxNumAllowed,
     			((prices != null) ? new HashMap<String, Integer>(prices) : null),
     			((defaults != null) ? new HashSet<String>(defaults) : null),
     			displayType);
+    	cloned.tagId = tagId;
+    	return cloned;
 	}
 
     /** The variations's name in various locales, e.g. "sides", "degree of cooking". */

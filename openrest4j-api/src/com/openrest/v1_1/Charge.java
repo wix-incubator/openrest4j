@@ -91,7 +91,7 @@ public class Charge implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	return new Charge(id, restaurantId, type, priority, code, clubId,
+    	final Charge cloned = new Charge(id, restaurantId, type, priority, code, clubId,
     			((itemIds != null) ? new HashSet<String>(itemIds) : null),
     			mode, amountRuleType, amountRule,
     			((coupon != null) ? (Coupon) coupon.clone() : null),
@@ -100,6 +100,11 @@ public class Charge implements Serializable, Cloneable {
     			((refs != null) ? new HashSet<String>(refs) : null),
     			((deliveryTypes != null) ? new HashSet<String>(deliveryTypes) : null),
     			amount);
+    	
+    	cloned.tagId = tagId;
+    	cloned.tagMode = tagMode;
+    	
+    	return cloned;
 	}
 
     /** Charge id. */
