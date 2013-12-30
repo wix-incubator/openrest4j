@@ -1,12 +1,15 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -18,7 +21,7 @@ import com.openrest.availability.Availability;
  * or a dish variation ("well done").
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Item implements Serializable, Comparable<Item> {
+public class Item implements Serializable, Cloneable, Comparable<Item> {
 	private static final long serialVersionUID = 1L;
 	
 	/** Label to mark a featured item ("flag dish"). */
@@ -47,6 +50,41 @@ public class Item implements Serializable, Comparable<Item> {
 
 	/** Default constructor for JSON deserialization. */
     public Item() {}
+    
+    @Override
+	public Object clone() {
+    	final List<Variation> clonedVariations;
+    	if (variations != null) {
+    		clonedVariations = new ArrayList<Variation>(variations.size());
+    		for (Variation variation : variations) {
+    			clonedVariations.add((Variation) variation.clone());
+    		}
+    	} else {
+    		clonedVariations = null;
+    	}
+    	
+    	final Map<String, Blob> clonedBlobs;
+    	if (blobs != null) {
+    		clonedBlobs = new LinkedHashMap<String, Blob>(blobs.size());
+    		for (Entry<String, Blob> entry : blobs.entrySet()) {
+    			clonedBlobs.put(entry.getKey(), (Blob) entry.getValue().clone());
+    		}
+    	} else {
+    		clonedBlobs = null;
+    	}
+    	
+    	return new Item(id, restaurantId,
+    			((title != null) ? new HashMap<String, String>(title) : null),
+    			((description != null) ? new HashMap<String, String>(description) : null),
+    			price, clonedVariations,
+    			((availability != null) ? (Availability) availability.clone() : null),
+    			picture,
+    			clonedBlobs,
+    			((externalIds != null) ? new HashMap<String, String>(externalIds) : null),
+    			((labels != null) ? new HashSet<String>(labels) : null),
+    			((properties != null) ? new HashMap<String, String>(properties) : null),
+    			rank);
+	}
 
     /** The item's unique id. */
     @JsonInclude(Include.NON_NULL)

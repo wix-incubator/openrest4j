@@ -1,6 +1,7 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Menu implements Serializable {
+public class Menu implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
     
     public Menu(Long modified, List<Item> items, List<Category> categories, List<Charge> charges) {
@@ -19,33 +20,55 @@ public class Menu implements Serializable {
         this.charges = charges;
     }
 
-    public static Menu fromCategories(List<Category> categories) {
-        final Menu menu = new Menu();
-        menu.categories = categories;
-        return menu;
-    }
-
-    public static Menu fromItems(List<Item> items) {
-        final Menu menu = new Menu();
-        menu.items = items;
-        return menu;
-    }
-
-    @Deprecated
-    public static Menu fromTags(List<Tag> tags) {
-        final Menu menu = new Menu();
-        menu.tags = tags;
-        return menu;
-    }
-    
-    public static Menu fromCharges(List<Charge> charges) {
-        final Menu menu = new Menu();
-        menu.charges = charges;
-        return menu;
-    }
-
     /** Default constructor for JSON deserialization. */
     public Menu() {}
+    
+    @Override
+	public Object clone() {
+    	final List<Item> clonedItems;
+    	if (items != null) {
+    		clonedItems = new ArrayList<Item>(items.size());
+    		for (Item item : items) {
+    			clonedItems.add((Item) item.clone());
+    		}
+    	} else {
+    		clonedItems = null;
+    	}
+    	
+    	final List<Category> clonedCategories;
+    	if (categories != null) {
+    		clonedCategories = new ArrayList<Category>(categories.size());
+    		for (Category category : categories) {
+    			clonedCategories.add((Category) category.clone());
+    		}
+    	} else {
+    		clonedCategories = null;
+    	}
+    	
+    	final List<Charge> clonedCharges;
+    	if (charges != null) {
+    		clonedCharges = new ArrayList<Charge>(charges.size());
+    		for (Charge charge : charges) {
+    			clonedCharges.add((Charge) charge.clone());
+    		}
+    	} else {
+    		clonedCharges = null;
+    	}
+    	
+    	final List<Tag> clonedTags;
+    	if (tags != null) {
+    		clonedTags = new ArrayList<Tag>(tags.size());
+    		for (Tag tag : tags) {
+    			clonedTags.add((Tag) tag.clone());
+    		}
+    	} else {
+    		clonedTags = null;
+    	}
+
+    	final Menu cloned = new Menu(modified, clonedItems, clonedCategories, clonedCharges);
+    	cloned.tags = clonedTags;
+    	return cloned;
+	}
     
     /** The menu's last modification timestamp. */
     @JsonInclude(Include.NON_NULL)
