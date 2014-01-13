@@ -2,11 +2,14 @@ package com.openrest.v1_1;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -18,8 +21,19 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class AppBuildInfo implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
 	
-	/** TODO */
 	public static final String STATE_NEW = "new";
+	public static final String STATE_SUBMITTED_TO_PUBLISHER = "waiting-for-distributor-approval";
+	public static final String STATE_SUBMITTED_TO_BOT = "waiting-for-build";
+	public static final String STATE_SUBMITTED_TO_STORE = "bot-delivered";
+	public static final String STATE_OPERATIONAL = "operational";
+	public static final String STATE_BOT_ERROR = "bot-error";
+	public static final String STATE_DELETING = "pending-removal";
+	public static final String STATE_DEPRECATED = "deprecated";
+	
+    /** All known statuses. */
+    public static final Set<String> ALL_STATES = new HashSet<String>(Arrays.asList(
+    		STATE_NEW, STATE_SUBMITTED_TO_PUBLISHER, STATE_SUBMITTED_TO_BOT, STATE_SUBMITTED_TO_STORE, STATE_OPERATIONAL,
+    		STATE_BOT_ERROR, STATE_DELETING, STATE_DEPRECATED));
 	
     public AppBuildInfo(String id, Long created, Long modified, String distributorId, String ownerId, String type, String link,
     		AppId appId, String internalId, String filename, String locale, Map<String, String> title,
