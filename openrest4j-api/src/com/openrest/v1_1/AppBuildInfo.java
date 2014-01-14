@@ -9,8 +9,8 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -22,18 +22,21 @@ public class AppBuildInfo implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
 	
 	public static final String STATE_NEW = "new";
-	public static final String STATE_SUBMITTED_TO_PUBLISHER = "waiting-for-distributor-approval";
-	public static final String STATE_SUBMITTED_TO_BOT = "waiting-for-build";
-	public static final String STATE_SUBMITTED_TO_STORE = "bot-delivered";
+	public static final String STATE_PUBLISHING_AT_PUBLISHER = "waiting-for-distributor-approval";
+	public static final String STATE_PUBLISHING_AT_BOT = "waiting-for-build";
+	public static final String STATE_PUBLISHING_AT_STORE = "bot-delivered";
+	public static final String STATE_REMOVING_AT_PUBLISHER = "waiting-for-distributor-removal";
+	public static final String STATE_REMOVING_AT_BOT = "pending-removal";
 	public static final String STATE_OPERATIONAL = "operational";
-	public static final String STATE_BOT_ERROR = "bot-error";
-	public static final String STATE_DELETING = "pending-removal";
 	public static final String STATE_DEPRECATED = "deprecated";
+	public static final String STATE_REMOVED = "removed";
+	public static final String STATE_ERROR = "bot-error";
 	
     /** All known statuses. */
     public static final Set<String> ALL_STATES = new HashSet<String>(Arrays.asList(
-    		STATE_NEW, STATE_SUBMITTED_TO_PUBLISHER, STATE_SUBMITTED_TO_BOT, STATE_SUBMITTED_TO_STORE, STATE_OPERATIONAL,
-    		STATE_BOT_ERROR, STATE_DELETING, STATE_DEPRECATED));
+    		STATE_NEW, STATE_PUBLISHING_AT_PUBLISHER, STATE_PUBLISHING_AT_BOT, STATE_PUBLISHING_AT_STORE,
+    		STATE_REMOVING_AT_PUBLISHER, STATE_REMOVING_AT_BOT,
+    		STATE_OPERATIONAL, STATE_DEPRECATED, STATE_REMOVED, STATE_ERROR));
 	
     public AppBuildInfo(String id, Long created, Long modified, String distributorId, String ownerId, String type, String link,
     		AppId appId, String internalId, String filename, String locale, Map<String, String> title,
