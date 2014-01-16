@@ -13,7 +13,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Notifications implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
     
-    public Notifications(List<Notification> notifications) {
+    public Notifications(Long modified, List<Notification> notifications) {
+    	this.modified = modified;
         this.notifications = notifications;
     }
 
@@ -32,8 +33,12 @@ public class Notifications implements Serializable, Cloneable {
     		clonedNotifications = null;
     	}
     	
-    	return new Notifications(clonedNotifications);
+    	return new Notifications(modified, clonedNotifications);
 	}
+    
+    /** The notifications' last modification timestamp. */
+    @JsonInclude(Include.NON_NULL)
+    public Long modified;
 
     @JsonInclude(Include.NON_DEFAULT)
     public List<Notification> notifications = new LinkedList<Notification>();
