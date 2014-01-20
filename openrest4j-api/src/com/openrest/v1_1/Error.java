@@ -85,5 +85,11 @@ public class Error {
     /** Multiple users attempted to concurrently change a resource. */
     public static final String ERROR_CONFLICT = "conflict";
     
+    /**
+     * The request did not execute due to other failed requests.
+     * @see BatchRequest
+     */
+    public static final String ERROR_BATCH = "batch";
+    
 	private Error() {}
 }
