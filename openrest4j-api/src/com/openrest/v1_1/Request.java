@@ -20,7 +20,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@Type(value = GetChainsRequest.class, name = GetChainsRequest.TYPE),
 	@Type(value = GetDistributorsRequest.class, name = GetDistributorsRequest.TYPE),
 	@Type(value = GetOrganizationFullRequest.class, name = GetOrganizationFullRequest.TYPE),
-	@Type(value = GetOrganizationsFullRequest.class, name = GetOrganizationsFullRequest.TYPE),
 	@Type(value = GetItemRequest.class, name = GetItemRequest.TYPE),
 	@Type(value = SearchRequest.class, name = SearchRequest.TYPE),
 	@Type(value = SearchPortalsRequest.class, name = SearchPortalsRequest.TYPE),
