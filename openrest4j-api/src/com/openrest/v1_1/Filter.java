@@ -18,9 +18,11 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Filter implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
 
-    public Filter(String distributorId, String chainId, Set<String> features, LatLng latLng, Double radius) {
+    public Filter(String distributorId, String chainId, Set<String> restaurantIds,
+    		Set<String> features, LatLng latLng, Double radius) {
     	this.distributorId = distributorId;
     	this.chainId = chainId;
+    	this.restaurantIds = restaurantIds;
     	this.features = features;
     	this.latLng = latLng;
     	this.radius = radius;
@@ -32,6 +34,7 @@ public class Filter implements Serializable, Cloneable {
     @Override
 	public Object clone() {
     	return new Filter(distributorId, chainId,
+    			((restaurantIds != null) ? new HashSet<String>(restaurantIds) : null),
     			((features != null) ? new HashSet<String>(features) : null),
     			((latLng != null) ? (LatLng) latLng.clone() : null), radius);
 	}
@@ -40,6 +43,8 @@ public class Filter implements Serializable, Cloneable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result
+				+ ((restaurantIds == null) ? 0 : restaurantIds.hashCode());
 		result = prime * result + ((chainId == null) ? 0 : chainId.hashCode());
 		result = prime * result
 				+ ((distributorId == null) ? 0 : distributorId.hashCode());
@@ -59,6 +64,11 @@ public class Filter implements Serializable, Cloneable {
 		if (getClass() != obj.getClass())
 			return false;
 		Filter other = (Filter) obj;
+		if (restaurantIds == null) {
+			if (other.restaurantIds != null)
+				return false;
+		} else if (!restaurantIds.equals(other.restaurantIds))
+			return false;
 		if (chainId == null) {
 			if (other.chainId != null)
 				return false;
@@ -87,13 +97,17 @@ public class Filter implements Serializable, Cloneable {
 		return true;
 	}
     
-	/** Exclude organizations that are not under this distributor */
+	/** Exclude restaurants that are not under this distributor */
     @JsonInclude(Include.NON_NULL)
     public String distributorId;
 
-	/** Exclude organizations not under this chain */
+	/** Exclude restaurants not under this chain */
     @JsonInclude(Include.NON_NULL)
     public String chainId;
+    
+	/** Exclude restaurants with ids not in this list */
+    @JsonInclude(Include.NON_NULL)
+    public Set<String> restaurantIds;
     
 	/** Exclude organizations that have none of these features */
     @JsonInclude(Include.NON_NULL)

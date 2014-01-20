@@ -1,7 +1,7 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class PushNotification implements Serializable {
     private static final long serialVersionUID = 1L;
     
-    public PushNotification(String deviceToken, String bundleId, Collection<String> restaurantIds, Boolean sound, String userId) {
+    public PushNotification(String deviceToken, String bundleId, Set<String> restaurantIds, Boolean sound, String userId) {
     	this.deviceToken = deviceToken;
     	this.bundleId = bundleId;
     	this.restaurantIds = restaurantIds;
@@ -32,7 +32,7 @@ public class PushNotification implements Serializable {
     
     /** Restaurant-ids for which notifications should be sent. */
     @JsonInclude(Include.NON_NULL)
-    public Collection<String> restaurantIds;
+    public Set<String> restaurantIds;
 
     /** Whether or not repeated sound notifications should be sent. */
     @JsonInclude(Include.NON_DEFAULT)

@@ -1,6 +1,5 @@
 package com.openrest.v1_1;
 
-import java.util.Collection;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -15,7 +14,7 @@ public class GetOrganizationsRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public GetOrganizationsRequest() {}
     
-    public GetOrganizationsRequest(String distributorId, String chainId, Collection<String> restaurantIds,
+    public GetOrganizationsRequest(String distributorId, String chainId, Set<String> restaurantIds,
     		Set<String> organizationTypes, Set<String> fields) {
     	this.distributorId = distributorId;
     	this.chainId = chainId;
@@ -31,7 +30,7 @@ public class GetOrganizationsRequest extends Request {
     public String chainId;
     
     @JsonInclude(Include.NON_NULL)
-    public Collection<String> restaurantIds;
+    public Set<String> restaurantIds;
 
     @JsonInclude(Include.NON_NULL)
     public Set<String> organizationTypes;
