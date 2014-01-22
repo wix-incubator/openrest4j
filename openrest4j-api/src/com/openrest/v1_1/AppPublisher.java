@@ -23,6 +23,14 @@ public class AppPublisher implements Serializable, Cloneable {
     public static final String EXTERNAL_ID_GOOGLE_PLAY = "com.google.play";
     
     /**
+     * External-id key for specifying the publisher's Google Maps "Key for Android applications".
+     * Taken from https://cloud.google.com/console/project/XXX/apiui/credential
+     * 
+     * @see AppPublisher.externalIds
+     */
+    public static final String EXTERNAL_ID_GOOGLE_MAPS_ANDROID = "com.google.maps.android";
+    
+    /**
      * Used to sign Android apps.
      * @see AppPublisher.certificates
      */
