@@ -11,12 +11,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-/**
- * An area on a map.
- * @author DL
- */
+/** An area on a map. */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Area implements Serializable, Cloneable {
+	private static final long serialVersionUID = 1L;
+	
 	public Area(Map<String, String> title, List<LatLng> polygon) {
     	this.title = title;
     	this.polygon = polygon;
@@ -80,6 +79,4 @@ public class Area implements Serializable, Cloneable {
 			return false;
 		return true;
 	}
-
-	private static final long serialVersionUID = 1L;
 }
