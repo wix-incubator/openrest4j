@@ -6,7 +6,6 @@
 	<classpathentry kind="lib" path="lib/jackson-annotations-2.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-core-2.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-databind-2.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/google-http-client-1.13.1-beta.jar"/>
-	<classpathentry kind="lib" path="lib/guava-13.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/google-http-client-1.17.0-rc.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
