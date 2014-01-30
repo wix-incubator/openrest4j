@@ -26,13 +26,13 @@ public class SearchResult extends Restaurant {
             Map<String, Integer> minPayments, String link, String domain, Set<String> altDomains,
             String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
             List<AppInfo> apps, Seo seo, Map<String, String> properties,
-            String state, Map<String, Double> features, Boolean legacyHierarchy, Double rank, List<TopItem> topItems,
+            String state, Map<String, Double> features, Double rank, List<TopItem> topItems,
             Set<String> deliveryTypes, DeliveryInfo deliveryInfo, List<Charge> charges) {
     	super(id, externalIds, created, modified, distributorId, chainId, title, description, contact, externalContacts,
     			address, messages, colorScheme, openTimes, deliveryTimes, deliveryInfos, maxFutureOrderDelayMins,
     			timezone, currency, locale, locales, paymentTypes, multiPaymentDisabled, cardInfos, minPayments, link, domain, altDomains,
     			picture, icon, wideLogo, noImagePicture, blobs,
-    			apps, seo, properties, state, features, legacyHierarchy, rank);
+    			apps, seo, properties, state, features, rank);
     	
     	this.topItems = topItems;
     	this.deliveryTypes = deliveryTypes;

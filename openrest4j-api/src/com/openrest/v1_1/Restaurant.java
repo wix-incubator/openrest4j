@@ -30,7 +30,7 @@ public class Restaurant extends Organization {
             Map<String, Integer> minPayments, String link, String domain, Set<String> altDomains,
             String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
             List<AppInfo> apps, Seo seo, Map<String, String> properties,
-            String state, Map<String, Double> features, Boolean legacyHierarchy, Double rank) {
+            String state, Map<String, Double> features, Double rank) {
     	super(id, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties,
     			picture, icon, wideLogo, noImagePicture, blobs, state, rank);
@@ -46,7 +46,6 @@ public class Restaurant extends Organization {
         this.cardInfos = cardInfos;
         this.minPayments = minPayments;
         this.features = features;
-        this.legacyHierarchy = legacyHierarchy;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -139,7 +138,7 @@ public class Restaurant extends Organization {
     			((seo != null) ? (Seo) seo.clone() : null),
     			((properties != null) ? new HashMap<String, String>(properties) : null), state,
     			((features != null) ? new HashMap<String, Double>(features) : null),
-    			legacyHierarchy, rank);
+    			rank);
 	}
     
 
@@ -208,11 +207,4 @@ public class Restaurant extends Organization {
      */
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, Double> features = new HashMap<String, Double>();
-    
-    /**
-     * Whether or not the restaurant's orders should be submitted / displayed
-     * with a legacy "2-level hierarchy".
-     */
-    @JsonInclude(Include.NON_DEFAULT)
-    public Boolean legacyHierarchy = Boolean.FALSE;
 }
