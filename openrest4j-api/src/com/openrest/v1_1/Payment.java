@@ -35,12 +35,16 @@ public class Payment implements Serializable, Cloneable {
     public static final String PAYMENT_TYPE_CELLARIX = "com.cellarix";
     /** BitsOfGold payment (@see www.bitsofgold.co.il). */
     public static final String PAYMENT_TYPE_BITSOFGOLD = "il.co.bitsofgold";
+    /** Pelecard-tokenized credit card payment (@see www.pelecard.com). */
+    public static final String PAYMENT_TYPE_PELECARD = "com.pelecard";
+    /** Braintree-tokenized credit card payment (@see www.braintreepayments.com). */
+    public static final String PAYMENT_TYPE_BRAINTREE = "com.braintreepayments";
 
     /** All known payment methods. */
     public static final Set<String> ALL_PAYMENT_TYPES = new HashSet<String>(Arrays.asList(
     		PAYMENT_TYPE_COD, PAYMENT_TYPE_CASH, PAYMENT_TYPE_CREDIT, PAYMENT_TYPE_DEBIT, PAYMENT_TYPE_10BIS,
     		PAYMENT_TYPE_CHECK, PAYMENT_TYPE_OFFSET, PAYMENT_TYPE_DIRECT_DEBIT, PAYMENT_TYPE_PAYPAL,
-    		PAYMENT_TYPE_CELLARIX, PAYMENT_TYPE_BITSOFGOLD
+    		PAYMENT_TYPE_CELLARIX, PAYMENT_TYPE_BITSOFGOLD, PAYMENT_TYPE_PELECARD, PAYMENT_TYPE_BRAINTREE
     ));
     
     public Payment(String type, Integer amount, CreditCard card, String token, String userId, String id, String password) {
@@ -75,7 +79,7 @@ public class Payment implements Serializable, Cloneable {
     @JsonInclude(Include.NON_NULL)
     public CreditCard card;
     
-    /** Payment token (for PAYMENT_TYPE_CELLARIX, PAYMENT_TYPE_BITSOFGOLD) */
+    /** Payment token (for PAYMENT_TYPE_CELLARIX, PAYMENT_TYPE_BITSOFGOLD, PAYMENT_TYPE_PELECARD, PAYMENT_TYPE_BRAINTREE) */
     @JsonInclude(Include.NON_NULL)
     public String token;
     
