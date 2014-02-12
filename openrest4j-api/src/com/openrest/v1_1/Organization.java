@@ -20,6 +20,8 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     public static final String MESSAGE_TYPE_WELCOME = "welcome";
     /** The organization's order confirmation message. */
     public static final String MESSAGE_TYPE_ORDER_CONFIRMATION = "order_confirmation";
+    /** The organization's ToS (terms of service). */
+    public static final String MESSAGE_TYPE_TOS = "tos";
     
     /**
      * External-id key for specifying the organization's notifications ("no-reply") email.
@@ -175,7 +177,10 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     @JsonInclude(Include.NON_DEFAULT)
     public Set<String> locales = new HashSet<String>();
     
-    /** Maps message types (e.g. MESSAGE_TYPE_WELCOME) to their text in various locales. */
+    /**
+     * Maps message types (e.g. MESSAGE_TYPE_WELCOME) to their text in various locales.
+     * The text may contain simple HTML formatting.
+     */
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, Map<String, String>> messages = new HashMap<String, Map<String, String>>();
     
