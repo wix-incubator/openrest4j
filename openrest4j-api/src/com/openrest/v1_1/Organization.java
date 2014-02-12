@@ -21,7 +21,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     /** The organization's order confirmation message. */
     public static final String MESSAGE_TYPE_ORDER_CONFIRMATION = "order_confirmation";
     /** The organization's ToS (terms of service). */
-    public static final String MESSAGE_TYPE_TOS = "tos";
+    public static final String MESSAGE_TYPE_TERMS = "terms";
     
     /**
      * External-id key for specifying the organization's notifications ("no-reply") email.
