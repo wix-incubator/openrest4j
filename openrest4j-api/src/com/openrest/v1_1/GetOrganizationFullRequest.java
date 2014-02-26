@@ -1,5 +1,7 @@
 package com.openrest.v1_1;
 
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -12,10 +14,14 @@ public class GetOrganizationFullRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public GetOrganizationFullRequest() {}
     
-    public GetOrganizationFullRequest(String organizationId) {
+    public GetOrganizationFullRequest(String organizationId, Set<String> fields) {
     	this.organizationId = organizationId;
+    	this.fields = fields;
     }
     
     @JsonInclude(Include.NON_NULL)
     public String organizationId;
+
+    @JsonInclude(Include.NON_NULL)
+    public Set<String> fields;
 }
