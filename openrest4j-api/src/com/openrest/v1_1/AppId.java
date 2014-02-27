@@ -30,6 +30,9 @@ public class AppId implements Serializable, Cloneable {
     		PLATFORM_ANDROID, PLATFORM_IOS, PLATFORM_WEB, PLATFORM_MOBILEWEB, PLATFORM_FACEBOOK
     ));
     
+	/** Namespace used with aliases (id = alias, version = meaningless). */
+    public static final String NS_OPENREST = "com.openrest";
+    
     public AppId(String platform, String id, String version) {
         this.platform = platform;
         this.id = id;
