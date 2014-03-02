@@ -15,7 +15,7 @@ import com.openrest.availability.Availability;
 public class SearchResult extends Restaurant {
     private static final long serialVersionUID = 1L;
     
-    public SearchResult(String id, Map<String, String> externalIds, Long created, Long modified,
+    public SearchResult(String id, String alias, Map<String, String> externalIds, Long created, Long modified,
     		String distributorId, String chainId, Map<String, String> title,
     		Map<String, String> description, Contact contact, Map<String, Contact> externalContacts, Address address,
     		Map<String, Map<String, String>> messages, ColorScheme colorScheme,
@@ -28,7 +28,7 @@ public class SearchResult extends Restaurant {
             List<AppInfo> apps, Seo seo, Map<String, String> properties,
             String state, Map<String, Double> features, Double rank, List<TopItem> topItems,
             Set<String> deliveryTypes, DeliveryInfo deliveryInfo, List<Charge> charges) {
-    	super(id, externalIds, created, modified, distributorId, chainId, title, description, contact, externalContacts,
+    	super(id, alias, externalIds, created, modified, distributorId, chainId, title, description, contact, externalContacts,
     			address, messages, colorScheme, openTimes, deliveryTimes, deliveryInfos, maxFutureOrderDelayMins,
     			timezone, currency, locale, locales, paymentTypes, multiPaymentDisabled, cardInfos, minPayments, link, domain, altDomains,
     			picture, icon, wideLogo, noImagePicture, blobs,

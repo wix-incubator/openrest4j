@@ -22,7 +22,7 @@ public class Portal extends Organization {
     /** Default constructor for JSON deserialization. */
     public Portal() {}
     
-    public Portal(String id, Map<String, String> externalIds, Long created, Long modified,
+    public Portal(String id, String alias, Map<String, String> externalIds, Long created, Long modified,
     		String distributorId, Filter filter,
     		Map<String, String> title, Map<String, String> description,
     		String locale, Set<String> locales, Map<String, Map<String, String>> messages, ColorScheme colorScheme,
@@ -31,7 +31,7 @@ public class Portal extends Organization {
     		List<AppInfo> apps, Seo seo, Map<String, String> properties,
     		String picture, String icon, String wideLogo, String noImagePicture,
     		Map<String, Blob> blobs, String state, Double rank) {
-    	super(id, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
+    	super(id, alias, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties,
     			picture, icon, wideLogo, noImagePicture, blobs, state, rank);
     	
@@ -81,7 +81,7 @@ public class Portal extends Organization {
     		clonedBlobs = null;
     	}
     	
-    	return new Portal(id,
+    	return new Portal(id, alias,
     			((externalIds != null) ? new HashMap<String, String>(externalIds) : null),
     			created, modified, distributorId,
     			((filter != null) ? (Filter) filter.clone() : null),
