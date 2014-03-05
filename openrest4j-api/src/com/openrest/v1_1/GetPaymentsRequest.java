@@ -12,10 +12,14 @@ public class GetPaymentsRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public GetPaymentsRequest() {}
     
-    public GetPaymentsRequest(String accessToken) {
+    public GetPaymentsRequest(String accessToken, ClientId clientId) {
     	this.accessToken = accessToken;
+    	this.clientId = clientId;
     }
     
     @JsonInclude(Include.NON_NULL)
     public String accessToken;
+    
+    @JsonInclude(Include.NON_NULL)
+    public ClientId clientId;
 }

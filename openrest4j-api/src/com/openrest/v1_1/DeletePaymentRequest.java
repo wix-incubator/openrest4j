@@ -12,13 +12,17 @@ public class DeletePaymentRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public DeletePaymentRequest() {}
     
-    public DeletePaymentRequest(String accessToken, String paymentId) {
+    public DeletePaymentRequest(String accessToken, ClientId clientId, String paymentId) {
     	this.accessToken = accessToken;
+    	this.clientId = clientId;
     	this.paymentId = paymentId;
     }
     
     @JsonInclude(Include.NON_NULL)
     public String accessToken;
+    
+    @JsonInclude(Include.NON_NULL)
+    public ClientId clientId;
     
     @JsonInclude(Include.NON_NULL)
     public String paymentId;
