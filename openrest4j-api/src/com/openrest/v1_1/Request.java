@@ -36,6 +36,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@Type(value = AddPaymentRequest.class, name = AddPaymentRequest.TYPE),
 	@Type(value = DeletePaymentRequest.class, name = DeletePaymentRequest.TYPE),
 	@Type(value = GetPaymentsRequest.class, name = GetPaymentsRequest.TYPE),
+	@Type(value = CreatePaypalPaymentRequest.class, name = CreatePaypalPaymentRequest.TYPE),
 	@Type(value = SetMenuRequest.class, name = SetMenuRequest.TYPE),
 	@Type(value = RegisterForEventRequest.class, name = RegisterForEventRequest.TYPE),
 	@Type(value = RegisterForPushNotificationsRequest.class, name = RegisterForPushNotificationsRequest.TYPE),
