@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GetSecretsRequest extends Request {
-	public static final String TYPE = "set_secrets";
+	public static final String TYPE = "get_secrets";
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */
