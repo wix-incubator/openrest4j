@@ -79,7 +79,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@Type(value = SetAppPublisherRequest.class, name = SetAppPublisherRequest.TYPE),
 	@Type(value = SubmitAppRequest.class, name = SubmitAppRequest.TYPE),
 	@Type(value = SetAppRequest.class, name = SetAppRequest.TYPE),
-	@Type(value = QueryAppsRequest.class, name = QueryAppsRequest.TYPE)
+	@Type(value = QueryAppsRequest.class, name = QueryAppsRequest.TYPE),
+	@Type(value = GetSecretsRequest.class, name = GetSecretsRequest.TYPE),
+	@Type(value = SetSecretRequest.class, name = SetSecretRequest.TYPE),
 })
 public abstract class Request implements Serializable {
     private static final long serialVersionUID = 1L;
