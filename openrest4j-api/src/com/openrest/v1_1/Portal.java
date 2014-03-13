@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -30,13 +31,14 @@ public class Portal extends Organization {
     		String link, String domain, Set<String> altDomains,
     		List<AppInfo> apps, Seo seo, Map<String, String> properties,
     		String picture, String icon, String wideLogo, String noImagePicture,
-    		Map<String, Blob> blobs, String state, Double rank) {
+    		Map<String, Blob> blobs, String state, Double rank, List<PortalMenuCategory> categories) {
     	super(id, alias, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties,
     			picture, icon, wideLogo, noImagePicture, blobs, state, rank);
     	
     	this.distributorId = distributorId;
     	this.filter = filter;
+    	this.categories = categories;
     }
     
     @Override
@@ -99,7 +101,7 @@ public class Portal extends Organization {
     			((seo != null) ? (Seo) seo.clone() : null),
     			((properties != null) ? new HashMap<String, String>(properties) : null),
     			picture, icon, wideLogo, noImagePicture, clonedBlobs,
-    			state, rank);
+    			state, rank, PortalMenuCategory.cloneList(categories));
 	}
     
     /** The distributor in charge of this portal. */
@@ -109,4 +111,8 @@ public class Portal extends Organization {
     /** The filter associated with this portal. */
     @JsonInclude(Include.NON_DEFAULT)
     public Filter filter = new Filter();
+    
+    /** The filter associated with this portal. */
+    @JsonInclude(Include.NON_DEFAULT)
+    public List<PortalMenuCategory> categories = new LinkedList<PortalMenuCategory>();
 }
