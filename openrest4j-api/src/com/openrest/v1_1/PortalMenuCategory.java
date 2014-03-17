@@ -33,7 +33,7 @@ public class PortalMenuCategory implements Serializable, Cloneable {
     	if (categories != null) {
     		clonedCategories = new LinkedList<PortalMenuCategory>();
     		for (PortalMenuCategory category : categories) {
-    			clonedCategories.add((PortalMenuCategory) category.clone());
+    			clonedCategories.add((category != null) ? (PortalMenuCategory) category.clone() : null);
     		}
     	} else {
     		clonedCategories = null;
