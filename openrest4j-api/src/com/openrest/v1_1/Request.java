@@ -84,7 +84,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@Type(value = SetSecretRequest.class, name = SetSecretRequest.TYPE),
 	@Type(value = GetFeaturesRequest.class, name = GetFeaturesRequest.TYPE),
 	@Type(value = GetPropertyRequest.class, name = GetPropertyRequest.TYPE),
-	@Type(value = SetPropertyRequest.class, name = SetPropertyRequest.TYPE)
+	@Type(value = SetPropertyRequest.class, name = SetPropertyRequest.TYPE),
+	@Type(value = GeocodeRequest.class, name = GeocodeRequest.TYPE)
 })
 public abstract class Request implements Serializable {
     private static final long serialVersionUID = 1L;
