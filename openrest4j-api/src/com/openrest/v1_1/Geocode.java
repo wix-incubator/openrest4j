@@ -10,11 +10,11 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Geocode implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
     
-	public Geocode(String countryCode, String region, String city, LatLng latLng) {
+	public Geocode(String countryCode, String region, String city, LatLng cityLatLng) {
 		this.countryCode = countryCode;
 		this.region = region;
 		this.city = city;
-		this.latLng = latLng;
+		this.cityLatLng = cityLatLng;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -23,7 +23,7 @@ public class Geocode implements Serializable, Cloneable {
     @Override
 	public Object clone() {
     	return new Geocode(countryCode, region, city,
-    			((latLng != null) ? (LatLng) latLng.clone() : null));
+    			((cityLatLng != null) ? (LatLng) cityLatLng.clone() : null));
 	}
 
     @JsonInclude(Include.NON_NULL)
@@ -36,5 +36,5 @@ public class Geocode implements Serializable, Cloneable {
     public String city;
     
     @JsonInclude(Include.NON_NULL)
-    public LatLng latLng;
+    public LatLng cityLatLng;
 }
