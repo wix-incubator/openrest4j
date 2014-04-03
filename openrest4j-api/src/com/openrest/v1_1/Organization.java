@@ -65,7 +65,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     		String link, String domain, Set<String> altDomains,
     		List<AppInfo> apps, Seo seo, Map<String, String> properties,
     		String picture, String icon, String wideLogo, String noImagePicture,
-    		Map<String, Blob> blobs, String state, Set<Product> products, Double rank) {
+    		Map<String, Blob> blobs, String state, Boolean closed, String virtualId, Set<Product> products, Double rank) {
 
     	this.id = id;
     	this.alias = alias;
@@ -95,6 +95,8 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     	this.noImagePicture = noImagePicture;
     	this.blobs = blobs;
     	this.state = state;
+    	this.closed = closed;
+    	this.virtualId = virtualId;
     	this.products = products;
     	this.rank = rank;
     }
@@ -256,6 +258,17 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
      */
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, Blob> blobs = new HashMap<String, Blob>();
+    
+    /**
+     * The organization is permanently closed, e.g. out of business.
+     * To mark an organization is temporarily closed (e.g. for renovation), use openTimes.exceptions
+     */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Boolean closed = Boolean.FALSE;
+    
+    /** For virtual organizations, marks the "real" organization id. */
+    @JsonInclude(Include.NON_NULL)
+    public String virtualId;
     
     /** @see State.ALL_STATES */
     @JsonInclude(Include.NON_DEFAULT)

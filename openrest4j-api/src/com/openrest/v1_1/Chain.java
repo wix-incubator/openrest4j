@@ -26,10 +26,10 @@ public class Chain extends Organization {
     		String link, String domain, Set<String> altDomains,
     		List<AppInfo> apps, Seo seo, Map<String, String> properties,
     		String picture, String icon, String wideLogo, String noImagePicture,
-    		Map<String, Blob> blobs, String state, Set<Product> products, Double rank) {
+    		Map<String, Blob> blobs, String state, Boolean closed, String virtualId, Set<Product> products, Double rank) {
     	super(id, alias, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties,
-    			picture, icon, wideLogo, noImagePicture, blobs, state, products, rank);
+    			picture, icon, wideLogo, noImagePicture, blobs, state, closed, virtualId, products, rank);
     	
     	this.distributorId = distributorId;
     }
@@ -53,7 +53,7 @@ public class Chain extends Organization {
     			((seo != null) ? (Seo) seo.clone() : null),
     			((properties != null) ? new LinkedHashMap<String, String>(properties) : null),
     			picture, icon, wideLogo, noImagePicture, Blob.clone(blobs),
-    			state, Product.clone(products), rank);
+    			state, closed, virtualId, Product.clone(products), rank);
 	}
     
     /** The distributor in charge of this chain. */
