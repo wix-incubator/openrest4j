@@ -1,6 +1,8 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -31,6 +33,18 @@ public class DeliveryInfo implements Serializable, Cloneable {
 				minOrderPrice, charge, delayMins, inactive, 
 				((availability != null) ? (Availability) availability.clone() : null));
 	}
+	
+    public static List<DeliveryInfo> clone(List<DeliveryInfo> deliveryInfos) {
+    	if (deliveryInfos == null) {
+    		return null;
+    	}
+    	
+    	final List<DeliveryInfo> cloned = new LinkedList<DeliveryInfo>();
+		for (DeliveryInfo deliveryInfo : deliveryInfos) {
+			cloned.add((deliveryInfo != null) ? (DeliveryInfo) deliveryInfo.clone() : null);
+		}
+		return cloned;
+    }
     
     /** Delivery type, one of Delivery.ALL_DELIVERY_TYPES. */
     @JsonInclude(Include.NON_NULL)

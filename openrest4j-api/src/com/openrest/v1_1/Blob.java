@@ -1,6 +1,9 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -19,6 +22,20 @@ public class Blob implements Serializable, Cloneable {
 	public Object clone() {
     	return new Blob(id, url);
 	}
+    
+    public static Map<String, Blob> clone(Map<String, Blob> blobs) {
+    	if (blobs == null) {
+    		return null;
+    	}
+    	
+    	final Map<String, Blob> cloned = new LinkedHashMap<String, Blob>(blobs.size());
+		for (Entry<String, Blob> entry : blobs.entrySet()) {
+			final String key = entry.getKey();
+			final Blob value = entry.getValue();
+			cloned.put(key, (value != null) ? (Blob) value.clone() : null);
+		}
+		return cloned;
+    }
     
     /** Default constructor for JSON deserialization. */
     public Blob() {}

@@ -3,6 +3,8 @@ package com.openrest.v1_1;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -50,6 +52,18 @@ public class AppInfo implements Serializable, Cloneable {
 	public Object clone() {
     	return new AppInfo(type, platform, id, version, link, state);
 	}
+    
+    public static List<AppInfo> clone(List<AppInfo> apps) {
+    	if (apps == null) {
+    		return null;
+    	}
+    	
+    	final List<AppInfo> cloned = new LinkedList<AppInfo>();
+		for (AppInfo app : apps) {
+			cloned.add((app != null) ? (AppInfo) app.clone() : null);
+		}
+		return cloned;
+    }
 
     /** Application type (@see ALL_APP_TYPES) */
     @JsonInclude(Include.NON_NULL)

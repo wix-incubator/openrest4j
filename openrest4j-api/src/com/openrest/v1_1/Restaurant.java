@@ -1,12 +1,10 @@
 package com.openrest.v1_1;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -30,10 +28,10 @@ public class Restaurant extends Organization {
             Map<String, Integer> minPayments, String link, String domain, Set<String> altDomains,
             String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
             List<AppInfo> apps, Seo seo, Map<String, String> properties,
-            String state, Map<String, Double> features, Double rank) {
+            String state, Set<Product> products, Map<String, Double> features, Double rank) {
     	super(id, alias, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties,
-    			picture, icon, wideLogo, noImagePicture, blobs, state, rank);
+    			picture, icon, wideLogo, noImagePicture, blobs, state, products, rank);
         
     	this.distributorId = distributorId;
     	this.chainId = chainId;
@@ -54,90 +52,31 @@ public class Restaurant extends Organization {
     /** @return a shallow copy of this object. */
     @Override
 	public Object clone() {
-    	final Map<String, CardInfo> clonedCardInfos;
-    	if (cardInfos != null) {
-    		clonedCardInfos = new HashMap<String, CardInfo>(cardInfos.size());
-    		for (Entry<String, CardInfo> entry : cardInfos.entrySet()) {
-    			clonedCardInfos.put(entry.getKey(), (CardInfo) entry.getValue().clone());
-    		}
-    	} else {
-    		clonedCardInfos = null;
-    	}
-    	
-    	final List<AppInfo> clonedApps;
-    	if (apps != null) {
-    		clonedApps = new ArrayList<AppInfo>(apps.size());
-    		for (AppInfo app : apps) {
-    			clonedApps.add((AppInfo) app.clone());
-    		}
-    	} else {
-    		clonedApps = null;
-    	}
-    	
-    	final Map<String, Map<String, String>> clonedMessages;
-    	if (messages != null) {
-    		clonedMessages = new HashMap<String, Map<String, String>>(messages.size());
-    		for (Entry<String, Map<String, String>> entry : messages.entrySet()) {
-    			clonedMessages.put(entry.getKey(), new HashMap<String, String>(entry.getValue()));
-    		}
-    	} else {
-    		clonedMessages = null;
-    	}
-    	
-    	final List<DeliveryInfo> clonedDeliveryInfos;
-    	if (deliveryInfos != null) {
-    		clonedDeliveryInfos = new ArrayList<DeliveryInfo>(deliveryInfos.size());
-    		for (DeliveryInfo deliveryInfo : deliveryInfos) {
-    			clonedDeliveryInfos.add((DeliveryInfo) deliveryInfo.clone());
-    		}
-    	} else {
-    		clonedDeliveryInfos = null;
-    	}
-    	
-    	final Map<String, Contact> clonedExternalContacts;
-    	if (externalContacts != null) {
-    		clonedExternalContacts = new LinkedHashMap<String, Contact>(externalContacts.size());
-    		for (Entry<String, Contact> entry : externalContacts.entrySet()) {
-    			clonedExternalContacts.put(entry.getKey(), (Contact) entry.getValue().clone());
-    		}
-    	} else {
-    		clonedExternalContacts = null;
-    	}    	
-    	
-    	final Map<String, Blob> clonedBlobs;
-    	if (blobs != null) {
-    		clonedBlobs = new LinkedHashMap<String, Blob>(blobs.size());
-    		for (Entry<String, Blob> entry : blobs.entrySet()) {
-    			clonedBlobs.put(entry.getKey(), (Blob) entry.getValue().clone());
-    		}
-    	} else {
-    		clonedBlobs = null;
-    	}
-
     	return new Restaurant(id, alias,
-    			((externalIds != null) ? new HashMap<String, String>(externalIds) : null),    			
+    			((externalIds != null) ? new LinkedHashMap<String, String>(externalIds) : null),    			
     			created, modified, distributorId, chainId,
-    			((title != null) ? new HashMap<String, String>(title) : null),
-    			((description != null) ? new HashMap<String, String>(description) : null),
-    			((contact != null) ? (Contact)contact.clone() : null), clonedExternalContacts,
+    			((title != null) ? new LinkedHashMap<String, String>(title) : null),
+    			((description != null) ? new LinkedHashMap<String, String>(description) : null),
+    			((contact != null) ? (Contact)contact.clone() : null), Contact.clone(externalContacts),
     			((address != null) ? (Address)address.clone() : null),
-    			clonedMessages,
+    			cloneMessages(messages),
     			((colorScheme != null) ? (ColorScheme) colorScheme.clone() : null),
     			((openTimes != null) ? (Availability) openTimes.clone() : null),
     			((deliveryTimes != null) ? (Availability) deliveryTimes.clone() : null),
-    			clonedDeliveryInfos, maxFutureOrderDelayMins,
+    			DeliveryInfo.clone(deliveryInfos), maxFutureOrderDelayMins,
     			timezone, currency, locale,
-    			((locales != null) ? new HashSet<String>(locales) : null),
-    			((paymentTypes != null) ? new HashSet<String>(paymentTypes) : null),
-    			multiPaymentDisabled, clonedCardInfos,
-    			((minPayments != null) ? new HashMap<String, Integer>(minPayments) : null),
+    			((locales != null) ? new LinkedHashSet<String>(locales) : null),
+    			((paymentTypes != null) ? new LinkedHashSet<String>(paymentTypes) : null),
+    			multiPaymentDisabled, CardInfo.clone(cardInfos),
+    			((minPayments != null) ? new LinkedHashMap<String, Integer>(minPayments) : null),
     			link, domain,
-    			((altDomains != null) ? new HashSet<String>(altDomains) : null),
-    			picture, icon, wideLogo, noImagePicture, clonedBlobs,
-    			clonedApps,
+    			((altDomains != null) ? new LinkedHashSet<String>(altDomains) : null),
+    			picture, icon, wideLogo, noImagePicture, Blob.clone(blobs),
+    			AppInfo.clone(apps),
     			((seo != null) ? (Seo) seo.clone() : null),
-    			((properties != null) ? new HashMap<String, String>(properties) : null), state,
-    			((features != null) ? new HashMap<String, Double>(features) : null),
+    			((properties != null) ? new LinkedHashMap<String, String>(properties) : null), state,
+    			Product.clone(products),
+    			((features != null) ? new LinkedHashMap<String, Double>(features) : null),
     			rank);
 	}
     
@@ -172,7 +111,7 @@ public class Restaurant extends Organization {
 
     /** Available payment methods. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Set<String> paymentTypes = new HashSet<String>();
+    public Set<String> paymentTypes = new LinkedHashSet<String>();
     
     /** Whether or not the restaurant supports multiple payments in a single order. */
     @JsonInclude(Include.NON_DEFAULT)
@@ -188,7 +127,7 @@ public class Restaurant extends Organization {
      * http://code.google.com/p/creditcard/
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, CardInfo> cardInfos = new HashMap<String, CardInfo>();
+    public Map<String, CardInfo> cardInfos = new LinkedHashMap<String, CardInfo>();
 
     /**
      * Maps available payment types to minimal charge allowed per payment, e.g.
@@ -196,7 +135,7 @@ public class Restaurant extends Organization {
      * payment types have zero minimum by default.
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, Integer> minPayments = new HashMap<String, Integer>();
+    public Map<String, Integer> minPayments = new LinkedHashMap<String, Integer>();
     
     /**
      * Maps feature-IDs to their values. The values correspond to how strongly the feature
@@ -206,5 +145,5 @@ public class Restaurant extends Organization {
      * restaurant with the same feature = 2.3 when customers search for hamburgers.
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, Double> features = new HashMap<String, Double>();
+    public Map<String, Double> features = new LinkedHashMap<String, Double>();
 }

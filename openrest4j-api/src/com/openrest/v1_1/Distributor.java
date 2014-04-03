@@ -1,12 +1,9 @@
 package com.openrest.v1_1;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -29,10 +26,10 @@ public class Distributor extends Organization {
     		String link, String domain, Set<String> altDomains,
     		List<AppInfo> apps, Seo seo, Map<String, String> properties, String facebookAppId,
     		String picture, String icon, String wideLogo, String noImagePicture,
-    		Map<String, Blob> blobs, String state, Double rank) {
+    		Map<String, Blob> blobs, String state, Set<Product> products, Double rank) {
     	super(id, alias, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties,
-    			picture, icon, wideLogo, noImagePicture, blobs, state, rank);
+    			picture, icon, wideLogo, noImagePicture, blobs, state, products, rank);
     	
     	this.facebookAppId = facebookAppId;
     }
@@ -43,63 +40,23 @@ public class Distributor extends Organization {
     
     @Override
 	public Object clone() {
-    	final Map<String, Map<String, String>> clonedMessages;
-    	if (messages != null) {
-    		clonedMessages = new HashMap<String, Map<String, String>>(messages.size());
-    		for (Entry<String, Map<String, String>> entry : messages.entrySet()) {
-    			clonedMessages.put(entry.getKey(), new HashMap<String, String>(entry.getValue()));
-    		}
-    	} else {
-    		clonedMessages = null;
-    	}
-    	
-    	final List<AppInfo> clonedApps;
-    	if (apps != null) {
-    		clonedApps = new ArrayList<AppInfo>(apps.size());
-    		for (AppInfo app : apps) {
-    			clonedApps.add((AppInfo) app.clone());
-    		}
-    	} else {
-    		clonedApps = null;
-    	}
-    	
-    	final Map<String, Contact> clonedExternalContacts;
-    	if (externalContacts != null) {
-    		clonedExternalContacts = new LinkedHashMap<String, Contact>(externalContacts.size());
-    		for (Entry<String, Contact> entry : externalContacts.entrySet()) {
-    			clonedExternalContacts.put(entry.getKey(), (Contact) entry.getValue().clone());
-    		}
-    	} else {
-    		clonedExternalContacts = null;
-    	}
-    	
-    	final Map<String, Blob> clonedBlobs;
-    	if (blobs != null) {
-    		clonedBlobs = new LinkedHashMap<String, Blob>(blobs.size());
-    		for (Entry<String, Blob> entry : blobs.entrySet()) {
-    			clonedBlobs.put(entry.getKey(), (Blob) entry.getValue().clone());
-    		}
-    	} else {
-    		clonedBlobs = null;
-    	}
-    	
     	return new Distributor(id, alias,
-    			((externalIds != null) ? new HashMap<String, String>(externalIds) : null),    			
+    			((externalIds != null) ? new LinkedHashMap<String, String>(externalIds) : null),    			
     			created, modified,
-    			((title != null) ? new HashMap<String, String>(title) : null),
-    			((description != null) ? new HashMap<String, String>(description) : null),
+    			((title != null) ? new LinkedHashMap<String, String>(title) : null),
+    			((description != null) ? new LinkedHashMap<String, String>(description) : null),
     			locale,
-    			((locales != null) ? new HashSet<String>(locales) : null),
-    			clonedMessages,
+    			((locales != null) ? new LinkedHashSet<String>(locales) : null),
+    			cloneMessages(messages),
     			((colorScheme != null) ? (ColorScheme)colorScheme.clone() : null),
-    			((contact != null) ? (Contact) contact.clone() : null), clonedExternalContacts,
+    			((contact != null) ? (Contact) contact.clone() : null), Contact.clone(externalContacts),
     			((address != null) ? (Address) address.clone() : null),
     			timezone, currency, link, domain,
-    			((altDomains != null) ? new HashSet<String>(altDomains) : null),
-    			clonedApps,
+    			((altDomains != null) ? new LinkedHashSet<String>(altDomains) : null),
+    			AppInfo.clone(apps),
     			((seo != null) ? (Seo) seo.clone() : null),
-    			((properties != null) ? new HashMap<String, String>(properties) : null),
-    			facebookAppId, picture, icon, wideLogo, noImagePicture, clonedBlobs,
-    			state, rank);
+    			((properties != null) ? new LinkedHashMap<String, String>(properties) : null),
+    			facebookAppId, picture, icon, wideLogo, noImagePicture, Blob.clone(blobs),
+    			state, Product.clone(products), rank);
 	}
 }

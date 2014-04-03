@@ -2,9 +2,11 @@ package com.openrest.v1_1;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -63,7 +65,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     		String link, String domain, Set<String> altDomains,
     		List<AppInfo> apps, Seo seo, Map<String, String> properties,
     		String picture, String icon, String wideLogo, String noImagePicture,
-    		Map<String, Blob> blobs, String state, Double rank) {
+    		Map<String, Blob> blobs, String state, Set<Product> products, Double rank) {
 
     	this.id = id;
     	this.alias = alias;
@@ -93,11 +95,24 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     	this.noImagePicture = noImagePicture;
     	this.blobs = blobs;
     	this.state = state;
+    	this.products = products;
     	this.rank = rank;
     }
     
     @Override
 	public abstract Object clone();
+    
+    protected static Map<String, Map<String, String>> cloneMessages(Map<String, Map<String, String>> messages) {
+    	if (messages == null) {
+    		return null;
+    	}
+    	
+    	final Map<String, Map<String, String>> cloned = new LinkedHashMap<String, Map<String, String>>(messages.size());
+		for (Entry<String, Map<String, String>> entry : messages.entrySet()) {
+			cloned.put(entry.getKey(), (entry.getValue() != null) ? new LinkedHashMap<String, String>(entry.getValue()) : null);
+		}
+		return cloned;
+    }
     
     public java.util.Date created() {
         return ((created != null) ? new java.util.Date(created.longValue()) : null);
@@ -180,7 +195,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     
     /** The organization's supported locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Set<String> locales = new HashSet<String>();
+    public Set<String> locales = new LinkedHashSet<String>();
     
     /**
      * Maps message types (e.g. MESSAGE_TYPE_WELCOME) to their text in various locales.
@@ -202,7 +217,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
      * These should redirect to the main domain.
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Set<String> altDomains = new HashSet<String>(); 
+    public Set<String> altDomains = new LinkedHashSet<String>(); 
     
     /** The organization's picture URL (direct link), or null if unavailable. */
     @JsonInclude(Include.NON_NULL)
@@ -245,6 +260,10 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     /** @see State.ALL_STATES */
     @JsonInclude(Include.NON_DEFAULT)
     public String state = State.STATE_OPERATIONAL;
+    
+    /** Active products */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Set<Product> products = new LinkedHashSet<Product>();
     
     /** The organization's Openrest rank (higher is better). */
     @JsonInclude(Include.NON_NULL)
