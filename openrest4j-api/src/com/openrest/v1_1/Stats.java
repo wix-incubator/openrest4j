@@ -3,6 +3,9 @@ package com.openrest.v1_1;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -36,6 +39,18 @@ public class Stats implements Serializable, Cloneable {
     @Override
 	public Object clone() {
     	return new Stats(((date != null) ? (Date)date.clone() : null), count, total);
+	}
+    
+	public static Map<String, Stats> clone(Map<String, Stats> stats) {
+    	if (stats == null) {
+    		return null;
+    	}
+    	
+    	final Map<String, Stats> cloned = new LinkedHashMap<String, Stats>(stats.size());
+    	for (Entry<String, Stats> entry : stats.entrySet()) {
+    		cloned.put(entry.getKey(), (entry.getValue() != null) ? (Stats) entry.getValue().clone() : null);
+    	}
+    	return cloned;
 	}
 
     @JsonInclude(Include.NON_NULL)

@@ -1,9 +1,8 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -14,7 +13,8 @@ import com.openrest.availability.Date;
 public class Bill implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
     
-    public Bill(String organizationId, Date forDate, Billing billing, Map<String, Stats> stats, String html) {
+    public Bill(String id, String organizationId, Date forDate, Billing billing, Map<String, Stats> stats, String html) {
+    	this.id = id;
     	this.organizationId = organizationId;
     	this.forDate = forDate;
     	this.billing = billing;
@@ -27,21 +27,15 @@ public class Bill implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	final Map<String, Stats> clonedStats;
-    	if (stats != null) {
-    		clonedStats = new HashMap<String, Stats>(stats.size());
-    		for (Entry<String, Stats> entry : stats.entrySet()) {
-    			clonedStats.put(entry.getKey(), (Stats) entry.getValue().clone());
-    		}
-    	} else {
-    		clonedStats = null;
-    	}
-    	
-    	return new Bill(organizationId,
+    	return new Bill(id, organizationId,
     			((forDate != null) ? (Date) forDate.clone() : null),
     			((billing != null) ? (Billing) billing.clone() : null),
-    			clonedStats, html);
+    			Stats.clone(stats), html);
 	}
+    
+    /** The bill's unique id. */
+    @JsonInclude(Include.NON_NULL)
+    public String id;
     
     /** The organization's unique id. */
     @JsonInclude(Include.NON_NULL)
@@ -57,7 +51,7 @@ public class Bill implements Serializable, Cloneable {
     
     /** The stats associated with this bill. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, Stats> stats = new HashMap<String, Stats>();
+    public Map<String, Stats> stats = new LinkedHashMap<String, Stats>();
     
     /** The bill in HTML format. */
     @JsonInclude(Include.NON_NULL)
