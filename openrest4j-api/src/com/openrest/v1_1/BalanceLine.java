@@ -3,6 +3,8 @@ package com.openrest.v1_1;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -70,9 +72,10 @@ public class BalanceLine implements Serializable, Cloneable, Comparable<BalanceL
     public static final Set<String> ALL_TYPES = new HashSet<String>(Arrays.asList(
     		BALANCE_LINE_TYPE_BILL, BALANCE_LINE_TYPE_TRANSACTION, BALANCE_LINE_TYPE_CHANGE));
 	
-    public BalanceLine(String id, Long created, String type, String customerId, String supplierId,
+    public BalanceLine(String id, Map<String, String> externalIds, Long created, String type, String customerId, String supplierId,
     		Date date, Date forDate, Integer money, Integer credit, Integer debt, String currency, String comment) {
     	this.id = id;
+    	this.externalIds = externalIds;
     	this.created = created;
     	this.type = type;
     	this.customerId = customerId;
@@ -91,7 +94,9 @@ public class BalanceLine implements Serializable, Cloneable, Comparable<BalanceL
     
     @Override
 	public Object clone() {
-    	return new BalanceLine(id, created, type, customerId, supplierId,
+    	return new BalanceLine(id,
+    			((externalIds != null) ? new LinkedHashMap<String, String>(externalIds) : null),
+    			created, type, customerId, supplierId,
     			((date != null) ? (Date) date.clone() : null),
     			((forDate != null) ? (Date) forDate.clone() : null),
     			money, credit, debt, currency, comment);
@@ -100,6 +105,16 @@ public class BalanceLine implements Serializable, Cloneable, Comparable<BalanceL
     /** The unique ID of this balance line. */
     @JsonInclude(Include.NON_NULL)
     public String id;
+    
+    /**
+     * Map of externally-defined ids referring to this balance line.
+     * For example, the transaction id in some external payment processor.
+     * 
+     * Developers should use unique keys, e.g. "com.company.product".
+     */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Map<String, String> externalIds = new LinkedHashMap<String, String>();
+    
     
     /** The balance line's actual creation timestamp (@see date). */
     @JsonInclude(Include.NON_NULL)
