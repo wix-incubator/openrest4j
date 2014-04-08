@@ -42,10 +42,16 @@ public class Channel {
 	 * param: burgeranch branch number.
 	 */
     public static final String CHANNEL_FRSVISION_BURGERANCH = "com.frsvision.burgeranch";
+	/**
+	 * Beecomm POS.
+	 * param: Beecomm restaurant-id.
+	 */
+    public static final String CHANNEL_BEECOMM = "com.beecomm";
 	
     /** All known channels. */
     public static final Set<String> ALL_CHANNELS = new HashSet<String>(Arrays.asList(
-    		CHANNEL_EMAIL, CHANNEL_FAX, CHANNEL_SMS, CHANNEL_VOICE, CHANNEL_RESTCLOUD, CHANNEL_FRSVISION_POS, CHANNEL_FRSVISION_BURGERANCH));
+    		CHANNEL_EMAIL, CHANNEL_FAX, CHANNEL_SMS, CHANNEL_VOICE, CHANNEL_RESTCLOUD,
+    		CHANNEL_FRSVISION_POS, CHANNEL_FRSVISION_BURGERANCH, CHANNEL_BEECOMM));
     
     /** Special channel param that's used as placeholder for the customer's details, e.g. by notifications. */
     public static final String CHANNEL_PARAM_CUSTOMER = "_customer_";
