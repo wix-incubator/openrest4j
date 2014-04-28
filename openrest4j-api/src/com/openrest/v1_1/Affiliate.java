@@ -11,15 +11,15 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Chain extends Organization {
-	public static final String TYPE = "chain";
+public class Affiliate extends Organization {
+	public static final String TYPE = "affiliate";
 	
 	private static final long serialVersionUID = 1L;
 	
     /** Default constructor for JSON deserialization. */
-    public Chain() {}
+    public Affiliate() {}
     
-    public Chain(String id, String alias, String affiliateId, Map<String, String> externalIds, Long created, Long modified,
+    public Affiliate(String id, String alias, String affiliateId, Map<String, String> externalIds, Long created, Long modified,
     		String distributorId, Map<String, String> title, Map<String, String> description,
     		String locale, Set<String> locales, Map<String, Map<String, String>> messages, ColorScheme colorScheme,
     		Contact contact, Map<String, Contact> externalContacts, Address address, String timezone, String currency,
@@ -36,7 +36,7 @@ public class Chain extends Organization {
     
     @Override
 	public Object clone() {
-    	return new Chain(id, alias, affiliateId,
+    	return new Affiliate(id, alias, affiliateId,
     			((externalIds != null) ? new LinkedHashMap<String, String>(externalIds) : null),
     			created, modified, distributorId,
     			((title != null) ? new LinkedHashMap<String, String>(title) : null),
@@ -56,7 +56,7 @@ public class Chain extends Organization {
     			state, closed, virtualId, Product.clone(products), rank);
 	}
     
-    /** The distributor in charge of this chain. */
+    /** The distributor in charge of this affiliate. */
     @JsonInclude(Include.NON_NULL)
     public String distributorId;
 }

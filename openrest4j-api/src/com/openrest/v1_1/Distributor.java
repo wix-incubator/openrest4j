@@ -19,7 +19,7 @@ public class Distributor extends Organization {
     /** Default constructor for JSON deserialization. */
     public Distributor() {}
     
-    public Distributor(String id, String alias, Map<String, String> externalIds, Long created, Long modified,
+    public Distributor(String id, String alias, String affiliateId, Map<String, String> externalIds, Long created, Long modified,
     		Map<String, String> title, Map<String, String> description,
     		String locale, Set<String> locales, Map<String, Map<String, String>> messages, ColorScheme colorScheme,
     		Contact contact, Map<String, Contact> externalContacts, Address address, String timezone, String currency,
@@ -27,7 +27,7 @@ public class Distributor extends Organization {
     		List<AppInfo> apps, Seo seo, Map<String, String> properties, String facebookAppId,
     		String picture, String icon, String wideLogo, String noImagePicture,
     		Map<String, Blob> blobs, String state, Boolean closed, String virtualId, Set<Product> products, Double rank) {
-    	super(id, alias, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
+    	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties,
     			picture, icon, wideLogo, noImagePicture, blobs, state, closed, virtualId, products, rank);
     	
@@ -40,7 +40,7 @@ public class Distributor extends Organization {
     
     @Override
 	public Object clone() {
-    	return new Distributor(id, alias,
+    	return new Distributor(id, alias, affiliateId,
     			((externalIds != null) ? new LinkedHashMap<String, String>(externalIds) : null),    			
     			created, modified,
     			((title != null) ? new LinkedHashMap<String, String>(title) : null),

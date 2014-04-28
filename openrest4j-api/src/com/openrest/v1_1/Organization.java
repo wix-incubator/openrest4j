@@ -57,7 +57,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     /** Default constructor for JSON deserialization. */
     public Organization() {}
     
-    protected Organization(String id, String alias, Map<String, String> externalIds, Long created, Long modified,
+    protected Organization(String id, String alias, String affiliateId, Map<String, String> externalIds, Long created, Long modified,
     		Map<String, String> title, Map<String, String> description,
     		String locale, Set<String> locales, Map<String, Map<String, String>> messages, ColorScheme colorScheme,
     		Contact contact, Map<String, Contact> externalContacts,
@@ -69,6 +69,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
 
     	this.id = id;
     	this.alias = alias;
+    	this.affiliateId = affiliateId;
     	this.externalIds = externalIds;
     	this.created = created;
     	this.modified = modified;
@@ -131,6 +132,10 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     /** The organization's current alias. */
     @JsonInclude(Include.NON_NULL)
     public String alias;
+    
+    /** The organization's referrer. */
+    @JsonInclude(Include.NON_NULL)
+    public String affiliateId;
     
     /**
      * Map of externally-defined ids referring to this organization.

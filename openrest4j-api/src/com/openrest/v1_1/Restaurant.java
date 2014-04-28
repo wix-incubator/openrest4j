@@ -17,7 +17,7 @@ public class Restaurant extends Organization {
 	public static final String TYPE = "restaurant";
 	private static final long serialVersionUID = 1L;
     
-    public Restaurant(String id, String alias, Map<String, String> externalIds, Long created, Long modified,
+    public Restaurant(String id, String alias, String affiliateId, Map<String, String> externalIds, Long created, Long modified,
     		String distributorId, String chainId, Map<String, String> title,
     		Map<String, String> description, Contact contact, Map<String, Contact> externalContacts, Address address,
     		Map<String, Map<String, String>> messages, ColorScheme colorScheme,
@@ -29,7 +29,7 @@ public class Restaurant extends Organization {
             String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
             List<AppInfo> apps, Seo seo, Map<String, String> properties,
             String state, Boolean closed, String virtualId, Set<Product> products, Map<String, Double> features, Double rank) {
-    	super(id, alias, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
+    	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties,
     			picture, icon, wideLogo, noImagePicture, blobs, state, closed, virtualId, products, rank);
         
@@ -52,7 +52,7 @@ public class Restaurant extends Organization {
     /** @return a shallow copy of this object. */
     @Override
 	public Object clone() {
-    	return new Restaurant(id, alias,
+    	return new Restaurant(id, alias, affiliateId,
     			((externalIds != null) ? new LinkedHashMap<String, String>(externalIds) : null),    			
     			created, modified, distributorId, chainId,
     			((title != null) ? new LinkedHashMap<String, String>(title) : null),
