@@ -110,16 +110,6 @@ public class Order implements Serializable, Cloneable {
     		clonedOrderItems = null;
     	}
     	
-    	final List<Payment> clonedPayments;
-    	if (payments != null) {
-    		clonedPayments = new ArrayList<Payment>(payments.size());
-    		for (Payment payment : payments) {
-    			clonedPayments.add((Payment) payment.clone());
-    		}
-    	} else {
-    		clonedPayments = null;
-    	}
-    	
     	final List<Charge> clonedCharges;
     	if (charges != null) {
     		clonedCharges = new ArrayList<Charge>(charges.size());
@@ -145,7 +135,7 @@ public class Order implements Serializable, Cloneable {
     			distributorId, chainId, restaurantId, locale, clonedOrderItems, comment, price,
     			((delivery != null) ? (Delivery) delivery.clone() : null),
     			((contact != null) ? (Contact) contact.clone() : null),
-    			clonedPayments, takeoutPacks, clonedCharges, created(), received(), modified(), submitAt(),
+    			Payment.clone(payments), takeoutPacks, clonedCharges, created(), received(), modified(), submitAt(),
     			((user != null) ? (User) user.clone() : null),
     			((clubMember != null) ? (ClubMember) clubMember.clone() : null),
     			status, shareToken, affiliate, developer, source, platform, ref, legacyHierarchy,

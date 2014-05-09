@@ -3,6 +3,8 @@ package com.openrest.v1_1;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -66,6 +68,18 @@ public class Payment implements Serializable, Cloneable {
     			((card != null) ? (CreditCard) card.clone() : null),
     			token, userId, id, password);
 	}
+    
+    public static List<Payment> clone(List<Payment> payments) {
+    	if (payments == null) {
+    		return null;
+    	}
+    	
+    	final List<Payment> cloned = new LinkedList<Payment>();
+		for (Payment payment : payments) {
+			cloned.add((payment != null) ? (Payment) payment.clone() : null);
+		}
+		return cloned;
+    }
 
     /** Payment type. */
     @JsonInclude(Include.NON_NULL)
