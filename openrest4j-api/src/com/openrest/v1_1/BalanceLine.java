@@ -68,12 +68,16 @@ public class BalanceLine implements Serializable, Cloneable, Comparable<BalanceL
 	public static final String BALANCE_LINE_TYPE_TRANSACTION = "transaction";
 	public static final String BALANCE_LINE_TYPE_CHANGE = "change";
 	
+    public static final String STATUS_PENDING = "pending";
+    public static final String STATUS_SUCCESS = "success";
+    public static final String STATUS_ERROR = "error";
+	
     /** All known statuses. */
     public static final Set<String> ALL_TYPES = new HashSet<String>(Arrays.asList(
     		BALANCE_LINE_TYPE_BILL, BALANCE_LINE_TYPE_TRANSACTION, BALANCE_LINE_TYPE_CHANGE));
 	
     public BalanceLine(String id, Map<String, String> externalIds, Long created, String type, String customerId, String supplierId,
-    		Date date, Date forDate, Integer money, Integer credit, Integer debt, String currency, String comment) {
+    		Date date, Date forDate, Integer money, Integer credit, Integer debt, String currency, String comment, String status) {
     	this.id = id;
     	this.externalIds = externalIds;
     	this.created = created;
@@ -87,6 +91,7 @@ public class BalanceLine implements Serializable, Cloneable, Comparable<BalanceL
     	this.debt = debt;
     	this.currency = currency;
     	this.comment = comment;
+    	this.status = status;
     }
     
     /** Default constructor for JSON deserialization. */
@@ -99,7 +104,7 @@ public class BalanceLine implements Serializable, Cloneable, Comparable<BalanceL
     			created, type, customerId, supplierId,
     			((date != null) ? (Date) date.clone() : null),
     			((forDate != null) ? (Date) forDate.clone() : null),
-    			money, credit, debt, currency, comment);
+    			money, credit, debt, currency, comment, status);
 	}
     
     /** The unique ID of this balance line. */
@@ -169,6 +174,10 @@ public class BalanceLine implements Serializable, Cloneable, Comparable<BalanceL
     /** Optional human-readable comment associated with this balance line. */
     @JsonInclude(Include.NON_NULL)
     public String comment;
+    
+    /** For transaction balance lines, shows the transaction status. */
+    @JsonInclude(Include.NON_DEFAULT)
+    public String status = STATUS_SUCCESS;
     
 	public int compareTo(BalanceLine other) {
 		int result = Date.compare(date, other.date);
