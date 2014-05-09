@@ -12,13 +12,17 @@ public class SetClientInfoRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public SetClientInfoRequest() {}
     
-    public SetClientInfoRequest(String accessToken, ClientInfo clientInfo) {
+    public SetClientInfoRequest(String accessToken, ClientId clientId, ClientInfo clientInfo) {
     	this.accessToken = accessToken;
+    	this.clientId = clientId;
     	this.clientInfo = clientInfo;
     }
     
     @JsonInclude(Include.NON_NULL)
     public String accessToken;
+    
+    @JsonInclude(Include.NON_NULL)
+    public ClientId clientId;
     
     @JsonInclude(Include.NON_NULL)
     public ClientInfo clientInfo;
