@@ -24,7 +24,7 @@ public class Distributor extends Organization {
     		String locale, Set<String> locales, Map<String, Map<String, String>> messages, ColorScheme colorScheme,
     		Contact contact, Map<String, Contact> externalContacts, Address address, String timezone, String currency,
     		String link, String domain, Set<String> altDomains,
-    		List<AppInfo> apps, Seo seo, Map<String, String> properties, String facebookAppId,
+    		List<AppInfo> apps, Seo seo, Map<String, String> properties, String facebookAppId, String tld,
     		String picture, String icon, String wideLogo, String noImagePicture,
     		Map<String, Blob> blobs, String state, Boolean closed, String virtualId, Set<Product> products, Double rank) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
@@ -32,11 +32,23 @@ public class Distributor extends Organization {
     			picture, icon, wideLogo, noImagePicture, blobs, state, closed, virtualId, products, rank);
     	
     	this.facebookAppId = facebookAppId;
+    	this.tld = tld;
     }
     
-    /** The distributor's Facebook application id. */
+    /**
+     * The distributor's Facebook application id.
+     * Deprecated, to be removed on 2014-08-01 (use externalIds["com.facebook.apps"])
+     */
+    @Deprecated
     @JsonInclude(Include.NON_NULL)
     public String facebookAppId;
+    
+    /**
+     * The distributor's top-level domain.
+     * White-label systems use domains of the form {alias}.{tld}).
+     */
+    @JsonInclude(Include.NON_NULL)
+    public String tld;
     
     @Override
 	public Object clone() {
@@ -56,7 +68,7 @@ public class Distributor extends Organization {
     			AppInfo.clone(apps),
     			((seo != null) ? (Seo) seo.clone() : null),
     			((properties != null) ? new LinkedHashMap<String, String>(properties) : null),
-    			facebookAppId, picture, icon, wideLogo, noImagePicture, Blob.clone(blobs),
+    			facebookAppId, tld, picture, icon, wideLogo, noImagePicture, Blob.clone(blobs),
     			state, closed, virtualId, Product.clone(products), rank);
 	}
 }
