@@ -52,12 +52,17 @@ public class Channel {
 	 * param: Google CloudPrint printer-id.
 	 */
     public static final String CHANNEL_CLOUDPRINT = "com.google.cloudprint";
+	/**
+	 * Presto POS.
+	 * param: port number in Presto's router.
+	 */
+    public static final String CHANNEL_PRESTO = "il.co.presto";
 	
     /** All known channels. */
     public static final Set<String> ALL_CHANNELS = new HashSet<String>(Arrays.asList(
     		CHANNEL_EMAIL, CHANNEL_FAX, CHANNEL_SMS, CHANNEL_VOICE, CHANNEL_RESTCLOUD,
     		CHANNEL_FRSVISION_POS, CHANNEL_FRSVISION_BURGERANCH, CHANNEL_BEECOMM,
-    		CHANNEL_CLOUDPRINT));
+    		CHANNEL_CLOUDPRINT, CHANNEL_PRESTO));
     
     /** Special channel param that's used as placeholder for the customer's details, e.g. by notifications. */
     public static final String CHANNEL_PARAM_CUSTOMER = "_customer_";
