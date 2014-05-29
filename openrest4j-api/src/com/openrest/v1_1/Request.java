@@ -88,7 +88,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@Type(value = GeocodeRequest.class, name = GeocodeRequest.TYPE),
 	@Type(value = ToggleProductRequest.class, name = ToggleProductRequest.TYPE),
 	@Type(value = QueryUsageRequest.class, name = QueryUsageRequest.TYPE),
-	@Type(value = GetInvrecRequest.class, name = GetInvrecRequest.TYPE)
+	@Type(value = GetInvrecRequest.class, name = GetInvrecRequest.TYPE),
+	@Type(value = AcceptDocumentRequest.class, name = AcceptDocumentRequest.TYPE)
 	
 })
 public abstract class Request implements Serializable {
