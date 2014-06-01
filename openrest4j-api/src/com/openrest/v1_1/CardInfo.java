@@ -1,9 +1,12 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -13,8 +16,15 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class CardInfo implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
     
-	public CardInfo(String formId, Boolean active) {
+    public static final String GATEWAY_BRAINTREE = "com.braintreegateway";
+    public static final String GATEWAY_AUTHORIZENET = "net.authorize";
+    
+    public static final Set<String> ALL_GATEWAYS = new LinkedHashSet<String>(Arrays.asList(
+    		GATEWAY_BRAINTREE, GATEWAY_AUTHORIZENET));
+    
+	public CardInfo(String formId, String gatewayId, Boolean active) {
 		this.formId = formId;
+		this.gatewayId = gatewayId;
 		this.active = active;
     }
 
@@ -23,7 +33,7 @@ public class CardInfo implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	return new CardInfo(formId, active);
+    	return new CardInfo(formId, gatewayId, active);
 	}
 
     public static Map<String, CardInfo> clone(Map<String, CardInfo> cardInfos) {
@@ -46,6 +56,13 @@ public class CardInfo implements Serializable, Cloneable {
      */
     @JsonInclude(Include.NON_NULL)
     public String formId;
+    
+    /**
+     * The payment gateway that should process cards of this network.
+     * See CardInfo.ALL_GATEWAYS 
+     */
+    @JsonInclude(Include.NON_NULL)
+    public String gatewayId;
     
     /** Whether or not cards of that specific network are supported. */
     @JsonInclude(Include.NON_DEFAULT)
