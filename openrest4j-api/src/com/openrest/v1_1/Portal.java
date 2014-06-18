@@ -27,11 +27,12 @@ public class Portal extends Organization {
     		Contact contact, Map<String, Contact> externalContacts, Address address, String timezone, String currency,
     		String link, String domain, Set<String> altDomains,
     		List<AppInfo> apps, Seo seo, Map<String, String> properties,
-    		String picture, String icon, String wideLogo, String noImagePicture,
-    		Map<String, Blob> blobs, String state, Boolean closed, String virtualId, Set<Product> products, Double rank, List<PortalMenuCategory> categories) {
+    		String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
+    		String state, Boolean closed, String virtualId, Boolean inactive, Set<Product> products, Double rank,
+    		List<PortalMenuCategory> categories) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties,
-    			picture, icon, wideLogo, noImagePicture, blobs, state, closed, virtualId, products, rank);
+    			picture, icon, wideLogo, noImagePicture, blobs, state, closed, virtualId, inactive, products, rank);
     	
     	this.distributorId = distributorId;
     	this.filter = filter;
@@ -58,7 +59,7 @@ public class Portal extends Organization {
     			((seo != null) ? (Seo) seo.clone() : null),
     			((properties != null) ? new LinkedHashMap<String, String>(properties) : null),
     			picture, icon, wideLogo, noImagePicture, Blob.clone(blobs),
-    			state, closed, virtualId, Product.clone(products), rank, PortalMenuCategory.cloneList(categories));
+    			state, closed, virtualId, inactive, Product.clone(products), rank, PortalMenuCategory.cloneList(categories));
 	}
     
     /** The distributor in charge of this portal. */

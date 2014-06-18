@@ -64,8 +64,8 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     		Address address, String timezone, String currency,
     		String link, String domain, Set<String> altDomains,
     		List<AppInfo> apps, Seo seo, Map<String, String> properties,
-    		String picture, String icon, String wideLogo, String noImagePicture,
-    		Map<String, Blob> blobs, String state, Boolean closed, String virtualId, Set<Product> products, Double rank) {
+    		String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
+    		String state, Boolean closed, String virtualId, Boolean inactive, Set<Product> products, Double rank) {
 
     	this.id = id;
     	this.alias = alias;
@@ -98,6 +98,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     	this.state = state;
     	this.closed = closed;
     	this.virtualId = virtualId;
+    	this.inactive = inactive;
     	this.products = products;
     	this.rank = rank;
     }
@@ -274,6 +275,10 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     /** For virtual organizations, marks the "real" organization id. */
     @JsonInclude(Include.NON_NULL)
     public String virtualId;
+    
+    /** Whether the organization has been activated (supplied billing information). */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Boolean inactive = Boolean.FALSE;
     
     /** @see State.ALL_STATES */
     @JsonInclude(Include.NON_DEFAULT)

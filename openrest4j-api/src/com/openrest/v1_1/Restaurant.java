@@ -28,10 +28,10 @@ public class Restaurant extends Organization {
             Map<String, Integer> minPayments, String link, String domain, Set<String> altDomains,
             String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
             List<AppInfo> apps, Seo seo, Map<String, String> properties,
-            String state, Boolean closed, String virtualId, Set<Product> products, Map<String, Double> features, Double rank) {
+            String state, Boolean closed, String virtualId, Boolean inactive, Set<Product> products, Map<String, Double> features, Double rank) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties,
-    			picture, icon, wideLogo, noImagePicture, blobs, state, closed, virtualId, products, rank);
+    			picture, icon, wideLogo, noImagePicture, blobs, state, closed, virtualId, inactive, products, rank);
         
     	this.distributorId = distributorId;
     	this.chainId = chainId;
@@ -74,7 +74,7 @@ public class Restaurant extends Organization {
     			picture, icon, wideLogo, noImagePicture, Blob.clone(blobs),
     			AppInfo.clone(apps),
     			((seo != null) ? (Seo) seo.clone() : null),
-    			((properties != null) ? new LinkedHashMap<String, String>(properties) : null), state, closed, virtualId,
+    			((properties != null) ? new LinkedHashMap<String, String>(properties) : null), state, closed, virtualId, inactive,
     			Product.clone(products),
     			((features != null) ? new LinkedHashMap<String, Double>(features) : null),
     			rank);
