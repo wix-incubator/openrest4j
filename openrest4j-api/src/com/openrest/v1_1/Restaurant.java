@@ -25,7 +25,7 @@ public class Restaurant extends Organization {
             List<DeliveryInfo> deliveryInfos, Integer maxFutureOrderDelayMins,
             String timezone, String currency, String locale, Set<String> locales,
             Set<String> paymentTypes, Boolean multiPaymentDisabled, Map<String, CardInfo> cardInfos,
-            Map<String, Integer> minPayments, String link, String domain, Set<String> altDomains,
+            Map<String, Integer> minPayments, Boolean antiFraudDisabled, String link, String domain, Set<String> altDomains,
             String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
             List<AppInfo> apps, Seo seo, Map<String, String> properties,
             String state, Boolean closed, String virtualId, Boolean inactive, Set<Product> products, Map<String, Double> features, Double rank) {
@@ -43,6 +43,7 @@ public class Restaurant extends Organization {
         this.multiPaymentDisabled = multiPaymentDisabled;
         this.cardInfos = cardInfos;
         this.minPayments = minPayments;
+        this.antiFraudDisabled = antiFraudDisabled;
         this.features = features;
     }
 
@@ -69,7 +70,7 @@ public class Restaurant extends Organization {
     			((paymentTypes != null) ? new LinkedHashSet<String>(paymentTypes) : null),
     			multiPaymentDisabled, CardInfo.clone(cardInfos),
     			((minPayments != null) ? new LinkedHashMap<String, Integer>(minPayments) : null),
-    			link, domain,
+    			antiFraudDisabled, link, domain,
     			((altDomains != null) ? new LinkedHashSet<String>(altDomains) : null),
     			picture, icon, wideLogo, noImagePicture, Blob.clone(blobs),
     			AppInfo.clone(apps),
@@ -136,6 +137,10 @@ public class Restaurant extends Organization {
      */
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, Integer> minPayments = new LinkedHashMap<String, Integer>();
+    
+    /** Whether or not the fraud prevention feature is turned off. */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Boolean antiFraudDisabled = Boolean.FALSE;
     
     /**
      * Maps feature-IDs to their values. The values correspond to how strongly the feature
