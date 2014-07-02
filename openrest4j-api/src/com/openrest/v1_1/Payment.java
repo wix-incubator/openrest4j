@@ -29,8 +29,12 @@ public class Payment implements Serializable, Cloneable {
     public static final String PAYMENT_TYPE_CHECK = "check";
     /** Payment by offsetting against external (reverse) payments. */
     public static final String PAYMENT_TYPE_OFFSET = "offset";
+    /** Write the amount as debt in the current balance. */
+    public static final String PAYMENT_TYPE_DEBT = "debt";
     /** Payment by direct debit. */
     public static final String PAYMENT_TYPE_DIRECT_DEBIT = "direct_debit";
+    /** Waived payment. */
+    public static final String PAYMENT_TYPE_WAIVE = "waive";
     /** PayPal payment. */
     public static final String PAYMENT_TYPE_PAYPAL = "paypal";
     /** Cellarix payment (@see www.cellarix.com). */
@@ -45,8 +49,8 @@ public class Payment implements Serializable, Cloneable {
     /** All known payment methods. */
     public static final Set<String> ALL_PAYMENT_TYPES = new HashSet<String>(Arrays.asList(
     		PAYMENT_TYPE_COD, PAYMENT_TYPE_CASH, PAYMENT_TYPE_CREDIT, PAYMENT_TYPE_DEBIT, PAYMENT_TYPE_10BIS,
-    		PAYMENT_TYPE_CHECK, PAYMENT_TYPE_OFFSET, PAYMENT_TYPE_DIRECT_DEBIT, PAYMENT_TYPE_PAYPAL,
-    		PAYMENT_TYPE_CELLARIX, PAYMENT_TYPE_BITSOFGOLD, PAYMENT_TYPE_PELECARD, PAYMENT_TYPE_BRAINTREE
+    		PAYMENT_TYPE_CHECK, PAYMENT_TYPE_OFFSET, PAYMENT_TYPE_DEBT, PAYMENT_TYPE_DIRECT_DEBIT, PAYMENT_TYPE_WAIVE,
+    		PAYMENT_TYPE_PAYPAL, PAYMENT_TYPE_CELLARIX, PAYMENT_TYPE_BITSOFGOLD, PAYMENT_TYPE_PELECARD, PAYMENT_TYPE_BRAINTREE
     ));
     
     public Payment(String type, Integer amount, CreditCard card, String token, String userId, String id, String password) {
