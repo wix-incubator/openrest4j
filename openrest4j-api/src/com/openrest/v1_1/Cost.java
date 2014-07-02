@@ -2,6 +2,8 @@ package com.openrest.v1_1;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -51,6 +53,18 @@ public class Cost implements Serializable, Comparable<Cost>, Cloneable  {
     			((title != null) ? new HashMap<String, String>(title) : null),
     			year, month, priority, amountRuleType, amountRule, minimum, discountRule, amount, discount);
 	}
+    
+    public static List<Cost> clone(List<Cost> costs) {
+    	if (costs == null) {
+    		return null;
+    	}
+    	
+    	final List<Cost> cloned = new LinkedList<Cost>();
+		for (Cost cost : costs) {
+			cloned.add((cost != null) ? (Cost) cost.clone() : null);
+		}
+		return cloned;
+    }
     
     /** Cost type. */
     @JsonInclude(Include.NON_NULL)
