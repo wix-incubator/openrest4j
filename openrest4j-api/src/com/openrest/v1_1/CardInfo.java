@@ -17,12 +17,13 @@ public class CardInfo implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
     
     public static final String GATEWAY_BRAINTREE = "com.braintreegateway";
+    public static final String GATEWAY_MERCURYPAY = "com.mercurypay";
     public static final String GATEWAY_PAGUELOFACIL = "com.paguelofacil";
     public static final String GATEWAY_PROPAY = "com.propay";
     public static final String GATEWAY_AUTHORIZENET = "net.authorize";
     
     public static final Set<String> ALL_GATEWAYS = new LinkedHashSet<String>(Arrays.asList(
-    		GATEWAY_BRAINTREE, GATEWAY_PAGUELOFACIL, GATEWAY_PROPAY, GATEWAY_AUTHORIZENET));
+    		GATEWAY_BRAINTREE, GATEWAY_MERCURYPAY, GATEWAY_PAGUELOFACIL, GATEWAY_PROPAY, GATEWAY_AUTHORIZENET));
     
 	public CardInfo(String formId, String gatewayId, Boolean active) {
 		this.formId = formId;
