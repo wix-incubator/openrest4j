@@ -3,6 +3,9 @@ package com.openrest.v1_1;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -67,7 +70,7 @@ public class Charge implements Serializable, Cloneable {
     		Set<String> itemIds, String mode,
     		String amountRuleType, Integer amountRule, Coupon coupon,
     		Availability availability, Boolean inactive, Set<String> refs, Set<String> deliveryTypes,
-    		Integer amount) {
+    		Integer amount, Map<String, String> properties) {
     	this.id = id;
     	this.restaurantId = restaurantId;
         this.type = type;
@@ -84,6 +87,7 @@ public class Charge implements Serializable, Cloneable {
         this.refs = refs;
         this.deliveryTypes = deliveryTypes;
         this.amount = amount;
+        this.properties = properties;
     }
     
 	/** Default constructor for JSON deserialization. */
@@ -92,14 +96,15 @@ public class Charge implements Serializable, Cloneable {
     @Override
 	public Object clone() {
     	final Charge cloned = new Charge(id, restaurantId, type, priority, code, clubId,
-    			((itemIds != null) ? new HashSet<String>(itemIds) : null),
+    			((itemIds != null) ? new LinkedHashSet<String>(itemIds) : null),
     			mode, amountRuleType, amountRule,
     			((coupon != null) ? (Coupon) coupon.clone() : null),
     			((availability != null) ? (Availability) availability.clone() : null),
     			inactive,
-    			((refs != null) ? new HashSet<String>(refs) : null),
-    			((deliveryTypes != null) ? new HashSet<String>(deliveryTypes) : null),
-    			amount);
+    			((refs != null) ? new LinkedHashSet<String>(refs) : null),
+    			((deliveryTypes != null) ? new LinkedHashSet<String>(deliveryTypes) : null),
+    			amount,
+    			((properties != null) ? new LinkedHashMap<String, String>(properties) : null));
     	
     	cloned.tagId = tagId;
     	cloned.tagMode = tagMode;
@@ -190,7 +195,14 @@ public class Charge implements Serializable, Cloneable {
     /** Bottom-line charge amount (in cents). */
     @JsonInclude(Include.NON_NULL)
     public Integer amount;
-    
+
+    /**
+     * Map of user-defined extended properties. Developers should use unique
+     * keys, e.g. "com.googlecode.openrestext".
+     */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Map<String, String> properties = new LinkedHashMap<String, String>();
+
 	public boolean equalsIgnoreAmount(Charge other) {
 		if (this == other)
 			return true;
@@ -230,6 +242,11 @@ public class Charge implements Serializable, Cloneable {
 			if (other.deliveryTypes != null)
 				return false;
 		} else if (!deliveryTypes.equals(other.deliveryTypes))
+			return false;
+		if (properties == null) {
+			if (other.properties != null)
+				return false;
+		} else if (!properties.equals(other.properties))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -314,6 +331,8 @@ public class Charge implements Serializable, Cloneable {
 				+ ((priority == null) ? 0 : priority.hashCode());
 		result = prime * result
 				+ ((restaurantId == null) ? 0 : restaurantId.hashCode());
+		result = prime * result
+				+ ((properties == null) ? 0 : properties.hashCode());
 		result = prime * result + ((itemIds == null) ? 0 : itemIds.hashCode());
 		result = prime * result + ((mode == null) ? 0 : mode.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());

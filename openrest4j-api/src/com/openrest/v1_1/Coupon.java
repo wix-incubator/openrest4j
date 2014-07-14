@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -25,12 +26,13 @@ public class Coupon implements Serializable, Cloneable {
     		Arrays.asList(COUPON_TYPE_DISCOUNT, COUPON_TYPE_M_PLUS_N));
    
     public Coupon(String type, Map<String, String> title, Map<String, String> description,
-    		Integer maxNumAllowed, Boolean othersAllowed) {
+    		Integer maxNumAllowed, Boolean othersAllowed, Map<String, String> properties) {
     	this.type = type;
     	this.title = title;
     	this.description = description;
     	this.maxNumAllowed = maxNumAllowed;
     	this.othersAllowed = othersAllowed;
+    	this.properties = properties;
     }
     
 	/** Default constructor for JSON deserialization. */
@@ -41,7 +43,8 @@ public class Coupon implements Serializable, Cloneable {
     	return new Coupon(type,
     			((title != null) ? new HashMap<String, String>(title) : null),
     			((description != null) ? new HashMap<String, String>(description) : null),
-    			maxNumAllowed, othersAllowed);
+    			maxNumAllowed, othersAllowed,
+    			((properties != null) ? new LinkedHashMap<String, String>(properties) : null));
 	}
    
     /** The coupon's type. */
@@ -64,6 +67,13 @@ public class Coupon implements Serializable, Cloneable {
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean othersAllowed = Boolean.TRUE;
     
+    /**
+     * Map of user-defined extended properties. Developers should use unique
+     * keys, e.g. "com.googlecode.openrestext".
+     */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Map<String, String> properties = new LinkedHashMap<String, String>();
+    
     @Override
 	public int hashCode() {
 		final int prime = 31;
@@ -74,6 +84,8 @@ public class Coupon implements Serializable, Cloneable {
 				+ ((maxNumAllowed == null) ? 0 : maxNumAllowed.hashCode());
 		result = prime * result
 				+ ((othersAllowed == null) ? 0 : othersAllowed.hashCode());
+		result = prime * result
+				+ ((properties == null) ? 0 : properties.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
@@ -97,6 +109,11 @@ public class Coupon implements Serializable, Cloneable {
 			if (other.maxNumAllowed != null)
 				return false;
 		} else if (!maxNumAllowed.equals(other.maxNumAllowed))
+			return false;
+		if (properties == null) {
+			if (other.properties != null)
+				return false;
+		} else if (!properties.equals(other.properties))
 			return false;
 		if (othersAllowed == null) {
 			if (other.othersAllowed != null)
