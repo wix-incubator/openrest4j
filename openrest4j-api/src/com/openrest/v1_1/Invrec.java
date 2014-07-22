@@ -18,9 +18,10 @@ public class Invrec implements Serializable, Cloneable {
     public static final String STATUS_PAID = "paid";
     public static final String STATUS_CANCELED = "canceled";
     
-    public Invrec(String id, Date date, String supplierId, String customerId, Contact seller, Contact buyer,
+    public Invrec(String id, String displayableId, Date date, String supplierId, String customerId, Contact seller, Contact buyer,
     		CurrencyAmount total, CurrencyAmount baseTotal, List<Payment> payments, String status, String html) {
     	this.id = id;
+    	this.displayableId = displayableId;
     	this.date = date;
     	this.supplierId = supplierId;
     	this.customerId = customerId;
@@ -38,7 +39,7 @@ public class Invrec implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	return new Invrec(id,
+    	return new Invrec(id, displayableId,
     			((date != null) ? (Date) date.clone() : null),
     			supplierId, customerId,
     			((seller != null) ? (Contact) seller.clone() : null),
@@ -51,6 +52,10 @@ public class Invrec implements Serializable, Cloneable {
     /** The invoice/receipt unique id. */
     @JsonInclude(Include.NON_NULL)
     public String id;
+
+    /** The invoice/receipt displayable id . */
+    @JsonInclude(Include.NON_NULL)
+    public String displayableId;
     
     /** Issuing date. */
     @JsonInclude(Include.NON_NULL)
