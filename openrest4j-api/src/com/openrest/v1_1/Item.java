@@ -1,15 +1,12 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Map.Entry;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -32,7 +29,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     		Map<String, String> description, Integer price, List<Variation> variations,
     		Availability availability, String picture, Map<String, Blob> blobs,
     		Map<String, String> externalIds, Set<String> labels,
-    		Map<String, String> properties, Double rank) {
+    		Map<String, String> properties, Integer stock, Double rank) {
         this.id = id;
         this.restaurantId = restaurantId;
         this.title = title;
@@ -45,6 +42,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
         this.externalIds = externalIds;
         this.labels = labels;
         this.properties = properties;
+        this.stock = stock;
         this.rank = rank;
     }
 
@@ -53,37 +51,17 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     
     @Override
 	public Object clone() {
-    	final List<Variation> clonedVariations;
-    	if (variations != null) {
-    		clonedVariations = new ArrayList<Variation>(variations.size());
-    		for (Variation variation : variations) {
-    			clonedVariations.add((Variation) variation.clone());
-    		}
-    	} else {
-    		clonedVariations = null;
-    	}
-    	
-    	final Map<String, Blob> clonedBlobs;
-    	if (blobs != null) {
-    		clonedBlobs = new LinkedHashMap<String, Blob>(blobs.size());
-    		for (Entry<String, Blob> entry : blobs.entrySet()) {
-    			clonedBlobs.put(entry.getKey(), (Blob) entry.getValue().clone());
-    		}
-    	} else {
-    		clonedBlobs = null;
-    	}
-    	
     	return new Item(id, restaurantId,
     			((title != null) ? new HashMap<String, String>(title) : null),
     			((description != null) ? new HashMap<String, String>(description) : null),
-    			price, clonedVariations,
+    			price, Variation.clone(variations),
     			((availability != null) ? (Availability) availability.clone() : null),
     			picture,
-    			clonedBlobs,
+    			Blob.clone(blobs),
     			((externalIds != null) ? new HashMap<String, String>(externalIds) : null),
     			((labels != null) ? new HashSet<String>(labels) : null),
     			((properties != null) ? new HashMap<String, String>(properties) : null),
-    			rank);
+    			stock, rank);
 	}
 
     /** The item's unique id. */
@@ -144,6 +122,10 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
      */
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> properties = new HashMap<String, String>();
+    
+    /** Number of items in stock (null means inventory is not managed for this item). */
+    @JsonInclude(Include.NON_NULL)
+    public Integer stock;
     
     /** The item's Openrest rank (higher is better). */
     @JsonInclude(Include.NON_NULL)

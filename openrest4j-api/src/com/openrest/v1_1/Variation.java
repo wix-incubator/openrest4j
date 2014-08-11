@@ -57,6 +57,18 @@ public class Variation implements Serializable, Cloneable {
     	cloned.tagId = tagId;
     	return cloned;
 	}
+    
+    public static List<Variation> clone(List<Variation> variations) {
+    	if (variations == null) {
+    		return null;
+    	}
+    	
+    	final List<Variation> cloned = new LinkedList<Variation>();
+		for (Variation variation : variations) {
+			cloned.add((variation != null) ? (Variation) variation.clone() : null);
+		}
+		return cloned;
+    }
 
     /** The variations's name in various locales, e.g. "sides", "degree of cooking". */
     @JsonInclude(Include.NON_DEFAULT)
