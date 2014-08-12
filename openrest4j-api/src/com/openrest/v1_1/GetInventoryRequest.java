@@ -1,6 +1,5 @@
 package com.openrest.v1_1;
 
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -27,6 +26,7 @@ public class GetInventoryRequest extends Request {
     @JsonInclude(Include.NON_NULL)
     public String organizationId;
     
-    @JsonInclude(Include.NON_DEFAULT)
-    public Set<String> itemIds = new LinkedHashSet<String>();
+    /** Item-ids to query (null means "all"). */
+    @JsonInclude(Include.NON_NULL)
+    public Set<String> itemIds;
 }
