@@ -40,7 +40,7 @@ public class Error {
     /** Delivery method is currently unavailable. */
     public static final String ERROR_DELIVERY_UNAVAILABLE = "delivery_unavailable";
     
-    /** Item is currently unavailable, e.g. just went out of stock. */
+    /** Item is currently unavailable, e.g. attempt to order a lunch menu item at dinner. */
     public static final String ERROR_ITEM_UNAVAILABLE = "item_unavailable";
     
     /** Charge is currently unavailable. */
@@ -90,6 +90,9 @@ public class Error {
      * @see BatchRequest
      */
     public static final String ERROR_BATCH = "batch";
+    
+    /** Item is out-of-stock (for managed-inventory items). */
+    public static final String ERROR_OUT_OF_STOCK = "out_of_stock";
     
 	private Error() {}
 }
