@@ -1,5 +1,8 @@
 package com.openrest.v1_1;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -12,10 +15,10 @@ public class AddInventoryRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public AddInventoryRequest() {}
     
-    public AddInventoryRequest(String accessToken, String organizationId, Inventory inventory) {
+    public AddInventoryRequest(String accessToken, String organizationId, Map<String, Integer> counts) {
     	this.accessToken = accessToken;
     	this.organizationId = organizationId;
-    	this.inventory = inventory;
+    	this.counts = counts;
     }
     
     @JsonInclude(Include.NON_NULL)
@@ -24,6 +27,6 @@ public class AddInventoryRequest extends Request {
     @JsonInclude(Include.NON_NULL)
     public String organizationId;
     
-    @JsonInclude(Include.NON_NULL)
-    public Inventory inventory;
+    @JsonInclude(Include.NON_DEFAULT)
+    public Map<String, Integer> counts = new LinkedHashMap<String, Integer>();
 }

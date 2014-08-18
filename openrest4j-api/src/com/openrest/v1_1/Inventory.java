@@ -15,16 +15,16 @@ public class Inventory implements Serializable, Cloneable {
     /** Default constructor for JSON deserialization. */
     public Inventory() {}
     
-    public Inventory(Map<String, Integer> stock) {
-    	this.stock = stock;
+    public Inventory(Map<String, Stock> stocks) {
+    	this.stocks = stocks;
     }
     
     @Override
 	public Object clone() {
-    	return new Inventory((stock != null) ? new LinkedHashMap<String, Integer>(stock) : null);
+    	return new Inventory(Stock.clone(stocks));
 	}
     
     /** Maps item ids to number of items in stock (null means inventory is not managed for this item). */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, Integer> stock = new LinkedHashMap<String, Integer>();
+    public Map<String, Stock> stocks = new LinkedHashMap<String, Stock>();
 }

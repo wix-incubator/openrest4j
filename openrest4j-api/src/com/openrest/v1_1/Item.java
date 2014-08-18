@@ -29,7 +29,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     		Map<String, String> description, Integer price, List<Variation> variations,
     		Availability availability, String picture, Map<String, Blob> blobs,
     		Map<String, String> externalIds, Set<String> labels,
-    		Map<String, String> properties, Integer stock, Double rank) {
+    		Map<String, String> properties, Stock stock, Double rank) {
         this.id = id;
         this.restaurantId = restaurantId;
         this.title = title;
@@ -123,9 +123,9 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> properties = new HashMap<String, String>();
     
-    /** Number of items in stock (null means inventory is not managed for this item). */
+    /** (read-only) Stock information (null means inventory is not managed for this item). */
     @JsonInclude(Include.NON_NULL)
-    public Integer stock;
+    public Stock stock;
     
     /** The item's Openrest rank (higher is better). */
     @JsonInclude(Include.NON_NULL)
