@@ -26,10 +26,11 @@ public class CardInfo implements Serializable, Cloneable {
     public static final String GATEWAY_ZCREDIT = "il.co.zcredit";
     public static final String GATEWAY_PAYPAL = "com.paypal";
     public static final String GATEWAY_STRIPE = "com.stripe";
+    public static final String GATEWAY_PAYSCAPE = "com.payscape";
 
     public static final Set<String> ALL_GATEWAYS = new LinkedHashSet<String>(Arrays.asList(
     		GATEWAY_BRAINTREE, GATEWAY_MERCURYPAY, GATEWAY_PAGUELOFACIL, GATEWAY_PROPAY, GATEWAY_AUTHORIZENET,
-    		GATEWAY_FIRSTDATA, GATEWAY_HEARTLAND, GATEWAY_ZCREDIT, GATEWAY_PAYPAL, GATEWAY_STRIPE));
+    		GATEWAY_FIRSTDATA, GATEWAY_HEARTLAND, GATEWAY_ZCREDIT, GATEWAY_PAYPAL, GATEWAY_STRIPE, GATEWAY_PAYSCAPE));
     
 	public CardInfo(String formId, String gatewayId, Boolean active) {
 		this.formId = formId;
