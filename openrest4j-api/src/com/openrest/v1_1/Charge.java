@@ -70,7 +70,7 @@ public class Charge implements Serializable, Cloneable {
     		Set<String> itemIds, String mode,
     		String amountRuleType, Integer amountRule, Coupon coupon,
     		Availability availability, Boolean inactive, Set<String> refs, Set<String> deliveryTypes,
-    		Integer amount, Map<String, String> properties) {
+    		Integer amount, Map<String, String> properties, String state) {
     	this.id = id;
     	this.restaurantId = restaurantId;
         this.type = type;
@@ -88,6 +88,7 @@ public class Charge implements Serializable, Cloneable {
         this.deliveryTypes = deliveryTypes;
         this.amount = amount;
         this.properties = properties;
+        this.state = state;
     }
     
 	/** Default constructor for JSON deserialization. */
@@ -104,7 +105,8 @@ public class Charge implements Serializable, Cloneable {
     			((refs != null) ? new LinkedHashSet<String>(refs) : null),
     			((deliveryTypes != null) ? new LinkedHashSet<String>(deliveryTypes) : null),
     			amount,
-    			((properties != null) ? new LinkedHashMap<String, String>(properties) : null));
+    			((properties != null) ? new LinkedHashMap<String, String>(properties) : null),
+    			state);
     	
     	cloned.tagId = tagId;
     	cloned.tagMode = tagMode;
@@ -202,6 +204,10 @@ public class Charge implements Serializable, Cloneable {
      */
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> properties = new LinkedHashMap<String, String>();
+    
+    /** @see State.ALL_STATES */
+    @JsonInclude(Include.NON_DEFAULT)
+    public String state = State.STATE_OPERATIONAL;
 
 	public boolean equalsIgnoreAmount(Charge other) {
 		if (this == other)
@@ -288,6 +294,11 @@ public class Charge implements Serializable, Cloneable {
 				return false;
 		} else if (!type.equals(other.type))
 			return false;
+		if (state == null) {
+			if (other.state != null)
+				return false;
+		} else if (!state.equals(other.state))
+			return false;
 		
 		return true;
 	}
@@ -317,25 +328,6 @@ public class Charge implements Serializable, Cloneable {
 	
     @Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
-		result = prime * result
-				+ ((amountRule == null) ? 0 : amountRule.hashCode());
-		result = prime * result
-				+ ((amountRuleType == null) ? 0 : amountRuleType.hashCode());
-		result = prime * result + ((code == null) ? 0 : code.hashCode());
-		result = prime * result + ((coupon == null) ? 0 : coupon.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((priority == null) ? 0 : priority.hashCode());
-		result = prime * result
-				+ ((restaurantId == null) ? 0 : restaurantId.hashCode());
-		result = prime * result
-				+ ((properties == null) ? 0 : properties.hashCode());
-		result = prime * result + ((itemIds == null) ? 0 : itemIds.hashCode());
-		result = prime * result + ((mode == null) ? 0 : mode.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		return result;
+    	return ((id != null) ? id.hashCode() : 0);
 	}
 }
