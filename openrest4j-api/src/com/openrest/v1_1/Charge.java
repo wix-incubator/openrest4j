@@ -69,8 +69,8 @@ public class Charge implements Serializable, Cloneable {
     		String code, String clubId,
     		Set<String> itemIds, String mode,
     		String amountRuleType, Integer amountRule, Coupon coupon,
-    		Availability availability, Boolean inactive, Set<String> refs, Set<String> deliveryTypes,
-    		Integer amount, Map<String, String> properties, String state) {
+    		Availability availability, String state, Set<String> refs, Set<String> deliveryTypes,
+    		Integer amount, Map<String, String> properties) {
     	this.id = id;
     	this.restaurantId = restaurantId;
         this.type = type;
@@ -83,12 +83,11 @@ public class Charge implements Serializable, Cloneable {
         this.amountRule = amountRule;
         this.coupon = coupon;
         this.availability = availability;
-        this.inactive = inactive;
+        this.state = state;
         this.refs = refs;
         this.deliveryTypes = deliveryTypes;
         this.amount = amount;
         this.properties = properties;
-        this.state = state;
     }
     
 	/** Default constructor for JSON deserialization. */
@@ -101,12 +100,11 @@ public class Charge implements Serializable, Cloneable {
     			mode, amountRuleType, amountRule,
     			((coupon != null) ? (Coupon) coupon.clone() : null),
     			((availability != null) ? (Availability) availability.clone() : null),
-    			inactive,
+    			state,
     			((refs != null) ? new LinkedHashSet<String>(refs) : null),
     			((deliveryTypes != null) ? new LinkedHashSet<String>(deliveryTypes) : null),
     			amount,
-    			((properties != null) ? new LinkedHashMap<String, String>(properties) : null),
-    			state);
+    			((properties != null) ? new LinkedHashMap<String, String>(properties) : null));
     	
     	cloned.tagId = tagId;
     	cloned.tagMode = tagMode;
@@ -179,10 +177,6 @@ public class Charge implements Serializable, Cloneable {
     @JsonInclude(Include.NON_DEFAULT)
     public Availability availability = new Availability();
     
-    /** Whether or not the charge is deactivated (i.e. suspended or disabled). */
-    @JsonInclude(Include.NON_DEFAULT)
-    public Boolean inactive = Boolean.FALSE;
-    
     /** The referrer-ids this charge applies to (null means any). */
     @JsonInclude(Include.NON_NULL)
     public Set<String> refs;
@@ -234,10 +228,10 @@ public class Charge implements Serializable, Cloneable {
 				return false;
 		} else if (!availability.equals(other.availability))
 			return false;
-		if (inactive == null) {
-			if (other.inactive != null)
+		if (state == null) {
+			if (other.state != null)
 				return false;
-		} else if (!inactive.equals(other.inactive))
+		} else if (!state.equals(other.state))
 			return false;
 		if (refs == null) {
 			if (other.refs != null)
@@ -293,11 +287,6 @@ public class Charge implements Serializable, Cloneable {
 			if (other.type != null)
 				return false;
 		} else if (!type.equals(other.type))
-			return false;
-		if (state == null) {
-			if (other.state != null)
-				return false;
-		} else if (!state.equals(other.state))
 			return false;
 		
 		return true;
