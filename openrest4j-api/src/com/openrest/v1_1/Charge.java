@@ -33,10 +33,13 @@ public class Charge implements Serializable, Cloneable {
     public static final String CHARGE_TYPE_TAX = "tax";
 	/** Service charge ("convenience fee"). */
     public static final String CHARGE_TYPE_SERVICE = "service";
+	/** Tip charge. */
+    public static final String CHARGE_TYPE_TIP = "tip";
     
     /** All known charges. */
     public static final Set<String> ALL_CHARGE_TYPES = new HashSet<String>(Arrays.asList(new String[] {
-    		CHARGE_TYPE_DELIVERY, CHARGE_TYPE_COUPON, CHARGE_TYPE_CLUB_COUPON, CHARGE_TYPE_TAX, CHARGE_TYPE_SERVICE
+    		CHARGE_TYPE_DELIVERY, CHARGE_TYPE_COUPON, CHARGE_TYPE_CLUB_COUPON, CHARGE_TYPE_TAX,
+    		CHARGE_TYPE_SERVICE, CHARGE_TYPE_TIP
     }));
     
 	/** Inclusive: tag refers to given items. */
@@ -70,7 +73,7 @@ public class Charge implements Serializable, Cloneable {
     		Set<String> itemIds, String mode,
     		String amountRuleType, Integer amountRule, Coupon coupon,
     		Availability availability, String state, Set<String> refs, Set<String> deliveryTypes,
-    		Integer amount, Map<String, String> properties) {
+    		Integer amount, Integer maxTimesPerUser, Map<String, String> properties) {
     	this.id = id;
     	this.restaurantId = restaurantId;
         this.type = type;
@@ -87,6 +90,7 @@ public class Charge implements Serializable, Cloneable {
         this.refs = refs;
         this.deliveryTypes = deliveryTypes;
         this.amount = amount;
+        this.maxTimesPerUser = maxTimesPerUser;
         this.properties = properties;
     }
     
@@ -103,7 +107,7 @@ public class Charge implements Serializable, Cloneable {
     			state,
     			((refs != null) ? new LinkedHashSet<String>(refs) : null),
     			((deliveryTypes != null) ? new LinkedHashSet<String>(deliveryTypes) : null),
-    			amount,
+    			amount, maxTimesPerUser,
     			((properties != null) ? new LinkedHashMap<String, String>(properties) : null));
     	
     	cloned.tagId = tagId;
@@ -112,7 +116,7 @@ public class Charge implements Serializable, Cloneable {
     	return cloned;
 	}
 
-    /** Charge id. */
+    /** Unique charge id. */
     @JsonInclude(Include.NON_NULL)
     public String id;
     
@@ -202,7 +206,14 @@ public class Charge implements Serializable, Cloneable {
     /** @see State.ALL_STATES */
     @JsonInclude(Include.NON_DEFAULT)
     public String state = State.STATE_OPERATIONAL;
-
+    
+    /**
+     * Maximum number of times this charge can be applied to orders made by a given user
+     * (null means infinite), e.g. for one-time charges.
+     */
+    @JsonInclude(Include.NON_NULL)
+    public Integer maxTimesPerUser;
+ 
 	public boolean equalsIgnoreAmount(Charge other) {
 		if (this == other)
 			return true;
@@ -232,6 +243,11 @@ public class Charge implements Serializable, Cloneable {
 			if (other.state != null)
 				return false;
 		} else if (!state.equals(other.state))
+			return false;
+		if (maxTimesPerUser == null) {
+			if (other.maxTimesPerUser != null)
+				return false;
+		} else if (!maxTimesPerUser.equals(other.maxTimesPerUser))
 			return false;
 		if (refs == null) {
 			if (other.refs != null)

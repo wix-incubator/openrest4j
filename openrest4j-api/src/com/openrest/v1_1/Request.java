@@ -95,7 +95,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@Type(value = AcceptDocumentRequest.class, name = AcceptDocumentRequest.TYPE),
 	@Type(value = GetInventoryRequest.class, name = GetInventoryRequest.TYPE),
 	@Type(value = SetInventoryRequest.class, name = SetInventoryRequest.TYPE),
-	@Type(value = AddInventoryRequest.class, name = AddInventoryRequest.TYPE)
+	@Type(value = AddInventoryRequest.class, name = AddInventoryRequest.TYPE),
+	@Type(value = AddChargeUsageRequest.class, name = AddChargeUsageRequest.TYPE),
+	@Type(value = GetChargeUsageRequest.class, name = GetChargeUsageRequest.TYPE)
 })
 public abstract class Request implements Serializable {
     private static final long serialVersionUID = 1L;
