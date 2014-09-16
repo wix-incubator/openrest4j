@@ -3,8 +3,10 @@ package com.openrest.v1_1;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -56,7 +58,8 @@ public class Payment implements Serializable, Cloneable {
     		PAYMENT_TYPE_BITPAY
     ));
     
-    public Payment(String type, Integer amount, CreditCard card, String token, String userId, String id, String password) {
+    public Payment(String type, Integer amount, CreditCard card, String token, String userId, String id, String password,
+    		Map<String, String> externalIds) {
     	this.type = type;
     	this.amount = amount;
     	this.card = card;
@@ -64,6 +67,7 @@ public class Payment implements Serializable, Cloneable {
     	this.userId = userId;
     	this.id = id;
     	this.password = password;
+    	this.externalIds = externalIds;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -73,7 +77,8 @@ public class Payment implements Serializable, Cloneable {
 	public Object clone() {
     	return new Payment(type, amount,
     			((card != null) ? (CreditCard) card.clone() : null),
-    			token, userId, id, password);
+    			token, userId, id, password,
+    			((externalIds != null) ? new LinkedHashMap<String, String>(externalIds) : null));
 	}
     
     public static List<Payment> clone(List<Payment> payments) {
@@ -120,4 +125,13 @@ public class Payment implements Serializable, Cloneable {
      */
     @JsonInclude(Include.NON_NULL)
     public String password;
+    
+    /**
+     * Map of externally-defined ids referring to this payment.
+     * For example, the transaction-id in some external payment gateway.
+     * 
+     * Developers should use unique keys, e.g. "com.company.product".
+     */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Map<String, String> externalIds = new LinkedHashMap<String, String>();
 }
