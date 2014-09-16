@@ -15,30 +15,35 @@ public class User implements Serializable, Cloneable {
     public static final String OPENREST_PREFIX = "spice|";
     public static final String PHONE_PREFIX = "tel|";
     
-    public User(String id, Boolean idIsInferred, String ipAddress, String fwdIpAddresses) {
+    public User(ClientId clientId, String id, Boolean idIsInferred, String ipAddress, String fwdIpAddresses) {
+    	this.clientId = clientId;
         this.id = id;
         this.idIsInferred = idIsInferred;
         this.ipAddress = ipAddress;
         this.fwdIpAddresses = fwdIpAddresses;
     }
     
-    public User(String id, String ipAddress, String fwdIpAddresses) {
-    	this(id, Boolean.FALSE, ipAddress, fwdIpAddresses);
-    }
-
     /** Default constructor for JSON deserialization. */
     public User() {}
     
     @Override
 	public Object clone() {
-    	return new User(id, ipAddress, fwdIpAddresses);
+    	return new User(
+    			((clientId != null) ? (ClientId) clientId.clone() : null),
+    			id, idIsInferred, ipAddress, fwdIpAddresses);
 	}
 
-    /** The user's Facebook id. */
+    /** The user's id. */
+    @JsonInclude(Include.NON_NULL)
+    public ClientId clientId;
+    
+    /** The user's Facebook id (deprecated 2014-09-16, use clientId). */
+    @Deprecated
     @JsonInclude(Include.NON_NULL)
     public String id;
     
-    /** Whether the user's Facebook id is inferred (as opposed to verified). */
+    @Deprecated
+    /** Whether the user's Facebook id is inferred, as opposed to verified (deprecated 2014-09-16, use clientId). */
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean idIsInferred = Boolean.FALSE;
 
