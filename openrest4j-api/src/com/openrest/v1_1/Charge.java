@@ -69,7 +69,7 @@ public class Charge implements Serializable, Cloneable {
     }));
 
     public Charge(String id, String restaurantId, String type, Double priority,
-    		String code, String clubId,
+    		String code, String clubId, String groupId,
     		Set<String> itemIds, String mode,
     		String amountRuleType, Integer amountRule, Coupon coupon,
     		Availability availability, String state, Set<String> refs, Set<String> deliveryTypes,
@@ -80,6 +80,7 @@ public class Charge implements Serializable, Cloneable {
         this.priority = priority;
         this.code = code;
         this.clubId = clubId;
+        this.groupId = groupId;
         this.itemIds = itemIds;
         this.mode = mode;
         this.amountRuleType = amountRuleType;
@@ -99,7 +100,7 @@ public class Charge implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	final Charge cloned = new Charge(id, restaurantId, type, priority, code, clubId,
+    	final Charge cloned = new Charge(id, restaurantId, type, priority, code, clubId, groupId,
     			((itemIds != null) ? new LinkedHashSet<String>(itemIds) : null),
     			mode, amountRuleType, amountRule,
     			((coupon != null) ? (Coupon) coupon.clone() : null),
@@ -132,13 +133,26 @@ public class Charge implements Serializable, Cloneable {
     @JsonInclude(Include.NON_DEFAULT)
     public Double priority = 0.0;
     
-    /** Optional activation code (GoDaddy-style). */
+    /**
+     * Optional activation code (GoDaddy-style).
+     * Deprecated 2014-09-17, use groupId with a CodeGroup.
+     */
+    @Deprecated
     @JsonInclude(Include.NON_NULL)
     public String code;
     
-    /** Optional internal club-id. */
+    /**
+     * Optional internal club-id.
+     * Scheduled for deprecation 
+     * Deprecated 2014-09-17, use groupId.
+     */
+    @Deprecated
     @JsonInclude(Include.NON_NULL)
     public String clubId;
+    
+    /** Optional group-id for which the charge applies. */
+    @JsonInclude(Include.NON_NULL)
+    public String groupId;
     
     /** Scheduled for deprecation on 2014-04-01 (use itemIds instead) */
     @Deprecated
@@ -288,6 +302,11 @@ public class Charge implements Serializable, Cloneable {
 			if (other.clubId != null)
 				return false;
 		} else if (!clubId.equals(other.clubId))
+			return false;
+		if (groupId == null) {
+			if (other.groupId != null)
+				return false;
+		} else if (!groupId.equals(other.groupId))
 			return false;
 		if (itemIds == null) {
 			if (other.itemIds != null)

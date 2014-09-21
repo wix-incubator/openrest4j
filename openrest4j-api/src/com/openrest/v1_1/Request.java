@@ -97,7 +97,14 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@Type(value = SetInventoryRequest.class, name = SetInventoryRequest.TYPE),
 	@Type(value = AddInventoryRequest.class, name = AddInventoryRequest.TYPE),
 	@Type(value = AddChargeUsageRequest.class, name = AddChargeUsageRequest.TYPE),
-	@Type(value = GetChargeUsageRequest.class, name = GetChargeUsageRequest.TYPE)
+	@Type(value = GetChargeUsageRequest.class, name = GetChargeUsageRequest.TYPE),
+	@Type(value = CreateGroupRequest.class, name = CreateGroupRequest.TYPE),
+	@Type(value = GetGroupsRequest.class, name = GetGroupsRequest.TYPE),
+	@Type(value = JoinGroupRequest.class, name = JoinGroupRequest.TYPE),
+	@Type(value = LeaveGroupRequest.class, name = LeaveGroupRequest.TYPE),
+	@Type(value = GetGroupStaffRequest.class, name = GetGroupStaffRequest.TYPE),
+	@Type(value = SetGroupStaffRequest.class, name = SetGroupStaffRequest.TYPE)
+	
 })
 public abstract class Request implements Serializable {
     private static final long serialVersionUID = 1L;
