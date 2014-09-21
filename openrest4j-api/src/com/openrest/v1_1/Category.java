@@ -31,6 +31,18 @@ public class Category implements Serializable, Cloneable, Comparable<Category> {
     /** Default constructor for JSON deserialization. */
     public Category() {}
     
+    public static List<Category> clone(List<Category> categories) {
+    	if (categories == null) {
+    		return null;
+    	}
+    	
+    	final List<Category> cloned = new LinkedList<Category>();
+    	for (Category category : categories) {
+    		cloned.add((category != null) ? (Category) category.clone() : null);
+    	}
+    	return cloned;
+    }
+    
     @Override
 	public Object clone() {
     	return new Category(id, restaurantId,

@@ -38,6 +38,18 @@ public class Tag implements Serializable, Cloneable {
         this.itemIds = itemIds;
         this.properties = properties;
     }
+    
+    public static List<Tag> clone(List<Tag> tags) {
+    	if (tags == null) {
+    		return null;
+    	}
+    	
+    	final List<Tag> cloned = new LinkedList<Tag>();
+    	for (Tag tag : tags) {
+    		cloned.add((tag != null) ? (Tag) tag.clone() : null);
+    	}
+    	return cloned;
+    }
 
     @Override
 	public Object clone() {

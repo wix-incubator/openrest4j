@@ -49,6 +49,18 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
 	/** Default constructor for JSON deserialization. */
     public Item() {}
     
+    public static List<Item> clone(List<Item> items) {
+    	if (items == null) {
+    		return null;
+    	}
+    	
+    	final List<Item> cloned = new LinkedList<Item>();
+    	for (Item item : items) {
+    		cloned.add((item != null) ? (Item) item.clone() : null);
+    	}
+    	return cloned;
+    }
+    
     @Override
 	public Object clone() {
     	return new Item(id, restaurantId,

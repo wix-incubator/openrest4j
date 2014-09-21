@@ -25,16 +25,6 @@ public class OrderItem implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	final List<Variation> clonedVariations;
-    	if (variations != null) {
-    		clonedVariations = new ArrayList<Variation>(variations.size());
-    		for (Variation variation : variations) {
-    			clonedVariations.add((Variation) variation.clone());
-    		}
-    	} else {
-    		clonedVariations = null;
-    	}
-    	
     	final List<List<OrderItem>> clonedVariationsChoices;
     	if (variationsChoices != null) {
     		clonedVariationsChoices = new ArrayList<List<OrderItem>>(variationsChoices.size());
@@ -48,8 +38,8 @@ public class OrderItem implements Serializable, Cloneable {
     	} else {
     		clonedVariationsChoices = null;
     	}
-    	
-    	return new OrderItem(itemId, clonedVariations, clonedVariationsChoices, comment, price, count);
+
+    	return new OrderItem(itemId, Variation.clone(variations), clonedVariationsChoices, comment, price, count);
 	}
 
     /** Item id. */

@@ -25,48 +25,8 @@ public class Menu implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	final List<Item> clonedItems;
-    	if (items != null) {
-    		clonedItems = new ArrayList<Item>(items.size());
-    		for (Item item : items) {
-    			clonedItems.add((Item) item.clone());
-    		}
-    	} else {
-    		clonedItems = null;
-    	}
-    	
-    	final List<Category> clonedCategories;
-    	if (categories != null) {
-    		clonedCategories = new ArrayList<Category>(categories.size());
-    		for (Category category : categories) {
-    			clonedCategories.add((Category) category.clone());
-    		}
-    	} else {
-    		clonedCategories = null;
-    	}
-    	
-    	final List<Charge> clonedCharges;
-    	if (charges != null) {
-    		clonedCharges = new ArrayList<Charge>(charges.size());
-    		for (Charge charge : charges) {
-    			clonedCharges.add((Charge) charge.clone());
-    		}
-    	} else {
-    		clonedCharges = null;
-    	}
-    	
-    	final List<Tag> clonedTags;
-    	if (tags != null) {
-    		clonedTags = new ArrayList<Tag>(tags.size());
-    		for (Tag tag : tags) {
-    			clonedTags.add((Tag) tag.clone());
-    		}
-    	} else {
-    		clonedTags = null;
-    	}
-
-    	final Menu cloned = new Menu(modified, clonedItems, clonedCategories, clonedCharges);
-    	cloned.tags = clonedTags;
+    	final Menu cloned = new Menu(modified, Item.clone(items), Category.clone(categories), Charge.clone(charges));
+    	cloned.tags = Tag.clone(tags);
     	return cloned;
 	}
     

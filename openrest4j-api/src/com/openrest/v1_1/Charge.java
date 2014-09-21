@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -97,6 +99,18 @@ public class Charge implements Serializable, Cloneable {
     
 	/** Default constructor for JSON deserialization. */
     public Charge() {}
+    
+    public static List<Charge> clone(List<Charge> charges) {
+    	if (charges == null) {
+    		return null;
+    	}
+    	
+    	final List<Charge> cloned = new LinkedList<Charge>();
+    	for (Charge charge : charges) {
+    		cloned.add((charge != null) ? (Charge) charge.clone() : null);
+    	}
+    	return cloned;
+    }
     
     @Override
 	public Object clone() {
