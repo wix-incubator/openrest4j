@@ -99,6 +99,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@Type(value = AddChargeUsageRequest.class, name = AddChargeUsageRequest.TYPE),
 	@Type(value = GetChargeUsageRequest.class, name = GetChargeUsageRequest.TYPE),
 	@Type(value = CreateGroupRequest.class, name = CreateGroupRequest.TYPE),
+	@Type(value = SetGroupRequest.class, name = SetGroupRequest.TYPE),
 	@Type(value = GetGroupsRequest.class, name = GetGroupsRequest.TYPE),
 	@Type(value = JoinGroupRequest.class, name = JoinGroupRequest.TYPE),
 	@Type(value = LeaveGroupRequest.class, name = LeaveGroupRequest.TYPE),

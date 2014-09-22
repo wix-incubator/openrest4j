@@ -19,7 +19,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	    property = "type")  
 @JsonSubTypes({
 	@Type(value = CodeGroup.class, name = CodeGroup.TYPE),
-	@Type(value = RoleGroup.class, name = RoleGroup.TYPE),
 	@Type(value = MembersGroup.class, name = MembersGroup.TYPE)
 })
 public abstract class Group implements Serializable, Cloneable {
