@@ -48,7 +48,7 @@ public class Order implements Serializable, Cloneable {
     /** View the order as third-party source, e.g. portal. */
     public static final String ORDER_VIEW_MODE_SOURCE = "source";
     
-    /** All known order statuses. */
+    /** All known order view modes. */
     public static final Set<String> ALL_ORDER_VIEW_MODES = new HashSet<String>(Arrays.asList(new String[] {
     		ORDER_VIEW_MODE_RESTAURANT, ORDER_VIEW_MODE_CUSTOMER, ORDER_VIEW_MODE_SHARE, ORDER_VIEW_MODE_SOURCE
     }));
