@@ -1,11 +1,14 @@
 package com.openrest.olo.users;
 
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.openrest.v1_1.ClientId;
 
 /** Group based on list of members. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -33,4 +36,7 @@ public class MembersGroup extends Group {
 	
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean joinable = Boolean.FALSE;
+    
+    @JsonInclude(Include.NON_DEFAULT)
+    public List<ClientId> members = new LinkedList<ClientId>();
 }

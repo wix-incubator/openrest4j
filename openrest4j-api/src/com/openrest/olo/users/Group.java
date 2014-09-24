@@ -1,8 +1,11 @@
 package com.openrest.olo.users;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -23,6 +26,18 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 })
 public abstract class Group implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
+    
+    /** View the group as any random person. */
+    public static final String GROUP_VIEW_MODE_ANYONE = "anyone";
+    /** View the group as a group member. */
+    public static final String GROUP_VIEW_MODE_MEMBER = "member";
+    /** View the group as a group manager. */
+    public static final String GROUP_VIEW_MODE_MANAGER = "manager";
+    
+    /** All known group view modes. */
+    public static final Set<String> ALL_GROUP_VIEW_MODES = new HashSet<String>(Arrays.asList(new String[] {
+    		GROUP_VIEW_MODE_ANYONE, GROUP_VIEW_MODE_MEMBER, GROUP_VIEW_MODE_MANAGER
+    }));
     
     /** Default constructor for JSON deserialization. */
     public Group() {}
