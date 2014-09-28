@@ -23,12 +23,12 @@ public class Distributor extends Organization {
     		Map<String, String> title, Map<String, String> description,
     		String locale, Set<String> locales, Map<String, Map<String, String>> messages, ColorScheme colorScheme,
     		Contact contact, Map<String, Contact> externalContacts, Address address, String timezone, String currency,
-    		String link, String domain, Set<String> altDomains,
-    		List<AppInfo> apps, Seo seo, Map<String, String> properties, String facebookAppId, String tld,
+    		String link, String domain, Set<String> altDomains, List<AppInfo> apps, Seo seo,
+    		Map<String, String> properties, Map<String, String> compatibilities, String facebookAppId, String tld,
     		String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
     		String state, Boolean closed, String virtualId, Boolean inactive, Set<Product> products, Double rank) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
-    			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties,
+    			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties, compatibilities,
     			picture, icon, wideLogo, noImagePicture, blobs, state, closed, virtualId, inactive, products, rank);
     	
     	this.facebookAppId = facebookAppId;
@@ -68,6 +68,7 @@ public class Distributor extends Organization {
     			AppInfo.clone(apps),
     			((seo != null) ? (Seo) seo.clone() : null),
     			((properties != null) ? new LinkedHashMap<String, String>(properties) : null),
+    			((compatibilities != null) ? new LinkedHashMap<String, String>(compatibilities) : null),
     			facebookAppId, tld, picture, icon, wideLogo, noImagePicture, Blob.clone(blobs),
     			state, closed, virtualId, inactive, Product.clone(products), rank);
 	}

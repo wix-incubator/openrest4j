@@ -1,8 +1,8 @@
 package com.openrest.v1_1;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,10 +27,10 @@ public class Restaurant extends Organization {
             Set<String> paymentTypes, Boolean multiPaymentDisabled, Map<String, CardInfo> cardInfos,
             Map<String, Integer> minPayments, Boolean antiFraudDisabled, String link, String domain, Set<String> altDomains,
             String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
-            List<AppInfo> apps, Seo seo, Map<String, String> properties,
+            List<AppInfo> apps, Seo seo, Map<String, String> properties, Map<String, String> compatibilities,
             String state, Boolean closed, String virtualId, Boolean inactive, Set<Product> products, Map<String, Double> features, Double rank) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
-    			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties,
+    			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties, compatibilities,
     			picture, icon, wideLogo, noImagePicture, blobs, state, closed, virtualId, inactive, products, rank);
         
     	this.distributorId = distributorId;
@@ -75,7 +75,9 @@ public class Restaurant extends Organization {
     			picture, icon, wideLogo, noImagePicture, Blob.clone(blobs),
     			AppInfo.clone(apps),
     			((seo != null) ? (Seo) seo.clone() : null),
-    			((properties != null) ? new LinkedHashMap<String, String>(properties) : null), state, closed, virtualId, inactive,
+    			((properties != null) ? new LinkedHashMap<String, String>(properties) : null),
+    			((compatibilities != null) ? new LinkedHashMap<String, String>(compatibilities) : null),
+    			state, closed, virtualId, inactive,
     			Product.clone(products),
     			((features != null) ? new LinkedHashMap<String, Double>(features) : null),
     			rank);
@@ -100,7 +102,7 @@ public class Restaurant extends Organization {
 
     /** Information regarding the different delivery destinations. */
     @JsonInclude(Include.NON_DEFAULT)
-    public List<DeliveryInfo> deliveryInfos = new ArrayList<DeliveryInfo>();
+    public List<DeliveryInfo> deliveryInfos = new LinkedList<DeliveryInfo>();
     
     /**
      * Latest time up to which future orders will be accepted. For example, a value of 4320 means
