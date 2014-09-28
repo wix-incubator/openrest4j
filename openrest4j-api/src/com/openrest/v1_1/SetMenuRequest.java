@@ -15,11 +15,10 @@ public class SetMenuRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public SetMenuRequest() {}
     
-    public SetMenuRequest(String accessToken, String organizationId, Menu menu, Boolean optimize, List<BlobCopy> setBlobs) {
+    public SetMenuRequest(String accessToken, String organizationId, Menu menu, List<BlobCopy> setBlobs) {
     	this.accessToken = accessToken;
     	this.organizationId = organizationId;
     	this.menu = menu;
-    	this.optimize = optimize;
     	this.setBlobs = setBlobs;
     }
     
@@ -35,9 +34,6 @@ public class SetMenuRequest extends Request {
      */
     @JsonInclude(Include.NON_NULL)
     public Menu menu;
-    
-    @JsonInclude(Include.NON_DEFAULT)
-    public Boolean optimize = Boolean.FALSE;
     
     @JsonInclude(Include.NON_DEFAULT)
     public List<BlobCopy> setBlobs = new LinkedList<BlobCopy>();
