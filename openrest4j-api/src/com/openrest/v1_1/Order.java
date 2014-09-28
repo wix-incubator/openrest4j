@@ -1,10 +1,10 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -57,7 +57,7 @@ public class Order implements Serializable, Cloneable {
     public Order(String id, Map<String, String> externalIds, String distributorId, String chainId, String restaurantId,
     		String locale, List<OrderItem> orderItems,
     		String comment, Integer price, Delivery delivery, Contact contact, List<Payment> payments,
-            Integer takeoutPacks, List<Charge> charges,
+            Integer takeoutPacks, List<Charge> charges, List<com.openrest.olo.charges.Charge> chargesV2,
             java.util.Date created, java.util.Date received, java.util.Date modified, java.util.Date submitAt,
             User user, ClubMember clubMember, String status, String shareToken,
             String affiliate, String developer, String source, String platform, String ref,
@@ -77,6 +77,7 @@ public class Order implements Serializable, Cloneable {
         this.payments = payments;
         this.takeoutPacks = takeoutPacks;
         this.charges = charges;
+        this.chargesV2 = chargesV2;
         this.created = ((created != null) ? created.getTime() : null);
         this.received = ((received != null) ? received.getTime() : null);
         this.modified = ((modified != null) ? modified.getTime() : null);
@@ -100,47 +101,18 @@ public class Order implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	final List<OrderItem> clonedOrderItems;
-    	if (orderItems != null) {
-    		clonedOrderItems = new ArrayList<OrderItem>(orderItems.size());
-    		for (OrderItem orderItem : orderItems) {
-    			clonedOrderItems.add((OrderItem) orderItem.clone());
-    		}
-    	} else {
-    		clonedOrderItems = null;
-    	}
-    	
-    	final List<Charge> clonedCharges;
-    	if (charges != null) {
-    		clonedCharges = new ArrayList<Charge>(charges.size());
-    		for (Charge charge : charges) {
-    			clonedCharges.add((Charge) charge.clone());
-    		}
-    	} else {
-    		clonedCharges = null;
-    	}
-    	
-    	final List<LogEntry> clonedLog;
-    	if (log != null) {
-    		clonedLog = new ArrayList<LogEntry>(log.size());
-    		for (LogEntry logEntry : log) {
-    			clonedLog.add((LogEntry) logEntry.clone());
-    		}
-    	} else {
-    		clonedLog = null;
-    	}
-    	
     	return new Order(id,
-    			((externalIds != null) ? new HashMap<String, String>(externalIds) : null),
-    			distributorId, chainId, restaurantId, locale, clonedOrderItems, comment, price,
+    			((externalIds != null) ? new LinkedHashMap<String, String>(externalIds) : null),
+    			distributorId, chainId, restaurantId, locale, OrderItem.clone(orderItems), comment, price,
     			((delivery != null) ? (Delivery) delivery.clone() : null),
     			((contact != null) ? (Contact) contact.clone() : null),
-    			Payment.clone(payments), takeoutPacks, clonedCharges, created(), received(), modified(), submitAt(),
+    			Payment.clone(payments), takeoutPacks, Charge.clone(charges), com.openrest.olo.charges.Charge.clone(chargesV2),
+    			created(), received(), modified(), submitAt(),
     			((user != null) ? (User) user.clone() : null),
     			((clubMember != null) ? (ClubMember) clubMember.clone() : null),
     			status, shareToken, affiliate, developer, source, platform, ref, legacyHierarchy,
-    			((properties != null) ? new HashMap<String, String>(properties) : null),
-    			clonedLog);
+    			((properties != null) ? new LinkedHashMap<String, String>(properties) : null),
+    			LogEntry.clone(log));
 	}
     
     public java.util.Date created() {
@@ -164,7 +136,7 @@ public class Order implements Serializable, Cloneable {
     public String id;
     
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> externalIds = new HashMap<String, String>();
+    public Map<String, String> externalIds = new LinkedHashMap<String, String>();
 
     /** The distributor's unique id. */
     @JsonInclude(Include.NON_NULL)
@@ -184,7 +156,7 @@ public class Order implements Serializable, Cloneable {
 
     /** The ordered items. */
     @JsonInclude(Include.NON_DEFAULT)
-    public List<OrderItem> orderItems = new ArrayList<OrderItem>();
+    public List<OrderItem> orderItems = new LinkedList<OrderItem>();
 
     /** Comment to the restaurant (as opposed to the delivery person!). */
     @JsonInclude(Include.NON_NULL)
@@ -204,7 +176,7 @@ public class Order implements Serializable, Cloneable {
 
     /* Payments. */
     @JsonInclude(Include.NON_DEFAULT)
-    public List<Payment> payments = new ArrayList<Payment>();
+    public List<Payment> payments = new LinkedList<Payment>();
 
     /**
      * Number of "takeout packs" (e.g. cutlery and condiments) to deliver with the order.
@@ -216,9 +188,15 @@ public class Order implements Serializable, Cloneable {
     /**
 	 * Extra charges or discounts associated with the order, ordered by priority
 	 * in descending order.
+	 * 
+     * Scheduled for deprecation on 2015-04-01 (use chargesV2). 
 	 */
+    @Deprecated
     @JsonInclude(Include.NON_DEFAULT)
-    public List<Charge> charges = new ArrayList<Charge>();
+    public List<Charge> charges = new LinkedList<Charge>();
+    
+    @JsonInclude(Include.NON_DEFAULT)
+    public List<com.openrest.olo.charges.Charge> chargesV2 = new LinkedList<com.openrest.olo.charges.Charge>();
 
     /** The order's creation timestamp. */
     @JsonInclude(Include.NON_NULL)
@@ -296,11 +274,11 @@ public class Order implements Serializable, Cloneable {
      * keys, e.g. "com.googlecode.openrestext".
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> properties = new HashMap<String, String>();
+    public Map<String, String> properties = new LinkedHashMap<String, String>();
     
     /** Change log for this order. */
     @JsonInclude(Include.NON_DEFAULT)
-    public List<LogEntry> log = new ArrayList<LogEntry>();
+    public List<LogEntry> log = new LinkedList<LogEntry>();
     
     /** The order in HTML format. */
     @JsonInclude(Include.NON_NULL)

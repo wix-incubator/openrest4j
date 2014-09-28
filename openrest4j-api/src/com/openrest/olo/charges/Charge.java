@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -66,6 +68,18 @@ public class Charge implements Serializable, Cloneable {
     			state,
     			((properties != null) ? new LinkedHashMap<String, String>(properties) : null));
 	}
+    
+    public static List<Charge> clone(List<Charge> charges) {
+    	if (charges == null) {
+    		return null;
+    	}
+    	
+    	final List<Charge> cloned = new LinkedList<Charge>();
+    	for (Charge charge : charges) {
+    		cloned.add((charge != null) ? (Charge) charge.clone() : null);
+    	}
+    	return cloned;
+    }
 
     /** @see ALL_CHARGE_TYPES. */
     @JsonInclude(Include.NON_NULL)

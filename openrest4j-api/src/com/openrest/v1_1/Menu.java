@@ -1,7 +1,6 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,10 +12,12 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Menu implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
     
-    public Menu(Long modified, List<Item> items, List<Category> categories, List<Charge> charges) {
+    public Menu(Long modified, List<Item> items, List<Category> categories, List<com.openrest.olo.charges.Charge> chargesV2,
+    		List<Charge> charges) {
     	this.modified = modified;
         this.items = items;
         this.categories = categories;
+        this.chargesV2 = chargesV2;
         this.charges = charges;
     }
 
@@ -25,7 +26,8 @@ public class Menu implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	final Menu cloned = new Menu(modified, Item.clone(items), Category.clone(categories), Charge.clone(charges));
+    	final Menu cloned = new Menu(modified, Item.clone(items), Category.clone(categories),
+    			com.openrest.olo.charges.Charge.clone(chargesV2), Charge.clone(charges));
     	cloned.tags = Tag.clone(tags);
     	return cloned;
 	}
@@ -45,6 +47,14 @@ public class Menu implements Serializable, Cloneable {
     @JsonInclude(Include.NON_DEFAULT)
     public List<Category> categories = new LinkedList<Category>();
     
+    @JsonInclude(Include.NON_DEFAULT)
+    public List<com.openrest.olo.charges.Charge> chargesV2 = new LinkedList<com.openrest.olo.charges.Charge>();
+    
+    /**
+     * Charges v1.
+     * Scheduled for deprecation on 2015-04-01 (use chargesV2). 
+     */
+    @Deprecated
     @JsonInclude(Include.NON_DEFAULT)
     public List<Charge> charges = new LinkedList<Charge>();
 }

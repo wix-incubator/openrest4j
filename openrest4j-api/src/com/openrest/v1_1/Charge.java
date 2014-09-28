@@ -20,7 +20,10 @@ import com.openrest.availability.Availability;
  * Examples: state tax, discount coupon.
  * 
  * For legacy reasons, delivery charges are not part of this.
+ * 
+ * Scheduled for deprecation on 2015-04-01 (use com.openrest.olo.charges.Charge). 
  */
+@Deprecated
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Charge implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;

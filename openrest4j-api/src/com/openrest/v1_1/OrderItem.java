@@ -1,7 +1,7 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -27,13 +27,9 @@ public class OrderItem implements Serializable, Cloneable {
 	public Object clone() {
     	final List<List<OrderItem>> clonedVariationsChoices;
     	if (variationsChoices != null) {
-    		clonedVariationsChoices = new ArrayList<List<OrderItem>>(variationsChoices.size());
+    		clonedVariationsChoices = new LinkedList<List<OrderItem>>();
     		for (List<OrderItem> orderItems : variationsChoices) {
-    			final List<OrderItem> clonedOrderItems = new ArrayList<OrderItem>(orderItems.size());
-    			for (OrderItem orderItem : orderItems) {
-    				clonedOrderItems.add((OrderItem) orderItem.clone());
-    			}
-    			clonedVariationsChoices.add(clonedOrderItems);
+    			clonedVariationsChoices.add(OrderItem.clone(orderItems));
     		}
     	} else {
     		clonedVariationsChoices = null;
@@ -41,6 +37,18 @@ public class OrderItem implements Serializable, Cloneable {
 
     	return new OrderItem(itemId, Variation.clone(variations), clonedVariationsChoices, comment, price, count);
 	}
+    
+    public static List<OrderItem> clone(List<OrderItem> orderItems) {
+    	if (orderItems == null) {
+    		return null;
+    	}
+    	
+    	final List<OrderItem> cloned = new LinkedList<OrderItem>();
+		for (OrderItem orderItem : orderItems) {
+			cloned.add((orderItem != null) ? (OrderItem) orderItem.clone() : null);
+		}
+    	return cloned;
+    }
 
     /** Item id. */
     @JsonInclude(Include.NON_NULL)
@@ -53,11 +61,11 @@ public class OrderItem implements Serializable, Cloneable {
      * for variationsChoices.
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public List<Variation> variations = new ArrayList<Variation>();
+    public List<Variation> variations = new LinkedList<Variation>();
 
     /** The ordered-item's chosen variations. */
     @JsonInclude(Include.NON_DEFAULT)
-    public List<List<OrderItem>> variationsChoices = new ArrayList<List<OrderItem>>();
+    public List<List<OrderItem>> variationsChoices = new LinkedList<List<OrderItem>>();
 
     /** Textual comment regarding the item. */
     @JsonInclude(Include.NON_NULL)

@@ -23,7 +23,7 @@ public class OrderCharge implements Serializable, Cloneable {
     	return new OrderCharge(chargeId, amount);
 	}
 
-    /** Charge id. */
+    /** The charge id. */
     @JsonInclude(Include.NON_NULL)
     public String chargeId;
 

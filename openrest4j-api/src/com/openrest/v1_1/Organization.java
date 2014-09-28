@@ -1,9 +1,8 @@
 package com.openrest.v1_1;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -45,12 +44,13 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     public static final String BLOB_TYPE_COVER = "cover";
 	/**
 	 * Sound recording for automated phone calls.
-	 * @see Notification.NOTIFICATION_TYPE_DELAYED_ORDER, Notification.NOTIFICATION_TYPE_NEW_ORDER
+	 * @see com.openrest.olo.notifications.Notification.NOTIFICATION_TYPE_DELAYED_ORDER
+	 * @see com.openrest.olo.notifications.Notification.NOTIFICATION_TYPE_NEW_ORDER
 	 */
     public static final String BLOB_TYPE_NOTIFICATION_VOICE = "notification_voice";
 	/**
 	 * Sound recording for automated phone calls.
-	 * @see Notification.NOTIFICATION_TYPE_POS_ERROR
+	 * @see com.openrest.olo.notifications.Notification.NOTIFICATION_TYPE_POS_ERROR
 	 */
     public static final String BLOB_TYPE_NOTIFICATION_POS_ERROR = "notification_pos_error";
     
@@ -63,7 +63,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     		Contact contact, Map<String, Contact> externalContacts,
     		Address address, String timezone, String currency,
     		String link, String domain, Set<String> altDomains,
-    		List<AppInfo> apps, Seo seo, Map<String, String> properties,
+    		List<AppInfo> apps, Seo seo, Map<String, String> properties, Map<String, String> compatibilities,
     		String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
     		String state, Boolean closed, String virtualId, Boolean inactive, Set<Product> products, Double rank) {
 
@@ -90,6 +90,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     	this.apps = apps;
     	this.seo = seo;
     	this.properties = properties;
+    	this.compatibilities = compatibilities;
     	this.picture = picture;
     	this.icon = icon;
     	this.wideLogo = wideLogo;
@@ -145,7 +146,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
      * Developers should use unique keys, e.g. "com.company.product".
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> externalIds = new HashMap<String, String>();
+    public Map<String, String> externalIds = new LinkedHashMap<String, String>();
     
     /** The organization's creation timestamp. */
     @JsonInclude(Include.NON_NULL)
@@ -157,11 +158,11 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     
     /** The organization's title in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title = new HashMap<String, String>();
+    public Map<String, String> title = new LinkedHashMap<String, String>();
 
     /** The organization's description or tagline in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> description = new HashMap<String, String>();
+    public Map<String, String> description = new LinkedHashMap<String, String>();
     
     /** The color scheme. */
     @JsonInclude(Include.NON_NULL)
@@ -178,7 +179,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
      * Developers should use unique keys, e.g. "com.company.product".
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, Contact> externalContacts = new HashMap<String, Contact>();
+    public Map<String, Contact> externalContacts = new LinkedHashMap<String, Contact>();
 
     /** The address of this organization. */
     @JsonInclude(Include.NON_NULL)
@@ -210,7 +211,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
      * The text may contain simple HTML formatting.
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, Map<String, String>> messages = new HashMap<String, Map<String, String>>();
+    public Map<String, Map<String, String>> messages = new LinkedHashMap<String, Map<String, String>>();
     
     /** The organization's main web-site URL. */
     @JsonInclude(Include.NON_NULL)
@@ -245,7 +246,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     
     /** The organization's applications. */
     @JsonInclude(Include.NON_DEFAULT)
-    public List<AppInfo> apps = new ArrayList<AppInfo>();
+    public List<AppInfo> apps = new LinkedList<AppInfo>();
     
     /** SEO information. */
     @JsonInclude(Include.NON_NULL)
@@ -256,14 +257,21 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
      * keys, e.g. "com.googlecode.openrestext".
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> properties = new HashMap<String, String>();
+    public Map<String, String> properties = new LinkedHashMap<String, String>();
+    
+    /**
+     * Maps features to compatibility levels, e.g. "com.openrest.charges" -> "1.0.0".
+     * A non-existent key means "latest".
+     */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Map<String, String> compatibilities = new LinkedHashMap<String, String>();
     
     /**
      * Maps blob-types to blobs.
      * @see GetBlobUploadUrlRequest#blobType
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, Blob> blobs = new HashMap<String, Blob>();
+    public Map<String, Blob> blobs = new LinkedHashMap<String, Blob>();
     
     /**
      * The organization is permanently closed, e.g. out of business.
