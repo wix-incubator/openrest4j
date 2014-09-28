@@ -1,6 +1,8 @@
 package com.openrest.olo.charges;
 
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -22,6 +24,18 @@ public class OrderCharge implements Serializable, Cloneable {
 	public Object clone() {
     	return new OrderCharge(chargeId, amount);
 	}
+    
+    public static List<OrderCharge> clone(List<OrderCharge> orderCharges) {
+    	if (orderCharges == null) {
+    		return null;
+    	}
+    	
+    	final List<OrderCharge> cloned = new LinkedList<OrderCharge>();
+    	for (OrderCharge orderCharge : orderCharges) {
+    		cloned.add((orderCharge != null) ? (OrderCharge) orderCharge.clone() : null);
+    	}
+    	return cloned;
+    }
 
     /** The charge id. */
     @JsonInclude(Include.NON_NULL)

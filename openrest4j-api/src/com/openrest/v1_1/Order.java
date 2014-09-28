@@ -12,6 +12,7 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.openrest.olo.charges.OrderCharge;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Order implements Serializable, Cloneable {
@@ -57,7 +58,7 @@ public class Order implements Serializable, Cloneable {
     public Order(String id, Map<String, String> externalIds, String distributorId, String chainId, String restaurantId,
     		String locale, List<OrderItem> orderItems,
     		String comment, Integer price, Delivery delivery, Contact contact, List<Payment> payments,
-            Integer takeoutPacks, List<Charge> charges, List<com.openrest.olo.charges.Charge> chargesV2,
+            Integer takeoutPacks, List<Charge> charges, List<OrderCharge> orderCharges,
             java.util.Date created, java.util.Date received, java.util.Date modified, java.util.Date submitAt,
             User user, ClubMember clubMember, String status, String shareToken,
             String affiliate, String developer, String source, String platform, String ref,
@@ -77,7 +78,7 @@ public class Order implements Serializable, Cloneable {
         this.payments = payments;
         this.takeoutPacks = takeoutPacks;
         this.charges = charges;
-        this.chargesV2 = chargesV2;
+        this.orderCharges = orderCharges;
         this.created = ((created != null) ? created.getTime() : null);
         this.received = ((received != null) ? received.getTime() : null);
         this.modified = ((modified != null) ? modified.getTime() : null);
@@ -106,7 +107,7 @@ public class Order implements Serializable, Cloneable {
     			distributorId, chainId, restaurantId, locale, OrderItem.clone(orderItems), comment, price,
     			((delivery != null) ? (Delivery) delivery.clone() : null),
     			((contact != null) ? (Contact) contact.clone() : null),
-    			Payment.clone(payments), takeoutPacks, Charge.clone(charges), com.openrest.olo.charges.Charge.clone(chargesV2),
+    			Payment.clone(payments), takeoutPacks, Charge.clone(charges), OrderCharge.clone(orderCharges),
     			created(), received(), modified(), submitAt(),
     			((user != null) ? (User) user.clone() : null),
     			((clubMember != null) ? (ClubMember) clubMember.clone() : null),
@@ -189,14 +190,14 @@ public class Order implements Serializable, Cloneable {
 	 * Extra charges or discounts associated with the order, ordered by priority
 	 * in descending order.
 	 * 
-     * Scheduled for deprecation on 2015-04-01 (use chargesV2). 
+     * Scheduled for deprecation on 2015-04-01 (use orderCharges). 
 	 */
     @Deprecated
     @JsonInclude(Include.NON_DEFAULT)
     public List<Charge> charges = new LinkedList<Charge>();
     
     @JsonInclude(Include.NON_DEFAULT)
-    public List<com.openrest.olo.charges.Charge> chargesV2 = new LinkedList<com.openrest.olo.charges.Charge>();
+    public List<OrderCharge> orderCharges = new LinkedList<OrderCharge>();
 
     /** The order's creation timestamp. */
     @JsonInclude(Include.NON_NULL)
