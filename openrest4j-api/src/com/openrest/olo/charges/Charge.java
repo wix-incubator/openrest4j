@@ -46,7 +46,7 @@ public class Charge implements Serializable, Cloneable {
     public Charge() {}
     
     public Charge(String type, String id, String organizationId, Map<String, String> title, Map<String, String> description,
-    		Condition condition, Action action, String state, Map<String, String> properties) {
+    		Condition condition, Action action, String state, Boolean mandatory, Map<String, String> properties) {
         this.type = type;
     	this.id = id;
     	this.organizationId = organizationId;
@@ -55,6 +55,7 @@ public class Charge implements Serializable, Cloneable {
     	this.condition = condition;
     	this.action = action;
         this.state = state;
+    	this.mandatory = mandatory;
         this.properties = properties;
     }
     
@@ -65,7 +66,7 @@ public class Charge implements Serializable, Cloneable {
     			((description != null) ? new LinkedHashMap<String, String>(description) : null),
     			((condition != null) ? (Condition) condition.clone() : null),
     			((action != null) ? (Action) action.clone() : null),
-    			state,
+    			state, mandatory,
     			((properties != null) ? new LinkedHashMap<String, String>(properties) : null));
 	}
     
@@ -110,6 +111,10 @@ public class Charge implements Serializable, Cloneable {
     /** @see State.ALL_STATES */
     @JsonInclude(Include.NON_DEFAULT)
     public String state = State.STATE_OPERATIONAL;
+    
+    /** Must this charge be included in all orders? */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Boolean mandatory = Boolean.FALSE;
     
     /**
      * Map of user-defined extended properties. Developers should use unique
