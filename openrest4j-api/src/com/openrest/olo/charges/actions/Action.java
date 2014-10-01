@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonSubTypes({
 	@Type(value = PercentageAction.class, name = PercentageAction.TYPE),
 	@Type(value = FixedAmountAction.class, name = FixedAmountAction.TYPE),
+	@Type(value = FixedAmountPerItemAction.class, name = FixedAmountPerItemAction.TYPE),
 	@Type(value = XPlusYAction.class, name = XPlusYAction.TYPE)
 })
 public abstract class Action implements Serializable, Cloneable {
