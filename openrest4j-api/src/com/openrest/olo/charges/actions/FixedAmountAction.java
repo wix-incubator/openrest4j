@@ -1,12 +1,14 @@
 package com.openrest.olo.charges.actions;
 
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.openrest.olo.charges.ItemsFilter;
+import com.openrest.olo.charges.IdsFilter;
+import com.openrest.olo.charges.Inclusion;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FixedAmountAction extends Action {
@@ -16,16 +18,18 @@ public class FixedAmountAction extends Action {
     /** Default constructor for JSON deserialization. */
     public FixedAmountAction() {}
     
-    public FixedAmountAction(Integer amount, ItemsFilter items, Map<String, String> properties) {
+    public FixedAmountAction(Integer amount, IdsFilter items, IdsFilter charges, Map<String, String> properties) {
     	super(properties);
     	this.amount = amount;
     	this.items = items;
+    	this.charges = charges;
     }
     
 	@Override
 	public Object clone() {
 		return new FixedAmountAction(amount,
-			((items != null) ? (ItemsFilter) items.clone() : null),
+			((items != null) ? (IdsFilter) items.clone() : null),
+			((charges != null) ? (IdsFilter) charges.clone() : null),
 			((properties != null) ? new LinkedHashMap<String, String>(properties) : null));
 	}
 	
@@ -33,6 +37,9 @@ public class FixedAmountAction extends Action {
     @JsonInclude(Include.NON_NULL)
     public Integer amount;
     
-    @JsonInclude(Include.NON_NULL)
-    public ItemsFilter items;
+    @JsonInclude(Include.NON_DEFAULT)
+    public IdsFilter items = new IdsFilter(Inclusion.TYPE_INCLUDE, new LinkedHashSet<String>());
+    
+    @JsonInclude(Include.NON_DEFAULT)
+    public IdsFilter charges = new IdsFilter(Inclusion.TYPE_INCLUDE, new LinkedHashSet<String>());
 }
