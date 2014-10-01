@@ -46,12 +46,14 @@ public class Charge implements Serializable, Cloneable {
     public Charge() {}
     
     public Charge(String type, String id, String organizationId, Map<String, String> title, Map<String, String> description,
-    		Condition condition, Action action, String state, Boolean mandatory, Map<String, String> properties) {
+    		Condition displayCondition, Condition condition, Action action, String state, Boolean mandatory,
+    		Map<String, String> properties) {
         this.type = type;
     	this.id = id;
     	this.organizationId = organizationId;
     	this.title = title;
     	this.description = description;
+    	this.displayCondition = displayCondition;
     	this.condition = condition;
     	this.action = action;
         this.state = state;
@@ -64,6 +66,7 @@ public class Charge implements Serializable, Cloneable {
     	return new Charge(type, id, organizationId,
     			((title != null) ? new LinkedHashMap<String, String>(title) : null),
     			((description != null) ? new LinkedHashMap<String, String>(description) : null),
+    			((displayCondition != null) ? (Condition) displayCondition.clone() : null),
     			((condition != null) ? (Condition) condition.clone() : null),
     			((action != null) ? (Action) action.clone() : null),
     			state, mandatory,
@@ -102,9 +105,15 @@ public class Charge implements Serializable, Cloneable {
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> description = new LinkedHashMap<String, String>();
     
+    /** Condition to display the charge to end-users. */
+    @JsonInclude(Include.NON_NULL)
+    public Condition displayCondition;
+    
+    /** Condition to apply the action. */
     @JsonInclude(Include.NON_NULL)
     public Condition condition;
     
+    /** The charge's action, e.g. "5% off for every item". */
     @JsonInclude(Include.NON_NULL)
     public Action action;
     
