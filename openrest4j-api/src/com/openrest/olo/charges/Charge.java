@@ -12,8 +12,8 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.openrest.olo.charges.actions.Action;
 import com.openrest.olo.charges.conditions.Condition;
+import com.openrest.olo.charges.operators.Operator;
 import com.openrest.v1_1.State;
 
 /**
@@ -46,7 +46,7 @@ public class Charge implements Serializable, Cloneable {
     public Charge() {}
     
     public Charge(String type, String id, String organizationId, Map<String, String> title, Map<String, String> description,
-    		Condition displayCondition, Condition condition, Action action, String state, Boolean mandatory,
+    		Condition displayCondition, Condition condition, Operator operator, String state, Boolean mandatory,
     		Map<String, String> properties) {
         this.type = type;
     	this.id = id;
@@ -55,7 +55,7 @@ public class Charge implements Serializable, Cloneable {
     	this.description = description;
     	this.displayCondition = displayCondition;
     	this.condition = condition;
-    	this.action = action;
+    	this.operator = operator;
         this.state = state;
     	this.mandatory = mandatory;
         this.properties = properties;
@@ -68,7 +68,7 @@ public class Charge implements Serializable, Cloneable {
     			((description != null) ? new LinkedHashMap<String, String>(description) : null),
     			((displayCondition != null) ? (Condition) displayCondition.clone() : null),
     			((condition != null) ? (Condition) condition.clone() : null),
-    			((action != null) ? (Action) action.clone() : null),
+    			((operator != null) ? (Operator) operator.clone() : null),
     			state, mandatory,
     			((properties != null) ? new LinkedHashMap<String, String>(properties) : null));
 	}
@@ -109,13 +109,13 @@ public class Charge implements Serializable, Cloneable {
     @JsonInclude(Include.NON_NULL)
     public Condition displayCondition;
     
-    /** Condition to apply the action. */
+    /** Condition to apply the operator. */
     @JsonInclude(Include.NON_NULL)
     public Condition condition;
     
-    /** The charge's action, e.g. "5% off for every item". */
+    /** The charge's operator, e.g. "5% off for every item" (null means the charge can be evaluated to any amount). */
     @JsonInclude(Include.NON_NULL)
-    public Action action;
+    public Operator operator;
     
     /** @see State.ALL_STATES */
     @JsonInclude(Include.NON_DEFAULT)

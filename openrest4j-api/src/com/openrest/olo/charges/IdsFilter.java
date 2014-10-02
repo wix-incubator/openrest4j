@@ -20,6 +20,14 @@ public class IdsFilter implements Serializable, Cloneable {
         this.ids = ids;
     }
     
+    public static IdsFilter any() {
+    	return new IdsFilter(Inclusion.TYPE_EXCLUDE, new LinkedHashSet<String>());
+    }
+    
+    public static IdsFilter none() {
+    	return new IdsFilter(Inclusion.TYPE_INCLUDE, new LinkedHashSet<String>());
+    }
+    
     @Override
 	public Object clone() {
     	return new IdsFilter(type,
@@ -29,7 +37,7 @@ public class IdsFilter implements Serializable, Cloneable {
     @JsonInclude(Include.NON_DEFAULT)
     public String type = Inclusion.TYPE_INCLUDE;
 
-    /** The ids (null means "all", which depends on context). */
+    /** The ids. */
     @JsonInclude(Include.NON_NULL)
     public Set<String> ids;
 }
