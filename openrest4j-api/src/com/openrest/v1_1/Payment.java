@@ -49,13 +49,15 @@ public class Payment implements Serializable, Cloneable {
     public static final String PAYMENT_TYPE_BRAINTREE = "com.braintreepayments";
     /** Bitpay payment (@see www.bitpay.com). */
     public static final String PAYMENT_TYPE_BITPAY = "com.bitpay";
+    /** Credit Mutuel payment (@see www.creditmutuel.fr). */
+    public static final String PAYMENT_TYPE_CREDITMUTUEL = "fr.creditmutuel";
 
     /** All known payment methods. */
     public static final Set<String> ALL_PAYMENT_TYPES = new HashSet<String>(Arrays.asList(
     		PAYMENT_TYPE_COD, PAYMENT_TYPE_CASH, PAYMENT_TYPE_CREDIT, PAYMENT_TYPE_DEBIT, PAYMENT_TYPE_10BIS,
     		PAYMENT_TYPE_CHECK, PAYMENT_TYPE_OFFSET, PAYMENT_TYPE_DEBT, PAYMENT_TYPE_DIRECT_DEBIT, PAYMENT_TYPE_WAIVE,
     		PAYMENT_TYPE_PAYPAL, PAYMENT_TYPE_CELLARIX, PAYMENT_TYPE_BITSOFGOLD, PAYMENT_TYPE_PELECARD, PAYMENT_TYPE_BRAINTREE,
-    		PAYMENT_TYPE_BITPAY
+    		PAYMENT_TYPE_BITPAY, PAYMENT_TYPE_CREDITMUTUEL
     ));
     
     public Payment(String type, Integer amount, CreditCard card, String token, String userId, String id, String password,
