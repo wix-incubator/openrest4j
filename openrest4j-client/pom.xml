@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.wixpress.openrest</groupId>
+    <artifactId>openrest4j-client</artifactId>
+    <version>1.1.7-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <url>${project_url}/${project.artifactId}</url>
+    <description>openrest4j Client</description>
+	
+    <developers>
+        <developer>
+            <name>Danny Leshem</name>
+            <email>dannyl@wix.com</email>
+            <roles>
+                <role>owner</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <parent>
+        <groupId>com.wixpress.common</groupId>
+        <artifactId>wix-scala-parent-ng</artifactId>
+        <version>100.0.0-SNAPSHOT</version>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <openrest.test.port>9902</openrest.test.port>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.wixpress.hoopoe</groupId>
+            <artifactId>hoopoe-utest</artifactId>
+        </dependency>
+
+        <!-- Compile/runtime dependencies -->
+	<dependency>
+		<groupId>com.google.http-client</groupId>
+		<artifactId>google-http-client</artifactId>
+		<version>1.17.0-rc</version>
+	</dependency>
+	<dependency>
+		<groupId>com.wixpress.openrest</groupId>
+		<artifactId>openrest4j-api</artifactId>
+		<version>1.1.7-SNAPSHOT</version>
+	</dependency>
+
+        <!-- Test Dependencies -->
+        <dependency>
+            <groupId>com.wixpress.common</groupId>
+            <artifactId>wix-framework-scala-test-dependencies</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.wixpress.common</groupId>
+                    <artifactId>wix-framework-test-dependencies</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.wixpress.common</groupId>
+                    <artifactId>wix-integration-test-framework</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+</project>
