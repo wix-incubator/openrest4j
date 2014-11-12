@@ -24,10 +24,12 @@ public class AppId implements Serializable, Cloneable {
     public static final String PLATFORM_MOBILEWEB = "mobileweb";
 	/** Facebook platform. */
     public static final String PLATFORM_FACEBOOK = "facebook";
+	/** Wix platform. */
+    public static final String PLATFORM_WIX = "com.wix";
     
     /** All known platforms. */
     public static final Set<String> ALL_PLATFORMS = new HashSet<String>(Arrays.asList(
-    		PLATFORM_ANDROID, PLATFORM_IOS, PLATFORM_WEB, PLATFORM_MOBILEWEB, PLATFORM_FACEBOOK
+    		PLATFORM_ANDROID, PLATFORM_IOS, PLATFORM_WEB, PLATFORM_MOBILEWEB, PLATFORM_FACEBOOK, PLATFORM_WIX
     ));
     
 	/** Namespace used with aliases (id = alias, version = meaningless). */
