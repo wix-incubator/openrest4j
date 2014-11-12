@@ -24,16 +24,17 @@ public class AppId implements Serializable, Cloneable {
     public static final String PLATFORM_MOBILEWEB = "mobileweb";
 	/** Facebook platform. */
     public static final String PLATFORM_FACEBOOK = "facebook";
-	/** Wix platform. */
-    public static final String PLATFORM_WIX = "com.wix";
     
     /** All known platforms. */
     public static final Set<String> ALL_PLATFORMS = new HashSet<String>(Arrays.asList(
-    		PLATFORM_ANDROID, PLATFORM_IOS, PLATFORM_WEB, PLATFORM_MOBILEWEB, PLATFORM_FACEBOOK, PLATFORM_WIX
+    		PLATFORM_ANDROID, PLATFORM_IOS, PLATFORM_WEB, PLATFORM_MOBILEWEB, PLATFORM_FACEBOOK
     ));
     
 	/** Namespace used with aliases (id = alias, version = meaningless). */
     public static final String NS_OPENREST = "com.openrest";
+    
+	/** Namespace used with Wix.com sites (id = site-id, version = meaningless). */
+    public static final String NS_WIX = "com.wix";
     
     public AppId(String platform, String id, String version) {
         this.platform = platform;
