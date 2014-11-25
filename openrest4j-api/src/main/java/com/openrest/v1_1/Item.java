@@ -11,7 +11,7 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.openrest.availability.Availability;
+import com.wix.restaurants.availability.Availability;
 
 /**
  * An item that can be ordered, e.g. a main dish ("hamburger"), a side ("fries")

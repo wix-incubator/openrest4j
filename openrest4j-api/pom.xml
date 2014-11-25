@@ -55,8 +55,7 @@
 	</dependency>
 	<dependency>
 		<groupId>com.wixpress.openrest</groupId>
-		<artifactId>availability4j-api</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<artifactId>wix-restaurants-availability-api</artifactId>
 	</dependency>
 
         <!-- Test Dependencies -->

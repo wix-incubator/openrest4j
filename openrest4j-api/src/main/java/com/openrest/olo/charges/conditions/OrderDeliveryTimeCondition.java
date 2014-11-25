@@ -6,7 +6,7 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.openrest.availability.Availability;
+import com.wix.restaurants.availability.Availability;
 
 /** Matches the order's delivery time against a given availability period. */
 @JsonIgnoreProperties(ignoreUnknown = true)

@@ -10,7 +10,7 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.openrest.availability.Date;
+import com.wix.restaurants.availability.Date;
 
 /**
  * A supplier-customer balance is split to three separate accounts, all viewed
