@@ -4,7 +4,7 @@
 
     <groupId>com.wixpress.openrest</groupId>
     <artifactId>openrest4j-all</artifactId>
-    <version>1.3.0-SNAPSHOT</version>
+    <version>1.4.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>The OpenRest SDK for Java</name>
     <url>${project_url}/${project.artifactId}</url>
