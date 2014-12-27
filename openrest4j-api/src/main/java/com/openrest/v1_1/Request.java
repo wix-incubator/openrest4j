@@ -7,6 +7,9 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import com.openrest.olo.GetPotentialWeeklyStatsRequest;
+import com.openrest.olo.SetPotentialWeeklyStatsRequest;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(
 		use = JsonTypeInfo.Id.NAME,  
@@ -60,6 +63,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@Type(value = DeferredRequest.class, name = DeferredRequest.TYPE),
 	@Type(value = BatchRequest.class, name = BatchRequest.TYPE),
 	@Type(value = GetStatsRequest.class, name = GetStatsRequest.TYPE),
+    @Type(value = GetPotentialWeeklyStatsRequest.class, name = GetPotentialWeeklyStatsRequest.TYPE),
+    @Type(value = SetPotentialWeeklyStatsRequest.class, name = SetPotentialWeeklyStatsRequest.TYPE),
 	@Type(value = GetStaffRequest.class, name = GetStaffRequest.TYPE),
 	@Type(value = SetStaffRequest.class, name = SetStaffRequest.TYPE),
 	@Type(value = GetNotificationsRequest.class, name = GetNotificationsRequest.TYPE),
