@@ -43,25 +43,5 @@
 		</dependency>
 
         <!-- Test Dependencies -->
-        <dependency>
-            <groupId>com.wixpress.hoopoe</groupId>
-            <artifactId>hoopoe-utest</artifactId>
-			<scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.wixpress.common</groupId>
-            <artifactId>wix-framework-scala-test-dependencies</artifactId>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.wixpress.common</groupId>
-                    <artifactId>wix-framework-test-dependencies</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.wixpress.common</groupId>
-                    <artifactId>wix-integration-test-framework</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
     </dependencies>
 </project>
