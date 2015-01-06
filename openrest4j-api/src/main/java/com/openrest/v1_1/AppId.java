@@ -14,9 +14,9 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class AppId implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
     
-    /** Android platform. */
+    /** Mobile app (Android). */
     public static final String PLATFORM_ANDROID = "android";
-	/** iOS platform. */
+	/** Mobile app (iOS). */
     public static final String PLATFORM_IOS = "ios";
 	/** Web platform. */
     public static final String PLATFORM_WEB = "web";
@@ -24,10 +24,17 @@ public class AppId implements Serializable, Cloneable {
     public static final String PLATFORM_MOBILEWEB = "mobileweb";
 	/** Facebook platform. */
     public static final String PLATFORM_FACEBOOK = "facebook";
-    
+    /** Call center. */
+    public static final String PLATFORM_CALLCENTER = "callcenter";
+    /** Kiosk (Android). */
+    public static final String PLATFORM_KIOSK_ANDROID = "kiosk.android";
+    /** Kiosk (iOS). */
+    public static final String PLATFORM_KIOSK_IOS = "kiosk.ios";
+
     /** All known platforms. */
     public static final Set<String> ALL_PLATFORMS = new HashSet<String>(Arrays.asList(
-    		PLATFORM_ANDROID, PLATFORM_IOS, PLATFORM_WEB, PLATFORM_MOBILEWEB, PLATFORM_FACEBOOK
+    		PLATFORM_ANDROID, PLATFORM_IOS, PLATFORM_WEB, PLATFORM_MOBILEWEB, PLATFORM_FACEBOOK,
+            PLATFORM_CALLCENTER, PLATFORM_KIOSK_ANDROID, PLATFORM_KIOSK_IOS
     ));
     
 	/** Namespace used with aliases (id = alias, version = meaningless). */
