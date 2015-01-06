@@ -19,7 +19,7 @@ public class Delivery implements Serializable, Cloneable {
     public static final String TIME_GUARANTEE_APPROXIMATE = "about";
     
     /** All known time guarantees. */
-    public static final Set<String> ALL_TIME_GUARANTEES = new HashSet<String>(Arrays.asList(new String[] {
+    public static final Set<String> ALL_TIME_GUARANTEES = new HashSet<>(Arrays.asList(new String[] {
     		TIME_GUARANTEE_BEFORE, TIME_GUARANTEE_APPROXIMATE
     }));
     
@@ -27,10 +27,12 @@ public class Delivery implements Serializable, Cloneable {
     public static final String DELIVERY_TYPE_DELIVERY = "delivery";
     /** Take-out from the restaurant. */
     public static final String DELIVERY_TYPE_TAKEOUT = "takeout";
+    /** Eat on premises. */
+    public static final String DELIVERY_TYPE_PREMISES = "premises";
 
     /** All known delivery methods. */
-    public static final Set<String> ALL_DELIVERY_TYPES = new HashSet<String>(Arrays.asList(new String[] {
-        DELIVERY_TYPE_DELIVERY, DELIVERY_TYPE_TAKEOUT
+    public static final Set<String> ALL_DELIVERY_TYPES = new HashSet<>(Arrays.asList(new String[] {
+        DELIVERY_TYPE_DELIVERY, DELIVERY_TYPE_TAKEOUT, DELIVERY_TYPE_PREMISES
     }));
 
     public Delivery(String type, Address address, Long time, String timeGuarantee, Integer charge) {
