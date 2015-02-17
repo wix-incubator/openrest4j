@@ -1,6 +1,8 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -12,7 +14,7 @@ public class Address implements Serializable, Cloneable {
 
     public Address(String formatted, String country, String city, String street, String number,
     		String apt, String floor, String entrance, String comment, LatLng latLng,
-    		String countryCode, String postalCode) {
+    		String countryCode, String postalCode, Map<String, String> properties) {
     	this.formatted = formatted;
     	this.country = country;
         this.city = city;
@@ -25,6 +27,7 @@ public class Address implements Serializable, Cloneable {
         this.latLng = latLng;
         this.countryCode = countryCode;
         this.postalCode = postalCode;
+        this.properties = properties;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -34,7 +37,8 @@ public class Address implements Serializable, Cloneable {
 	public Object clone() {
     	return new Address(formatted, country, city, street, number, apt, floor, entrance, comment,
     			((latLng != null) ? (LatLng) latLng.clone() : null),
-    			countryCode, postalCode);
+    			countryCode, postalCode,
+                ((properties != null) ? new LinkedHashMap<>(properties) : null));
 	}
 
     public String streetAddress(boolean useCountry) {
@@ -95,98 +99,49 @@ public class Address implements Serializable, Cloneable {
     
     @JsonInclude(Include.NON_NULL)
     public String postalCode;
-    
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((apt == null) ? 0 : apt.hashCode());
-		result = prime * result + ((city == null) ? 0 : city.hashCode());
-		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
-		result = prime * result + ((country == null) ? 0 : country.hashCode());
-		result = prime * result
-				+ ((countryCode == null) ? 0 : countryCode.hashCode());
-		result = prime * result
-				+ ((entrance == null) ? 0 : entrance.hashCode());
-		result = prime * result + ((floor == null) ? 0 : floor.hashCode());
-		result = prime * result + ((formatted == null) ? 0 : formatted.hashCode());
-		result = prime * result + ((latLng == null) ? 0 : latLng.hashCode());
-		result = prime * result + ((number == null) ? 0 : number.hashCode());
-		result = prime * result
-				+ ((postalCode == null) ? 0 : postalCode.hashCode());
-		result = prime * result + ((street == null) ? 0 : street.hashCode());
-		return result;
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Address other = (Address) obj;
-		if (apt == null) {
-			if (other.apt != null)
-				return false;
-		} else if (!apt.equals(other.apt))
-			return false;
-		if (city == null) {
-			if (other.city != null)
-				return false;
-		} else if (!city.equals(other.city))
-			return false;
-		if (comment == null) {
-			if (other.comment != null)
-				return false;
-		} else if (!comment.equals(other.comment))
-			return false;
-		if (country == null) {
-			if (other.country != null)
-				return false;
-		} else if (!country.equals(other.country))
-			return false;
-		if (countryCode == null) {
-			if (other.countryCode != null)
-				return false;
-		} else if (!countryCode.equals(other.countryCode))
-			return false;
-		if (entrance == null) {
-			if (other.entrance != null)
-				return false;
-		} else if (!entrance.equals(other.entrance))
-			return false;
-		if (floor == null) {
-			if (other.floor != null)
-				return false;
-		} else if (!floor.equals(other.floor))
-			return false;
-		if (formatted == null) {
-			if (other.formatted != null)
-				return false;
-		} else if (!formatted.equals(other.formatted))
-			return false;
-		if (latLng == null) {
-			if (other.latLng != null)
-				return false;
-		} else if (!latLng.equals(other.latLng))
-			return false;
-		if (number == null) {
-			if (other.number != null)
-				return false;
-		} else if (!number.equals(other.number))
-			return false;
-		if (postalCode == null) {
-			if (other.postalCode != null)
-				return false;
-		} else if (!postalCode.equals(other.postalCode))
-			return false;
-		if (street == null) {
-			if (other.street != null)
-				return false;
-		} else if (!street.equals(other.street))
-			return false;
-		return true;
-	}
+    @JsonInclude(Include.NON_DEFAULT)
+    public Map<String, String> properties = new LinkedHashMap<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Address address = (Address) o;
+
+        if (apt != null ? !apt.equals(address.apt) : address.apt != null) return false;
+        if (city != null ? !city.equals(address.city) : address.city != null) return false;
+        if (comment != null ? !comment.equals(address.comment) : address.comment != null) return false;
+        if (country != null ? !country.equals(address.country) : address.country != null) return false;
+        if (countryCode != null ? !countryCode.equals(address.countryCode) : address.countryCode != null) return false;
+        if (entrance != null ? !entrance.equals(address.entrance) : address.entrance != null) return false;
+        if (floor != null ? !floor.equals(address.floor) : address.floor != null) return false;
+        if (formatted != null ? !formatted.equals(address.formatted) : address.formatted != null) return false;
+        if (latLng != null ? !latLng.equals(address.latLng) : address.latLng != null) return false;
+        if (number != null ? !number.equals(address.number) : address.number != null) return false;
+        if (postalCode != null ? !postalCode.equals(address.postalCode) : address.postalCode != null) return false;
+        if (properties != null ? !properties.equals(address.properties) : address.properties != null) return false;
+        if (street != null ? !street.equals(address.street) : address.street != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = formatted != null ? formatted.hashCode() : 0;
+        result = 31 * result + (country != null ? country.hashCode() : 0);
+        result = 31 * result + (city != null ? city.hashCode() : 0);
+        result = 31 * result + (street != null ? street.hashCode() : 0);
+        result = 31 * result + (number != null ? number.hashCode() : 0);
+        result = 31 * result + (apt != null ? apt.hashCode() : 0);
+        result = 31 * result + (floor != null ? floor.hashCode() : 0);
+        result = 31 * result + (entrance != null ? entrance.hashCode() : 0);
+        result = 31 * result + (comment != null ? comment.hashCode() : 0);
+        result = 31 * result + (latLng != null ? latLng.hashCode() : 0);
+        result = 31 * result + (countryCode != null ? countryCode.hashCode() : 0);
+        result = 31 * result + (postalCode != null ? postalCode.hashCode() : 0);
+        result = 31 * result + (properties != null ? properties.hashCode() : 0);
+        return result;
+    }
 }
