@@ -68,6 +68,48 @@ public class CreditCard implements Serializable, Cloneable {
     			csc, anonymized);
 	}
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CreditCard that = (CreditCard) o;
+
+        if (anonymized != null ? !anonymized.equals(that.anonymized) : that.anonymized != null) return false;
+        if (billingAddress != null ? !billingAddress.equals(that.billingAddress) : that.billingAddress != null) return false;
+        if (billingPostalCode != null ? !billingPostalCode.equals(that.billingPostalCode) : that.billingPostalCode != null) return false;
+        if (csc != null ? !csc.equals(that.csc) : that.csc != null) return false;
+        if (expireMonth != null ? !expireMonth.equals(that.expireMonth) : that.expireMonth != null) return false;
+        if (expireYear != null ? !expireYear.equals(that.expireYear) : that.expireYear != null) return false;
+        if (holderId != null ? !holderId.equals(that.holderId) : that.holderId != null) return false;
+        if (holderName != null ? !holderName.equals(that.holderName) : that.holderName != null) return false;
+        if (issueNumber != null ? !issueNumber.equals(that.issueNumber) : that.issueNumber != null) return false;
+        if (number != null ? !number.equals(that.number) : that.number != null) return false;
+        if (type != null ? !type.equals(that.type) : that.type != null) return false;
+        if (validFromMonth != null ? !validFromMonth.equals(that.validFromMonth) : that.validFromMonth != null) return false;
+        if (validFromYear != null ? !validFromYear.equals(that.validFromYear) : that.validFromYear != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = type != null ? type.hashCode() : 0;
+        result = 31 * result + (number != null ? number.hashCode() : 0);
+        result = 31 * result + (expireMonth != null ? expireMonth.hashCode() : 0);
+        result = 31 * result + (expireYear != null ? expireYear.hashCode() : 0);
+        result = 31 * result + (holderId != null ? holderId.hashCode() : 0);
+        result = 31 * result + (holderName != null ? holderName.hashCode() : 0);
+        result = 31 * result + (validFromMonth != null ? validFromMonth.hashCode() : 0);
+        result = 31 * result + (validFromYear != null ? validFromYear.hashCode() : 0);
+        result = 31 * result + (issueNumber != null ? issueNumber.hashCode() : 0);
+        result = 31 * result + (billingAddress != null ? billingAddress.hashCode() : 0);
+        result = 31 * result + (billingPostalCode != null ? billingPostalCode.hashCode() : 0);
+        result = 31 * result + (csc != null ? csc.hashCode() : 0);
+        result = 31 * result + (anonymized != null ? anonymized.hashCode() : 0);
+        return result;
+    }
+
     /** The card type, e.g. "visa", "mastercard", "maestro". */
     @JsonInclude(Include.NON_NULL)
     public String type;

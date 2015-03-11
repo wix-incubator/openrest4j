@@ -39,6 +39,28 @@ public class LogEntry implements Serializable, Cloneable {
     	return cloned;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LogEntry logEntry = (LogEntry) o;
+
+        if (comment != null ? !comment.equals(logEntry.comment) : logEntry.comment != null) return false;
+        if (timestamp != null ? !timestamp.equals(logEntry.timestamp) : logEntry.timestamp != null) return false;
+        if (user != null ? !user.equals(logEntry.user) : logEntry.user != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = timestamp != null ? timestamp.hashCode() : 0;
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (comment != null ? comment.hashCode() : 0);
+        return result;
+    }
+
     /** The log entry's timestamp. */
     @JsonInclude(Include.NON_NULL)
     public Long timestamp;

@@ -33,6 +33,32 @@ public class User implements Serializable, Cloneable {
     			id, idIsInferred, ipAddress, fwdIpAddresses);
 	}
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (clientId != null ? !clientId.equals(user.clientId) : user.clientId != null) return false;
+        if (fwdIpAddresses != null ? !fwdIpAddresses.equals(user.fwdIpAddresses) : user.fwdIpAddresses != null) return false;
+        if (id != null ? !id.equals(user.id) : user.id != null) return false;
+        if (idIsInferred != null ? !idIsInferred.equals(user.idIsInferred) : user.idIsInferred != null) return false;
+        if (ipAddress != null ? !ipAddress.equals(user.ipAddress) : user.ipAddress != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = clientId != null ? clientId.hashCode() : 0;
+        result = 31 * result + (id != null ? id.hashCode() : 0);
+        result = 31 * result + (idIsInferred != null ? idIsInferred.hashCode() : 0);
+        result = 31 * result + (ipAddress != null ? ipAddress.hashCode() : 0);
+        result = 31 * result + (fwdIpAddresses != null ? fwdIpAddresses.hashCode() : 0);
+        return result;
+    }
+
     /** The user's id. */
     @JsonInclude(Include.NON_NULL)
     public ClientId clientId;

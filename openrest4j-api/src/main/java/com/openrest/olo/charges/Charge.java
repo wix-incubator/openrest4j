@@ -85,6 +85,44 @@ public class Charge implements Serializable, Cloneable {
     	return cloned;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Charge charge = (Charge) o;
+
+        if (condition != null ? !condition.equals(charge.condition) : charge.condition != null) return false;
+        if (description != null ? !description.equals(charge.description) : charge.description != null) return false;
+        if (displayCondition != null ? !displayCondition.equals(charge.displayCondition) : charge.displayCondition != null) return false;
+        if (id != null ? !id.equals(charge.id) : charge.id != null) return false;
+        if (mandatory != null ? !mandatory.equals(charge.mandatory) : charge.mandatory != null) return false;
+        if (operator != null ? !operator.equals(charge.operator) : charge.operator != null) return false;
+        if (organizationId != null ? !organizationId.equals(charge.organizationId) : charge.organizationId != null) return false;
+        if (properties != null ? !properties.equals(charge.properties) : charge.properties != null) return false;
+        if (state != null ? !state.equals(charge.state) : charge.state != null) return false;
+        if (title != null ? !title.equals(charge.title) : charge.title != null) return false;
+        if (type != null ? !type.equals(charge.type) : charge.type != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = type != null ? type.hashCode() : 0;
+        result = 31 * result + (id != null ? id.hashCode() : 0);
+        result = 31 * result + (organizationId != null ? organizationId.hashCode() : 0);
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (displayCondition != null ? displayCondition.hashCode() : 0);
+        result = 31 * result + (condition != null ? condition.hashCode() : 0);
+        result = 31 * result + (operator != null ? operator.hashCode() : 0);
+        result = 31 * result + (state != null ? state.hashCode() : 0);
+        result = 31 * result + (mandatory != null ? mandatory.hashCode() : 0);
+        result = 31 * result + (properties != null ? properties.hashCode() : 0);
+        return result;
+    }
+
     /** @see ALL_CHARGE_TYPES. */
     @JsonInclude(Include.NON_NULL)
     public String type;
