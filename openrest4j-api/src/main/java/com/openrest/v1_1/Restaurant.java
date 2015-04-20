@@ -1,16 +1,11 @@
 package com.openrest.v1_1;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.restaurants.availability.Availability;
+
+import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Restaurant extends Organization {
@@ -28,10 +23,11 @@ public class Restaurant extends Organization {
             Map<String, Integer> minPayments, Boolean antiFraudDisabled, String link, String domain, Set<String> altDomains,
             String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
             List<AppInfo> apps, Seo seo, Map<String, String> properties, Map<String, String> compatibilities,
+            Map<String, Availability> availabilities,
             String state, Boolean closed, String virtualId, Boolean inactive, Set<Product> products, Map<String, Double> features, Double rank) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties, compatibilities,
-    			picture, icon, wideLogo, noImagePicture, blobs, state, closed, virtualId, inactive, products, rank);
+                availabilities, picture, icon, wideLogo, noImagePicture, blobs, state, closed, virtualId, inactive, products, rank);
         
     	this.distributorId = distributorId;
     	this.chainId = chainId;
@@ -54,10 +50,10 @@ public class Restaurant extends Organization {
     @Override
 	public Object clone() {
     	return new Restaurant(id, alias, affiliateId,
-    			((externalIds != null) ? new LinkedHashMap<String, String>(externalIds) : null),    			
+    			((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
     			created, modified, distributorId, chainId,
-    			((title != null) ? new LinkedHashMap<String, String>(title) : null),
-    			((description != null) ? new LinkedHashMap<String, String>(description) : null),
+    			((title != null) ? new LinkedHashMap<>(title) : null),
+    			((description != null) ? new LinkedHashMap<>(description) : null),
     			((contact != null) ? (Contact)contact.clone() : null), Contact.clone(externalContacts),
     			((address != null) ? (Address)address.clone() : null),
     			cloneMessages(messages),
@@ -66,20 +62,21 @@ public class Restaurant extends Organization {
     			((deliveryTimes != null) ? (Availability) deliveryTimes.clone() : null),
     			DeliveryInfo.clone(deliveryInfos), maxFutureOrderDelayMins,
     			timezone, currency, locale,
-    			((locales != null) ? new LinkedHashSet<String>(locales) : null),
-    			((paymentTypes != null) ? new LinkedHashSet<String>(paymentTypes) : null),
+    			((locales != null) ? new LinkedHashSet<>(locales) : null),
+    			((paymentTypes != null) ? new LinkedHashSet<>(paymentTypes) : null),
     			multiPaymentDisabled, CardInfo.clone(cardInfos),
-    			((minPayments != null) ? new LinkedHashMap<String, Integer>(minPayments) : null),
+    			((minPayments != null) ? new LinkedHashMap<>(minPayments) : null),
     			antiFraudDisabled, link, domain,
-    			((altDomains != null) ? new LinkedHashSet<String>(altDomains) : null),
+    			((altDomains != null) ? new LinkedHashSet<>(altDomains) : null),
     			picture, icon, wideLogo, noImagePicture, Blob.clone(blobs),
     			AppInfo.clone(apps),
     			((seo != null) ? (Seo) seo.clone() : null),
-    			((properties != null) ? new LinkedHashMap<String, String>(properties) : null),
-    			((compatibilities != null) ? new LinkedHashMap<String, String>(compatibilities) : null),
+    			((properties != null) ? new LinkedHashMap<>(properties) : null),
+    			((compatibilities != null) ? new LinkedHashMap<>(compatibilities) : null),
+                Availability.clone(availabilities),
     			state, closed, virtualId, inactive,
     			Product.clone(products),
-    			((features != null) ? new LinkedHashMap<String, Double>(features) : null),
+    			((features != null) ? new LinkedHashMap<>(features) : null),
     			rank);
 	}
     
@@ -102,7 +99,7 @@ public class Restaurant extends Organization {
 
     /** Information regarding the different delivery destinations. */
     @JsonInclude(Include.NON_DEFAULT)
-    public List<DeliveryInfo> deliveryInfos = new LinkedList<DeliveryInfo>();
+    public List<DeliveryInfo> deliveryInfos = new LinkedList<>();
     
     /**
      * Latest time up to which future orders will be accepted. For example, a value of 4320 means
@@ -114,7 +111,7 @@ public class Restaurant extends Organization {
 
     /** Available payment methods. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Set<String> paymentTypes = new LinkedHashSet<String>();
+    public Set<String> paymentTypes = new LinkedHashSet<>();
     
     /** Whether or not the restaurant supports multiple payments in a single order. */
     @JsonInclude(Include.NON_DEFAULT)
@@ -130,7 +127,7 @@ public class Restaurant extends Organization {
      * http://code.google.com/p/creditcard/
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, CardInfo> cardInfos = new LinkedHashMap<String, CardInfo>();
+    public Map<String, CardInfo> cardInfos = new LinkedHashMap<>();
 
     /**
      * Maps available payment types to minimal charge allowed per payment, e.g.
@@ -138,7 +135,7 @@ public class Restaurant extends Organization {
      * payment types have zero minimum by default.
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, Integer> minPayments = new LinkedHashMap<String, Integer>();
+    public Map<String, Integer> minPayments = new LinkedHashMap<>();
     
     /** Whether or not the fraud prevention feature is turned off. */
     @JsonInclude(Include.NON_DEFAULT)
@@ -152,5 +149,5 @@ public class Restaurant extends Organization {
      * restaurant with the same feature = 2.3 when customers search for hamburgers.
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, Double> features = new LinkedHashMap<String, Double>();
+    public Map<String, Double> features = new LinkedHashMap<>();
 }

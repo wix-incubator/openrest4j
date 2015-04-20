@@ -1,15 +1,11 @@
 package com.openrest.v1_1;
 
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.restaurants.availability.Availability;
+
+import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchResult extends Restaurant {
@@ -25,16 +21,16 @@ public class SearchResult extends Restaurant {
             Set<String> paymentTypes, Boolean multiPaymentDisabled, Map<String, CardInfo> cardInfos,
             Map<String, Integer> minPayments, Boolean antiFraudDisabled, String link, String domain, Set<String> altDomains,
             String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
-            List<AppInfo> apps, Seo seo, Map<String, String> properties, Map<String, String> compatibilities,
+            List<AppInfo> apps, Seo seo, Map<String, String> properties,
+            Map<String, String> compatibilities, Map<String, Availability> availabilities,
             String state, Boolean closed, String virtualId, Boolean inactive, Set<Product> products,
             Map<String, Double> features, Double rank, List<TopItem> topItems,
             Set<String> deliveryTypes, DeliveryInfo deliveryInfo, List<Charge> charges) {
     	super(id, alias, affiliateId, externalIds, created, modified, distributorId, chainId, title, description, contact, externalContacts,
     			address, messages, colorScheme, openTimes, deliveryTimes, deliveryInfos, maxFutureOrderDelayMins,
     			timezone, currency, locale, locales, paymentTypes, multiPaymentDisabled, cardInfos, minPayments,
-    			antiFraudDisabled, link, domain, altDomains,
-    			picture, icon, wideLogo, noImagePicture, blobs,
-    			apps, seo, properties, compatibilities, state, closed, virtualId, inactive, products, features, rank);
+    			antiFraudDisabled, link, domain, altDomains, picture, icon, wideLogo, noImagePicture, blobs,
+    			apps, seo, properties, compatibilities, availabilities, state, closed, virtualId, inactive, products, features, rank);
     	
     	this.topItems = topItems;
     	this.deliveryTypes = deliveryTypes;
@@ -46,11 +42,11 @@ public class SearchResult extends Restaurant {
     public SearchResult() {}
     
     @JsonInclude(Include.NON_DEFAULT)
-    public List<TopItem> topItems = new LinkedList<TopItem>();
+    public List<TopItem> topItems = new LinkedList<>();
     
     /** Supported delivery types (optimization to avoid getting the entire deliveryInfos field). */
     @JsonInclude(Include.NON_DEFAULT)
-    public Set<String> deliveryTypes = new LinkedHashSet<String>();
+    public Set<String> deliveryTypes = new LinkedHashSet<>();
     
     /** The "most optimistic" delivery info (optimization to avoid getting the entire deliveryInfos field). */
     @JsonInclude(Include.NON_NULL)
@@ -58,5 +54,5 @@ public class SearchResult extends Restaurant {
     
     /** Available charges (for discounts search). */
     @JsonInclude(Include.NON_DEFAULT)
-    public List<Charge> charges = new LinkedList<Charge>();
+    public List<Charge> charges = new LinkedList<>();
 }
