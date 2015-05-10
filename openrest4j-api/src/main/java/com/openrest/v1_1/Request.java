@@ -90,6 +90,7 @@ import com.openrest.olo.SetPotentialWeeklyStatsRequest;
 	@Type(value = SetAppRequest.class, name = SetAppRequest.TYPE),
 	@Type(value = QueryAppsRequest.class, name = QueryAppsRequest.TYPE),
 	@Type(value = GetSecretsRequest.class, name = GetSecretsRequest.TYPE),
+	@Type(value = SetSecretsRequest.class, name = SetSecretsRequest.TYPE),
 	@Type(value = SetSecretRequest.class, name = SetSecretRequest.TYPE),
 	@Type(value = GetFeaturesRequest.class, name = GetFeaturesRequest.TYPE),
 	@Type(value = GetPropertyRequest.class, name = GetPropertyRequest.TYPE),

@@ -8,4 +8,7 @@ public class Compatibilities {
 
     public static final String SECTIONS_KEY = "com.openrest.olo.sections";
     public static final String SECTIONS_V1 = "1.0.0";
+
+    public static final String CREDITCARDS_KEY = "com.wix.restaurants.creditcards";
+    public static final String CREDITCARDS_V1 = "1.0.0";
 }

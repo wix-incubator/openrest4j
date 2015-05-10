@@ -19,7 +19,7 @@ public class Restaurant extends Organization {
     		Availability openTimes, Availability deliveryTimes,
             List<DeliveryInfo> deliveryInfos, Integer maxFutureOrderDelayMins,
             String timezone, String currency, String locale, Set<String> locales,
-            Set<String> paymentTypes, Boolean multiPaymentDisabled, Map<String, CardInfo> cardInfos,
+            Set<String> paymentTypes, Boolean multiPaymentDisabled, Map<String, CardInfo> cardInfos, CreditcardsInfo creditcardsInfo,
             Map<String, Integer> minPayments, Boolean antiFraudDisabled, String link, String domain, Set<String> altDomains,
             String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
             List<AppInfo> apps, Seo seo, Map<String, String> properties, Map<String, String> compatibilities,
@@ -37,6 +37,7 @@ public class Restaurant extends Organization {
         this.maxFutureOrderDelayMins = maxFutureOrderDelayMins;
         this.paymentTypes = paymentTypes;
         this.multiPaymentDisabled = multiPaymentDisabled;
+        this.creditcardsInfo = creditcardsInfo;
         this.cardInfos = cardInfos;
         this.minPayments = minPayments;
         this.antiFraudDisabled = antiFraudDisabled;
@@ -65,6 +66,7 @@ public class Restaurant extends Organization {
     			((locales != null) ? new LinkedHashSet<>(locales) : null),
     			((paymentTypes != null) ? new LinkedHashSet<>(paymentTypes) : null),
     			multiPaymentDisabled, CardInfo.clone(cardInfos),
+                ((creditcardsInfo != null) ? (CreditcardsInfo) creditcardsInfo.clone() : null),
     			((minPayments != null) ? new LinkedHashMap<>(minPayments) : null),
     			antiFraudDisabled, link, domain,
     			((altDomains != null) ? new LinkedHashSet<>(altDomains) : null),
@@ -125,9 +127,15 @@ public class Restaurant extends Organization {
      * 
      * For the complete list of credit card networks, see
      * http://code.google.com/p/creditcard/
+     *
+     * Scheduled for deprecation on 2015-08-01 (use creditcardsInfo).
      */
+    @Deprecated
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, CardInfo> cardInfos = new LinkedHashMap<>();
+
+    @JsonInclude(Include.NON_NULL)
+    public CreditcardsInfo creditcardsInfo = new CreditcardsInfo();
 
     /**
      * Maps available payment types to minimal charge allowed per payment, e.g.

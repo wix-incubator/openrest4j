@@ -1,18 +1,20 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Secrets implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
     
-	public Secrets(Map<String, String> properties, Boolean anonymized) {
+	public Secrets(Long modified, Map<String, String> properties, Boolean anonymized) {
+        this.modified = modified;
         this.properties = properties;
         this.anonymized = anonymized;
     }
@@ -22,13 +24,17 @@ public class Secrets implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	return new Secrets(
+    	return new Secrets(modified,
     			((properties != null) ? new HashMap<String, String>(properties) : null),
     			anonymized);
 	}
 
+    /** Last modification timestamp. */
+    @JsonInclude(Include.NON_NULL)
+    public Long modified;
+
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> properties = new HashMap<String, String>();
+    public Map<String, String> properties = new LinkedHashMap<>();
     
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean anonymized = Boolean.FALSE;
