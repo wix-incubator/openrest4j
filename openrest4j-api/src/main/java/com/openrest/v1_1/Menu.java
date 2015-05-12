@@ -1,23 +1,22 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Menu implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
 
-    public Menu(Long modified, List<Item> items, List<MenuSection> sections, List<Category> categories,
+    public Menu(Long modified, List<Item> items, List<MenuSection> sections,
                 List<com.openrest.olo.charges.Charge> chargesV2, List<Charge> charges) {
     	this.modified = modified;
         this.items = items;
         this.sections = sections;
-        this.categories = categories;
         this.chargesV2 = chargesV2;
         this.charges = charges;
     }
@@ -28,7 +27,7 @@ public class Menu implements Serializable, Cloneable {
     @Override
 	public Object clone() {
     	final Menu cloned = new Menu(modified, Item.clone(items), MenuSection.clone(sections),
-                Category.clone(categories), com.openrest.olo.charges.Charge.clone(chargesV2), Charge.clone(charges));
+                com.openrest.olo.charges.Charge.clone(chargesV2), Charge.clone(charges));
     	cloned.tags = Tag.clone(tags);
     	return cloned;
 	}
@@ -44,7 +43,6 @@ public class Menu implements Serializable, Cloneable {
         if (items != null ? !items.equals(menu.items) : menu.items != null) return false;
         if (tags != null ? !tags.equals(menu.tags) : menu.tags != null) return false;
         if (sections != null ? !sections.equals(menu.sections) : menu.sections != null) return false;
-        if (categories != null ? !categories.equals(menu.categories) : menu.categories != null) return false;
         if (chargesV2 != null ? !chargesV2.equals(menu.chargesV2) : menu.chargesV2 != null) return false;
         return !(charges != null ? !charges.equals(menu.charges) : menu.charges != null);
     }
@@ -55,7 +53,6 @@ public class Menu implements Serializable, Cloneable {
         result = 31 * result + (items != null ? items.hashCode() : 0);
         result = 31 * result + (tags != null ? tags.hashCode() : 0);
         result = 31 * result + (sections != null ? sections.hashCode() : 0);
-        result = 31 * result + (categories != null ? categories.hashCode() : 0);
         result = 31 * result + (chargesV2 != null ? chargesV2.hashCode() : 0);
         result = 31 * result + (charges != null ? charges.hashCode() : 0);
         return result;
@@ -78,13 +75,6 @@ public class Menu implements Serializable, Cloneable {
     @JsonInclude(Include.NON_DEFAULT)
     public List<MenuSection> sections = new LinkedList<>();
 
-    /**
-     * Menu sections v1.
-     * Scheduled for deprecation on 2015-08-01 (use sections)
-     */
-    @JsonInclude(Include.NON_DEFAULT)
-    public List<Category> categories = new LinkedList<>();
-    
     @JsonInclude(Include.NON_DEFAULT)
     public List<com.openrest.olo.charges.Charge> chargesV2 = new LinkedList<>();
     
