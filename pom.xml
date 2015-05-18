@@ -2,15 +2,27 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.wixpress.openrest</groupId>
+    <groupId>com.wix.openrest</groupId>
     <artifactId>openrest4j-all</artifactId>
-    <version>1.4.0-SNAPSHOT</version>
+    <version>1.5.0</version>
     <packaging>pom</packaging>
     <name>The OpenRest SDK for Java</name>
-    <url>${project_url}/${project.artifactId}</url>
     <description>The OpenRest SDK for Java modules pom</description>
+	<url>https://github.com/wix/openrest4j</url>
+	
+    <modules>
+        <module>openrest4j-api</module>
+        <module>openrest4j-client</module>
+    </modules>
 
     <developers>
+        <developer>
+            <name>Ohad Raz</name>
+            <email>ohadr@wix.com</email>
+            <roles>
+                <role>owner</role>
+            </roles>
+        </developer>
         <developer>
             <name>Danny Leshem</name>
             <email>dannyl@wix.com</email>
@@ -18,22 +30,116 @@
                 <role>owner</role>
             </roles>
         </developer>
-    </developers>
+        <developer>
+            <name>Yoav Amit</name>
+            <email>yoava@wix.com</email>
+            <roles>
+                <role>owner</role>
+            </roles>
+        </developer>
+	</developers>
+	
+	<issueManagement>
+		<url>https://github.com/wix/openrest4j/issues</url>
+		<system>GitHub Issues</system>
+	</issueManagement>	
+	
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>	
+	
+	<scm>
+		<url>https://github.com/wix/openrest4j</url>
+		<connection>scm:git:git://github.com/wix/openrest4j.git</connection>
+		<developerConnection>scm:git:git@github.com:wix/openrest4j.git</developerConnection>
+	</scm>	
+	
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		
+		<com.fasterxml.jackson.version>2.5.3</com.fasterxml.jackson.version>
+		<com.wix.restaurants.availability.version>1.2.0</com.wix.restaurants.availability.version>
+		<com.wix.restaurants.jsonclient.version>1.2.0</com.wix.restaurants.jsonclient.version>
+    </properties>
 
-    <parent>
-        <groupId>com.wixpress.common</groupId>
-        <artifactId>wix-master-parent</artifactId>
-        <version>100.0.0-SNAPSHOT</version>
-    </parent>
-
-    <modules>
-        <module>openrest4j-api</module>
-        <module>openrest4j-client</module>
-    </modules>
-    <distributionManagement>
-        <site>
-            <id>apidocs</id>
-            <url>${site_full_path}/${project.artifactId}</url>
-        </site>
-    </distributionManagement>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>	
+	
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.3</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.6</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.5</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
+			</plugin>			
+        </plugins>
+    </build>
 </project>

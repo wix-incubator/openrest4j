@@ -2,11 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.wixpress.openrest</groupId>
+    <groupId>com.wix.openrest</groupId>
     <artifactId>openrest4j-client</artifactId>
-    <version>1.4.0-SNAPSHOT</version>
+    <version>1.5.0</version>
     <packaging>jar</packaging>
-    <url>${project_url}/${project.artifactId}</url>
     <description>openrest4j Client</description>
 	
     <developers>
@@ -17,29 +16,39 @@
                 <role>owner</role>
             </roles>
         </developer>
+        <developer>
+            <name>Ohad Raz</name>
+            <email>ohadr@wix.com</email>
+            <roles>
+                <role>owner</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Yoav Amit</name>
+            <email>yoava@wix.com</email>
+            <roles>
+                <role>owner</role>
+            </roles>
+        </developer>
     </developers>
-
+	
     <parent>
-        <groupId>com.wixpress.common</groupId>
-        <artifactId>wix-scala-parent-ng</artifactId>
-        <version>100.0.0-SNAPSHOT</version>
+        <groupId>com.wix.openrest</groupId>
+        <artifactId>openrest4j-all</artifactId>
+        <version>1.5.0</version>
     </parent>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <openrest.test.port>9902</openrest.test.port>
-    </properties>
 
     <dependencies>
 		<!-- Compile/runtime dependencies -->
 		<dependency>
-			<groupId>com.wixpress.openrest</groupId>
+			<groupId>com.wix.openrest</groupId>
 			<artifactId>openrest4j-api</artifactId>
-			<version>1.4.0-SNAPSHOT</version>
+			<version>1.5.0</version>
 		</dependency>
 		<dependency>
-			<groupId>com.wixpress.openrest</groupId>
+			<groupId>com.wix.restaurants</groupId>
 			<artifactId>wix-restaurants-jsonclient</artifactId>
+			<version>${com.wix.restaurants.jsonclient.version}</version>
 		</dependency>
 
         <!-- Test Dependencies -->
