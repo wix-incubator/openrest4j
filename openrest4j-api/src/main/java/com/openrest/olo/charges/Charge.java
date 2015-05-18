@@ -1,20 +1,14 @@
 package com.openrest.olo.charges;
 
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.openrest.olo.charges.conditions.Condition;
 import com.openrest.olo.charges.operators.Operator;
 import com.openrest.v1_1.State;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * An extra charge or a discount associated with an order.
@@ -38,7 +32,7 @@ public class Charge implements Serializable, Cloneable {
     public static final String CHARGE_TYPE_TIP = "tip";
     
     /** All known charges. */
-    public static final Set<String> ALL_CHARGE_TYPES = new HashSet<String>(Arrays.asList(new String[] {
+    public static final Set<String> ALL_CHARGE_TYPES = new HashSet<>(Arrays.asList(new String[] {
     		CHARGE_TYPE_DELIVERY, CHARGE_TYPE_DISCOUNT, CHARGE_TYPE_TAX, CHARGE_TYPE_SERVICE, CHARGE_TYPE_TIP
     }));
     
@@ -64,13 +58,13 @@ public class Charge implements Serializable, Cloneable {
     @Override
 	public Object clone() {
     	return new Charge(type, id, organizationId,
-    			((title != null) ? new LinkedHashMap<String, String>(title) : null),
-    			((description != null) ? new LinkedHashMap<String, String>(description) : null),
+    			((title != null) ? new LinkedHashMap<>(title) : null),
+    			((description != null) ? new LinkedHashMap<>(description) : null),
     			((displayCondition != null) ? (Condition) displayCondition.clone() : null),
     			((condition != null) ? (Condition) condition.clone() : null),
     			((operator != null) ? (Operator) operator.clone() : null),
     			state, mandatory,
-    			((properties != null) ? new LinkedHashMap<String, String>(properties) : null));
+    			((properties != null) ? new LinkedHashMap<>(properties) : null));
 	}
     
     public static List<Charge> clone(List<Charge> charges) {
@@ -78,7 +72,7 @@ public class Charge implements Serializable, Cloneable {
     		return null;
     	}
     	
-    	final List<Charge> cloned = new LinkedList<Charge>();
+    	final List<Charge> cloned = new LinkedList<>();
     	for (Charge charge : charges) {
     		cloned.add((charge != null) ? (Charge) charge.clone() : null);
     	}
@@ -123,7 +117,7 @@ public class Charge implements Serializable, Cloneable {
         return result;
     }
 
-    /** @see ALL_CHARGE_TYPES. */
+    /** @see Charge#ALL_CHARGE_TYPES */
     @JsonInclude(Include.NON_NULL)
     public String type;
     
@@ -155,7 +149,7 @@ public class Charge implements Serializable, Cloneable {
     @JsonInclude(Include.NON_NULL)
     public Operator operator;
     
-    /** @see State.ALL_STATES */
+    /** @see State#ALL_STATES */
     @JsonInclude(Include.NON_DEFAULT)
     public String state = State.STATE_OPERATIONAL;
     

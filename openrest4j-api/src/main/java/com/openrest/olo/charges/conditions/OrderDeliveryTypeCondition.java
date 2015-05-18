@@ -1,12 +1,12 @@
 package com.openrest.olo.charges.conditions;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.openrest.v1_1.Delivery;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /** Matches the order's delivery type against a given delivery type. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -25,10 +25,10 @@ public class OrderDeliveryTypeCondition extends Condition {
 	@Override
 	public Object clone() {
 		return new OrderDeliveryTypeCondition(deliveryType,
-			((properties != null) ? new LinkedHashMap<String, String>(properties) : null));
+			((properties != null) ? new LinkedHashMap<>(properties) : null));
 	}
 	
-	/** @see Delivery.ALL_DELIVERY_TYPES */
+	/** @see Delivery#ALL_DELIVERY_TYPES */
     @JsonInclude(Include.NON_NULL)
     public String deliveryType;
 }

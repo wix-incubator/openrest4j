@@ -15,23 +15,23 @@ public class CreditCard implements Serializable, Cloneable {
     
     /** (number & expireMonth & expireYear) */
     public static final String FORM_STANDARD = "standard"; 
-    /** FORM_STANDARD & csc */
+    /** FORM_STANDARD AND csc */
     public static final String FORM_STANDARD_CSC = "standard_csc"; 
-    /** FORM_STANDARD & holderId */
+    /** FORM_STANDARD AND holderId */
     public static final String FORM_STANDARD_HOLDERID = "standard_id";
-    /** FORM_STANDARD & (issueNumber | (validFromMonth & validFromYear)) */
+    /** FORM_STANDARD AND (issueNumber OR (validFromMonth AND validFromYear)) */
     public static final String FORM_MAESTRO = "maestro";
-    /** FORM_MAESTRO & csc */
+    /** FORM_MAESTRO AND csc */
     public static final String FORM_MAESTRO_CSC = "maestro_csc"; 
-    /** FORM_STANDARD_HOLDERID & csc */
+    /** FORM_STANDARD_HOLDERID AND csc */
     public static final String FORM_STANDARD_HOLDERID_CSC = "standard_id_csc";
-    /** FORM_STANDARD & billingAddress & billingPostalCode */
+    /** FORM_STANDARD AND billingAddress AND billingPostalCode */
     public static final String FORM_STANDARD_ADDRESS = "standard_address";
-    /** FORM_STANDARD_ADDRESS & csc */
+    /** FORM_STANDARD_ADDRESS AND csc */
     public static final String FORM_STANDARD_ADDRESS_CSC = "standard_address_csc";
-    /** FORM_MAESTRO & billingAddress & billingPostalCode */
+    /** FORM_MAESTRO AND billingAddress AND billingPostalCode */
     public static final String FORM_MAESTRO_ADDRESS = "maestro_address";
-    /** FORM_MAESTRO_ADDRESS & csc */
+    /** FORM_MAESTRO_ADDRESS AND csc */
     public static final String FORM_MAESTRO_ADDRESS_CSC = "maestro_address_csc";
     
     public static final Set<String> ALL_FORMS = new HashSet<String>(Arrays.asList(
