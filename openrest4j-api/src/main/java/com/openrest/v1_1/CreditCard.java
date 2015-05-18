@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class CreditCard implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
     
-    /** (number & expireMonth & expireYear) */
+    /** (number AND expireMonth AND expireYear) */
     public static final String FORM_STANDARD = "standard"; 
     /** FORM_STANDARD AND csc */
     public static final String FORM_STANDARD_CSC = "standard_csc"; 
@@ -34,7 +34,7 @@ public class CreditCard implements Serializable, Cloneable {
     /** FORM_MAESTRO_ADDRESS AND csc */
     public static final String FORM_MAESTRO_ADDRESS_CSC = "maestro_address_csc";
     
-    public static final Set<String> ALL_FORMS = new HashSet<String>(Arrays.asList(
+    public static final Set<String> ALL_FORMS = new HashSet<>(Arrays.asList(
     		FORM_STANDARD, FORM_STANDARD_CSC, FORM_STANDARD_HOLDERID, FORM_MAESTRO, FORM_MAESTRO_CSC,
     		FORM_STANDARD_HOLDERID_CSC, FORM_STANDARD_ADDRESS, FORM_STANDARD_ADDRESS_CSC, FORM_MAESTRO_ADDRESS, FORM_MAESTRO_ADDRESS_CSC));
     
