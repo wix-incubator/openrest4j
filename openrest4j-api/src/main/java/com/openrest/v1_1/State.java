@@ -22,7 +22,7 @@ public class State {
     public static final String STATE_INFO = "info";
     
     /** All known statuses. */
-    public static final Set<String> ALL_STATES = new HashSet<String>(Arrays.asList(
+    public static final Set<String> ALL_STATES = new HashSet<>(Arrays.asList(
     		STATE_DEMO, STATE_UNDER_CONSTRUCTION, STATE_OPERATIONAL, STATE_CLOSED, STATE_INFO));
     
     public static int compare(String state1, String state2) {
@@ -30,7 +30,7 @@ public class State {
     }
     
     private static Map<String, Integer> getStateRanksMap() {
-    	final Map<String, Integer> ranks = new HashMap<String, Integer>();
+    	final Map<String, Integer> ranks = new HashMap<>();
     	ranks.put(STATE_OPERATIONAL, 0);
     	ranks.put(STATE_INFO, 1);
     	ranks.put(STATE_UNDER_CONSTRUCTION, 2);

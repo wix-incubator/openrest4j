@@ -1,6 +1,7 @@
 package com.openrest.v1_1;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -35,7 +36,7 @@ public class SetOrderStatusRequest extends Request {
     public String orderId;
     
     /**
-     * @see Order.ALL_ORDER_STATUSES
+     * @see Order#ALL_ORDER_STATUSES
      * null means "no change" (for comment only statuses)
      */
     @JsonInclude(Include.NON_NULL)
@@ -45,5 +46,5 @@ public class SetOrderStatusRequest extends Request {
     public String comment;
     
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> externalIds = new HashMap<String, String>();
+    public Map<String, String> externalIds = new LinkedHashMap<>();
 }

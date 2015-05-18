@@ -1,19 +1,12 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.restaurants.availability.Availability;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * An extra charge or a discount associated with an order.
@@ -42,7 +35,7 @@ public class Charge implements Serializable, Cloneable {
     public static final String CHARGE_TYPE_TIP = "tip";
     
     /** All known charges. */
-    public static final Set<String> ALL_CHARGE_TYPES = new HashSet<String>(Arrays.asList(new String[] {
+    public static final Set<String> ALL_CHARGE_TYPES = new HashSet<>(Arrays.asList(new String[] {
     		CHARGE_TYPE_DELIVERY, CHARGE_TYPE_COUPON, CHARGE_TYPE_CLUB_COUPON, CHARGE_TYPE_TAX,
     		CHARGE_TYPE_SERVICE, CHARGE_TYPE_TIP
     }));
@@ -53,7 +46,7 @@ public class Charge implements Serializable, Cloneable {
     public static final String MODE_EXCLUDE = "exclude";
     
     /** All known tag modes */
-    public static final Set<String> ALL_MODES = new HashSet<String>(Arrays.asList(
+    public static final Set<String> ALL_MODES = new HashSet<>(Arrays.asList(
     		MODE_INCLUDE, MODE_EXCLUDE
     ));
     
@@ -69,7 +62,7 @@ public class Charge implements Serializable, Cloneable {
     public static final String AMOUNT_RULE_TYPE_VARIABLE = "variable";
 
     /** All known amount rule types. */
-    public static final Set<String> ALL_AMOUNT_RULE_TYPES = new HashSet<String>(Arrays.asList(new String[] {
+    public static final Set<String> ALL_AMOUNT_RULE_TYPES = new HashSet<>(Arrays.asList(new String[] {
     		AMOUNT_RULE_TYPE_FIXED, AMOUNT_RULE_TYPE_FIXED_PER_ITEM, AMOUNT_RULE_TYPE_PERCENTAGE, AMOUNT_RULE_TYPE_ANY, AMOUNT_RULE_TYPE_VARIABLE
     }));
 
@@ -108,7 +101,7 @@ public class Charge implements Serializable, Cloneable {
     		return null;
     	}
     	
-    	final List<Charge> cloned = new LinkedList<Charge>();
+    	final List<Charge> cloned = new LinkedList<>();
     	for (Charge charge : charges) {
     		cloned.add((charge != null) ? (Charge) charge.clone() : null);
     	}
@@ -118,15 +111,15 @@ public class Charge implements Serializable, Cloneable {
     @Override
 	public Object clone() {
     	final Charge cloned = new Charge(id, restaurantId, type, priority, code, clubId, groupId,
-    			((itemIds != null) ? new LinkedHashSet<String>(itemIds) : null),
+    			((itemIds != null) ? new LinkedHashSet<>(itemIds) : null),
     			mode, amountRuleType, amountRule,
     			((coupon != null) ? (Coupon) coupon.clone() : null),
     			((availability != null) ? (Availability) availability.clone() : null),
     			state,
-    			((refs != null) ? new LinkedHashSet<String>(refs) : null),
-    			((deliveryTypes != null) ? new LinkedHashSet<String>(deliveryTypes) : null),
+    			((refs != null) ? new LinkedHashSet<>(refs) : null),
+    			((deliveryTypes != null) ? new LinkedHashSet<>(deliveryTypes) : null),
     			amount, maxTimesPerUser,
-    			((properties != null) ? new LinkedHashMap<String, String>(properties) : null));
+    			((properties != null) ? new LinkedHashMap<>(properties) : null));
     	
     	cloned.tagId = tagId;
     	cloned.tagMode = tagMode;
@@ -218,7 +211,7 @@ public class Charge implements Serializable, Cloneable {
     
     /**
      * The delivery-types this charge applies to (null means any).
-     * @see Delivery.ALL_DELIVERY_TYPES
+     * @see Delivery#ALL_DELIVERY_TYPES
      */
     @JsonInclude(Include.NON_NULL)
     public Set<String> deliveryTypes;
@@ -232,9 +225,9 @@ public class Charge implements Serializable, Cloneable {
      * keys, e.g. "com.googlecode.openrestext".
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> properties = new LinkedHashMap<String, String>();
+    public Map<String, String> properties = new LinkedHashMap<>();
     
-    /** @see State.ALL_STATES */
+    /** @see State#ALL_STATES */
     @JsonInclude(Include.NON_DEFAULT)
     public String state = State.STATE_OPERATIONAL;
     

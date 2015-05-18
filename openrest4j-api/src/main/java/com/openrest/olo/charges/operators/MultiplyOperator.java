@@ -1,17 +1,17 @@
 package com.openrest.olo.charges.operators;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-
 /**
  * Multiplies two lists of values and returns the (integer) division of the results.
- * @see http://en.wikipedia.org/wiki/Empty_product
+ * @see <a href="http://en.wikipedia.org/wiki/Empty_product">Empty Product</a>
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MultiplyOperator extends Operator {
@@ -30,12 +30,12 @@ public class MultiplyOperator extends Operator {
 	@Override
 	public Object clone() {
 		return new MultiplyOperator(Operator.clone(numerators), Operator.clone(denominators),
-			((properties != null) ? new LinkedHashMap<String, String>(properties) : null));
+			((properties != null) ? new LinkedHashMap<>(properties) : null));
 	}
 	
     @JsonInclude(Include.NON_DEFAULT)
-    public List<Operator> numerators = new LinkedList<Operator>();
+    public List<Operator> numerators = new LinkedList<>();
     
     @JsonInclude(Include.NON_DEFAULT)
-    public List<Operator> denominators = new LinkedList<Operator>();
+    public List<Operator> denominators = new LinkedList<>();
 }

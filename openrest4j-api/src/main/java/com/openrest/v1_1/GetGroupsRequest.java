@@ -25,7 +25,7 @@ public class GetGroupsRequest extends Request {
     @JsonInclude(Include.NON_NULL)
     public String accessToken;
     
-    /** @see Group.ALL_GROUP_VIEW_MODES */
+    /** @see com.openrest.olo.users.Group#ALL_GROUP_VIEW_MODES */
     @JsonInclude(Include.NON_NULL)
     public String viewMode;
     
@@ -33,5 +33,5 @@ public class GetGroupsRequest extends Request {
     public Set<String> groupIds;
     
     @JsonInclude(Include.NON_NULL)
-    public Set<String> codes = new LinkedHashSet<String>();
+    public Set<String> codes = new LinkedHashSet<>();
 }

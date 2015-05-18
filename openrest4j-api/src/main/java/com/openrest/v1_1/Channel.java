@@ -28,7 +28,7 @@ public class Channel {
 	 */
     public static final String CHANNEL_VOICE = "voice";
 	/**
-	 * @see http://www.restcloud.net/
+	 * @see <a href="http://www.restcloud.net/">RestCloud</a>
 	 * param: restcloud restaurant-id.
 	 */
     public static final String CHANNEL_RESTCLOUD = "net.restcloud";
@@ -59,7 +59,7 @@ public class Channel {
     public static final String CHANNEL_PRESTO = "il.co.presto";
 	
     /** All known channels. */
-    public static final Set<String> ALL_CHANNELS = new HashSet<String>(Arrays.asList(
+    public static final Set<String> ALL_CHANNELS = new HashSet<>(Arrays.asList(
     		CHANNEL_EMAIL, CHANNEL_FAX, CHANNEL_SMS, CHANNEL_VOICE, CHANNEL_RESTCLOUD,
     		CHANNEL_FRSVISION_POS, CHANNEL_FRSVISION_BURGERANCH, CHANNEL_BEECOMM,
     		CHANNEL_CLOUDPRINT, CHANNEL_PRESTO));

@@ -156,7 +156,7 @@ public class CreditCard implements Serializable, Cloneable {
 
     /**
      * Card security code.
-     * @see http://en.wikipedia.org/wiki/Card_security_code
+     * @see <a href="http://en.wikipedia.org/wiki/Card_security_code">Card Security Code</a>
      */
     @JsonInclude(Include.NON_NULL)
     public String csc;

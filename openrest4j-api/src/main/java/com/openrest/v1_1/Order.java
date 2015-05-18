@@ -332,7 +332,7 @@ public class Order implements Serializable, Cloneable {
     @JsonInclude(Include.NON_NULL)
     public String source;
     
-    /** @see AppId.ALL_PLATFORMS */
+    /** @see AppId#ALL_PLATFORMS */
     @JsonInclude(Include.NON_NULL)
     public String platform;
     

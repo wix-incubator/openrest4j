@@ -41,7 +41,7 @@ public class NotifyOrderRequest extends Request {
     @JsonInclude(Include.NON_NULL)
     public String locale;
     
-    /** @see Order.ALL_ORDER_VIEW_MODES */
+    /** @see Order#ALL_ORDER_VIEW_MODES */
     @JsonInclude(Include.NON_NULL)
     public String viewMode;
     

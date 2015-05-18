@@ -1,13 +1,13 @@
 package com.openrest.v1_1;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /** Application (e.g. iPhone app) information. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -32,7 +32,7 @@ public class AppId implements Serializable, Cloneable {
     public static final String PLATFORM_KIOSK_IOS = "kiosk.ios";
 
     /** All known platforms. */
-    public static final Set<String> ALL_PLATFORMS = new HashSet<String>(Arrays.asList(
+    public static final Set<String> ALL_PLATFORMS = new HashSet<>(Arrays.asList(
     		PLATFORM_ANDROID, PLATFORM_IOS, PLATFORM_WEB, PLATFORM_MOBILEWEB, PLATFORM_FACEBOOK,
             PLATFORM_CALLCENTER, PLATFORM_KIOSK_ANDROID, PLATFORM_KIOSK_IOS
     ));
@@ -63,7 +63,7 @@ public class AppId implements Serializable, Cloneable {
 
     /**
      * Application id, in a platform specific format:
-     * iOS platform -> "bundle id"
+     * iOS platform: "bundle id"
      */
     @JsonInclude(Include.NON_NULL)
     public String id;

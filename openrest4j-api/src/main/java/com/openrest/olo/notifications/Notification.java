@@ -1,9 +1,5 @@
 package com.openrest.olo.notifications;
 
-import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -12,6 +8,10 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.openrest.v1_1.Channel;
 import com.openrest.v1_1.State;
+
+import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(
@@ -53,7 +53,7 @@ public abstract class Notification implements Serializable, Cloneable {
 			return null;
 		}
 		
-    	final List<Notification> cloned = new LinkedList<Notification>();
+    	final List<Notification> cloned = new LinkedList<>();
     	for (Notification notification : notifications) {
     		cloned.add((notification != null) ? (Notification) notification.clone() : null);
     	}
@@ -63,7 +63,7 @@ public abstract class Notification implements Serializable, Cloneable {
     @JsonInclude(Include.NON_NULL)
     public String organizationId;    
 
-    /** @see Channel.ALL_CHANNELS */
+    /** @see Channel#ALL_CHANNELS */
     @JsonInclude(Include.NON_NULL)
     public String channelId;
     
@@ -75,7 +75,7 @@ public abstract class Notification implements Serializable, Cloneable {
     @JsonInclude(Include.NON_NULL)
     public String comment;
     
-    /** @see State.ALL_STATES */
+    /** @see State#ALL_STATES */
     @JsonInclude(Include.NON_DEFAULT)
     public String state = State.STATE_OPERATIONAL;
 }

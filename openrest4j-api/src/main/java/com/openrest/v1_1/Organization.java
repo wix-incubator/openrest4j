@@ -24,7 +24,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
      * External-id key for specifying the organization's notifications ("no-reply") email.
      * For the value's format, @see http://en.wikipedia.org/wiki/Email_address
      * 
-     * @see Organization.externalIds
+     * @see Organization#externalIds
      */
     public static final String EXTERNAL_ID_EMAIL_NOREPLY = "email.noreply";
 	
@@ -40,13 +40,13 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     public static final String BLOB_TYPE_COVER = "cover";
 	/**
 	 * Sound recording for automated phone calls.
-	 * @see com.openrest.olo.notifications.Notification.NOTIFICATION_TYPE_DELAYED_ORDER
-	 * @see com.openrest.olo.notifications.Notification.NOTIFICATION_TYPE_NEW_ORDER
+	 * @see com.openrest.olo.notifications.DelayedOrderNotification
+	 * @see com.openrest.olo.notifications.NewOrderNotification
 	 */
     public static final String BLOB_TYPE_NOTIFICATION_VOICE = "notification_voice";
 	/**
 	 * Sound recording for automated phone calls.
-	 * @see com.openrest.olo.notifications.Notification.NOTIFICATION_TYPE_POS_ERROR
+	 * @see com.openrest.olo.notifications.PosErrorNotification
 	 */
     public static final String BLOB_TYPE_NOTIFICATION_POS_ERROR = "notification_pos_error";
     
@@ -185,7 +185,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     
     /**
      * The restaurant's timezone.
-     * @see http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+     * @see <a href="http://en.wikipedia.org/wiki/List_of_tz_database_time_zones">List of tz database time zones</a>
      * 
      * Use java.util.TimeZone.getTimeZone to create a Java TimeZone object.
      */
@@ -258,7 +258,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     public Map<String, String> properties = new LinkedHashMap<>();
     
     /**
-     * Maps features to compatibility levels, e.g. "com.openrest.charges" -> "1.0.0".
+     * Maps features to compatibility levels, e.g. "com.openrest.charges" to "1.0.0".
      * A non-existent key means "latest".
      */
     @JsonInclude(Include.NON_DEFAULT)
@@ -293,7 +293,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean inactive = Boolean.FALSE;
     
-    /** @see State.ALL_STATES */
+    /** @see State#ALL_STATES */
     @JsonInclude(Include.NON_DEFAULT)
     public String state = State.STATE_OPERATIONAL;
     

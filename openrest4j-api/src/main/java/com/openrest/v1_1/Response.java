@@ -37,7 +37,7 @@ public class Response<T> implements Serializable {
     @JsonInclude(Include.NON_NULL)
     public Long timestamp;
 
-    /** @see Error. */
+    /** See Error class. */
     @JsonInclude(Include.NON_NULL)
     public String error;
 

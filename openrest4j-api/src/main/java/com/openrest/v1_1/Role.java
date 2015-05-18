@@ -34,7 +34,7 @@ public class Role implements Serializable, Cloneable {
     
     /**
      * The user's role (admin, manager, employee, etc) in the organization.
-     * @see com.googlecode.openrest.Staff
+     * @see Staff
      * */
     @JsonInclude(Include.NON_NULL)
     public String role;

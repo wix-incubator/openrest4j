@@ -1,15 +1,11 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.io.Serializable;
+import java.util.*;
 
 /** Application (e.g. iPhone app) information. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -32,7 +28,7 @@ public class AppInfo implements Serializable, Cloneable {
     public static final String APP_TYPE_EMPLOYEE = "employee";
     
     /** All known application types. */
-    public static final Set<String> ALL_APP_TYPES = new HashSet<String>(Arrays.asList(new String[] {
+    public static final Set<String> ALL_APP_TYPES = new HashSet<>(Arrays.asList(new String[] {
     		APP_TYPE_CLIENT, APP_TYPE_EMPLOYEE
     }));
     
@@ -58,7 +54,7 @@ public class AppInfo implements Serializable, Cloneable {
     		return null;
     	}
     	
-    	final List<AppInfo> cloned = new LinkedList<AppInfo>();
+    	final List<AppInfo> cloned = new LinkedList<>();
 		for (AppInfo app : apps) {
 			cloned.add((app != null) ? (AppInfo) app.clone() : null);
 		}
@@ -75,7 +71,7 @@ public class AppInfo implements Serializable, Cloneable {
 
     /**
      * Application id, in a platform specific format:
-     * iOS platform -> "bundle id"
+     * iOS platform: "bundle id"
      */
     @JsonInclude(Include.NON_NULL)
     public String id;
@@ -88,7 +84,7 @@ public class AppInfo implements Serializable, Cloneable {
     @JsonInclude(Include.NON_NULL)
     public String link;
     
-    /** @see State.ALL_STATES */
+    /** @see State#ALL_STATES */
     @JsonInclude(Include.NON_DEFAULT)
     public String state = State.STATE_OPERATIONAL;
 }

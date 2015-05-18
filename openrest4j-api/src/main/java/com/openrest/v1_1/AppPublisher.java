@@ -1,13 +1,13 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /** AppStore application publisher .*/
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -18,7 +18,7 @@ public class AppPublisher implements Serializable, Cloneable {
      * External-id key for specifying the publisher's Play Store developer account.
      * Taken from https://play.google.com/apps/publish/?dev_acc=[XXX]
      * 
-     * @see AppPublisher.externalIds
+     * @see AppPublisher#externalIds
      */
     public static final String EXTERNAL_ID_GOOGLE_PLAY = "com.google.play";
     
@@ -26,37 +26,37 @@ public class AppPublisher implements Serializable, Cloneable {
      * External-id key for specifying the publisher's Google Maps "Key for Android applications".
      * Taken from https://cloud.google.com/console/project/XXX/apiui/credential
      * 
-     * @see AppPublisher.externalIds
+     * @see AppPublisher#externalIds
      */
     public static final String EXTERNAL_ID_GOOGLE_MAPS_ANDROID = "com.google.maps.android";
     
     /**
      * Used to sign Android apps.
-     * @see AppPublisher.certificates
+     * @see AppPublisher#certificates
      */
     public static final String CERTIFICATE_ANDROID = "android";
     
     /**
      * Used to sign iOS apps.
-     * @see AppPublisher.externalIds
+     * @see AppPublisher#externalIds
      */
     public static final String CERTIFICATE_IOS = "ios";
     
     /**
      * Used to sign iOS apps.
-     * @see AppPublisher.externalIds
+     * @see AppPublisher#externalIds
      */
     public static final String CERTIFICATE_IOS_PRIVATE = "ios.private";
     
     /** 
      * Apple (developer id).
-     * @see AppPublisher.logins
+     * @see AppPublisher#logins
      */
     public static final String LOGIN_APPLE = "com.apple";
     
     /** 
      * Urban Airship.
-     * @see AppPublisher.logins
+     * @see AppPublisher#logins
      */
     public static final String LOGIN_URBANAIRSHIP = "com.urbanairship";
     
@@ -78,7 +78,7 @@ public class AppPublisher implements Serializable, Cloneable {
 	public Object clone() {
     	final Map<String, Login> clonedLogins;
     	if (logins != null) {
-    		clonedLogins = new HashMap<String, Login>(logins.size());
+    		clonedLogins = new LinkedHashMap<>(logins.size());
     		for (Entry<String, Login> entry : logins.entrySet()) {
     			clonedLogins.put(entry.getKey(), (Login) entry.getValue().clone());
     		}
@@ -88,7 +88,7 @@ public class AppPublisher implements Serializable, Cloneable {
     	
     	final Map<String, Certificate> clonedCertificates;
     	if (certificates != null) {
-    		clonedCertificates = new HashMap<String, Certificate>(certificates.size());
+    		clonedCertificates = new LinkedHashMap<>(certificates.size());
     		for (Entry<String, Certificate> entry : certificates.entrySet()) {
     			clonedCertificates.put(entry.getKey(), (Certificate) entry.getValue().clone());
     		}
@@ -99,7 +99,7 @@ public class AppPublisher implements Serializable, Cloneable {
     	return new AppPublisher(title, url,
     			((contact != null) ? (Contact) contact.clone() : null),
     			copyright,
-    			((externalIds != null) ? new HashMap<String, String>(externalIds) : null),
+    			((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
     			clonedLogins, clonedCertificates);
 	}
     
@@ -122,11 +122,11 @@ public class AppPublisher implements Serializable, Cloneable {
      * Developers should use unique keys, e.g. "com.company.product".
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> externalIds = new HashMap<String, String>();
+    public Map<String, String> externalIds = new LinkedHashMap<>();
     
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, Login> logins = new HashMap<String, Login>();
+    public Map<String, Login> logins = new LinkedHashMap<>();
     
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, Certificate> certificates = new HashMap<String, Certificate>();
+    public Map<String, Certificate> certificates = new LinkedHashMap<>();
 }

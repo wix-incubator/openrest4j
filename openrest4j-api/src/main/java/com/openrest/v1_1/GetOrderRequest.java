@@ -43,7 +43,7 @@ public class GetOrderRequest extends Request {
     @JsonInclude(Include.NON_NULL)
     public String orderId;
     
-    /** @see Order.ALL_ORDER_VIEW_MODES */
+    /** @see Order#ALL_ORDER_VIEW_MODES */
     @JsonInclude(Include.NON_NULL)
     public String viewMode;
     

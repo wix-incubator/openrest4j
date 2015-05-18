@@ -1,17 +1,17 @@
 package com.openrest.olo.charges.conditions;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-
 /**
  * Logical meta-condition that's satisfied if at least one of the child conditions are satisfied.
- * @see http://en.wikipedia.org/wiki/Logical_disjunction#Definition
+ * @see <a href="http://en.wikipedia.org/wiki/Logical_disjunction#Definition">Logical Disjunction</a>
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OrCondition extends Condition {
@@ -29,9 +29,9 @@ public class OrCondition extends Condition {
 	@Override
 	public Object clone() {
 		return new OrCondition(Condition.clone(conditions),
-			((properties != null) ? new LinkedHashMap<String, String>(properties) : null));
+			((properties != null) ? new LinkedHashMap<>(properties) : null));
 	}
 	
     @JsonInclude(Include.NON_DEFAULT)
-    public List<Condition> conditions = new LinkedList<Condition>();
+    public List<Condition> conditions = new LinkedList<>();
 }

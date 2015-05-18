@@ -1,12 +1,12 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Address implements Serializable, Cloneable {
@@ -92,7 +92,7 @@ public class Address implements Serializable, Cloneable {
     
     /**
      * Two letter country code.
-     * @see http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+     * @see <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>
      */
     @JsonInclude(Include.NON_NULL)
     public String countryCode;
