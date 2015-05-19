@@ -14,13 +14,15 @@ public class GetOrderRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public GetOrderRequest() {}
     
-    public GetOrderRequest(String accessToken, String orderId, String viewMode, String shareToken,
-    		Boolean anonymize, Set<String> fields, String locale, Viewport viewport, Boolean embed,
-    		Boolean printConfirmation, Boolean printHeader, Boolean printCsc) {
+    public GetOrderRequest(String accessToken, String shareToken, String ownerToken,
+                           String orderId, String viewMode, Boolean anonymize,
+                           Set<String> fields, String locale, Viewport viewport, Boolean embed,
+                           Boolean printConfirmation, Boolean printHeader, Boolean printCsc) {
     	this.accessToken = accessToken;
+        this.shareToken = shareToken;
+        this.ownerToken = ownerToken;
     	this.orderId = orderId;
     	this.viewMode = viewMode;
-    	this.shareToken = shareToken;
     	this.anonymize = anonymize;
     	this.fields = fields;
     	this.locale = locale;
@@ -31,15 +33,17 @@ public class GetOrderRequest extends Request {
     	this.printCsc = printCsc;
     }
     
-    public GetOrderRequest(String accessToken, String orderId, String viewMode, String shareToken,
-    		Boolean anonymize, Set<String> fields) {
-    	this(accessToken, orderId, viewMode, shareToken, anonymize, fields, shareToken,
-    			null, Boolean.FALSE, Boolean.FALSE, Boolean.FALSE, Boolean.FALSE);
-    }
-    
     @JsonInclude(Include.NON_NULL)
     public String accessToken;
-    
+
+    /** @see Order#shareToken */
+    @JsonInclude(Include.NON_NULL)
+    public String shareToken;
+
+    /** @see Order#ownerToken */
+    @JsonInclude(Include.NON_NULL)
+    public String ownerToken;
+
     @JsonInclude(Include.NON_NULL)
     public String orderId;
     
@@ -51,10 +55,7 @@ public class GetOrderRequest extends Request {
     @Deprecated
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean restaurantView = Boolean.FALSE;
-    
-    @JsonInclude(Include.NON_NULL)
-    public String shareToken;
-    
+
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean anonymize = Boolean.FALSE;
     
