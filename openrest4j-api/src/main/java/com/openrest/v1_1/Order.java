@@ -36,7 +36,7 @@ public class Order implements Serializable, Cloneable {
     public static final String ORDER_STATUS_CANCELLED = "canceled";
     
     /** All known order statuses. */
-    public static final Set<String> ALL_ORDER_STATUSES = new HashSet<String>(Arrays.asList(new String[] {
+    public static final Set<String> ALL_ORDER_STATUSES = new HashSet<>(Arrays.asList(new String[] {
     		ORDER_STATUS_SUBMITTED, ORDER_STATUS_PENDING, ORDER_STATUS_NEW, ORDER_STATUS_ACCEPTED, ORDER_STATUS_CANCELLED
     }));
     
@@ -60,7 +60,7 @@ public class Order implements Serializable, Cloneable {
     		String comment, Integer price, Delivery delivery, Contact contact, List<Payment> payments,
             Integer takeoutPacks, List<Charge> charges, List<OrderCharge> orderCharges,
             java.util.Date created, java.util.Date received, java.util.Date modified, java.util.Date submitAt,
-            User user, ClubMember clubMember, String status, String shareToken,
+            User user, ClubMember clubMember, String status, String shareToken, String ownerToken,
             String affiliate, String developer, String source, String platform, String ref,
             Boolean legacyHierarchy, Map<String, String> properties, List<LogEntry> log) {
 
@@ -87,6 +87,7 @@ public class Order implements Serializable, Cloneable {
         this.clubMember = clubMember;
         this.status = status;
         this.shareToken = shareToken;
+        this.ownerToken = ownerToken;
         this.affiliate = affiliate;
         this.developer = developer;
         this.source = source;
@@ -111,7 +112,7 @@ public class Order implements Serializable, Cloneable {
     			created(), received(), modified(), submitAt(),
     			((user != null) ? (User) user.clone() : null),
     			((clubMember != null) ? (ClubMember) clubMember.clone() : null),
-    			status, shareToken, affiliate, developer, source, platform, ref, legacyHierarchy,
+    			status, shareToken, ownerToken, affiliate, developer, source, platform, ref, legacyHierarchy,
     			((properties != null) ? new LinkedHashMap<String, String>(properties) : null),
     			LogEntry.clone(log));
 	}
@@ -150,6 +151,7 @@ public class Order implements Serializable, Cloneable {
         if (ref != null ? !ref.equals(order.ref) : order.ref != null) return false;
         if (restaurantId != null ? !restaurantId.equals(order.restaurantId) : order.restaurantId != null) return false;
         if (shareToken != null ? !shareToken.equals(order.shareToken) : order.shareToken != null) return false;
+        if (ownerToken != null ? !ownerToken.equals(order.ownerToken) : order.ownerToken != null) return false;
         if (source != null ? !source.equals(order.source) : order.source != null) return false;
         if (status != null ? !status.equals(order.status) : order.status != null) return false;
         if (submitAt != null ? !submitAt.equals(order.submitAt) : order.submitAt != null) return false;
@@ -184,6 +186,7 @@ public class Order implements Serializable, Cloneable {
         result = 31 * result + (clubMember != null ? clubMember.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         result = 31 * result + (shareToken != null ? shareToken.hashCode() : 0);
+        result = 31 * result + (ownerToken != null ? ownerToken.hashCode() : 0);
         result = 31 * result + (affiliate != null ? affiliate.hashCode() : 0);
         result = 31 * result + (developer != null ? developer.hashCode() : 0);
         result = 31 * result + (source != null ? source.hashCode() : 0);
@@ -313,10 +316,14 @@ public class Order implements Serializable, Cloneable {
     @JsonInclude(Include.NON_NULL)
     public String status;
 
-    /** The order's share-token. */
+    /** Allows retrieving a partially anonymized version of the order (used for publicly sharing the order). */
     @JsonInclude(Include.NON_NULL)
     public String shareToken;
-    
+
+    /** Allows retrieving the full order as the owner. */
+    @JsonInclude(Include.NON_NULL)
+    public String ownerToken;
+
     /** Affiliate-id, for orders that came through affiliate marketing. */
     @JsonInclude(Include.NON_NULL)
     public String affiliate;
