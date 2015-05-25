@@ -63,7 +63,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		
 		<com.fasterxml.jackson.version>2.5.3</com.fasterxml.jackson.version>
-		<com.wix.restaurants.availability.version>1.2.0</com.wix.restaurants.availability.version>
+		<com.wix.restaurants.availability.version>1.2.1</com.wix.restaurants.availability.version>
 		<com.wix.restaurants.jsonclient.version>1.2.0</com.wix.restaurants.jsonclient.version>
     </properties>
 
