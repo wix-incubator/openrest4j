@@ -9,8 +9,9 @@ import com.wix.restaurants.jsonclient.JsonClient;
 public class OpenrestProtocol {
 	private final JsonClient jsonClient;
 	
-	public OpenrestProtocol(HttpRequestFactory requestFactory, Integer connectTimeout, Integer readTimeout) {
-		jsonClient = new JsonClient(requestFactory, connectTimeout, readTimeout, 1);
+	public OpenrestProtocol(HttpRequestFactory requestFactory, Integer connectTimeout, Integer readTimeout,
+							Integer numberOfRetries) {
+		jsonClient = new JsonClient(requestFactory, connectTimeout, readTimeout, numberOfRetries);
 	}
 	
     public <T> T post(String url, Object obj, TypeReference<Response<T>> responseType) throws IOException, OpenrestException {
