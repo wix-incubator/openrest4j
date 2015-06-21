@@ -1,17 +1,12 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.wix.pay.creditcard.tokenizer.model.CreditCardToken;
+
+import java.io.Serializable;
+import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Payment implements Serializable, Cloneable {
@@ -60,11 +55,12 @@ public class Payment implements Serializable, Cloneable {
     		PAYMENT_TYPE_BITPAY, PAYMENT_TYPE_CREDITMUTUEL
     ));
     
-    public Payment(String type, Integer amount, CreditCard card, String token, String userId, String id, String password,
+    public Payment(String type, Integer amount, CreditCard card, CreditCardToken cardToken, String token, String userId, String id, String password,
     		Map<String, String> externalIds) {
     	this.type = type;
     	this.amount = amount;
     	this.card = card;
+        this.cardToken = cardToken;
     	this.token = token;
     	this.userId = userId;
     	this.id = id;
@@ -79,6 +75,7 @@ public class Payment implements Serializable, Cloneable {
 	public Object clone() {
     	return new Payment(type, amount,
     			((card != null) ? (CreditCard) card.clone() : null),
+                cardToken,
     			token, userId, id, password,
     			((externalIds != null) ? new LinkedHashMap<String, String>(externalIds) : null));
 	}
@@ -104,6 +101,7 @@ public class Payment implements Serializable, Cloneable {
 
         if (amount != null ? !amount.equals(payment.amount) : payment.amount != null) return false;
         if (card != null ? !card.equals(payment.card) : payment.card != null) return false;
+        if (cardToken != null ? !cardToken.equals(payment.cardToken) : payment.cardToken != null) return false;
         if (externalIds != null ? !externalIds.equals(payment.externalIds) : payment.externalIds != null) return false;
         if (id != null ? !id.equals(payment.id) : payment.id != null) return false;
         if (password != null ? !password.equals(payment.password) : payment.password != null) return false;
@@ -119,6 +117,7 @@ public class Payment implements Serializable, Cloneable {
         int result = type != null ? type.hashCode() : 0;
         result = 31 * result + (amount != null ? amount.hashCode() : 0);
         result = 31 * result + (card != null ? card.hashCode() : 0);
+        result = 31 * result + (cardToken != null ? cardToken.hashCode() : 0);
         result = 31 * result + (token != null ? token.hashCode() : 0);
         result = 31 * result + (userId != null ? userId.hashCode() : 0);
         result = 31 * result + (id != null ? id.hashCode() : 0);
@@ -138,7 +137,11 @@ public class Payment implements Serializable, Cloneable {
     /** Credit card details (for PAYMENT_TYPE_CREDIT, PAYMENT_TYPE_10BIS, PAYMENT_TYPE_BITSOFGOLD) */
     @JsonInclude(Include.NON_NULL)
     public CreditCard card;
-    
+
+    /** Credit card details (for PAYMENT_TYPE_CREDIT) */
+    @JsonInclude(Include.NON_NULL)
+    public CreditCardToken cardToken;
+
     /** Payment token (for PAYMENT_TYPE_CELLARIX, PAYMENT_TYPE_BITSOFGOLD, PAYMENT_TYPE_PELECARD, PAYMENT_TYPE_BRAINTREE, PAYMENT_TYPE_BITPAY) */
     @JsonInclude(Include.NON_NULL)
     public String token;

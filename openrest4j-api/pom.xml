@@ -60,6 +60,11 @@
 			<artifactId>wix-restaurants-availability-api</artifactId>
 			<version>${com.wix.restaurants.availability.version}</version>
 		</dependency>
+        <dependency>
+            <groupId>com.wix.pay</groupId>
+            <artifactId>credit-card-tokenizer-api</artifactId>
+            <version>${com.wix.pay.creditcard.tokenizer.version}</version>
+        </dependency>
 
         <!-- Test Dependencies -->
     </dependencies>
