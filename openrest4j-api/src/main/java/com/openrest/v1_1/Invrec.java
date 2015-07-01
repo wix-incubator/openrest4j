@@ -1,13 +1,14 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.openrest.olo.payments.Payment;
 import com.wix.restaurants.availability.Date;
+
+import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 /** An Invoice/Receipt. */
 @JsonIgnoreProperties(ignoreUnknown = true)

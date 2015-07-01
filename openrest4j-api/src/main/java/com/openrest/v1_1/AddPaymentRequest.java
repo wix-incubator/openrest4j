@@ -3,6 +3,7 @@ package com.openrest.v1_1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.openrest.olo.payments.CreditcardPayment;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AddPaymentRequest extends Request {
@@ -12,7 +13,7 @@ public class AddPaymentRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public AddPaymentRequest() {}
     
-    public AddPaymentRequest(String accessToken, ClientId clientId, Payment payment) {
+    public AddPaymentRequest(String accessToken, ClientId clientId, CreditcardPayment payment) {
     	this.accessToken = accessToken;
     	this.clientId = clientId;
     	this.payment = payment;
@@ -25,5 +26,5 @@ public class AddPaymentRequest extends Request {
     public ClientId clientId;
     
     @JsonInclude(Include.NON_NULL)
-    public Payment payment;
+    public CreditcardPayment payment;
 }

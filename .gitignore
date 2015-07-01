@@ -1,6 +1,3 @@
-.settings
-bin
-.metadata
-target
-*.iml
+target/
 .idea/**
+*.iml

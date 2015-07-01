@@ -1,18 +1,13 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.openrest.olo.charges.OrderCharge;
+import com.openrest.olo.payments.Payment;
+
+import java.io.Serializable;
+import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Order implements Serializable, Cloneable {
