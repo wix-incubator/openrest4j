@@ -1,7 +1,9 @@
 package com.openrest.olo.payments;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.openrest.v1_1.CreditCard;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /** Payment in delivery-club.ru credit. */
@@ -19,7 +21,8 @@ public class DeliveryclubPayment extends Payment {
 
     @Override
     public Object clone() {
-        return new DeliveryclubPayment(amount, externalIds);
+        return new DeliveryclubPayment(amount,
+                ((externalIds != null) ? new LinkedHashMap<>(externalIds) : null));
     }
 
     @Override

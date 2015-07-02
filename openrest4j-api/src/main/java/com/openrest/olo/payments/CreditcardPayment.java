@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.openrest.v1_1.CreditCard;
 import com.wix.pay.creditcard.tokenizer.model.CreditCardToken;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /** Payment with a credit/debit card. */
@@ -28,7 +29,11 @@ public class CreditcardPayment extends Payment {
 
     @Override
     public Object clone() {
-        return new CreditcardPayment(amount, externalIds, card, cardToken, userId, id, password);
+        return new CreditcardPayment(amount,
+                ((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
+                ((card != null) ? (CreditCard) card.clone() : null),
+                cardToken,
+                userId, id, password);
     }
 
     @Override

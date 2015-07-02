@@ -2,7 +2,9 @@ package com.openrest.olo.payments;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.openrest.v1_1.CreditCard;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /** Payment with Cellarix digital wallet. */
@@ -21,7 +23,9 @@ public class CellarixPayment extends Payment {
 
     @Override
     public Object clone() {
-        return new CellarixPayment(amount, externalIds, token);
+        return new CellarixPayment(amount,
+                ((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
+                token);
     }
 
     @Override

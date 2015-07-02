@@ -3,6 +3,7 @@ package com.openrest.olo.payments;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /** Payment with Bitcoin via BitPay. */
@@ -21,7 +22,9 @@ public class BitpayPayment extends Payment {
 
     @Override
     public Object clone() {
-        return new BitpayPayment(amount, externalIds, token);
+        return new BitpayPayment(amount,
+                ((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
+                token);
     }
 
     @Override

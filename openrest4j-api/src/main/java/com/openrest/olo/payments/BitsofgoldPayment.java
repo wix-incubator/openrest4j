@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.openrest.v1_1.CreditCard;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /** Payment with a Bitcoin via Bits of Gold. */
@@ -23,7 +24,10 @@ public class BitsofgoldPayment extends Payment {
 
     @Override
     public Object clone() {
-        return new BitsofgoldPayment(amount, externalIds, card, token);
+        return new BitsofgoldPayment(amount,
+                ((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
+                ((card != null) ? (CreditCard) card.clone() : null),
+                token);
     }
 
     @Override
