@@ -8,6 +8,18 @@ Official libraries exist for Java (here), [.NET](https://github.com/openrest/ope
 
 The Java library acts as the reference implementation and implicitly defines the API.
 
-Standard use-cases: [3rd-party clients](https://github.com/openrest/openrest4j/wiki/Client-Integration), [POS systems](https://github.com/openrest/openrest4j/wiki/POS-Integration).
+## Installation
+### Maven users
 
-We have an open attitude for working with new partners, ping us for details: info@openrest.com
+Add this dependency to your project's POM:
+
+```xml
+<dependency>
+  <groupId>com.wix.openrest</groupId>
+  <artifactId>openrest4j-client</artifactId>
+  <version>1.8.0</version>
+</dependency>
+```
+
+## License
+This library uses the Apache License, version 2.0.
