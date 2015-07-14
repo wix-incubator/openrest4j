@@ -2,6 +2,8 @@ package com.openrest.v1_1;
 
 import java.io.Serializable;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -34,13 +36,25 @@ public class Contact implements Serializable, Cloneable {
     		return null;
     	}
     	
-    	final Map<String, Contact> cloned = new LinkedHashMap<String, Contact>(contacts.size());
+    	final Map<String, Contact> cloned = new LinkedHashMap<>(contacts.size());
 		for (Entry<String, Contact> entry : contacts.entrySet()) {
 			final String key = entry.getKey();
 			final Contact value = entry.getValue();
 			cloned.put(key, (value != null) ? (Contact) value.clone() : null);
 		}
 		return cloned;
+    }
+
+	public static List<Contact> clone(List<Contact> contacts) {
+        if (contacts == null) {
+            return null;
+        }
+
+        final List<Contact> cloned = new LinkedList<>();
+        for (Contact contact : contacts) {
+            cloned.add((contact != null) ? (Contact) contact.clone() : null);
+        }
+        return cloned;
     }
 
     @JsonInclude(Include.NON_NULL)

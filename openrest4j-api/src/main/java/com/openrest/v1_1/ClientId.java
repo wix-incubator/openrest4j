@@ -1,9 +1,11 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ClientId implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
@@ -26,6 +28,19 @@ public class ClientId implements Serializable, Cloneable {
 	public Object clone() {
     	return new ClientId(ns, id, uid, inferred);
 	}
+
+
+	public static List<ClientId> clone(List<ClientId> clientIds) {
+        if (clientIds == null) {
+            return null;
+        }
+
+        final List<ClientId> cloned = new LinkedList<>();
+        for (ClientId clientId : clientIds) {
+            cloned.add((clientId != null) ? (ClientId) clientId.clone() : null);
+        }
+        return cloned;
+    }
     
     /** The unique id's namespace. */
     @JsonInclude(Include.NON_NULL)

@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import java.io.Serializable;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -40,6 +42,18 @@ public class Address implements Serializable, Cloneable {
     			countryCode, postalCode,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
 	}
+
+    public static List<Address> clone(List<Address> addresses) {
+        if (addresses == null) {
+            return null;
+        }
+
+        final List<Address> cloned = new LinkedList<>();
+        for (Address address : addresses) {
+            cloned.add((address != null) ? (Address) address.clone() : null);
+        }
+        return cloned;
+    }
 
     public String streetAddress(boolean useCountry) {
     	final StringBuilder builder = new StringBuilder();

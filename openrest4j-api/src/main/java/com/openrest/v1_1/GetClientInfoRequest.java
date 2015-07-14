@@ -1,11 +1,11 @@
 package com.openrest.v1_1;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GetClientInfoRequest extends Request {
@@ -30,5 +30,5 @@ public class GetClientInfoRequest extends Request {
     
     /** Optional organization-ids for displaying ClientInfo.comments. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Set<String> organizationIds = new HashSet<String>();
+    public Set<String> organizationIds = new LinkedHashSet<>();
 }

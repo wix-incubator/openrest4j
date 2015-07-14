@@ -40,8 +40,6 @@ import com.openrest.olo.SetPotentialWeeklyStatsRequest;
 	@Type(value = DeletePaymentRequest.class, name = DeletePaymentRequest.TYPE),
 	@Type(value = GetPaymentsRequest.class, name = GetPaymentsRequest.TYPE),
     @Type(value = SaveCardRequest.class, name = SaveCardRequest.TYPE),
-    @Type(value = DeleteCardRequest.class, name = DeleteCardRequest.TYPE),
-    @Type(value = GetCardsRequest.class, name = GetCardsRequest.TYPE),
 	@Type(value = CreatePaypalPaymentRequest.class, name = CreatePaypalPaymentRequest.TYPE),
 	@Type(value = CreateBitpayPaymentRequest.class, name = CreateBitpayPaymentRequest.TYPE),
 	@Type(value = CreateCreditmutuelPaymentRequest.class, name = CreateCreditmutuelPaymentRequest.TYPE),

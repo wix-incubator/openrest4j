@@ -1,12 +1,14 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.io.Serializable;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 /** Identifies a club member to the restaurant. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -30,6 +32,18 @@ public class ClubMember implements Serializable, Cloneable {
     	return new ClubMember(organizationId, memberId, phone,
     			((clubIds != null) ? new LinkedHashSet<String>(clubIds) : null));
 	}
+
+    public static List<ClubMember> clone(List<ClubMember> clubMembers) {
+        if (clubMembers == null) {
+            return null;
+        }
+
+        final List<ClubMember> cloned = new LinkedList<>();
+        for (ClubMember clubMember : clubMembers) {
+            cloned.add((clubMember != null) ? (ClubMember) clubMember.clone() : null);
+        }
+        return cloned;
+    }
 
     @Override
     public boolean equals(Object o) {
