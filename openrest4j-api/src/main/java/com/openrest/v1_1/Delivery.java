@@ -51,6 +51,30 @@ public class Delivery implements Serializable, Cloneable {
     	return new Delivery(type, ((address != null) ? (Address) address.clone() : null), time, timeGuarantee, charge);
 	}
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Delivery delivery = (Delivery) o;
+
+        if (type != null ? !type.equals(delivery.type) : delivery.type != null) return false;
+        if (address != null ? !address.equals(delivery.address) : delivery.address != null) return false;
+        if (time != null ? !time.equals(delivery.time) : delivery.time != null) return false;
+        if (timeGuarantee != null ? !timeGuarantee.equals(delivery.timeGuarantee) : delivery.timeGuarantee != null) return false;
+        return !(charge != null ? !charge.equals(delivery.charge) : delivery.charge != null);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = type != null ? type.hashCode() : 0;
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (time != null ? time.hashCode() : 0);
+        result = 31 * result + (timeGuarantee != null ? timeGuarantee.hashCode() : 0);
+        result = 31 * result + (charge != null ? charge.hashCode() : 0);
+        return result;
+    }
+
     /** Delivery type. */
     @JsonInclude(Include.NON_NULL)
     public String type;
