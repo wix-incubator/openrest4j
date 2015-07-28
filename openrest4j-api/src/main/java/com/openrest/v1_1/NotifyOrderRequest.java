@@ -13,7 +13,7 @@ public class NotifyOrderRequest extends Request {
     public NotifyOrderRequest() {}
     
     public NotifyOrderRequest(String accessToken, String orderId, String channelId, String channelParam, String locale, 
-    		String viewMode, Boolean anonymize, Boolean printConfirmation, Boolean printHeader, Boolean printCsc) {
+    		String viewMode, Boolean anonymize, Boolean printHeader, Boolean printCsc) {
     	this.accessToken = accessToken;
     	this.orderId = orderId;
     	this.channelId = channelId;
@@ -21,7 +21,6 @@ public class NotifyOrderRequest extends Request {
     	this.locale = locale;
     	this.viewMode = viewMode;
     	this.anonymize = anonymize;
-    	this.printConfirmation = printConfirmation;
     	this.printHeader = printHeader;
     	this.printCsc = printCsc;
     }
@@ -48,9 +47,6 @@ public class NotifyOrderRequest extends Request {
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean anonymize = Boolean.FALSE;
 
-    @JsonInclude(Include.NON_DEFAULT)
-    public Boolean printConfirmation = Boolean.FALSE;
-    
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean printHeader = Boolean.FALSE;
     

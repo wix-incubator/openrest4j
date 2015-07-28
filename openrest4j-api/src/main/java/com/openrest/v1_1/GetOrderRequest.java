@@ -1,10 +1,10 @@
 package com.openrest.v1_1;
 
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GetOrderRequest extends Request {
@@ -17,7 +17,7 @@ public class GetOrderRequest extends Request {
     public GetOrderRequest(String accessToken, String shareToken, String ownerToken,
                            String orderId, String viewMode, Boolean anonymize,
                            Set<String> fields, String locale, Viewport viewport, Boolean embed,
-                           Boolean printConfirmation, Boolean printHeader, Boolean printCsc) {
+                           Boolean printHeader, Boolean printCsc) {
     	this.accessToken = accessToken;
         this.shareToken = shareToken;
         this.ownerToken = ownerToken;
@@ -28,7 +28,6 @@ public class GetOrderRequest extends Request {
     	this.locale = locale;
     	this.viewport = viewport;
     	this.embed = embed;
-    	this.printConfirmation = printConfirmation;
     	this.printHeader = printHeader;
     	this.printCsc = printCsc;
     }
@@ -70,10 +69,6 @@ public class GetOrderRequest extends Request {
     /** For Order.html. */
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean embed = Boolean.FALSE;
-    
-    /** For Order.html. */
-    @JsonInclude(Include.NON_DEFAULT)
-    public Boolean printConfirmation = Boolean.FALSE;
     
     /** For Order.html. */
     @JsonInclude(Include.NON_DEFAULT)
