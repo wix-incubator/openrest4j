@@ -5,18 +5,24 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Address implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
 
+    /** Buzz door on arival. */
+    public static final String ON_ARRIVAL_BUZZ = "buzz";
+    /** Call customer on arrival. */
+    public static final String ON_ARRIVAL_PHONE = "phone";
+
+    public static final Set<String> ALL_ON_ARRIVAL = new HashSet<>(Arrays.asList(
+            ON_ARRIVAL_BUZZ, ON_ARRIVAL_PHONE
+    ));
+
     public Address(String formatted, String country, String city, String street, String number,
     		String apt, String floor, String entrance, String comment, LatLng latLng,
-    		String countryCode, String postalCode, Map<String, String> properties) {
+    		String countryCode, String postalCode, String onArrival, Map<String, String> properties) {
     	this.formatted = formatted;
     	this.country = country;
         this.city = city;
@@ -29,6 +35,7 @@ public class Address implements Serializable, Cloneable {
         this.latLng = latLng;
         this.countryCode = countryCode;
         this.postalCode = postalCode;
+        this.onArrival = onArrival;
         this.properties = properties;
     }
 
@@ -39,7 +46,7 @@ public class Address implements Serializable, Cloneable {
 	public Object clone() {
     	return new Address(formatted, country, city, street, number, apt, floor, entrance, comment,
     			((latLng != null) ? (LatLng) latLng.clone() : null),
-    			countryCode, postalCode,
+    			countryCode, postalCode, onArrival,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
 	}
 
@@ -114,6 +121,10 @@ public class Address implements Serializable, Cloneable {
     @JsonInclude(Include.NON_NULL)
     public String postalCode;
 
+    /** @see #ALL_ON_ARRIVAL */
+    @JsonInclude(Include.NON_NULL)
+    public String onArrival;
+
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> properties = new LinkedHashMap<>();
 
@@ -135,6 +146,7 @@ public class Address implements Serializable, Cloneable {
         if (latLng != null ? !latLng.equals(address.latLng) : address.latLng != null) return false;
         if (number != null ? !number.equals(address.number) : address.number != null) return false;
         if (postalCode != null ? !postalCode.equals(address.postalCode) : address.postalCode != null) return false;
+        if (onArrival != null ? !onArrival.equals(address.onArrival) : address.onArrival != null) return false;
         if (properties != null ? !properties.equals(address.properties) : address.properties != null) return false;
         if (street != null ? !street.equals(address.street) : address.street != null) return false;
 
@@ -155,6 +167,7 @@ public class Address implements Serializable, Cloneable {
         result = 31 * result + (latLng != null ? latLng.hashCode() : 0);
         result = 31 * result + (countryCode != null ? countryCode.hashCode() : 0);
         result = 31 * result + (postalCode != null ? postalCode.hashCode() : 0);
+        result = 31 * result + (onArrival != null ? onArrival.hashCode() : 0);
         result = 31 * result + (properties != null ? properties.hashCode() : 0);
         return result;
     }
