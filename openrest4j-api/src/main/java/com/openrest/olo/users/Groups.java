@@ -1,11 +1,11 @@
 package com.openrest.olo.users;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 public class Groups implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -18,5 +18,5 @@ public class Groups implements Serializable {
     }
 
     @JsonInclude(Include.NON_DEFAULT)
-	public List<Group> groups = new LinkedList<Group>();
+	public List<Group> groups = new LinkedList<>();
 }
