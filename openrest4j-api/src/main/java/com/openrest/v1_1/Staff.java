@@ -33,9 +33,9 @@ public class Staff implements Serializable, Cloneable {
 	public Object clone() {
     	final Map<String, Set<String>> clonedStaff;
     	if (staff != null) {
-    		clonedStaff = new LinkedHashMap<String, Set<String>>(staff.size());
+    		clonedStaff = new LinkedHashMap<>(staff.size());
     		for (Entry<String, Set<String>> entry : staff.entrySet()) {
-    			clonedStaff.put(entry.getKey(), new LinkedHashSet<String>(entry.getValue()));
+    			clonedStaff.put(entry.getKey(), new LinkedHashSet<>(entry.getValue()));
     		}
     	} else {
     		clonedStaff = null;
