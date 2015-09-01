@@ -22,7 +22,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     
     /**
      * External-id key for specifying the organization's notifications ("no-reply") email.
-     * For the value's format, @see http://en.wikipedia.org/wiki/Email_address
+     * For the value's format, @see <a href="http://en.wikipedia.org/wiki/Email_address">Email address</a>
      * 
      * @see Organization#externalIds
      */

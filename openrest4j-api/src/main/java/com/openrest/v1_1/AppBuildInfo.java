@@ -1,20 +1,12 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 
 /** Information required to build an app. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -33,7 +25,7 @@ public class AppBuildInfo implements Serializable, Cloneable {
 	public static final String STATE_ERROR = "bot-error";
 	
     /** All known statuses. */
-    public static final Set<String> ALL_STATES = new HashSet<String>(Arrays.asList(
+    public static final Set<String> ALL_STATES = new HashSet<>(Arrays.asList(
     		STATE_NEW, STATE_PUBLISHING_AT_PUBLISHER, STATE_PUBLISHING_AT_BOT, STATE_PUBLISHING_AT_STORE,
     		STATE_REMOVING_AT_PUBLISHER, STATE_REMOVING_AT_BOT,
     		STATE_OPERATIONAL, STATE_DEPRECATED, STATE_REMOVED, STATE_ERROR));
@@ -69,7 +61,7 @@ public class AppBuildInfo implements Serializable, Cloneable {
 	public Object clone() {
     	final Map<String, AppstoreInfo> clonedStoreInfos;
     	if (storeInfos != null) {
-    		clonedStoreInfos = new LinkedHashMap<String, AppstoreInfo>(storeInfos.size());
+    		clonedStoreInfos = new LinkedHashMap<>(storeInfos.size());
     		for (Entry<String, AppstoreInfo> entry : storeInfos.entrySet()) {
     			clonedStoreInfos.put(entry.getKey(), (AppstoreInfo) entry.getValue().clone());
     		}
@@ -79,7 +71,7 @@ public class AppBuildInfo implements Serializable, Cloneable {
     	
     	final Map<String, Blob> clonedBlobs;
     	if (blobs != null) {
-    		clonedBlobs = new LinkedHashMap<String, Blob>(blobs.size());
+    		clonedBlobs = new LinkedHashMap<>(blobs.size());
     		for (Entry<String, Blob> entry : blobs.entrySet()) {
     			clonedBlobs.put(entry.getKey(), (Blob) entry.getValue().clone());
     		}
@@ -89,7 +81,7 @@ public class AppBuildInfo implements Serializable, Cloneable {
     	
     	final List<LogEntry> clonedLog;
     	if (log != null) {
-    		clonedLog = new ArrayList<LogEntry>(log.size());
+    		clonedLog = new ArrayList<>(log.size());
     		for (LogEntry logEntry : log) {
     			clonedLog.add((LogEntry) logEntry.clone());
     		}
@@ -100,10 +92,10 @@ public class AppBuildInfo implements Serializable, Cloneable {
     	return new AppBuildInfo(id, created, modified, distributorId, ownerId, type, link,
     			((appId != null) ? (AppId) appId.clone() : null),
     			internalId, filename, locale,
-    			((title != null) ? new HashMap<String, String>(title) : null),
-    			((description != null) ? new HashMap<String, String>(description) : null),
+    			((title != null) ? new HashMap<>(title) : null),
+    			((description != null) ? new HashMap<>(description) : null),
     			clonedStoreInfos,
-    			((properties != null) ? new HashMap<String, String>(properties) : null), 
+    			((properties != null) ? new HashMap<>(properties) : null),
     			clonedBlobs, state, clonedLog);
 	}
     
@@ -156,35 +148,35 @@ public class AppBuildInfo implements Serializable, Cloneable {
     
     /** The app's build (not appstore!) title in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title = new HashMap<String, String>();
+    public Map<String, String> title = new LinkedHashMap<>();
     
     /** The app's build (not appstore!) description in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> description = new HashMap<String, String>();
+    public Map<String, String> description = new LinkedHashMap<>();
     
     /** Appstore information in different locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, AppstoreInfo> storeInfos = new HashMap<String, AppstoreInfo>();
+    public Map<String, AppstoreInfo> storeInfos = new LinkedHashMap<>();
     
     /**
      * Map of user-defined extended properties. Developers should use unique
      * keys, e.g. "com.googlecode.openrestext".
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> properties = new HashMap<String, String>();
+    public Map<String, String> properties = new LinkedHashMap<>();
     
     /**
      * Maps blob-types to blobs.
      * @see GetBlobUploadUrlRequest#blobType
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, Blob> blobs = new HashMap<String, Blob>();
+    public Map<String, Blob> blobs = new LinkedHashMap<>();
     
-    /** @see ALL_STATES */
+    /** @see #ALL_STATES */
     @JsonInclude(Include.NON_NULL)
     public String state;
     
     /** Change log. */
     @JsonInclude(Include.NON_DEFAULT)
-    public List<LogEntry> log = new LinkedList<LogEntry>();
+    public List<LogEntry> log = new LinkedList<>();
 }
