@@ -57,12 +57,18 @@ public class Channel {
 	 * param: port number in Presto's router.
 	 */
     public static final String CHANNEL_PRESTO = "il.co.presto";
-	
+
+    /**
+     * RSD POS.
+     * param: ignored.
+     */
+    public static final String CHANNEL_RSD = "il.co.rsd";
+
     /** All known channels. */
     public static final Set<String> ALL_CHANNELS = new HashSet<>(Arrays.asList(
     		CHANNEL_EMAIL, CHANNEL_FAX, CHANNEL_SMS, CHANNEL_VOICE, CHANNEL_RESTCLOUD,
     		CHANNEL_FRSVISION_POS, CHANNEL_FRSVISION_BURGERANCH, CHANNEL_BEECOMM,
-    		CHANNEL_CLOUDPRINT, CHANNEL_PRESTO));
+    		CHANNEL_CLOUDPRINT, CHANNEL_PRESTO, CHANNEL_RSD));
     
     /** Special channel param that's used as placeholder for the customer's details, e.g. by notifications. */
     public static final String CHANNEL_PARAM_CUSTOMER = "_customer_";
