@@ -22,6 +22,7 @@ import java.util.Map;
         @Type(value = CashPayment.class, name = CashPayment.TYPE),
         @Type(value = CreditcardPayment.class, name = CreditcardPayment.TYPE),
         @Type(value = DeliveryclubPayment.class, name = DeliveryclubPayment.TYPE),
+        @Type(value = DeliverycomPayment.class, name = DeliverycomPayment.TYPE),
         @Type(value = BitpayPayment.class, name = BitpayPayment.TYPE),
         @Type(value = CellarixPayment.class, name = CellarixPayment.TYPE),
         @Type(value = BitsofgoldPayment.class, name = BitsofgoldPayment.TYPE),
