@@ -35,6 +35,6 @@ public class Payment {
     		PAYMENT_TYPE_COD, CashPayment.TYPE, CreditcardPayment.TYPE, PAYMENT_TYPE_DEBIT, PAYMENT_TYPE_10BIS,
     		PAYMENT_TYPE_CHECK, PAYMENT_TYPE_OFFSET, PAYMENT_TYPE_DEBT, PAYMENT_TYPE_DIRECT_DEBIT, PAYMENT_TYPE_WAIVE,
     		PAYMENT_TYPE_PAYPAL, CellarixPayment.TYPE, BitsofgoldPayment.TYPE, BitpayPayment.TYPE,
-            DeliveryclubPayment.TYPE, DeliverycomPayment.TYPE
+            DeliveryclubPayment.TYPE, DeliverycomPayment.TYPE, MultipassPayment.TYPE
     ));
 }

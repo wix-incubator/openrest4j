@@ -28,6 +28,7 @@ import java.util.Map;
         @Type(value = BitsofgoldPayment.class, name = BitsofgoldPayment.TYPE),
         @Type(value = PelecardPayment.class, name = PelecardPayment.TYPE),
         @Type(value = CreditmutuelPayment.class, name = CreditmutuelPayment.TYPE),
+        @Type(value = MultipassPayment.class, name = MultipassPayment.TYPE)
 })
 public abstract class Payment implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
