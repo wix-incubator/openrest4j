@@ -131,11 +131,11 @@ public class Charge implements Serializable, Cloneable {
     
     /** Title. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title = new LinkedHashMap<String, String>();
+    public Map<String, String> title = new LinkedHashMap<>();
 
     /** Description. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> description = new LinkedHashMap<String, String>();
+    public Map<String, String> description = new LinkedHashMap<>();
     
     /** Condition to display the charge to end-users. */
     @JsonInclude(Include.NON_NULL)
@@ -162,5 +162,5 @@ public class Charge implements Serializable, Cloneable {
      * keys, e.g. "com.googlecode.openrestext".
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> properties = new LinkedHashMap<String, String>();
+    public Map<String, String> properties = new LinkedHashMap<>();
 }

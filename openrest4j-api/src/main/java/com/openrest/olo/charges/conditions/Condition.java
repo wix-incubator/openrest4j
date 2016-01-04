@@ -1,17 +1,17 @@
 package com.openrest.olo.charges.conditions;
 
-import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 /** A satisfiable condition. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -49,7 +49,7 @@ public abstract class Condition implements Serializable, Cloneable {
     		return null;
     	}
     	
-    	final List<Condition> cloned = new LinkedList<Condition>();
+    	final List<Condition> cloned = new LinkedList<>();
     	for (Condition rule : rules) {
     		cloned.add((rule != null) ? (Condition) rule.clone() : null);
     	}
@@ -64,5 +64,5 @@ public abstract class Condition implements Serializable, Cloneable {
      * keys, e.g. "com.googlecode.openrestext".
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> properties = new LinkedHashMap<String, String>();
+    public Map<String, String> properties = new LinkedHashMap<>();
 }
