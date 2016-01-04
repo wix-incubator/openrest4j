@@ -20,8 +20,8 @@ import java.util.Map;
 	    include = JsonTypeInfo.As.PROPERTY,  
 	    property = "type")  
 @JsonSubTypes({
-	@Type(value = TrueCondition.class, name = AndCondition.TYPE),
-	@Type(value = FalseCondition.class, name = OrCondition.TYPE),
+	@Type(value = TrueCondition.class, name = TrueCondition.TYPE),
+	@Type(value = FalseCondition.class, name = FalseCondition.TYPE),
 	@Type(value = AndCondition.class, name = AndCondition.TYPE),
 	@Type(value = OrCondition.class, name = OrCondition.TYPE),
 	@Type(value = NotCondition.class, name = NotCondition.TYPE),
