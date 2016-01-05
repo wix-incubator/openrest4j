@@ -18,16 +18,17 @@ public class MultipassPayment extends Payment {
     /** Default constructor for JSON deserialization. */
     public MultipassPayment() {}
 
-    public MultipassPayment(Integer amount, Map<String, String> externalIds, String number) {
+    public MultipassPayment(Integer amount, Map<String, String> externalIds, String number, String pin) {
         super(amount, externalIds);
         this.number = number;
+        this.pin = pin;
     }
 
     @Override
     public Object clone() {
         return new MultipassPayment(amount,
                 ((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
-                number);
+                number, pin);
     }
 
     @Override
@@ -39,7 +40,8 @@ public class MultipassPayment extends Payment {
 
         if (amount != null ? !amount.equals(that.amount) : that.amount != null) return false;
         if (externalIds != null ? !externalIds.equals(that.externalIds) : that.externalIds != null) return false;
-        return !(number != null ? !number.equals(that.number) : that.number != null);
+        if (number != null ? !number.equals(that.number) : that.number != null) return false;
+        return !(pin != null ? !pin.equals(that.pin) : that.pin != null);
     }
 
     @Override
@@ -47,10 +49,15 @@ public class MultipassPayment extends Payment {
         int result = amount != null ? amount.hashCode() : 0;
         result = 31 * result + (externalIds != null ? externalIds.hashCode() : 0);
         result = 31 * result + (number != null ? number.hashCode() : 0);
+        result = 31 * result + (pin != null ? pin.hashCode() : 0);
         return result;
     }
 
     /** MultiPass card number. */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public String number;
+
+    /** MultiPass PIN. */
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public String pin;
 }
