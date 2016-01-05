@@ -30,7 +30,7 @@ public class OrderCharge implements Serializable, Cloneable {
     		return null;
     	}
     	
-    	final List<OrderCharge> cloned = new LinkedList<OrderCharge>();
+    	final List<OrderCharge> cloned = new LinkedList<>();
     	for (OrderCharge orderCharge : orderCharges) {
     		cloned.add((orderCharge != null) ? (OrderCharge) orderCharge.clone() : null);
     	}
