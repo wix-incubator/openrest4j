@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.openrest.olo.charges.OrderCharge;
+import com.openrest.olo.dispatches.Dispatch;
 import com.openrest.olo.payments.Payment;
 
 import java.io.Serializable;
@@ -52,7 +53,7 @@ public class Order implements Serializable, Cloneable {
     /** Constructs a previously submitted order from persisted data. */
     public Order(String id, Map<String, String> externalIds, String distributorId, String chainId, String restaurantId,
     		String locale, List<OrderItem> orderItems,
-    		String comment, Integer price, Delivery delivery, Contact contact, List<Payment> payments,
+    		String comment, Integer price, Dispatch delivery, Contact contact, List<Payment> payments,
             Integer takeoutPacks, List<Charge> charges, List<OrderCharge> orderCharges,
             java.util.Date created, java.util.Date received, java.util.Date modified, java.util.Date submitAt,
             User user, ClubMember clubMember, String status, String shareToken, String ownerToken,
@@ -101,7 +102,7 @@ public class Order implements Serializable, Cloneable {
     	return new Order(id,
     			((externalIds != null) ? new LinkedHashMap<String, String>(externalIds) : null),
     			distributorId, chainId, restaurantId, locale, OrderItem.clone(orderItems), comment, price,
-    			((delivery != null) ? (Delivery) delivery.clone() : null),
+    			((delivery != null) ? (Dispatch) delivery.clone() : null),
     			((contact != null) ? (Contact) contact.clone() : null),
     			Payment.clone(payments), takeoutPacks, Charge.clone(charges), OrderCharge.clone(orderCharges),
     			created(), received(), modified(), submitAt(),
@@ -247,7 +248,7 @@ public class Order implements Serializable, Cloneable {
 
     /* Delivery method. */
     @JsonInclude(Include.NON_NULL)
-    public Delivery delivery;
+    public Dispatch delivery;
 
     /* Contact details. */
     @JsonInclude(Include.NON_NULL)

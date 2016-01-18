@@ -3,6 +3,7 @@ package com.openrest.v1_1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.openrest.olo.dispatches.DispatchInfo;
 import com.wix.restaurants.availability.Availability;
 
 import java.util.*;
@@ -16,7 +17,7 @@ public class SearchResult extends Restaurant {
     		Map<String, String> description, Contact contact, Map<String, Contact> externalContacts, Address address,
     		Map<String, Map<String, String>> messages, ColorScheme colorScheme,
     		Availability openTimes, Availability deliveryTimes,
-            List<DeliveryInfo> deliveryInfos, Integer maxFutureOrderDelayMins,
+            List<DispatchInfo> deliveryInfos, Integer maxFutureOrderDelayMins,
             String timezone, String currency, String locale, Set<String> locales,
             Set<String> paymentTypes, Boolean multiPaymentDisabled, Map<String, CardInfo> cardInfos, CreditcardsInfo creditcardsInfo,
             Map<String, Integer> minPayments, Boolean antiFraudDisabled, String link, String domain, Set<String> altDomains,
@@ -25,7 +26,7 @@ public class SearchResult extends Restaurant {
             Map<String, String> compatibilities, Map<String, Availability> availabilities,
             String state, Boolean closed, String virtualId, Boolean inactive, Set<Product> products,
             Map<String, Double> features, Double rank, List<TopItem> topItems,
-            Set<String> deliveryTypes, DeliveryInfo deliveryInfo, List<Charge> charges) {
+            Set<String> deliveryTypes, DispatchInfo deliveryInfo, List<Charge> charges) {
     	super(id, alias, affiliateId, externalIds, created, modified, distributorId, chainId, title, description, contact, externalContacts,
     			address, messages, colorScheme, openTimes, deliveryTimes, deliveryInfos, maxFutureOrderDelayMins,
     			timezone, currency, locale, locales, paymentTypes, multiPaymentDisabled, cardInfos, creditcardsInfo, minPayments,
@@ -50,7 +51,7 @@ public class SearchResult extends Restaurant {
     
     /** The "most optimistic" delivery info (optimization to avoid getting the entire deliveryInfos field). */
     @JsonInclude(Include.NON_NULL)
-    public DeliveryInfo deliveryInfo;
+    public DispatchInfo deliveryInfo;
     
     /** Available charges (for discounts search). */
     @JsonInclude(Include.NON_DEFAULT)

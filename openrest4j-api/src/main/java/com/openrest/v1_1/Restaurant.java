@@ -3,6 +3,7 @@ package com.openrest.v1_1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.openrest.olo.dispatches.DispatchInfo;
 import com.wix.restaurants.availability.Availability;
 
 import java.util.*;
@@ -17,7 +18,7 @@ public class Restaurant extends Organization {
     		Map<String, String> description, Contact contact, Map<String, Contact> externalContacts, Address address,
     		Map<String, Map<String, String>> messages, ColorScheme colorScheme,
     		Availability openTimes, Availability deliveryTimes,
-            List<DeliveryInfo> deliveryInfos, Integer maxFutureOrderDelayMins,
+            List<DispatchInfo> deliveryInfos, Integer maxFutureOrderDelayMins,
             String timezone, String currency, String locale, Set<String> locales,
             Set<String> paymentTypes, Boolean multiPaymentDisabled, Map<String, CardInfo> cardInfos, CreditcardsInfo creditcardsInfo,
             Map<String, Integer> minPayments, Boolean antiFraudDisabled, String link, String domain, Set<String> altDomains,
@@ -61,7 +62,7 @@ public class Restaurant extends Organization {
     			((colorScheme != null) ? (ColorScheme) colorScheme.clone() : null),
     			((openTimes != null) ? (Availability) openTimes.clone() : null),
     			((deliveryTimes != null) ? (Availability) deliveryTimes.clone() : null),
-    			DeliveryInfo.clone(deliveryInfos), maxFutureOrderDelayMins,
+                DispatchInfo.clone(deliveryInfos), maxFutureOrderDelayMins,
     			timezone, currency, locale,
     			((locales != null) ? new LinkedHashSet<>(locales) : null),
     			((paymentTypes != null) ? new LinkedHashSet<>(paymentTypes) : null),
@@ -101,7 +102,7 @@ public class Restaurant extends Organization {
 
     /** Information regarding the different delivery destinations. */
     @JsonInclude(Include.NON_DEFAULT)
-    public List<DeliveryInfo> deliveryInfos = new LinkedList<>();
+    public List<DispatchInfo> deliveryInfos = new LinkedList<>();
     
     /**
      * Latest time up to which future orders will be accepted. For example, a value of 4320 means

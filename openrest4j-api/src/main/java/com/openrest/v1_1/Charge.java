@@ -211,7 +211,7 @@ public class Charge implements Serializable, Cloneable {
     
     /**
      * The delivery-types this charge applies to (null means any).
-     * @see Delivery#ALL_DELIVERY_TYPES
+     * @see com.openrest.olo.dispatches.Dispatch
      */
     @JsonInclude(Include.NON_NULL)
     public Set<String> deliveryTypes;
