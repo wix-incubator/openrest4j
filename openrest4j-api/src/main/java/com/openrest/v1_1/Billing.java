@@ -1,12 +1,12 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Billing implements Serializable, Cloneable {
@@ -43,7 +43,7 @@ public class Billing implements Serializable, Cloneable {
     
     /** The costs. */
     @JsonInclude(Include.NON_DEFAULT)
-    public List<Cost> costs = new LinkedList<Cost>();
+    public List<Cost> costs = new LinkedList<>();
     
     /** Payment method (@see Payment.ALL_PAYMENT_TYPES). */
     @JsonInclude(Include.NON_NULL)

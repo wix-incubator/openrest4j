@@ -1,14 +1,14 @@
 package com.openrest.v1_1;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Cost implements Serializable, Comparable<Cost>, Cloneable  {
@@ -50,7 +50,7 @@ public class Cost implements Serializable, Comparable<Cost>, Cloneable  {
     @Override
 	public Object clone() {
     	return new Cost(type, key,
-    			((title != null) ? new HashMap<String, String>(title) : null),
+    			((title != null) ? new HashMap<>(title) : null),
     			year, month, priority, amountRuleType, amountRule, minimum, discountRule, amount, discount);
 	}
     
@@ -59,7 +59,7 @@ public class Cost implements Serializable, Comparable<Cost>, Cloneable  {
     		return null;
     	}
     	
-    	final List<Cost> cloned = new LinkedList<Cost>();
+    	final List<Cost> cloned = new LinkedList<>();
 		for (Cost cost : costs) {
 			cloned.add((cost != null) ? (Cost) cost.clone() : null);
 		}
@@ -76,7 +76,7 @@ public class Cost implements Serializable, Comparable<Cost>, Cloneable  {
     
     /** Optional cost title (multi-locale). */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title = new HashMap<String, String>();
+    public Map<String, String> title = new HashMap<>();
     
     /** Year in which this cost was incurred (relevant mostly for one-time costs). */
     @JsonInclude(Include.NON_NULL)
