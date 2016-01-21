@@ -21,7 +21,7 @@ public class Address implements Serializable, Cloneable {
     ));
 
     public Address(String formatted, String country, String city, String street, String number,
-    		String apt, String floor, String entrance, String comment, LatLng latLng,
+    		String apt, String floor, String entrance, String comment, LatLng latLng, Boolean approximate,
     		String countryCode, String postalCode, String onArrival, Map<String, String> properties) {
     	this.formatted = formatted;
     	this.country = country;
@@ -33,6 +33,7 @@ public class Address implements Serializable, Cloneable {
         this.entrance = entrance;
         this.comment = comment;
         this.latLng = latLng;
+        this.approximate = approximate;
         this.countryCode = countryCode;
         this.postalCode = postalCode;
         this.onArrival = onArrival;
@@ -45,7 +46,7 @@ public class Address implements Serializable, Cloneable {
     @Override
 	public Object clone() {
     	return new Address(formatted, country, city, street, number, apt, floor, entrance, comment,
-    			((latLng != null) ? (LatLng) latLng.clone() : null),
+    			((latLng != null) ? (LatLng) latLng.clone() : null), approximate,
     			countryCode, postalCode, onArrival,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
 	}
@@ -110,6 +111,10 @@ public class Address implements Serializable, Cloneable {
     /** The geocode of the 'formatted' field. */
     @JsonInclude(Include.NON_NULL)
     public LatLng latLng;
+
+    /** The Lat/Lng field is approximated (not "rooftop accurate"). */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Boolean approximate = Boolean.FALSE;
     
     /**
      * Two letter country code.
@@ -144,6 +149,7 @@ public class Address implements Serializable, Cloneable {
         if (floor != null ? !floor.equals(address.floor) : address.floor != null) return false;
         if (formatted != null ? !formatted.equals(address.formatted) : address.formatted != null) return false;
         if (latLng != null ? !latLng.equals(address.latLng) : address.latLng != null) return false;
+        if (approximate != null ? !approximate.equals(address.approximate) : address.approximate != null) return false;
         if (number != null ? !number.equals(address.number) : address.number != null) return false;
         if (postalCode != null ? !postalCode.equals(address.postalCode) : address.postalCode != null) return false;
         if (onArrival != null ? !onArrival.equals(address.onArrival) : address.onArrival != null) return false;
@@ -165,6 +171,7 @@ public class Address implements Serializable, Cloneable {
         result = 31 * result + (entrance != null ? entrance.hashCode() : 0);
         result = 31 * result + (comment != null ? comment.hashCode() : 0);
         result = 31 * result + (latLng != null ? latLng.hashCode() : 0);
+        result = 31 * result + (approximate != null ? approximate.hashCode() : 0);
         result = 31 * result + (countryCode != null ? countryCode.hashCode() : 0);
         result = 31 * result + (postalCode != null ? postalCode.hashCode() : 0);
         result = 31 * result + (onArrival != null ? onArrival.hashCode() : 0);

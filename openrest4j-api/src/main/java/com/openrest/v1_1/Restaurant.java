@@ -21,8 +21,8 @@ public class Restaurant extends Organization {
             List<DispatchInfo> deliveryInfos, Integer maxFutureOrderDelayMins,
             String timezone, String currency, String locale, Set<String> locales,
             Set<String> paymentTypes, Boolean multiPaymentDisabled, Map<String, CardInfo> cardInfos, CreditcardsInfo creditcardsInfo,
-            Map<String, Integer> minPayments, Boolean antiFraudDisabled, String link, String domain, Set<String> altDomains,
-            String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
+            DeliveriesInfo deliveriesInfo, Map<String, Integer> minPayments, Boolean antiFraudDisabled, String link, String domain,
+            Set<String> altDomains, String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
             List<AppInfo> apps, Seo seo, Map<String, String> properties, Map<String, String> compatibilities,
             Map<String, Availability> availabilities,
             String state, Boolean closed, String virtualId, Boolean inactive, Set<Product> products, Map<String, Double> features, Double rank) {
@@ -39,6 +39,7 @@ public class Restaurant extends Organization {
         this.paymentTypes = paymentTypes;
         this.multiPaymentDisabled = multiPaymentDisabled;
         this.creditcardsInfo = creditcardsInfo;
+        this.deliveriesInfo = deliveriesInfo;
         this.cardInfos = cardInfos;
         this.minPayments = minPayments;
         this.antiFraudDisabled = antiFraudDisabled;
@@ -68,6 +69,7 @@ public class Restaurant extends Organization {
     			((paymentTypes != null) ? new LinkedHashSet<>(paymentTypes) : null),
     			multiPaymentDisabled, CardInfo.clone(cardInfos),
                 ((creditcardsInfo != null) ? (CreditcardsInfo) creditcardsInfo.clone() : null),
+                ((deliveriesInfo != null) ? (DeliveriesInfo) deliveriesInfo.clone() : null),
     			((minPayments != null) ? new LinkedHashMap<>(minPayments) : null),
     			antiFraudDisabled, link, domain,
     			((altDomains != null) ? new LinkedHashSet<>(altDomains) : null),
@@ -137,6 +139,9 @@ public class Restaurant extends Organization {
 
     @JsonInclude(Include.NON_NULL)
     public CreditcardsInfo creditcardsInfo = new CreditcardsInfo();
+
+    @JsonInclude(Include.NON_NULL)
+    public DeliveriesInfo deliveriesInfo;
 
     /**
      * Maps available payment types to minimal charge allowed per payment, e.g.
