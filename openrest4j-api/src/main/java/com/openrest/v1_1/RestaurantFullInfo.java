@@ -1,12 +1,10 @@
 package com.openrest.v1_1;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RestaurantFullInfo extends OpenrestObject {
@@ -14,14 +12,12 @@ public class RestaurantFullInfo extends OpenrestObject {
 	
     private static final long serialVersionUID = 1L;
     
-    public RestaurantFullInfo(Restaurant restaurant, Menu menu, List<Charge> charges,
-    		Chain chain, Distributor distributor, Set<String> fbAdmins) {
+    public RestaurantFullInfo(Restaurant restaurant, Menu menu, List<Charge> charges, Chain chain, Distributor distributor) {
     	this.restaurant = restaurant;
     	this.menu = menu;
     	this.charges = charges;
     	this.distributor = distributor;
     	this.chain = chain;
-    	this.fbAdmins = fbAdmins;
     }
     
     /** Default constructor for JSON deserialization. */
@@ -47,8 +43,4 @@ public class RestaurantFullInfo extends OpenrestObject {
     /** The chain. */
     @JsonInclude(Include.NON_NULL)
     public Chain chain;
-    
-    /** The restaurant's Facebook admins. */
-    @JsonInclude(Include.NON_DEFAULT)
-    public Set<String> fbAdmins = new HashSet<String>();
 }
