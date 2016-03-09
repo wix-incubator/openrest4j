@@ -1,12 +1,12 @@
 package com.openrest.olo.charges;
 
-import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.io.Serializable;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class IdsFilter implements Serializable, Cloneable {
@@ -33,6 +33,25 @@ public class IdsFilter implements Serializable, Cloneable {
     	return new IdsFilter(type,
     			((ids != null) ? new LinkedHashSet<String>(ids) : null));
 	}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        IdsFilter idsFilter = (IdsFilter) o;
+
+        if (type != null ? !type.equals(idsFilter.type) : idsFilter.type != null) return false;
+        return !(ids != null ? !ids.equals(idsFilter.ids) : idsFilter.ids != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = type != null ? type.hashCode() : 0;
+        result = 31 * result + (ids != null ? ids.hashCode() : 0);
+        return result;
+    }
 
     @JsonInclude(Include.NON_DEFAULT)
     public String type = Inclusion.TYPE_INCLUDE;
