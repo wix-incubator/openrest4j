@@ -112,7 +112,7 @@ public class MenuSection implements Serializable, Cloneable {
 
     /**
      * Maps blob-types to blobs.
-     * @see GetBlobUploadUrlRequest#blobType
+     * @see BlobTypes
      */
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, Blob> blobs = new LinkedHashMap<>();

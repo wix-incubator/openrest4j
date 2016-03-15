@@ -1,17 +1,12 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.restaurants.availability.Availability;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * An item that can be ordered, e.g. a main dish ("hamburger"), a side ("fries")
@@ -110,7 +105,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     
     /**
      * Maps blob-types to blobs.
-     * @see GetBlobUploadUrlRequest#blobType
+	 * @see BlobTypes
      */
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, Blob> blobs = new HashMap<String, Blob>();
