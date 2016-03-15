@@ -3,14 +3,6 @@ package com.openrest.v1_1;
 public class BlobTypes {
     private BlobTypes() {}
 
-    /**
-     * External-id key for specifying the organization's notifications ("no-reply") email.
-     * For the value's format, @see <a href="http://en.wikipedia.org/wiki/Email_address">Email address</a>
-     *
-     * @see Organization#externalIds
-     */
-    public static final String EXTERNAL_ID_EMAIL_NOREPLY = "email.noreply";
-
     /** Standard (4:3) logo image. */
     public static final String BLOB_TYPE_LOGO = "logo";
     /** Square (1:1) logo image. */
