@@ -75,8 +75,6 @@ import com.openrest.olo.SetPotentialWeeklyStatsRequest;
 	@Type(value = SetBillingRequest.class, name = SetBillingRequest.TYPE),
 	@Type(value = GetBillRequest.class, name = GetBillRequest.TYPE),
 	@Type(value = CalculateBillRequest.class, name = CalculateBillRequest.TYPE),
-	@Type(value = PurchaseCreditRequest.class, name = PurchaseCreditRequest.TYPE),
-	@Type(value = SettleBillingRequest.class, name = SettleBillingRequest.TYPE),
 	@Type(value = GetBalanceLinesRequest.class, name = GetBalanceLinesRequest.TYPE),
 	@Type(value = AddBalanceLineRequest.class, name = AddBalanceLineRequest.TYPE),
 	@Type(value = AddCostRequest.class, name = AddCostRequest.TYPE),
