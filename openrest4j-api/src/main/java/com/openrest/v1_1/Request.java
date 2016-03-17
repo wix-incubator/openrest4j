@@ -1,14 +1,13 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
 import com.openrest.olo.GetPotentialWeeklyStatsRequest;
 import com.openrest.olo.SetPotentialWeeklyStatsRequest;
+
+import java.io.Serializable;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(
@@ -36,9 +35,6 @@ import com.openrest.olo.SetPotentialWeeklyStatsRequest;
 	@Type(value = SetOrderPropertiesRequest.class, name = SetOrderPropertiesRequest.TYPE),
 	@Type(value = QueryClubMembersRequest.class, name = QueryClubMembersRequest.TYPE),
 	@Type(value = SubmitFeedbackRequest.class, name = SubmitFeedbackRequest.TYPE),
-	@Type(value = AddPaymentRequest.class, name = AddPaymentRequest.TYPE),
-	@Type(value = DeletePaymentRequest.class, name = DeletePaymentRequest.TYPE),
-	@Type(value = GetPaymentsRequest.class, name = GetPaymentsRequest.TYPE),
     @Type(value = SaveCardRequest.class, name = SaveCardRequest.TYPE),
 	@Type(value = CreatePaypalPaymentRequest.class, name = CreatePaypalPaymentRequest.TYPE),
 	@Type(value = CreateBitpayPaymentRequest.class, name = CreateBitpayPaymentRequest.TYPE),
