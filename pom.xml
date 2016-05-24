@@ -65,7 +65,7 @@
 		<com.fasterxml.jackson.version>2.7.4</com.fasterxml.jackson.version>
 		<com.wix.restaurants.availability.version>1.4.0</com.wix.restaurants.availability.version>
 		<com.wix.restaurants.jsonclient.version>1.5.0</com.wix.restaurants.jsonclient.version>
-		<com.wix.pay.creditcard.tokenizer.version>1.5.0</com.wix.pay.creditcard.tokenizer.version>
+		<com.wix.pay.creditcard.tokenizer.version>1.6.0</com.wix.pay.creditcard.tokenizer.version>
         <java.source.version>1.7</java.source.version>
         <java.target.version>1.7</java.target.version>
     </properties>
