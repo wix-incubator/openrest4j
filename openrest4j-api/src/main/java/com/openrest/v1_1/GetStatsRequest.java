@@ -1,11 +1,11 @@
 package com.openrest.v1_1;
 
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.restaurants.availability.Date;
+
+import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GetStatsRequest extends Request {
@@ -16,11 +16,12 @@ public class GetStatsRequest extends Request {
     public GetStatsRequest() {}
     
     public GetStatsRequest(String accessToken, String distributorId, String chainId, Set<String> restaurantIds,
-    		Date since, Date until, String granularity, String source, String platform, String ref) {
+    		String timezone, Date since, Date until, String granularity, String source, String platform, String ref) {
     	this.accessToken = accessToken;
     	this.distributorId = distributorId;
     	this.chainId = chainId;
     	this.restaurantIds = restaurantIds;
+        this.timezone = timezone;
     	this.since = since;
     	this.until = until;
     	this.granularity = granularity;
@@ -40,7 +41,10 @@ public class GetStatsRequest extends Request {
     
     @JsonInclude(Include.NON_NULL)
     public Set<String> restaurantIds;
-    
+
+    @JsonInclude(Include.NON_NULL)
+    public String timezone;
+
     @JsonInclude(Include.NON_NULL)
     public Date since;
 
