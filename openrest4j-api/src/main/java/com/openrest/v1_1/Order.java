@@ -53,7 +53,7 @@ public class Order implements Serializable, Cloneable {
     /** Constructs a previously submitted order from persisted data. */
     public Order(String id, Map<String, String> externalIds, String distributorId, String chainId, String restaurantId,
     		String locale, List<OrderItem> orderItems,
-    		String comment, Integer price, Dispatch delivery, Contact contact, List<Payment> payments,
+    		String comment, Integer price, String currency, Dispatch delivery, Contact contact, List<Payment> payments,
             Integer takeoutPacks, List<Charge> charges, List<OrderCharge> orderCharges,
             java.util.Date created, java.util.Date received, java.util.Date modified, java.util.Date submitAt,
             User user, ClubMember clubMember, String status, String shareToken, String ownerToken,
@@ -69,6 +69,7 @@ public class Order implements Serializable, Cloneable {
         this.orderItems = orderItems;
         this.comment = comment;
         this.price = price;
+        this.currency = currency;
         this.delivery = delivery;
         this.contact = contact;
         this.payments = payments;
@@ -101,7 +102,7 @@ public class Order implements Serializable, Cloneable {
 	public Object clone() {
     	return new Order(id,
     			((externalIds != null) ? new LinkedHashMap<String, String>(externalIds) : null),
-    			distributorId, chainId, restaurantId, locale, OrderItem.clone(orderItems), comment, price,
+    			distributorId, chainId, restaurantId, locale, OrderItem.clone(orderItems), comment, price, currency,
     			((delivery != null) ? (Dispatch) delivery.clone() : null),
     			((contact != null) ? (Contact) contact.clone() : null),
     			Payment.clone(payments), takeoutPacks, Charge.clone(charges), OrderCharge.clone(orderCharges),
@@ -142,6 +143,7 @@ public class Order implements Serializable, Cloneable {
         if (payments != null ? !payments.equals(order.payments) : order.payments != null) return false;
         if (platform != null ? !platform.equals(order.platform) : order.platform != null) return false;
         if (price != null ? !price.equals(order.price) : order.price != null) return false;
+        if (currency != null ? !currency.equals(order.currency) : order.currency != null) return false;
         if (properties != null ? !properties.equals(order.properties) : order.properties != null) return false;
         if (received != null ? !received.equals(order.received) : order.received != null) return false;
         if (ref != null ? !ref.equals(order.ref) : order.ref != null) return false;
@@ -168,6 +170,7 @@ public class Order implements Serializable, Cloneable {
         result = 31 * result + (orderItems != null ? orderItems.hashCode() : 0);
         result = 31 * result + (comment != null ? comment.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (currency != null ? currency.hashCode() : 0);
         result = 31 * result + (delivery != null ? delivery.hashCode() : 0);
         result = 31 * result + (contact != null ? contact.hashCode() : 0);
         result = 31 * result + (payments != null ? payments.hashCode() : 0);
@@ -245,6 +248,10 @@ public class Order implements Serializable, Cloneable {
     /** Total price of the order. */
     @JsonInclude(Include.NON_NULL)
     public Integer price;
+
+    /** The order's currency (ISO 4217). */
+    @JsonInclude(Include.NON_NULL)
+    public String currency;
 
     /* Delivery method. */
     @JsonInclude(Include.NON_NULL)
