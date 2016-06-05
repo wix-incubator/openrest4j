@@ -12,6 +12,7 @@ import java.util.Map;
 /**
  * Multiplies two lists of values and returns the (integer) division of the results.
  * @see <a href="http://en.wikipedia.org/wiki/Empty_product">Empty Product</a>
+ * @see <a href="https://en.wikipedia.org/wiki/Rounding#Round_half_away_from_zero">Commercial rounding</a>
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MultiplyOperator extends Operator {
