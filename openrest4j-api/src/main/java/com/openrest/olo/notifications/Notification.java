@@ -20,7 +20,6 @@ import java.util.List;
 	    property = "type")  
 @JsonSubTypes({
 	@Type(value = NewOrderNotification.class, name = NewOrderNotification.TYPE),
-	@Type(value = PosPushNotification.class, name = PosPushNotification.TYPE),
 	@Type(value = SubmittedOrderNotification.class, name = SubmittedOrderNotification.TYPE),
 	@Type(value = DelayedOrderNotification.class, name = DelayedOrderNotification.TYPE),
 	@Type(value = AcceptedOrderNotification.class, name = AcceptedOrderNotification.TYPE),
