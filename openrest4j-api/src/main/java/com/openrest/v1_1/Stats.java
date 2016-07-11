@@ -1,17 +1,13 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.restaurants.availability.Date;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Stats implements Serializable, Cloneable {
@@ -23,7 +19,7 @@ public class Stats implements Serializable, Cloneable {
     public static final String STATS_GRANULARITY_YEAR = "year";
     
     /** All known stats granularities. */
-    public static final Set<String> ALL_STATS_GRANULARITIES = new HashSet<String>(Arrays.asList(new String[] {
+    public static final Set<String> ALL_STATS_GRANULARITIES = new HashSet<>(Arrays.asList(new String[] {
     		STATS_GRANULARITY_DAY, STATS_GRANULARITY_WEEK, STATS_GRANULARITY_MONTH, STATS_GRANULARITY_YEAR
     }));
 
@@ -35,7 +31,28 @@ public class Stats implements Serializable, Cloneable {
 
     /** Default constructor for JSON deserialization. */
     public Stats() {}
-    
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Stats stats = (Stats) o;
+
+        if (date != null ? !date.equals(stats.date) : stats.date != null) return false;
+        if (count != null ? !count.equals(stats.count) : stats.count != null) return false;
+        return total != null ? total.equals(stats.total) : stats.total == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = date != null ? date.hashCode() : 0;
+        result = 31 * result + (count != null ? count.hashCode() : 0);
+        result = 31 * result + (total != null ? total.hashCode() : 0);
+        return result;
+    }
+
     @Override
 	public Object clone() {
     	return new Stats(((date != null) ? (Date)date.clone() : null), count, total);
@@ -46,7 +63,7 @@ public class Stats implements Serializable, Cloneable {
     		return null;
     	}
     	
-    	final Map<String, Stats> cloned = new LinkedHashMap<String, Stats>(stats.size());
+    	final Map<String, Stats> cloned = new LinkedHashMap<>(stats.size());
     	for (Entry<String, Stats> entry : stats.entrySet()) {
     		cloned.put(entry.getKey(), (entry.getValue() != null) ? (Stats) entry.getValue().clone() : null);
     	}
