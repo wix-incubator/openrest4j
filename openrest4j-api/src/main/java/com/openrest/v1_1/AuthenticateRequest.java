@@ -16,6 +16,22 @@ public class AuthenticateRequest extends Request {
         this.credentials = credentials;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AuthenticateRequest that = (AuthenticateRequest) o;
+
+        return credentials != null ? credentials.equals(that.credentials) : that.credentials == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return credentials != null ? credentials.hashCode() : 0;
+    }
+
     @JsonInclude(Include.NON_NULL)
     public Credentials credentials;
 }
