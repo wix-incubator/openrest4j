@@ -39,7 +39,36 @@ public class ClientInfo implements Serializable, Cloneable {
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
     			((comments != null) ? new LinkedHashMap<>(comments) : null));
 	}
-    
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ClientInfo that = (ClientInfo) o;
+
+        if (ids != null ? !ids.equals(that.ids) : that.ids != null) return false;
+        if (contacts != null ? !contacts.equals(that.contacts) : that.contacts != null) return false;
+        if (addresses != null ? !addresses.equals(that.addresses) : that.addresses != null) return false;
+        if (memberships != null ? !memberships.equals(that.memberships) : that.memberships != null) return false;
+        if (cardTokens != null ? !cardTokens.equals(that.cardTokens) : that.cardTokens != null) return false;
+        if (properties != null ? !properties.equals(that.properties) : that.properties != null) return false;
+        return comments != null ? comments.equals(that.comments) : that.comments == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = ids != null ? ids.hashCode() : 0;
+        result = 31 * result + (contacts != null ? contacts.hashCode() : 0);
+        result = 31 * result + (addresses != null ? addresses.hashCode() : 0);
+        result = 31 * result + (memberships != null ? memberships.hashCode() : 0);
+        result = 31 * result + (cardTokens != null ? cardTokens.hashCode() : 0);
+        result = 31 * result + (properties != null ? properties.hashCode() : 0);
+        result = 31 * result + (comments != null ? comments.hashCode() : 0);
+        return result;
+    }
+
     /** Saved contact details. */
     @JsonInclude(Include.NON_DEFAULT)
     public List<ClientId> ids = new LinkedList<>();
