@@ -35,6 +35,7 @@ import java.io.Serializable;
 	@Type(value = QueryClubMembersRequest.class, name = QueryClubMembersRequest.TYPE),
 	@Type(value = SubmitFeedbackRequest.class, name = SubmitFeedbackRequest.TYPE),
     @Type(value = SaveCardRequest.class, name = SaveCardRequest.TYPE),
+	@Type(value = SaveCardsRequest.class, name = SaveCardsRequest.TYPE),
 	@Type(value = CreatePaypalPaymentRequest.class, name = CreatePaypalPaymentRequest.TYPE),
 	@Type(value = CreateBitpayPaymentRequest.class, name = CreateBitpayPaymentRequest.TYPE),
 	@Type(value = CreateCreditmutuelPaymentRequest.class, name = CreateCreditmutuelPaymentRequest.TYPE),

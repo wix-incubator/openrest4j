@@ -5,23 +5,20 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.pay.creditcard.tokenizer.model.CreditCardToken;
 
-/**
- * Deprecated on 2016-09-14.
- * Use SaveCardsRequest
- */
-@Deprecated
+import java.util.List;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SaveCardRequest extends Request {
-    public static final String TYPE = "save_card";
+public class SaveCardsRequest extends Request {
+    public static final String TYPE = "save_cards";
     private static final long serialVersionUID = 1L;
 
     /** Default constructor for JSON deserialization. */
-    public SaveCardRequest() {}
+    public SaveCardsRequest() {}
 
-    public SaveCardRequest(String accessToken, ClientId clientId, CreditCardToken cardToken) {
+    public SaveCardsRequest(String accessToken, ClientId clientId, List<CreditCardToken> cardTokens) {
         this.accessToken = accessToken;
         this.clientId = clientId;
-        this.cardToken = cardToken;
+        this.cardTokens = cardTokens;
     }
 
     @JsonInclude(Include.NON_NULL)
@@ -31,7 +28,7 @@ public class SaveCardRequest extends Request {
     @JsonInclude(Include.NON_NULL)
     public ClientId clientId;
 
-    /** Temporary card token to save. */
+    /** Temporary card tokens to save. */
     @JsonInclude(Include.NON_NULL)
-    public CreditCardToken cardToken;
+    public List<CreditCardToken> cardTokens;
 }
