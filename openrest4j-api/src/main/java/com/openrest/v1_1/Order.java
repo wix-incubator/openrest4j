@@ -101,7 +101,7 @@ public class Order implements Serializable, Cloneable {
     @Override
 	public Object clone() {
     	return new Order(id,
-    			((externalIds != null) ? new LinkedHashMap<String, String>(externalIds) : null),
+    			((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
     			distributorId, chainId, restaurantId, locale, OrderItem.clone(orderItems), comment, price, currency,
     			((delivery != null) ? (Dispatch) delivery.clone() : null),
     			((contact != null) ? (Contact) contact.clone() : null),
@@ -110,7 +110,7 @@ public class Order implements Serializable, Cloneable {
     			((user != null) ? (User) user.clone() : null),
     			((clubMember != null) ? (ClubMember) clubMember.clone() : null),
     			status, shareToken, ownerToken, affiliate, developer, source, platform, ref, legacyHierarchy,
-    			((properties != null) ? new LinkedHashMap<String, String>(properties) : null),
+    			((properties != null) ? new LinkedHashMap<>(properties) : null),
     			LogEntry.clone(log));
 	}
 
@@ -219,7 +219,7 @@ public class Order implements Serializable, Cloneable {
     public String id;
     
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> externalIds = new LinkedHashMap<String, String>();
+    public Map<String, String> externalIds = new LinkedHashMap<>();
 
     /** The distributor's unique id. */
     @JsonInclude(Include.NON_NULL)
@@ -280,10 +280,10 @@ public class Order implements Serializable, Cloneable {
 	 */
     @Deprecated
     @JsonInclude(Include.NON_DEFAULT)
-    public List<Charge> charges = new LinkedList<Charge>();
+    public List<Charge> charges = new LinkedList<>();
     
     @JsonInclude(Include.NON_DEFAULT)
-    public List<OrderCharge> orderCharges = new LinkedList<OrderCharge>();
+    public List<OrderCharge> orderCharges = new LinkedList<>();
 
     /** The order's creation timestamp. */
     @JsonInclude(Include.NON_NULL)
@@ -365,11 +365,11 @@ public class Order implements Serializable, Cloneable {
      * keys, e.g. "com.googlecode.openrestext".
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> properties = new LinkedHashMap<String, String>();
+    public Map<String, String> properties = new LinkedHashMap<>();
     
     /** Change log for this order. */
     @JsonInclude(Include.NON_DEFAULT)
-    public List<LogEntry> log = new LinkedList<LogEntry>();
+    public List<LogEntry> log = new LinkedList<>();
     
     /** The order in HTML format. */
     @JsonInclude(Include.NON_NULL)
