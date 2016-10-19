@@ -30,11 +30,18 @@ public class AppId implements Serializable, Cloneable {
     public static final String PLATFORM_KIOSK_ANDROID = "kiosk.android";
     /** Kiosk (iOS). */
     public static final String PLATFORM_KIOSK_IOS = "kiosk.ios";
+    /** Facebook Messenger bots. */
+    public static final String PLATFORM_MESSENGER = "com.messenger";
+    /** Telegram bots. */
+    public static final String PLATFORM_TELEGRAM = "org.telegram";
+    /** Slack bots. */
+    public static final String PLATFORM_SLACK = "com.slack";
 
     /** All known platforms. */
     public static final Set<String> ALL_PLATFORMS = new HashSet<>(Arrays.asList(
     		PLATFORM_ANDROID, PLATFORM_IOS, PLATFORM_WEB, PLATFORM_MOBILEWEB, PLATFORM_FACEBOOK,
-            PLATFORM_CALLCENTER, PLATFORM_KIOSK_ANDROID, PLATFORM_KIOSK_IOS
+            PLATFORM_CALLCENTER, PLATFORM_KIOSK_ANDROID, PLATFORM_KIOSK_IOS,
+            PLATFORM_MESSENGER, PLATFORM_TELEGRAM, PLATFORM_SLACK
     ));
     
 	/** Namespace used with aliases (id = alias, version = meaningless). */
