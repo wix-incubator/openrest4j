@@ -49,7 +49,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     		return null;
     	}
     	
-    	final List<Item> cloned = new LinkedList<Item>();
+    	final List<Item> cloned = new LinkedList<>();
     	for (Item item : items) {
     		cloned.add((item != null) ? (Item) item.clone() : null);
     	}
@@ -59,15 +59,15 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     @Override
 	public Object clone() {
     	return new Item(id, restaurantId,
-    			((title != null) ? new HashMap<String, String>(title) : null),
-    			((description != null) ? new HashMap<String, String>(description) : null),
+    			((title != null) ? new LinkedHashMap<>(title) : null),
+    			((description != null) ? new LinkedHashMap<>(description) : null),
     			price, Variation.clone(variations),
     			((availability != null) ? (Availability) availability.clone() : null),
     			picture,
     			Blob.clone(blobs),
-    			((externalIds != null) ? new HashMap<String, String>(externalIds) : null),
-    			((labels != null) ? new HashSet<String>(labels) : null),
-    			((properties != null) ? new HashMap<String, String>(properties) : null),
+    			((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
+    			((labels != null) ? new LinkedHashSet<>(labels) : null),
+    			((properties != null) ? new LinkedHashMap<>(properties) : null),
     			stock, rank);
 	}
 
@@ -81,11 +81,11 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
 
     /** The item's title in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title = new HashMap<String, String>();
+    public Map<String, String> title = new LinkedHashMap<>();
 
     /** The item's one line description in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> description = new HashMap<String, String>();
+    public Map<String, String> description = new LinkedHashMap<>();
 
     /** The item's price, in "cents". */
     @JsonInclude(Include.NON_DEFAULT)
@@ -93,7 +93,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
 
     /** List of possible variations. */
     @JsonInclude(Include.NON_DEFAULT)
-    public List<Variation> variations = new LinkedList<Variation>();
+    public List<Variation> variations = new LinkedList<>();
 
     /** Time windows in which this item is regularly available. */
     @JsonInclude(Include.NON_DEFAULT)
@@ -108,7 +108,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
 	 * @see BlobTypes
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, Blob> blobs = new HashMap<String, Blob>();
+    public Map<String, Blob> blobs = new LinkedHashMap<>();
 
     /**
      * Map of externally-defined item ids referring to this item.
@@ -117,18 +117,18 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
      * Developers should use unique keys, e.g. "com.company.product".
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> externalIds = new HashMap<String, String>();
+    public Map<String, String> externalIds = new LinkedHashMap<>();
 
     /** The item's labels, e.g. "new", "spicy". */
     @JsonInclude(Include.NON_DEFAULT)
-    public Set<String> labels = new HashSet<String>();
+    public Set<String> labels = new LinkedHashSet<>();
     
     /**
      * Map of user-defined extended properties. Developers should use unique
      * keys, e.g. "com.googlecode.openrestext".
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> properties = new HashMap<String, String>();
+    public Map<String, String> properties = new LinkedHashMap<>();
     
     /** (read-only) Stock information (null means inventory is not managed for this item). */
     @JsonInclude(Include.NON_NULL)
