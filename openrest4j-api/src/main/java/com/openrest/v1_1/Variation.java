@@ -1,17 +1,11 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * A possible modification to an item, e.g. "choice of sides" for a happy-meal
@@ -28,11 +22,12 @@ public class Variation implements Serializable, Cloneable {
     public static final String VARIATION_DISPLAY_TYPE_HIDDEN = "hidden";
     
     /** All known variation display types. */
-    public static final Set<String> ALL_VARIATION_DISPLAY_TYPES = new HashSet<String>(
+    public static final Set<String> ALL_VARIATION_DISPLAY_TYPES = new HashSet<>(
     		Arrays.asList(VARIATION_DISPLAY_TYPE_DIFF, VARIATION_DISPLAY_TYPE_CHOICE, VARIATION_DISPLAY_TYPE_HIDDEN));
 
     public Variation(Map<String, String> title, List<String> itemIds, Integer minNumAllowed,
-    		Integer maxNumAllowed, Map<String, Integer> prices, Set<String> defaults, String displayType) {
+    		Integer maxNumAllowed, Map<String, Integer> prices, Set<String> defaults, String displayType,
+            Map<String, String> properties) {
         this.title = title;
         this.itemIds = itemIds;
         this.minNumAllowed = minNumAllowed;
@@ -40,6 +35,7 @@ public class Variation implements Serializable, Cloneable {
         this.prices = prices;
         this.defaults = defaults;
         this.displayType = displayType;
+        this.properties = properties;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -48,12 +44,13 @@ public class Variation implements Serializable, Cloneable {
     @Override
 	public Object clone() {
     	final Variation cloned = new Variation(
-    			((title != null) ? new HashMap<String, String>(title) : null),
-    			((itemIds != null) ? new LinkedList<String>(itemIds) : null),
+    			((title != null) ? new LinkedHashMap<>(title) : null),
+    			((itemIds != null) ? new LinkedList<>(itemIds) : null),
     			minNumAllowed, maxNumAllowed,
-    			((prices != null) ? new HashMap<String, Integer>(prices) : null),
-    			((defaults != null) ? new HashSet<String>(defaults) : null),
-    			displayType);
+    			((prices != null) ? new LinkedHashMap<>(prices) : null),
+    			((defaults != null) ? new LinkedHashSet<>(defaults) : null),
+    			displayType,
+                ((properties != null) ? new LinkedHashMap<>(properties) : null));
     	cloned.tagId = tagId;
     	return cloned;
 	}
@@ -63,7 +60,7 @@ public class Variation implements Serializable, Cloneable {
     		return null;
     	}
     	
-    	final List<Variation> cloned = new LinkedList<Variation>();
+    	final List<Variation> cloned = new LinkedList<>();
 		for (Variation variation : variations) {
 			cloned.add((variation != null) ? (Variation) variation.clone() : null);
 		}
@@ -72,11 +69,11 @@ public class Variation implements Serializable, Cloneable {
 
     /** The variations's name in various locales, e.g. "sides", "degree of cooking". */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title = new HashMap<String, String>();
+    public Map<String, String> title = new LinkedHashMap<>();
 
     /** The set's name, e.g. "drink", "sides". */
     @JsonInclude(Include.NON_NULL)
-    public List<String> itemIds = new LinkedList<String>();
+    public List<String> itemIds = new LinkedList<>();
     
     /** Scheduled for deprecation on 2014-04-01 (use itemIds instead) */
     @Deprecated
@@ -93,15 +90,22 @@ public class Variation implements Serializable, Cloneable {
 
     /** Items' base prices. Non-referenced items are free by default. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, Integer> prices = new HashMap<String, Integer>();
+    public Map<String, Integer> prices = new LinkedHashMap<>();
 
     /** Default selected item ids. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Set<String> defaults = new HashSet<String>();
+    public Set<String> defaults = new LinkedHashSet<>();
 
     /** Display type for human-readable printing. */
     @JsonInclude(Include.NON_DEFAULT)
     public String displayType = VARIATION_DISPLAY_TYPE_CHOICE;
+
+    /**
+     * Map of user-defined extended properties. Developers should use unique
+     * keys, e.g. "com.googlecode.openrestext".
+     */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Map<String, String> properties = new LinkedHashMap<>();
 
     @Override
     public boolean equals(Object obj) {
@@ -133,6 +137,9 @@ public class Variation implements Serializable, Cloneable {
         if ((this.displayType == null) ? (other.displayType != null) : !this.displayType.equals(other.displayType)) {
             return false;
         }
+        if ((this.properties == null) ? (other.properties != null) : !this.properties.equals(other.properties)) {
+            return false;
+        }
         return true;
     }
     
@@ -146,6 +153,7 @@ public class Variation implements Serializable, Cloneable {
         hash = 97 * hash + (this.prices != null ? this.prices.hashCode() : 0);
         hash = 97 * hash + (this.defaults != null ? this.defaults.hashCode() : 0);
         hash = 97 * hash + (this.displayType != null ? this.displayType.hashCode() : 0);
+        hash = 97 * hash + (this.properties != null ? this.properties.hashCode() : 0);
         return hash;
     }
     
