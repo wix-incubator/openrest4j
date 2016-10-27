@@ -244,7 +244,8 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
 
     /**
      * Availabilities of various aspects in the system, e.g. online ordering.
-     * A non-existent key means "always available".
+     * A non-existent key means "unavailable".
+     * @see com.wix.restaurants.Aspects for possible keys.
      */
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, Availability> availabilities = new LinkedHashMap<>();
