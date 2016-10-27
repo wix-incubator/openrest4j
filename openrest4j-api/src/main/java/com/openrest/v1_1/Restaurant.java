@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.openrest.olo.dispatches.DispatchInfo;
 import com.wix.restaurants.availability.Availability;
+import com.wix.restaurants.reservations.ReservationsInfo;
 
 import java.util.*;
 
@@ -21,7 +22,7 @@ public class Restaurant extends Organization {
             List<DispatchInfo> deliveryInfos, Integer maxFutureOrderDelayMins,
             String timezone, String currency, String locale, Set<String> locales,
             Set<String> paymentTypes, Boolean multiPaymentDisabled, Map<String, CardInfo> cardInfos, CreditcardsInfo creditcardsInfo,
-            DeliveriesInfo deliveriesInfo, Map<String, Integer> minPayments, Boolean antiFraudDisabled, String link, String domain,
+            DeliveriesInfo deliveriesInfo, ReservationsInfo reservations, Map<String, Integer> minPayments, Boolean antiFraudDisabled, String link, String domain,
             Set<String> altDomains, String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
             List<AppInfo> apps, Seo seo, Map<String, String> properties, Map<String, String> compatibilities,
             Map<String, Availability> availabilities,
@@ -40,6 +41,7 @@ public class Restaurant extends Organization {
         this.multiPaymentDisabled = multiPaymentDisabled;
         this.creditcardsInfo = creditcardsInfo;
         this.deliveriesInfo = deliveriesInfo;
+        this.reservations = reservations;
         this.cardInfos = cardInfos;
         this.minPayments = minPayments;
         this.antiFraudDisabled = antiFraudDisabled;
@@ -70,6 +72,7 @@ public class Restaurant extends Organization {
     			multiPaymentDisabled, CardInfo.clone(cardInfos),
                 ((creditcardsInfo != null) ? (CreditcardsInfo) creditcardsInfo.clone() : null),
                 ((deliveriesInfo != null) ? (DeliveriesInfo) deliveriesInfo.clone() : null),
+                ((reservations != null) ? (ReservationsInfo) reservations.clone() : null),
     			((minPayments != null) ? new LinkedHashMap<>(minPayments) : null),
     			antiFraudDisabled, link, domain,
     			((altDomains != null) ? new LinkedHashSet<>(altDomains) : null),
@@ -94,11 +97,22 @@ public class Restaurant extends Organization {
     @JsonInclude(Include.NON_NULL)
     public String chainId;
     
-    /** Restaurant availability. */
+    /**
+     * Restaurant availability.
+     * Scheduled for deprecation on 2016-10-27 (use availabilities).
+     *
+     * @see Organization#availabilities
+     * @see com.wix.restaurants.Aspects#open
+     */
+    @Deprecated
     @JsonInclude(Include.NON_DEFAULT)
     public Availability openTimes = new Availability();
 
-    /** Deliveries availability. */
+    /**
+     * Deliveries availability.
+     * Scheduled for deprecation on 2016-10-27 (use individual availability fields of deliveryInfos).
+     */
+    @Deprecated
     @JsonInclude(Include.NON_DEFAULT)
     public Availability deliveryTimes = new Availability();
 
@@ -142,6 +156,9 @@ public class Restaurant extends Organization {
 
     @JsonInclude(Include.NON_NULL)
     public DeliveriesInfo deliveriesInfo;
+
+    @JsonInclude(Include.NON_NULL)
+    public ReservationsInfo reservations;
 
     /**
      * Maps available payment types to minimal charge allowed per payment, e.g.
