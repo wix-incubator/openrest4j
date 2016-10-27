@@ -18,5 +18,5 @@ public class SearchResponse implements Serializable {
     }
 
     @JsonInclude(Include.NON_DEFAULT)
-	public List<SearchResult> results = new ArrayList<SearchResult>();
+	public List<SearchResult> results = new ArrayList<>();
 }
