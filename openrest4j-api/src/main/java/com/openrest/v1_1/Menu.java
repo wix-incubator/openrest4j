@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
 public class Menu implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
 
-    public Menu(Long modified, List<Item> items, List<MenuSection> sections,
+    public Menu(Date modified, List<Item> items, List<MenuSection> sections,
                 List<com.openrest.olo.charges.Charge> chargesV2, List<Charge> charges) {
     	this.modified = modified;
         this.items = items;
@@ -26,7 +27,9 @@ public class Menu implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	final Menu cloned = new Menu(modified, Item.clone(items), MenuSection.clone(sections),
+    	final Menu cloned = new Menu(
+                (modified != null) ? (Date) modified.clone() : null,
+                Item.clone(items), MenuSection.clone(sections),
                 com.openrest.olo.charges.Charge.clone(chargesV2), Charge.clone(charges));
     	cloned.tags = Tag.clone(tags);
     	return cloned;
@@ -60,7 +63,7 @@ public class Menu implements Serializable, Cloneable {
 
     /** The menu's last modification timestamp. */
     @JsonInclude(Include.NON_NULL)
-    public Long modified;
+    public Date modified;
 
     /** All menu items. */
     @JsonInclude(Include.NON_DEFAULT)
