@@ -2,6 +2,7 @@ package com.openrest.olo.dispatches;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -14,13 +15,15 @@ public class PickupDispatch extends Dispatch {
     /** Default constructor for JSON deserialization. */
     public PickupDispatch() {}
 
-    public PickupDispatch(Long time, String timeGuarantee, Integer charge, Map<String, String> properties) {
+    public PickupDispatch(Date time, String timeGuarantee, Integer charge, Map<String, String> properties) {
         super(time, timeGuarantee, charge, properties);
     }
 
     @Override
     public Object clone() {
-        return new PickupDispatch(time, timeGuarantee, charge,
+        return new PickupDispatch(
+                (time != null) ? (Date) time.clone() : null,
+                timeGuarantee, charge,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
     }
 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.openrest.v1_1.Address;
 
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -16,7 +17,7 @@ public class DeliveryDispatch extends Dispatch {
     /** Default constructor for JSON deserialization. */
     public DeliveryDispatch() {}
 
-    public DeliveryDispatch(Address address, Long time, String timeGuarantee, Integer charge, Map<String, String> properties) {
+    public DeliveryDispatch(Address address, Date time, String timeGuarantee, Integer charge, Map<String, String> properties) {
         super(time, timeGuarantee, charge, properties);
 
         this.address = address;
@@ -26,7 +27,8 @@ public class DeliveryDispatch extends Dispatch {
     public Object clone() {
         return new DeliveryDispatch(
                 ((address != null) ? (Address) address.clone() : null),
-                time, timeGuarantee, charge,
+                (time != null) ? (Date) time.clone() : null,
+                timeGuarantee, charge,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
     }
 

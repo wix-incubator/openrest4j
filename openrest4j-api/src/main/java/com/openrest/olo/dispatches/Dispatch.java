@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.wix.restaurants.TimeGuarantees;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -28,7 +29,7 @@ public abstract class Dispatch implements Serializable, Cloneable {
     /** Default constructor for JSON deserialization. */
     public Dispatch() {}
 
-    public Dispatch(Long time, String timeGuarantee, Integer charge, Map<String, String> properties) {
+    public Dispatch(Date time, String timeGuarantee, Integer charge, Map<String, String> properties) {
         this.time = time;
         this.timeGuarantee = timeGuarantee;
         this.charge = charge;
@@ -40,15 +41,11 @@ public abstract class Dispatch implements Serializable, Cloneable {
 
     /** Timestamp by which the order will be delivered or ready for pick-up. */
     @JsonInclude(Include.NON_NULL)
-    public Long time;
+    public Date time;
 
     /** The type of time guarantee given. */
     @JsonInclude(Include.NON_DEFAULT)
     public String timeGuarantee = TimeGuarantees.before;
-
-    public java.util.Date time() {
-        return ((time != null) ? new java.util.Date(time) : null);
-    }
 
     /** The delivery charge (in "cents"). */
     @JsonInclude(Include.NON_DEFAULT)
