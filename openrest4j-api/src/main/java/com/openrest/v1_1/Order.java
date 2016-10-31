@@ -19,7 +19,7 @@ public class Order implements Serializable, Cloneable {
     		String locale, List<OrderItem> orderItems,
     		String comment, Integer price, String currency, Dispatch delivery, Contact contact, List<Payment> payments,
             Integer takeoutPacks, List<Charge> charges, List<OrderCharge> orderCharges,
-            java.util.Date created, java.util.Date received, java.util.Date modified, java.util.Date submitAt,
+            Date created, Date received, Date modified, Date submitAt,
             User user, ClubMember clubMember, String status, String shareToken, String ownerToken,
             String affiliate, String developer, String source, String platform, String ref,
             Boolean legacyHierarchy, Map<String, String> properties, List<LogEntry> log) {
@@ -40,10 +40,10 @@ public class Order implements Serializable, Cloneable {
         this.takeoutPacks = takeoutPacks;
         this.charges = charges;
         this.orderCharges = orderCharges;
-        this.created = ((created != null) ? created.getTime() : null);
-        this.received = ((received != null) ? received.getTime() : null);
-        this.modified = ((modified != null) ? modified.getTime() : null);
-        this.submitAt = ((submitAt != null) ? submitAt.getTime() : null);
+        this.created = created;
+        this.received = received;
+        this.modified = modified;
+        this.submitAt = submitAt;
         this.user = user;
         this.clubMember = clubMember;
         this.status = status;
@@ -70,7 +70,10 @@ public class Order implements Serializable, Cloneable {
     			((delivery != null) ? (Dispatch) delivery.clone() : null),
     			((contact != null) ? (Contact) contact.clone() : null),
     			Payment.clone(payments), takeoutPacks, Charge.clone(charges), OrderCharge.clone(orderCharges),
-    			created(), received(), modified(), submitAt(),
+                (created != null) ? (Date) created.clone() : null,
+                (received != null) ? (Date) received.clone() : null,
+                (modified != null) ? (Date) modified.clone() : null,
+                (submitAt != null) ? (Date) submitAt.clone() : null,
     			((user != null) ? (User) user.clone() : null),
     			((clubMember != null) ? (ClubMember) clubMember.clone() : null),
     			status, shareToken, ownerToken, affiliate, developer, source, platform, ref, legacyHierarchy,
@@ -162,22 +165,6 @@ public class Order implements Serializable, Cloneable {
         return result;
     }
 
-    public java.util.Date created() {
-        return ((created != null) ? new java.util.Date(created.longValue()) : null);
-    }
-    
-    public java.util.Date received() {
-        return ((received != null) ? new java.util.Date(received.longValue()) : null);
-    }
-
-    public java.util.Date modified() {
-        return ((modified != null) ? new java.util.Date(modified.longValue()) : null);
-    }
-    
-    public java.util.Date submitAt() {
-        return ((submitAt != null) ? new java.util.Date(submitAt.longValue()) : null);
-    }
-
     /** The order's unique id. */
     @JsonInclude(Include.NON_NULL)
     public String id;
@@ -251,25 +238,25 @@ public class Order implements Serializable, Cloneable {
 
     /** The order's creation timestamp. */
     @JsonInclude(Include.NON_NULL)
-    public Long created;
+    public Date created;
     
     /**
      * When should the order be submitted to the restaurant (null means now).
      * Used in future ordering.
      */
     @JsonInclude(Include.NON_NULL)
-    public Long submitAt;
+    public Date submitAt;
     
     /**
      * Timestamp in which the order was marked as "new" in the system. This may differ from the
      * order's creation timestamp for orders that were pending upon creation.
      */
     @JsonInclude(Include.NON_NULL)
-    public Long received;
+    public Date received;
 
     /** The order's last modification timestamp. */
     @JsonInclude(Include.NON_NULL)
-    public Long modified;
+    public Date modified;
 
     /** The ordering user. */
     @JsonInclude(Include.NON_NULL)
