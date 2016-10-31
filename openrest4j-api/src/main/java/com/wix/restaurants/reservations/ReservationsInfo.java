@@ -93,6 +93,10 @@ public class ReservationsInfo implements Serializable, Cloneable {
     @JsonInclude(Include.NON_NULL)
     public Integer maxFutureDelayMins;
 
-    @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> properties = new LinkedHashMap<>();
+    /**
+     * Map of user-defined extended properties.
+     * Developers should use unique keys, e.g. "com.example.product".
+     */
+    @JsonInclude(Include.NON_NULL)
+    public Map<String, String> properties;
 }
