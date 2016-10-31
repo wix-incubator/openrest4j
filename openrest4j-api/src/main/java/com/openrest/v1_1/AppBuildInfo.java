@@ -30,7 +30,7 @@ public class AppBuildInfo implements Serializable, Cloneable {
     		STATE_REMOVING_AT_PUBLISHER, STATE_REMOVING_AT_BOT,
     		STATE_OPERATIONAL, STATE_DEPRECATED, STATE_REMOVED, STATE_ERROR));
 	
-    public AppBuildInfo(String id, Long created, Long modified, String distributorId, String ownerId, String type, String link,
+    public AppBuildInfo(String id, Date created, Date modified, String distributorId, String ownerId, String type, String link,
     		AppId appId, String internalId, String filename, String locale, Map<String, String> title,
     		Map<String, String> description, Map<String, AppstoreInfo> storeInfos, Map<String, String> properties,
     		Map<String, Blob> blobs, String state, List<LogEntry> log) {
@@ -89,7 +89,10 @@ public class AppBuildInfo implements Serializable, Cloneable {
     		clonedLog = null;
     	}
 
-    	return new AppBuildInfo(id, created, modified, distributorId, ownerId, type, link,
+    	return new AppBuildInfo(id,
+				(created != null) ? (Date) created.clone() : null,
+				(modified != null) ? (Date) modified.clone() : null,
+				distributorId, ownerId, type, link,
     			((appId != null) ? (AppId) appId.clone() : null),
     			internalId, filename, locale,
     			((title != null) ? new HashMap<>(title) : null),
@@ -105,11 +108,11 @@ public class AppBuildInfo implements Serializable, Cloneable {
     
     /** Creation timestamp. */
     @JsonInclude(Include.NON_NULL)
-    public Long created;
+    public Date created;
     
     /** Last modification timestamp. */
     @JsonInclude(Include.NON_NULL)
-    public Long modified;
+    public Date modified;
     
     /** Distributor in charge of publishing this app. */
     @JsonInclude(Include.NON_NULL)
