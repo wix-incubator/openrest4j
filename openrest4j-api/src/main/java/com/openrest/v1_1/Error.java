@@ -93,6 +93,9 @@ public class Error {
     
     /** Item is out-of-stock (for managed-inventory items). */
     public static final String ERROR_OUT_OF_STOCK = "out_of_stock";
-    
+
+    /** The request attempted to change immutable data. */
+    public static final String ERROR_IMMUTABLE = "immutable";
+
 	private Error() {}
 }
