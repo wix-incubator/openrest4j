@@ -13,7 +13,7 @@ import java.util.*;
 public class SearchResult extends Restaurant {
     private static final long serialVersionUID = 1L;
     
-    public SearchResult(String id, String alias, String affiliateId, Map<String, String> externalIds, Long created, Long modified,
+    public SearchResult(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
                         String distributorId, String chainId, Map<String, String> title,
                         Map<String, String> description, Contact contact, Map<String, Contact> externalContacts, Address address,
                         Map<String, Map<String, String>> messages, ColorScheme colorScheme,

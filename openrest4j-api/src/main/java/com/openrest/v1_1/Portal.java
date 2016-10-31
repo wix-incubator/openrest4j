@@ -16,7 +16,7 @@ public class Portal extends Organization {
     /** Default constructor for JSON deserialization. */
     public Portal() {}
     
-    public Portal(String id, String alias, String affiliateId, Map<String, String> externalIds, Long created, Long modified,
+    public Portal(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
     		String distributorId, Filter filter,
     		Map<String, String> title, Map<String, String> description,
     		String locale, Set<String> locales, Map<String, Map<String, String>> messages, ColorScheme colorScheme,
@@ -40,7 +40,9 @@ public class Portal extends Organization {
 	public Object clone() {
     	return new Portal(id, alias, affiliateId,
     			((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
-    			created, modified, distributorId,
+				(created != null) ? (Date) created.clone() : null,
+				(modified != null) ? (Date) modified.clone() : null,
+				distributorId,
     			((filter != null) ? (Filter) filter.clone() : null),
     			((title != null) ? new LinkedHashMap<>(title) : null),
     			((description != null) ? new LinkedHashMap<>(description) : null),

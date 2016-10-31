@@ -1,12 +1,12 @@
 package com.openrest.v1_1;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.util.Collection;
+import java.util.Date;
+import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class QueryOrdersRequest extends Request {
@@ -17,7 +17,7 @@ public class QueryOrdersRequest extends Request {
     public QueryOrdersRequest() {}
     
     public QueryOrdersRequest(String accessToken, String distributorId, String chainId, Collection<String> restaurantIds, ClientId clientId,
-    		String status, String source, String platform, String ref, Long since, Long until, String query, String viewMode, String ordering, Set<String> fields,
+    		String status, String source, String platform, String ref, Date since, Date until, String query, String viewMode, String ordering, Set<String> fields,
     		Integer limit) {
     	this.accessToken = accessToken;
     	this.distributorId = distributorId;
@@ -57,6 +57,10 @@ public class QueryOrdersRequest extends Request {
     @JsonInclude(Include.NON_NULL)
     public String userId;
 
+    /**
+     * Order status filter.
+     * @see com.wix.restaurants.olo.Statuses
+     */
     @JsonInclude(Include.NON_NULL)
     public String status;
     
@@ -72,23 +76,15 @@ public class QueryOrdersRequest extends Request {
     public String ref;
 
     @JsonInclude(Include.NON_NULL)
-    public Long since;
-    
-    public Date since() {
-    	return ((since != null) ? new Date(since.longValue()) : null);
-    }
-    
+    public Date since;
+
     @JsonInclude(Include.NON_NULL)
-    public Long until;
-    
-    public Date until() {
-    	return ((until != null) ? new Date(until.longValue()) : null);
-    }
-    
+    public Date until;
+
     @JsonInclude(Include.NON_NULL)
     public String query;
-    
-    /** @see Order#ALL_ORDER_VIEW_MODES */
+
+    /** @see com.wix.restaurants.Actors */
     @JsonInclude(Include.NON_NULL)
     public String viewMode;
     

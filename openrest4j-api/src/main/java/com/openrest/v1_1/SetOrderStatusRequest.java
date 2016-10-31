@@ -1,12 +1,11 @@
 package com.openrest.v1_1;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SetOrderStatusRequest extends Request {
@@ -36,7 +35,7 @@ public class SetOrderStatusRequest extends Request {
     public String orderId;
     
     /**
-     * @see Order#ALL_ORDER_STATUSES
+     * @see com.wix.restaurants.olo.Statuses
      * null means "no change" (for comment only statuses)
      */
     @JsonInclude(Include.NON_NULL)

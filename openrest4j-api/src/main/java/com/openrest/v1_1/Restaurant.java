@@ -14,7 +14,7 @@ public class Restaurant extends Organization {
 	public static final String TYPE = "restaurant";
 	private static final long serialVersionUID = 1L;
     
-    public Restaurant(String id, String alias, String affiliateId, Map<String, String> externalIds, Long created, Long modified,
+    public Restaurant(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
     		String distributorId, String chainId, Map<String, String> title,
     		Map<String, String> description, Contact contact, Map<String, Contact> externalContacts, Address address,
     		Map<String, Map<String, String>> messages, ColorScheme colorScheme,
@@ -56,7 +56,9 @@ public class Restaurant extends Organization {
 	public Object clone() {
     	return new Restaurant(id, alias, affiliateId,
     			((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
-    			created, modified, distributorId, chainId,
+                (created != null) ? (Date) created.clone() : null,
+                (modified != null) ? (Date) modified.clone() : null,
+                distributorId, chainId,
     			((title != null) ? new LinkedHashMap<>(title) : null),
     			((description != null) ? new LinkedHashMap<>(description) : null),
     			((contact != null) ? (Contact)contact.clone() : null), Contact.clone(externalContacts),

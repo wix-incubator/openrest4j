@@ -16,7 +16,7 @@ public class Affiliate extends Organization {
     /** Default constructor for JSON deserialization. */
     public Affiliate() {}
     
-    public Affiliate(String id, String alias, String affiliateId, Map<String, String> externalIds, Long created, Long modified,
+    public Affiliate(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
     		String distributorId, Map<String, String> title, Map<String, String> description,
     		String locale, Set<String> locales, Map<String, Map<String, String>> messages, ColorScheme colorScheme,
     		Contact contact, Map<String, Contact> externalContacts, Address address, String timezone, String currency,
@@ -36,7 +36,9 @@ public class Affiliate extends Organization {
 	public Object clone() {
     	return new Affiliate(id, alias, affiliateId,
     			((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
-    			created, modified, distributorId,
+                (created != null) ? (Date) created.clone() : null,
+                (modified != null) ? (Date) modified.clone() : null,
+				distributorId,
     			((title != null) ? new LinkedHashMap<>(title) : null),
     			((description != null) ? new LinkedHashMap<>(description) : null),
     			locale,

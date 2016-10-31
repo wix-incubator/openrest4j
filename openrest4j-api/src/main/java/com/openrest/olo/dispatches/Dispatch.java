@@ -6,9 +6,11 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.wix.restaurants.TimeGuarantees;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(
@@ -22,16 +24,6 @@ import java.util.*;
 })
 public abstract class Dispatch implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
-
-    /** Guaranteed to happen before the given timestamp. */
-    public static final String TIME_GUARANTEE_BEFORE = "before";
-    /** Guaranteed to happen at about the given timestamp. */
-    public static final String TIME_GUARANTEE_APPROXIMATE = "about";
-
-    /** All known time guarantees. */
-    public static final Set<String> ALL_TIME_GUARANTEES = new HashSet<>(Arrays.asList(new String[] {
-            TIME_GUARANTEE_BEFORE, TIME_GUARANTEE_APPROXIMATE
-    }));
 
     /** Default constructor for JSON deserialization. */
     public Dispatch() {}
@@ -52,7 +44,7 @@ public abstract class Dispatch implements Serializable, Cloneable {
 
     /** The type of time guarantee given. */
     @JsonInclude(Include.NON_DEFAULT)
-    public String timeGuarantee = TIME_GUARANTEE_BEFORE;
+    public String timeGuarantee = TimeGuarantees.before;
 
     public java.util.Date time() {
         return ((time != null) ? new java.util.Date(time) : null);

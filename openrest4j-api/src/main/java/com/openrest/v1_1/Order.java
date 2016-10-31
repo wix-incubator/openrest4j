@@ -14,42 +14,6 @@ import java.util.*;
 public class Order implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
     
-    /**
-     * The order has been submitted by the user, and awaits her final approval.
-     * The restaurant is not made aware of the order.
-     */
-    public static final String ORDER_STATUS_SUBMITTED = "submitted";
-    /**
-     * The restaurant required further confirmation before the order is submitted
-     * (e.g. validating the user's phone number by SMS).
-     */
-    public static final String ORDER_STATUS_PENDING = "pending";
-    /** The order has been approved by the user, and awaits processing by the restaurant. */
-    public static final String ORDER_STATUS_NEW = "new";
-    /** The order has been processed and accepted by the restaurant. */
-    public static final String ORDER_STATUS_ACCEPTED = "accepted";
-    /** The order has been canceled. */
-    public static final String ORDER_STATUS_CANCELLED = "canceled";
-    
-    /** All known order statuses. */
-    public static final Set<String> ALL_ORDER_STATUSES = new HashSet<>(Arrays.asList(new String[] {
-    		ORDER_STATUS_SUBMITTED, ORDER_STATUS_PENDING, ORDER_STATUS_NEW, ORDER_STATUS_ACCEPTED, ORDER_STATUS_CANCELLED
-    }));
-    
-    /** View the order as the restaurant. */
-    public static final String ORDER_VIEW_MODE_RESTAURANT = "restaurant";
-    /** View the order as the customer. */
-    public static final String ORDER_VIEW_MODE_CUSTOMER = "customer";
-    /** View the order as privately shared on social networks. */
-    public static final String ORDER_VIEW_MODE_SHARE = "share";
-    /** View the order as third-party source, e.g. portal. */
-    public static final String ORDER_VIEW_MODE_SOURCE = "source";
-    
-    /** All known order view modes. */
-    public static final Set<String> ALL_ORDER_VIEW_MODES = new HashSet<String>(Arrays.asList(new String[] {
-    		ORDER_VIEW_MODE_RESTAURANT, ORDER_VIEW_MODE_CUSTOMER, ORDER_VIEW_MODE_SHARE, ORDER_VIEW_MODE_SOURCE
-    }));
-
     /** Constructs a previously submitted order from persisted data. */
     public Order(String id, Map<String, String> externalIds, String distributorId, String chainId, String restaurantId,
     		String locale, List<OrderItem> orderItems,
@@ -315,7 +279,10 @@ public class Order implements Serializable, Cloneable {
     @JsonInclude(Include.NON_NULL)
     public ClubMember clubMember;
 
-    /** The order's status. */
+    /**
+     * The order's status.
+     * @see com.wix.restaurants.olo.Statuses
+     */
     @JsonInclude(Include.NON_NULL)
     public String status;
 

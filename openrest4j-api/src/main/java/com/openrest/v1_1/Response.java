@@ -1,17 +1,18 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.io.Serializable;
+import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Response<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
     public Response(T value) {
-        this.timestamp = new java.util.Date().getTime();
+        this.timestamp = new java.util.Date();
         this.value = value;
     }
 
@@ -21,7 +22,7 @@ public class Response<T> implements Serializable {
     @SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Response fromException(OpenrestException e) {
         final Response response = new Response();
-        response.timestamp = new java.util.Date().getTime();
+        response.timestamp = new java.util.Date();
         response.error = e.error();
         response.errorMessage = e.errorMessage();
         return response;
@@ -30,12 +31,12 @@ public class Response<T> implements Serializable {
     @SuppressWarnings("rawtypes")
 	public static Response fromNullValue() {
         final Response response = new Response();
-        response.timestamp = new java.util.Date().getTime();
+        response.timestamp = new java.util.Date();
         return response;
     }
 
     @JsonInclude(Include.NON_NULL)
-    public Long timestamp;
+    public Date timestamp;
 
     /** See Error class. */
     @JsonInclude(Include.NON_NULL)

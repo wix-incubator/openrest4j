@@ -1,19 +1,20 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 /** An entry in a change-log. */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LogEntry implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
     
-    public LogEntry(Long timestamp, User user, String comment) {
+    public LogEntry(Date timestamp, User user, String comment) {
         this.timestamp = timestamp;
         this.user = user;
         this.comment = comment;
@@ -24,7 +25,9 @@ public class LogEntry implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	return new LogEntry(timestamp, ((user != null) ? (User) user.clone() : null), comment);
+    	return new LogEntry(
+                (timestamp != null) ? (Date) timestamp.clone() : null,
+                ((user != null) ? (User) user.clone() : null), comment);
 	}
     
     public static List<LogEntry> clone(List<LogEntry> log) {
@@ -32,7 +35,7 @@ public class LogEntry implements Serializable, Cloneable {
     		return null;
     	}
     	
-    	final List<LogEntry> cloned = new LinkedList<LogEntry>();
+    	final List<LogEntry> cloned = new LinkedList<>();
     	for (LogEntry logEntry : log) {
     		cloned.add((logEntry != null) ? (LogEntry) logEntry.clone() : null);
     	}
@@ -63,7 +66,7 @@ public class LogEntry implements Serializable, Cloneable {
 
     /** The log entry's timestamp. */
     @JsonInclude(Include.NON_NULL)
-    public Long timestamp;
+    public Date timestamp;
     
     /** The user making the changes. */
     @JsonInclude(Include.NON_NULL)

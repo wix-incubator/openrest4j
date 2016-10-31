@@ -31,7 +31,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     /** Default constructor for JSON deserialization. */
     public Organization() {}
     
-    protected Organization(String id, String alias, String affiliateId, Map<String, String> externalIds, Long created, Long modified,
+    protected Organization(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
     		Map<String, String> title, Map<String, String> description,
     		String locale, Set<String> locales, Map<String, Map<String, String>> messages, ColorScheme colorScheme,
     		Contact contact, Map<String, Contact> externalContacts,
@@ -95,14 +95,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
 		return cloned;
     }
     
-    public java.util.Date created() {
-        return ((created != null) ? new java.util.Date(created.longValue()) : null);
-    }
-    
-    public java.util.Date modified() {
-        return ((modified != null) ? new java.util.Date(modified.longValue()) : null);
-    }
-    
     /** The organization's unique id. */
     @JsonInclude(Include.NON_NULL)
     public String id;
@@ -126,11 +118,11 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     
     /** The organization's creation timestamp. */
     @JsonInclude(Include.NON_NULL)
-    public Long created;
+    public Date created;
     
     /** The organization's last modification timestamp. */
     @JsonInclude(Include.NON_NULL)
-    public Long modified;
+    public Date modified;
     
     /** The organization's title in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
