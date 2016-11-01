@@ -80,7 +80,7 @@ public class ReservationsInfo implements Serializable, Cloneable {
     public Integer maxPartySize;
 
     /**
-     * Earliest time from which future reservations are allowed, or null for no limit.
+     * Earliest time from which future reservations are allowed.
      * For example, a value of 1440 means future reservations must be placed at least 1 day in advance.
      */
     @JsonInclude(Include.NON_NULL)
@@ -89,6 +89,8 @@ public class ReservationsInfo implements Serializable, Cloneable {
     /**
      * Latest time up to which future reservations are allowed, or null for no limit.
      * For example, a value of 10080 means future reservations are accepted up to 7 days in advance.
+     *
+     * A value of 0 means that future reservations are not allowed.
      */
     @JsonInclude(Include.NON_NULL)
     public Integer maxFutureDelayMins;
