@@ -71,7 +71,7 @@ public class ReservationsInfo implements Serializable, Cloneable {
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean pendingApproval = Boolean.FALSE;
 
-    /** Minimum party size allowed, or null for no minimum. */
+    /** Minimum party size allowed. */
     @JsonInclude(Include.NON_NULL)
     public Integer minPartySize;
 
