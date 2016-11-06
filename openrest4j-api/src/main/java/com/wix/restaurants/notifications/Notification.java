@@ -1,4 +1,4 @@
-package com.openrest.olo.notifications;
+package com.wix.restaurants.notifications;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -6,8 +6,13 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.openrest.olo.notifications.FeedbackNotification;
+import com.openrest.olo.notifications.OfflineNotification;
+import com.openrest.olo.notifications.SubscriptionNotification;
 import com.openrest.v1_1.Channel;
 import com.openrest.v1_1.State;
+import com.wix.restaurants.olo.notifications.*;
+import com.wix.restaurants.reservations.notifications.UpdatedReservationNotification;
 
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -28,7 +33,8 @@ import java.util.List;
 	@Type(value = PosErrorNotification.class, name = PosErrorNotification.TYPE),
 	@Type(value = FeedbackNotification.class, name = FeedbackNotification.TYPE),
 	@Type(value = SubscriptionNotification.class, name = SubscriptionNotification.TYPE),
-	@Type(value = LowStockNotification.class, name = LowStockNotification.TYPE)
+	@Type(value = LowStockNotification.class, name = LowStockNotification.TYPE),
+	@Type(value = UpdatedReservationNotification.class, name = UpdatedReservationNotification.TYPE),
 })
 public abstract class Notification implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;

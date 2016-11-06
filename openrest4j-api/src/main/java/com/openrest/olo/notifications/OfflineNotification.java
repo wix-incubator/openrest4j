@@ -3,6 +3,7 @@ package com.openrest.olo.notifications;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.wix.restaurants.notifications.Notification;
 
 /** Triggered when no one checks for existence of new orders for some duration. */
 @JsonIgnoreProperties(ignoreUnknown = true)

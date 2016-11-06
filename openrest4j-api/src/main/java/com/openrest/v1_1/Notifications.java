@@ -3,7 +3,7 @@ package com.openrest.v1_1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.openrest.olo.notifications.Notification;
+import com.wix.restaurants.notifications.Notification;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -15,13 +15,13 @@ public class BlobTypes {
     public static final String BLOB_TYPE_COVER = "cover";
     /**
      * Sound recording for automated phone calls.
-     * @see com.openrest.olo.notifications.DelayedOrderNotification
-     * @see com.openrest.olo.notifications.NewOrderNotification
+     * @see com.wix.restaurants.olo.notifications.DelayedOrderNotification
+     * @see com.wix.restaurants.olo.notifications.NewOrderNotification
      */
     public static final String BLOB_TYPE_NOTIFICATION_VOICE = "notification_voice";
     /**
      * Sound recording for automated phone calls.
-     * @see com.openrest.olo.notifications.PosErrorNotification
+     * @see com.wix.restaurants.olo.notifications.PosErrorNotification
      */
     public static final String BLOB_TYPE_NOTIFICATION_POS_ERROR = "notification_pos_error";
 }

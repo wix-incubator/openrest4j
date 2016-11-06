@@ -1,6 +1,7 @@
 package com.openrest.olo.notifications;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.wix.restaurants.notifications.Notification;
 
 /** Triggered when a new user subscribes to the organization's mailing list. */
 @JsonIgnoreProperties(ignoreUnknown = true)
