@@ -6,7 +6,7 @@ import com.openrest.v1_1.Request;
 import com.wix.restaurants.reservations.Reservation;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SubmitReservationRequest extends Request {
+public class SubmitReservationRequest extends Request implements Cloneable {
     public static final String TYPE = "submit_reservation";
     private static final long serialVersionUID = 1L;
 
@@ -16,6 +16,12 @@ public class SubmitReservationRequest extends Request {
     public SubmitReservationRequest(String accessToken, Reservation reservation) {
         this.accessToken = accessToken;
         this.reservation = reservation;
+    }
+
+    @Override
+    public Object clone() {
+        return new SubmitReservationRequest(accessToken,
+                (reservation != null) ? (Reservation) reservation.clone() : null);
     }
 
     /** Optional access token of the user submitting the reservation. */
