@@ -1,12 +1,12 @@
 package com.openrest.v1_1;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.openrest.olo.users.Group;
+
+import java.util.LinkedList;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SubmitOrderRequest extends Request {
@@ -27,7 +27,7 @@ public class SubmitOrderRequest extends Request {
     public String accessToken;
     
     @JsonInclude(Include.NON_DEFAULT)
-    public List<Group> groups = new LinkedList<Group>();
+    public List<Group> groups = new LinkedList<>();
     
     @JsonInclude(Include.NON_NULL)
     public Order order;
