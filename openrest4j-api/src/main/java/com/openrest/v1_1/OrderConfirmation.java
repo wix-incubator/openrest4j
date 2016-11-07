@@ -24,7 +24,7 @@ public class OrderConfirmation implements Serializable {
 
     /** The restaurant's confirmation message in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> message = new HashMap<String, String>();
+    public Map<String, String> message = new HashMap<>();
     
     private static final long serialVersionUID = 1L;
 }
