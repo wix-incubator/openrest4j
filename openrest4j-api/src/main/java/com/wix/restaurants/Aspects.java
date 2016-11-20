@@ -12,9 +12,4 @@ public class Aspects {
     public static String onlineOrdering() {
         return "OLO";
     }
-
-    /** Accepting online table reservations. */
-    public static String onlineReservations() {
-        return "OLR";
-    }
 }

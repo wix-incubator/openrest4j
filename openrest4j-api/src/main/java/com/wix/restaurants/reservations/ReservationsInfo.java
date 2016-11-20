@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.restaurants.IntegerInterval;
+import com.wix.restaurants.availability.Availability;
 
 import java.io.Serializable;
 import java.util.LinkedHashMap;
@@ -18,10 +19,12 @@ public class ReservationsInfo implements Serializable, Cloneable {
 
     public ReservationsInfo(Boolean pendingApproval,
                             IntegerInterval partySize,
+                            Availability availability,
                             IntegerInterval futureDelayMins,
                             Map<String, String> properties) {
         this.pendingApproval = pendingApproval;
         this.partySize = partySize;
+        this.availability = availability;
         this.futureDelayMins = futureDelayMins;
         this.properties = properties;
     }
@@ -31,6 +34,7 @@ public class ReservationsInfo implements Serializable, Cloneable {
         return new ReservationsInfo(
                 pendingApproval,
                 (partySize != null) ? (IntegerInterval) partySize.clone() : null,
+                (availability != null) ? (Availability) availability.clone() : null,
                 (futureDelayMins != null) ? (IntegerInterval) futureDelayMins.clone() : null,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
     }
@@ -42,11 +46,10 @@ public class ReservationsInfo implements Serializable, Cloneable {
 
         ReservationsInfo that = (ReservationsInfo) o;
 
-        if (pendingApproval != null ? !pendingApproval.equals(that.pendingApproval) : that.pendingApproval != null)
-            return false;
+        if (pendingApproval != null ? !pendingApproval.equals(that.pendingApproval) : that.pendingApproval != null) return false;
         if (partySize != null ? !partySize.equals(that.partySize) : that.partySize != null) return false;
-        if (futureDelayMins != null ? !futureDelayMins.equals(that.futureDelayMins) : that.futureDelayMins != null)
-            return false;
+        if (availability != null ? !availability.equals(that.availability) : that.availability != null) return false;
+        if (futureDelayMins != null ? !futureDelayMins.equals(that.futureDelayMins) : that.futureDelayMins != null) return false;
         return properties != null ? properties.equals(that.properties) : that.properties == null;
 
     }
@@ -55,6 +58,7 @@ public class ReservationsInfo implements Serializable, Cloneable {
     public int hashCode() {
         int result = pendingApproval != null ? pendingApproval.hashCode() : 0;
         result = 31 * result + (partySize != null ? partySize.hashCode() : 0);
+        result = 31 * result + (availability != null ? availability.hashCode() : 0);
         result = 31 * result + (futureDelayMins != null ? futureDelayMins.hashCode() : 0);
         result = 31 * result + (properties != null ? properties.hashCode() : 0);
         return result;
@@ -69,7 +73,14 @@ public class ReservationsInfo implements Serializable, Cloneable {
     public IntegerInterval partySize;
 
     /**
-     * Time interval for which future reservations are allowed (minimum is mandatory, and non-negative),
+     * The restaurant accepts reservations to these times.
+     * @see #futureDelayMins for limitations.
+     */
+    @JsonInclude(Include.NON_NULL)
+    public Availability availability;
+
+    /**
+     * Time interval in which future reservations are allowed (minimum is mandatory, and non-negative),
      * or null if future reservations are not allowed.
      *
      * For example, min=1440 max=10080 means that future reservations must be placed at least 1 day in advance,
