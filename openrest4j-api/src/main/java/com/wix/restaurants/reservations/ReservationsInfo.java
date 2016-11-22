@@ -21,11 +21,13 @@ public class ReservationsInfo implements Serializable, Cloneable {
                             IntegerInterval partySize,
                             Availability availability,
                             IntegerInterval futureDelayMins,
+                            Integer heldForMins,
                             Map<String, String> properties) {
         this.pendingApproval = pendingApproval;
         this.partySize = partySize;
         this.availability = availability;
         this.futureDelayMins = futureDelayMins;
+        this.heldForMins = heldForMins;
         this.properties = properties;
     }
 
@@ -36,6 +38,7 @@ public class ReservationsInfo implements Serializable, Cloneable {
                 (partySize != null) ? (IntegerInterval) partySize.clone() : null,
                 (availability != null) ? (Availability) availability.clone() : null,
                 (futureDelayMins != null) ? (IntegerInterval) futureDelayMins.clone() : null,
+                heldForMins,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
     }
 
@@ -50,6 +53,7 @@ public class ReservationsInfo implements Serializable, Cloneable {
         if (partySize != null ? !partySize.equals(that.partySize) : that.partySize != null) return false;
         if (availability != null ? !availability.equals(that.availability) : that.availability != null) return false;
         if (futureDelayMins != null ? !futureDelayMins.equals(that.futureDelayMins) : that.futureDelayMins != null) return false;
+        if (heldForMins != null ? !heldForMins.equals(that.heldForMins) : that.heldForMins != null) return false;
         return properties != null ? properties.equals(that.properties) : that.properties == null;
 
     }
@@ -60,6 +64,7 @@ public class ReservationsInfo implements Serializable, Cloneable {
         result = 31 * result + (partySize != null ? partySize.hashCode() : 0);
         result = 31 * result + (availability != null ? availability.hashCode() : 0);
         result = 31 * result + (futureDelayMins != null ? futureDelayMins.hashCode() : 0);
+        result = 31 * result + (heldForMins != null ? heldForMins.hashCode() : 0);
         result = 31 * result + (properties != null ? properties.hashCode() : 0);
         return result;
     }
@@ -88,6 +93,10 @@ public class ReservationsInfo implements Serializable, Cloneable {
      */
     @JsonInclude(Include.NON_NULL)
     public IntegerInterval futureDelayMins;
+
+    /** How long (in minutes) are tables held for late customers, or null if unlimited. */
+    @JsonInclude(Include.NON_NULL)
+    public Integer heldForMins;
 
     /**
      * Map of user-defined extended properties.
