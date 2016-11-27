@@ -92,7 +92,11 @@ public class QueryOrdersRequest extends Request {
     @Deprecated
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean restaurantView = Boolean.FALSE;
-    
+
+    /**
+     * Optional result ordering.
+     * @see com.wix.restaurants.Orderings
+     */
     @JsonInclude(Include.NON_NULL)
     public String ordering;
     
