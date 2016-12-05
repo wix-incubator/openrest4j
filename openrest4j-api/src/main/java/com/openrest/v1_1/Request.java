@@ -114,7 +114,9 @@ import java.io.Serializable;
 	@Type(value = GetReservationRequest.class, name = GetReservationRequest.TYPE),
 	@Type(value = QueryUnhandledReservationsRequest.class, name = QueryUnhandledReservationsRequest.TYPE),
 	@Type(value = QueryModifiedReservationsRequest.class, name = QueryModifiedReservationsRequest.TYPE),
-	@Type(value = QueryReservationsRequest.class, name = QueryReservationsRequest.TYPE)
+	@Type(value = QueryReservationsRequest.class, name = QueryReservationsRequest.TYPE),
+	@Type(value = SetReservationStatusRequest.class, name = SetReservationStatusRequest.TYPE),
+	@Type(value = ConfirmReservationRequest.class, name = ConfirmReservationRequest.TYPE)
 })
 public abstract class Request implements Serializable {
     private static final long serialVersionUID = 1L;
