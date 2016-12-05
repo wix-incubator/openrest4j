@@ -38,14 +38,14 @@ public class GetReservationRequest extends Request implements Cloneable {
     public String accessToken;
 
     /**
-     * Owner token for viewing the order as owner (null if using accessToken or shareToken).
+     * Owner token for viewing the reservation as owner (null if using accessToken or shareToken).
      * @see Reservation#ownerToken
      */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public String ownerToken;
 
     /**
-     * Share token for viewing a shared order (null if using accessToken or ownerToken).
+     * Share token for viewing a shared reservation (null if using accessToken or ownerToken).
      * @see Reservation#shareToken
      */
     @JsonInclude(JsonInclude.Include.NON_NULL)
