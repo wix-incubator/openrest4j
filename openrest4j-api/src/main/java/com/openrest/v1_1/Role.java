@@ -1,10 +1,10 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.io.Serializable;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Role implements Serializable, Cloneable {
@@ -32,10 +32,7 @@ public class Role implements Serializable, Cloneable {
     @JsonInclude(Include.NON_NULL)
     public String organizationType;
     
-    /**
-     * The user's role (admin, manager, employee, etc) in the organization.
-     * @see Staff
-     * */
+    /** @see com.wix.restaurants.Roles */
     @JsonInclude(Include.NON_NULL)
     public String role;
 }

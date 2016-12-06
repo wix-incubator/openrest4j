@@ -3,6 +3,7 @@ package com.openrest.v1_1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.wix.restaurants.Roles;
 
 import java.io.Serializable;
 import java.util.*;
@@ -12,16 +13,6 @@ import java.util.Map.Entry;
 public class Staff implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
     
-    public static final String STAFF_ADMIN = "admin";
-    public static final String STAFF_DISTRIBUTOR = "distributor";
-    public static final String STAFF_MANAGER = "manager";
-    public static final String STAFF_EMPLOYEE = "employee";
-    
-    /** All known staff types. */
-    public static final Set<String> ALL_STAFFS = new HashSet<>(Arrays.asList(new String[] {
-   		STAFF_ADMIN, STAFF_DISTRIBUTOR, STAFF_MANAGER, STAFF_EMPLOYEE
-    }));
-
     public Staff(Map<String, Set<String>> staff) {
         this.staff = staff;
     }
@@ -46,32 +37,32 @@ public class Staff implements Serializable, Cloneable {
 
     public static Staff createAdmins(Set<String> adminStaff) {
         final Map<String, Set<String>> staff = new HashMap<>(1);
-        staff.put(STAFF_ADMIN, adminStaff);
+        staff.put(Roles.admin, adminStaff);
         return new Staff(staff);
     }
     
     public static Staff createDistributors(Set<String> distributorStaff) {
         final Map<String, Set<String>> staff = new LinkedHashMap<>(1);
-        staff.put(STAFF_DISTRIBUTOR, distributorStaff);
+        staff.put(Roles.distributor, distributorStaff);
         return new Staff(staff);
     }
     
     public static Staff createManagers(Set<String> managerStaff) {
         final Map<String, Set<String>> staff = new LinkedHashMap<>(1);
-        staff.put(STAFF_MANAGER, managerStaff);
+        staff.put(Roles.manager, managerStaff);
         return new Staff(staff);
     }
 
     public static Staff createEmployees(Set<String> employeeStaff) {
         final Map<String, Set<String>> staff = new LinkedHashMap<>(1);
-        staff.put(STAFF_EMPLOYEE, employeeStaff);
+        staff.put(Roles.employee, employeeStaff);
         return new Staff(staff);
     }
 
     public static Staff createRestaurantStaff(Set<String> managerStaff, Set<String> employeeStaff) {
         final Map<String, Set<String>> staff = new LinkedHashMap<>(2);
-        staff.put(STAFF_MANAGER, managerStaff);
-        staff.put(STAFF_EMPLOYEE, employeeStaff);
+        staff.put(Roles.manager, managerStaff);
+        staff.put(Roles.employee, employeeStaff);
         return new Staff(staff);
     }
 
