@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import java.util.Locale;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SignUpRequest extends Request {
 	public static final String TYPE = "sign_up";
@@ -12,7 +14,7 @@ public class SignUpRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public SignUpRequest() {}
     
-    public SignUpRequest(String locale, String distributorId, String email, String password) {
+    public SignUpRequest(Locale locale, String distributorId, String email, String password) {
     	this.locale = locale;
     	this.distributorId = distributorId;
     	this.email = email;
@@ -20,7 +22,7 @@ public class SignUpRequest extends Request {
     }
     
     @JsonInclude(Include.NON_NULL)
-    public String locale;
+    public Locale locale;
     
     @JsonInclude(Include.NON_NULL)
     public String distributorId;
