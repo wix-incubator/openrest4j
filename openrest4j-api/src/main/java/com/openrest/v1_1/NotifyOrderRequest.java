@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import java.util.Locale;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class NotifyOrderRequest extends Request {
 	public static final String TYPE = "notify_order";
@@ -12,7 +14,7 @@ public class NotifyOrderRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public NotifyOrderRequest() {}
     
-    public NotifyOrderRequest(String accessToken, String orderId, String channelId, String channelParam, String locale, 
+    public NotifyOrderRequest(String accessToken, String orderId, String channelId, String channelParam, Locale locale,
     		String viewMode, Boolean anonymize, Boolean printHeader, Boolean printCsc) {
     	this.accessToken = accessToken;
     	this.orderId = orderId;
@@ -38,7 +40,7 @@ public class NotifyOrderRequest extends Request {
     public String channelParam;
     
     @JsonInclude(Include.NON_NULL)
-    public String locale;
+    public Locale locale;
     
     /** @see com.wix.restaurants.Actors */
     @JsonInclude(Include.NON_NULL)
