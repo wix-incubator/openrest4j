@@ -16,7 +16,7 @@ public class Order implements Serializable, Cloneable {
     
     /** Constructs a previously submitted order from persisted data. */
     public Order(String id, Map<String, String> externalIds, String distributorId, String chainId, String restaurantId,
-    		String locale, List<OrderItem> orderItems,
+    		Locale locale, List<OrderItem> orderItems,
     		String comment, Integer price, String currency, Dispatch delivery, Contact contact, List<Payment> payments,
             Integer takeoutPacks, List<Charge> charges, List<OrderCharge> orderCharges,
             Date created, Date received, Date modified, Date submitAt,
@@ -186,7 +186,7 @@ public class Order implements Serializable, Cloneable {
     
     /** The order's locale. */
     @JsonInclude(Include.NON_NULL)
-    public String locale;
+    public Locale locale;
 
     /** The ordered items. */
     @JsonInclude(Include.NON_DEFAULT)

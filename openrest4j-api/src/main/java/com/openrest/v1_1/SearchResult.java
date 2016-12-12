@@ -14,12 +14,12 @@ public class SearchResult extends Restaurant {
     private static final long serialVersionUID = 1L;
     
     public SearchResult(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
-                        String distributorId, String chainId, Map<String, String> title,
-                        Map<String, String> description, Contact contact, Map<String, Contact> externalContacts, Address address,
-                        Map<String, Map<String, String>> messages, ColorScheme colorScheme,
+                        String distributorId, String chainId, Map<Locale, String> title,
+                        Map<Locale, String> description, Contact contact, Map<String, Contact> externalContacts, Address address,
+                        Map<String, Map<Locale, String>> messages, ColorScheme colorScheme,
                         Availability openTimes, Availability deliveryTimes,
                         List<DispatchInfo> deliveryInfos, Integer maxFutureOrderDelayMins,
-                        String timezone, String currency, String locale, Set<String> locales,
+                        String timezone, String currency, Locale locale, Set<Locale> locales,
                         Set<String> paymentTypes, Boolean multiPaymentDisabled, Map<String, CardInfo> cardInfos, CreditcardsInfo creditcardsInfo,
                         DeliveriesInfo deliveriesInfo, ReservationsInfo reservations, Map<String, Integer> minPayments, Boolean antiFraudDisabled, String link, String domain,
                         Set<String> altDomains, String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,

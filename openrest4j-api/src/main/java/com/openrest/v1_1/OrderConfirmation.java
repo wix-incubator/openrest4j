@@ -2,6 +2,7 @@ package com.openrest.v1_1;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -10,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderConfirmation implements Serializable {
-    public OrderConfirmation(Order order, Map<String, String> message) {
+    public OrderConfirmation(Order order, Map<Locale, String> message) {
         this.order = order;
         this.message = message;
     }
@@ -24,7 +25,7 @@ public class OrderConfirmation implements Serializable {
 
     /** The restaurant's confirmation message in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> message = new HashMap<>();
+    public Map<Locale, String> message = new HashMap<>();
     
     private static final long serialVersionUID = 1L;
 }

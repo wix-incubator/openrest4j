@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import java.util.Locale;
 import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -16,7 +17,7 @@ public class GetOrderRequest extends Request {
     
     public GetOrderRequest(String accessToken, String shareToken, String ownerToken,
                            String orderId, String viewMode, Boolean anonymize,
-                           Set<String> fields, String locale, Viewport viewport, Boolean embed,
+                           Set<String> fields, Locale locale, Viewport viewport, Boolean embed,
                            Boolean printHeader, Boolean printCsc) {
     	this.accessToken = accessToken;
         this.shareToken = shareToken;
@@ -60,7 +61,7 @@ public class GetOrderRequest extends Request {
     
     /** For Order.html, if null Order.locale will be used. */
     @JsonInclude(Include.NON_NULL)
-	public String locale;
+	public Locale locale;
     
     /** For Order.html. */
     @JsonInclude(Include.NON_NULL)

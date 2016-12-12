@@ -32,8 +32,8 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     public Organization() {}
     
     protected Organization(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
-    		Map<String, String> title, Map<String, String> description,
-    		String locale, Set<String> locales, Map<String, Map<String, String>> messages, ColorScheme colorScheme,
+    		Map<Locale, String> title, Map<Locale, String> description,
+    		Locale locale, Set<Locale> locales, Map<String, Map<Locale, String>> messages, ColorScheme colorScheme,
     		Contact contact, Map<String, Contact> externalContacts,
     		Address address, String timezone, String currency,
     		String link, String domain, Set<String> altDomains,
@@ -83,13 +83,13 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     @Override
 	public abstract Object clone();
     
-    protected static Map<String, Map<String, String>> cloneMessages(Map<String, Map<String, String>> messages) {
+    protected static Map<String, Map<Locale, String>> cloneMessages(Map<String, Map<Locale, String>> messages) {
     	if (messages == null) {
     		return null;
     	}
     	
-    	final Map<String, Map<String, String>> cloned = new LinkedHashMap<>(messages.size());
-		for (Entry<String, Map<String, String>> entry : messages.entrySet()) {
+    	final Map<String, Map<Locale, String>> cloned = new LinkedHashMap<>(messages.size());
+		for (Entry<String, Map<Locale, String>> entry : messages.entrySet()) {
 			cloned.put(entry.getKey(), (entry.getValue() != null) ? new LinkedHashMap<>(entry.getValue()) : null);
 		}
 		return cloned;
@@ -126,11 +126,11 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     
     /** The organization's title in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title = new LinkedHashMap<>();
+    public Map<Locale, String> title = new LinkedHashMap<>();
 
     /** The organization's description or tagline in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> description = new LinkedHashMap<>();
+    public Map<Locale, String> description = new LinkedHashMap<>();
     
     /** The color scheme. */
     @JsonInclude(Include.NON_NULL)
@@ -168,18 +168,18 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     
     /** The organization's default locale, e.g. "en_US". */
     @JsonInclude(Include.NON_NULL)
-    public String locale;
+    public Locale locale;
     
     /** The organization's supported locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Set<String> locales = new LinkedHashSet<>();
+    public Set<Locale> locales = new LinkedHashSet<>();
     
     /**
      * Maps message types (e.g. MESSAGE_TYPE_WELCOME) to their text in various locales.
      * The text may contain simple HTML formatting.
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, Map<String, String>> messages = new LinkedHashMap<>();
+    public Map<String, Map<Locale, String>> messages = new LinkedHashMap<>();
     
     /** The organization's main web-site URL. */
     @JsonInclude(Include.NON_NULL)

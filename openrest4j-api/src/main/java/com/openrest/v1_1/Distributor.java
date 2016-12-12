@@ -17,8 +17,8 @@ public class Distributor extends Organization {
     public Distributor() {}
     
     public Distributor(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
-    		Map<String, String> title, Map<String, String> description,
-    		String locale, Set<String> locales, Map<String, Map<String, String>> messages, ColorScheme colorScheme,
+    		Map<Locale, String> title, Map<Locale, String> description,
+    		Locale locale, Set<Locale> locales, Map<String, Map<Locale, String>> messages, ColorScheme colorScheme,
     		Contact contact, Map<String, Contact> externalContacts, Address address, String timezone, String currency,
     		String link, String domain, Set<String> altDomains, List<AppInfo> apps, Seo seo,
     		Map<String, String> properties, Map<String, String> compatibilities,
