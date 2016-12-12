@@ -1,12 +1,7 @@
 package com.openrest.v1_1;
  
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -25,8 +20,8 @@ public class Coupon implements Serializable, Cloneable {
     public static final Set<String> ALL_COUPON_TYPES = new HashSet<String>(
     		Arrays.asList(COUPON_TYPE_DISCOUNT, COUPON_TYPE_M_PLUS_N));
    
-    public Coupon(String type, Map<String, String> title, Map<String, String> description,
-    		Integer maxNumAllowed, Boolean othersAllowed, Map<String, String> properties) {
+    public Coupon(String type, Map<Locale, String> title, Map<Locale, String> description,
+				  Integer maxNumAllowed, Boolean othersAllowed, Map<String, String> properties) {
     	this.type = type;
     	this.title = title;
     	this.description = description;
@@ -41,10 +36,10 @@ public class Coupon implements Serializable, Cloneable {
     @Override
 	public Object clone() {
     	return new Coupon(type,
-    			((title != null) ? new HashMap<String, String>(title) : null),
-    			((description != null) ? new HashMap<String, String>(description) : null),
+    			((title != null) ? new LinkedHashMap<>(title) : null),
+    			((description != null) ? new LinkedHashMap<>(description) : null),
     			maxNumAllowed, othersAllowed,
-    			((properties != null) ? new LinkedHashMap<String, String>(properties) : null));
+    			((properties != null) ? new LinkedHashMap<>(properties) : null));
 	}
    
     /** The coupon's type. */
@@ -53,11 +48,11 @@ public class Coupon implements Serializable, Cloneable {
    
     /** The coupon's user-friendly short name in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title = new HashMap<String, String>();
+    public Map<Locale, String> title = new LinkedHashMap<>();
     
     /** The coupon's user-friendly description in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> description = new HashMap<String, String>();
+    public Map<Locale, String> description = new LinkedHashMap<>();
     
     /** Maximum number of times this coupon can be used in a single order. */
     @JsonInclude(Include.NON_DEFAULT)

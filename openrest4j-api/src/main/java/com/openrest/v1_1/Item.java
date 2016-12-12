@@ -20,8 +20,8 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
 	public static final String LABEL_FEATURED = "featured";
     
 	/** Constructs a previously submitted item from persisted data. */
-    public Item(String id, String restaurantId, Map<String, String> title,
-    		Map<String, String> description, Integer price, List<Variation> variations,
+    public Item(String id, String restaurantId, Map<Locale, String> title,
+    		Map<Locale, String> description, Integer price, List<Variation> variations,
     		Availability availability, String picture, Map<String, Blob> blobs,
     		Map<String, String> externalIds, Set<String> labels,
     		Map<String, String> properties, Stock stock, Double rank) {
@@ -81,11 +81,11 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
 
     /** The item's title in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title = new LinkedHashMap<>();
+    public Map<Locale, String> title = new LinkedHashMap<>();
 
     /** The item's one line description in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> description = new LinkedHashMap<>();
+    public Map<Locale, String> description = new LinkedHashMap<>();
 
     /** The item's price, in "cents". */
     @JsonInclude(Include.NON_DEFAULT)

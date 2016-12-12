@@ -1,18 +1,19 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.Locale;
+import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TopItem implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
     
-    public TopItem(String id, Map<String, String> title, Integer price, String picture) {
+    public TopItem(String id, Map<Locale, String> title, Integer price, String picture) {
     	this.id = id;
     	this.title = title;
     	this.price = price;
@@ -29,7 +30,7 @@ public class TopItem implements Serializable, Cloneable {
     @Override
 	public Object clone() {
     	return new TopItem(id,
-    			((title != null) ? new HashMap<String, String>(title) : null),
+    			((title != null) ? new LinkedHashMap<>(title) : null),
     			price, picture);
 	}
     
@@ -37,7 +38,7 @@ public class TopItem implements Serializable, Cloneable {
     public String id;
     
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title = new HashMap<String, String>();
+    public Map<Locale, String> title = new LinkedHashMap<>();
     
     @JsonInclude(Include.NON_DEFAULT)
     public Integer price = 0;

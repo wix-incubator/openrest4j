@@ -25,7 +25,7 @@ public class Variation implements Serializable, Cloneable {
     public static final Set<String> ALL_VARIATION_DISPLAY_TYPES = new HashSet<>(
     		Arrays.asList(VARIATION_DISPLAY_TYPE_DIFF, VARIATION_DISPLAY_TYPE_CHOICE, VARIATION_DISPLAY_TYPE_HIDDEN));
 
-    public Variation(Map<String, String> title, List<String> itemIds, Integer minNumAllowed,
+    public Variation(Map<Locale, String> title, List<String> itemIds, Integer minNumAllowed,
     		Integer maxNumAllowed, Map<String, Integer> prices, Set<String> defaults, String displayType,
             Map<String, String> properties) {
         this.title = title;
@@ -69,7 +69,7 @@ public class Variation implements Serializable, Cloneable {
 
     /** The variations's name in various locales, e.g. "sides", "degree of cooking". */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title = new LinkedHashMap<>();
+    public Map<Locale, String> title = new LinkedHashMap<>();
 
     /** The set's name, e.g. "drink", "sides". */
     @JsonInclude(Include.NON_NULL)

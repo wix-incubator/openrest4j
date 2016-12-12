@@ -1,11 +1,7 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -16,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Area implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
 	
-	public Area(Map<String, String> title, List<LatLng> polygon) {
+	public Area(Map<Locale, String> title, List<LatLng> polygon) {
     	this.title = title;
     	this.polygon = polygon;
     }
@@ -28,7 +24,7 @@ public class Area implements Serializable, Cloneable {
 	public Object clone() {
     	final List<LatLng> clonedPolygon;
     	if (polygon != null) {
-    		clonedPolygon = new ArrayList<LatLng>(polygon.size());
+    		clonedPolygon = new ArrayList<>(polygon.size());
     		for (LatLng latLng : polygon) {
     			clonedPolygon.add((LatLng) latLng.clone());
     		}
@@ -37,17 +33,17 @@ public class Area implements Serializable, Cloneable {
     	}
     	
     	return new Area(
-    			((title != null) ? new HashMap<String, String>(title) : null),
+    			((title != null) ? new LinkedHashMap<>(title) : null),
     			clonedPolygon);
 	}
     
     /** The area's human-readable title in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title = new HashMap<String, String>();
+    public Map<Locale, String> title = new LinkedHashMap<>();
     
     /** The area (polygon vertices). */
     @JsonInclude(Include.NON_DEFAULT)
-    public List<LatLng> polygon = new LinkedList<LatLng>();
+    public List<LatLng> polygon = new LinkedList<>();
     
     @Override
 	public int hashCode() {

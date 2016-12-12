@@ -39,7 +39,7 @@ public class Charge implements Serializable, Cloneable {
 	/** Default constructor for JSON deserialization. */
     public Charge() {}
     
-    public Charge(String type, String id, String organizationId, Map<String, String> title, Map<String, String> description,
+    public Charge(String type, String id, String organizationId, Map<Locale, String> title, Map<Locale, String> description,
     		Condition displayCondition, Condition condition, Operator operator, String state, Boolean mandatory,
     		Map<String, String> properties) {
         this.type = type;
@@ -131,11 +131,11 @@ public class Charge implements Serializable, Cloneable {
     
     /** Title. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title = new LinkedHashMap<>();
+    public Map<Locale, String> title = new LinkedHashMap<>();
 
     /** Description. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> description = new LinkedHashMap<>();
+    public Map<Locale, String> description = new LinkedHashMap<>();
     
     /** Condition to display the charge to end-users. */
     @JsonInclude(Include.NON_NULL)

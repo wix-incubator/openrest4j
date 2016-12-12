@@ -6,16 +6,13 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.restaurants.availability.Availability;
 
 import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MenuSection implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
 
-    public MenuSection(String id, Map<String, String> title, Map<String, String> description,
+    public MenuSection(String id, Map<Locale, String> title, Map<Locale, String> description,
                        List<MenuSection> children, List<String> itemIds, Availability availability,
                        Map<String, Blob> blobs, Map<String, String> properties) {
         this.id = id;
@@ -92,11 +89,11 @@ public class MenuSection implements Serializable, Cloneable {
 
     /** The category's title in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title = new LinkedHashMap<>();
+    public Map<Locale, String> title = new LinkedHashMap<>();
 
     /** The category's description in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> description = new LinkedHashMap<>();
+    public Map<Locale, String> description = new LinkedHashMap<>();
 
     /** Sub sections. */
     @JsonInclude(Include.NON_DEFAULT)

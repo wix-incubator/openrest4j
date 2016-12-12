@@ -1,23 +1,18 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.io.Serializable;
+import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PortalMenuCategory implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
     
-    public PortalMenuCategory(Map<String, String> title, Map<String, String> description,
-    		List<PortalMenuCategory> children, Set<String> features, Map<String, String> properties) {
+    public PortalMenuCategory(Map<Locale, String> title, Map<Locale, String> description,
+							  List<PortalMenuCategory> children, Set<String> features, Map<String, String> properties) {
     	this.title = title;
     	this.description = description;
     	this.children = children;
@@ -44,11 +39,11 @@ public class PortalMenuCategory implements Serializable, Cloneable {
     @Override
 	public Object clone() {
     	return new PortalMenuCategory(
-    			((title != null) ? new HashMap<String, String>(title) : null),
-    			((description != null) ? new HashMap<String, String>(description) : null),
+    			((title != null) ? new LinkedHashMap<>(title) : null),
+    			((description != null) ? new LinkedHashMap<>(description) : null),
     			cloneList(children),
-    			((features != null) ? new HashSet<String>(features) : null),
-    			((properties != null) ? new HashMap<String, String>(properties) : null));
+    			((features != null) ? new LinkedHashSet<>(features) : null),
+    			((properties != null) ? new LinkedHashMap<>(properties) : null));
 	}
     
 	@Override
@@ -113,24 +108,24 @@ public class PortalMenuCategory implements Serializable, Cloneable {
 	
     /** Localized title. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title = new HashMap<String, String>();
+    public Map<Locale, String> title = new LinkedHashMap<>();
 
     /** Localized description. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> description = new HashMap<String, String>();
+    public Map<Locale, String> description = new LinkedHashMap<>();
 
     /** Sub-categories. */
     @JsonInclude(Include.NON_DEFAULT)
-    public List<PortalMenuCategory> children = new LinkedList<PortalMenuCategory>();
+    public List<PortalMenuCategory> children = new LinkedList<>();
 
     /** Features to display. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Set<String> features = new HashSet<String>();
+    public Set<String> features = new LinkedHashSet<>();
     
     /**
      * Map of user-defined extended properties. Developers should use unique
      * keys, e.g. "com.googlecode.openrestext".
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> properties = new HashMap<String, String>();
+    public Map<String, String> properties = new LinkedHashMap<>();
 }
