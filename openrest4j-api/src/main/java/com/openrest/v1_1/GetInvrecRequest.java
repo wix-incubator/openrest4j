@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import java.util.Locale;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GetInvrecRequest extends Request {
 	public static final String TYPE = "get_invrec";
@@ -12,7 +14,7 @@ public class GetInvrecRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public GetInvrecRequest() {}
     
-    public GetInvrecRequest(String accessToken, String invrecId, String locale) {
+    public GetInvrecRequest(String accessToken, String invrecId, Locale locale) {
     	this.accessToken = accessToken;
     	this.invrecId = invrecId;
     	this.locale = locale;
@@ -26,5 +28,5 @@ public class GetInvrecRequest extends Request {
     
     /** For Invrec.html */
     @JsonInclude(Include.NON_NULL)
-    public String locale;
+    public Locale locale;
 }
