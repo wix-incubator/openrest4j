@@ -99,14 +99,7 @@ public class Restaurant extends Organization {
     @JsonInclude(Include.NON_NULL)
     public String chainId;
     
-    /**
-     * Restaurant availability.
-     * Scheduled for deprecation on 2016-10-27 (use availabilities).
-     *
-     * @see Organization#availabilities
-     * @see com.wix.restaurants.Aspects#open
-     */
-    @Deprecated
+    /** Restaurant opening times. */
     @JsonInclude(Include.NON_DEFAULT)
     public Availability openTimes = new Availability();
 
