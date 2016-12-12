@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Cost implements Serializable, Comparable<Cost>, Cloneable  {
@@ -28,7 +25,7 @@ public class Cost implements Serializable, Comparable<Cost>, Cloneable  {
     public static final String COST_KEY_OTHER_ADWORDS = "adwords";
     public static final String COST_KEY_OTHER_DOMAIN = "domain";
     
-    public Cost(String type, String key, Map<String, String> title, Integer year, Integer month, Double priority, 
+    public Cost(String type, String key, Map<Locale, String> title, Integer year, Integer month, Double priority,
     		String amountRuleType, Integer amountRule, Integer minimum, Integer discountRule, Integer amount, Integer discount) {
     	this.type = type;
     	this.key = key;
@@ -76,7 +73,7 @@ public class Cost implements Serializable, Comparable<Cost>, Cloneable  {
     
     /** Optional cost title (multi-locale). */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title = new HashMap<>();
+    public Map<Locale, String> title = new HashMap<>();
     
     /** Year in which this cost was incurred (relevant mostly for one-time costs). */
     @JsonInclude(Include.NON_NULL)

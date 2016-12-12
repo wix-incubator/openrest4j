@@ -1,18 +1,19 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.Locale;
+import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Feature implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
     
-    public Feature(String id, Map<String, String> title, Map<String, String> description) {
+    public Feature(String id, Map<Locale, String> title, Map<Locale, String> description) {
     	this.id = id;
     	this.title = title;
     	this.description = description;
@@ -24,8 +25,8 @@ public class Feature implements Serializable, Cloneable {
     @Override
 	public Object clone() {
 		return new Feature(id,
-				(title != null) ? new HashMap<String, String>(title) : null,
-				(description != null) ? new HashMap<String, String>(description) : null);
+				(title != null) ? new LinkedHashMap<>(title) : null,
+				(description != null) ? new LinkedHashMap<>(description) : null);
 	}
     
 	@Override
@@ -70,8 +71,8 @@ public class Feature implements Serializable, Cloneable {
     public String id;
 
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title = new HashMap<String, String>();
+    public Map<Locale, String> title = new LinkedHashMap<>();
 
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> description = new HashMap<String, String>();
+    public Map<Locale, String> description = new LinkedHashMap<>();
 }

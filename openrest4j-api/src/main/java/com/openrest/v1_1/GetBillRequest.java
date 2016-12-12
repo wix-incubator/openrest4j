@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.restaurants.availability.Date;
 
+import java.util.Locale;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GetBillRequest extends Request {
 	public static final String TYPE = "get_bill";
@@ -13,7 +15,7 @@ public class GetBillRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public GetBillRequest() {}
     
-    public GetBillRequest(String accessToken, String organizationId, Date forDate, String locale) {
+    public GetBillRequest(String accessToken, String organizationId, Date forDate, Locale locale) {
     	this.accessToken = accessToken;
     	this.organizationId = organizationId;
     	this.forDate = forDate;
@@ -31,5 +33,5 @@ public class GetBillRequest extends Request {
     
     /** For Bill.html, if null Organization.locale will be used. */
     @JsonInclude(Include.NON_NULL)
-	public String locale;
+	public Locale locale;
 }
