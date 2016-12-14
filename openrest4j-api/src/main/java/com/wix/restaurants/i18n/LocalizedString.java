@@ -25,6 +25,10 @@ public class LocalizedString implements Serializable, Cloneable {
     /** Default constructor for JSON deserialization. */
     public LocalizedString() {}
 
+    public String get(Locale locale) {
+        return localized.get(locale);
+    }
+
     public Map<Locale, String> getLocalized() {
         return localized;
     }
