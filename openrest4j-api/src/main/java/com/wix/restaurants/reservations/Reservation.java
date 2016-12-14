@@ -5,10 +5,14 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.openrest.v1_1.Contact;
 import com.openrest.v1_1.User;
+import com.wix.restaurants.i18n.Locale;
 import com.wix.restaurants.reservations.log.LogEntry;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A table reservation.

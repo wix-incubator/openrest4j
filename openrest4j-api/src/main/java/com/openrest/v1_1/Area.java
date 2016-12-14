@@ -1,18 +1,21 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.wix.restaurants.i18n.LocalizedString;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /** An area on a map. */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Area implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
 	
-	public Area(Map<Locale, String> title, List<LatLng> polygon) {
+	public Area(LocalizedString title, List<LatLng> polygon) {
     	this.title = title;
     	this.polygon = polygon;
     }
@@ -33,13 +36,13 @@ public class Area implements Serializable, Cloneable {
     	}
     	
     	return new Area(
-    			((title != null) ? new LinkedHashMap<>(title) : null),
+    			((title != null) ? (LocalizedString) title.clone()  : null),
     			clonedPolygon);
 	}
     
     /** The area's human-readable title in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<Locale, String> title = new LinkedHashMap<>();
+    public LocalizedString title = LocalizedString.empty;
     
     /** The area (polygon vertices). */
     @JsonInclude(Include.NON_DEFAULT)

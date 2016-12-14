@@ -1,17 +1,15 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.wix.restaurants.i18n.LocalizedString;
+
+import java.io.Serializable;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderConfirmation implements Serializable {
-    public OrderConfirmation(Order order, Map<Locale, String> message) {
+    public OrderConfirmation(Order order, LocalizedString message) {
         this.order = order;
         this.message = message;
     }
@@ -25,7 +23,7 @@ public class OrderConfirmation implements Serializable {
 
     /** The restaurant's confirmation message in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<Locale, String> message = new HashMap<>();
+    public LocalizedString message = LocalizedString.empty;
     
     private static final long serialVersionUID = 1L;
 }

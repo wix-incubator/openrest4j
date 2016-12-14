@@ -3,6 +3,7 @@ package com.openrest.v1_1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.wix.restaurants.i18n.LocalizedString;
 
 import java.io.Serializable;
 import java.util.*;
@@ -11,7 +12,7 @@ import java.util.*;
 public class PortalMenuCategory implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
     
-    public PortalMenuCategory(Map<Locale, String> title, Map<Locale, String> description,
+    public PortalMenuCategory(LocalizedString title, LocalizedString description,
 							  List<PortalMenuCategory> children, Set<String> features, Map<String, String> properties) {
     	this.title = title;
     	this.description = description;
@@ -39,8 +40,8 @@ public class PortalMenuCategory implements Serializable, Cloneable {
     @Override
 	public Object clone() {
     	return new PortalMenuCategory(
-    			((title != null) ? new LinkedHashMap<>(title) : null),
-    			((description != null) ? new LinkedHashMap<>(description) : null),
+    			((title != null) ? (LocalizedString) title.clone()  : null),
+    			((description != null) ? (LocalizedString) description.clone() : null),
     			cloneList(children),
     			((features != null) ? new LinkedHashSet<>(features) : null),
     			((properties != null) ? new LinkedHashMap<>(properties) : null));
@@ -108,11 +109,11 @@ public class PortalMenuCategory implements Serializable, Cloneable {
 	
     /** Localized title. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<Locale, String> title = new LinkedHashMap<>();
+    public LocalizedString title = LocalizedString.empty;
 
     /** Localized description. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<Locale, String> description = new LinkedHashMap<>();
+    public LocalizedString description = LocalizedString.empty;
 
     /** Sub-categories. */
     @JsonInclude(Include.NON_DEFAULT)

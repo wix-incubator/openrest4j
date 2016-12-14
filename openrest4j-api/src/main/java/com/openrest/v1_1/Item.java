@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.restaurants.availability.Availability;
+import com.wix.restaurants.i18n.Locale;
+import com.wix.restaurants.i18n.LocalizedString;
 
 import java.io.Serializable;
 import java.util.*;
@@ -20,11 +22,11 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
 	public static final String LABEL_FEATURED = "featured";
     
 	/** Constructs a previously submitted item from persisted data. */
-    public Item(String id, String restaurantId, Map<Locale, String> title,
-    		Map<Locale, String> description, Integer price, List<Variation> variations,
-    		Availability availability, String picture, Map<String, Blob> blobs,
-    		Map<String, String> externalIds, Set<String> labels,
-    		Map<String, String> properties, Stock stock, Double rank) {
+    public Item(String id, String restaurantId, LocalizedString title,
+				LocalizedString description, Integer price, List<Variation> variations,
+				Availability availability, String picture, Map<String, Blob> blobs,
+				Map<String, String> externalIds, Set<String> labels,
+				Map<String, String> properties, Stock stock, Double rank) {
         this.id = id;
         this.restaurantId = restaurantId;
         this.title = title;
@@ -59,8 +61,8 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     @Override
 	public Object clone() {
     	return new Item(id, restaurantId,
-    			((title != null) ? new LinkedHashMap<>(title) : null),
-    			((description != null) ? new LinkedHashMap<>(description) : null),
+    			((title != null) ? (LocalizedString) title.clone() : null),
+    			((description != null) ? (LocalizedString) description.clone() : null),
     			price, Variation.clone(variations),
     			((availability != null) ? (Availability) availability.clone() : null),
     			picture,
@@ -81,11 +83,11 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
 
     /** The item's title in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<Locale, String> title = new LinkedHashMap<>();
+    public LocalizedString title = LocalizedString.empty;
 
     /** The item's one line description in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<Locale, String> description = new LinkedHashMap<>();
+    public LocalizedString description = LocalizedString.empty;
 
     /** The item's price, in "cents". */
     @JsonInclude(Include.NON_DEFAULT)

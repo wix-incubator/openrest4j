@@ -4,15 +4,19 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.restaurants.availability.Availability;
+import com.wix.restaurants.i18n.LocalizedString;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MenuSection implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
 
-    public MenuSection(String id, Map<Locale, String> title, Map<Locale, String> description,
+    public MenuSection(String id, LocalizedString title, LocalizedString description,
                        List<MenuSection> children, List<String> itemIds, Availability availability,
                        Map<String, Blob> blobs, Map<String, String> properties) {
         this.id = id;
@@ -31,8 +35,8 @@ public class MenuSection implements Serializable, Cloneable {
     @Override
     public Object clone() {
         return new MenuSection(id,
-                ((title != null) ? new LinkedHashMap<>(title) : null),
-                ((description != null) ? new LinkedHashMap<>(description) : null),
+                ((title != null) ? (LocalizedString) title.clone()  : null),
+                ((description != null) ? (LocalizedString) description.clone() : null),
                 clone(children),
                 ((itemIds != null) ? new LinkedList<>(itemIds) : null),
                 ((availability != null) ? (Availability) availability.clone() : null),
@@ -89,11 +93,11 @@ public class MenuSection implements Serializable, Cloneable {
 
     /** The category's title in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<Locale, String> title = new LinkedHashMap<>();
+    public LocalizedString title = LocalizedString.empty;
 
     /** The category's description in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<Locale, String> description = new LinkedHashMap<>();
+    public LocalizedString description = LocalizedString.empty;
 
     /** Sub sections. */
     @JsonInclude(Include.NON_DEFAULT)

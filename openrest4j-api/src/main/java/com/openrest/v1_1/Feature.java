@@ -3,17 +3,15 @@ package com.openrest.v1_1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.wix.restaurants.i18n.LocalizedString;
 
 import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.Locale;
-import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Feature implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
     
-    public Feature(String id, Map<Locale, String> title, Map<Locale, String> description) {
+    public Feature(String id, LocalizedString title, LocalizedString description) {
     	this.id = id;
     	this.title = title;
     	this.description = description;
@@ -25,8 +23,8 @@ public class Feature implements Serializable, Cloneable {
     @Override
 	public Object clone() {
 		return new Feature(id,
-				(title != null) ? new LinkedHashMap<>(title) : null,
-				(description != null) ? new LinkedHashMap<>(description) : null);
+				(title != null) ? (LocalizedString) title.clone() : null,
+				(description != null) ? (LocalizedString) description.clone() : null);
 	}
     
 	@Override
@@ -71,8 +69,8 @@ public class Feature implements Serializable, Cloneable {
     public String id;
 
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<Locale, String> title = new LinkedHashMap<>();
+    public LocalizedString title = LocalizedString.empty;
 
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<Locale, String> description = new LinkedHashMap<>();
+    public LocalizedString description = LocalizedString.empty;
 }

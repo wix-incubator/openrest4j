@@ -3,8 +3,8 @@ package com.openrest.v1_1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.wix.restaurants.i18n.Locale;
 
-import java.util.Locale;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ResetPasswordRequest extends Request {

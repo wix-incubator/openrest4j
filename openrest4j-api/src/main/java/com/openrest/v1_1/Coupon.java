@@ -1,11 +1,12 @@
 package com.openrest.v1_1;
- 
-import java.io.Serializable;
-import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.wix.restaurants.i18n.LocalizedString;
+
+import java.io.Serializable;
+import java.util.*;
  
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Coupon implements Serializable, Cloneable {
@@ -20,7 +21,7 @@ public class Coupon implements Serializable, Cloneable {
     public static final Set<String> ALL_COUPON_TYPES = new HashSet<String>(
     		Arrays.asList(COUPON_TYPE_DISCOUNT, COUPON_TYPE_M_PLUS_N));
    
-    public Coupon(String type, Map<Locale, String> title, Map<Locale, String> description,
+    public Coupon(String type, LocalizedString title, LocalizedString description,
 				  Integer maxNumAllowed, Boolean othersAllowed, Map<String, String> properties) {
     	this.type = type;
     	this.title = title;
@@ -36,8 +37,8 @@ public class Coupon implements Serializable, Cloneable {
     @Override
 	public Object clone() {
     	return new Coupon(type,
-    			((title != null) ? new LinkedHashMap<>(title) : null),
-    			((description != null) ? new LinkedHashMap<>(description) : null),
+    			((title != null) ? (LocalizedString) title.clone() : null),
+    			((description != null) ? (LocalizedString) description.clone()  : null),
     			maxNumAllowed, othersAllowed,
     			((properties != null) ? new LinkedHashMap<>(properties) : null));
 	}
@@ -48,11 +49,11 @@ public class Coupon implements Serializable, Cloneable {
    
     /** The coupon's user-friendly short name in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<Locale, String> title = new LinkedHashMap<>();
+    public LocalizedString title = LocalizedString.empty;
     
     /** The coupon's user-friendly description in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<Locale, String> description = new LinkedHashMap<>();
+    public LocalizedString description = LocalizedString.empty;
     
     /** Maximum number of times this coupon can be used in a single order. */
     @JsonInclude(Include.NON_DEFAULT)
@@ -67,7 +68,7 @@ public class Coupon implements Serializable, Cloneable {
      * keys, e.g. "com.googlecode.openrestext".
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> properties = new LinkedHashMap<String, String>();
+    public Map<String, String> properties = new LinkedHashMap<>();
     
     @Override
 	public int hashCode() {

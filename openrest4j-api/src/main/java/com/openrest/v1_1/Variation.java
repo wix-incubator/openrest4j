@@ -3,6 +3,7 @@ package com.openrest.v1_1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.wix.restaurants.i18n.LocalizedString;
 
 import java.io.Serializable;
 import java.util.*;
@@ -25,9 +26,9 @@ public class Variation implements Serializable, Cloneable {
     public static final Set<String> ALL_VARIATION_DISPLAY_TYPES = new HashSet<>(
     		Arrays.asList(VARIATION_DISPLAY_TYPE_DIFF, VARIATION_DISPLAY_TYPE_CHOICE, VARIATION_DISPLAY_TYPE_HIDDEN));
 
-    public Variation(Map<Locale, String> title, List<String> itemIds, Integer minNumAllowed,
-    		Integer maxNumAllowed, Map<String, Integer> prices, Set<String> defaults, String displayType,
-            Map<String, String> properties) {
+    public Variation(LocalizedString title, List<String> itemIds, Integer minNumAllowed,
+                     Integer maxNumAllowed, Map<String, Integer> prices, Set<String> defaults, String displayType,
+                     Map<String, String> properties) {
         this.title = title;
         this.itemIds = itemIds;
         this.minNumAllowed = minNumAllowed;
@@ -44,7 +45,7 @@ public class Variation implements Serializable, Cloneable {
     @Override
 	public Object clone() {
     	final Variation cloned = new Variation(
-    			((title != null) ? new LinkedHashMap<>(title) : null),
+    			((title != null) ? (LocalizedString) title.clone() : null),
     			((itemIds != null) ? new LinkedList<>(itemIds) : null),
     			minNumAllowed, maxNumAllowed,
     			((prices != null) ? new LinkedHashMap<>(prices) : null),
@@ -69,7 +70,7 @@ public class Variation implements Serializable, Cloneable {
 
     /** The variations's name in various locales, e.g. "sides", "degree of cooking". */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<Locale, String> title = new LinkedHashMap<>();
+    public LocalizedString title = LocalizedString.empty;
 
     /** The set's name, e.g. "drink", "sides". */
     @JsonInclude(Include.NON_NULL)

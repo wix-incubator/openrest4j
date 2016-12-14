@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.openrest.olo.dispatches.DispatchInfo;
 import com.wix.restaurants.availability.Availability;
+import com.wix.restaurants.i18n.Locale;
+import com.wix.restaurants.i18n.LocalizedString;
 import com.wix.restaurants.reservations.ReservationsInfo;
 
 import java.util.*;
@@ -14,9 +16,9 @@ public class SearchResult extends Restaurant {
     private static final long serialVersionUID = 1L;
     
     public SearchResult(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
-                        String distributorId, String chainId, Map<Locale, String> title,
-                        Map<Locale, String> description, Contact contact, Map<String, Contact> externalContacts, Address address,
-                        Map<String, Map<Locale, String>> messages, ColorScheme colorScheme,
+                        String distributorId, String chainId, LocalizedString title,
+                        LocalizedString description, Contact contact, Map<String, Contact> externalContacts, Address address,
+                        Map<String, LocalizedString> messages, ColorScheme colorScheme,
                         Availability openTimes, Availability deliveryTimes,
                         List<DispatchInfo> deliveryInfos, Integer maxFutureOrderDelayMins,
                         String timezone, String currency, Locale locale, Set<Locale> locales,

@@ -66,5 +66,11 @@
         </dependency>
 
         <!-- Test Dependencies -->
+        <dependency>
+            <groupId>com.wix.restaurants</groupId>
+            <artifactId>wix-restaurants-json</artifactId>
+            <version>${com.wix.restaurants.json.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

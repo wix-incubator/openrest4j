@@ -3,6 +3,7 @@ package com.openrest.v1_1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.wix.restaurants.i18n.Locale;
 
 import java.io.Serializable;
 import java.util.*;
@@ -31,8 +32,8 @@ public class AppBuildInfo implements Serializable, Cloneable {
     		STATE_OPERATIONAL, STATE_DEPRECATED, STATE_REMOVED, STATE_ERROR));
 	
     public AppBuildInfo(String id, Date created, Date modified, String distributorId, String ownerId, String type, String link,
-    		AppId appId, String internalId, String filename, String locale, Map<String, String> title,
-    		Map<String, String> description, Map<String, AppstoreInfo> storeInfos, Map<String, String> properties,
+    		AppId appId, String internalId, String filename, Locale locale, Map<Locale, String> title,
+    		Map<Locale, String> description, Map<String, AppstoreInfo> storeInfos, Map<String, String> properties,
     		Map<String, Blob> blobs, String state, List<LogEntry> log) {
     	this.id = id;
     	this.created = created;
@@ -147,15 +148,15 @@ public class AppBuildInfo implements Serializable, Cloneable {
     
     /** Base locale of the app. */
     @JsonInclude(Include.NON_NULL)
-    public String locale;
+    public Locale locale;
     
     /** The app's build (not appstore!) title in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title = new LinkedHashMap<>();
+    public Map<Locale, String> title = new LinkedHashMap<>();
     
     /** The app's build (not appstore!) description in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> description = new LinkedHashMap<>();
+    public Map<Locale, String> description = new LinkedHashMap<>();
     
     /** Appstore information in different locales. */
     @JsonInclude(Include.NON_DEFAULT)

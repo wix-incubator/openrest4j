@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.openrest.olo.charges.conditions.Condition;
 import com.openrest.olo.charges.operators.Operator;
 import com.openrest.v1_1.State;
+import com.wix.restaurants.i18n.LocalizedString;
 
 import java.io.Serializable;
 import java.util.*;
@@ -39,9 +40,9 @@ public class Charge implements Serializable, Cloneable {
 	/** Default constructor for JSON deserialization. */
     public Charge() {}
     
-    public Charge(String type, String id, String organizationId, Map<Locale, String> title, Map<Locale, String> description,
-    		Condition displayCondition, Condition condition, Operator operator, String state, Boolean mandatory,
-    		Map<String, String> properties) {
+    public Charge(String type, String id, String organizationId, LocalizedString title, LocalizedString description,
+                  Condition displayCondition, Condition condition, Operator operator, String state, Boolean mandatory,
+                  Map<String, String> properties) {
         this.type = type;
     	this.id = id;
     	this.organizationId = organizationId;
@@ -58,8 +59,8 @@ public class Charge implements Serializable, Cloneable {
     @Override
 	public Object clone() {
     	return new Charge(type, id, organizationId,
-    			((title != null) ? new LinkedHashMap<>(title) : null),
-    			((description != null) ? new LinkedHashMap<>(description) : null),
+    			((title != null) ? (LocalizedString) title.clone() : null),
+    			((description != null) ?(LocalizedString) description.clone() : null),
     			((displayCondition != null) ? (Condition) displayCondition.clone() : null),
     			((condition != null) ? (Condition) condition.clone() : null),
     			((operator != null) ? (Operator) operator.clone() : null),
@@ -131,11 +132,11 @@ public class Charge implements Serializable, Cloneable {
     
     /** Title. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<Locale, String> title = new LinkedHashMap<>();
+    public LocalizedString title = LocalizedString.empty;
 
     /** Description. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<Locale, String> description = new LinkedHashMap<>();
+    public LocalizedString description = LocalizedString.empty;
     
     /** Condition to display the charge to end-users. */
     @JsonInclude(Include.NON_NULL)

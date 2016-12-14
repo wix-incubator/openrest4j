@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.restaurants.availability.Availability;
+import com.wix.restaurants.i18n.Locale;
+import com.wix.restaurants.i18n.LocalizedString;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -32,15 +34,15 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     public Organization() {}
     
     protected Organization(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
-    		Map<Locale, String> title, Map<Locale, String> description,
-    		Locale locale, Set<Locale> locales, Map<String, Map<Locale, String>> messages, ColorScheme colorScheme,
-    		Contact contact, Map<String, Contact> externalContacts,
-    		Address address, String timezone, String currency,
-    		String link, String domain, Set<String> altDomains,
-    		List<AppInfo> apps, Seo seo, Map<String, String> properties,
-            Map<String, String> compatibilities, Map<String, Availability> availabilities,
-    		String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
-    		String state, Boolean closed, String virtualId, Boolean inactive, Set<Product> products, Double rank) {
+                           LocalizedString title, LocalizedString description,
+                           Locale locale, Set<Locale> locales, Map<String, LocalizedString> messages, ColorScheme colorScheme,
+                           Contact contact, Map<String, Contact> externalContacts,
+                           Address address, String timezone, String currency,
+                           String link, String domain, Set<String> altDomains,
+                           List<AppInfo> apps, Seo seo, Map<String, String> properties,
+                           Map<String, String> compatibilities, Map<String, Availability> availabilities,
+                           String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
+                           String state, Boolean closed, String virtualId, Boolean inactive, Set<Product> products, Double rank) {
 
     	this.id = id;
     	this.alias = alias;
@@ -83,14 +85,14 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     @Override
 	public abstract Object clone();
     
-    protected static Map<String, Map<Locale, String>> cloneMessages(Map<String, Map<Locale, String>> messages) {
+    protected static Map<String, LocalizedString> cloneMessages(Map<String, LocalizedString> messages) {
     	if (messages == null) {
     		return null;
     	}
     	
-    	final Map<String, Map<Locale, String>> cloned = new LinkedHashMap<>(messages.size());
-		for (Entry<String, Map<Locale, String>> entry : messages.entrySet()) {
-			cloned.put(entry.getKey(), (entry.getValue() != null) ? new LinkedHashMap<>(entry.getValue()) : null);
+    	final Map<String, LocalizedString> cloned = new LinkedHashMap<>(messages.size());
+		for (Entry<String, LocalizedString> entry : messages.entrySet()) {
+			cloned.put(entry.getKey(), (entry.getValue() != null) ? (LocalizedString) entry.getValue().clone() : null);
 		}
 		return cloned;
     }
@@ -126,11 +128,11 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     
     /** The organization's title in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<Locale, String> title = new LinkedHashMap<>();
+    public LocalizedString title = LocalizedString.empty;
 
     /** The organization's description or tagline in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<Locale, String> description = new LinkedHashMap<>();
+    public LocalizedString description = LocalizedString.empty;
     
     /** The color scheme. */
     @JsonInclude(Include.NON_NULL)
@@ -179,7 +181,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
      * The text may contain simple HTML formatting.
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, Map<Locale, String>> messages = new LinkedHashMap<>();
+    public Map<String, LocalizedString> messages = new LinkedHashMap<>();
     
     /** The organization's main web-site URL. */
     @JsonInclude(Include.NON_NULL)

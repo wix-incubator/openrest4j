@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.restaurants.availability.Availability;
+import com.wix.restaurants.i18n.Locale;
+import com.wix.restaurants.i18n.LocalizedString;
 
 import java.util.*;
 
@@ -17,14 +19,14 @@ public class Chain extends Organization {
     public Chain() {}
     
     public Chain(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
-    		String distributorId, Map<Locale, String> title, Map<Locale, String> description,
-    		Locale locale, Set<Locale> locales, Map<String, Map<Locale, String>> messages, ColorScheme colorScheme,
-    		Contact contact, Map<String, Contact> externalContacts, Address address, String timezone, String currency,
-    		String link, String domain, Set<String> altDomains,
-    		List<AppInfo> apps, Seo seo, Map<String, String> properties,
-			Map<String, String> compatibilities, Map<String, Availability> availabilities,
-    		String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
-    		String state, Boolean closed, String virtualId, Boolean inactive, Set<Product> products, Double rank) {
+				 String distributorId, LocalizedString title, LocalizedString description,
+				 Locale locale, Set<Locale> locales, Map<String, LocalizedString> messages, ColorScheme colorScheme,
+				 Contact contact, Map<String, Contact> externalContacts, Address address, String timezone, String currency,
+				 String link, String domain, Set<String> altDomains,
+				 List<AppInfo> apps, Seo seo, Map<String, String> properties,
+				 Map<String, String> compatibilities, Map<String, Availability> availabilities,
+				 String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
+				 String state, Boolean closed, String virtualId, Boolean inactive, Set<Product> products, Double rank) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties,
 				compatibilities, availabilities, picture, icon, wideLogo, noImagePicture, blobs, state, closed, virtualId, inactive, products, rank);
@@ -39,8 +41,8 @@ public class Chain extends Organization {
 				(created != null) ? (Date) created.clone() : null,
 				(modified != null) ? (Date) modified.clone() : null,
 				distributorId,
-    			((title != null) ? new LinkedHashMap<>(title) : null),
-    			((description != null) ? new LinkedHashMap<>(description) : null),
+    			((title != null) ? (LocalizedString) title.clone() : null),
+    			((description != null) ? (LocalizedString) description.clone() : null),
     			locale,
     			((locales != null) ? new LinkedHashSet<>(locales) : null),
     			cloneMessages(messages),

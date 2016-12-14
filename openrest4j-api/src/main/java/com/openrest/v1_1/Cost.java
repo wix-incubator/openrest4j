@@ -3,9 +3,11 @@ package com.openrest.v1_1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.wix.restaurants.i18n.LocalizedString;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Cost implements Serializable, Comparable<Cost>, Cloneable  {
@@ -25,8 +27,8 @@ public class Cost implements Serializable, Comparable<Cost>, Cloneable  {
     public static final String COST_KEY_OTHER_ADWORDS = "adwords";
     public static final String COST_KEY_OTHER_DOMAIN = "domain";
     
-    public Cost(String type, String key, Map<Locale, String> title, Integer year, Integer month, Double priority,
-    		String amountRuleType, Integer amountRule, Integer minimum, Integer discountRule, Integer amount, Integer discount) {
+    public Cost(String type, String key, LocalizedString title, Integer year, Integer month, Double priority,
+                String amountRuleType, Integer amountRule, Integer minimum, Integer discountRule, Integer amount, Integer discount) {
     	this.type = type;
     	this.key = key;
     	this.title = title;
@@ -47,7 +49,7 @@ public class Cost implements Serializable, Comparable<Cost>, Cloneable  {
     @Override
 	public Object clone() {
     	return new Cost(type, key,
-    			((title != null) ? new HashMap<>(title) : null),
+    			((title != null) ? (LocalizedString) title.clone() : null),
     			year, month, priority, amountRuleType, amountRule, minimum, discountRule, amount, discount);
 	}
     
@@ -73,7 +75,7 @@ public class Cost implements Serializable, Comparable<Cost>, Cloneable  {
     
     /** Optional cost title (multi-locale). */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<Locale, String> title = new HashMap<>();
+    public LocalizedString title = LocalizedString.empty;
     
     /** Year in which this cost was incurred (relevant mostly for one-time costs). */
     @JsonInclude(Include.NON_NULL)
