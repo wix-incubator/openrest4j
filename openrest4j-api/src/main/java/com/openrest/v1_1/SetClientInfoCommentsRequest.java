@@ -1,11 +1,11 @@
 package com.openrest.v1_1;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SetClientInfoCommentsRequest extends Request {
@@ -28,5 +28,5 @@ public class SetClientInfoCommentsRequest extends Request {
     public ClientId clientId;
     
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> comments = new HashMap<String, String>();
+    public Map<String, String> comments = new LinkedHashMap<>();
 }
