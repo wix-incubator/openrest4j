@@ -14,7 +14,7 @@ import java.util.Map;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LocalizedString implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
-    public static LocalizedString empty = new LocalizedString(Collections.<Locale, String>emptyMap());
+    public static final LocalizedString empty = new LocalizedString(Collections.<Locale, String>emptyMap());
 
     private Map<Locale, String> localized;
 
