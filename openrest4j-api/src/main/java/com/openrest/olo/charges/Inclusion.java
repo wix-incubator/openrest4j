@@ -13,7 +13,7 @@ public class Inclusion {
     public static final String TYPE_EXCLUDE = "exclude";
     
     /** All known modes. */
-    public static final Set<String> ALL_TYPES = new HashSet<String>(Arrays.asList(
+    public static final Set<String> ALL_TYPES = new HashSet<>(Arrays.asList(
     		TYPE_INCLUDE, TYPE_EXCLUDE
     ));
 }
