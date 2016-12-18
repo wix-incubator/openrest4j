@@ -1,17 +1,12 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.wix.restaurants.i18n.LocalizedString;
+
+import java.io.Serializable;
+import java.util.*;
 
 /** A set of items that go together, e.g. "sides", "drinks", "toppings". */
 @Deprecated
@@ -25,13 +20,12 @@ public class Tag implements Serializable, Cloneable {
     public static final String TAG_MODE_EXCLUDE = "exclude";
     
     /** All known tag modes */
-    public static final Set<String> ALL_TAG_MODES = new HashSet<String>(Arrays.asList(new String[] {
+    public static final Set<String> ALL_TAG_MODES = new HashSet<>(Arrays.asList(new String[] {
     		TAG_MODE_INCLUDE, TAG_MODE_EXCLUDE
     }));
 	
     /** Constructs a previously submitted tag from persisted data. */
-    public Tag(String id, String restaurantId, Map<String, String> title,
-    		List<String> itemIds, Map<String, String> properties) {
+    public Tag(String id, String restaurantId, LocalizedString title, List<String> itemIds, Map<String, String> properties) {
         this.id = id;
         this.restaurantId = restaurantId;
         this.title = title;
@@ -44,7 +38,7 @@ public class Tag implements Serializable, Cloneable {
     		return null;
     	}
     	
-    	final List<Tag> cloned = new LinkedList<Tag>();
+    	final List<Tag> cloned = new LinkedList<>();
     	for (Tag tag : tags) {
     		cloned.add((tag != null) ? (Tag) tag.clone() : null);
     	}
@@ -54,9 +48,9 @@ public class Tag implements Serializable, Cloneable {
     @Override
 	public Object clone() {
     	return new Tag(id, restaurantId,
-    			((title != null) ? new HashMap<String, String>(title) : null),
-    			new LinkedList<String>(itemIds),
-    			((properties != null) ? new HashMap<String, String>(properties) : null));
+    			(title != null) ? (LocalizedString) title.clone() : null,
+				(itemIds != null) ? new LinkedList<>(itemIds) : null,
+    			(properties != null) ? new LinkedHashMap<>(properties) : null);
 	}
 
     /** Default constructor for JSON deserialization. */
@@ -72,18 +66,18 @@ public class Tag implements Serializable, Cloneable {
 
     /** The tag's name in various locales, e.g. "drink", "sides". */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title = new HashMap<String, String>();
+    public LocalizedString title = LocalizedString.empty;
 
     /** Item ids. */
     @JsonInclude(Include.NON_DEFAULT)
-    public List<String> itemIds = new LinkedList<String>();
+    public List<String> itemIds = new LinkedList<>();
 
     /**
      * Map of user-defined extended properties. Developers should use unique
      * keys, e.g. "com.googlecode.openrestext".
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> properties = new HashMap<String, String>();
+    public Map<String, String> properties = new LinkedHashMap<>();
     
     @Override
 	public int hashCode() {
