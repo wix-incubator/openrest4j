@@ -1,11 +1,12 @@
 package com.openrest.olo.users;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.wix.restaurants.i18n.LocalizedString;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /** Group based on knowing the secret code. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -16,8 +17,8 @@ public class CodeGroup extends Group {
     /** Default constructor for JSON deserialization. */
     public CodeGroup() {}
     
-    public CodeGroup(String id, Map<String, String> title, Map<String, String> description,
-    		String code, String codeHash, Map<String, String> properties) {
+    public CodeGroup(String id, LocalizedString title, LocalizedString description,
+					 String code, String codeHash, Map<String, String> properties) {
     	super(id, title, description, properties);
     	this.code = code;
     	this.codeHash = codeHash;
@@ -26,10 +27,10 @@ public class CodeGroup extends Group {
 	@Override
 	public Object clone() {
 		return new CodeGroup(id,
-			((title != null) ? new LinkedHashMap<String, String>(title) : null),
-			((description != null) ? new LinkedHashMap<String, String>(description) : null),
+			(title != null) ? (LocalizedString) title.clone() : null,
+            (description != null) ? (LocalizedString) description.clone() : null,
 			code, codeHash,
-			((properties != null) ? new LinkedHashMap<String, String>(properties) : null));
+			((properties != null) ? new LinkedHashMap<>(properties) : null));
 	}
 	
 	/** The group's secret code. */

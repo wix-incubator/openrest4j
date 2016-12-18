@@ -1,18 +1,15 @@
 package com.openrest.olo.users;
 
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.wix.restaurants.i18n.LocalizedString;
+
+import java.io.Serializable;
+import java.util.*;
 
 /** A group of users, defined by some rule. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -35,14 +32,14 @@ public abstract class Group implements Serializable, Cloneable {
     public static final String GROUP_VIEW_MODE_MANAGER = "manager";
     
     /** All known group view modes. */
-    public static final Set<String> ALL_GROUP_VIEW_MODES = new HashSet<String>(Arrays.asList(new String[] {
+    public static final Set<String> ALL_GROUP_VIEW_MODES = new HashSet<>(Arrays.asList(new String[] {
     		GROUP_VIEW_MODE_ANYONE, GROUP_VIEW_MODE_MEMBER, GROUP_VIEW_MODE_MANAGER
     }));
     
     /** Default constructor for JSON deserialization. */
     public Group() {}
     
-    public Group(String id, Map<String, String> title, Map<String, String> description, Map<String, String> properties) {
+    public Group(String id, LocalizedString title, LocalizedString description, Map<String, String> properties) {
     	this.id = id;
     	this.title = title;
     	this.description = description;
@@ -58,16 +55,16 @@ public abstract class Group implements Serializable, Cloneable {
     
     /** The group's title in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> title = new LinkedHashMap<String, String>();
+    public LocalizedString title = LocalizedString.empty;
 
     /** The group's description in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> description = new LinkedHashMap<String, String>();
+    public LocalizedString description = LocalizedString.empty;
     
     /**
      * Map of user-defined extended properties. Developers should use unique
      * keys, e.g. "com.googlecode.openrestext".
      */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, String> properties = new LinkedHashMap<String, String>();
+    public Map<String, String> properties = new LinkedHashMap<>();
 }
