@@ -27,12 +27,10 @@ public class Menu implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	final Menu cloned = new Menu(
+    	return new Menu(
                 (modified != null) ? (Date) modified.clone() : null,
                 Item.clone(items), MenuSection.clone(sections),
                 com.openrest.olo.charges.Charge.clone(chargesV2), Charge.clone(charges));
-    	cloned.tags = Tag.clone(tags);
-    	return cloned;
 	}
 
     @Override
@@ -44,7 +42,6 @@ public class Menu implements Serializable, Cloneable {
 
         if (modified != null ? !modified.equals(menu.modified) : menu.modified != null) return false;
         if (items != null ? !items.equals(menu.items) : menu.items != null) return false;
-        if (tags != null ? !tags.equals(menu.tags) : menu.tags != null) return false;
         if (sections != null ? !sections.equals(menu.sections) : menu.sections != null) return false;
         if (chargesV2 != null ? !chargesV2.equals(menu.chargesV2) : menu.chargesV2 != null) return false;
         return !(charges != null ? !charges.equals(menu.charges) : menu.charges != null);
@@ -54,7 +51,6 @@ public class Menu implements Serializable, Cloneable {
     public int hashCode() {
         int result = modified != null ? modified.hashCode() : 0;
         result = 31 * result + (items != null ? items.hashCode() : 0);
-        result = 31 * result + (tags != null ? tags.hashCode() : 0);
         result = 31 * result + (sections != null ? sections.hashCode() : 0);
         result = 31 * result + (chargesV2 != null ? chargesV2.hashCode() : 0);
         result = 31 * result + (charges != null ? charges.hashCode() : 0);
@@ -69,11 +65,6 @@ public class Menu implements Serializable, Cloneable {
     @JsonInclude(Include.NON_DEFAULT)
     public List<Item> items = new LinkedList<>();
     
-    /** Scheduled for deprecation on 2014-04-01 (use Item.itemIds and Charge.itemIds) */
-    @Deprecated
-    @JsonInclude(Include.NON_DEFAULT)
-    public List<Tag> tags = new LinkedList<>();
-
     /** Top-level menu sections. */
     @JsonInclude(Include.NON_DEFAULT)
     public List<MenuSection> sections = new LinkedList<>();

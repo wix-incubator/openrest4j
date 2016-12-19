@@ -3,6 +3,7 @@ package com.openrest.olo.charges;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.wix.restaurants.Inclusions;
 
 import java.io.Serializable;
 import java.util.LinkedHashSet;
@@ -21,17 +22,17 @@ public class IdsFilter implements Serializable, Cloneable {
     }
     
     public static IdsFilter any() {
-    	return new IdsFilter(Inclusion.TYPE_EXCLUDE, new LinkedHashSet<String>());
+    	return new IdsFilter(Inclusions.exclude, new LinkedHashSet<String>());
     }
     
     public static IdsFilter none() {
-    	return new IdsFilter(Inclusion.TYPE_INCLUDE, new LinkedHashSet<String>());
+    	return new IdsFilter(Inclusions.include, new LinkedHashSet<String>());
     }
     
     @Override
 	public Object clone() {
     	return new IdsFilter(type,
-    			((ids != null) ? new LinkedHashSet<String>(ids) : null));
+    			((ids != null) ? new LinkedHashSet<>(ids) : null));
 	}
 
     @Override
@@ -53,8 +54,9 @@ public class IdsFilter implements Serializable, Cloneable {
         return result;
     }
 
+    /** @see Inclusions */
     @JsonInclude(Include.NON_DEFAULT)
-    public String type = Inclusion.TYPE_INCLUDE;
+    public String type = Inclusions.include;
 
     /** The ids. */
     @JsonInclude(Include.NON_NULL)

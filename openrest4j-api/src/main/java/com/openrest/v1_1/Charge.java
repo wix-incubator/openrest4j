@@ -3,6 +3,7 @@ package com.openrest.v1_1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.wix.restaurants.Inclusions;
 import com.wix.restaurants.availability.Availability;
 
 import java.io.Serializable;
@@ -39,16 +40,6 @@ public class Charge implements Serializable, Cloneable {
     		CHARGE_TYPE_DELIVERY, CHARGE_TYPE_COUPON, CHARGE_TYPE_CLUB_COUPON, CHARGE_TYPE_TAX,
     		CHARGE_TYPE_SERVICE, CHARGE_TYPE_TIP
     }));
-    
-	/** Inclusive: tag refers to given items. */
-	public static final String MODE_INCLUDE = "include";
-    /** Exclusive: tag refers to anything but the given items. */
-    public static final String MODE_EXCLUDE = "exclude";
-    
-    /** All known tag modes */
-    public static final Set<String> ALL_MODES = new HashSet<>(Arrays.asList(
-    		MODE_INCLUDE, MODE_EXCLUDE
-    ));
     
 	/** Amount rule is a fixed number that's added once to all applicable items. */
     public static final String AMOUNT_RULE_TYPE_FIXED = "fixed";
@@ -110,7 +101,7 @@ public class Charge implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	final Charge cloned = new Charge(id, restaurantId, type, priority, code, clubId, groupId,
+    	return new Charge(id, restaurantId, type, priority, code, clubId, groupId,
     			((itemIds != null) ? new LinkedHashSet<>(itemIds) : null),
     			mode, amountRuleType, amountRule,
     			((coupon != null) ? (Coupon) coupon.clone() : null),
@@ -120,11 +111,6 @@ public class Charge implements Serializable, Cloneable {
     			((deliveryTypes != null) ? new LinkedHashSet<>(deliveryTypes) : null),
     			amount, maxTimesPerUser,
     			((properties != null) ? new LinkedHashMap<>(properties) : null));
-    	
-    	cloned.tagId = tagId;
-    	cloned.tagMode = tagMode;
-    	
-    	return cloned;
 	}
 
     /** Unique charge id. */
@@ -164,23 +150,16 @@ public class Charge implements Serializable, Cloneable {
     @JsonInclude(Include.NON_NULL)
     public String groupId;
     
-    /** Scheduled for deprecation on 2014-04-01 (use itemIds instead) */
-    @Deprecated
-    @JsonInclude(Include.NON_NULL)
-    public String tagId;
-   
-    /** Scheduled for deprecation on 2014-04-01 (use mode instead) */
-    @Deprecated
-    @JsonInclude(Include.NON_DEFAULT)
-    public String tagMode = Tag.TAG_MODE_INCLUDE;
-    
     /** Items for which the charge applies, null if applies for every item. */
     @JsonInclude(Include.NON_NULL)
     public Set<String> itemIds;
     
-    /** Items mode: inclusive or exclusive. */
+    /**
+	 * Items mode: inclusive or exclusive.
+     * @see Inclusions
+	 */
     @JsonInclude(Include.NON_DEFAULT)
-    public String mode = MODE_INCLUDE;
+    public String mode = Inclusions.include;
     
     /** Charge amount rule type. */
     @JsonInclude(Include.NON_DEFAULT)
