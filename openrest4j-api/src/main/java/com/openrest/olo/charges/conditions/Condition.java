@@ -29,7 +29,7 @@ import java.util.Map;
 	@Type(value = UserRoleCondition.class, name = UserRoleCondition.TYPE),
 	@Type(value = UserChargeUsageCondition.class, name = UserChargeUsageCondition.TYPE),
 	@Type(value = OrderItemsPriceCondition.class, name = OrderItemsPriceCondition.TYPE),
-	@Type(value = OrderDeliveryTimeCondition.class, name = OrderDeliveryTimeCondition.TYPE),
+	@Type(value = OrderTimeCondition.class, name = OrderTimeCondition.TYPE),
 	@Type(value = OrderDeliveryTypeCondition.class, name = OrderDeliveryTypeCondition.TYPE),
 	@Type(value = OrderPlatformCondition.class, name = OrderPlatformCondition.TYPE),
 	@Type(value = OrderSourceCondition.class, name = OrderSourceCondition.TYPE)
