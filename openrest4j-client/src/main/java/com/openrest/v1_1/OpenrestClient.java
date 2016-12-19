@@ -1,9 +1,9 @@
 package com.openrest.v1_1;
 
-import java.io.IOException;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.api.client.http.HttpRequestFactory;
+
+import java.io.IOException;
 
 /** The Openrest client. */
 public class OpenrestClient {
