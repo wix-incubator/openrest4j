@@ -44,7 +44,7 @@ public class Variation implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	final Variation cloned = new Variation(
+    	return new Variation(
     			((title != null) ? (LocalizedString) title.clone() : null),
     			((itemIds != null) ? new LinkedList<>(itemIds) : null),
     			minNumAllowed, maxNumAllowed,
@@ -52,8 +52,6 @@ public class Variation implements Serializable, Cloneable {
     			((defaults != null) ? new LinkedHashSet<>(defaults) : null),
     			displayType,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
-    	cloned.tagId = tagId;
-    	return cloned;
 	}
     
     public static List<Variation> clone(List<Variation> variations) {
@@ -76,11 +74,6 @@ public class Variation implements Serializable, Cloneable {
     @JsonInclude(Include.NON_NULL)
     public List<String> itemIds = new LinkedList<>();
     
-    /** Scheduled for deprecation on 2014-04-01 (use itemIds instead) */
-    @Deprecated
-    @JsonInclude(Include.NON_NULL)
-    public String tagId;
-
     /** Minimum number of items to select. */
     @JsonInclude(Include.NON_DEFAULT)
     public Integer minNumAllowed = 0;
