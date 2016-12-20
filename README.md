@@ -17,7 +17,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.wix.openrest</groupId>
   <artifactId>openrest4j-client</artifactId>
-  <version>1.19.0</version>
+  <version>1.22.0</version>
 </dependency>
 ```
 
