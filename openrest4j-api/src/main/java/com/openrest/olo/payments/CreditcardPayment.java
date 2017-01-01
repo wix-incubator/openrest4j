@@ -19,14 +19,11 @@ public class CreditcardPayment extends Payment {
 
     public CreditcardPayment(Integer amount, Map<String, String> externalIds,
                              String collectionMethod, CreditCardToken cardToken,
-                             CreditCard card, String userId, String id, String password) {
+                             CreditCard card) {
         super(amount, externalIds);
         this.collectionMethod = collectionMethod;
         this.cardToken = cardToken;
         this.card = card;
-        this.userId = userId;
-        this.id = id;
-        this.password = password;
     }
 
     @Override
@@ -35,8 +32,7 @@ public class CreditcardPayment extends Payment {
                 ((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
                 collectionMethod,
                 cardToken,
-                ((card != null) ? (CreditCard) card.clone() : null),
-                userId, id, password);
+                ((card != null) ? (CreditCard) card.clone() : null));
     }
 
     @Override
@@ -50,11 +46,7 @@ public class CreditcardPayment extends Payment {
         if (externalIds != null ? !externalIds.equals(that.externalIds) : that.externalIds != null) return false;
         if (collectionMethod != null ? !collectionMethod.equals(that.collectionMethod) : that.collectionMethod != null) return false;
         if (cardToken != null ? !cardToken.equals(that.cardToken) : that.cardToken != null) return false;
-        if (card != null ? !card.equals(that.card) : that.card != null) return false;
-        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        return !(password != null ? !password.equals(that.password) : that.password != null);
-
+        return !(card != null ? !card.equals(that.card) : that.card != null);
     }
 
     @Override
@@ -64,9 +56,6 @@ public class CreditcardPayment extends Payment {
         result = 31 * result + (collectionMethod != null ? collectionMethod.hashCode() : 0);
         result = 31 * result + (cardToken != null ? cardToken.hashCode() : 0);
         result = 31 * result + (card != null ? card.hashCode() : 0);
-        result = 31 * result + (userId != null ? userId.hashCode() : 0);
-        result = 31 * result + (id != null ? id.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
     }
 
@@ -82,23 +71,7 @@ public class CreditcardPayment extends Payment {
     public CreditCardToken cardToken;
 
     /** Credit card details (will be deprecated 2015-08-01). */
+    @Deprecated
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public CreditCard card;
-
-    /** The user's Facebook id (for saved payments). */
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    public String userId;
-
-    /** Payment unique id (for saved payments). */
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    public String id;
-
-    /**
-     * Optional user-defined password for protecting against unauthorized usage (for saved payments).
-     *
-     * For anonymized saved payments, this would either be missing (null) to indicate
-     * no password, or empty ("") to indicate a password exists and was anonymized.
-     */
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    public String password;
 }
