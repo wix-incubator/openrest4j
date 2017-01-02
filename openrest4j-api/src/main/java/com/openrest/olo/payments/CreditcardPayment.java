@@ -60,8 +60,8 @@ public class CreditcardPayment extends Payment {
     }
 
     /**
-     * Credit card collection method.
-     * @see com.openrest.v1_1.CreditcardsInfo#ALL_COLLECTION_METHODS
+     * Card collection method.
+     * @see com.wix.restaurants.CollectionMethods
      */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public String collectionMethod;
