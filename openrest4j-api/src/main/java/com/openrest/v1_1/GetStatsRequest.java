@@ -50,7 +50,8 @@ public class GetStatsRequest extends Request {
 
     @JsonInclude(Include.NON_NULL)
     public Date until;
-    
+
+    /** @see com.wix.restaurants.Granularities */
     @JsonInclude(Include.NON_NULL)
     public String granularity;
     
