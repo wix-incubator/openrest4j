@@ -6,23 +6,14 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.restaurants.availability.Date;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Stats implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
     
-    public static final String STATS_GRANULARITY_DAY = "day";
-    public static final String STATS_GRANULARITY_WEEK = "week";
-    public static final String STATS_GRANULARITY_MONTH = "month";
-    public static final String STATS_GRANULARITY_YEAR = "year";
-    
-    /** All known stats granularities. */
-    public static final Set<String> ALL_STATS_GRANULARITIES = new HashSet<>(Arrays.asList(new String[] {
-    		STATS_GRANULARITY_DAY, STATS_GRANULARITY_WEEK, STATS_GRANULARITY_MONTH, STATS_GRANULARITY_YEAR
-    }));
-
     public Stats(Date date, Integer count, Long total) {
         this.date = date;
         this.count = count;
