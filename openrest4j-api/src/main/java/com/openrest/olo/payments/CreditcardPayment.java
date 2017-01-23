@@ -8,7 +8,10 @@ import com.wix.pay.creditcard.tokenizer.model.CreditCardToken;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/** Payment with a credit/debit card. */
+/**
+ * Payment with a credit/debit card.
+ * @see <a href="https://en.wikipedia.org/wiki/Payment_card">Payment card</a>
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CreditcardPayment extends Payment {
     public static final String TYPE = "credit";
