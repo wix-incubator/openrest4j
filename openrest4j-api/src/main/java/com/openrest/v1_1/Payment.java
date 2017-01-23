@@ -25,14 +25,12 @@ public class Payment {
     public static final String PAYMENT_TYPE_DIRECT_DEBIT = "direct_debit";
     /** Waived payment. */
     public static final String PAYMENT_TYPE_WAIVE = "waive";
-    /** PayPal payment. */
-    public static final String PAYMENT_TYPE_PAYPAL = "paypal";
 
     /** All known payment methods. */
     public static final Set<String> ALL_PAYMENT_TYPES = new HashSet<>(Arrays.asList(
     		PAYMENT_TYPE_COD, CashPayment.TYPE, CreditcardPayment.TYPE, PAYMENT_TYPE_DEBIT, TenbisPayment.TYPE,
     		PAYMENT_TYPE_CHECK, PAYMENT_TYPE_OFFSET, PAYMENT_TYPE_DEBT, PAYMENT_TYPE_DIRECT_DEBIT, PAYMENT_TYPE_WAIVE,
-    		PAYMENT_TYPE_PAYPAL, CellarixPayment.TYPE, BitsofgoldPayment.TYPE, BitpayPayment.TYPE,
+    		PaypalPayment.TYPE, CellarixPayment.TYPE, BitsofgoldPayment.TYPE, BitpayPayment.TYPE,
             DeliveryclubPayment.TYPE, DeliverycomPayment.TYPE, MultipassPayment.TYPE
     ));
 }
