@@ -2,7 +2,6 @@ package com.openrest.olo.payments;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.openrest.v1_1.CreditCard;
 import com.wix.pay.creditcard.tokenizer.model.CreditCardToken;
 
 import java.util.LinkedHashMap;
@@ -21,12 +20,10 @@ public class CreditcardPayment extends Payment {
     public CreditcardPayment() {}
 
     public CreditcardPayment(Integer amount, Map<String, String> externalIds,
-                             String collectionMethod, CreditCardToken cardToken,
-                             CreditCard card) {
+                             String collectionMethod, CreditCardToken cardToken) {
         super(amount, externalIds);
         this.collectionMethod = collectionMethod;
         this.cardToken = cardToken;
-        this.card = card;
     }
 
     @Override
@@ -34,8 +31,7 @@ public class CreditcardPayment extends Payment {
         return new CreditcardPayment(amount,
                 ((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
                 collectionMethod,
-                cardToken,
-                ((card != null) ? (CreditCard) card.clone() : null));
+                cardToken);
     }
 
     @Override
@@ -48,8 +44,7 @@ public class CreditcardPayment extends Payment {
         if (amount != null ? !amount.equals(that.amount) : that.amount != null) return false;
         if (externalIds != null ? !externalIds.equals(that.externalIds) : that.externalIds != null) return false;
         if (collectionMethod != null ? !collectionMethod.equals(that.collectionMethod) : that.collectionMethod != null) return false;
-        if (cardToken != null ? !cardToken.equals(that.cardToken) : that.cardToken != null) return false;
-        return !(card != null ? !card.equals(that.card) : that.card != null);
+        return !(cardToken != null ? !cardToken.equals(that.cardToken) : that.cardToken != null);
     }
 
     @Override
@@ -58,7 +53,6 @@ public class CreditcardPayment extends Payment {
         result = 31 * result + (externalIds != null ? externalIds.hashCode() : 0);
         result = 31 * result + (collectionMethod != null ? collectionMethod.hashCode() : 0);
         result = 31 * result + (cardToken != null ? cardToken.hashCode() : 0);
-        result = 31 * result + (card != null ? card.hashCode() : 0);
         return result;
     }
 
@@ -72,9 +66,4 @@ public class CreditcardPayment extends Payment {
     /** Card token (if card is collected online). */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public CreditCardToken cardToken;
-
-    /** Credit card details (will be deprecated 2015-08-01). */
-    @Deprecated
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    public CreditCard card;
 }

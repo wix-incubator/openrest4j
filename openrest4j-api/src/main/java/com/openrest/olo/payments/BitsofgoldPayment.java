@@ -2,7 +2,6 @@ package com.openrest.olo.payments;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.openrest.v1_1.CreditCard;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -16,9 +15,8 @@ public class BitsofgoldPayment extends Payment {
     /** Default constructor for JSON deserialization. */
     public BitsofgoldPayment() {}
 
-    public BitsofgoldPayment(Integer amount, Map<String, String> externalIds, CreditCard card, String token) {
+    public BitsofgoldPayment(Integer amount, Map<String, String> externalIds, String token) {
         super(amount, externalIds);
-        this.card = card;
         this.token = token;
     }
 
@@ -26,7 +24,6 @@ public class BitsofgoldPayment extends Payment {
     public Object clone() {
         return new BitsofgoldPayment(amount,
                 ((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
-                ((card != null) ? (CreditCard) card.clone() : null),
                 token);
     }
 
@@ -39,7 +36,6 @@ public class BitsofgoldPayment extends Payment {
 
         if (amount != null ? !amount.equals(that.amount) : that.amount != null) return false;
         if (externalIds != null ? !externalIds.equals(that.externalIds) : that.externalIds != null) return false;
-        if (card != null ? !card.equals(that.card) : that.card != null) return false;
         return !(token != null ? !token.equals(that.token) : that.token != null);
 
     }
@@ -48,14 +44,9 @@ public class BitsofgoldPayment extends Payment {
     public int hashCode() {
         int result = amount != null ? amount.hashCode() : 0;
         result = 31 * result + (externalIds != null ? externalIds.hashCode() : 0);
-        result = 31 * result + (card != null ? card.hashCode() : 0);
         result = 31 * result + (token != null ? token.hashCode() : 0);
         return result;
     }
-
-    /** Credit card details (to be filled by BitsOfGold). */
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    public CreditCard card;
 
     /** Payment token. */
     @JsonInclude(JsonInclude.Include.NON_NULL)

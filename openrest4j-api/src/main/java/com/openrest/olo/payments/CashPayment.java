@@ -1,7 +1,6 @@
 package com.openrest.olo.payments;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.openrest.v1_1.CreditCard;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
