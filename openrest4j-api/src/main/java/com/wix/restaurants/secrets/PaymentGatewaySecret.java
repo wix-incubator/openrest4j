@@ -1,4 +1,4 @@
-package com.openrest.v1_1;
+package com.wix.restaurants.secrets;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -9,22 +9,22 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SecretCreditcardsInfo implements Serializable, Cloneable {
+public class PaymentGatewaySecret implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
 
     public static final String ID = "com.wix.restaurants.creditcards";
 
     /** Default constructor for JSON deserialization. */
-    public SecretCreditcardsInfo() {}
+    public PaymentGatewaySecret() {}
 
-    public SecretCreditcardsInfo(String gatewayId, Map<String, String> merchantKeys) {
+    public PaymentGatewaySecret(String gatewayId, Map<String, String> merchantKeys) {
         this.gatewayId = gatewayId;
         this.merchantKeys = merchantKeys;
     }
 
     @Override
     public Object clone() {
-        return new SecretCreditcardsInfo(gatewayId,
+        return new PaymentGatewaySecret(gatewayId,
                 ((merchantKeys != null) ? new LinkedHashMap<>(merchantKeys) : null));
     }
 
