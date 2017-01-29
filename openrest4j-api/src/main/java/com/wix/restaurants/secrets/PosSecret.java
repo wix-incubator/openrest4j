@@ -1,4 +1,4 @@
-package com.openrest.v1_1;
+package com.wix.restaurants.secrets;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -9,22 +9,22 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SecretPosInfo implements Serializable, Cloneable {
+public class PosSecret implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
 
     public static final String ID = "com.wix.restaurants.pos";
 
     /** Default constructor for JSON deserialization. */
-    public SecretPosInfo() {}
+    public PosSecret() {}
 
-    public SecretPosInfo(String posId, Map<String, String> endpointKeys) {
+    public PosSecret(String posId, Map<String, String> endpointKeys) {
         this.posId = posId;
         this.endpointKeys = endpointKeys;
     }
 
     @Override
     public Object clone() {
-        return new SecretPosInfo(posId,
+        return new PosSecret(posId,
                 ((endpointKeys != null) ? new LinkedHashMap<>(endpointKeys) : null));
     }
 
