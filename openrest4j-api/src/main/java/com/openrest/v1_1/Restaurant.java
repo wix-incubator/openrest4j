@@ -23,7 +23,7 @@ public class Restaurant extends Organization {
                       Availability openTimes, Availability deliveryTimes,
                       List<DispatchInfo> deliveryInfos, Integer maxFutureOrderDelayMins,
                       String timezone, String currency, Locale locale, Set<Locale> locales,
-                      Set<String> paymentTypes, Boolean multiPaymentDisabled, Map<String, CardInfo> cardInfos, CreditcardsInfo creditcardsInfo,
+                      Set<String> paymentTypes, Boolean multiPaymentDisabled, CreditcardsInfo creditcardsInfo,
                       DeliveriesInfo deliveriesInfo, ReservationsInfo reservations, Map<String, Integer> minPayments, Boolean antiFraudDisabled, String link, String domain,
                       Set<String> altDomains, String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
                       List<AppInfo> apps, Seo seo, Map<String, String> properties, Map<String, String> compatibilities,
@@ -44,7 +44,6 @@ public class Restaurant extends Organization {
         this.creditcardsInfo = creditcardsInfo;
         this.deliveriesInfo = deliveriesInfo;
         this.reservations = reservations;
-        this.cardInfos = cardInfos;
         this.minPayments = minPayments;
         this.antiFraudDisabled = antiFraudDisabled;
         this.features = features;
@@ -73,7 +72,7 @@ public class Restaurant extends Organization {
     			timezone, currency, locale,
     			((locales != null) ? new LinkedHashSet<>(locales) : null),
     			((paymentTypes != null) ? new LinkedHashSet<>(paymentTypes) : null),
-    			multiPaymentDisabled, CardInfo.clone(cardInfos),
+    			multiPaymentDisabled,
                 ((creditcardsInfo != null) ? (CreditcardsInfo) creditcardsInfo.clone() : null),
                 ((deliveriesInfo != null) ? (DeliveriesInfo) deliveriesInfo.clone() : null),
                 ((reservations != null) ? (ReservationsInfo) reservations.clone() : null),
@@ -133,21 +132,6 @@ public class Restaurant extends Organization {
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean multiPaymentDisabled = Boolean.FALSE;
     
-    /**
-     * Maps credit card networks (e.g. "visa", "amex" etc) to the information
-     * required to clear cards of that network.
-     * 
-     * Networks that do not appear here are not supported by the restaurant.
-     * 
-     * For the complete list of credit card networks, see
-     * http://code.google.com/p/creditcard/
-     *
-     * Scheduled for deprecation on 2015-08-01 (use creditcardsInfo).
-     */
-    @Deprecated
-    @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, CardInfo> cardInfos = new LinkedHashMap<>();
-
     @JsonInclude(Include.NON_NULL)
     public CreditcardsInfo creditcardsInfo = new CreditcardsInfo();
 
