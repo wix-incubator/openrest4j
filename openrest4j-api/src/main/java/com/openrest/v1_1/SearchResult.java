@@ -7,6 +7,7 @@ import com.openrest.olo.dispatches.DispatchInfo;
 import com.wix.restaurants.availability.Availability;
 import com.wix.restaurants.i18n.Locale;
 import com.wix.restaurants.i18n.LocalizedString;
+import com.wix.restaurants.olo.OrdersInfo;
 import com.wix.restaurants.reservations.ReservationsInfo;
 
 import java.util.*;
@@ -23,7 +24,8 @@ public class SearchResult extends Restaurant {
                         List<DispatchInfo> deliveryInfos, Integer maxFutureOrderDelayMins,
                         String timezone, String currency, Locale locale, Set<Locale> locales,
                         Set<String> paymentTypes, Boolean multiPaymentDisabled, CreditcardsInfo creditcardsInfo,
-                        DeliveriesInfo deliveriesInfo, ReservationsInfo reservations, Map<String, Integer> minPayments, Boolean antiFraudDisabled, String link, String domain,
+                        DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations,
+                        Map<String, Integer> minPayments, Boolean antiFraudDisabled, String link, String domain,
                         Set<String> altDomains, String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
                         List<AppInfo> apps, Seo seo, Map<String, String> properties,
                         Map<String, String> compatibilities, Map<String, Availability> availabilities,
@@ -32,7 +34,7 @@ public class SearchResult extends Restaurant {
                         Set<String> deliveryTypes, DispatchInfo deliveryInfo, List<Charge> charges) {
     	super(id, alias, affiliateId, externalIds, created, modified, distributorId, chainId, title, description, contact, externalContacts,
     			address, messages, colorScheme, openTimes, deliveryTimes, deliveryInfos, maxFutureOrderDelayMins,
-    			timezone, currency, locale, locales, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, reservations, minPayments,
+    			timezone, currency, locale, locales, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations, minPayments,
     			antiFraudDisabled, link, domain, altDomains, picture, icon, wideLogo, noImagePicture, blobs,
     			apps, seo, properties, compatibilities, availabilities, state, closed, virtualId, inactive, products, features, rank);
     	

@@ -7,6 +7,7 @@ import com.openrest.olo.dispatches.DispatchInfo;
 import com.wix.restaurants.availability.Availability;
 import com.wix.restaurants.i18n.Locale;
 import com.wix.restaurants.i18n.LocalizedString;
+import com.wix.restaurants.olo.OrdersInfo;
 import com.wix.restaurants.reservations.ReservationsInfo;
 
 import java.util.*;
@@ -24,7 +25,8 @@ public class Restaurant extends Organization {
                       List<DispatchInfo> deliveryInfos, Integer maxFutureOrderDelayMins,
                       String timezone, String currency, Locale locale, Set<Locale> locales,
                       Set<String> paymentTypes, Boolean multiPaymentDisabled, CreditcardsInfo creditcardsInfo,
-                      DeliveriesInfo deliveriesInfo, ReservationsInfo reservations, Map<String, Integer> minPayments, Boolean antiFraudDisabled, String link, String domain,
+                      DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations,
+                      Map<String, Integer> minPayments, Boolean antiFraudDisabled, String link, String domain,
                       Set<String> altDomains, String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
                       List<AppInfo> apps, Seo seo, Map<String, String> properties, Map<String, String> compatibilities,
                       Map<String, Availability> availabilities,
@@ -43,6 +45,7 @@ public class Restaurant extends Organization {
         this.multiPaymentDisabled = multiPaymentDisabled;
         this.creditcardsInfo = creditcardsInfo;
         this.deliveriesInfo = deliveriesInfo;
+        this.orders = orders;
         this.reservations = reservations;
         this.minPayments = minPayments;
         this.antiFraudDisabled = antiFraudDisabled;
@@ -75,6 +78,7 @@ public class Restaurant extends Organization {
     			multiPaymentDisabled,
                 ((creditcardsInfo != null) ? (CreditcardsInfo) creditcardsInfo.clone() : null),
                 ((deliveriesInfo != null) ? (DeliveriesInfo) deliveriesInfo.clone() : null),
+                ((orders != null) ? (OrdersInfo) orders.clone() : null),
                 ((reservations != null) ? (ReservationsInfo) reservations.clone() : null),
     			((minPayments != null) ? new LinkedHashMap<>(minPayments) : null),
     			antiFraudDisabled, link, domain,
@@ -137,6 +141,9 @@ public class Restaurant extends Organization {
 
     @JsonInclude(Include.NON_NULL)
     public DeliveriesInfo deliveriesInfo;
+
+    @JsonInclude(Include.NON_NULL)
+    public OrdersInfo orders;
 
     @JsonInclude(Include.NON_NULL)
     public ReservationsInfo reservations;
