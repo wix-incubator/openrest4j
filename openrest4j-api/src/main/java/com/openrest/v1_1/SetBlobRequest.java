@@ -12,13 +12,15 @@ public class SetBlobRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public SetBlobRequest() {}
     
-    public SetBlobRequest(String accessToken, String organizationId, String itemId, String blobType, String blobId, String url) {
+    public SetBlobRequest(String accessToken, String organizationId, String itemId, String blobType,
+                          String blobId, String url, String servableUrl) {
     	this.accessToken = accessToken;
     	this.organizationId = organizationId;
     	this.itemId = itemId;
     	this.blobType = blobType;
     	this.blobId = blobId;
     	this.url = url;
+    	this.servableUrl = servableUrl;
     }
     
     @JsonInclude(Include.NON_NULL)
@@ -34,11 +36,21 @@ public class SetBlobRequest extends Request {
     @JsonInclude(Include.NON_NULL)
     public String blobType;
 
-    /** Existing blob-id to link to. Leave null if using url. */
+    /** Existing blob-id to link to. Leave null if using url or servableUrl. */
     @JsonInclude(Include.NON_NULL)
     public String blobId;
-    
-    /** External url to retrieve blob data from. Leave null if using blobId. */
+
+    /**
+     * External url to import blob data from (can be discarded after import operation).
+     * Leave null if using blobId or servableUrl.
+     */
     @JsonInclude(Include.NON_NULL)
     public String url;
+
+    /**
+     * External url to use as-is in blob (must be a permanent https:// url).
+     * Leave null if using blobId or url.
+     */
+    @JsonInclude(Include.NON_NULL)
+    public String servableUrl;
 }
