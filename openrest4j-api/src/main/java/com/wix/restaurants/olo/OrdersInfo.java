@@ -3,13 +3,13 @@ package com.wix.restaurants.olo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.wix.restaurants.IntegerInterval;
 import com.wix.restaurants.availability.Availability;
 
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/** Online ordering settings. */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OrdersInfo implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
@@ -18,10 +18,12 @@ public class OrdersInfo implements Serializable, Cloneable {
     public OrdersInfo() {}
 
     public OrdersInfo(Availability availability,
-                      IntegerInterval futureDelayMins,
+                      AsapOrdersInfo asap,
+                      FutureOrdersInfo future,
                       Map<String, String> properties) {
         this.availability = availability;
-        this.futureDelayMins = futureDelayMins;
+        this.asap = asap;
+        this.future = future;
         this.properties = properties;
     }
 
@@ -29,7 +31,8 @@ public class OrdersInfo implements Serializable, Cloneable {
     public Object clone() {
         return new OrdersInfo(
                 (availability != null) ? (Availability) availability.clone() : null,
-                (futureDelayMins != null) ? (IntegerInterval) futureDelayMins.clone() : null,
+                (asap != null) ? (AsapOrdersInfo) asap.clone() : null,
+                (future != null) ? (FutureOrdersInfo) future.clone() : null,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
     }
 
@@ -41,7 +44,8 @@ public class OrdersInfo implements Serializable, Cloneable {
         OrdersInfo that = (OrdersInfo) o;
 
         if (availability != null ? !availability.equals(that.availability) : that.availability != null) return false;
-        if (futureDelayMins != null ? !futureDelayMins.equals(that.futureDelayMins) : that.futureDelayMins != null) return false;
+        if (asap != null ? !asap.equals(that.asap) : that.asap != null) return false;
+        if (future != null ? !future.equals(that.future) : that.future != null) return false;
         return properties != null ? properties.equals(that.properties) : that.properties == null;
 
     }
@@ -49,27 +53,23 @@ public class OrdersInfo implements Serializable, Cloneable {
     @Override
     public int hashCode() {
         int result = availability != null ? availability.hashCode() : 0;
-        result = 31 * result + (futureDelayMins != null ? futureDelayMins.hashCode() : 0);
+        result = 31 * result + (asap != null ? asap.hashCode() : 0);
+        result = 31 * result + (future != null ? future.hashCode() : 0);
         result = 31 * result + (properties != null ? properties.hashCode() : 0);
         return result;
     }
 
-    /**
-     * The restaurant accepts online orders to these times.
-     * @see #futureDelayMins for limitations.
-     */
+    /** The restaurant accepts online orders during these times. */
     @JsonInclude(Include.NON_NULL)
     public Availability availability;
 
-    /**
-     * Time interval in which future orders are allowed (minimum is mandatory, and non-negative),
-     * or null if future orders are not allowed.
-     *
-     * For example, min=1440 max=10080 means that future orders must be placed at least 1 day in advance,
-     * and at most 7 days in advance.
-     */
+    /** Settings for regular (ASAP) orders. */
     @JsonInclude(Include.NON_NULL)
-    public IntegerInterval futureDelayMins;
+    public AsapOrdersInfo asap;
+
+    /** Settings for future orders. */
+    @JsonInclude(Include.NON_NULL)
+    public FutureOrdersInfo future;
 
     /**
      * Map of user-defined extended properties.
