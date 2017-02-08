@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/** Online reservations settings. */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ReservationsInfo implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
