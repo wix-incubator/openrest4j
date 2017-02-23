@@ -3,7 +3,7 @@ package com.openrest.olo.charges;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.openrest.olo.charges.conditions.Condition;
+import com.wix.restaurants.conditions.Condition;
 import com.openrest.olo.charges.operators.Operator;
 import com.openrest.v1_1.State;
 import com.wix.restaurants.i18n.LocalizedString;

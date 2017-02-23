@@ -1,4 +1,4 @@
-package com.openrest.olo.charges.conditions;
+package com.wix.restaurants.conditions;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
