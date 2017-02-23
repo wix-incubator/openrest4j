@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.restaurants.availability.Availability;
-import com.wix.restaurants.i18n.Locale;
+import com.wix.restaurants.conditions.Condition;
 import com.wix.restaurants.i18n.LocalizedString;
 
 import java.io.Serializable;
@@ -24,6 +24,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
 	/** Constructs a previously submitted item from persisted data. */
     public Item(String id, String restaurantId, LocalizedString title,
 				LocalizedString description, Integer price, List<Variation> variations,
+				Condition displayCondition, Condition condition,
 				Availability availability, String picture, Map<String, Blob> blobs,
 				Map<String, String> externalIds, Set<String> labels,
 				Map<String, String> properties, Stock stock, Double rank) {
@@ -33,6 +34,8 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
         this.description = description;
         this.price = price;
         this.variations = variations;
+        this.displayCondition = displayCondition;
+		this.condition = condition;
         this.availability = availability;
         this.picture = picture;
         this.blobs = blobs;
@@ -64,6 +67,8 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     			((title != null) ? (LocalizedString) title.clone() : null),
     			((description != null) ? (LocalizedString) description.clone() : null),
     			price, Variation.clone(variations),
+                (displayCondition != null) ? (Condition) displayCondition.clone() : null,
+                (condition != null) ? (Condition) condition.clone() : null,
     			((availability != null) ? (Availability) availability.clone() : null),
     			picture,
     			Blob.clone(blobs),
@@ -96,6 +101,14 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     /** List of possible variations. */
     @JsonInclude(Include.NON_DEFAULT)
     public List<Variation> variations = new LinkedList<>();
+
+    /** Condition to display the item to end-users, e.g you can have a secret item that only shows up in certain hours. */
+    @JsonInclude(Include.NON_NULL)
+    public Condition displayCondition;
+
+    /** Condition to order the item, e.g. you can have an item that's only available for ordering in certain hours. */
+    @JsonInclude(Include.NON_NULL)
+    public Condition condition;
 
     /** Time windows in which this item is regularly available. */
     @JsonInclude(Include.NON_DEFAULT)
@@ -139,85 +152,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     /** The item's Openrest rank (higher is better). */
     @JsonInclude(Include.NON_NULL)
     public Double rank;
-    
-    @Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((availability == null) ? 0 : availability.hashCode());
-		result = prime * result
-				+ ((description == null) ? 0 : description.hashCode());
-		result = prime * result
-				+ ((externalIds == null) ? 0 : externalIds.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((labels == null) ? 0 : labels.hashCode());
-		result = prime * result + ((price == null) ? 0 : price.hashCode());
-		result = prime * result
-				+ ((restaurantId == null) ? 0 : restaurantId.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		result = prime * result
-				+ ((variations == null) ? 0 : variations.hashCode());
-		return result;
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Item other = (Item) obj;
-		if (availability == null) {
-			if (other.availability != null)
-				return false;
-		} else if (!availability.equals(other.availability))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (externalIds == null) {
-			if (other.externalIds != null)
-				return false;
-		} else if (!externalIds.equals(other.externalIds))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (labels == null) {
-			if (other.labels != null)
-				return false;
-		} else if (!labels.equals(other.labels))
-			return false;
-		if (price == null) {
-			if (other.price != null)
-				return false;
-		} else if (!price.equals(other.price))
-			return false;
-		if (restaurantId == null) {
-			if (other.restaurantId != null)
-				return false;
-		} else if (!restaurantId.equals(other.restaurantId))
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		if (variations == null) {
-			if (other.variations != null)
-				return false;
-		} else if (!variations.equals(other.variations))
-			return false;
-		return true;
-	}
-    
 	public int compareTo(Item other) {
 		if (rank != null) {
 			return ((other.rank != null) ? -rank.compareTo(other.rank) : -1);
@@ -225,4 +160,50 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
 			return ((other.rank == null) ? (0) : 1);
 		}
 	}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Item item = (Item) o;
+
+        if (id != null ? !id.equals(item.id) : item.id != null) return false;
+        if (restaurantId != null ? !restaurantId.equals(item.restaurantId) : item.restaurantId != null) return false;
+        if (title != null ? !title.equals(item.title) : item.title != null) return false;
+        if (description != null ? !description.equals(item.description) : item.description != null) return false;
+        if (price != null ? !price.equals(item.price) : item.price != null) return false;
+        if (variations != null ? !variations.equals(item.variations) : item.variations != null) return false;
+        if (displayCondition != null ? !displayCondition.equals(item.displayCondition) : item.displayCondition != null) return false;
+        if (condition != null ? !condition.equals(item.condition) : item.condition != null) return false;
+        if (availability != null ? !availability.equals(item.availability) : item.availability != null) return false;
+        if (picture != null ? !picture.equals(item.picture) : item.picture != null) return false;
+        if (blobs != null ? !blobs.equals(item.blobs) : item.blobs != null) return false;
+        if (externalIds != null ? !externalIds.equals(item.externalIds) : item.externalIds != null) return false;
+        if (labels != null ? !labels.equals(item.labels) : item.labels != null) return false;
+        if (properties != null ? !properties.equals(item.properties) : item.properties != null) return false;
+        if (stock != null ? !stock.equals(item.stock) : item.stock != null) return false;
+        return rank != null ? rank.equals(item.rank) : item.rank == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (restaurantId != null ? restaurantId.hashCode() : 0);
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (variations != null ? variations.hashCode() : 0);
+        result = 31 * result + (displayCondition != null ? displayCondition.hashCode() : 0);
+        result = 31 * result + (condition != null ? condition.hashCode() : 0);
+        result = 31 * result + (availability != null ? availability.hashCode() : 0);
+        result = 31 * result + (picture != null ? picture.hashCode() : 0);
+        result = 31 * result + (blobs != null ? blobs.hashCode() : 0);
+        result = 31 * result + (externalIds != null ? externalIds.hashCode() : 0);
+        result = 31 * result + (labels != null ? labels.hashCode() : 0);
+        result = 31 * result + (properties != null ? properties.hashCode() : 0);
+        result = 31 * result + (stock != null ? stock.hashCode() : 0);
+        result = 31 * result + (rank != null ? rank.hashCode() : 0);
+        return result;
+    }
 }
