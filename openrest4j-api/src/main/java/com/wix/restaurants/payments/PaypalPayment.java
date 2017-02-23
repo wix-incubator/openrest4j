@@ -1,27 +1,26 @@
-package com.openrest.olo.payments;
+package com.wix.restaurants.payments;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/** Payment with Debit card (deprecated, use CreditcardPayment). */
-@Deprecated
+/** PayPal. */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DebitPayment extends Payment {
-    public static final String TYPE = "debit";
+public class PaypalPayment extends Payment {
+    public static final String TYPE = "paypal";
     private static final long serialVersionUID = 1L;
 
     /** Default constructor for JSON deserialization. */
-    public DebitPayment() {}
+    public PaypalPayment() {}
 
-    public DebitPayment(Integer amount, Map<String, String> externalIds) {
+    public PaypalPayment(Integer amount, Map<String, String> externalIds) {
         super(amount, externalIds);
     }
 
     @Override
     public Object clone() {
-        return new DebitPayment(amount,
+        return new PaypalPayment(amount,
                 ((externalIds != null) ? new LinkedHashMap<>(externalIds) : null));
     }
 
@@ -30,7 +29,7 @@ public class DebitPayment extends Payment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        final DebitPayment payment = (DebitPayment) o;
+        final PaypalPayment payment = (PaypalPayment) o;
 
         if (amount != null ? !amount.equals(payment.amount) : payment.amount != null) return false;
         if (externalIds != null ? !externalIds.equals(payment.externalIds) : payment.externalIds != null) return false;

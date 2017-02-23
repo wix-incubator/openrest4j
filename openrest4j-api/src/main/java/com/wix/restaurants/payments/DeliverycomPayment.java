@@ -1,26 +1,26 @@
-package com.openrest.olo.payments;
+package com.wix.restaurants.payments;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/** PayPal. */
+/** Payment in delivery.com credit. */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PaypalPayment extends Payment {
-    public static final String TYPE = "paypal";
+public class DeliverycomPayment extends Payment {
+    public static final String TYPE = "com.delivery";
     private static final long serialVersionUID = 1L;
 
     /** Default constructor for JSON deserialization. */
-    public PaypalPayment() {}
+    public DeliverycomPayment() {}
 
-    public PaypalPayment(Integer amount, Map<String, String> externalIds) {
+    public DeliverycomPayment(Integer amount, Map<String, String> externalIds) {
         super(amount, externalIds);
     }
 
     @Override
     public Object clone() {
-        return new PaypalPayment(amount,
+        return new DeliverycomPayment(amount,
                 ((externalIds != null) ? new LinkedHashMap<>(externalIds) : null));
     }
 
@@ -29,7 +29,7 @@ public class PaypalPayment extends Payment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        final PaypalPayment payment = (PaypalPayment) o;
+        final DeliverycomPayment payment = (DeliverycomPayment) o;
 
         if (amount != null ? !amount.equals(payment.amount) : payment.amount != null) return false;
         if (externalIds != null ? !externalIds.equals(payment.externalIds) : payment.externalIds != null) return false;

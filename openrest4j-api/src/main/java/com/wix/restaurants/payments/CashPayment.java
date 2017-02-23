@@ -1,4 +1,4 @@
-package com.openrest.olo.payments;
+package com.wix.restaurants.payments;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

@@ -1,4 +1,4 @@
-package com.openrest.olo.payments;
+package com.wix.restaurants.payments;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -6,23 +6,23 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/** Payment with a Bitcoin via Bits of Gold. */
+/** Payment with Cellarix digital wallet. */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class BitsofgoldPayment extends Payment {
-    public static final String TYPE = "il.co.bitsofgold";
+public class CellarixPayment extends Payment {
+    public static final String TYPE = "com.cellarix";
     private static final long serialVersionUID = 1L;
 
     /** Default constructor for JSON deserialization. */
-    public BitsofgoldPayment() {}
+    public CellarixPayment() {}
 
-    public BitsofgoldPayment(Integer amount, Map<String, String> externalIds, String token) {
+    public CellarixPayment(Integer amount, Map<String, String> externalIds, String token) {
         super(amount, externalIds);
         this.token = token;
     }
 
     @Override
     public Object clone() {
-        return new BitsofgoldPayment(amount,
+        return new CellarixPayment(amount,
                 ((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
                 token);
     }
@@ -32,12 +32,11 @@ public class BitsofgoldPayment extends Payment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        final BitsofgoldPayment that = (BitsofgoldPayment) o;
+        final CellarixPayment that = (CellarixPayment) o;
 
         if (amount != null ? !amount.equals(that.amount) : that.amount != null) return false;
         if (externalIds != null ? !externalIds.equals(that.externalIds) : that.externalIds != null) return false;
         return !(token != null ? !token.equals(that.token) : that.token != null);
-
     }
 
     @Override

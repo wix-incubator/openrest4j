@@ -1,26 +1,26 @@
-package com.openrest.olo.payments;
+package com.wix.restaurants.payments;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/** Payment in delivery.com credit. */
+/** Payment in delivery-club.ru credit. */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DeliverycomPayment extends Payment {
-    public static final String TYPE = "com.delivery";
+public class DeliveryclubPayment extends Payment {
+    public static final String TYPE = "ru.delivery-club";
     private static final long serialVersionUID = 1L;
 
     /** Default constructor for JSON deserialization. */
-    public DeliverycomPayment() {}
+    public DeliveryclubPayment() {}
 
-    public DeliverycomPayment(Integer amount, Map<String, String> externalIds) {
+    public DeliveryclubPayment(Integer amount, Map<String, String> externalIds) {
         super(amount, externalIds);
     }
 
     @Override
     public Object clone() {
-        return new DeliverycomPayment(amount,
+        return new DeliveryclubPayment(amount,
                 ((externalIds != null) ? new LinkedHashMap<>(externalIds) : null));
     }
 
@@ -29,7 +29,7 @@ public class DeliverycomPayment extends Payment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        final DeliverycomPayment payment = (DeliverycomPayment) o;
+        final DeliveryclubPayment payment = (DeliveryclubPayment) o;
 
         if (amount != null ? !amount.equals(payment.amount) : payment.amount != null) return false;
         if (externalIds != null ? !externalIds.equals(payment.externalIds) : payment.externalIds != null) return false;

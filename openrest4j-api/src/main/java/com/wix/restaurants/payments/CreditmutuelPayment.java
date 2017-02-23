@@ -1,4 +1,4 @@
-package com.openrest.olo.payments;
+package com.wix.restaurants.payments;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -6,23 +6,24 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/** Payment with Bitcoin via BitPay. */
+/** Payment with CreditMutuel token. */
+@Deprecated
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class BitpayPayment extends Payment {
-    public static final String TYPE = "com.bitpay";
+public class CreditmutuelPayment extends Payment {
+    public static final String TYPE = "fr.creditmutuel";
     private static final long serialVersionUID = 1L;
 
     /** Default constructor for JSON deserialization. */
-    public BitpayPayment() {}
+    public CreditmutuelPayment() {}
 
-    public BitpayPayment(Integer amount, Map<String, String> externalIds, String token) {
+    public CreditmutuelPayment(Integer amount, Map<String, String> externalIds, String token) {
         super(amount, externalIds);
         this.token = token;
     }
 
     @Override
     public Object clone() {
-        return new BitpayPayment(amount,
+        return new CreditmutuelPayment(amount,
                 ((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
                 token);
     }
@@ -32,7 +33,7 @@ public class BitpayPayment extends Payment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        final BitpayPayment that = (BitpayPayment) o;
+        final CreditmutuelPayment that = (CreditmutuelPayment) o;
 
         if (amount != null ? !amount.equals(that.amount) : that.amount != null) return false;
         if (externalIds != null ? !externalIds.equals(that.externalIds) : that.externalIds != null) return false;

@@ -1,6 +1,6 @@
 package com.openrest.v1_1;
 
-import com.openrest.olo.payments.*;
+import com.wix.restaurants.payments.*;
 
 import java.util.Arrays;
 import java.util.HashSet;

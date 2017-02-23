@@ -3,7 +3,7 @@ package com.openrest.v1_1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.openrest.olo.payments.Payment;
+import com.wix.restaurants.payments.Payment;
 import com.wix.restaurants.availability.Date;
 
 import java.io.Serializable;

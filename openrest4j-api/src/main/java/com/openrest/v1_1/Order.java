@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.openrest.olo.charges.OrderCharge;
 import com.openrest.olo.dispatches.Dispatch;
-import com.openrest.olo.payments.Payment;
+import com.wix.restaurants.payments.Payment;
 import com.wix.restaurants.i18n.Locale;
 
 import java.io.Serializable;
