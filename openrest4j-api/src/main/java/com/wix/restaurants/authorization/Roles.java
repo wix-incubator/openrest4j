@@ -1,4 +1,4 @@
-package com.wix.restaurants;
+package com.wix.restaurants.authorization;
 
 /** Roles in the system (each associated with certain permissions). */
 public class Roles {

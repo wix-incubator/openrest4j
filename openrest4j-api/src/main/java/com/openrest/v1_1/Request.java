@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.openrest.olo.GetPotentialWeeklyStatsRequest;
 import com.openrest.olo.SetPotentialWeeklyStatsRequest;
+import com.wix.restaurants.authorization.requests.GetRolesRequest;
+import com.wix.restaurants.authorization.requests.GetRoleRequest;
 import com.wix.restaurants.reservations.requests.*;
 
 import java.io.Serializable;
@@ -117,7 +119,8 @@ import java.io.Serializable;
 	@Type(value = QueryReservationsRequest.class, name = QueryReservationsRequest.TYPE),
 	@Type(value = SetReservationStatusRequest.class, name = SetReservationStatusRequest.TYPE),
 	@Type(value = ConfirmReservationRequest.class, name = ConfirmReservationRequest.TYPE),
-	@Type(value = JoinChainRequest.class, name = JoinChainRequest.TYPE)
+	@Type(value = JoinChainRequest.class, name = JoinChainRequest.TYPE),
+	@Type(value = GetRoleRequest.class, name = GetRoleRequest.TYPE)
 })
 public abstract class Request implements Serializable {
     private static final long serialVersionUID = 1L;

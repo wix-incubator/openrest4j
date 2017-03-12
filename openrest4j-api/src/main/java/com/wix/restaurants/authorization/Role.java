@@ -1,4 +1,4 @@
-package com.openrest.v1_1;
+package com.wix.restaurants.authorization;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -32,7 +32,7 @@ public class Role implements Serializable, Cloneable {
     @JsonInclude(Include.NON_NULL)
     public String organizationType;
     
-    /** @see com.wix.restaurants.Roles */
+    /** @see Roles */
     @JsonInclude(Include.NON_NULL)
     public String role;
 }
