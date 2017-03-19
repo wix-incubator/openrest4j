@@ -23,7 +23,27 @@ public class Role implements Serializable, Cloneable {
 	public Object clone() {
     	return new Role(organizationId, organizationType, role);
 	}
-    
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Role role1 = (Role) o;
+
+        if (organizationId != null ? !organizationId.equals(role1.organizationId) : role1.organizationId != null) return false;
+        if (organizationType != null ? !organizationType.equals(role1.organizationType) : role1.organizationType != null) return false;
+        return role != null ? role.equals(role1.role) : role1.role == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = organizationId != null ? organizationId.hashCode() : 0;
+        result = 31 * result + (organizationType != null ? organizationType.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
+        return result;
+    }
+
     /** The organization id. */
     @JsonInclude(Include.NON_NULL)
     public String organizationId;

@@ -28,13 +28,31 @@ public class AcceptedDocument implements Serializable, Cloneable {
     		return null;
     	}
     	
-    	final List<AcceptedDocument> cloned = new LinkedList<AcceptedDocument>();
+    	final List<AcceptedDocument> cloned = new LinkedList<>();
 		for (AcceptedDocument acceptedDocument : acceptedDocuments) {
 			cloned.add((acceptedDocument != null) ? (AcceptedDocument) acceptedDocument.clone() : null);
 		}
 		return cloned;
     }
-    
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		AcceptedDocument that = (AcceptedDocument) o;
+
+		if (documentId != null ? !documentId.equals(that.documentId) : that.documentId != null) return false;
+		return accepted != null ? accepted.equals(that.accepted) : that.accepted == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = documentId != null ? documentId.hashCode() : 0;
+		result = 31 * result + (accepted != null ? accepted.hashCode() : 0);
+		return result;
+	}
+
     /** Document id. */
     @JsonInclude(Include.NON_NULL)
 	public DocumentId documentId;
