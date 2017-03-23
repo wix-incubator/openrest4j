@@ -254,14 +254,14 @@ public class Reservation implements Serializable, Cloneable {
 
     /**
      * Identifies the organization from which the customer reserved.
-     * An empty String means the restaurant's (or chain's) white-label system.
+     * @see com.wix.restaurants.Sources
      */
     @JsonInclude(Include.NON_NULL)
     public String source;
 
     /**
      * The platform through which the customer reserved.
-     * @see com.openrest.v1_1.AppId#ALL_PLATFORMS
+     * @see com.wix.restaurants.Platforms
      */
     @JsonInclude(Include.NON_NULL)
     public String platform;

@@ -5,44 +5,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 /** Application (e.g. iPhone app) information. */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AppId implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
-    
-    /** Mobile app (Android). */
-    public static final String PLATFORM_ANDROID = "android";
-	/** Mobile app (iOS). */
-    public static final String PLATFORM_IOS = "ios";
-	/** Web platform. */
-    public static final String PLATFORM_WEB = "web";
-	/** Mobileweb platform. */
-    public static final String PLATFORM_MOBILEWEB = "mobileweb";
-	/** Facebook platform. */
-    public static final String PLATFORM_FACEBOOK = "facebook";
-    /** Call center. */
-    public static final String PLATFORM_CALLCENTER = "callcenter";
-    /** Kiosk (Android). */
-    public static final String PLATFORM_KIOSK_ANDROID = "kiosk.android";
-    /** Kiosk (iOS). */
-    public static final String PLATFORM_KIOSK_IOS = "kiosk.ios";
-    /** Facebook Messenger bots. */
-    public static final String PLATFORM_MESSENGER = "com.messenger";
-    /** Telegram bots. */
-    public static final String PLATFORM_TELEGRAM = "org.telegram";
-    /** Slack bots. */
-    public static final String PLATFORM_SLACK = "com.slack";
-
-    /** All known platforms. */
-    public static final Set<String> ALL_PLATFORMS = new HashSet<>(Arrays.asList(
-    		PLATFORM_ANDROID, PLATFORM_IOS, PLATFORM_WEB, PLATFORM_MOBILEWEB, PLATFORM_FACEBOOK,
-            PLATFORM_CALLCENTER, PLATFORM_KIOSK_ANDROID, PLATFORM_KIOSK_IOS,
-            PLATFORM_MESSENGER, PLATFORM_TELEGRAM, PLATFORM_SLACK
-    ));
     
 	/** Namespace used with aliases (id = alias, version = meaningless). */
     public static final String NS_OPENREST = "com.openrest";

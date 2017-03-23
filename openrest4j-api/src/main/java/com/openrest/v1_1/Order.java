@@ -292,12 +292,15 @@ public class Order implements Serializable, Cloneable {
     
     /**
      * The organization-id from which the customer ordered.
-     * An empty String means the restaurant's (or chain's) white-label system.
+     * @see com.wix.restaurants.Sources
      */
     @JsonInclude(Include.NON_NULL)
     public String source;
-    
-    /** @see AppId#ALL_PLATFORMS */
+
+    /**
+     * The platform through which the customer ordered.
+     * @see com.wix.restaurants.Platforms
+     */
     @JsonInclude(Include.NON_NULL)
     public String platform;
     

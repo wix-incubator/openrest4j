@@ -58,6 +58,7 @@ public class GetStatsRequest extends Request {
     @JsonInclude(Include.NON_NULL)
     public String source;
 
+    /** @see com.wix.restaurants.Platforms */
     @JsonInclude(Include.NON_NULL)
     public String platform;
     
