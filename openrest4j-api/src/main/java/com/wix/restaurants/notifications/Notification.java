@@ -68,7 +68,7 @@ public abstract class Notification implements Serializable, Cloneable {
     @JsonInclude(Include.NON_NULL)
     public String organizationId;    
 
-    /** @see Channel#ALL_CHANNELS */
+    /** @see Channels */
     @JsonInclude(Include.NON_NULL)
     public String channelId;
     

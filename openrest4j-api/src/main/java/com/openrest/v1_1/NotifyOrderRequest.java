@@ -31,7 +31,8 @@ public class NotifyOrderRequest extends Request {
     
     @JsonInclude(Include.NON_NULL)
     public String orderId;
-    
+
+    /** @see com.wix.restaurants.notifications.Channels */
     @JsonInclude(Include.NON_NULL)
     public String channelId;
     
