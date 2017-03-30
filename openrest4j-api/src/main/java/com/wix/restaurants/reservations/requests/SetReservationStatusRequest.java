@@ -43,7 +43,7 @@ public class SetReservationStatusRequest extends Request {
     public String reservationId;
 
     /**
-     * @see com.wix.restaurants.olo.Statuses
+     * @see com.wix.restaurants.reservations.Statuses
      * null means "no change" (for comment only statuses)
      */
     @JsonInclude(JsonInclude.Include.NON_NULL)
