@@ -2,6 +2,7 @@ package com.openrest.v1_1;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.api.client.http.HttpRequestFactory;
+import com.wix.restaurants.requests.Request;
 
 import java.io.IOException;
 

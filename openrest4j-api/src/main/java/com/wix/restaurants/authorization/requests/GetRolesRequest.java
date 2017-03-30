@@ -3,7 +3,7 @@ package com.wix.restaurants.authorization.requests;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.openrest.v1_1.Request;
+import com.wix.restaurants.requests.Request;
 
 /**
  * Returns all roles associated with a given user.

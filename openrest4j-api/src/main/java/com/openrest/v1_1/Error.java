@@ -87,7 +87,7 @@ public class Error {
     
     /**
      * The request did not execute due to other failed requests.
-     * @see BatchRequest
+     * @see com.wix.restaurants.requests.BatchRequest
      */
     public static final String ERROR_BATCH = "batch";
     
