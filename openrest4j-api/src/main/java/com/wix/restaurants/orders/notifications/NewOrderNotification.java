@@ -1,29 +1,28 @@
-package com.wix.restaurants.olo.notifications;
+package com.wix.restaurants.orders.notifications;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.restaurants.notifications.Notification;
 
-/** Triggered when a new order is not handled for some duration. */
+/** Triggered when a new order is received. */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DelayedOrderNotification extends Notification {
-    public static final String TYPE = "delayed_order";
+public class NewOrderNotification extends Notification {
+    public static final String TYPE = "new_order";
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */
-    public DelayedOrderNotification() {}
+    public NewOrderNotification() {}
     
-    public DelayedOrderNotification(String organizationId, String channelId, String channelParam, String comment, String state,
-    		Boolean acceptOrder, Integer durationMins) {
+    public NewOrderNotification(String organizationId, String channelId, String channelParam, String comment, String state,
+    		Boolean acceptOrder) {
     	super(organizationId, channelId, channelParam, comment, state);
     	this.acceptOrder = acceptOrder;
-    	this.durationMins = durationMins;
     }
     
 	@Override
 	public Object clone() {
-		return new DelayedOrderNotification(organizationId, channelId, channelParam, comment, state, acceptOrder, durationMins);
+		return new NewOrderNotification(organizationId, channelId, channelParam, comment, state, acceptOrder);
 	}
 	
     /**
@@ -32,8 +31,4 @@ public class DelayedOrderNotification extends Notification {
      */
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean acceptOrder = Boolean.FALSE;
-    
-    /** Event duration for triggering a notification, e.g. "after 15 minutes of not handling an incoming order". */
-    @JsonInclude(Include.NON_DEFAULT)
-    public Integer durationMins = 0;
 }

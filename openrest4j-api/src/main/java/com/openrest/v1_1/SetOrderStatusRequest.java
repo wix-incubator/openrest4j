@@ -35,7 +35,7 @@ public class SetOrderStatusRequest extends Request {
     public String orderId;
     
     /**
-     * @see com.wix.restaurants.olo.Statuses
+     * @see com.wix.restaurants.orders.Statuses
      * null means "no change" (for comment only statuses)
      */
     @JsonInclude(Include.NON_NULL)

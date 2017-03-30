@@ -1,4 +1,4 @@
-package com.wix.restaurants.olo;
+package com.wix.restaurants.orders;
 
 /** Order statuses. */
 public class Statuses {

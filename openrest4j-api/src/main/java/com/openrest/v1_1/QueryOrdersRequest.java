@@ -59,7 +59,7 @@ public class QueryOrdersRequest extends Request {
 
     /**
      * Order status filter.
-     * @see com.wix.restaurants.olo.Statuses
+     * @see com.wix.restaurants.orders.Statuses
      */
     @JsonInclude(Include.NON_NULL)
     public String status;

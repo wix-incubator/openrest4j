@@ -269,7 +269,7 @@ public class Order implements Serializable, Cloneable {
 
     /**
      * The order's status.
-     * @see com.wix.restaurants.olo.Statuses
+     * @see com.wix.restaurants.orders.Statuses
      */
     @JsonInclude(Include.NON_NULL)
     public String status;

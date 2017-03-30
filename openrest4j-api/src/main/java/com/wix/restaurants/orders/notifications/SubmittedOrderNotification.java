@@ -1,20 +1,20 @@
-package com.wix.restaurants.olo.notifications;
+package com.wix.restaurants.orders.notifications;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.restaurants.notifications.Notification;
 
-/** Triggered when a new order is received. */
+/** Triggered when a new order is submitted to the restaurant. */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class NewOrderNotification extends Notification {
-    public static final String TYPE = "new_order";
+public class SubmittedOrderNotification extends Notification {
+    public static final String TYPE = "submitted_order";
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */
-    public NewOrderNotification() {}
+    public SubmittedOrderNotification() {}
     
-    public NewOrderNotification(String organizationId, String channelId, String channelParam, String comment, String state,
+    public SubmittedOrderNotification(String organizationId, String channelId, String channelParam, String comment, String state,
     		Boolean acceptOrder) {
     	super(organizationId, channelId, channelParam, comment, state);
     	this.acceptOrder = acceptOrder;
@@ -22,7 +22,7 @@ public class NewOrderNotification extends Notification {
     
 	@Override
 	public Object clone() {
-		return new NewOrderNotification(organizationId, channelId, channelParam, comment, state, acceptOrder);
+		return new SubmittedOrderNotification(organizationId, channelId, channelParam, comment, state, acceptOrder);
 	}
 	
     /**

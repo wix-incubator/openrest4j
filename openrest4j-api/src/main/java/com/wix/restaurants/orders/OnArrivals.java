@@ -1,4 +1,4 @@
-package com.wix.restaurants.olo;
+package com.wix.restaurants.orders;
 
 /** Ways to contact a recipient upon arrival to destination address. */
 public class OnArrivals {

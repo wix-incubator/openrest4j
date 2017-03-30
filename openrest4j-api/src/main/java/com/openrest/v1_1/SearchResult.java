@@ -7,7 +7,7 @@ import com.openrest.olo.dispatches.DispatchInfo;
 import com.wix.restaurants.availability.Availability;
 import com.wix.restaurants.i18n.Locale;
 import com.wix.restaurants.i18n.LocalizedString;
-import com.wix.restaurants.olo.OrdersInfo;
+import com.wix.restaurants.orders.OrdersInfo;
 import com.wix.restaurants.reservations.ReservationsInfo;
 
 import java.util.*;

@@ -1,4 +1,4 @@
-package com.wix.restaurants.olo.notifications;
+package com.wix.restaurants.orders.notifications;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.wix.restaurants.notifications.Notification;

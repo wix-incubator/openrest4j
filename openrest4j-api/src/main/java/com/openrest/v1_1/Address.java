@@ -122,7 +122,7 @@ public class Address implements Serializable, Cloneable {
     @JsonInclude(Include.NON_NULL)
     public String postalCode;
 
-    /** @see com.wix.restaurants.olo.OnArrivals */
+    /** @see com.wix.restaurants.orders.OnArrivals */
     @JsonInclude(Include.NON_NULL)
     public String onArrival;
 

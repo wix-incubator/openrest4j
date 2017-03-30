@@ -1,4 +1,4 @@
-package com.wix.restaurants.olo;
+package com.wix.restaurants.orders;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;

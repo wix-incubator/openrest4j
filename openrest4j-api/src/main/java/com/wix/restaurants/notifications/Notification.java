@@ -11,7 +11,7 @@ import com.openrest.olo.notifications.OfflineNotification;
 import com.openrest.olo.notifications.SubscriptionNotification;
 import com.openrest.v1_1.Channel;
 import com.openrest.v1_1.State;
-import com.wix.restaurants.olo.notifications.*;
+import com.wix.restaurants.orders.notifications.*;
 import com.wix.restaurants.reservations.notifications.UpdatedReservationNotification;
 
 import java.io.Serializable;

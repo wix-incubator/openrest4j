@@ -1,28 +1,29 @@
-package com.wix.restaurants.olo.notifications;
+package com.wix.restaurants.orders.notifications;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.restaurants.notifications.Notification;
 
-/** Triggered when a new order is submitted to the restaurant. */
+/** Triggered when a new order is not handled for some duration. */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SubmittedOrderNotification extends Notification {
-    public static final String TYPE = "submitted_order";
+public class DelayedOrderNotification extends Notification {
+    public static final String TYPE = "delayed_order";
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */
-    public SubmittedOrderNotification() {}
+    public DelayedOrderNotification() {}
     
-    public SubmittedOrderNotification(String organizationId, String channelId, String channelParam, String comment, String state,
-    		Boolean acceptOrder) {
+    public DelayedOrderNotification(String organizationId, String channelId, String channelParam, String comment, String state,
+    		Boolean acceptOrder, Integer durationMins) {
     	super(organizationId, channelId, channelParam, comment, state);
     	this.acceptOrder = acceptOrder;
+    	this.durationMins = durationMins;
     }
     
 	@Override
 	public Object clone() {
-		return new SubmittedOrderNotification(organizationId, channelId, channelParam, comment, state, acceptOrder);
+		return new DelayedOrderNotification(organizationId, channelId, channelParam, comment, state, acceptOrder, durationMins);
 	}
 	
     /**
@@ -31,4 +32,8 @@ public class SubmittedOrderNotification extends Notification {
      */
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean acceptOrder = Boolean.FALSE;
+    
+    /** Event duration for triggering a notification, e.g. "after 15 minutes of not handling an incoming order". */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Integer durationMins = 0;
 }
