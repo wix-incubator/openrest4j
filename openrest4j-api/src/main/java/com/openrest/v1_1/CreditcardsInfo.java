@@ -32,6 +32,28 @@ public class CreditcardsInfo implements Serializable, Cloneable {
                 (comment != null) ? (LocalizedString) comment.clone() : null);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CreditcardsInfo that = (CreditcardsInfo) o;
+
+        if (networks != null ? !networks.equals(that.networks) : that.networks != null) return false;
+        if (fields != null ? !fields.equals(that.fields) : that.fields != null) return false;
+        if (collectionMethod != null ? !collectionMethod.equals(that.collectionMethod) : that.collectionMethod != null) return false;
+        return comment != null ? comment.equals(that.comment) : that.comment == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = networks != null ? networks.hashCode() : 0;
+        result = 31 * result + (fields != null ? fields.hashCode() : 0);
+        result = 31 * result + (collectionMethod != null ? collectionMethod.hashCode() : 0);
+        result = 31 * result + (comment != null ? comment.hashCode() : 0);
+        return result;
+    }
+
     /** Accepted networks, e.g. "visa", "mastercard", "amex". */
     @JsonInclude(Include.NON_NULL)
     public Set<String> networks = new LinkedHashSet<>();
