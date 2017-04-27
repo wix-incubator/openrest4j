@@ -37,4 +37,10 @@ public class Channels {
      * param: Google CloudPrint printer-id.
      */
     public static final String cloudprint = "com.google.cloudprint";
+
+    /**
+     * Webhook.
+     * param: URL (must be https).
+     */
+    public static final String webhook = "webhook";
 }
