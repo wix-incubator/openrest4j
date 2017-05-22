@@ -18,9 +18,6 @@ import java.util.*;
 public class Item implements Serializable, Cloneable, Comparable<Item> {
 	private static final long serialVersionUID = 1L;
 	
-	/** Label to mark a featured item ("flag dish"). */
-	public static final String LABEL_FEATURED = "featured";
-    
 	/** Constructs a previously submitted item from persisted data. */
     public Item(String id, String restaurantId, LocalizedString title,
 				LocalizedString description, Integer price, List<Variation> variations,
@@ -134,7 +131,10 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> externalIds = new LinkedHashMap<>();
 
-    /** The item's labels, e.g. "new", "spicy". */
+    /**
+     * The item's labels.
+     * @see com.wix.restaurants.Labels
+     */
     @JsonInclude(Include.NON_DEFAULT)
     public Set<String> labels = new LinkedHashSet<>();
     
