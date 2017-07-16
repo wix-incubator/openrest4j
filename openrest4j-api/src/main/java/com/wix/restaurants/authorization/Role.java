@@ -44,6 +44,15 @@ public class Role implements Serializable, Cloneable {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "Role{" +
+                "organizationId='" + organizationId + '\'' +
+                ", organizationType='" + organizationType + '\'' +
+                ", role='" + role + '\'' +
+                '}';
+    }
+
     /** The organization id. */
     @JsonInclude(Include.NON_NULL)
     public String organizationId;
