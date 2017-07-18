@@ -25,6 +25,26 @@ public class GetRoleRequest extends Request {
         this.clientId = clientId;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        GetRoleRequest that = (GetRoleRequest) o;
+
+        if (accessToken != null ? !accessToken.equals(that.accessToken) : that.accessToken != null) return false;
+        if (organizationId != null ? !organizationId.equals(that.organizationId) : that.organizationId != null) return false;
+        return clientId != null ? clientId.equals(that.clientId) : that.clientId == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = accessToken != null ? accessToken.hashCode() : 0;
+        result = 31 * result + (organizationId != null ? organizationId.hashCode() : 0);
+        result = 31 * result + (clientId != null ? clientId.hashCode() : 0);
+        return result;
+    }
+
     /** An access token. */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public String accessToken;
