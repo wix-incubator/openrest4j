@@ -35,7 +35,47 @@ public class GetOrderRequest extends Request {
     	this.printHeader = printHeader;
     	this.printCsc = printCsc;
     }
-    
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        GetOrderRequest that = (GetOrderRequest) o;
+
+        if (accessToken != null ? !accessToken.equals(that.accessToken) : that.accessToken != null) return false;
+        if (shareToken != null ? !shareToken.equals(that.shareToken) : that.shareToken != null) return false;
+        if (ownerToken != null ? !ownerToken.equals(that.ownerToken) : that.ownerToken != null) return false;
+        if (orderId != null ? !orderId.equals(that.orderId) : that.orderId != null) return false;
+        if (viewMode != null ? !viewMode.equals(that.viewMode) : that.viewMode != null) return false;
+        if (restaurantView != null ? !restaurantView.equals(that.restaurantView) : that.restaurantView != null) return false;
+        if (anonymize != null ? !anonymize.equals(that.anonymize) : that.anonymize != null) return false;
+        if (locale != null ? !locale.equals(that.locale) : that.locale != null) return false;
+        if (viewport != null ? !viewport.equals(that.viewport) : that.viewport != null) return false;
+        if (embed != null ? !embed.equals(that.embed) : that.embed != null) return false;
+        if (printHeader != null ? !printHeader.equals(that.printHeader) : that.printHeader != null) return false;
+        if (printCsc != null ? !printCsc.equals(that.printCsc) : that.printCsc != null) return false;
+        return fields != null ? fields.equals(that.fields) : that.fields == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = accessToken != null ? accessToken.hashCode() : 0;
+        result = 31 * result + (shareToken != null ? shareToken.hashCode() : 0);
+        result = 31 * result + (ownerToken != null ? ownerToken.hashCode() : 0);
+        result = 31 * result + (orderId != null ? orderId.hashCode() : 0);
+        result = 31 * result + (viewMode != null ? viewMode.hashCode() : 0);
+        result = 31 * result + (restaurantView != null ? restaurantView.hashCode() : 0);
+        result = 31 * result + (anonymize != null ? anonymize.hashCode() : 0);
+        result = 31 * result + (locale != null ? locale.hashCode() : 0);
+        result = 31 * result + (viewport != null ? viewport.hashCode() : 0);
+        result = 31 * result + (embed != null ? embed.hashCode() : 0);
+        result = 31 * result + (printHeader != null ? printHeader.hashCode() : 0);
+        result = 31 * result + (printCsc != null ? printCsc.hashCode() : 0);
+        result = 31 * result + (fields != null ? fields.hashCode() : 0);
+        return result;
+    }
+
     @JsonInclude(Include.NON_NULL)
     public String accessToken;
 
