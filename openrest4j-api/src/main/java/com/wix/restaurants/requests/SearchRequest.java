@@ -17,12 +17,11 @@ public class SearchRequest extends Request {
     public SearchRequest() {}
     
     public SearchRequest(Filter filter, Set<String> states, Set<String> features, String query,
-                         Set<String> chargeTypes, Set<String> fields, Integer limit, Set<String> excludeIds) {
+                         Set<String> fields, Integer limit, Set<String> excludeIds) {
     	this.filter = filter;
     	this.states = states;
     	this.features = features;
     	this.query = query;
-    	this.chargeTypes = chargeTypes;
     	this.fields = fields;
     	this.limit = limit;
     	this.excludeIds = excludeIds;
@@ -54,10 +53,7 @@ public class SearchRequest extends Request {
     
     @JsonInclude(Include.NON_NULL)
     public String query;
-    
-    @JsonInclude(Include.NON_NULL)
-    public Set<String> chargeTypes;
-    
+
     @JsonInclude(Include.NON_NULL)
     public Set<String> fields;
     
