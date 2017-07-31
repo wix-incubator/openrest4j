@@ -31,7 +31,7 @@ public class SearchResult extends Restaurant {
                         Map<String, String> compatibilities, Map<String, Availability> availabilities,
                         String state, Boolean closed, String virtualId, Boolean inactive, Set<Product> products,
                         Map<String, Double> features, Double rank, List<TopItem> topItems,
-                        Set<String> deliveryTypes, DispatchInfo deliveryInfo, List<Charge> charges) {
+                        Set<String> deliveryTypes, DispatchInfo deliveryInfo) {
     	super(id, alias, affiliateId, externalIds, created, modified, distributorId, chainId, title, description, contact, externalContacts,
     			address, messages, colorScheme, openTimes, deliveryTimes, deliveryInfos,
     			timezone, currency, locale, locales, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations, minPayments,
@@ -41,7 +41,6 @@ public class SearchResult extends Restaurant {
     	this.topItems = topItems;
     	this.deliveryTypes = deliveryTypes;
     	this.deliveryInfo = deliveryInfo;
-    	this.charges = charges;
     }
     
     /** Default constructor for JSON deserialization. */
@@ -57,8 +56,4 @@ public class SearchResult extends Restaurant {
     /** The "most optimistic" delivery info (optimization to avoid getting the entire deliveryInfos field). */
     @JsonInclude(Include.NON_NULL)
     public DispatchInfo deliveryInfo;
-    
-    /** Available charges (for discounts search). */
-    @JsonInclude(Include.NON_DEFAULT)
-    public List<Charge> charges = new LinkedList<>();
 }
