@@ -22,7 +22,7 @@ public class Restaurant extends Organization {
                       LocalizedString description, Contact contact, Map<String, Contact> externalContacts, Address address,
                       Map<String, LocalizedString> messages, ColorScheme colorScheme,
                       Availability openTimes, Availability deliveryTimes,
-                      List<DispatchInfo> deliveryInfos, Integer maxFutureOrderDelayMins,
+                      List<DispatchInfo> deliveryInfos,
                       String timezone, String currency, Locale locale, Set<Locale> locales,
                       Set<String> paymentTypes, Boolean multiPaymentDisabled, CreditcardsInfo creditcardsInfo,
                       DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations,
@@ -40,7 +40,6 @@ public class Restaurant extends Organization {
         this.openTimes = openTimes;
         this.deliveryTimes = deliveryTimes;
         this.deliveryInfos = deliveryInfos;
-        this.maxFutureOrderDelayMins = maxFutureOrderDelayMins;
         this.paymentTypes = paymentTypes;
         this.multiPaymentDisabled = multiPaymentDisabled;
         this.creditcardsInfo = creditcardsInfo;
@@ -71,7 +70,7 @@ public class Restaurant extends Organization {
     			((colorScheme != null) ? (ColorScheme) colorScheme.clone() : null),
     			((openTimes != null) ? (Availability) openTimes.clone() : null),
     			((deliveryTimes != null) ? (Availability) deliveryTimes.clone() : null),
-                DispatchInfo.clone(deliveryInfos), maxFutureOrderDelayMins,
+                DispatchInfo.clone(deliveryInfos),
     			timezone, currency, locale,
     			((locales != null) ? new LinkedHashSet<>(locales) : null),
     			((paymentTypes != null) ? new LinkedHashSet<>(paymentTypes) : null),
@@ -107,7 +106,6 @@ public class Restaurant extends Organization {
         if (openTimes != null ? !openTimes.equals(that.openTimes) : that.openTimes != null) return false;
         if (deliveryTimes != null ? !deliveryTimes.equals(that.deliveryTimes) : that.deliveryTimes != null) return false;
         if (deliveryInfos != null ? !deliveryInfos.equals(that.deliveryInfos) : that.deliveryInfos != null) return false;
-        if (maxFutureOrderDelayMins != null ? !maxFutureOrderDelayMins.equals(that.maxFutureOrderDelayMins) : that.maxFutureOrderDelayMins != null) return false;
         if (paymentTypes != null ? !paymentTypes.equals(that.paymentTypes) : that.paymentTypes != null) return false;
         if (multiPaymentDisabled != null ? !multiPaymentDisabled.equals(that.multiPaymentDisabled) : that.multiPaymentDisabled != null) return false;
         if (creditcardsInfo != null ? !creditcardsInfo.equals(that.creditcardsInfo) : that.creditcardsInfo != null) return false;
@@ -126,7 +124,6 @@ public class Restaurant extends Organization {
         result = 31 * result + (openTimes != null ? openTimes.hashCode() : 0);
         result = 31 * result + (deliveryTimes != null ? deliveryTimes.hashCode() : 0);
         result = 31 * result + (deliveryInfos != null ? deliveryInfos.hashCode() : 0);
-        result = 31 * result + (maxFutureOrderDelayMins != null ? maxFutureOrderDelayMins.hashCode() : 0);
         result = 31 * result + (paymentTypes != null ? paymentTypes.hashCode() : 0);
         result = 31 * result + (multiPaymentDisabled != null ? multiPaymentDisabled.hashCode() : 0);
         result = 31 * result + (creditcardsInfo != null ? creditcardsInfo.hashCode() : 0);
@@ -163,14 +160,6 @@ public class Restaurant extends Organization {
     @JsonInclude(Include.NON_DEFAULT)
     public List<DispatchInfo> deliveryInfos = new LinkedList<>();
     
-    /**
-     * Latest time up to which future orders will be accepted. For example, a value of 4320 means
-     * that the restaurant is willing to accept future orders up to 3 days in advance. The default
-     * value of 0 means that the restaurant does not allow future orders.
-     */
-    @JsonInclude(Include.NON_DEFAULT)
-    public Integer maxFutureOrderDelayMins = 0;
-
     /** Available payment methods. */
     @JsonInclude(Include.NON_DEFAULT)
     public Set<String> paymentTypes = new LinkedHashSet<>();
