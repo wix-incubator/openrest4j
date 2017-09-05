@@ -14,12 +14,11 @@ public class Menu implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
 
     public Menu(Date modified, List<Item> items, List<MenuSection> sections,
-                List<com.openrest.olo.charges.Charge> chargesV2, List<Charge> charges) {
+                List<com.openrest.olo.charges.Charge> chargesV2) {
     	this.modified = modified;
         this.items = items;
         this.sections = sections;
         this.chargesV2 = chargesV2;
-        this.charges = charges;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -30,7 +29,7 @@ public class Menu implements Serializable, Cloneable {
     	return new Menu(
                 (modified != null) ? (Date) modified.clone() : null,
                 Item.clone(items), MenuSection.clone(sections),
-                com.openrest.olo.charges.Charge.clone(chargesV2), Charge.clone(charges));
+                com.openrest.olo.charges.Charge.clone(chargesV2));
 	}
 
     @Override
@@ -43,8 +42,7 @@ public class Menu implements Serializable, Cloneable {
         if (modified != null ? !modified.equals(menu.modified) : menu.modified != null) return false;
         if (items != null ? !items.equals(menu.items) : menu.items != null) return false;
         if (sections != null ? !sections.equals(menu.sections) : menu.sections != null) return false;
-        if (chargesV2 != null ? !chargesV2.equals(menu.chargesV2) : menu.chargesV2 != null) return false;
-        return !(charges != null ? !charges.equals(menu.charges) : menu.charges != null);
+        return !(chargesV2 != null ? !chargesV2.equals(menu.chargesV2) : menu.chargesV2 != null);
     }
 
     @Override
@@ -53,7 +51,6 @@ public class Menu implements Serializable, Cloneable {
         result = 31 * result + (items != null ? items.hashCode() : 0);
         result = 31 * result + (sections != null ? sections.hashCode() : 0);
         result = 31 * result + (chargesV2 != null ? chargesV2.hashCode() : 0);
-        result = 31 * result + (charges != null ? charges.hashCode() : 0);
         return result;
     }
 
@@ -71,12 +68,4 @@ public class Menu implements Serializable, Cloneable {
 
     @JsonInclude(Include.NON_DEFAULT)
     public List<com.openrest.olo.charges.Charge> chargesV2 = new LinkedList<>();
-    
-    /**
-     * Charges v1.
-     * Scheduled for deprecation on 2015-04-01 (use chargesV2). 
-     */
-    @Deprecated
-    @JsonInclude(Include.NON_DEFAULT)
-    public List<Charge> charges = new LinkedList<>();
 }
