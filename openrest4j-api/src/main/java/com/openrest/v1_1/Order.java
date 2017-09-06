@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.openrest.olo.charges.OrderCharge;
 import com.openrest.olo.dispatches.Dispatch;
-import com.wix.restaurants.payments.Payment;
 import com.wix.restaurants.i18n.Locale;
+import com.wix.restaurants.payments.Payment;
 
 import java.io.Serializable;
 import java.util.*;
@@ -19,7 +19,7 @@ public class Order implements Serializable, Cloneable {
     public Order(String id, Map<String, String> externalIds, String distributorId, String chainId, String restaurantId,
     		Locale locale, List<OrderItem> orderItems,
     		String comment, Integer price, String currency, Dispatch delivery, Contact contact, List<Payment> payments,
-            Integer takeoutPacks, List<Charge> charges, List<OrderCharge> orderCharges,
+            Integer takeoutPacks, List<OrderCharge> orderCharges,
             Date created, Date received, Date modified, Date submitAt,
             User user, ClubMember clubMember, String status, String shareToken, String ownerToken,
             String affiliate, String developer, String source, String platform, String ref,
@@ -39,7 +39,6 @@ public class Order implements Serializable, Cloneable {
         this.contact = contact;
         this.payments = payments;
         this.takeoutPacks = takeoutPacks;
-        this.charges = charges;
         this.orderCharges = orderCharges;
         this.created = created;
         this.received = received;
@@ -70,7 +69,7 @@ public class Order implements Serializable, Cloneable {
     			distributorId, chainId, restaurantId, locale, OrderItem.clone(orderItems), comment, price, currency,
     			((delivery != null) ? (Dispatch) delivery.clone() : null),
     			((contact != null) ? (Contact) contact.clone() : null),
-    			Payment.clone(payments), takeoutPacks, Charge.clone(charges), OrderCharge.clone(orderCharges),
+    			Payment.clone(payments), takeoutPacks, OrderCharge.clone(orderCharges),
                 (created != null) ? (Date) created.clone() : null,
                 (received != null) ? (Date) received.clone() : null,
                 (modified != null) ? (Date) modified.clone() : null,
@@ -91,7 +90,6 @@ public class Order implements Serializable, Cloneable {
 
         if (affiliate != null ? !affiliate.equals(order.affiliate) : order.affiliate != null) return false;
         if (chainId != null ? !chainId.equals(order.chainId) : order.chainId != null) return false;
-        if (charges != null ? !charges.equals(order.charges) : order.charges != null) return false;
         if (clubMember != null ? !clubMember.equals(order.clubMember) : order.clubMember != null) return false;
         if (comment != null ? !comment.equals(order.comment) : order.comment != null) return false;
         if (contact != null ? !contact.equals(order.contact) : order.contact != null) return false;
@@ -143,7 +141,6 @@ public class Order implements Serializable, Cloneable {
         result = 31 * result + (contact != null ? contact.hashCode() : 0);
         result = 31 * result + (payments != null ? payments.hashCode() : 0);
         result = 31 * result + (takeoutPacks != null ? takeoutPacks.hashCode() : 0);
-        result = 31 * result + (charges != null ? charges.hashCode() : 0);
         result = 31 * result + (orderCharges != null ? orderCharges.hashCode() : 0);
         result = 31 * result + (created != null ? created.hashCode() : 0);
         result = 31 * result + (submitAt != null ? submitAt.hashCode() : 0);
@@ -223,17 +220,8 @@ public class Order implements Serializable, Cloneable {
      */
     @JsonInclude(Include.NON_NULL)
     public Integer takeoutPacks;
-    
-    /**
-	 * Extra charges or discounts associated with the order, ordered by priority
-	 * in descending order.
-	 * 
-     * Scheduled for deprecation on 2015-04-01 (use orderCharges). 
-	 */
-    @Deprecated
-    @JsonInclude(Include.NON_DEFAULT)
-    public List<Charge> charges = new LinkedList<>();
-    
+
+    /** Extra charges associated with the order, e.g. tax, discounts. */
     @JsonInclude(Include.NON_DEFAULT)
     public List<OrderCharge> orderCharges = new LinkedList<>();
 

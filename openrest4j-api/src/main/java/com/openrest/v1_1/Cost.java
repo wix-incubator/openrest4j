@@ -12,7 +12,18 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Cost implements Serializable, Comparable<Cost>, Cloneable  {
 	private static final long serialVersionUID = 1L;
-    
+
+    /** Amount rule is a fixed number that's added once to all applicable items. */
+    public static final String AMOUNT_RULE_TYPE_FIXED = "fixed";
+    /** Amount rule is a fixed number that's added to each applicable item individually. */
+    public static final String AMOUNT_RULE_TYPE_FIXED_PER_ITEM = "fixed_per_item";
+    /** Amount rule is percentage of some baseline amount. */
+    public static final String AMOUNT_RULE_TYPE_PERCENTAGE = "percentage";
+    /** Amount rule is ignored, amount can take any number. */
+    public static final String AMOUNT_RULE_TYPE_ANY = "any";
+    /** Amount rule is variable, depending on external factors. */
+    public static final String AMOUNT_RULE_TYPE_VARIABLE = "variable";
+
 	/** Commission charged for online orders. */
     public static final String COST_TYPE_COMMISSION = "commission";
 	/** Costs for masked phone calls. */
@@ -89,9 +100,9 @@ public class Cost implements Serializable, Comparable<Cost>, Cloneable  {
     @JsonInclude(Include.NON_DEFAULT)
     public Double priority = 0.0;
     
-    /** Base cost amount rule type (@see Charge.amountRuleType) . */
+    /** Base cost amount rule type. */
     @JsonInclude(Include.NON_DEFAULT)
-    public String amountRuleType = Charge.AMOUNT_RULE_TYPE_VARIABLE;
+    public String amountRuleType = AMOUNT_RULE_TYPE_VARIABLE;
     
     /**
      * Base cost amount rule (cents for fixed amounts, basis points for percentage
