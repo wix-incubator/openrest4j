@@ -101,7 +101,12 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     @JsonInclude(Include.NON_NULL)
     public String id;
     
-    /** The organization's current alias. */
+    /**
+     * The organization's current alias.
+     *
+     * Scheduled for deprecation on 2017-12-01.
+     */
+    @Deprecated
     @JsonInclude(Include.NON_NULL)
     public String alias;
     
@@ -134,7 +139,12 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     @JsonInclude(Include.NON_DEFAULT)
     public LocalizedString description = LocalizedString.empty;
     
-    /** The color scheme. */
+    /**
+     * The color scheme.
+     *
+     * Scheduled for deprecation on 2017-12-01.
+     */
+    @Deprecated
     @JsonInclude(Include.NON_NULL)
     public ColorScheme colorScheme;
 
@@ -147,7 +157,10 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
      * For example, a redirect phone number in some portal.
      * 
      * Developers should use unique keys, e.g. "com.company.product".
+     *
+     * Scheduled for deprecation on 2017-12-01.
      */
+    @Deprecated
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, Contact> externalContacts = new LinkedHashMap<>();
 
@@ -183,11 +196,21 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, LocalizedString> messages = new LinkedHashMap<>();
     
-    /** The organization's main web-site URL. */
+    /**
+     * The organization's main web-site URL.
+     *
+     * Scheduled for deprecation on 2017-12-01.
+     */
+    @Deprecated
     @JsonInclude(Include.NON_NULL)
     public String link;
     
-    /** The organization's online ordering domain. */
+    /**
+     * The organization's online ordering domain.
+     *
+     * Scheduled for deprecation on 2017-12-01.
+     */
+    @Deprecated
     @JsonInclude(Include.NON_NULL)
     public String domain;
     
@@ -258,15 +281,30 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean closed = Boolean.FALSE;
     
-    /** For virtual organizations, marks the "real" organization id. */
+    /**
+     * For virtual organizations, marks the "real" organization id.
+     *
+     * Scheduled for deprecation on 2017-12-01.
+     */
+    @Deprecated
     @JsonInclude(Include.NON_NULL)
     public String virtualId;
-    
-    /** Whether the organization has been activated (supplied billing information). */
+
+    /**
+     * Whether the organization has been activated (supplied billing information).
+     *
+     * Scheduled for deprecation on 2017-12-01.
+     */
+    @Deprecated
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean inactive = Boolean.FALSE;
     
-    /** @see State#ALL_STATES */
+    /**
+     * @see State#ALL_STATES
+     *
+     * Scheduled for deprecation on 2017-12-01.
+     */
+    @Deprecated
     @JsonInclude(Include.NON_DEFAULT)
     public String state = State.STATE_OPERATIONAL;
     
@@ -274,7 +312,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     @JsonInclude(Include.NON_DEFAULT)
     public Set<Product> products = new LinkedHashSet<>();
     
-    /** The organization's Openrest rank (higher is better). */
+    /** The organization's popularity rank (higher is better). */
     @JsonInclude(Include.NON_NULL)
     public Double rank;
     
