@@ -20,8 +20,7 @@ public class SearchResult extends Restaurant {
                         String distributorId, String chainId, LocalizedString title,
                         LocalizedString description, Contact contact, Map<String, Contact> externalContacts, Address address,
                         Map<String, LocalizedString> messages, ColorScheme colorScheme,
-                        Availability openTimes, Availability deliveryTimes,
-                        List<DispatchInfo> deliveryInfos,
+                        Availability openTimes, List<DispatchInfo> deliveryInfos,
                         String timezone, String currency, Locale locale, Set<Locale> locales,
                         Set<String> paymentTypes, Boolean multiPaymentDisabled, CreditcardsInfo creditcardsInfo,
                         DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations,
@@ -33,7 +32,7 @@ public class SearchResult extends Restaurant {
                         Map<String, Double> features, Double rank, List<TopItem> topItems,
                         Set<String> deliveryTypes, DispatchInfo deliveryInfo) {
     	super(id, alias, affiliateId, externalIds, created, modified, distributorId, chainId, title, description, contact, externalContacts,
-    			address, messages, colorScheme, openTimes, deliveryTimes, deliveryInfos,
+    			address, messages, colorScheme, openTimes, deliveryInfos,
     			timezone, currency, locale, locales, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations, minPayments,
     			antiFraudDisabled, link, domain, altDomains, picture, icon, wideLogo, noImagePicture, blobs,
     			apps, seo, properties, compatibilities, availabilities, state, closed, virtualId, inactive, products, features, rank);
