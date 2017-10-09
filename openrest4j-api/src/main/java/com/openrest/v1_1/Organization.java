@@ -38,11 +38,10 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
                            Locale locale, Set<Locale> locales, Map<String, LocalizedString> messages, ColorScheme colorScheme,
                            Contact contact, Map<String, Contact> externalContacts,
                            Address address, String timezone, String currency,
-                           String link, String domain, Set<String> altDomains,
                            List<AppInfo> apps, Seo seo, Map<String, String> properties,
                            Map<String, String> compatibilities, Map<String, Availability> availabilities,
                            String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
-                           String state, Boolean closed, String virtualId, Boolean inactive, Set<Product> products, Double rank) {
+                           String state, Boolean closed, Set<Product> products, Double rank) {
 
     	this.id = id;
     	this.alias = alias;
@@ -61,9 +60,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     	this.address = address;
     	this.timezone = timezone;
     	this.currency = currency;
-    	this.link = link;
-    	this.domain = domain;
-    	this.altDomains = altDomains;
     	this.apps = apps;
     	this.seo = seo;
     	this.properties = properties;
@@ -76,8 +72,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     	this.blobs = blobs;
     	this.state = state;
     	this.closed = closed;
-    	this.virtualId = virtualId;
-    	this.inactive = inactive;
     	this.products = products;
     	this.rank = rank;
     }
@@ -196,31 +190,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, LocalizedString> messages = new LinkedHashMap<>();
     
-    /**
-     * The organization's main web-site URL.
-     *
-     * Scheduled for deprecation on 2017-12-01.
-     */
-    @Deprecated
-    @JsonInclude(Include.NON_NULL)
-    public String link;
-    
-    /**
-     * The organization's online ordering domain.
-     *
-     * Scheduled for deprecation on 2017-12-01.
-     */
-    @Deprecated
-    @JsonInclude(Include.NON_NULL)
-    public String domain;
-    
-    /**
-     * The organization's online ordering alternative / legacy domains.
-     * These should redirect to the main domain.
-     */
-    @JsonInclude(Include.NON_DEFAULT)
-    public Set<String> altDomains = new LinkedHashSet<>();
-    
     /** The organization's picture URL (direct link), or null if unavailable. */
     @JsonInclude(Include.NON_NULL)
     public String picture;
@@ -280,24 +249,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
      */
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean closed = Boolean.FALSE;
-    
-    /**
-     * For virtual organizations, marks the "real" organization id.
-     *
-     * Scheduled for deprecation on 2017-12-01.
-     */
-    @Deprecated
-    @JsonInclude(Include.NON_NULL)
-    public String virtualId;
-
-    /**
-     * Whether the organization has been activated (supplied billing information).
-     *
-     * Scheduled for deprecation on 2017-12-01.
-     */
-    @Deprecated
-    @JsonInclude(Include.NON_DEFAULT)
-    public Boolean inactive = Boolean.FALSE;
     
     /**
      * @see State#ALL_STATES

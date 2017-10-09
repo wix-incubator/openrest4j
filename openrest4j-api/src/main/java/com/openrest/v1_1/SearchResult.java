@@ -24,18 +24,18 @@ public class SearchResult extends Restaurant {
                         String timezone, String currency, Locale locale, Set<Locale> locales,
                         Set<String> paymentTypes, Boolean multiPaymentDisabled, CreditcardsInfo creditcardsInfo,
                         DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations,
-                        Map<String, Integer> minPayments, Boolean antiFraudDisabled, String link, String domain,
-                        Set<String> altDomains, String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
+                        Map<String, Integer> minPayments, Boolean antiFraudDisabled,
+                        String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
                         List<AppInfo> apps, Seo seo, Map<String, String> properties,
                         Map<String, String> compatibilities, Map<String, Availability> availabilities,
-                        String state, Boolean closed, String virtualId, Boolean inactive, Set<Product> products,
+                        String state, Boolean closed, Set<Product> products,
                         Map<String, Double> features, Double rank, List<TopItem> topItems,
                         Set<String> deliveryTypes, DispatchInfo deliveryInfo) {
     	super(id, alias, affiliateId, externalIds, created, modified, distributorId, chainId, title, description, contact, externalContacts,
     			address, messages, colorScheme, openTimes, deliveryInfos,
     			timezone, currency, locale, locales, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations, minPayments,
-    			antiFraudDisabled, link, domain, altDomains, picture, icon, wideLogo, noImagePicture, blobs,
-    			apps, seo, properties, compatibilities, availabilities, state, closed, virtualId, inactive, products, features, rank);
+    			antiFraudDisabled, picture, icon, wideLogo, noImagePicture, blobs,
+    			apps, seo, properties, compatibilities, availabilities, state, closed, products, features, rank);
     	
     	this.topItems = topItems;
     	this.deliveryTypes = deliveryTypes;

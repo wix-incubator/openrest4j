@@ -25,14 +25,14 @@ public class Restaurant extends Organization {
                       String timezone, String currency, Locale locale, Set<Locale> locales,
                       Set<String> paymentTypes, Boolean multiPaymentDisabled, CreditcardsInfo creditcardsInfo,
                       DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations,
-                      Map<String, Integer> minPayments, Boolean antiFraudDisabled, String link, String domain,
-                      Set<String> altDomains, String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
+                      Map<String, Integer> minPayments, Boolean antiFraudDisabled,
+                      String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
                       List<AppInfo> apps, Seo seo, Map<String, String> properties, Map<String, String> compatibilities,
                       Map<String, Availability> availabilities,
-                      String state, Boolean closed, String virtualId, Boolean inactive, Set<Product> products, Map<String, Double> features, Double rank) {
+                      String state, Boolean closed, Set<Product> products, Map<String, Double> features, Double rank) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
-    			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties, compatibilities,
-                availabilities, picture, icon, wideLogo, noImagePicture, blobs, state, closed, virtualId, inactive, products, rank);
+    			contact, externalContacts, address, timezone, currency, apps, seo, properties, compatibilities,
+                availabilities, picture, icon, wideLogo, noImagePicture, blobs, state, closed, products, rank);
         
     	this.distributorId = distributorId;
     	this.chainId = chainId;
@@ -77,16 +77,13 @@ public class Restaurant extends Organization {
                 ((orders != null) ? (OrdersInfo) orders.clone() : null),
                 ((reservations != null) ? (ReservationsInfo) reservations.clone() : null),
     			((minPayments != null) ? new LinkedHashMap<>(minPayments) : null),
-    			antiFraudDisabled, link, domain,
-    			((altDomains != null) ? new LinkedHashSet<>(altDomains) : null),
-    			picture, icon, wideLogo, noImagePicture, Blob.clone(blobs),
+    			antiFraudDisabled, picture, icon, wideLogo, noImagePicture, Blob.clone(blobs),
     			AppInfo.clone(apps),
     			((seo != null) ? (Seo) seo.clone() : null),
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
     			((compatibilities != null) ? new LinkedHashMap<>(compatibilities) : null),
                 Availability.clone(availabilities),
-    			state, closed, virtualId, inactive,
-    			Product.clone(products),
+    			state, closed, Product.clone(products),
     			((features != null) ? new LinkedHashMap<>(features) : null),
     			rank);
 	}
