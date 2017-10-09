@@ -88,7 +88,6 @@ import java.io.Serializable;
 	@Type(value = SetPropertyRequest.class, name = SetPropertyRequest.TYPE),
 	@Type(value = GeocodeRequest.class, name = GeocodeRequest.TYPE),
 	@Type(value = ToggleProductRequest.class, name = ToggleProductRequest.TYPE),
-    @Type(value = ToggleInactiveRequest.class, name = ToggleInactiveRequest.TYPE),
 	@Type(value = QueryUsageRequest.class, name = QueryUsageRequest.TYPE),
 	@Type(value = GetInvrecRequest.class, name = GetInvrecRequest.TYPE),
 	@Type(value = AcceptDocumentRequest.class, name = AcceptDocumentRequest.TYPE),
