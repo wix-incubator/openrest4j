@@ -24,8 +24,7 @@ public class SearchResult extends Restaurant {
                         String timezone, String currency, Locale locale, Set<Locale> locales,
                         Set<String> paymentTypes, Boolean multiPaymentDisabled, CreditcardsInfo creditcardsInfo,
                         DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations,
-                        Map<String, Integer> minPayments, Boolean antiFraudDisabled,
-                        String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
+                        Map<String, Integer> minPayments, Boolean antiFraudDisabled, Map<String, Blob> blobs,
                         List<AppInfo> apps, Seo seo, Map<String, String> properties,
                         Map<String, String> compatibilities, Map<String, Availability> availabilities,
                         String state, Boolean closed, Set<Product> products,
@@ -34,8 +33,7 @@ public class SearchResult extends Restaurant {
     	super(id, alias, affiliateId, externalIds, created, modified, distributorId, chainId, title, description, contact, externalContacts,
     			address, messages, colorScheme, openTimes, deliveryInfos,
     			timezone, currency, locale, locales, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations, minPayments,
-    			antiFraudDisabled, picture, icon, wideLogo, noImagePicture, blobs,
-    			apps, seo, properties, compatibilities, availabilities, state, closed, products, features, rank);
+    			antiFraudDisabled, blobs, apps, seo, properties, compatibilities, availabilities, state, closed, products, features, rank);
     	
     	this.topItems = topItems;
     	this.deliveryTypes = deliveryTypes;

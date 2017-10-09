@@ -40,7 +40,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
                            Address address, String timezone, String currency,
                            List<AppInfo> apps, Seo seo, Map<String, String> properties,
                            Map<String, String> compatibilities, Map<String, Availability> availabilities,
-                           String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
+                           Map<String, Blob> blobs,
                            String state, Boolean closed, Set<Product> products, Double rank) {
 
     	this.id = id;
@@ -65,10 +65,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     	this.properties = properties;
     	this.compatibilities = compatibilities;
         this.availabilities = availabilities;
-    	this.picture = picture;
-    	this.icon = icon;
-    	this.wideLogo = wideLogo;
-    	this.noImagePicture = noImagePicture;
     	this.blobs = blobs;
     	this.state = state;
     	this.closed = closed;
@@ -189,22 +185,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
      */
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, LocalizedString> messages = new LinkedHashMap<>();
-    
-    /** The organization's picture URL (direct link), or null if unavailable. */
-    @JsonInclude(Include.NON_NULL)
-    public String picture;
-    
-    /** The organization's icon URL (direct link), or null if unavailable. */
-    @JsonInclude(Include.NON_NULL)
-    public String icon;
-    
-    /** The organization's wide logo URL (direct link), or null if unavailable. */
-    @JsonInclude(Include.NON_NULL)
-    public String wideLogo;
-    
-    /** The picture shown when a picture is missing. */
-    @JsonInclude(Include.NON_NULL)
-    public String noImagePicture;
     
     /** The organization's applications. */
     @JsonInclude(Include.NON_DEFAULT)

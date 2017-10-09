@@ -25,11 +25,11 @@ public class Distributor extends Organization {
 					   List<AppInfo> apps, Seo seo,
 					   Map<String, String> properties, Map<String, String> compatibilities,
 					   Map<String, Availability> availabilities, String facebookAppId, String tld,
-					   String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
+					   Map<String, Blob> blobs,
 					   String state, Boolean closed, Set<Product> products, Double rank) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, externalContacts, address, timezone, currency, apps, seo, properties,
-				compatibilities, availabilities, picture, icon, wideLogo, noImagePicture, blobs, state, closed, products, rank);
+				compatibilities, availabilities, blobs, state, closed, products, rank);
     	
     	this.facebookAppId = facebookAppId;
     	this.tld = tld;
@@ -69,7 +69,7 @@ public class Distributor extends Organization {
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
     			((compatibilities != null) ? new LinkedHashMap<>(compatibilities) : null),
 				Availability.clone(availabilities),
-    			facebookAppId, tld, picture, icon, wideLogo, noImagePicture, Blob.clone(blobs),
+    			facebookAppId, tld, Blob.clone(blobs),
     			state, closed, Product.clone(products), rank);
 	}
 }

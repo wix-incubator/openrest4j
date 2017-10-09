@@ -25,14 +25,13 @@ public class Restaurant extends Organization {
                       String timezone, String currency, Locale locale, Set<Locale> locales,
                       Set<String> paymentTypes, Boolean multiPaymentDisabled, CreditcardsInfo creditcardsInfo,
                       DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations,
-                      Map<String, Integer> minPayments, Boolean antiFraudDisabled,
-                      String picture, String icon, String wideLogo, String noImagePicture, Map<String, Blob> blobs,
+                      Map<String, Integer> minPayments, Boolean antiFraudDisabled, Map<String, Blob> blobs,
                       List<AppInfo> apps, Seo seo, Map<String, String> properties, Map<String, String> compatibilities,
                       Map<String, Availability> availabilities,
                       String state, Boolean closed, Set<Product> products, Map<String, Double> features, Double rank) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, externalContacts, address, timezone, currency, apps, seo, properties, compatibilities,
-                availabilities, picture, icon, wideLogo, noImagePicture, blobs, state, closed, products, rank);
+                availabilities, blobs, state, closed, products, rank);
         
     	this.distributorId = distributorId;
     	this.chainId = chainId;
@@ -77,8 +76,7 @@ public class Restaurant extends Organization {
                 ((orders != null) ? (OrdersInfo) orders.clone() : null),
                 ((reservations != null) ? (ReservationsInfo) reservations.clone() : null),
     			((minPayments != null) ? new LinkedHashMap<>(minPayments) : null),
-    			antiFraudDisabled, picture, icon, wideLogo, noImagePicture, Blob.clone(blobs),
-    			AppInfo.clone(apps),
+    			antiFraudDisabled, Blob.clone(blobs), AppInfo.clone(apps),
     			((seo != null) ? (Seo) seo.clone() : null),
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
     			((compatibilities != null) ? new LinkedHashMap<>(compatibilities) : null),
