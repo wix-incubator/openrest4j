@@ -24,7 +24,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
 				Condition displayCondition, Condition condition,
 				Availability availability, String picture, Map<String, Blob> blobs,
 				Map<String, String> externalIds, Set<String> labels,
-				Map<String, String> properties, Stock stock, Double rank) {
+				Map<String, String> properties, Stock stock, Integer maxCommentLength, Double rank) {
         this.id = id;
         this.restaurantId = restaurantId;
         this.title = title;
@@ -40,6 +40,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
         this.labels = labels;
         this.properties = properties;
         this.stock = stock;
+        this.maxCommentLength = maxCommentLength;
         this.rank = rank;
     }
 
@@ -72,7 +73,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     			((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
     			((labels != null) ? new LinkedHashSet<>(labels) : null),
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
-    			stock, rank);
+    			stock, maxCommentLength, rank);
 	}
 
     /** The item's unique id. */
@@ -148,7 +149,16 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     /** (read-only) Stock information (null means inventory is not managed for this item). */
     @JsonInclude(Include.NON_NULL)
     public Stock stock;
-    
+
+    /**
+     * Maximum allowed length (in characters) for order item comment, or null if unlimited.
+     * A value of 0 means comments are disabled for this item.
+     *
+     * @see OrderItem#comment
+     */
+    @JsonInclude(Include.NON_NULL)
+    public Integer maxCommentLength;
+
     /** The item's Openrest rank (higher is better). */
     @JsonInclude(Include.NON_NULL)
     public Double rank;
@@ -183,6 +193,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
         if (labels != null ? !labels.equals(item.labels) : item.labels != null) return false;
         if (properties != null ? !properties.equals(item.properties) : item.properties != null) return false;
         if (stock != null ? !stock.equals(item.stock) : item.stock != null) return false;
+        if (maxCommentLength != null ? !maxCommentLength.equals(item.maxCommentLength) : item.maxCommentLength != null) return false;
         return rank != null ? rank.equals(item.rank) : item.rank == null;
     }
 
@@ -203,6 +214,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
         result = 31 * result + (labels != null ? labels.hashCode() : 0);
         result = 31 * result + (properties != null ? properties.hashCode() : 0);
         result = 31 * result + (stock != null ? stock.hashCode() : 0);
+        result = 31 * result + (maxCommentLength != null ? maxCommentLength.hashCode() : 0);
         result = 31 * result + (rank != null ? rank.hashCode() : 0);
         return result;
     }
