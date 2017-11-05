@@ -1,12 +1,13 @@
 package com.wix.restaurants.requests;
 
+
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.openrest.v1_1.ClientId;
-import com.wix.pay.creditcard.tokenizer.model.CreditCardToken;
+import com.wix.pay.smaug.client.model.CreditCardToken;
 
-import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SaveCardsRequest extends Request {

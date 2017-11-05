@@ -61,8 +61,8 @@
 		</dependency>
         <dependency>
             <groupId>com.wix.pay</groupId>
-            <artifactId>credit-card-tokenizer-api</artifactId>
-            <version>${com.wix.pay.creditcard.tokenizer.version}</version>
+            <artifactId>smaug-client-api</artifactId>
+            <version>${com.wix.pay.smaug.client.version}</version>
         </dependency>
 
         <!-- Test Dependencies -->

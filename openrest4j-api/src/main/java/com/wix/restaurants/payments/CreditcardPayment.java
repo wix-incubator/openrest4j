@@ -1,11 +1,12 @@
 package com.wix.restaurants.payments;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.wix.pay.creditcard.tokenizer.model.CreditCardToken;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.wix.pay.smaug.client.model.CreditCardToken;
+
 
 /**
  * Payment with a credit/debit card.
