@@ -13,21 +13,16 @@ public class MapWixMetasiteRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public MapWixMetasiteRequest() {}
 
-    public MapWixMetasiteRequest(String accessToken, String appKey, String instance, String metasiteId, String organizationId) {
+    public MapWixMetasiteRequest(String accessToken, String instance, String metasiteId, String organizationId) {
         this.accessToken = accessToken;
-        this.appKey = appKey;
         this.instance = instance;
         this.metasiteId = metasiteId;
         this.organizationId = organizationId;
     }
 
-    /** Access token (alternative: specify appKey and instance). */
+    /** Access token (alternative: specify instance). */
     @JsonInclude(Include.NON_NULL)
     public String accessToken;
-
-    /** Key of the Wix app for which the instance belongs to (alternative: specify accessToken). */
-    @JsonInclude(Include.NON_NULL)
-    public String appKey;
 
     /**
      * App instance of a Wix site owner (alternative: specify accessToken).
