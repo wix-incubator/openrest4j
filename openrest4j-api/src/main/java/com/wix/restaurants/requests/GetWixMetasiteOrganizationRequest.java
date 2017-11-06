@@ -29,7 +29,6 @@ public class GetWixMetasiteOrganizationRequest extends Request {
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean full = Boolean.FALSE;
 
-    /** If full=false */
     @JsonInclude(Include.NON_NULL)
     public Set<String> fields;
 }
