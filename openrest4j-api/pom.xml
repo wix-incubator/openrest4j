@@ -33,7 +33,7 @@
     <parent>
         <groupId>com.wix.openrest</groupId>
         <artifactId>openrest4j-all</artifactId>
-        <version>1.26.0-SNAPSHOT</version>
+        <version>1.27.0-SNAPSHOT</version>
     </parent>
 
 
@@ -61,8 +61,8 @@
 		</dependency>
         <dependency>
             <groupId>com.wix.pay</groupId>
-            <artifactId>credit-card-tokenizer-api</artifactId>
-            <version>${com.wix.pay.creditcard.tokenizer.version}</version>
+            <artifactId>smaug-client-api</artifactId>
+            <version>${com.wix.pay.smaug.client.version}</version>
         </dependency>
 
         <!-- Test Dependencies -->
