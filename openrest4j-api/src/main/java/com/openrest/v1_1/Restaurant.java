@@ -25,7 +25,7 @@ public class Restaurant extends Organization {
                       String timezone, String currency, Locale locale, Set<Locale> locales,
                       Set<String> paymentTypes, Boolean multiPaymentDisabled, CreditcardsInfo creditcardsInfo,
                       DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations,
-                      Map<String, Integer> minPayments, Boolean antiFraudDisabled, Map<String, Blob> blobs,
+                      Boolean antiFraudDisabled, Map<String, Blob> blobs,
                       List<AppInfo> apps, Seo seo, Map<String, String> properties, Map<String, String> compatibilities,
                       Map<String, Availability> availabilities,
                       String state, Boolean closed, Set<Product> products, Map<String, Double> features, Double rank) {
@@ -43,7 +43,6 @@ public class Restaurant extends Organization {
         this.deliveriesInfo = deliveriesInfo;
         this.orders = orders;
         this.reservations = reservations;
-        this.minPayments = minPayments;
         this.antiFraudDisabled = antiFraudDisabled;
         this.features = features;
     }
@@ -75,7 +74,6 @@ public class Restaurant extends Organization {
                 ((deliveriesInfo != null) ? (DeliveriesInfo) deliveriesInfo.clone() : null),
                 ((orders != null) ? (OrdersInfo) orders.clone() : null),
                 ((reservations != null) ? (ReservationsInfo) reservations.clone() : null),
-    			((minPayments != null) ? new LinkedHashMap<>(minPayments) : null),
     			antiFraudDisabled, Blob.clone(blobs), AppInfo.clone(apps),
     			((seo != null) ? (Seo) seo.clone() : null),
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
@@ -103,7 +101,6 @@ public class Restaurant extends Organization {
         if (deliveriesInfo != null ? !deliveriesInfo.equals(that.deliveriesInfo) : that.deliveriesInfo != null) return false;
         if (orders != null ? !orders.equals(that.orders) : that.orders != null) return false;
         if (reservations != null ? !reservations.equals(that.reservations) : that.reservations != null) return false;
-        if (minPayments != null ? !minPayments.equals(that.minPayments) : that.minPayments != null) return false;
         if (antiFraudDisabled != null ? !antiFraudDisabled.equals(that.antiFraudDisabled) : that.antiFraudDisabled != null) return false;
         return features != null ? features.equals(that.features) : that.features == null;
     }
@@ -120,7 +117,6 @@ public class Restaurant extends Organization {
         result = 31 * result + (deliveriesInfo != null ? deliveriesInfo.hashCode() : 0);
         result = 31 * result + (orders != null ? orders.hashCode() : 0);
         result = 31 * result + (reservations != null ? reservations.hashCode() : 0);
-        result = 31 * result + (minPayments != null ? minPayments.hashCode() : 0);
         result = 31 * result + (antiFraudDisabled != null ? antiFraudDisabled.hashCode() : 0);
         result = 31 * result + (features != null ? features.hashCode() : 0);
         return result;
@@ -162,14 +158,6 @@ public class Restaurant extends Organization {
     @JsonInclude(Include.NON_NULL)
     public ReservationsInfo reservations;
 
-    /**
-     * Maps available payment types to minimal charge allowed per payment, e.g.
-     * "credit cards can only be used for paying $5 or more". Non-referenced
-     * payment types have zero minimum by default.
-     */
-    @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, Integer> minPayments = new LinkedHashMap<>();
-    
     /** Whether or not the fraud prevention feature is turned off. */
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean antiFraudDisabled = Boolean.FALSE;
