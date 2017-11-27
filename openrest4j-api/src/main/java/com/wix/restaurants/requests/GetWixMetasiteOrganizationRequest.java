@@ -21,6 +21,26 @@ public class GetWixMetasiteOrganizationRequest extends Request {
         this.fields = fields;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        GetWixMetasiteOrganizationRequest that = (GetWixMetasiteOrganizationRequest) o;
+
+        if (metasiteId != null ? !metasiteId.equals(that.metasiteId) : that.metasiteId != null) return false;
+        if (full != null ? !full.equals(that.full) : that.full != null) return false;
+        return fields != null ? fields.equals(that.fields) : that.fields == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = metasiteId != null ? metasiteId.hashCode() : 0;
+        result = 31 * result + (full != null ? full.hashCode() : 0);
+        result = 31 * result + (fields != null ? fields.hashCode() : 0);
+        return result;
+    }
+
     /** A Wix MetaSite ID. */
     @JsonInclude(Include.NON_NULL)
     public String metasiteId;
