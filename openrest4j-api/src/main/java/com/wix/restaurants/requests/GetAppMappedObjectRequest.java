@@ -20,7 +20,27 @@ public class GetAppMappedObjectRequest extends Request {
     	this.full = full;
     	this.fields = fields;
     }
-    
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        GetAppMappedObjectRequest that = (GetAppMappedObjectRequest) o;
+
+        if (appId != null ? !appId.equals(that.appId) : that.appId != null) return false;
+        if (full != null ? !full.equals(that.full) : that.full != null) return false;
+        return fields != null ? fields.equals(that.fields) : that.fields == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = appId != null ? appId.hashCode() : 0;
+        result = 31 * result + (full != null ? full.hashCode() : 0);
+        result = 31 * result + (fields != null ? fields.hashCode() : 0);
+        return result;
+    }
+
     @JsonInclude(Include.NON_NULL)
     public AppId appId;
     
