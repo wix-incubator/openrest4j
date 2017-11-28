@@ -45,7 +45,6 @@ public class GetAppMappedObjectRequest extends Request {
     public AppId appId;
     
     /** Whether or not the "full" organization object is requested. */
-    @JsonInclude(Include.NON_DEFAULT)
     public Boolean full = Boolean.TRUE;
 
     /** If full=false */
