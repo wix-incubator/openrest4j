@@ -59,8 +59,30 @@ public class Portal extends Organization {
 				Availability.clone(availabilities), Blob.clone(blobs),
     			state, closed, Product.clone(products), rank, PortalMenuCategory.cloneList(categories));
 	}
-    
-    /** The distributor in charge of this portal. */
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+
+		Portal portal = (Portal) o;
+
+		if (distributorId != null ? !distributorId.equals(portal.distributorId) : portal.distributorId != null) return false;
+		if (filter != null ? !filter.equals(portal.filter) : portal.filter != null) return false;
+		return categories != null ? categories.equals(portal.categories) : portal.categories == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = 31 * result + (distributorId != null ? distributorId.hashCode() : 0);
+		result = 31 * result + (filter != null ? filter.hashCode() : 0);
+		result = 31 * result + (categories != null ? categories.hashCode() : 0);
+		return result;
+	}
+
+	/** The distributor in charge of this portal. */
     @JsonInclude(Include.NON_NULL)
     public String distributorId;
     

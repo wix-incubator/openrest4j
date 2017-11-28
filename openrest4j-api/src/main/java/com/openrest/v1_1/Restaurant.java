@@ -16,7 +16,47 @@ import java.util.*;
 public class Restaurant extends Organization {
 	public static final String TYPE = "restaurant";
 	private static final long serialVersionUID = 1L;
-    
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Restaurant that = (Restaurant) o;
+
+        if (distributorId != null ? !distributorId.equals(that.distributorId) : that.distributorId != null) return false;
+        if (chainId != null ? !chainId.equals(that.chainId) : that.chainId != null) return false;
+        if (openTimes != null ? !openTimes.equals(that.openTimes) : that.openTimes != null) return false;
+        if (deliveryInfos != null ? !deliveryInfos.equals(that.deliveryInfos) : that.deliveryInfos != null) return false;
+        if (paymentTypes != null ? !paymentTypes.equals(that.paymentTypes) : that.paymentTypes != null) return false;
+        if (multiPaymentDisabled != null ? !multiPaymentDisabled.equals(that.multiPaymentDisabled) : that.multiPaymentDisabled != null) return false;
+        if (creditcardsInfo != null ? !creditcardsInfo.equals(that.creditcardsInfo) : that.creditcardsInfo != null) return false;
+        if (deliveriesInfo != null ? !deliveriesInfo.equals(that.deliveriesInfo) : that.deliveriesInfo != null) return false;
+        if (orders != null ? !orders.equals(that.orders) : that.orders != null) return false;
+        if (reservations != null ? !reservations.equals(that.reservations) : that.reservations != null) return false;
+        if (antiFraudDisabled != null ? !antiFraudDisabled.equals(that.antiFraudDisabled) : that.antiFraudDisabled != null) return false;
+        return features != null ? features.equals(that.features) : that.features == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (distributorId != null ? distributorId.hashCode() : 0);
+        result = 31 * result + (chainId != null ? chainId.hashCode() : 0);
+        result = 31 * result + (openTimes != null ? openTimes.hashCode() : 0);
+        result = 31 * result + (deliveryInfos != null ? deliveryInfos.hashCode() : 0);
+        result = 31 * result + (paymentTypes != null ? paymentTypes.hashCode() : 0);
+        result = 31 * result + (multiPaymentDisabled != null ? multiPaymentDisabled.hashCode() : 0);
+        result = 31 * result + (creditcardsInfo != null ? creditcardsInfo.hashCode() : 0);
+        result = 31 * result + (deliveriesInfo != null ? deliveriesInfo.hashCode() : 0);
+        result = 31 * result + (orders != null ? orders.hashCode() : 0);
+        result = 31 * result + (reservations != null ? reservations.hashCode() : 0);
+        result = 31 * result + (antiFraudDisabled != null ? antiFraudDisabled.hashCode() : 0);
+        result = 31 * result + (features != null ? features.hashCode() : 0);
+        return result;
+    }
+
     public Restaurant(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
                       String distributorId, String chainId, LocalizedString title,
                       LocalizedString description, Contact contact, Map<String, Contact> externalContacts, Address address,
@@ -83,44 +123,6 @@ public class Restaurant extends Organization {
     			((features != null) ? new LinkedHashMap<>(features) : null),
     			rank);
 	}
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Restaurant that = (Restaurant) o;
-
-        if (distributorId != null ? !distributorId.equals(that.distributorId) : that.distributorId != null) return false;
-        if (chainId != null ? !chainId.equals(that.chainId) : that.chainId != null) return false;
-        if (openTimes != null ? !openTimes.equals(that.openTimes) : that.openTimes != null) return false;
-        if (deliveryInfos != null ? !deliveryInfos.equals(that.deliveryInfos) : that.deliveryInfos != null) return false;
-        if (paymentTypes != null ? !paymentTypes.equals(that.paymentTypes) : that.paymentTypes != null) return false;
-        if (multiPaymentDisabled != null ? !multiPaymentDisabled.equals(that.multiPaymentDisabled) : that.multiPaymentDisabled != null) return false;
-        if (creditcardsInfo != null ? !creditcardsInfo.equals(that.creditcardsInfo) : that.creditcardsInfo != null) return false;
-        if (deliveriesInfo != null ? !deliveriesInfo.equals(that.deliveriesInfo) : that.deliveriesInfo != null) return false;
-        if (orders != null ? !orders.equals(that.orders) : that.orders != null) return false;
-        if (reservations != null ? !reservations.equals(that.reservations) : that.reservations != null) return false;
-        if (antiFraudDisabled != null ? !antiFraudDisabled.equals(that.antiFraudDisabled) : that.antiFraudDisabled != null) return false;
-        return features != null ? features.equals(that.features) : that.features == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = distributorId != null ? distributorId.hashCode() : 0;
-        result = 31 * result + (chainId != null ? chainId.hashCode() : 0);
-        result = 31 * result + (openTimes != null ? openTimes.hashCode() : 0);
-        result = 31 * result + (deliveryInfos != null ? deliveryInfos.hashCode() : 0);
-        result = 31 * result + (paymentTypes != null ? paymentTypes.hashCode() : 0);
-        result = 31 * result + (multiPaymentDisabled != null ? multiPaymentDisabled.hashCode() : 0);
-        result = 31 * result + (creditcardsInfo != null ? creditcardsInfo.hashCode() : 0);
-        result = 31 * result + (deliveriesInfo != null ? deliveriesInfo.hashCode() : 0);
-        result = 31 * result + (orders != null ? orders.hashCode() : 0);
-        result = 31 * result + (reservations != null ? reservations.hashCode() : 0);
-        result = 31 * result + (antiFraudDisabled != null ? antiFraudDisabled.hashCode() : 0);
-        result = 31 * result + (features != null ? features.hashCode() : 0);
-        return result;
-    }
 
     /** The distributor in charge of this restaurant. */
     @JsonInclude(Include.NON_NULL)

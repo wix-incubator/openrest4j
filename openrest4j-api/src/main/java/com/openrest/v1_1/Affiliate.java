@@ -54,7 +54,25 @@ public class Affiliate extends Organization {
 				Availability.clone(availabilities), Blob.clone(blobs),
     			state, closed, Product.clone(products), rank);
 	}
-    
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+
+		Affiliate affiliate = (Affiliate) o;
+
+		return distributorId != null ? distributorId.equals(affiliate.distributorId) : affiliate.distributorId == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = 31 * result + (distributorId != null ? distributorId.hashCode() : 0);
+		return result;
+	}
+
     /** The distributor in charge of this affiliate. */
     @JsonInclude(Include.NON_NULL)
     public String distributorId;

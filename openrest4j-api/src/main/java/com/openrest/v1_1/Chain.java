@@ -55,8 +55,26 @@ public class Chain extends Organization {
 				Availability.clone(availabilities), Blob.clone(blobs),
     			state, closed, Product.clone(products), rank);
 	}
-    
-    /** The distributor in charge of this chain. */
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+
+		Chain chain = (Chain) o;
+
+		return distributorId != null ? distributorId.equals(chain.distributorId) : chain.distributorId == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = 31 * result + (distributorId != null ? distributorId.hashCode() : 0);
+		return result;
+	}
+
+	/** The distributor in charge of this chain. */
     @JsonInclude(Include.NON_NULL)
     public String distributorId;
 }

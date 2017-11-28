@@ -34,7 +34,50 @@ public class Distributor extends Organization {
     	this.facebookAppId = facebookAppId;
     	this.tld = tld;
     }
-    
+
+	@Override
+	public Object clone() {
+		return new Distributor(id, alias, affiliateId,
+				((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
+				(created != null) ? (Date) created.clone() : null,
+				(modified != null) ? (Date) modified.clone() : null,
+				((title != null) ? (LocalizedString) title.clone() : null),
+				((description != null) ? (LocalizedString) description.clone() : null),
+				locale,
+				((locales != null) ? new LinkedHashSet<>(locales) : null),
+				cloneMessages(messages),
+				((colorScheme != null) ? (ColorScheme)colorScheme.clone() : null),
+				((contact != null) ? (Contact) contact.clone() : null), Contact.clone(externalContacts),
+				((address != null) ? (Address) address.clone() : null),
+				timezone, currency, AppInfo.clone(apps),
+				((seo != null) ? (Seo) seo.clone() : null),
+				((properties != null) ? new LinkedHashMap<>(properties) : null),
+				((compatibilities != null) ? new LinkedHashMap<>(compatibilities) : null),
+				Availability.clone(availabilities),
+				facebookAppId, tld, Blob.clone(blobs),
+				state, closed, Product.clone(products), rank);
+	}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Distributor that = (Distributor) o;
+
+        if (facebookAppId != null ? !facebookAppId.equals(that.facebookAppId) : that.facebookAppId != null) return false;
+        return tld != null ? tld.equals(that.tld) : that.tld == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (facebookAppId != null ? facebookAppId.hashCode() : 0);
+        result = 31 * result + (tld != null ? tld.hashCode() : 0);
+        return result;
+    }
+
     /**
      * The distributor's Facebook application id.
      * Deprecated, to be removed on 2014-08-01 (use externalIds["com.facebook.apps"])
@@ -49,27 +92,4 @@ public class Distributor extends Organization {
      */
     @JsonInclude(Include.NON_NULL)
     public String tld;
-    
-    @Override
-	public Object clone() {
-    	return new Distributor(id, alias, affiliateId,
-    			((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
-                (created != null) ? (Date) created.clone() : null,
-                (modified != null) ? (Date) modified.clone() : null,
-    			((title != null) ? (LocalizedString) title.clone() : null),
-    			((description != null) ? (LocalizedString) description.clone() : null),
-    			locale,
-    			((locales != null) ? new LinkedHashSet<>(locales) : null),
-    			cloneMessages(messages),
-    			((colorScheme != null) ? (ColorScheme)colorScheme.clone() : null),
-    			((contact != null) ? (Contact) contact.clone() : null), Contact.clone(externalContacts),
-    			((address != null) ? (Address) address.clone() : null),
-    			timezone, currency, AppInfo.clone(apps),
-    			((seo != null) ? (Seo) seo.clone() : null),
-    			((properties != null) ? new LinkedHashMap<>(properties) : null),
-    			((compatibilities != null) ? new LinkedHashMap<>(compatibilities) : null),
-				Availability.clone(availabilities),
-    			facebookAppId, tld, Blob.clone(blobs),
-    			state, closed, Product.clone(products), rank);
-	}
 }

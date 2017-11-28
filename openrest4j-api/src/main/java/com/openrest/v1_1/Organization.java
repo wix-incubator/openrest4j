@@ -10,7 +10,7 @@ import com.wix.restaurants.i18n.LocalizedString;
 import java.util.*;
 import java.util.Map.Entry;
 
-/** Base class for Restaurants, Chains, Portals, Distributers. */
+/** Base class for Restaurants, Chains, Portals, Distributors. */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class Organization extends OpenrestObject implements Cloneable, Comparable<Organization> {
 	private static final long serialVersionUID = 1L;
@@ -262,4 +262,72 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
 		}
 		return result;
 	}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Organization that = (Organization) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (alias != null ? !alias.equals(that.alias) : that.alias != null) return false;
+        if (affiliateId != null ? !affiliateId.equals(that.affiliateId) : that.affiliateId != null) return false;
+        if (externalIds != null ? !externalIds.equals(that.externalIds) : that.externalIds != null) return false;
+        if (created != null ? !created.equals(that.created) : that.created != null) return false;
+        if (modified != null ? !modified.equals(that.modified) : that.modified != null) return false;
+        if (title != null ? !title.equals(that.title) : that.title != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (colorScheme != null ? !colorScheme.equals(that.colorScheme) : that.colorScheme != null) return false;
+        if (contact != null ? !contact.equals(that.contact) : that.contact != null) return false;
+        if (externalContacts != null ? !externalContacts.equals(that.externalContacts) : that.externalContacts != null) return false;
+        if (address != null ? !address.equals(that.address) : that.address != null) return false;
+        if (timezone != null ? !timezone.equals(that.timezone) : that.timezone != null) return false;
+        if (currency != null ? !currency.equals(that.currency) : that.currency != null) return false;
+        if (locale != null ? !locale.equals(that.locale) : that.locale != null) return false;
+        if (locales != null ? !locales.equals(that.locales) : that.locales != null) return false;
+        if (messages != null ? !messages.equals(that.messages) : that.messages != null) return false;
+        if (apps != null ? !apps.equals(that.apps) : that.apps != null) return false;
+        if (seo != null ? !seo.equals(that.seo) : that.seo != null) return false;
+        if (properties != null ? !properties.equals(that.properties) : that.properties != null) return false;
+        if (compatibilities != null ? !compatibilities.equals(that.compatibilities) : that.compatibilities != null) return false;
+        if (availabilities != null ? !availabilities.equals(that.availabilities) : that.availabilities != null) return false;
+        if (blobs != null ? !blobs.equals(that.blobs) : that.blobs != null) return false;
+        if (closed != null ? !closed.equals(that.closed) : that.closed != null) return false;
+        if (state != null ? !state.equals(that.state) : that.state != null) return false;
+        if (products != null ? !products.equals(that.products) : that.products != null) return false;
+        return rank != null ? rank.equals(that.rank) : that.rank == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (alias != null ? alias.hashCode() : 0);
+        result = 31 * result + (affiliateId != null ? affiliateId.hashCode() : 0);
+        result = 31 * result + (externalIds != null ? externalIds.hashCode() : 0);
+        result = 31 * result + (created != null ? created.hashCode() : 0);
+        result = 31 * result + (modified != null ? modified.hashCode() : 0);
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (colorScheme != null ? colorScheme.hashCode() : 0);
+        result = 31 * result + (contact != null ? contact.hashCode() : 0);
+        result = 31 * result + (externalContacts != null ? externalContacts.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (timezone != null ? timezone.hashCode() : 0);
+        result = 31 * result + (currency != null ? currency.hashCode() : 0);
+        result = 31 * result + (locale != null ? locale.hashCode() : 0);
+        result = 31 * result + (locales != null ? locales.hashCode() : 0);
+        result = 31 * result + (messages != null ? messages.hashCode() : 0);
+        result = 31 * result + (apps != null ? apps.hashCode() : 0);
+        result = 31 * result + (seo != null ? seo.hashCode() : 0);
+        result = 31 * result + (properties != null ? properties.hashCode() : 0);
+        result = 31 * result + (compatibilities != null ? compatibilities.hashCode() : 0);
+        result = 31 * result + (availabilities != null ? availabilities.hashCode() : 0);
+        result = 31 * result + (blobs != null ? blobs.hashCode() : 0);
+        result = 31 * result + (closed != null ? closed.hashCode() : 0);
+        result = 31 * result + (state != null ? state.hashCode() : 0);
+        result = 31 * result + (products != null ? products.hashCode() : 0);
+        result = 31 * result + (rank != null ? rank.hashCode() : 0);
+        return result;
+    }
 }
