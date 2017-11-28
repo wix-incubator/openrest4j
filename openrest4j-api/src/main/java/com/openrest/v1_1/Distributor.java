@@ -36,7 +36,7 @@ public class Distributor extends Organization {
     }
 
 	@Override
-	public Object clone() {
+	protected Distributor cloneImpl() {
 		return new Distributor(id, alias, affiliateId,
 				((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
 				(created != null) ? (Date) created.clone() : null,

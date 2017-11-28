@@ -34,7 +34,7 @@ public class Chain extends Organization {
     }
     
     @Override
-	public Object clone() {
+	protected Chain cloneImpl() {
     	return new Chain(id, alias, affiliateId,
     			((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
 				(created != null) ? (Date) created.clone() : null,

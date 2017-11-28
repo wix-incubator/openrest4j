@@ -37,7 +37,7 @@ public class Portal extends Organization {
     }
     
     @Override
-	public Object clone() {
+	protected Organization cloneImpl() {
     	return new Portal(id, alias, affiliateId,
     			((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
 				(created != null) ? (Date) created.clone() : null,

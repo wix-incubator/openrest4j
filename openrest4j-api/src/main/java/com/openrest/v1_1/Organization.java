@@ -73,7 +73,11 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     }
     
     @Override
-	public abstract Object clone();
+	public Object clone() {
+        return cloneImpl();
+    }
+
+    protected abstract Organization cloneImpl();
     
     protected static Map<String, LocalizedString> cloneMessages(Map<String, LocalizedString> messages) {
     	if (messages == null) {

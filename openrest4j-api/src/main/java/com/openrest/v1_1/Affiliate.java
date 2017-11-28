@@ -33,7 +33,7 @@ public class Affiliate extends Organization {
     }
     
     @Override
-	public Object clone() {
+	protected Affiliate cloneImpl() {
     	return new Affiliate(id, alias, affiliateId,
     			((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
                 (created != null) ? (Date) created.clone() : null,

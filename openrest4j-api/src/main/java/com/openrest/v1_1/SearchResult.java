@@ -42,7 +42,65 @@ public class SearchResult extends Restaurant {
     
     /** Default constructor for JSON deserialization. */
     public SearchResult() {}
-    
+
+    @Override
+    protected SearchResult cloneImpl() {
+        return new SearchResult(id, alias, affiliateId,
+                ((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
+                (created != null) ? (Date) created.clone() : null,
+                (modified != null) ? (Date) modified.clone() : null,
+                distributorId, chainId,
+                ((title != null) ? (LocalizedString) title.clone() : null),
+                ((description != null) ? (LocalizedString) description.clone() : null),
+                ((contact != null) ? (Contact)contact.clone() : null), Contact.clone(externalContacts),
+                ((address != null) ? (Address)address.clone() : null),
+                cloneMessages(messages),
+                ((colorScheme != null) ? (ColorScheme) colorScheme.clone() : null),
+                ((openTimes != null) ? (Availability) openTimes.clone() : null),
+                DispatchInfo.clone(deliveryInfos),
+                timezone, currency, locale,
+                ((locales != null) ? new LinkedHashSet<>(locales) : null),
+                ((paymentTypes != null) ? new LinkedHashSet<>(paymentTypes) : null),
+                multiPaymentDisabled,
+                ((creditcardsInfo != null) ? (CreditcardsInfo) creditcardsInfo.clone() : null),
+                ((deliveriesInfo != null) ? (DeliveriesInfo) deliveriesInfo.clone() : null),
+                ((orders != null) ? (OrdersInfo) orders.clone() : null),
+                ((reservations != null) ? (ReservationsInfo) reservations.clone() : null),
+                antiFraudDisabled, Blob.clone(blobs), AppInfo.clone(apps),
+                ((seo != null) ? (Seo) seo.clone() : null),
+                ((properties != null) ? new LinkedHashMap<>(properties) : null),
+                ((compatibilities != null) ? new LinkedHashMap<>(compatibilities) : null),
+                Availability.clone(availabilities),
+                state, closed, Product.clone(products),
+                ((features != null) ? new LinkedHashMap<>(features) : null),
+                rank,
+                TopItem.clone(topItems),
+                (deliveryTypes != null) ? new LinkedHashSet<>(deliveryTypes): null,
+                (deliveryInfo != null) ? (DispatchInfo) deliveryInfo.clone() : null);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        SearchResult that = (SearchResult) o;
+
+        if (topItems != null ? !topItems.equals(that.topItems) : that.topItems != null) return false;
+        if (deliveryTypes != null ? !deliveryTypes.equals(that.deliveryTypes) : that.deliveryTypes != null) return false;
+        return deliveryInfo != null ? deliveryInfo.equals(that.deliveryInfo) : that.deliveryInfo == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (topItems != null ? topItems.hashCode() : 0);
+        result = 31 * result + (deliveryTypes != null ? deliveryTypes.hashCode() : 0);
+        result = 31 * result + (deliveryInfo != null ? deliveryInfo.hashCode() : 0);
+        return result;
+    }
+
     @JsonInclude(Include.NON_DEFAULT)
     public List<TopItem> topItems = new LinkedList<>();
     

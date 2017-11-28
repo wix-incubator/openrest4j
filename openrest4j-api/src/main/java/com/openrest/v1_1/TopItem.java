@@ -3,12 +3,11 @@ package com.openrest.v1_1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.wix.restaurants.i18n.Locale;
 import com.wix.restaurants.i18n.LocalizedString;
 
 import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.LinkedList;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TopItem implements Serializable, Cloneable {
@@ -34,7 +33,19 @@ public class TopItem implements Serializable, Cloneable {
     			((title != null) ? (LocalizedString) title.clone() : null),
     			price, picture);
 	}
-    
+
+    public static List<TopItem> clone(List<TopItem> topItems) {
+        if (topItems == null) {
+            return null;
+        }
+
+        final List<TopItem> cloned = new LinkedList<>();
+        for (TopItem topItem : topItems) {
+            cloned.add((topItem != null) ? (TopItem) topItem.clone() : null);
+        }
+        return cloned;
+    }
+
     @JsonInclude(Include.NON_NULL)
     public String id;
     

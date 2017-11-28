@@ -92,7 +92,7 @@ public class Restaurant extends Organization {
     
     /** @return a shallow copy of this object. */
     @Override
-	public Object clone() {
+	protected Restaurant cloneImpl() {
     	return new Restaurant(id, alias, affiliateId,
     			((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
                 (created != null) ? (Date) created.clone() : null,
