@@ -25,7 +25,7 @@ public class Menu implements Serializable, Cloneable {
     public Menu() {}
     
     @Override
-	public Object clone() {
+	public Menu clone() {
     	return new Menu(
                 (modified != null) ? (Date) modified.clone() : null,
                 Item.clone(items), MenuSection.clone(sections),
