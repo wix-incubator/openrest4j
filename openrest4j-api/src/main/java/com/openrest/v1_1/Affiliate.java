@@ -31,7 +31,12 @@ public class Affiliate extends Organization {
     	
     	this.distributorId = distributorId;
     }
-    
+
+    @Override
+    public Affiliate clone() {
+        return cloneImpl();
+    }
+
     @Override
 	protected Affiliate cloneImpl() {
     	return new Affiliate(id, alias, affiliateId,

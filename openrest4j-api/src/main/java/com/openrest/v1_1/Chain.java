@@ -32,7 +32,12 @@ public class Chain extends Organization {
     	
     	this.distributorId = distributorId;
     }
-    
+
+    @Override
+    public Chain clone() {
+        return cloneImpl();
+    }
+
     @Override
 	protected Chain cloneImpl() {
     	return new Chain(id, alias, affiliateId,

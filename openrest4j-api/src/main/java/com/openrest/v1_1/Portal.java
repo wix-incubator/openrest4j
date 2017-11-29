@@ -35,9 +35,14 @@ public class Portal extends Organization {
     	this.filter = filter;
     	this.categories = categories;
     }
-    
+
     @Override
-	protected Organization cloneImpl() {
+    public Portal clone() {
+        return cloneImpl();
+    }
+
+    @Override
+	protected Portal cloneImpl() {
     	return new Portal(id, alias, affiliateId,
     			((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
 				(created != null) ? (Date) created.clone() : null,

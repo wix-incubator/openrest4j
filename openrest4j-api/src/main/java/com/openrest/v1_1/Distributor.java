@@ -35,6 +35,11 @@ public class Distributor extends Organization {
     	this.tld = tld;
     }
 
+    @Override
+    public Distributor clone() {
+        return cloneImpl();
+    }
+
 	@Override
 	protected Distributor cloneImpl() {
 		return new Distributor(id, alias, affiliateId,

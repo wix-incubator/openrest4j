@@ -89,7 +89,12 @@ public class Restaurant extends Organization {
 
     /** Default constructor for JSON deserialization. */
     public Restaurant() {}
-    
+
+    @Override
+    public Restaurant clone() {
+        return cloneImpl();
+    }
+
     /** @return a shallow copy of this object. */
     @Override
 	protected Restaurant cloneImpl() {

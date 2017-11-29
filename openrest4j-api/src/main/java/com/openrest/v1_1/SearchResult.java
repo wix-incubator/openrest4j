@@ -44,6 +44,11 @@ public class SearchResult extends Restaurant {
     public SearchResult() {}
 
     @Override
+    public SearchResult clone() {
+        return cloneImpl();
+    }
+
+    @Override
     protected SearchResult cloneImpl() {
         return new SearchResult(id, alias, affiliateId,
                 ((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),

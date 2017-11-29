@@ -73,7 +73,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     }
     
     @Override
-	public Object clone() {
+	public Organization clone() {
         return cloneImpl();
     }
 

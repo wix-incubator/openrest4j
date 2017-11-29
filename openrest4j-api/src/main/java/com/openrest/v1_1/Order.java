@@ -63,7 +63,7 @@ public class Order implements Serializable, Cloneable {
     public Order() {}
     
     @Override
-	public Object clone() {
+	public Order clone() {
     	return new Order(id,
     			((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
     			distributorId, chainId, restaurantId, locale, OrderItem.clone(orderItems), comment, price, currency,
