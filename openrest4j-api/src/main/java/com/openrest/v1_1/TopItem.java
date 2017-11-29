@@ -28,7 +28,7 @@ public class TopItem implements Serializable, Cloneable {
     public TopItem() {}
     
     @Override
-	public Object clone() {
+	public TopItem clone() {
     	return new TopItem(id,
     			((title != null) ? (LocalizedString) title.clone() : null),
     			price, picture);
@@ -41,7 +41,7 @@ public class TopItem implements Serializable, Cloneable {
 
         final List<TopItem> cloned = new LinkedList<>();
         for (TopItem topItem : topItems) {
-            cloned.add((topItem != null) ? (TopItem) topItem.clone() : null);
+            cloned.add((topItem != null) ? topItem.clone() : null);
         }
         return cloned;
     }
