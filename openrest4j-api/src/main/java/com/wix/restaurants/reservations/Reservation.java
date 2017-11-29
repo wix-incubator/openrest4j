@@ -63,7 +63,7 @@ public class Reservation implements Serializable, Cloneable {
     public Reservation() {}
 
     @Override
-    public Object clone() {
+    public Reservation clone() {
         return new Reservation(id,
                 ((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
                 (created != null) ? (Date) created.clone() : null,
