@@ -24,7 +24,7 @@ public class Area implements Serializable, Cloneable {
     public Area() {}
     
     @Override
-	public Object clone() {
+	public Area clone() {
     	final List<LatLng> clonedPolygon;
     	if (polygon != null) {
     		clonedPolygon = new ArrayList<>(polygon.size());
