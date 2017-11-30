@@ -21,25 +21,16 @@ public class CommentLogEntry extends LogEntry {
     }
 
     @Override
-    public Object clone() {
+    public CommentLogEntry clone() {
+        return cloneImpl();
+    }
+
+    @Override
+    protected CommentLogEntry cloneImpl() {
         return new CommentLogEntry(
                 (timestamp != null) ? (Date) timestamp.clone() : null,
                 (user != null) ? (User) user.clone() : null,
                 actingAs, comment,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
     }
 }

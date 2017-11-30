@@ -37,7 +37,11 @@ public abstract class LogEntry implements Serializable, Cloneable {
     }
 
     @Override
-    public abstract Object clone();
+    public LogEntry clone() {
+        return cloneImpl();
+    }
+
+    protected abstract LogEntry cloneImpl();
 
     public static List<LogEntry> clone(List<LogEntry> log) {
         if (log == null) {
@@ -46,7 +50,7 @@ public abstract class LogEntry implements Serializable, Cloneable {
 
         final List<LogEntry> cloned = new LinkedList<>();
         for (LogEntry logEntry : log) {
-            cloned.add((logEntry != null) ? (LogEntry) logEntry.clone() : null);
+            cloned.add((logEntry != null) ? logEntry.clone() : null);
         }
         return cloned;
     }

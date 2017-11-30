@@ -24,17 +24,18 @@ public class StatusLogEntry extends LogEntry {
     }
 
     @Override
-    public Object clone() {
+    public StatusLogEntry clone() {
+        return cloneImpl();
+    }
+
+    @Override
+    protected StatusLogEntry cloneImpl() {
         return new StatusLogEntry(
                 (timestamp != null) ? (Date) timestamp.clone() : null,
                 (user != null) ? (User) user.clone() : null,
                 actingAs, status, comment,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
     }
-
-    /** @see com.wix.restaurants.reservations.Statuses */
-    @JsonInclude(Include.NON_NULL)
-    public String status;
 
     @Override
     public boolean equals(Object o) {
@@ -53,4 +54,8 @@ public class StatusLogEntry extends LogEntry {
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
+
+    /** @see com.wix.restaurants.reservations.Statuses */
+    @JsonInclude(Include.NON_NULL)
+    public String status;
 }
