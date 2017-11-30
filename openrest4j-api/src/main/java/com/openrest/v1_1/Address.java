@@ -39,9 +39,9 @@ public class Address implements Serializable, Cloneable {
     public Address() {}
     
     @Override
-	public Object clone() {
+	public Address clone() {
     	return new Address(formatted, country, city, street, number, apt, floor, entrance, comment,
-    			((latLng != null) ? (LatLng) latLng.clone() : null), approximate,
+    			((latLng != null) ? latLng.clone() : null), approximate,
     			countryCode, postalCode, onArrival,
                 (externalIds != null) ? new LinkedHashMap<>(externalIds) : null,
                 (properties != null) ? new LinkedHashMap<>(properties) : null);

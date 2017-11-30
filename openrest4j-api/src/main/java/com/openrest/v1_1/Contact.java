@@ -1,15 +1,15 @@
 package com.openrest.v1_1;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Contact implements Serializable, Cloneable {
@@ -27,7 +27,7 @@ public class Contact implements Serializable, Cloneable {
     public Contact() {}
     
     @Override
-	public Object clone() {
+	public Contact clone() {
 		return new Contact(firstName, lastName, email, phone, fax);
 	}
     
@@ -40,7 +40,7 @@ public class Contact implements Serializable, Cloneable {
 		for (Entry<String, Contact> entry : contacts.entrySet()) {
 			final String key = entry.getKey();
 			final Contact value = entry.getValue();
-			cloned.put(key, (value != null) ? (Contact) value.clone() : null);
+			cloned.put(key, (value != null) ? value.clone() : null);
 		}
 		return cloned;
     }
@@ -52,7 +52,7 @@ public class Contact implements Serializable, Cloneable {
 
         final List<Contact> cloned = new LinkedList<>();
         for (Contact contact : contacts) {
-            cloned.add((contact != null) ? (Contact) contact.clone() : null);
+            cloned.add((contact != null) ? contact.clone() : null);
         }
         return cloned;
     }
