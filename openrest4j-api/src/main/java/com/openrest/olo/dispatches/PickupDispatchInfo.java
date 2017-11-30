@@ -21,36 +21,14 @@ public class PickupDispatchInfo extends DispatchInfo {
     }
 
     @Override
-    public Object clone() {
+    public PickupDispatchInfo clone() {
+        return cloneImpl();
+    }
+
+    @Override
+    protected PickupDispatchInfo cloneImpl() {
         return new PickupDispatchInfo(minOrderPrice, charge, delayMins, inactive,
                 ((availability != null) ? (Availability) availability.clone() : null),
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        PickupDispatchInfo dispatchInfo = (PickupDispatchInfo) o;
-
-        if (minOrderPrice != null ? !minOrderPrice.equals(dispatchInfo.minOrderPrice) : dispatchInfo.minOrderPrice != null) return false;
-        if (charge != null ? !charge.equals(dispatchInfo.charge) : dispatchInfo.charge != null) return false;
-        if (delayMins != null ? !delayMins.equals(dispatchInfo.delayMins) : dispatchInfo.delayMins != null) return false;
-        if (inactive != null ? !inactive.equals(dispatchInfo.inactive) : dispatchInfo.inactive != null) return false;
-        if (availability != null ? !availability.equals(dispatchInfo.availability) : dispatchInfo.availability != null) return false;
-        return !(properties != null ? !properties.equals(dispatchInfo.properties) : dispatchInfo.properties != null);
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = minOrderPrice != null ? minOrderPrice.hashCode() : 0;
-        result = 31 * result + (charge != null ? charge.hashCode() : 0);
-        result = 31 * result + (delayMins != null ? delayMins.hashCode() : 0);
-        result = 31 * result + (inactive != null ? inactive.hashCode() : 0);
-        result = 31 * result + (availability != null ? availability.hashCode() : 0);
-        result = 31 * result + (properties != null ? properties.hashCode() : 0);
-        return result;
     }
 }

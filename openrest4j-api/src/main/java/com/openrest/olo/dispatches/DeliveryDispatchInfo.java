@@ -25,9 +25,14 @@ public class DeliveryDispatchInfo extends DispatchInfo {
     }
 
     @Override
-    public Object clone() {
+    public DeliveryDispatchInfo clone() {
+        return cloneImpl();
+    }
+
+    @Override
+    protected DeliveryDispatchInfo cloneImpl() {
         return new DeliveryDispatchInfo(
-                ((area != null) ? (Area) area.clone() : null),
+                ((area != null) ? area.clone() : null),
                 minOrderPrice, charge, delayMins, inactive,
                 ((availability != null) ? (Availability) availability.clone() : null),
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
@@ -37,28 +42,17 @@ public class DeliveryDispatchInfo extends DispatchInfo {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
-        DeliveryDispatchInfo dispatchInfo = (DeliveryDispatchInfo) o;
+        DeliveryDispatchInfo that = (DeliveryDispatchInfo) o;
 
-        if (area != null ? !area.equals(dispatchInfo.area) : dispatchInfo.area != null) return false;
-        if (minOrderPrice != null ? !minOrderPrice.equals(dispatchInfo.minOrderPrice) : dispatchInfo.minOrderPrice != null) return false;
-        if (charge != null ? !charge.equals(dispatchInfo.charge) : dispatchInfo.charge != null) return false;
-        if (delayMins != null ? !delayMins.equals(dispatchInfo.delayMins) : dispatchInfo.delayMins != null) return false;
-        if (inactive != null ? !inactive.equals(dispatchInfo.inactive) : dispatchInfo.inactive != null) return false;
-        if (availability != null ? !availability.equals(dispatchInfo.availability) : dispatchInfo.availability != null) return false;
-        return !(properties != null ? !properties.equals(dispatchInfo.properties) : dispatchInfo.properties != null);
-
+        return area != null ? area.equals(that.area) : that.area == null;
     }
 
     @Override
     public int hashCode() {
-        int result = area != null ? area.hashCode() : 0;
-        result = 31 * result + (minOrderPrice != null ? minOrderPrice.hashCode() : 0);
-        result = 31 * result + (charge != null ? charge.hashCode() : 0);
-        result = 31 * result + (delayMins != null ? delayMins.hashCode() : 0);
-        result = 31 * result + (inactive != null ? inactive.hashCode() : 0);
-        result = 31 * result + (availability != null ? availability.hashCode() : 0);
-        result = 31 * result + (properties != null ? properties.hashCode() : 0);
+        int result = super.hashCode();
+        result = 31 * result + (area != null ? area.hashCode() : 0);
         return result;
     }
 

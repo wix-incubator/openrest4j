@@ -42,7 +42,11 @@ public abstract class DispatchInfo implements Serializable, Cloneable {
     }
 
     @Override
-    public abstract Object clone();
+    public DispatchInfo clone() {
+        return cloneImpl();
+    };
+
+    protected abstract DispatchInfo cloneImpl();
 
     public static List<DispatchInfo> clone(List<DispatchInfo> dispatchInfos) {
         if (dispatchInfos == null) {
@@ -51,9 +55,35 @@ public abstract class DispatchInfo implements Serializable, Cloneable {
 
         final List<DispatchInfo> cloned = new LinkedList<>();
         for (DispatchInfo dispatchInfo : dispatchInfos) {
-            cloned.add((dispatchInfo != null) ? (DispatchInfo) dispatchInfo.clone() : null);
+            cloned.add((dispatchInfo != null) ? dispatchInfo.clone() : null);
         }
         return cloned;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DispatchInfo that = (DispatchInfo) o;
+
+        if (minOrderPrice != null ? !minOrderPrice.equals(that.minOrderPrice) : that.minOrderPrice != null) return false;
+        if (charge != null ? !charge.equals(that.charge) : that.charge != null) return false;
+        if (delayMins != null ? !delayMins.equals(that.delayMins) : that.delayMins != null) return false;
+        if (inactive != null ? !inactive.equals(that.inactive) : that.inactive != null) return false;
+        if (availability != null ? !availability.equals(that.availability) : that.availability != null) return false;
+        return properties != null ? properties.equals(that.properties) : that.properties == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = minOrderPrice != null ? minOrderPrice.hashCode() : 0;
+        result = 31 * result + (charge != null ? charge.hashCode() : 0);
+        result = 31 * result + (delayMins != null ? delayMins.hashCode() : 0);
+        result = 31 * result + (inactive != null ? inactive.hashCode() : 0);
+        result = 31 * result + (availability != null ? availability.hashCode() : 0);
+        result = 31 * result + (properties != null ? properties.hashCode() : 0);
+        return result;
     }
 
     /**
