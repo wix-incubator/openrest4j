@@ -39,7 +39,7 @@ public class Locale implements Serializable, Cloneable {
     }
 
     @Override
-    public Object clone() {
+    public Locale clone() {
         return this;
     }
 
