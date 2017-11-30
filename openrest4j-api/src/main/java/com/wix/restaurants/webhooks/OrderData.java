@@ -23,11 +23,11 @@ public class OrderData implements Serializable, Cloneable {
     public OrderData() {}
 
     @Override
-    public Object clone() {
+    public OrderData clone() {
         return new OrderData(
-                restaurant != null ? (Restaurant) restaurant.clone() : null,
-                menu != null ? (Menu) menu.clone() : null,
-                order != null ? (Order) order.clone() : null);
+                restaurant != null ? restaurant.clone() : null,
+                menu != null ? menu.clone() : null,
+                order != null ? order.clone() : null);
     }
 
     @Override
