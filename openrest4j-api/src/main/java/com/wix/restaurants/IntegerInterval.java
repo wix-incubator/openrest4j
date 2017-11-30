@@ -19,7 +19,7 @@ public class IntegerInterval implements Serializable, Cloneable {
     }
 
     @Override
-    public Object clone() {
+    public IntegerInterval clone() {
         return new IntegerInterval(min, max);
     }
 
