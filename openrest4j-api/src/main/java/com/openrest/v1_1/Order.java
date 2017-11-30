@@ -67,7 +67,7 @@ public class Order implements Serializable, Cloneable {
     	return new Order(id,
     			((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
     			distributorId, chainId, restaurantId, locale, OrderItem.clone(orderItems), comment, price, currency,
-    			((delivery != null) ? (Dispatch) delivery.clone() : null),
+    			((delivery != null) ? delivery.clone() : null),
     			((contact != null) ? (Contact) contact.clone() : null),
     			Payment.clone(payments), takeoutPacks, OrderCharge.clone(orderCharges),
                 (created != null) ? (Date) created.clone() : null,
