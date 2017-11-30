@@ -1,12 +1,12 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.io.Serializable;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * A filter induces a "view" over the restaurants space.
@@ -32,11 +32,11 @@ public class Filter implements Serializable, Cloneable {
     public Filter() {}
     
     @Override
-	public Object clone() {
+	public Filter clone() {
     	return new Filter(distributorId, chainId,
-    			((restaurantIds != null) ? new HashSet<String>(restaurantIds) : null),
-    			((features != null) ? new HashSet<String>(features) : null),
-    			((latLng != null) ? (LatLng) latLng.clone() : null), radius);
+    			((restaurantIds != null) ? new LinkedHashSet<>(restaurantIds) : null),
+    			((features != null) ? new LinkedHashSet<>(features) : null),
+    			((latLng != null) ? latLng.clone() : null), radius);
 	}
 
 	@Override

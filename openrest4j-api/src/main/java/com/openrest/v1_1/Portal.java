@@ -48,7 +48,7 @@ public class Portal extends Organization {
 				(created != null) ? (Date) created.clone() : null,
 				(modified != null) ? (Date) modified.clone() : null,
 				distributorId,
-    			((filter != null) ? (Filter) filter.clone() : null),
+    			((filter != null) ? filter.clone() : null),
     			((title != null) ? title.clone() : null),
     			((description != null) ? description.clone() : null),
     			locale,
