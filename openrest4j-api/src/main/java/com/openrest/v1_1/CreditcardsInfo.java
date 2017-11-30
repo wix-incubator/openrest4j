@@ -24,12 +24,12 @@ public class CreditcardsInfo implements Serializable, Cloneable {
     }
 
     @Override
-    public Object clone() {
+    public CreditcardsInfo clone() {
         return new CreditcardsInfo(
                 ((networks != null) ? new LinkedHashSet<>(networks) : null),
                 ((fields != null) ? new LinkedHashSet<>(fields) : null),
                 collectionMethod,
-                (comment != null) ? (LocalizedString) comment.clone() : null);
+                (comment != null) ? comment.clone() : null);
     }
 
     @Override
