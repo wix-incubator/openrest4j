@@ -118,7 +118,7 @@ public class Restaurant extends Organization {
                 ((creditcardsInfo != null) ? (CreditcardsInfo) creditcardsInfo.clone() : null),
                 ((deliveriesInfo != null) ? (DeliveriesInfo) deliveriesInfo.clone() : null),
                 ((orders != null) ? (OrdersInfo) orders.clone() : null),
-                ((reservations != null) ? (ReservationsInfo) reservations.clone() : null),
+                ((reservations != null) ? reservations.clone() : null),
     			antiFraudDisabled, Blob.clone(blobs), AppInfo.clone(apps),
     			((seo != null) ? (Seo) seo.clone() : null),
     			((properties != null) ? new LinkedHashMap<>(properties) : null),

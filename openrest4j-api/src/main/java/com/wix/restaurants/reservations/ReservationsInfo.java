@@ -33,12 +33,12 @@ public class ReservationsInfo implements Serializable, Cloneable {
     }
 
     @Override
-    public Object clone() {
+    public ReservationsInfo clone() {
         return new ReservationsInfo(
                 pendingApproval,
-                (partySize != null) ? (IntegerInterval) partySize.clone() : null,
+                (partySize != null) ? partySize.clone() : null,
                 (availability != null) ? (Availability) availability.clone() : null,
-                (futureDelayMins != null) ? (IntegerInterval) futureDelayMins.clone() : null,
+                (futureDelayMins != null) ? futureDelayMins.clone() : null,
                 heldForMins,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
     }
