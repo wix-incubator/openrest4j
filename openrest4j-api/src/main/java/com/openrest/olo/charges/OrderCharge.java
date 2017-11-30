@@ -21,7 +21,7 @@ public class OrderCharge implements Serializable, Cloneable {
     }
     
     @Override
-	public Object clone() {
+	public OrderCharge clone() {
     	return new OrderCharge(chargeId, amount);
 	}
     
@@ -32,7 +32,7 @@ public class OrderCharge implements Serializable, Cloneable {
     	
     	final List<OrderCharge> cloned = new LinkedList<>();
     	for (OrderCharge orderCharge : orderCharges) {
-    		cloned.add((orderCharge != null) ? (OrderCharge) orderCharge.clone() : null);
+    		cloned.add((orderCharge != null) ? orderCharge.clone() : null);
     	}
     	return cloned;
     }
