@@ -45,7 +45,11 @@ public abstract class Payment implements Serializable, Cloneable {
     }
 
     @Override
-    public abstract Object clone();
+    public Payment clone() {
+        return cloneImpl();
+    }
+
+    protected abstract Payment cloneImpl();
 
     public static List<Payment> clone(List<Payment> payments) {
         if (payments == null) {
@@ -54,9 +58,27 @@ public abstract class Payment implements Serializable, Cloneable {
 
         final List<Payment> cloned = new LinkedList<>();
         for (Payment payment : payments) {
-            cloned.add((payment != null) ? (Payment) payment.clone() : null);
+            cloned.add((payment != null) ? payment.clone() : null);
         }
         return cloned;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Payment payment = (Payment) o;
+
+        if (amount != null ? !amount.equals(payment.amount) : payment.amount != null) return false;
+        return externalIds != null ? externalIds.equals(payment.externalIds) : payment.externalIds == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = amount != null ? amount.hashCode() : 0;
+        result = 31 * result + (externalIds != null ? externalIds.hashCode() : 0);
+        return result;
     }
 
     /** Amount to pay. */

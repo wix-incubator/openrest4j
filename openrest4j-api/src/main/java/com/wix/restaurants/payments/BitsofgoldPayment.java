@@ -21,7 +21,12 @@ public class BitsofgoldPayment extends Payment {
     }
 
     @Override
-    public Object clone() {
+    public BitsofgoldPayment clone() {
+        return cloneImpl();
+    }
+
+    @Override
+    protected BitsofgoldPayment cloneImpl() {
         return new BitsofgoldPayment(amount,
                 ((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
                 token);
@@ -31,19 +36,16 @@ public class BitsofgoldPayment extends Payment {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
-        final BitsofgoldPayment that = (BitsofgoldPayment) o;
+        BitsofgoldPayment that = (BitsofgoldPayment) o;
 
-        if (amount != null ? !amount.equals(that.amount) : that.amount != null) return false;
-        if (externalIds != null ? !externalIds.equals(that.externalIds) : that.externalIds != null) return false;
-        return !(token != null ? !token.equals(that.token) : that.token != null);
-
+        return token != null ? token.equals(that.token) : that.token == null;
     }
 
     @Override
     public int hashCode() {
-        int result = amount != null ? amount.hashCode() : 0;
-        result = 31 * result + (externalIds != null ? externalIds.hashCode() : 0);
+        int result = super.hashCode();
         result = 31 * result + (token != null ? token.hashCode() : 0);
         return result;
     }

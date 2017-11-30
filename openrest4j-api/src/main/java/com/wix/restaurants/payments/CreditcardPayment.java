@@ -1,11 +1,12 @@
 package com.wix.restaurants.payments;
 
 
-import java.util.LinkedHashMap;
-import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.wix.pay.smaug.client.model.CreditCardToken;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 
 /**
@@ -28,7 +29,12 @@ public class CreditcardPayment extends Payment {
     }
 
     @Override
-    public Object clone() {
+    public CreditcardPayment clone() {
+        return cloneImpl();
+    }
+
+    @Override
+    protected CreditcardPayment cloneImpl() {
         return new CreditcardPayment(amount,
                 ((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
                 collectionMethod,
@@ -39,19 +45,18 @@ public class CreditcardPayment extends Payment {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
-        final CreditcardPayment that = (CreditcardPayment) o;
+        CreditcardPayment that = (CreditcardPayment) o;
 
-        if (amount != null ? !amount.equals(that.amount) : that.amount != null) return false;
-        if (externalIds != null ? !externalIds.equals(that.externalIds) : that.externalIds != null) return false;
-        if (collectionMethod != null ? !collectionMethod.equals(that.collectionMethod) : that.collectionMethod != null) return false;
-        return !(cardToken != null ? !cardToken.equals(that.cardToken) : that.cardToken != null);
+        if (collectionMethod != null ? !collectionMethod.equals(that.collectionMethod) : that.collectionMethod != null)
+            return false;
+        return cardToken != null ? cardToken.equals(that.cardToken) : that.cardToken == null;
     }
 
     @Override
     public int hashCode() {
-        int result = amount != null ? amount.hashCode() : 0;
-        result = 31 * result + (externalIds != null ? externalIds.hashCode() : 0);
+        int result = super.hashCode();
         result = 31 * result + (collectionMethod != null ? collectionMethod.hashCode() : 0);
         result = 31 * result + (cardToken != null ? cardToken.hashCode() : 0);
         return result;

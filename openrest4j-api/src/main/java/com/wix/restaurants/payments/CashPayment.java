@@ -19,28 +19,13 @@ public class CashPayment extends Payment {
     }
 
     @Override
-    public Object clone() {
+    public CashPayment clone() {
+        return cloneImpl();
+    }
+
+    @Override
+    protected CashPayment cloneImpl() {
         return new CashPayment(amount,
                 ((externalIds != null) ? new LinkedHashMap<>(externalIds) : null));
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        final CashPayment payment = (CashPayment) o;
-
-        if (amount != null ? !amount.equals(payment.amount) : payment.amount != null) return false;
-        if (externalIds != null ? !externalIds.equals(payment.externalIds) : payment.externalIds != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = amount != null ? amount.hashCode() : 0;
-        result = 31 * result + (externalIds != null ? externalIds.hashCode() : 0);
-        return result;
     }
 }

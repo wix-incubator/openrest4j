@@ -25,7 +25,12 @@ public class MultipassPayment extends Payment {
     }
 
     @Override
-    public Object clone() {
+    public MultipassPayment clone() {
+        return cloneImpl();
+    }
+
+    @Override
+    protected MultipassPayment cloneImpl() {
         return new MultipassPayment(amount,
                 ((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
                 number, pin);
@@ -35,19 +40,17 @@ public class MultipassPayment extends Payment {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
-        final MultipassPayment that = (MultipassPayment) o;
+        MultipassPayment that = (MultipassPayment) o;
 
-        if (amount != null ? !amount.equals(that.amount) : that.amount != null) return false;
-        if (externalIds != null ? !externalIds.equals(that.externalIds) : that.externalIds != null) return false;
         if (number != null ? !number.equals(that.number) : that.number != null) return false;
-        return !(pin != null ? !pin.equals(that.pin) : that.pin != null);
+        return pin != null ? pin.equals(that.pin) : that.pin == null;
     }
 
     @Override
     public int hashCode() {
-        int result = amount != null ? amount.hashCode() : 0;
-        result = 31 * result + (externalIds != null ? externalIds.hashCode() : 0);
+        int result = super.hashCode();
         result = 31 * result + (number != null ? number.hashCode() : 0);
         result = 31 * result + (pin != null ? pin.hashCode() : 0);
         return result;
