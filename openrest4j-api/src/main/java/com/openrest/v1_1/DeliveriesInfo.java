@@ -32,7 +32,7 @@ public class DeliveriesInfo implements Serializable, Cloneable {
     }
 
     @Override
-    public Object clone() {
+    public DeliveriesInfo clone() {
         return new DeliveriesInfo(approximateAddresses,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
     }
