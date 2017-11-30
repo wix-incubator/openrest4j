@@ -1,12 +1,12 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.io.Serializable;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Product implements Serializable, Cloneable {
@@ -21,7 +21,7 @@ public class Product implements Serializable, Cloneable {
     public Product() {}
     
     @Override
-	public Object clone() {
+	public Product clone() {
     	return new Product(id, param);
 	}
     
@@ -30,9 +30,9 @@ public class Product implements Serializable, Cloneable {
     		return null;
     	}
     	
-    	final Set<Product> cloned = new LinkedHashSet<Product>(products.size());
+    	final Set<Product> cloned = new LinkedHashSet<>(products.size());
 		for (Product product : products) {
-			cloned.add((product != null) ? (Product) product.clone() : null);
+			cloned.add((product != null) ? product.clone() : null);
 		}
     	return cloned;
     }
