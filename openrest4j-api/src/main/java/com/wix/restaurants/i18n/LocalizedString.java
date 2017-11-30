@@ -34,7 +34,7 @@ public class LocalizedString implements Serializable, Cloneable {
     }
 
     @Override
-    public Object clone() {
+    public LocalizedString clone() {
         return this;
     }
 
