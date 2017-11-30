@@ -24,7 +24,12 @@ public class DeliveryDispatch extends Dispatch {
     }
 
     @Override
-    public Object clone() {
+    public DeliveryDispatch clone() {
+        return cloneImpl();
+    }
+
+    @Override
+    protected DeliveryDispatch cloneImpl() {
         return new DeliveryDispatch(
                 ((address != null) ? (Address) address.clone() : null),
                 (time != null) ? (Date) time.clone() : null,
@@ -36,25 +41,17 @@ public class DeliveryDispatch extends Dispatch {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
-        DeliveryDispatch dispatch = (DeliveryDispatch) o;
+        DeliveryDispatch that = (DeliveryDispatch) o;
 
-        if (address != null ? !address.equals(dispatch.address) : dispatch.address != null) return false;
-        if (time != null ? !time.equals(dispatch.time) : dispatch.time != null) return false;
-        if (timeGuarantee != null ? !timeGuarantee.equals(dispatch.timeGuarantee) : dispatch.timeGuarantee != null)
-            return false;
-        if (charge != null ? !charge.equals(dispatch.charge) : dispatch.charge != null) return false;
-        return !(properties != null ? !properties.equals(dispatch.properties) : dispatch.properties != null);
-
+        return address != null ? address.equals(that.address) : that.address == null;
     }
 
     @Override
     public int hashCode() {
-        int result = address != null ? address.hashCode() : 0;
-        result = 31 * result + (time != null ? time.hashCode() : 0);
-        result = 31 * result + (timeGuarantee != null ? timeGuarantee.hashCode() : 0);
-        result = 31 * result + (charge != null ? charge.hashCode() : 0);
-        result = 31 * result + (properties != null ? properties.hashCode() : 0);
+        int result = super.hashCode();
+        result = 31 * result + (address != null ? address.hashCode() : 0);
         return result;
     }
 

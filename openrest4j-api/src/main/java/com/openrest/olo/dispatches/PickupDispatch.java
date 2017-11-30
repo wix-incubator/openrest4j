@@ -20,34 +20,15 @@ public class PickupDispatch extends Dispatch {
     }
 
     @Override
-    public Object clone() {
+    public PickupDispatch clone() {
+        return cloneImpl();
+    }
+
+    @Override
+    protected PickupDispatch cloneImpl() {
         return new PickupDispatch(
                 (time != null) ? (Date) time.clone() : null,
                 timeGuarantee, charge,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        PickupDispatch dispatch = (PickupDispatch) o;
-
-        if (time != null ? !time.equals(dispatch.time) : dispatch.time != null) return false;
-        if (timeGuarantee != null ? !timeGuarantee.equals(dispatch.timeGuarantee) : dispatch.timeGuarantee != null)
-            return false;
-        if (charge != null ? !charge.equals(dispatch.charge) : dispatch.charge != null) return false;
-        return !(properties != null ? !properties.equals(dispatch.properties) : dispatch.properties != null);
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = time != null ? time.hashCode() : 0;
-        result = 31 * result + (timeGuarantee != null ? timeGuarantee.hashCode() : 0);
-        result = 31 * result + (charge != null ? charge.hashCode() : 0);
-        result = 31 * result + (properties != null ? properties.hashCode() : 0);
-        return result;
     }
 }

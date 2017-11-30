@@ -37,7 +37,34 @@ public abstract class Dispatch implements Serializable, Cloneable {
     }
 
     @Override
-    public abstract Object clone();
+    public Dispatch clone() {
+        return cloneImpl();
+    }
+
+    protected abstract Dispatch cloneImpl();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Dispatch dispatch = (Dispatch) o;
+
+        if (time != null ? !time.equals(dispatch.time) : dispatch.time != null) return false;
+        if (timeGuarantee != null ? !timeGuarantee.equals(dispatch.timeGuarantee) : dispatch.timeGuarantee != null)
+            return false;
+        if (charge != null ? !charge.equals(dispatch.charge) : dispatch.charge != null) return false;
+        return properties != null ? properties.equals(dispatch.properties) : dispatch.properties == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = time != null ? time.hashCode() : 0;
+        result = 31 * result + (timeGuarantee != null ? timeGuarantee.hashCode() : 0);
+        result = 31 * result + (charge != null ? charge.hashCode() : 0);
+        result = 31 * result + (properties != null ? properties.hashCode() : 0);
+        return result;
+    }
 
     /** Timestamp by which the order will be delivered or ready for pick-up. */
     @JsonInclude(Include.NON_NULL)
