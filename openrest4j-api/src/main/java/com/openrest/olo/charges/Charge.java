@@ -57,7 +57,7 @@ public class Charge implements Serializable, Cloneable {
     }
     
     @Override
-	public Object clone() {
+	public Charge clone() {
     	return new Charge(type, id, organizationId,
     			((title != null) ? (LocalizedString) title.clone() : null),
     			((description != null) ?(LocalizedString) description.clone() : null),
@@ -75,7 +75,7 @@ public class Charge implements Serializable, Cloneable {
     	
     	final List<Charge> cloned = new LinkedList<>();
     	for (Charge charge : charges) {
-    		cloned.add((charge != null) ? (Charge) charge.clone() : null);
+    		cloned.add((charge != null) ? charge.clone() : null);
     	}
     	return cloned;
     }
