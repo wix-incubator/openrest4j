@@ -30,11 +30,11 @@ public class OrdersInfo implements Serializable, Cloneable {
     }
 
     @Override
-    public Object clone() {
+    public OrdersInfo clone() {
         return new OrdersInfo(
                 (availability != null) ? (Availability) availability.clone() : null,
-                (asap != null) ? (AsapOrdersInfo) asap.clone() : null,
-                (future != null) ? (FutureOrdersInfo) future.clone() : null,
+                (asap != null) ? asap.clone() : null,
+                (future != null) ? future.clone() : null,
                 maxCommentLength,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
     }

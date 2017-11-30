@@ -22,7 +22,7 @@ public class FutureOrdersInfo implements Serializable, Cloneable {
     }
 
     @Override
-    public Object clone() {
+    public FutureOrdersInfo clone() {
         return new FutureOrdersInfo(disabled, delayMins);
     }
 

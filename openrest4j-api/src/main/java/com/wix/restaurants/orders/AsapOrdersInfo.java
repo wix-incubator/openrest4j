@@ -21,7 +21,7 @@ public class AsapOrdersInfo implements Serializable, Cloneable {
     }
 
     @Override
-    public Object clone() {
+    public AsapOrdersInfo clone() {
         return new AsapOrdersInfo(disabled, preOrderMins);
     }
 
