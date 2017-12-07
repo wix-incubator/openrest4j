@@ -51,14 +51,33 @@ public abstract class Condition implements Serializable, Cloneable {
     	
     	final List<Condition> cloned = new LinkedList<>();
     	for (Condition rule : rules) {
-    		cloned.add((rule != null) ? (Condition) rule.clone() : null);
+    		cloned.add((rule != null) ? rule.clone() : null);
     	}
     	return cloned;
     }
     
     @Override
-	public abstract Object clone();
-    
+	public Condition clone() {
+        return cloneImpl();
+    }
+
+	protected abstract Condition cloneImpl();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Condition condition = (Condition) o;
+
+        return properties != null ? properties.equals(condition.properties) : condition.properties == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return properties != null ? properties.hashCode() : 0;
+    }
+
     /**
      * Map of user-defined extended properties. Developers should use unique
      * keys, e.g. "com.googlecode.openrestext".

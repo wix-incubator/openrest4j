@@ -25,13 +25,36 @@ public class OrCondition extends Condition {
     	super(properties);
     	this.conditions = conditions;
     }
-    
-	@Override
-	public Object clone() {
-		return new OrCondition(Condition.clone(conditions),
-			((properties != null) ? new LinkedHashMap<>(properties) : null));
-	}
-	
+
+    @Override
+    public OrCondition clone() {
+        return cloneImpl();
+    }
+
+    @Override
+    protected OrCondition cloneImpl() {
+        return new OrCondition(Condition.clone(conditions),
+                ((properties != null) ? new LinkedHashMap<>(properties) : null));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        OrCondition that = (OrCondition) o;
+
+        return conditions != null ? conditions.equals(that.conditions) : that.conditions == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (conditions != null ? conditions.hashCode() : 0);
+        return result;
+    }
+
     @JsonInclude(Include.NON_DEFAULT)
     public List<Condition> conditions = new LinkedList<>();
 }

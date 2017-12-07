@@ -21,13 +21,38 @@ public class UserRoleCondition extends Condition {
     	this.organizationId = organizationId;
     	this.role = role;
     }
-    
-	@Override
-	public Object clone() {
-		return new UserRoleCondition(organizationId, role,
-			((properties != null) ? new LinkedHashMap<String, String>(properties) : null));
-	}
-	
+
+    @Override
+    public UserRoleCondition clone() {
+        return cloneImpl();
+    }
+
+    @Override
+    protected UserRoleCondition cloneImpl() {
+        return new UserRoleCondition(organizationId, role,
+                ((properties != null) ? new LinkedHashMap<>(properties) : null));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        UserRoleCondition that = (UserRoleCondition) o;
+
+        if (organizationId != null ? !organizationId.equals(that.organizationId) : that.organizationId != null) return false;
+        return role != null ? role.equals(that.role) : that.role == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (organizationId != null ? organizationId.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
+        return result;
+    }
+
     @JsonInclude(Include.NON_NULL)
     public String organizationId;
     

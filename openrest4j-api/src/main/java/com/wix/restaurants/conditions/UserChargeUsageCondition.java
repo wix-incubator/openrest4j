@@ -22,13 +22,40 @@ public class UserChargeUsageCondition extends Condition {
     	this.min = min;
     	this.max = max;
     }
-    
-	@Override
-	public Object clone() {
-		return new UserChargeUsageCondition(chargeId, min, max,
-			((properties != null) ? new LinkedHashMap<String, String>(properties) : null));
-	}
-	
+
+    @Override
+    public UserChargeUsageCondition clone() {
+        return cloneImpl();
+    }
+
+    @Override
+    protected UserChargeUsageCondition cloneImpl() {
+        return new UserChargeUsageCondition(chargeId, min, max,
+                ((properties != null) ? new LinkedHashMap<>(properties) : null));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        UserChargeUsageCondition that = (UserChargeUsageCondition) o;
+
+        if (chargeId != null ? !chargeId.equals(that.chargeId) : that.chargeId != null) return false;
+        if (min != null ? !min.equals(that.min) : that.min != null) return false;
+        return max != null ? max.equals(that.max) : that.max == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (chargeId != null ? chargeId.hashCode() : 0);
+        result = 31 * result + (min != null ? min.hashCode() : 0);
+        result = 31 * result + (max != null ? max.hashCode() : 0);
+        return result;
+    }
+
     @JsonInclude(Include.NON_NULL)
     public String chargeId;
     

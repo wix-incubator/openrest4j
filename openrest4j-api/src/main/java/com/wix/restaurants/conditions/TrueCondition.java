@@ -1,9 +1,9 @@
 package com.wix.restaurants.conditions;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /** A condition that is always satisfied. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -19,7 +19,12 @@ public class TrueCondition extends Condition {
     }
     
 	@Override
-	public Object clone() {
-		return new TrueCondition(((properties != null) ? new LinkedHashMap<String, String>(properties) : null));
+	public TrueCondition clone() {
+        return cloneImpl();
 	}
+
+    @Override
+    protected TrueCondition cloneImpl() {
+        return new TrueCondition(((properties != null) ? new LinkedHashMap<>(properties) : null));
+    }
 }

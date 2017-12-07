@@ -21,13 +21,38 @@ public class OrderItemsPriceCondition extends Condition {
     	this.min = min;
     	this.max = max;
     }
-    
-	@Override
-	public Object clone() {
-		return new OrderItemsPriceCondition(min, max,
-			((properties != null) ? new LinkedHashMap<String, String>(properties) : null));
-	}
-	
+
+    @Override
+    public OrderItemsPriceCondition clone() {
+        return cloneImpl();
+    }
+
+    @Override
+    protected OrderItemsPriceCondition cloneImpl() {
+        return new OrderItemsPriceCondition(min, max,
+                ((properties != null) ? new LinkedHashMap<>(properties) : null));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        OrderItemsPriceCondition that = (OrderItemsPriceCondition) o;
+
+        if (min != null ? !min.equals(that.min) : that.min != null) return false;
+        return max != null ? max.equals(that.max) : that.max == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (min != null ? min.hashCode() : 0);
+        result = 31 * result + (max != null ? max.hashCode() : 0);
+        return result;
+    }
+
 	/** Minimum order price (null means no minimum) */
     @JsonInclude(Include.NON_NULL)
     public Integer min;

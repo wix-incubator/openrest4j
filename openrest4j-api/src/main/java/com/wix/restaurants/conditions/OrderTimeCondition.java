@@ -28,14 +28,37 @@ public class OrderTimeCondition extends Condition {
     	super(properties);
     	this.availability = availability;
     }
-    
-	@Override
-	public Object clone() {
-		return new OrderTimeCondition(
-			((availability != null) ? (Availability) availability.clone() : null),
-			((properties != null) ? new LinkedHashMap<>(properties) : null));
-	}
-	
+
+    @Override
+    public OrderTimeCondition clone() {
+        return cloneImpl();
+    }
+
+    @Override
+    protected OrderTimeCondition cloneImpl() {
+        return new OrderTimeCondition(
+                ((availability != null) ? (Availability) availability.clone() : null),
+                ((properties != null) ? new LinkedHashMap<>(properties) : null));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        OrderTimeCondition that = (OrderTimeCondition) o;
+
+        return availability != null ? availability.equals(that.availability) : that.availability == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (availability != null ? availability.hashCode() : 0);
+        return result;
+    }
+
     @JsonInclude(Include.NON_NULL)
     public Availability availability;
 }

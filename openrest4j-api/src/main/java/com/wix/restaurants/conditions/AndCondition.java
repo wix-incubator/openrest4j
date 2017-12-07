@@ -27,11 +27,34 @@ public class AndCondition extends Condition {
     }
     
 	@Override
-	public Object clone() {
-		return new AndCondition(Condition.clone(conditions),
-			((properties != null) ? new LinkedHashMap<>(properties) : null));
+	public AndCondition clone() {
+        return cloneImpl();
 	}
-	
+
+    @Override
+    protected AndCondition cloneImpl() {
+        return new AndCondition(Condition.clone(conditions),
+                ((properties != null) ? new LinkedHashMap<>(properties) : null));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        AndCondition that = (AndCondition) o;
+
+        return conditions != null ? conditions.equals(that.conditions) : that.conditions == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (conditions != null ? conditions.hashCode() : 0);
+        return result;
+    }
+
     @JsonInclude(Include.NON_DEFAULT)
     public List<Condition> conditions = new LinkedList<>();
 }

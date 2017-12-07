@@ -20,13 +20,36 @@ public class OrderDeliveryTypeCondition extends Condition {
     	super(properties);
     	this.deliveryType = deliveryType;
     }
-    
-	@Override
-	public Object clone() {
-		return new OrderDeliveryTypeCondition(deliveryType,
-			((properties != null) ? new LinkedHashMap<>(properties) : null));
-	}
-	
+
+    @Override
+    public OrderDeliveryTypeCondition clone() {
+        return cloneImpl();
+    }
+
+    @Override
+    protected OrderDeliveryTypeCondition cloneImpl() {
+        return new OrderDeliveryTypeCondition(deliveryType,
+                ((properties != null) ? new LinkedHashMap<>(properties) : null));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        OrderDeliveryTypeCondition that = (OrderDeliveryTypeCondition) o;
+
+        return deliveryType != null ? deliveryType.equals(that.deliveryType) : that.deliveryType == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (deliveryType != null ? deliveryType.hashCode() : 0);
+        return result;
+    }
+
 	/** @see com.openrest.olo.dispatches.Dispatch */
     @JsonInclude(Include.NON_NULL)
     public String deliveryType;
