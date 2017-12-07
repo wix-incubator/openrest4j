@@ -62,8 +62,8 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     @Override
 	public Object clone() {
     	return new Item(id, restaurantId,
-    			((title != null) ? (LocalizedString) title.clone() : null),
-    			((description != null) ? (LocalizedString) description.clone() : null),
+    			((title != null) ? title.clone() : null),
+    			((description != null) ? description.clone() : null),
     			price, Variation.clone(variations),
                 (displayCondition != null) ? (Condition) displayCondition.clone() : null,
                 (condition != null) ? (Condition) condition.clone() : null,
