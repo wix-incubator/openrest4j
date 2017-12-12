@@ -8,10 +8,7 @@ import java.io.Serializable;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LatLng implements Serializable, Cloneable {
-	@Override
-	public String toString() {
-		return "{\"lat\":" + lat + ",\"lng\":" + lng + "}";
-	}
+    private static final long serialVersionUID = 1L;
 
 	public LatLng(Double lat, Double lng) {
         this.lat = lat;
@@ -25,12 +22,6 @@ public class LatLng implements Serializable, Cloneable {
 	public LatLng clone() {
     	return new LatLng(lat, lng);
 	}
-
-    @JsonInclude(Include.NON_NULL)
-    public Double lat;
-
-    @JsonInclude(Include.NON_NULL)
-    public Double lng;
 
     @Override
     public boolean equals(Object obj) {
@@ -58,5 +49,17 @@ public class LatLng implements Serializable, Cloneable {
         return hash;
     }
     
-    private static final long serialVersionUID = 1L;
+    @Override
+    public String toString() {
+        return "LatLng{" +
+                "lat=" + lat +
+                ", lng=" + lng +
+                '}';
+    }
+
+    @JsonInclude(Include.NON_NULL)
+    public Double lat;
+
+    @JsonInclude(Include.NON_NULL)
+    public Double lng;
 }
