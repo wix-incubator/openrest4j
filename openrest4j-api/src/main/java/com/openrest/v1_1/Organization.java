@@ -334,4 +334,37 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
         result = 31 * result + (rank != null ? rank.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Organization{" +
+                "id='" + id + '\'' +
+                ", alias='" + alias + '\'' +
+                ", affiliateId='" + affiliateId + '\'' +
+                ", externalIds=" + externalIds +
+                ", created=" + created +
+                ", modified=" + modified +
+                ", title=" + title +
+                ", description=" + description +
+                ", colorScheme=" + colorScheme +
+                ", contact=" + contact +
+                ", externalContacts=" + externalContacts +
+                ", address=" + address +
+                ", timezone='" + timezone + '\'' +
+                ", currency='" + currency + '\'' +
+                ", locale=" + locale +
+                ", locales=" + locales +
+                ", messages=" + messages +
+                ", apps=" + apps +
+                ", seo=" + seo +
+                ", properties=" + properties +
+                ", compatibilities=" + compatibilities +
+                ", availabilities=" + availabilities +
+                ", blobs=" + blobs +
+                ", closed=" + closed +
+                ", state='" + state + '\'' +
+                ", products=" + products +
+                ", rank=" + rank +
+                '}';
+    }
 }

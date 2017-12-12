@@ -129,6 +129,51 @@ public class Restaurant extends Organization {
     			rank);
 	}
 
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "distributorId='" + distributorId + '\'' +
+                ", chainId='" + chainId + '\'' +
+                ", openTimes=" + openTimes +
+                ", deliveryInfos=" + deliveryInfos +
+                ", paymentTypes=" + paymentTypes +
+                ", multiPaymentDisabled=" + multiPaymentDisabled +
+                ", creditcardsInfo=" + creditcardsInfo +
+                ", deliveriesInfo=" + deliveriesInfo +
+                ", orders=" + orders +
+                ", reservations=" + reservations +
+                ", antiFraudDisabled=" + antiFraudDisabled +
+                ", features=" + features +
+                ", id='" + id + '\'' +
+                ", alias='" + alias + '\'' +
+                ", affiliateId='" + affiliateId + '\'' +
+                ", externalIds=" + externalIds +
+                ", created=" + created +
+                ", modified=" + modified +
+                ", title=" + title +
+                ", description=" + description +
+                ", colorScheme=" + colorScheme +
+                ", contact=" + contact +
+                ", externalContacts=" + externalContacts +
+                ", address=" + address +
+                ", timezone='" + timezone + '\'' +
+                ", currency='" + currency + '\'' +
+                ", locale=" + locale +
+                ", locales=" + locales +
+                ", messages=" + messages +
+                ", apps=" + apps +
+                ", seo=" + seo +
+                ", properties=" + properties +
+                ", compatibilities=" + compatibilities +
+                ", availabilities=" + availabilities +
+                ", blobs=" + blobs +
+                ", closed=" + closed +
+                ", state='" + state + '\'' +
+                ", products=" + products +
+                ", rank=" + rank +
+                '}';
+    }
+
     /** The distributor in charge of this restaurant. */
     @JsonInclude(Include.NON_NULL)
     public String distributorId;
