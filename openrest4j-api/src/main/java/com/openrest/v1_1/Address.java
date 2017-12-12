@@ -15,8 +15,8 @@ public class Address implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
 
     public Address(String formatted, String country, String city, String street, String number,
-    		String apt, String floor, String entrance, String comment, LatLng latLng, Boolean approximate,
-    		String countryCode, String postalCode, String onArrival, Map<String, String> externalIds, Map<String, String> properties) {
+                   String apt, String floor, String entrance, String comment, LatLng latLng, Boolean approximate,
+                   String countryCode, String postalCode, String onArrival, Map<String, String> externalIds, Map<String, String> properties) {
     	this.formatted = formatted;
     	this.country = country;
         this.city = city;
@@ -46,6 +46,28 @@ public class Address implements Serializable, Cloneable {
                 (externalIds != null) ? new LinkedHashMap<>(externalIds) : null,
                 (properties != null) ? new LinkedHashMap<>(properties) : null);
 	}
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "formatted='" + formatted + '\'' +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", number='" + number + '\'' +
+                ", apt='" + apt + '\'' +
+                ", floor='" + floor + '\'' +
+                ", entrance='" + entrance + '\'' +
+                ", comment='" + comment + '\'' +
+                ", latLng=" + latLng +
+                ", approximate=" + approximate +
+                ", countryCode='" + countryCode + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", onArrival='" + onArrival + '\'' +
+                ", externalIds=" + externalIds +
+                ", properties=" + properties +
+                '}';
+    }
 
     public static List<Address> clone(List<Address> addresses) {
         if (addresses == null) {
