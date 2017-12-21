@@ -12,21 +12,16 @@ public class SetWixAppMappingRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public SetWixAppMappingRequest() {}
 
-    public SetWixAppMappingRequest(String accessToken, String appKey, String instance, String instanceId, String organizationId) {
+    public SetWixAppMappingRequest(String accessToken, String instance, String instanceId, String organizationId) {
         this.accessToken = accessToken;
-        this.appKey = appKey;
         this.instance = instance;
         this.instanceId = instanceId;
         this.organizationId = organizationId;
     }
 
-    /** Access token (alternative: specify appKey and instance). */
+    /** Access token (alternative: specify instance). */
     @JsonInclude(Include.NON_NULL)
     public String accessToken;
-
-    /** Key of the Wix app for which the instance belongs to (alternative: specify accessToken). */
-    @JsonInclude(Include.NON_NULL)
-    public String appKey;
 
     /**
      * App instance of a Wix site owner (alternative: specify accessToken).
