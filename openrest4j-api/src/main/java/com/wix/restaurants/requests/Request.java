@@ -115,7 +115,8 @@ import java.io.Serializable;
 	@Type(value = GetRoleRequest.class, name = GetRoleRequest.TYPE),
 	@Type(value = SendDashboardAppRequest.class, name = SendDashboardAppRequest.TYPE),
 	@Type(value = MapWixMetasiteRequest.class, name = MapWixMetasiteRequest.TYPE),
-	@Type(value = GetWixMetasiteOrganizationRequest.class, name = GetWixMetasiteOrganizationRequest.TYPE)
+	@Type(value = GetWixMetasiteOrganizationRequest.class, name = GetWixMetasiteOrganizationRequest.TYPE),
+	@Type(value = ChangeOrganizationLocaleRequest.class, name = ChangeOrganizationLocaleRequest.TYPE)
 })
 public abstract class Request implements Serializable {
     private static final long serialVersionUID = 1L;
