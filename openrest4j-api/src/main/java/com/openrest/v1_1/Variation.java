@@ -14,6 +14,8 @@ import java.util.*;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Variation implements Serializable, Cloneable {
+    private static final long serialVersionUID = 1L;
+
     public static final String VARIATION_DISPLAY_TYPE_DIFF = "diff";
     public static final String VARIATION_DISPLAY_TYPE_CHOICE = "choice";
     /**
@@ -43,9 +45,9 @@ public class Variation implements Serializable, Cloneable {
     public Variation() {}
     
     @Override
-	public Object clone() {
+	public Variation clone() {
     	return new Variation(
-    			((title != null) ? (LocalizedString) title.clone() : null),
+    			((title != null) ? title.clone() : null),
     			((itemIds != null) ? new LinkedList<>(itemIds) : null),
     			minNumAllowed, maxNumAllowed,
     			((prices != null) ? new LinkedHashMap<>(prices) : null),
@@ -61,9 +63,39 @@ public class Variation implements Serializable, Cloneable {
     	
     	final List<Variation> cloned = new LinkedList<>();
 		for (Variation variation : variations) {
-			cloned.add((variation != null) ? (Variation) variation.clone() : null);
+			cloned.add((variation != null) ? variation.clone() : null);
 		}
 		return cloned;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Variation variation = (Variation) o;
+
+        if (title != null ? !title.equals(variation.title) : variation.title != null) return false;
+        if (itemIds != null ? !itemIds.equals(variation.itemIds) : variation.itemIds != null) return false;
+        if (minNumAllowed != null ? !minNumAllowed.equals(variation.minNumAllowed) : variation.minNumAllowed != null) return false;
+        if (maxNumAllowed != null ? !maxNumAllowed.equals(variation.maxNumAllowed) : variation.maxNumAllowed != null) return false;
+        if (prices != null ? !prices.equals(variation.prices) : variation.prices != null) return false;
+        if (defaults != null ? !defaults.equals(variation.defaults) : variation.defaults != null) return false;
+        if (displayType != null ? !displayType.equals(variation.displayType) : variation.displayType != null) return false;
+        return properties != null ? properties.equals(variation.properties) : variation.properties == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = title != null ? title.hashCode() : 0;
+        result = 31 * result + (itemIds != null ? itemIds.hashCode() : 0);
+        result = 31 * result + (minNumAllowed != null ? minNumAllowed.hashCode() : 0);
+        result = 31 * result + (maxNumAllowed != null ? maxNumAllowed.hashCode() : 0);
+        result = 31 * result + (prices != null ? prices.hashCode() : 0);
+        result = 31 * result + (defaults != null ? defaults.hashCode() : 0);
+        result = 31 * result + (displayType != null ? displayType.hashCode() : 0);
+        result = 31 * result + (properties != null ? properties.hashCode() : 0);
+        return result;
     }
 
     /** The variations's name in various locales, e.g. "sides", "degree of cooking". */
@@ -100,56 +132,4 @@ public class Variation implements Serializable, Cloneable {
      */
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> properties = new LinkedHashMap<>();
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Variation other = (Variation) obj;
-        if ((this.title == null) ? (other.title != null) : !this.title.equals(other.title)) {
-            return false;
-        }
-        if ((this.itemIds == null) ? (other.itemIds != null) : !this.itemIds.equals(other.itemIds)) {
-            return false;
-        }
-        if (this.minNumAllowed != other.minNumAllowed && (this.minNumAllowed == null || !this.minNumAllowed.equals(other.minNumAllowed))) {
-            return false;
-        }
-        if (this.maxNumAllowed != other.maxNumAllowed && (this.maxNumAllowed == null || !this.maxNumAllowed.equals(other.maxNumAllowed))) {
-            return false;
-        }
-        if (this.prices != other.prices && (this.prices == null || !this.prices.equals(other.prices))) {
-            return false;
-        }
-        if (this.defaults != other.defaults && (this.defaults == null || !this.defaults.equals(other.defaults))) {
-            return false;
-        }
-        if ((this.displayType == null) ? (other.displayType != null) : !this.displayType.equals(other.displayType)) {
-            return false;
-        }
-        if ((this.properties == null) ? (other.properties != null) : !this.properties.equals(other.properties)) {
-            return false;
-        }
-        return true;
-    }
-    
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + (this.title != null ? this.title.hashCode() : 0);
-        hash = 97 * hash + (this.itemIds != null ? this.itemIds.hashCode() : 0);
-        hash = 97 * hash + (this.minNumAllowed != null ? this.minNumAllowed.hashCode() : 0);
-        hash = 97 * hash + (this.maxNumAllowed != null ? this.maxNumAllowed.hashCode() : 0);
-        hash = 97 * hash + (this.prices != null ? this.prices.hashCode() : 0);
-        hash = 97 * hash + (this.defaults != null ? this.defaults.hashCode() : 0);
-        hash = 97 * hash + (this.displayType != null ? this.displayType.hashCode() : 0);
-        hash = 97 * hash + (this.properties != null ? this.properties.hashCode() : 0);
-        return hash;
-    }
-    
-    private static final long serialVersionUID = 1L;
 }
