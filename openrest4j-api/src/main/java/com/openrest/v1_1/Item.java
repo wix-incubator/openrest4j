@@ -54,20 +54,20 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     	
     	final List<Item> cloned = new LinkedList<>();
     	for (Item item : items) {
-    		cloned.add((item != null) ? (Item) item.clone() : null);
+    		cloned.add((item != null) ? item.clone() : null);
     	}
     	return cloned;
     }
     
     @Override
-	public Object clone() {
+	public Item clone() {
     	return new Item(id, restaurantId,
     			((title != null) ? title.clone() : null),
     			((description != null) ? description.clone() : null),
     			price, Variation.clone(variations),
                 (displayCondition != null) ? displayCondition.clone() : null,
                 (condition != null) ? condition.clone() : null,
-    			((availability != null) ? (Availability) availability.clone() : null),
+    			((availability != null) ? availability.clone() : null),
     			picture,
     			Blob.clone(blobs),
     			((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
