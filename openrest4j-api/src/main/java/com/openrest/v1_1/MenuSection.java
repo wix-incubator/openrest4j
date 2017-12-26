@@ -38,15 +38,15 @@ public class MenuSection implements Serializable, Cloneable {
     public MenuSection() {}
 
     @Override
-    public Object clone() {
+    public MenuSection clone() {
         return new MenuSection(id,
-                ((title != null) ? (LocalizedString) title.clone()  : null),
-                ((description != null) ? (LocalizedString) description.clone() : null),
+                ((title != null) ? title.clone()  : null),
+                ((description != null) ? description.clone() : null),
                 clone(children),
                 ((itemIds != null) ? new LinkedList<>(itemIds) : null),
-                ((displayCondition != null) ? (Condition) displayCondition.clone() : null),
-                ((condition != null) ? (Condition) condition.clone() : null),
-                ((availability != null) ? (Availability) availability.clone() : null),
+                ((displayCondition != null) ? displayCondition.clone() : null),
+                ((condition != null) ? condition.clone() : null),
+                ((availability != null) ? availability.clone() : null),
                 ((blobs != null) ? new LinkedHashMap<>(blobs) : null),
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
     }
@@ -58,7 +58,7 @@ public class MenuSection implements Serializable, Cloneable {
 
         final List<MenuSection> cloned = new LinkedList<>();
         for (MenuSection section : sections) {
-            cloned.add((section != null) ? (MenuSection)section.clone() : null);
+            cloned.add((section != null) ? section.clone() : null);
         }
         return cloned;
     }
