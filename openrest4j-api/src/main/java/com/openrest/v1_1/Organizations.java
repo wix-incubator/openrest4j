@@ -18,5 +18,5 @@ public class Organizations implements Serializable {
     }
 
     @JsonInclude(Include.NON_DEFAULT)
-	public List<Organization> organizations = new LinkedList<Organization>();
+	public List<Organization> organizations = new LinkedList<>();
 }
