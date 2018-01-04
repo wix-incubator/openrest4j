@@ -15,14 +15,6 @@ import java.util.Map.Entry;
 public abstract class Organization extends OpenrestObject implements Cloneable, Comparable<Organization> {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * External-id key for specifying the organization's notifications ("no-reply") email.
-     * For the value's format, @see <a href="http://en.wikipedia.org/wiki/Email_address">Email address</a>
-     *
-     * @see Organization#externalIds
-     */
-    public static final String EXTERNAL_ID_EMAIL_NOREPLY = "email.noreply";
-
     /** The organization's welcome message. */
     public static final String MESSAGE_TYPE_WELCOME = "welcome";
     /** The organization's order confirmation message. */
