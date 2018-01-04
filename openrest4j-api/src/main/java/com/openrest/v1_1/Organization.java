@@ -28,8 +28,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     protected Organization(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
                            LocalizedString title, LocalizedString description,
                            Locale locale, Set<Locale> locales, Map<String, LocalizedString> messages, ColorScheme colorScheme,
-                           Contact contact, Map<String, Contact> externalContacts,
-                           Address address, String timezone, String currency,
+                           Contact contact, Address address, String timezone, String currency,
                            List<AppInfo> apps, Seo seo, Map<String, String> properties,
                            Map<String, String> compatibilities, Map<String, Availability> availabilities,
                            Map<String, Blob> blobs,
@@ -48,7 +47,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     	this.messages = messages;
     	this.colorScheme = colorScheme;
     	this.contact = contact;
-    	this.externalContacts = externalContacts;
     	this.address = address;
     	this.timezone = timezone;
     	this.currency = currency;
@@ -136,18 +134,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     /** The organization's contact. */
     @JsonInclude(Include.NON_NULL)
     public Contact contact;
-    
-    /**
-     * Map of externally-defined contact information for this organization.
-     * For example, a redirect phone number in some portal.
-     * 
-     * Developers should use unique keys, e.g. "com.company.product".
-     *
-     * Scheduled for deprecation on 2017-12-01.
-     */
-    @Deprecated
-    @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, Contact> externalContacts = new LinkedHashMap<>();
 
     /** The address of this organization. */
     @JsonInclude(Include.NON_NULL)
@@ -259,7 +245,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
         if (colorScheme != null ? !colorScheme.equals(that.colorScheme) : that.colorScheme != null) return false;
         if (contact != null ? !contact.equals(that.contact) : that.contact != null) return false;
-        if (externalContacts != null ? !externalContacts.equals(that.externalContacts) : that.externalContacts != null) return false;
         if (address != null ? !address.equals(that.address) : that.address != null) return false;
         if (timezone != null ? !timezone.equals(that.timezone) : that.timezone != null) return false;
         if (currency != null ? !currency.equals(that.currency) : that.currency != null) return false;
@@ -289,7 +274,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (colorScheme != null ? colorScheme.hashCode() : 0);
         result = 31 * result + (contact != null ? contact.hashCode() : 0);
-        result = 31 * result + (externalContacts != null ? externalContacts.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + (timezone != null ? timezone.hashCode() : 0);
         result = 31 * result + (currency != null ? currency.hashCode() : 0);
@@ -321,7 +305,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
                 ", description=" + description +
                 ", colorScheme=" + colorScheme +
                 ", contact=" + contact +
-                ", externalContacts=" + externalContacts +
                 ", address=" + address +
                 ", timezone='" + timezone + '\'' +
                 ", currency='" + currency + '\'' +

@@ -18,7 +18,7 @@ public class SearchResult extends Restaurant {
     
     public SearchResult(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
                         String distributorId, String chainId, LocalizedString title,
-                        LocalizedString description, Contact contact, Map<String, Contact> externalContacts, Address address,
+                        LocalizedString description, Contact contact, Address address,
                         Map<String, LocalizedString> messages, ColorScheme colorScheme,
                         Availability openTimes, List<DispatchInfo> deliveryInfos,
                         String timezone, String currency, Locale locale, Set<Locale> locales,
@@ -30,7 +30,7 @@ public class SearchResult extends Restaurant {
                         String state, Boolean closed, Set<Product> products,
                         Map<String, Double> features, List<TopItem> topItems,
                         Set<String> deliveryTypes, DispatchInfo deliveryInfo) {
-    	super(id, alias, affiliateId, externalIds, created, modified, distributorId, chainId, title, description, contact, externalContacts,
+    	super(id, alias, affiliateId, externalIds, created, modified, distributorId, chainId, title, description, contact,
     			address, messages, colorScheme, openTimes, deliveryInfos,
     			timezone, currency, locale, locales, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations,
     			antiFraudDisabled, blobs, apps, seo, properties, compatibilities, availabilities, state, closed, products, features);
@@ -57,7 +57,7 @@ public class SearchResult extends Restaurant {
                 distributorId, chainId,
                 ((title != null) ? title.clone() : null),
                 ((description != null) ? description.clone() : null),
-                ((contact != null) ? contact.clone() : null), Contact.clone(externalContacts),
+                ((contact != null) ? contact.clone() : null),
                 ((address != null) ? address.clone() : null),
                 cloneMessages(messages),
                 ((colorScheme != null) ? (ColorScheme) colorScheme.clone() : null),

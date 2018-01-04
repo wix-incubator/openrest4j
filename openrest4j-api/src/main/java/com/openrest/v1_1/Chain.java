@@ -21,13 +21,13 @@ public class Chain extends Organization {
     public Chain(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
 				 String distributorId, LocalizedString title, LocalizedString description,
 				 Locale locale, Set<Locale> locales, Map<String, LocalizedString> messages, ColorScheme colorScheme,
-				 Contact contact, Map<String, Contact> externalContacts, Address address, String timezone, String currency,
+				 Contact contact, Address address, String timezone, String currency,
 				 List<AppInfo> apps, Seo seo, Map<String, String> properties,
 				 Map<String, String> compatibilities, Map<String, Availability> availabilities,
 				 Map<String, Blob> blobs,
 				 String state, Boolean closed, Set<Product> products) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
-    			contact, externalContacts, address, timezone, currency, apps, seo, properties,
+    			contact, address, timezone, currency, apps, seo, properties,
 				compatibilities, availabilities, blobs, state, closed, products);
     	
     	this.distributorId = distributorId;
@@ -51,7 +51,7 @@ public class Chain extends Organization {
     			((locales != null) ? new LinkedHashSet<>(locales) : null),
     			cloneMessages(messages),
     			((colorScheme != null) ? (ColorScheme)colorScheme.clone() : null),
-    			((contact != null) ? contact.clone() : null), Contact.clone(externalContacts),
+    			((contact != null) ? contact.clone() : null),
     			((address != null) ? address.clone() : null),
     			timezone, currency, AppInfo.clone(apps),
     			((seo != null) ? (Seo) seo.clone() : null),

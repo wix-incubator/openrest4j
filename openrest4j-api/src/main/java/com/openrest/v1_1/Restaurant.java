@@ -59,7 +59,7 @@ public class Restaurant extends Organization {
 
     public Restaurant(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
                       String distributorId, String chainId, LocalizedString title,
-                      LocalizedString description, Contact contact, Map<String, Contact> externalContacts, Address address,
+                      LocalizedString description, Contact contact, Address address,
                       Map<String, LocalizedString> messages, ColorScheme colorScheme,
                       Availability openTimes, List<DispatchInfo> deliveryInfos,
                       String timezone, String currency, Locale locale, Set<Locale> locales,
@@ -70,7 +70,7 @@ public class Restaurant extends Organization {
                       Map<String, Availability> availabilities,
                       String state, Boolean closed, Set<Product> products, Map<String, Double> features) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
-    			contact, externalContacts, address, timezone, currency, apps, seo, properties, compatibilities,
+    			contact, address, timezone, currency, apps, seo, properties, compatibilities,
                 availabilities, blobs, state, closed, products);
         
     	this.distributorId = distributorId;
@@ -105,11 +105,11 @@ public class Restaurant extends Organization {
                 distributorId, chainId,
     			((title != null) ? title.clone() : null),
     			((description != null) ? description.clone() : null),
-    			((contact != null) ? contact.clone() : null), Contact.clone(externalContacts),
+    			((contact != null) ? contact.clone() : null),
     			((address != null) ? address.clone() : null),
     			cloneMessages(messages),
     			((colorScheme != null) ? (ColorScheme) colorScheme.clone() : null),
-    			((openTimes != null) ? (Availability) openTimes.clone() : null),
+    			((openTimes != null) ? openTimes.clone() : null),
                 DispatchInfo.clone(deliveryInfos),
     			timezone, currency, locale,
     			((locales != null) ? new LinkedHashSet<>(locales) : null),
@@ -153,7 +153,6 @@ public class Restaurant extends Organization {
                 ", description=" + description +
                 ", colorScheme=" + colorScheme +
                 ", contact=" + contact +
-                ", externalContacts=" + externalContacts +
                 ", address=" + address +
                 ", timezone='" + timezone + '\'' +
                 ", currency='" + currency + '\'' +
