@@ -24,10 +24,10 @@ public class Affiliate extends Organization {
 					 Contact contact, Map<String, Contact> externalContacts, Address address, String timezone, String currency,
 					 List<AppInfo> apps, Seo seo, Map<String, String> properties,
 					 Map<String, String> compatibilities, Map<String, Availability> availabilities,
-					 Map<String, Blob> blobs, String state, Boolean closed, Set<Product> products, Double rank) {
+					 Map<String, Blob> blobs, String state, Boolean closed, Set<Product> products) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, externalContacts, address, timezone, currency, apps, seo, properties,
-				compatibilities, availabilities, blobs, state, closed, products, rank);
+				compatibilities, availabilities, blobs, state, closed, products);
     	
     	this.distributorId = distributorId;
     }
@@ -57,7 +57,7 @@ public class Affiliate extends Organization {
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
     			((compatibilities != null) ? new LinkedHashMap<>(compatibilities) : null),
 				Availability.clone(availabilities), Blob.clone(blobs),
-    			state, closed, Product.clone(products), rank);
+    			state, closed, Product.clone(products));
 	}
 
 	@Override

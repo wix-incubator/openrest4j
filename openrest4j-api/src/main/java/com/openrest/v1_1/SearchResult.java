@@ -28,12 +28,12 @@ public class SearchResult extends Restaurant {
                         List<AppInfo> apps, Seo seo, Map<String, String> properties,
                         Map<String, String> compatibilities, Map<String, Availability> availabilities,
                         String state, Boolean closed, Set<Product> products,
-                        Map<String, Double> features, Double rank, List<TopItem> topItems,
+                        Map<String, Double> features, List<TopItem> topItems,
                         Set<String> deliveryTypes, DispatchInfo deliveryInfo) {
     	super(id, alias, affiliateId, externalIds, created, modified, distributorId, chainId, title, description, contact, externalContacts,
     			address, messages, colorScheme, openTimes, deliveryInfos,
     			timezone, currency, locale, locales, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations,
-    			antiFraudDisabled, blobs, apps, seo, properties, compatibilities, availabilities, state, closed, products, features, rank);
+    			antiFraudDisabled, blobs, apps, seo, properties, compatibilities, availabilities, state, closed, products, features);
     	
     	this.topItems = topItems;
     	this.deliveryTypes = deliveryTypes;
@@ -55,22 +55,22 @@ public class SearchResult extends Restaurant {
                 (created != null) ? (Date) created.clone() : null,
                 (modified != null) ? (Date) modified.clone() : null,
                 distributorId, chainId,
-                ((title != null) ? (LocalizedString) title.clone() : null),
-                ((description != null) ? (LocalizedString) description.clone() : null),
-                ((contact != null) ? (Contact)contact.clone() : null), Contact.clone(externalContacts),
-                ((address != null) ? (Address)address.clone() : null),
+                ((title != null) ? title.clone() : null),
+                ((description != null) ? description.clone() : null),
+                ((contact != null) ? contact.clone() : null), Contact.clone(externalContacts),
+                ((address != null) ? address.clone() : null),
                 cloneMessages(messages),
                 ((colorScheme != null) ? (ColorScheme) colorScheme.clone() : null),
-                ((openTimes != null) ? (Availability) openTimes.clone() : null),
+                ((openTimes != null) ? openTimes.clone() : null),
                 DispatchInfo.clone(deliveryInfos),
                 timezone, currency, locale,
                 ((locales != null) ? new LinkedHashSet<>(locales) : null),
                 ((paymentTypes != null) ? new LinkedHashSet<>(paymentTypes) : null),
                 multiPaymentDisabled,
-                ((creditcardsInfo != null) ? (CreditcardsInfo) creditcardsInfo.clone() : null),
-                ((deliveriesInfo != null) ? (DeliveriesInfo) deliveriesInfo.clone() : null),
-                ((orders != null) ? (OrdersInfo) orders.clone() : null),
-                ((reservations != null) ? (ReservationsInfo) reservations.clone() : null),
+                ((creditcardsInfo != null) ? creditcardsInfo.clone() : null),
+                ((deliveriesInfo != null) ? deliveriesInfo.clone() : null),
+                ((orders != null) ? orders.clone() : null),
+                ((reservations != null) ? reservations.clone() : null),
                 antiFraudDisabled, Blob.clone(blobs), AppInfo.clone(apps),
                 ((seo != null) ? (Seo) seo.clone() : null),
                 ((properties != null) ? new LinkedHashMap<>(properties) : null),
@@ -78,10 +78,9 @@ public class SearchResult extends Restaurant {
                 Availability.clone(availabilities),
                 state, closed, Product.clone(products),
                 ((features != null) ? new LinkedHashMap<>(features) : null),
-                rank,
                 TopItem.clone(topItems),
                 (deliveryTypes != null) ? new LinkedHashSet<>(deliveryTypes): null,
-                (deliveryInfo != null) ? (DispatchInfo) deliveryInfo.clone() : null);
+                (deliveryInfo != null) ? deliveryInfo.clone() : null);
     }
 
     @Override
