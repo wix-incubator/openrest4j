@@ -16,10 +16,9 @@ public class SearchRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public SearchRequest() {}
     
-    public SearchRequest(Filter filter, Set<String> states, Set<String> features, String query,
+    public SearchRequest(Filter filter, Set<String> features, String query,
                          Set<String> fields, Integer limit, Set<String> excludeIds) {
     	this.filter = filter;
-    	this.states = states;
     	this.features = features;
     	this.query = query;
     	this.fields = fields;
@@ -45,9 +44,6 @@ public class SearchRequest extends Request {
     @JsonInclude(Include.NON_NULL)
     public LatLng latLng;
     
-    @JsonInclude(Include.NON_NULL)
-    public Set<String> states;
-
     @JsonInclude(Include.NON_NULL)
     public Set<String> features;
     
