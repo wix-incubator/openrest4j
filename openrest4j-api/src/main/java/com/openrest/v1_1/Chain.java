@@ -25,10 +25,10 @@ public class Chain extends Organization {
 				 List<AppInfo> apps, Seo seo, Map<String, String> properties,
 				 Map<String, String> compatibilities, Map<String, Availability> availabilities,
 				 Map<String, Blob> blobs,
-				 String state, Boolean closed, Set<Product> products) {
+				 Boolean closed, Set<Product> products) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, address, timezone, currency, apps, seo, properties,
-				compatibilities, availabilities, blobs, state, closed, products);
+				compatibilities, availabilities, blobs, closed, products);
     	
     	this.distributorId = distributorId;
     }
@@ -58,7 +58,7 @@ public class Chain extends Organization {
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
     			((compatibilities != null) ? new LinkedHashMap<>(compatibilities) : null),
 				Availability.clone(availabilities), Blob.clone(blobs),
-    			state, closed, Product.clone(products));
+    			closed, Product.clone(products));
 	}
 
 	@Override

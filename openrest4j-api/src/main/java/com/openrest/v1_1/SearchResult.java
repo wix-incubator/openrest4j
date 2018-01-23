@@ -27,14 +27,14 @@ public class SearchResult extends Restaurant {
                         Boolean antiFraudDisabled, Map<String, Blob> blobs,
                         List<AppInfo> apps, Seo seo, Map<String, String> properties,
                         Map<String, String> compatibilities, Map<String, Availability> availabilities,
-                        String state, Boolean closed, Set<Product> products,
+                        Boolean closed, Set<Product> products,
                         Map<String, Double> features, List<TopItem> topItems,
                         Set<String> deliveryTypes, DispatchInfo deliveryInfo) {
     	super(id, alias, affiliateId, externalIds, created, modified, distributorId, chainId, title, description, contact,
     			address, messages, colorScheme, openTimes, deliveryInfos,
     			timezone, currency, locale, locales, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations,
-    			antiFraudDisabled, blobs, apps, seo, properties, compatibilities, availabilities, state, closed, products, features);
-    	
+    			antiFraudDisabled, blobs, apps, seo, properties, compatibilities, availabilities, closed, products, features);
+
     	this.topItems = topItems;
     	this.deliveryTypes = deliveryTypes;
     	this.deliveryInfo = deliveryInfo;
@@ -76,7 +76,7 @@ public class SearchResult extends Restaurant {
                 ((properties != null) ? new LinkedHashMap<>(properties) : null),
                 ((compatibilities != null) ? new LinkedHashMap<>(compatibilities) : null),
                 Availability.clone(availabilities),
-                state, closed, Product.clone(products),
+                closed, Product.clone(products),
                 ((features != null) ? new LinkedHashMap<>(features) : null),
                 TopItem.clone(topItems),
                 (deliveryTypes != null) ? new LinkedHashSet<>(deliveryTypes): null,

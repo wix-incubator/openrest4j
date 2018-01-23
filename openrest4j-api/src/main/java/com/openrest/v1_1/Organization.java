@@ -32,7 +32,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
                            List<AppInfo> apps, Seo seo, Map<String, String> properties,
                            Map<String, String> compatibilities, Map<String, Availability> availabilities,
                            Map<String, Blob> blobs,
-                           String state, Boolean closed, Set<Product> products) {
+                           Boolean closed, Set<Product> products) {
 
     	this.id = id;
     	this.alias = alias;
@@ -56,7 +56,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     	this.compatibilities = compatibilities;
         this.availabilities = availabilities;
     	this.blobs = blobs;
-    	this.state = state;
     	this.closed = closed;
     	this.products = products;
     }
@@ -211,21 +210,12 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean closed = Boolean.FALSE;
     
-    /**
-     * @see State#ALL_STATES
-     *
-     * Scheduled for deprecation on 2017-12-01.
-     */
-    @Deprecated
-    @JsonInclude(Include.NON_DEFAULT)
-    public String state = State.STATE_OPERATIONAL;
-    
     /** Active products */
     @JsonInclude(Include.NON_DEFAULT)
     public Set<Product> products = new LinkedHashSet<>();
     
 	public int compareTo(Organization other) {
-        return State.compare(state, other.state);
+	    return this.id.compareTo(other.id);
 	}
 
     @Override
@@ -258,7 +248,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
         if (availabilities != null ? !availabilities.equals(that.availabilities) : that.availabilities != null) return false;
         if (blobs != null ? !blobs.equals(that.blobs) : that.blobs != null) return false;
         if (closed != null ? !closed.equals(that.closed) : that.closed != null) return false;
-        if (state != null ? !state.equals(that.state) : that.state != null) return false;
         return products != null ? products.equals(that.products) : that.products == null;
     }
 
@@ -287,7 +276,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
         result = 31 * result + (availabilities != null ? availabilities.hashCode() : 0);
         result = 31 * result + (blobs != null ? blobs.hashCode() : 0);
         result = 31 * result + (closed != null ? closed.hashCode() : 0);
-        result = 31 * result + (state != null ? state.hashCode() : 0);
         result = 31 * result + (products != null ? products.hashCode() : 0);
         return result;
     }
@@ -318,7 +306,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
                 ", availabilities=" + availabilities +
                 ", blobs=" + blobs +
                 ", closed=" + closed +
-                ", state='" + state + '\'' +
                 ", products=" + products +
                 '}';
     }

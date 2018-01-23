@@ -26,10 +26,10 @@ public class Distributor extends Organization {
 					   Map<String, String> properties, Map<String, String> compatibilities,
 					   Map<String, Availability> availabilities, String facebookAppId, String tld,
 					   Map<String, Blob> blobs,
-					   String state, Boolean closed, Set<Product> products) {
+					   Boolean closed, Set<Product> products) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, address, timezone, currency, apps, seo, properties,
-				compatibilities, availabilities, blobs, state, closed, products);
+				compatibilities, availabilities, blobs, closed, products);
     	
     	this.facebookAppId = facebookAppId;
     	this.tld = tld;
@@ -60,7 +60,7 @@ public class Distributor extends Organization {
 				((compatibilities != null) ? new LinkedHashMap<>(compatibilities) : null),
 				Availability.clone(availabilities),
 				facebookAppId, tld, Blob.clone(blobs),
-				state, closed, Product.clone(products));
+				closed, Product.clone(products));
 	}
 
     @Override
