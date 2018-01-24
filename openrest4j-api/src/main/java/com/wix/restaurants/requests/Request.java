@@ -55,7 +55,6 @@ import java.io.Serializable;
 	@Type(value = SetClientInfoCommentsRequest.class, name = SetClientInfoCommentsRequest.TYPE),
 	@Type(value = SetAvailabilityExceptionsRequest.class, name = SetAvailabilityExceptionsRequest.TYPE),
 	@Type(value = QueryEmailRequest.class, name = QueryEmailRequest.TYPE),
-	@Type(value = DeferredRequest.class, name = DeferredRequest.TYPE),
 	@Type(value = BatchRequest.class, name = BatchRequest.TYPE),
 	@Type(value = GetStatsRequest.class, name = GetStatsRequest.TYPE),
 	@Type(value = GetStaffRequest.class, name = GetStaffRequest.TYPE),
