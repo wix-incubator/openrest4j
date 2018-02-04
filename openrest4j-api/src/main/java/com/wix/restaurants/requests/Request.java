@@ -80,7 +80,6 @@ import java.io.Serializable;
 	@Type(value = SetPropertyRequest.class, name = SetPropertyRequest.TYPE),
 	@Type(value = ToggleProductRequest.class, name = ToggleProductRequest.TYPE),
 	@Type(value = QueryUsageRequest.class, name = QueryUsageRequest.TYPE),
-	@Type(value = GetInvrecRequest.class, name = GetInvrecRequest.TYPE),
 	@Type(value = AcceptDocumentRequest.class, name = AcceptDocumentRequest.TYPE),
 	@Type(value = GetInventoryRequest.class, name = GetInventoryRequest.TYPE),
 	@Type(value = SetInventoryRequest.class, name = SetInventoryRequest.TYPE),
