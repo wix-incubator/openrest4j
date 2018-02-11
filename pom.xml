@@ -65,7 +65,7 @@
     <properties>
 		<com.fasterxml.jackson.version>2.7.4</com.fasterxml.jackson.version>
 		<com.wix.restaurants.availability.version>1.6.0</com.wix.restaurants.availability.version>
-        <com.wix.restaurants.json.version>1.5.0</com.wix.restaurants.json.version>
+        <com.wix.restaurants.json.version>1.6.0</com.wix.restaurants.json.version>
 		<com.wix.restaurants.jsonclient.version>1.5.0</com.wix.restaurants.jsonclient.version>
 		<com.wix.pay.smaug.client.version>1.7.0</com.wix.pay.smaug.client.version>
         <java.source.version>1.7</java.source.version>
