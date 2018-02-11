@@ -68,8 +68,6 @@
         <com.wix.restaurants.json.version>1.6.0</com.wix.restaurants.json.version>
 		<com.wix.restaurants.jsonclient.version>1.5.0</com.wix.restaurants.jsonclient.version>
 		<com.wix.pay.smaug.client.version>1.7.0</com.wix.pay.smaug.client.version>
-        <java.source.version>1.7</java.source.version>
-        <java.target.version>1.7</java.target.version>
     </properties>
 
 
@@ -77,37 +75,4 @@
         <module>openrest4j-api</module>
         <module>openrest4j-client</module>
     </modules>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>1.4.1</version>
-                <executions>
-                    <execution>
-                        <id>enforce-bytecode-version</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <enforceBytecodeVersion>
-                                    <maxJdkVersion>1.7</maxJdkVersion>
-                                </enforceBytecodeVersion>
-                            </rules>
-                            <fail>true</fail>
-                        </configuration>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>extra-enforcer-rules</artifactId>
-                        <version>1.0-beta-4</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-        </plugins>
-    </build>
 </project>
