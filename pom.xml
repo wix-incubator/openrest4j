@@ -35,11 +35,12 @@
     </developers>
 
 
-    <parent>
-        <groupId>com.wix</groupId>
-        <artifactId>wix-oss-parent</artifactId>
-        <version>1.4.0</version>
-    </parent>
+	<parent>
+		<groupId>com.wix</groupId>
+		<artifactId>wix-oss-scala-parent</artifactId>
+		<version>0.47.0</version>
+		<relativePath />
+	</parent>
 
 
     <scm>
