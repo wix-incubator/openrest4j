@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import java.util.Objects;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SetWixAppMappingRequest extends Request {
     public static final String TYPE = "set_wix_app_mapping";
@@ -17,6 +19,22 @@ public class SetWixAppMappingRequest extends Request {
         this.instance = instance;
         this.instanceId = instanceId;
         this.organizationId = organizationId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SetWixAppMappingRequest that = (SetWixAppMappingRequest) o;
+        return Objects.equals(accessToken, that.accessToken) &&
+                Objects.equals(instance, that.instance) &&
+                Objects.equals(instanceId, that.instanceId) &&
+                Objects.equals(organizationId, that.organizationId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(accessToken, instance, instanceId, organizationId);
     }
 
     /** Access token (alternative: specify instance). */
