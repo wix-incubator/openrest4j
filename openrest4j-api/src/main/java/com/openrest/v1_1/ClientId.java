@@ -22,7 +22,7 @@ public class ClientId implements Serializable, Cloneable {
     public ClientId() {}
     
     @Override
-	public Object clone() {
+	public ClientId clone() {
     	return new ClientId(ns, id, uid, inferred);
 	}
 
@@ -34,7 +34,7 @@ public class ClientId implements Serializable, Cloneable {
 
         final List<ClientId> cloned = new LinkedList<>();
         for (ClientId clientId : clientIds) {
-            cloned.add((clientId != null) ? (ClientId) clientId.clone() : null);
+            cloned.add((clientId != null) ? clientId.clone() : null);
         }
         return cloned;
     }
