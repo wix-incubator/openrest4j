@@ -6,13 +6,10 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 public class ClientId implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
-    
-    public static final String NS_PHONE = "tel";
-    public static final String NS_OPENREST = "com.openrest";
-    public static final String NS_FACEBOOK = "com.facebook";
     
     public ClientId(String ns, String id, String uid, Boolean inferred) {
     	this.ns = ns;
@@ -41,12 +38,34 @@ public class ClientId implements Serializable, Cloneable {
         }
         return cloned;
     }
-    
-    /** The unique id's namespace. */
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		ClientId clientId = (ClientId) o;
+		return Objects.equals(ns, clientId.ns) &&
+				Objects.equals(id, clientId.id) &&
+				Objects.equals(uid, clientId.uid) &&
+				Objects.equals(inferred, clientId.inferred);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(ns, id, uid, inferred);
+	}
+
+    /**
+     * The unique id's namespace.
+     * @see com.wix.restaurants.ClientNamespaces
+     */
     @JsonInclude(Include.NON_NULL)
     public String ns;
-	
-    /** The unique id. */
+
+    /**
+     * The unique id (namespace-specific).
+     * @see com.wix.restaurants.ClientNamespaces
+     */
     @JsonInclude(Include.NON_NULL)
     public String id;
     
@@ -58,48 +77,4 @@ public class ClientId implements Serializable, Cloneable {
     /** Whether the id is inferred (as opposed to verified). */
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean inferred = Boolean.FALSE;
-    
-    @Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((inferred == null) ? 0 : inferred.hashCode());
-		result = prime * result + ((ns == null) ? 0 : ns.hashCode());
-		result = prime * result + ((uid == null) ? 0 : uid.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ClientId other = (ClientId) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (inferred == null) {
-			if (other.inferred != null)
-				return false;
-		} else if (!inferred.equals(other.inferred))
-			return false;
-		if (ns == null) {
-			if (other.ns != null)
-				return false;
-		} else if (!ns.equals(other.ns))
-			return false;
-		if (uid == null) {
-			if (other.uid != null)
-				return false;
-		} else if (!uid.equals(other.uid))
-			return false;
-		return true;
-	}
 }
