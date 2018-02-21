@@ -101,6 +101,7 @@ import java.io.Serializable;
 	@Type(value = QueryUnhandledReservationsRequest.class, name = QueryUnhandledReservationsRequest.TYPE),
 	@Type(value = QueryModifiedReservationsRequest.class, name = QueryModifiedReservationsRequest.TYPE),
 	@Type(value = QueryReservationsRequest.class, name = QueryReservationsRequest.TYPE),
+	@Type(value = QueryCustomerReservationsRequest.class, name = QueryCustomerReservationsRequest.TYPE),
 	@Type(value = SetReservationStatusRequest.class, name = SetReservationStatusRequest.TYPE),
 	@Type(value = ConfirmReservationRequest.class, name = ConfirmReservationRequest.TYPE),
 	@Type(value = NotifyReservationRequest.class, name = NotifyReservationRequest.TYPE),
