@@ -27,4 +27,16 @@ public class ClientNamespaces {
      * identifier: Facebook user ID, e.g. "4" for Mark Zuckerberg.
      */
     public static final String facebook = "com.facebook";
+
+    /**
+     * Google user.
+     * identifier: Google user ID (email), e.g. "example@gmail.com".
+     */
+    public static final String google = "com.google";
+
+    /**
+     * Wix user.
+     * identifier: Wix user ID (GUID).
+     */
+    public static final String wix = "com.wix";
 }
