@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Role implements Serializable, Cloneable {
@@ -20,7 +21,7 @@ public class Role implements Serializable, Cloneable {
     public Role() {}
     
     @Override
-	public Object clone() {
+	public Role clone() {
     	return new Role(organizationId, organizationType, role);
 	}
 
@@ -28,20 +29,15 @@ public class Role implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Role role1 = (Role) o;
-
-        if (organizationId != null ? !organizationId.equals(role1.organizationId) : role1.organizationId != null) return false;
-        if (organizationType != null ? !organizationType.equals(role1.organizationType) : role1.organizationType != null) return false;
-        return role != null ? role.equals(role1.role) : role1.role == null;
+        return Objects.equals(organizationId, role1.organizationId) &&
+                Objects.equals(organizationType, role1.organizationType) &&
+                Objects.equals(role, role1.role);
     }
 
     @Override
     public int hashCode() {
-        int result = organizationId != null ? organizationId.hashCode() : 0;
-        result = 31 * result + (organizationType != null ? organizationType.hashCode() : 0);
-        result = 31 * result + (role != null ? role.hashCode() : 0);
-        return result;
+        return Objects.hash(organizationId, organizationType, role);
     }
 
     @Override
