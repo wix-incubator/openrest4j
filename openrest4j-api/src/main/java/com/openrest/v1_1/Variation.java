@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.restaurants.i18n.LocalizedString;
+import com.wix.restaurants.orders.VariationDisplayTypes;
 
 import java.io.Serializable;
 import java.util.*;
@@ -15,18 +16,6 @@ import java.util.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Variation implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
-
-    public static final String VARIATION_DISPLAY_TYPE_DIFF = "diff";
-    public static final String VARIATION_DISPLAY_TYPE_CHOICE = "choice";
-    /**
-     * Variations that are not displayed to the customer, just to the restaurant.
-     * Similar to a hidden field in an HTML form.
-     */
-    public static final String VARIATION_DISPLAY_TYPE_HIDDEN = "hidden";
-    
-    /** All known variation display types. */
-    public static final Set<String> ALL_VARIATION_DISPLAY_TYPES = new HashSet<>(
-    		Arrays.asList(VARIATION_DISPLAY_TYPE_DIFF, VARIATION_DISPLAY_TYPE_CHOICE, VARIATION_DISPLAY_TYPE_HIDDEN));
 
     public Variation(LocalizedString title, List<String> itemIds, Integer minNumAllowed,
                      Integer maxNumAllowed, Map<String, Integer> prices, Set<String> defaults, String displayType,
@@ -122,9 +111,9 @@ public class Variation implements Serializable, Cloneable {
     @JsonInclude(Include.NON_DEFAULT)
     public Set<String> defaults = new LinkedHashSet<>();
 
-    /** Display type for human-readable printing. */
+    /** @see VariationDisplayTypes */
     @JsonInclude(Include.NON_DEFAULT)
-    public String displayType = VARIATION_DISPLAY_TYPE_CHOICE;
+    public String displayType = VariationDisplayTypes.choice;
 
     /**
      * Map of user-defined extended properties. Developers should use unique
