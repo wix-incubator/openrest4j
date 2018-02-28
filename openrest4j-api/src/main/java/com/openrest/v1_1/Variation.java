@@ -44,7 +44,7 @@ public class Variation implements Serializable, Cloneable {
     			displayType,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
 	}
-    
+
     public static List<Variation> clone(List<Variation> variations) {
     	if (variations == null) {
     		return null;
@@ -61,30 +61,20 @@ public class Variation implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Variation variation = (Variation) o;
-
-        if (title != null ? !title.equals(variation.title) : variation.title != null) return false;
-        if (itemIds != null ? !itemIds.equals(variation.itemIds) : variation.itemIds != null) return false;
-        if (minNumAllowed != null ? !minNumAllowed.equals(variation.minNumAllowed) : variation.minNumAllowed != null) return false;
-        if (maxNumAllowed != null ? !maxNumAllowed.equals(variation.maxNumAllowed) : variation.maxNumAllowed != null) return false;
-        if (prices != null ? !prices.equals(variation.prices) : variation.prices != null) return false;
-        if (defaults != null ? !defaults.equals(variation.defaults) : variation.defaults != null) return false;
-        if (displayType != null ? !displayType.equals(variation.displayType) : variation.displayType != null) return false;
-        return properties != null ? properties.equals(variation.properties) : variation.properties == null;
+        return Objects.equals(title, variation.title) &&
+                Objects.equals(itemIds, variation.itemIds) &&
+                Objects.equals(minNumAllowed, variation.minNumAllowed) &&
+                Objects.equals(maxNumAllowed, variation.maxNumAllowed) &&
+                Objects.equals(prices, variation.prices) &&
+                Objects.equals(defaults, variation.defaults) &&
+                Objects.equals(displayType, variation.displayType) &&
+                Objects.equals(properties, variation.properties);
     }
 
     @Override
     public int hashCode() {
-        int result = title != null ? title.hashCode() : 0;
-        result = 31 * result + (itemIds != null ? itemIds.hashCode() : 0);
-        result = 31 * result + (minNumAllowed != null ? minNumAllowed.hashCode() : 0);
-        result = 31 * result + (maxNumAllowed != null ? maxNumAllowed.hashCode() : 0);
-        result = 31 * result + (prices != null ? prices.hashCode() : 0);
-        result = 31 * result + (defaults != null ? defaults.hashCode() : 0);
-        result = 31 * result + (displayType != null ? displayType.hashCode() : 0);
-        result = 31 * result + (properties != null ? properties.hashCode() : 0);
-        return result;
+        return Objects.hash(title, itemIds, minNumAllowed, maxNumAllowed, prices, defaults, displayType, properties);
     }
 
     /** The variations's name in various locales, e.g. "sides", "degree of cooking". */
