@@ -19,14 +19,13 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
 	private static final long serialVersionUID = 1L;
 	
 	/** Constructs a previously submitted item from persisted data. */
-    public Item(String id, String restaurantId, LocalizedString title,
+    public Item(String id, LocalizedString title,
 				LocalizedString description, Integer price, List<Variation> variations,
 				Condition displayCondition, Condition condition,
 				Availability availability, String picture, Map<String, Blob> blobs,
 				Map<String, String> externalIds, Set<String> labels,
-				Map<String, String> properties, Stock stock, Integer maxCommentLength, Double rank) {
+				Map<String, String> properties, Stock stock, Integer maxCommentLength) {
         this.id = id;
-        this.restaurantId = restaurantId;
         this.title = title;
         this.description = description;
         this.price = price;
@@ -41,7 +40,6 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
         this.properties = properties;
         this.stock = stock;
         this.maxCommentLength = maxCommentLength;
-        this.rank = rank;
     }
 
 	/** Default constructor for JSON deserialization. */
@@ -61,7 +59,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     
     @Override
 	public Item clone() {
-    	return new Item(id, restaurantId,
+    	return new Item(id,
     			((title != null) ? title.clone() : null),
     			((description != null) ? description.clone() : null),
     			price, Variation.clone(variations),
@@ -73,16 +71,64 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     			((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
     			((labels != null) ? new LinkedHashSet<>(labels) : null),
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
-    			stock, maxCommentLength, rank);
+    			stock, maxCommentLength);
 	}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return Objects.equals(id, item.id) &&
+                Objects.equals(title, item.title) &&
+                Objects.equals(description, item.description) &&
+                Objects.equals(price, item.price) &&
+                Objects.equals(variations, item.variations) &&
+                Objects.equals(displayCondition, item.displayCondition) &&
+                Objects.equals(condition, item.condition) &&
+                Objects.equals(availability, item.availability) &&
+                Objects.equals(picture, item.picture) &&
+                Objects.equals(blobs, item.blobs) &&
+                Objects.equals(externalIds, item.externalIds) &&
+                Objects.equals(labels, item.labels) &&
+                Objects.equals(properties, item.properties) &&
+                Objects.equals(stock, item.stock) &&
+                Objects.equals(maxCommentLength, item.maxCommentLength);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, description, price, variations, displayCondition, condition, availability, picture, blobs, externalIds, labels, properties, stock, maxCommentLength);
+    }
+
+    public int compareTo(Item other) {
+        return this.id.compareTo(other.id);
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id='" + id + '\'' +
+                ", title=" + title +
+                ", description=" + description +
+                ", price=" + price +
+                ", variations=" + variations +
+                ", displayCondition=" + displayCondition +
+                ", condition=" + condition +
+                ", availability=" + availability +
+                ", picture='" + picture + '\'' +
+                ", blobs=" + blobs +
+                ", externalIds=" + externalIds +
+                ", labels=" + labels +
+                ", properties=" + properties +
+                ", stock=" + stock +
+                ", maxCommentLength=" + maxCommentLength +
+                '}';
+    }
 
     /** The item's unique id. */
     @JsonInclude(Include.NON_NULL)
     public String id;
-
-    /** The restaurant's id. */
-    @JsonInclude(Include.NON_NULL)
-    public String restaurantId;
 
     /** The item's title in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
@@ -158,64 +204,4 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
      */
     @JsonInclude(Include.NON_NULL)
     public Integer maxCommentLength;
-
-    /** The item's Openrest rank (higher is better). */
-    @JsonInclude(Include.NON_NULL)
-    public Double rank;
-
-	public int compareTo(Item other) {
-		if (rank != null) {
-			return ((other.rank != null) ? -rank.compareTo(other.rank) : -1);
-		} else {
-			return ((other.rank == null) ? (0) : 1);
-		}
-	}
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Item item = (Item) o;
-
-        if (id != null ? !id.equals(item.id) : item.id != null) return false;
-        if (restaurantId != null ? !restaurantId.equals(item.restaurantId) : item.restaurantId != null) return false;
-        if (title != null ? !title.equals(item.title) : item.title != null) return false;
-        if (description != null ? !description.equals(item.description) : item.description != null) return false;
-        if (price != null ? !price.equals(item.price) : item.price != null) return false;
-        if (variations != null ? !variations.equals(item.variations) : item.variations != null) return false;
-        if (displayCondition != null ? !displayCondition.equals(item.displayCondition) : item.displayCondition != null) return false;
-        if (condition != null ? !condition.equals(item.condition) : item.condition != null) return false;
-        if (availability != null ? !availability.equals(item.availability) : item.availability != null) return false;
-        if (picture != null ? !picture.equals(item.picture) : item.picture != null) return false;
-        if (blobs != null ? !blobs.equals(item.blobs) : item.blobs != null) return false;
-        if (externalIds != null ? !externalIds.equals(item.externalIds) : item.externalIds != null) return false;
-        if (labels != null ? !labels.equals(item.labels) : item.labels != null) return false;
-        if (properties != null ? !properties.equals(item.properties) : item.properties != null) return false;
-        if (stock != null ? !stock.equals(item.stock) : item.stock != null) return false;
-        if (maxCommentLength != null ? !maxCommentLength.equals(item.maxCommentLength) : item.maxCommentLength != null) return false;
-        return rank != null ? rank.equals(item.rank) : item.rank == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (restaurantId != null ? restaurantId.hashCode() : 0);
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (variations != null ? variations.hashCode() : 0);
-        result = 31 * result + (displayCondition != null ? displayCondition.hashCode() : 0);
-        result = 31 * result + (condition != null ? condition.hashCode() : 0);
-        result = 31 * result + (availability != null ? availability.hashCode() : 0);
-        result = 31 * result + (picture != null ? picture.hashCode() : 0);
-        result = 31 * result + (blobs != null ? blobs.hashCode() : 0);
-        result = 31 * result + (externalIds != null ? externalIds.hashCode() : 0);
-        result = 31 * result + (labels != null ? labels.hashCode() : 0);
-        result = 31 * result + (properties != null ? properties.hashCode() : 0);
-        result = 31 * result + (stock != null ? stock.hashCode() : 0);
-        result = 31 * result + (maxCommentLength != null ? maxCommentLength.hashCode() : 0);
-        result = 31 * result + (rank != null ? rank.hashCode() : 0);
-        return result;
-    }
 }
