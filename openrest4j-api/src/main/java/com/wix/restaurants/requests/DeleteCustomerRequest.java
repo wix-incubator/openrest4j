@@ -14,7 +14,7 @@ import java.util.Objects;
  * @see <a href="https://en.wikipedia.org/wiki/General_Data_Protection_Regulation">General Data Protection Regulation</a>
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DeleteCustomerRequest extends Request {
+public class DeleteCustomerRequest extends Request implements Cloneable {
     public static final String TYPE = "delete_customer";
     private static final long serialVersionUID = 1L;
 
@@ -25,6 +25,11 @@ public class DeleteCustomerRequest extends Request {
         this.accessToken = accessToken;
         this.organizationId = organizationId;
         this.customerId = customerId;
+    }
+
+    @Override
+    public DeleteCustomerRequest clone() {
+        return new DeleteCustomerRequest(accessToken, organizationId, customerId);
     }
 
     @Override
@@ -40,6 +45,15 @@ public class DeleteCustomerRequest extends Request {
     @Override
     public int hashCode() {
         return Objects.hash(accessToken, organizationId, customerId);
+    }
+
+    @Override
+    public String toString() {
+        return "DeleteCustomerRequest{" +
+                "accessToken='" + accessToken + '\'' +
+                ", organizationId='" + organizationId + '\'' +
+                ", customerId=" + customerId +
+                '}';
     }
 
     @JsonInclude(Include.NON_NULL)
