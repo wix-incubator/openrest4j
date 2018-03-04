@@ -7,6 +7,7 @@ import com.wix.restaurants.requests.Request;
 
 import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -34,6 +35,36 @@ public class QueryCustomerReservationsRequest extends Request implements Cloneab
                 (modifiedSince != null) ? (Date) modifiedSince.clone() : null,
                 limit,
                 (fields != null) ? new LinkedHashSet<>(fields) : null);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        QueryCustomerReservationsRequest that = (QueryCustomerReservationsRequest) o;
+        return Objects.equals(accessToken, that.accessToken) &&
+                Objects.equals(organizationId, that.organizationId) &&
+                Objects.equals(customerId, that.customerId) &&
+                Objects.equals(modifiedSince, that.modifiedSince) &&
+                Objects.equals(limit, that.limit) &&
+                Objects.equals(fields, that.fields);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(accessToken, organizationId, customerId, modifiedSince, limit, fields);
+    }
+
+    @Override
+    public String toString() {
+        return "QueryCustomerReservationsRequest{" +
+                "accessToken='" + accessToken + '\'' +
+                ", organizationId='" + organizationId + '\'' +
+                ", customerId=" + customerId +
+                ", modifiedSince=" + modifiedSince +
+                ", limit=" + limit +
+                ", fields=" + fields +
+                '}';
     }
 
     /** User access token. */
