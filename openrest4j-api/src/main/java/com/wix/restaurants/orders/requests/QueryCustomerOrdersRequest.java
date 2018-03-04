@@ -30,7 +30,7 @@ public class QueryCustomerOrdersRequest extends Request implements Cloneable {
     }
 
     @Override
-    public QueryCustomerOrdersRequest clone() throws CloneNotSupportedException {
+    public QueryCustomerOrdersRequest clone() {
         return new QueryCustomerOrdersRequest(accessToken, organizationId,
                 (customerId != null) ? customerId.clone() : null,
                 (modifiedSince != null) ? (Date) modifiedSince.clone() : null,
