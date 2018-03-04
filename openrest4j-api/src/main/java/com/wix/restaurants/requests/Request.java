@@ -30,6 +30,7 @@ import java.io.Serializable;
 	@Type(value = SearchRequest.class, name = SearchRequest.TYPE),
 	@Type(value = SearchPortalsRequest.class, name = SearchPortalsRequest.TYPE),
 	@Type(value = QueryOrdersRequest.class, name = QueryOrdersRequest.TYPE),
+    @Type(value = QueryCustomerOrdersRequest.class, name = QueryCustomerOrdersRequest.TYPE),
 	@Type(value = GetOrderRequest.class, name = GetOrderRequest.TYPE),
 	@Type(value = DisplayOrderRequest.class, name = DisplayOrderRequest.TYPE),
 	@Type(value = NotifyOrderRequest.class, name = NotifyOrderRequest.TYPE),
