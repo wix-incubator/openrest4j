@@ -65,13 +65,13 @@ public class Restaurant extends Organization {
                       String timezone, String currency, Locale locale, Set<Locale> locales,
                       Set<String> paymentTypes, Boolean multiPaymentDisabled, CreditcardsInfo creditcardsInfo,
                       DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations,
-                      Boolean antiFraudDisabled, Map<String, Blob> blobs,
+                      Boolean antiFraudDisabled, Map<String, Blob> blobs, Map<String, String> media,
                       List<AppInfo> apps, Seo seo, Map<String, String> properties, Map<String, String> compatibilities,
                       Map<String, Availability> availabilities,
                       Boolean closed, Set<Product> products, Map<String, Double> features) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
     			contact, address, timezone, currency, apps, seo, properties, compatibilities,
-                availabilities, blobs, closed, products);
+                availabilities, blobs, media, closed, products);
         
     	this.distributorId = distributorId;
     	this.chainId = chainId;
@@ -119,7 +119,9 @@ public class Restaurant extends Organization {
                 ((deliveriesInfo != null) ? deliveriesInfo.clone() : null),
                 ((orders != null) ? orders.clone() : null),
                 ((reservations != null) ? reservations.clone() : null),
-    			antiFraudDisabled, Blob.clone(blobs), AppInfo.clone(apps),
+    			antiFraudDisabled, Blob.clone(blobs),
+                ((media != null) ? new LinkedHashMap<>(media) : null),
+                AppInfo.clone(apps),
     			((seo != null) ? (Seo) seo.clone() : null),
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
     			((compatibilities != null) ? new LinkedHashMap<>(compatibilities) : null),
@@ -165,6 +167,7 @@ public class Restaurant extends Organization {
                 ", compatibilities=" + compatibilities +
                 ", availabilities=" + availabilities +
                 ", blobs=" + blobs +
+                ", media=" + media +
                 ", closed=" + closed +
                 ", products=" + products +
                 '}';

@@ -24,14 +24,14 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     
     /** Default constructor for JSON deserialization. */
     public Organization() {}
-    
+
     protected Organization(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
                            LocalizedString title, LocalizedString description,
                            Locale locale, Set<Locale> locales, Map<String, LocalizedString> messages, ColorScheme colorScheme,
                            Contact contact, Address address, String timezone, String currency,
                            List<AppInfo> apps, Seo seo, Map<String, String> properties,
                            Map<String, String> compatibilities, Map<String, Availability> availabilities,
-                           Map<String, Blob> blobs,
+                           Map<String, Blob> blobs, Map<String, String> media,
                            Boolean closed, Set<Product> products) {
 
     	this.id = id;
@@ -56,6 +56,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     	this.compatibilities = compatibilities;
         this.availabilities = availabilities;
     	this.blobs = blobs;
+    	this.media = media;
     	this.closed = closed;
     	this.products = products;
     }
@@ -74,11 +75,48 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     	
     	final Map<String, LocalizedString> cloned = new LinkedHashMap<>(messages.size());
 		for (Entry<String, LocalizedString> entry : messages.entrySet()) {
-			cloned.put(entry.getKey(), (entry.getValue() != null) ? (LocalizedString) entry.getValue().clone() : null);
+			cloned.put(entry.getKey(), (entry.getValue() != null) ? entry.getValue().clone() : null);
 		}
 		return cloned;
     }
-    
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Organization that = (Organization) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(alias, that.alias) &&
+                Objects.equals(affiliateId, that.affiliateId) &&
+                Objects.equals(externalIds, that.externalIds) &&
+                Objects.equals(created, that.created) &&
+                Objects.equals(modified, that.modified) &&
+                Objects.equals(title, that.title) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(colorScheme, that.colorScheme) &&
+                Objects.equals(contact, that.contact) &&
+                Objects.equals(address, that.address) &&
+                Objects.equals(timezone, that.timezone) &&
+                Objects.equals(currency, that.currency) &&
+                Objects.equals(locale, that.locale) &&
+                Objects.equals(locales, that.locales) &&
+                Objects.equals(messages, that.messages) &&
+                Objects.equals(apps, that.apps) &&
+                Objects.equals(seo, that.seo) &&
+                Objects.equals(properties, that.properties) &&
+                Objects.equals(compatibilities, that.compatibilities) &&
+                Objects.equals(availabilities, that.availabilities) &&
+                Objects.equals(blobs, that.blobs) &&
+                Objects.equals(media, that.media) &&
+                Objects.equals(closed, that.closed) &&
+                Objects.equals(products, that.products);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, alias, affiliateId, externalIds, created, modified, title, description, colorScheme, contact, address, timezone, currency, locale, locales, messages, apps, seo, properties, compatibilities, availabilities, blobs, media, closed, products);
+    }
+
     /** The organization's unique id. */
     @JsonInclude(Include.NON_NULL)
     public String id;
@@ -202,7 +240,14 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
      */
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, Blob> blobs = new LinkedHashMap<>();
-    
+
+    /**
+     * Maps media-types to URLs.
+     * @see BlobTypes
+     */
+    @JsonInclude(Include.NON_NULL)
+    public Map<String, String> media;
+
     /**
      * The organization is permanently closed, e.g. out of business.
      * To mark an organization is temporarily closed (e.g. for renovation), use openTimes.exceptions
@@ -218,67 +263,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
 	    return this.id.compareTo(other.id);
 	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Organization that = (Organization) o;
-
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (alias != null ? !alias.equals(that.alias) : that.alias != null) return false;
-        if (affiliateId != null ? !affiliateId.equals(that.affiliateId) : that.affiliateId != null) return false;
-        if (externalIds != null ? !externalIds.equals(that.externalIds) : that.externalIds != null) return false;
-        if (created != null ? !created.equals(that.created) : that.created != null) return false;
-        if (modified != null ? !modified.equals(that.modified) : that.modified != null) return false;
-        if (title != null ? !title.equals(that.title) : that.title != null) return false;
-        if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (colorScheme != null ? !colorScheme.equals(that.colorScheme) : that.colorScheme != null) return false;
-        if (contact != null ? !contact.equals(that.contact) : that.contact != null) return false;
-        if (address != null ? !address.equals(that.address) : that.address != null) return false;
-        if (timezone != null ? !timezone.equals(that.timezone) : that.timezone != null) return false;
-        if (currency != null ? !currency.equals(that.currency) : that.currency != null) return false;
-        if (locale != null ? !locale.equals(that.locale) : that.locale != null) return false;
-        if (locales != null ? !locales.equals(that.locales) : that.locales != null) return false;
-        if (messages != null ? !messages.equals(that.messages) : that.messages != null) return false;
-        if (apps != null ? !apps.equals(that.apps) : that.apps != null) return false;
-        if (seo != null ? !seo.equals(that.seo) : that.seo != null) return false;
-        if (properties != null ? !properties.equals(that.properties) : that.properties != null) return false;
-        if (compatibilities != null ? !compatibilities.equals(that.compatibilities) : that.compatibilities != null) return false;
-        if (availabilities != null ? !availabilities.equals(that.availabilities) : that.availabilities != null) return false;
-        if (blobs != null ? !blobs.equals(that.blobs) : that.blobs != null) return false;
-        if (closed != null ? !closed.equals(that.closed) : that.closed != null) return false;
-        return products != null ? products.equals(that.products) : that.products == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (alias != null ? alias.hashCode() : 0);
-        result = 31 * result + (affiliateId != null ? affiliateId.hashCode() : 0);
-        result = 31 * result + (externalIds != null ? externalIds.hashCode() : 0);
-        result = 31 * result + (created != null ? created.hashCode() : 0);
-        result = 31 * result + (modified != null ? modified.hashCode() : 0);
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (colorScheme != null ? colorScheme.hashCode() : 0);
-        result = 31 * result + (contact != null ? contact.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (timezone != null ? timezone.hashCode() : 0);
-        result = 31 * result + (currency != null ? currency.hashCode() : 0);
-        result = 31 * result + (locale != null ? locale.hashCode() : 0);
-        result = 31 * result + (locales != null ? locales.hashCode() : 0);
-        result = 31 * result + (messages != null ? messages.hashCode() : 0);
-        result = 31 * result + (apps != null ? apps.hashCode() : 0);
-        result = 31 * result + (seo != null ? seo.hashCode() : 0);
-        result = 31 * result + (properties != null ? properties.hashCode() : 0);
-        result = 31 * result + (compatibilities != null ? compatibilities.hashCode() : 0);
-        result = 31 * result + (availabilities != null ? availabilities.hashCode() : 0);
-        result = 31 * result + (blobs != null ? blobs.hashCode() : 0);
-        result = 31 * result + (closed != null ? closed.hashCode() : 0);
-        result = 31 * result + (products != null ? products.hashCode() : 0);
-        return result;
-    }
 
     @Override
     public String toString() {
@@ -305,6 +289,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
                 ", compatibilities=" + compatibilities +
                 ", availabilities=" + availabilities +
                 ", blobs=" + blobs +
+                ", media=" + media +
                 ", closed=" + closed +
                 ", products=" + products +
                 '}';

@@ -24,7 +24,7 @@ public class SearchResult extends Restaurant {
                         String timezone, String currency, Locale locale, Set<Locale> locales,
                         Set<String> paymentTypes, Boolean multiPaymentDisabled, CreditcardsInfo creditcardsInfo,
                         DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations,
-                        Boolean antiFraudDisabled, Map<String, Blob> blobs,
+                        Boolean antiFraudDisabled, Map<String, Blob> blobs, Map<String, String> media,
                         List<AppInfo> apps, Seo seo, Map<String, String> properties,
                         Map<String, String> compatibilities, Map<String, Availability> availabilities,
                         Boolean closed, Set<Product> products,
@@ -33,7 +33,7 @@ public class SearchResult extends Restaurant {
     	super(id, alias, affiliateId, externalIds, created, modified, distributorId, chainId, title, description, contact,
     			address, messages, colorScheme, openTimes, deliveryInfos,
     			timezone, currency, locale, locales, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations,
-    			antiFraudDisabled, blobs, apps, seo, properties, compatibilities, availabilities, closed, products, features);
+    			antiFraudDisabled, blobs, media, apps, seo, properties, compatibilities, availabilities, closed, products, features);
 
     	this.topItems = topItems;
     	this.deliveryTypes = deliveryTypes;
@@ -71,7 +71,9 @@ public class SearchResult extends Restaurant {
                 ((deliveriesInfo != null) ? deliveriesInfo.clone() : null),
                 ((orders != null) ? orders.clone() : null),
                 ((reservations != null) ? reservations.clone() : null),
-                antiFraudDisabled, Blob.clone(blobs), AppInfo.clone(apps),
+                antiFraudDisabled, Blob.clone(blobs),
+                ((media != null) ? new LinkedHashMap<>(media) : null),
+                AppInfo.clone(apps),
                 ((seo != null) ? (Seo) seo.clone() : null),
                 ((properties != null) ? new LinkedHashMap<>(properties) : null),
                 ((compatibilities != null) ? new LinkedHashMap<>(compatibilities) : null),
