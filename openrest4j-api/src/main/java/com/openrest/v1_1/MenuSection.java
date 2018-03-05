@@ -8,10 +8,7 @@ import com.wix.restaurants.conditions.Condition;
 import com.wix.restaurants.i18n.LocalizedString;
 
 import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MenuSection implements Serializable, Cloneable {
@@ -21,7 +18,7 @@ public class MenuSection implements Serializable, Cloneable {
                        List<MenuSection> children, List<String> itemIds,
                        Condition displayCondition, Condition condition,
                        Availability availability,
-                       Map<String, Blob> blobs, Map<String, String> properties) {
+                       Map<String, Blob> blobs, Map<String, String> media, Map<String, String> properties) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -31,6 +28,7 @@ public class MenuSection implements Serializable, Cloneable {
         this.condition = condition;
         this.availability = availability;
         this.blobs = blobs;
+        this.media = media;
         this.properties = properties;
     }
 
@@ -48,6 +46,7 @@ public class MenuSection implements Serializable, Cloneable {
                 ((condition != null) ? condition.clone() : null),
                 ((availability != null) ? availability.clone() : null),
                 ((blobs != null) ? new LinkedHashMap<>(blobs) : null),
+                ((media != null) ? new LinkedHashMap<>(media) : null),
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
     }
 
@@ -67,35 +66,40 @@ public class MenuSection implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         MenuSection that = (MenuSection) o;
-
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (title != null ? !title.equals(that.title) : that.title != null) return false;
-        if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (children != null ? !children.equals(that.children) : that.children != null) return false;
-        if (itemIds != null ? !itemIds.equals(that.itemIds) : that.itemIds != null) return false;
-        if (displayCondition != null ? !displayCondition.equals(that.displayCondition) : that.displayCondition != null) return false;
-        if (condition != null ? !condition.equals(that.condition) : that.condition != null) return false;
-        if (availability != null ? !availability.equals(that.availability) : that.availability != null) return false;
-        if (blobs != null ? !blobs.equals(that.blobs) : that.blobs != null) return false;
-        return !(properties != null ? !properties.equals(that.properties) : that.properties != null);
-
+        return Objects.equals(id, that.id) &&
+                Objects.equals(title, that.title) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(children, that.children) &&
+                Objects.equals(itemIds, that.itemIds) &&
+                Objects.equals(displayCondition, that.displayCondition) &&
+                Objects.equals(condition, that.condition) &&
+                Objects.equals(availability, that.availability) &&
+                Objects.equals(blobs, that.blobs) &&
+                Objects.equals(media, that.media) &&
+                Objects.equals(properties, that.properties);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (children != null ? children.hashCode() : 0);
-        result = 31 * result + (itemIds != null ? itemIds.hashCode() : 0);
-        result = 31 * result + (displayCondition != null ? displayCondition.hashCode() : 0);
-        result = 31 * result + (condition != null ? condition.hashCode() : 0);
-        result = 31 * result + (availability != null ? availability.hashCode() : 0);
-        result = 31 * result + (blobs != null ? blobs.hashCode() : 0);
-        result = 31 * result + (properties != null ? properties.hashCode() : 0);
-        return result;
+        return Objects.hash(id, title, description, children, itemIds, displayCondition, condition, availability, blobs, media, properties);
+    }
+
+    @Override
+    public String toString() {
+        return "MenuSection{" +
+                "id='" + id + '\'' +
+                ", title=" + title +
+                ", description=" + description +
+                ", children=" + children +
+                ", itemIds=" + itemIds +
+                ", displayCondition=" + displayCondition +
+                ", condition=" + condition +
+                ", availability=" + availability +
+                ", blobs=" + blobs +
+                ", media=" + media +
+                ", properties=" + properties +
+                '}';
     }
 
     /** Optional category id (if exists, must be unique per menu). */
@@ -136,6 +140,13 @@ public class MenuSection implements Serializable, Cloneable {
      */
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, Blob> blobs = new LinkedHashMap<>();
+
+    /**
+     * Maps media-types to URLs.
+     * @see BlobTypes
+     */
+    @JsonInclude(Include.NON_NULL)
+    public Map<String, String> media;
 
     /**
      * Map of user-defined extended properties. Developers should use unique
