@@ -17,7 +17,7 @@ public class CanceledOrderNotification extends Notification {
     }
     
 	@Override
-	public Object clone() {
+	public CanceledOrderNotification clone() {
 		return new CanceledOrderNotification(organizationId, channelId, channelParam, comment, state);
 	}
 }

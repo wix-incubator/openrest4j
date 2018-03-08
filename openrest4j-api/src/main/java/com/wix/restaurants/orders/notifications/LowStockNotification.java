@@ -17,7 +17,7 @@ public class LowStockNotification extends Notification {
     }
     
 	@Override
-	public Object clone() {
+	public LowStockNotification clone() {
 		return new LowStockNotification(organizationId, channelId, channelParam, comment, state);
 	}
 }

@@ -17,7 +17,7 @@ public class PosErrorNotification extends Notification {
     }
     
 	@Override
-	public Object clone() {
+	public PosErrorNotification clone() {
 		return new PosErrorNotification(organizationId, channelId, channelParam, comment, state);
 	}
 }

@@ -21,7 +21,7 @@ public class UpdatedReservationNotification extends Notification {
     }
 
     @Override
-    public Object clone() {
+    public UpdatedReservationNotification clone() {
         return new UpdatedReservationNotification(organizationId, channelId, channelParam, comment, state);
     }
 }

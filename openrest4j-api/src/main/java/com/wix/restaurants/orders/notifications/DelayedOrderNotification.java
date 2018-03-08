@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.restaurants.notifications.Notification;
 
+import java.util.Objects;
+
 /** Triggered when a new order is not handled for some duration. */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DelayedOrderNotification extends Notification {
@@ -22,10 +24,25 @@ public class DelayedOrderNotification extends Notification {
     }
     
 	@Override
-	public Object clone() {
+	public DelayedOrderNotification clone() {
 		return new DelayedOrderNotification(organizationId, channelId, channelParam, comment, state, acceptOrder, durationMins);
 	}
-	
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        DelayedOrderNotification that = (DelayedOrderNotification) o;
+        return Objects.equals(acceptOrder, that.acceptOrder) &&
+                Objects.equals(durationMins, that.durationMins);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), acceptOrder, durationMins);
+    }
+
     /**
      * For orders-related notifications, whether or not the order should be
      * marked as accepted upon successful transmission of the notification.

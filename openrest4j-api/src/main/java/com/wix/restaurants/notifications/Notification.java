@@ -17,6 +17,7 @@ import com.wix.restaurants.reservations.notifications.UpdatedReservationNotifica
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(
@@ -51,7 +52,7 @@ public abstract class Notification implements Serializable, Cloneable {
     }
     
     @Override
-	public abstract Object clone();
+	public abstract Notification clone();
     
 	public static List<Notification> clone(List<Notification> notifications) {
 		if (notifications == null) {
@@ -60,11 +61,28 @@ public abstract class Notification implements Serializable, Cloneable {
 		
     	final List<Notification> cloned = new LinkedList<>();
     	for (Notification notification : notifications) {
-    		cloned.add((notification != null) ? (Notification) notification.clone() : null);
+    		cloned.add((notification != null) ? notification.clone() : null);
     	}
     	return cloned;
 	}
-    
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Notification that = (Notification) o;
+		return Objects.equals(organizationId, that.organizationId) &&
+				Objects.equals(channelId, that.channelId) &&
+				Objects.equals(channelParam, that.channelParam) &&
+				Objects.equals(comment, that.comment) &&
+				Objects.equals(state, that.state);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(organizationId, channelId, channelParam, comment, state);
+	}
+
     @JsonInclude(Include.NON_NULL)
     public String organizationId;    
 

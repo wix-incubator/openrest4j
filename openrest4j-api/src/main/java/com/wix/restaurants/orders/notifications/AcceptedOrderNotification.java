@@ -17,7 +17,7 @@ public class AcceptedOrderNotification extends Notification {
     }
     
 	@Override
-	public Object clone() {
+	public AcceptedOrderNotification clone() {
 		return new AcceptedOrderNotification(organizationId, channelId, channelParam, comment, state);
 	}
 }

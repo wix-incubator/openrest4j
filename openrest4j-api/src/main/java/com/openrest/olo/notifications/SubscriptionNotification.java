@@ -17,7 +17,7 @@ public class SubscriptionNotification extends Notification {
     }
     
 	@Override
-	public Object clone() {
+	public SubscriptionNotification clone() {
 		return new SubscriptionNotification(organizationId, channelId, channelParam, comment, state);
 	}
 }

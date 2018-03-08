@@ -17,7 +17,7 @@ public class FeedbackNotification extends Notification {
     }
     
 	@Override
-	public Object clone() {
+	public FeedbackNotification clone() {
 		return new FeedbackNotification(organizationId, channelId, channelParam, comment, state);
 	}
 }

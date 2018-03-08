@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Notifications implements Serializable, Cloneable {
@@ -23,12 +24,26 @@ public class Notifications implements Serializable, Cloneable {
     public Notifications() {}
     
     @Override
-	public Object clone() {
+	public Notifications clone() {
     	return new Notifications(
                 (modified != null) ? (Date) modified.clone() : null,
                 Notification.clone(notifications));
 	}
-    
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Notifications that = (Notifications) o;
+        return Objects.equals(modified, that.modified) &&
+                Objects.equals(notifications, that.notifications);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(modified, notifications);
+    }
+
     /** The notifications' last modification timestamp. */
     @JsonInclude(Include.NON_NULL)
     public Date modified;
