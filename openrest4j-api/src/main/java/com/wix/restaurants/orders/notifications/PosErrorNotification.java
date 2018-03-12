@@ -12,12 +12,12 @@ public class PosErrorNotification extends Notification {
     /** Default constructor for JSON deserialization. */
     public PosErrorNotification() {}
     
-    public PosErrorNotification(String organizationId, String channelId, String channelParam, String comment, String state) {
-    	super(organizationId, channelId, channelParam, comment, state);
+    public PosErrorNotification(String channelId, String channelParam, String comment, String state) {
+    	super(channelId, channelParam, comment, state);
     }
     
 	@Override
 	public PosErrorNotification clone() {
-		return new PosErrorNotification(organizationId, channelId, channelParam, comment, state);
+		return new PosErrorNotification(channelId, channelParam, comment, state);
 	}
 }

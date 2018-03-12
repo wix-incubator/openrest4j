@@ -16,16 +16,16 @@ public class DelayedOrderNotification extends Notification {
     /** Default constructor for JSON deserialization. */
     public DelayedOrderNotification() {}
     
-    public DelayedOrderNotification(String organizationId, String channelId, String channelParam, String comment, String state,
+    public DelayedOrderNotification(String channelId, String channelParam, String comment, String state,
     		Boolean acceptOrder, Integer durationMins) {
-    	super(organizationId, channelId, channelParam, comment, state);
+    	super(channelId, channelParam, comment, state);
     	this.acceptOrder = acceptOrder;
     	this.durationMins = durationMins;
     }
     
 	@Override
 	public DelayedOrderNotification clone() {
-		return new DelayedOrderNotification(organizationId, channelId, channelParam, comment, state, acceptOrder, durationMins);
+		return new DelayedOrderNotification(channelId, channelParam, comment, state, acceptOrder, durationMins);
 	}
 
     @Override

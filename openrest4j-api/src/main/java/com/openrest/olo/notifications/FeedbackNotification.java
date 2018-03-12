@@ -12,12 +12,12 @@ public class FeedbackNotification extends Notification {
     /** Default constructor for JSON deserialization. */
     public FeedbackNotification() {}
     
-    public FeedbackNotification(String organizationId, String channelId, String channelParam, String comment, String state) {
-    	super(organizationId, channelId, channelParam, comment, state);
+    public FeedbackNotification(String channelId, String channelParam, String comment, String state) {
+    	super(channelId, channelParam, comment, state);
     }
     
 	@Override
 	public FeedbackNotification clone() {
-		return new FeedbackNotification(organizationId, channelId, channelParam, comment, state);
+		return new FeedbackNotification(channelId, channelParam, comment, state);
 	}
 }

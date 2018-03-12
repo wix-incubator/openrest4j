@@ -16,15 +16,14 @@ public class SubmittedOrderNotification extends Notification {
     /** Default constructor for JSON deserialization. */
     public SubmittedOrderNotification() {}
     
-    public SubmittedOrderNotification(String organizationId, String channelId, String channelParam, String comment, String state,
-    		Boolean acceptOrder) {
-    	super(organizationId, channelId, channelParam, comment, state);
+    public SubmittedOrderNotification(String channelId, String channelParam, String comment, String state, Boolean acceptOrder) {
+    	super(channelId, channelParam, comment, state);
     	this.acceptOrder = acceptOrder;
     }
     
 	@Override
 	public SubmittedOrderNotification clone() {
-		return new SubmittedOrderNotification(organizationId, channelId, channelParam, comment, state, acceptOrder);
+		return new SubmittedOrderNotification(channelId, channelParam, comment, state, acceptOrder);
 	}
 
     @Override

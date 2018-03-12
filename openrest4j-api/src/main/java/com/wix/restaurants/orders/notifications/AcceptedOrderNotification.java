@@ -12,12 +12,12 @@ public class AcceptedOrderNotification extends Notification {
     /** Default constructor for JSON deserialization. */
     public AcceptedOrderNotification() {}
     
-    public AcceptedOrderNotification(String organizationId, String channelId, String channelParam, String comment, String state) {
-    	super(organizationId, channelId, channelParam, comment, state);
+    public AcceptedOrderNotification(String channelId, String channelParam, String comment, String state) {
+    	super(channelId, channelParam, comment, state);
     }
     
 	@Override
 	public AcceptedOrderNotification clone() {
-		return new AcceptedOrderNotification(organizationId, channelId, channelParam, comment, state);
+		return new AcceptedOrderNotification(channelId, channelParam, comment, state);
 	}
 }

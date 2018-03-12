@@ -16,15 +16,14 @@ public class OfflineNotification extends Notification {
     /** Default constructor for JSON deserialization. */
     public OfflineNotification() {}
     
-    public OfflineNotification(String organizationId, String channelId, String channelParam, String comment, String state,
-    		Integer durationMins) {
-    	super(organizationId, channelId, channelParam, comment, state);
+    public OfflineNotification(String channelId, String channelParam, String comment, String state, Integer durationMins) {
+    	super(channelId, channelParam, comment, state);
     	this.durationMins = durationMins;
     }
     
 	@Override
 	public OfflineNotification clone() {
-		return new OfflineNotification(organizationId, channelId, channelParam, comment, state, durationMins);
+		return new OfflineNotification(channelId, channelParam, comment, state, durationMins);
 	}
 
     @Override

@@ -12,12 +12,12 @@ public class CanceledOrderNotification extends Notification {
     /** Default constructor for JSON deserialization. */
     public CanceledOrderNotification() {}
     
-    public CanceledOrderNotification(String organizationId, String channelId, String channelParam, String comment, String state) {
-    	super(organizationId, channelId, channelParam, comment, state);
+    public CanceledOrderNotification(String channelId, String channelParam, String comment, String state) {
+    	super(channelId, channelParam, comment, state);
     }
     
 	@Override
 	public CanceledOrderNotification clone() {
-		return new CanceledOrderNotification(organizationId, channelId, channelParam, comment, state);
+		return new CanceledOrderNotification(channelId, channelParam, comment, state);
 	}
 }

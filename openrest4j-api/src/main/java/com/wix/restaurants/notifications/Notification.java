@@ -43,8 +43,7 @@ public abstract class Notification implements Serializable, Cloneable {
     /** Default constructor for JSON deserialization. */
     public Notification() {}
     
-    public Notification(String organizationId, String channelId, String channelParam, String comment, String state) {
-    	this.organizationId = organizationId;
+    public Notification(String channelId, String channelParam, String comment, String state) {
     	this.channelId = channelId;
     	this.channelParam = channelParam;
     	this.comment = comment;
@@ -71,8 +70,7 @@ public abstract class Notification implements Serializable, Cloneable {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Notification that = (Notification) o;
-		return Objects.equals(organizationId, that.organizationId) &&
-				Objects.equals(channelId, that.channelId) &&
+		return Objects.equals(channelId, that.channelId) &&
 				Objects.equals(channelParam, that.channelParam) &&
 				Objects.equals(comment, that.comment) &&
 				Objects.equals(state, that.state);
@@ -80,11 +78,8 @@ public abstract class Notification implements Serializable, Cloneable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(organizationId, channelId, channelParam, comment, state);
+		return Objects.hash(channelId, channelParam, comment, state);
 	}
-
-    @JsonInclude(Include.NON_NULL)
-    public String organizationId;    
 
     /** @see Channels */
     @JsonInclude(Include.NON_NULL)

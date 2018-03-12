@@ -12,12 +12,12 @@ public class SubscriptionNotification extends Notification {
     /** Default constructor for JSON deserialization. */
     public SubscriptionNotification() {}
     
-    public SubscriptionNotification(String organizationId, String channelId, String channelParam, String comment, String state) {
-    	super(organizationId, channelId, channelParam, comment, state);
+    public SubscriptionNotification(String channelId, String channelParam, String comment, String state) {
+    	super(channelId, channelParam, comment, state);
     }
     
 	@Override
 	public SubscriptionNotification clone() {
-		return new SubscriptionNotification(organizationId, channelId, channelParam, comment, state);
+		return new SubscriptionNotification(channelId, channelParam, comment, state);
 	}
 }

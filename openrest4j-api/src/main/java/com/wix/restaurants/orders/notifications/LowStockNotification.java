@@ -12,12 +12,12 @@ public class LowStockNotification extends Notification {
     /** Default constructor for JSON deserialization. */
     public LowStockNotification() {}
     
-    public LowStockNotification(String organizationId, String channelId, String channelParam, String comment, String state) {
-    	super(organizationId, channelId, channelParam, comment, state);
+    public LowStockNotification(String channelId, String channelParam, String comment, String state) {
+    	super(channelId, channelParam, comment, state);
     }
     
 	@Override
 	public LowStockNotification clone() {
-		return new LowStockNotification(organizationId, channelId, channelParam, comment, state);
+		return new LowStockNotification(channelId, channelParam, comment, state);
 	}
 }

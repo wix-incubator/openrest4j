@@ -12,16 +12,15 @@ public class UpdatedReservationNotification extends Notification {
     /** Default constructor for JSON deserialization. */
     public UpdatedReservationNotification() {}
 
-    public UpdatedReservationNotification(String organizationId,
-                                          String channelId,
+    public UpdatedReservationNotification(String channelId,
                                           String channelParam,
                                           String comment,
                                           String state) {
-        super(organizationId, channelId, channelParam, comment, state);
+        super(channelId, channelParam, comment, state);
     }
 
     @Override
     public UpdatedReservationNotification clone() {
-        return new UpdatedReservationNotification(organizationId, channelId, channelParam, comment, state);
+        return new UpdatedReservationNotification(channelId, channelParam, comment, state);
     }
 }

@@ -16,15 +16,14 @@ public class NewOrderNotification extends Notification {
     /** Default constructor for JSON deserialization. */
     public NewOrderNotification() {}
     
-    public NewOrderNotification(String organizationId, String channelId, String channelParam, String comment, String state,
-    		Boolean acceptOrder) {
-    	super(organizationId, channelId, channelParam, comment, state);
+    public NewOrderNotification(String channelId, String channelParam, String comment, String state, Boolean acceptOrder) {
+    	super(channelId, channelParam, comment, state);
     	this.acceptOrder = acceptOrder;
     }
     
 	@Override
 	public NewOrderNotification clone() {
-		return new NewOrderNotification(organizationId, channelId, channelParam, comment, state, acceptOrder);
+		return new NewOrderNotification(channelId, channelParam, comment, state, acceptOrder);
 	}
 
     @Override
