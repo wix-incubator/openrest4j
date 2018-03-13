@@ -32,7 +32,7 @@ public class ClientInfo implements Serializable, Cloneable {
     public ClientInfo() {}
     
     @Override
-	public Object clone() {
+	public ClientInfo clone() {
     	return new ClientInfo(
                 ClientId.clone(ids), Contact.clone(contacts), Address.clone(addresses),
                 ClubMember.clone(memberships),
