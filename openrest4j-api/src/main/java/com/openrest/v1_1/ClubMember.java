@@ -28,9 +28,9 @@ public class ClubMember implements Serializable, Cloneable {
     public ClubMember() {}
     
     @Override
-	public Object clone() {
+	public ClubMember clone() {
     	return new ClubMember(organizationId, memberId, phone,
-    			((clubIds != null) ? new LinkedHashSet<String>(clubIds) : null));
+    			((clubIds != null) ? new LinkedHashSet<>(clubIds) : null));
 	}
 
     public static List<ClubMember> clone(List<ClubMember> clubMembers) {
@@ -40,7 +40,7 @@ public class ClubMember implements Serializable, Cloneable {
 
         final List<ClubMember> cloned = new LinkedList<>();
         for (ClubMember clubMember : clubMembers) {
-            cloned.add((clubMember != null) ? (ClubMember) clubMember.clone() : null);
+            cloned.add((clubMember != null) ? clubMember.clone() : null);
         }
         return cloned;
     }
