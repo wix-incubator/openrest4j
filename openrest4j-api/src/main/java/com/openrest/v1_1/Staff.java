@@ -21,7 +21,7 @@ public class Staff implements Serializable, Cloneable {
     public Staff() {}
     
     @Override
-	public Object clone() {
+	public Staff clone() {
     	final Map<String, Set<String>> clonedStaff;
     	if (staff != null) {
     		clonedStaff = new LinkedHashMap<>(staff.size());
@@ -64,6 +64,26 @@ public class Staff implements Serializable, Cloneable {
         staff.put(Roles.manager, managerStaff);
         staff.put(Roles.employee, employeeStaff);
         return new Staff(staff);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Staff staff1 = (Staff) o;
+        return Objects.equals(staff, staff1.staff);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(staff);
+    }
+
+    @Override
+    public String toString() {
+        return "Staff{" +
+                "staff=" + staff +
+                '}';
     }
 
     /** Maps roles (see above) to a set of user-ids. */
