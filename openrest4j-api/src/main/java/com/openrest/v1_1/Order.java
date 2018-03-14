@@ -68,14 +68,14 @@ public class Order implements Serializable, Cloneable {
     			((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
     			distributorId, chainId, restaurantId, locale, OrderItem.clone(orderItems), comment, price, currency,
     			((delivery != null) ? delivery.clone() : null),
-    			((contact != null) ? (Contact) contact.clone() : null),
+    			((contact != null) ? contact.clone() : null),
     			Payment.clone(payments), takeoutPacks, OrderCharge.clone(orderCharges),
                 (created != null) ? (Date) created.clone() : null,
                 (received != null) ? (Date) received.clone() : null,
                 (modified != null) ? (Date) modified.clone() : null,
                 (submitAt != null) ? (Date) submitAt.clone() : null,
-    			((user != null) ? (User) user.clone() : null),
-    			((clubMember != null) ? (ClubMember) clubMember.clone() : null),
+    			((user != null) ? user.clone() : null),
+    			((clubMember != null) ? clubMember.clone() : null),
     			status, shareToken, ownerToken, affiliate, developer, source, platform, ref, legacyHierarchy,
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
     			LogEntry.clone(log));
@@ -85,82 +85,84 @@ public class Order implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Order order = (Order) o;
-
-        if (affiliate != null ? !affiliate.equals(order.affiliate) : order.affiliate != null) return false;
-        if (chainId != null ? !chainId.equals(order.chainId) : order.chainId != null) return false;
-        if (clubMember != null ? !clubMember.equals(order.clubMember) : order.clubMember != null) return false;
-        if (comment != null ? !comment.equals(order.comment) : order.comment != null) return false;
-        if (contact != null ? !contact.equals(order.contact) : order.contact != null) return false;
-        if (created != null ? !created.equals(order.created) : order.created != null) return false;
-        if (delivery != null ? !delivery.equals(order.delivery) : order.delivery != null) return false;
-        if (developer != null ? !developer.equals(order.developer) : order.developer != null) return false;
-        if (distributorId != null ? !distributorId.equals(order.distributorId) : order.distributorId != null) return false;
-        if (externalIds != null ? !externalIds.equals(order.externalIds) : order.externalIds != null) return false;
-        if (html != null ? !html.equals(order.html) : order.html != null) return false;
-        if (id != null ? !id.equals(order.id) : order.id != null) return false;
-        if (legacyHierarchy != null ? !legacyHierarchy.equals(order.legacyHierarchy) : order.legacyHierarchy != null) return false;
-        if (locale != null ? !locale.equals(order.locale) : order.locale != null) return false;
-        if (log != null ? !log.equals(order.log) : order.log != null) return false;
-        if (modified != null ? !modified.equals(order.modified) : order.modified != null) return false;
-        if (orderCharges != null ? !orderCharges.equals(order.orderCharges) : order.orderCharges != null) return false;
-        if (orderItems != null ? !orderItems.equals(order.orderItems) : order.orderItems != null) return false;
-        if (payments != null ? !payments.equals(order.payments) : order.payments != null) return false;
-        if (platform != null ? !platform.equals(order.platform) : order.platform != null) return false;
-        if (price != null ? !price.equals(order.price) : order.price != null) return false;
-        if (currency != null ? !currency.equals(order.currency) : order.currency != null) return false;
-        if (properties != null ? !properties.equals(order.properties) : order.properties != null) return false;
-        if (received != null ? !received.equals(order.received) : order.received != null) return false;
-        if (ref != null ? !ref.equals(order.ref) : order.ref != null) return false;
-        if (restaurantId != null ? !restaurantId.equals(order.restaurantId) : order.restaurantId != null) return false;
-        if (shareToken != null ? !shareToken.equals(order.shareToken) : order.shareToken != null) return false;
-        if (ownerToken != null ? !ownerToken.equals(order.ownerToken) : order.ownerToken != null) return false;
-        if (source != null ? !source.equals(order.source) : order.source != null) return false;
-        if (status != null ? !status.equals(order.status) : order.status != null) return false;
-        if (submitAt != null ? !submitAt.equals(order.submitAt) : order.submitAt != null) return false;
-        if (takeoutPacks != null ? !takeoutPacks.equals(order.takeoutPacks) : order.takeoutPacks != null) return false;
-        if (user != null ? !user.equals(order.user) : order.user != null) return false;
-
-        return true;
+        return Objects.equals(id, order.id) &&
+                Objects.equals(externalIds, order.externalIds) &&
+                Objects.equals(distributorId, order.distributorId) &&
+                Objects.equals(chainId, order.chainId) &&
+                Objects.equals(restaurantId, order.restaurantId) &&
+                Objects.equals(locale, order.locale) &&
+                Objects.equals(orderItems, order.orderItems) &&
+                Objects.equals(comment, order.comment) &&
+                Objects.equals(price, order.price) &&
+                Objects.equals(currency, order.currency) &&
+                Objects.equals(delivery, order.delivery) &&
+                Objects.equals(contact, order.contact) &&
+                Objects.equals(payments, order.payments) &&
+                Objects.equals(takeoutPacks, order.takeoutPacks) &&
+                Objects.equals(orderCharges, order.orderCharges) &&
+                Objects.equals(created, order.created) &&
+                Objects.equals(submitAt, order.submitAt) &&
+                Objects.equals(received, order.received) &&
+                Objects.equals(modified, order.modified) &&
+                Objects.equals(user, order.user) &&
+                Objects.equals(clubMember, order.clubMember) &&
+                Objects.equals(status, order.status) &&
+                Objects.equals(shareToken, order.shareToken) &&
+                Objects.equals(ownerToken, order.ownerToken) &&
+                Objects.equals(affiliate, order.affiliate) &&
+                Objects.equals(developer, order.developer) &&
+                Objects.equals(source, order.source) &&
+                Objects.equals(platform, order.platform) &&
+                Objects.equals(ref, order.ref) &&
+                Objects.equals(legacyHierarchy, order.legacyHierarchy) &&
+                Objects.equals(properties, order.properties) &&
+                Objects.equals(log, order.log) &&
+                Objects.equals(html, order.html);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (externalIds != null ? externalIds.hashCode() : 0);
-        result = 31 * result + (distributorId != null ? distributorId.hashCode() : 0);
-        result = 31 * result + (chainId != null ? chainId.hashCode() : 0);
-        result = 31 * result + (restaurantId != null ? restaurantId.hashCode() : 0);
-        result = 31 * result + (locale != null ? locale.hashCode() : 0);
-        result = 31 * result + (orderItems != null ? orderItems.hashCode() : 0);
-        result = 31 * result + (comment != null ? comment.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (currency != null ? currency.hashCode() : 0);
-        result = 31 * result + (delivery != null ? delivery.hashCode() : 0);
-        result = 31 * result + (contact != null ? contact.hashCode() : 0);
-        result = 31 * result + (payments != null ? payments.hashCode() : 0);
-        result = 31 * result + (takeoutPacks != null ? takeoutPacks.hashCode() : 0);
-        result = 31 * result + (orderCharges != null ? orderCharges.hashCode() : 0);
-        result = 31 * result + (created != null ? created.hashCode() : 0);
-        result = 31 * result + (submitAt != null ? submitAt.hashCode() : 0);
-        result = 31 * result + (received != null ? received.hashCode() : 0);
-        result = 31 * result + (modified != null ? modified.hashCode() : 0);
-        result = 31 * result + (user != null ? user.hashCode() : 0);
-        result = 31 * result + (clubMember != null ? clubMember.hashCode() : 0);
-        result = 31 * result + (status != null ? status.hashCode() : 0);
-        result = 31 * result + (shareToken != null ? shareToken.hashCode() : 0);
-        result = 31 * result + (ownerToken != null ? ownerToken.hashCode() : 0);
-        result = 31 * result + (affiliate != null ? affiliate.hashCode() : 0);
-        result = 31 * result + (developer != null ? developer.hashCode() : 0);
-        result = 31 * result + (source != null ? source.hashCode() : 0);
-        result = 31 * result + (platform != null ? platform.hashCode() : 0);
-        result = 31 * result + (ref != null ? ref.hashCode() : 0);
-        result = 31 * result + (legacyHierarchy != null ? legacyHierarchy.hashCode() : 0);
-        result = 31 * result + (properties != null ? properties.hashCode() : 0);
-        result = 31 * result + (log != null ? log.hashCode() : 0);
-        result = 31 * result + (html != null ? html.hashCode() : 0);
-        return result;
+        return Objects.hash(id, externalIds, distributorId, chainId, restaurantId, locale, orderItems, comment, price, currency, delivery, contact, payments, takeoutPacks, orderCharges, created, submitAt, received, modified, user, clubMember, status, shareToken, ownerToken, affiliate, developer, source, platform, ref, legacyHierarchy, properties, log, html);
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id='" + id + '\'' +
+                ", externalIds=" + externalIds +
+                ", distributorId='" + distributorId + '\'' +
+                ", chainId='" + chainId + '\'' +
+                ", restaurantId='" + restaurantId + '\'' +
+                ", locale=" + locale +
+                ", orderItems=" + orderItems +
+                ", comment='" + comment + '\'' +
+                ", price=" + price +
+                ", currency='" + currency + '\'' +
+                ", delivery=" + delivery +
+                ", contact=" + contact +
+                ", payments=" + payments +
+                ", takeoutPacks=" + takeoutPacks +
+                ", orderCharges=" + orderCharges +
+                ", created=" + created +
+                ", submitAt=" + submitAt +
+                ", received=" + received +
+                ", modified=" + modified +
+                ", user=" + user +
+                ", clubMember=" + clubMember +
+                ", status='" + status + '\'' +
+                ", shareToken='" + shareToken + '\'' +
+                ", ownerToken='" + ownerToken + '\'' +
+                ", affiliate='" + affiliate + '\'' +
+                ", developer='" + developer + '\'' +
+                ", source='" + source + '\'' +
+                ", platform='" + platform + '\'' +
+                ", ref='" + ref + '\'' +
+                ", legacyHierarchy=" + legacyHierarchy +
+                ", properties=" + properties +
+                ", log=" + log +
+                ", html='" + html + '\'' +
+                '}';
     }
 
     /** The order's unique id. */
