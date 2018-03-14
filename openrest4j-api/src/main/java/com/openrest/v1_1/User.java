@@ -1,10 +1,11 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.io.Serializable;
+import java.util.Objects;
 
 /** Information regarding a remote user of the system. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -27,9 +28,9 @@ public class User implements Serializable, Cloneable {
     public User() {}
     
     @Override
-	public Object clone() {
+	public User clone() {
     	return new User(
-    			((clientId != null) ? (ClientId) clientId.clone() : null),
+    			((clientId != null) ? clientId.clone() : null),
     			id, idIsInferred, ipAddress, fwdIpAddresses);
 	}
 
@@ -37,26 +38,28 @@ public class User implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         User user = (User) o;
-
-        if (clientId != null ? !clientId.equals(user.clientId) : user.clientId != null) return false;
-        if (fwdIpAddresses != null ? !fwdIpAddresses.equals(user.fwdIpAddresses) : user.fwdIpAddresses != null) return false;
-        if (id != null ? !id.equals(user.id) : user.id != null) return false;
-        if (idIsInferred != null ? !idIsInferred.equals(user.idIsInferred) : user.idIsInferred != null) return false;
-        if (ipAddress != null ? !ipAddress.equals(user.ipAddress) : user.ipAddress != null) return false;
-
-        return true;
+        return Objects.equals(clientId, user.clientId) &&
+                Objects.equals(id, user.id) &&
+                Objects.equals(idIsInferred, user.idIsInferred) &&
+                Objects.equals(ipAddress, user.ipAddress) &&
+                Objects.equals(fwdIpAddresses, user.fwdIpAddresses);
     }
 
     @Override
     public int hashCode() {
-        int result = clientId != null ? clientId.hashCode() : 0;
-        result = 31 * result + (id != null ? id.hashCode() : 0);
-        result = 31 * result + (idIsInferred != null ? idIsInferred.hashCode() : 0);
-        result = 31 * result + (ipAddress != null ? ipAddress.hashCode() : 0);
-        result = 31 * result + (fwdIpAddresses != null ? fwdIpAddresses.hashCode() : 0);
-        return result;
+        return Objects.hash(clientId, id, idIsInferred, ipAddress, fwdIpAddresses);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "clientId=" + clientId +
+                ", id='" + id + '\'' +
+                ", idIsInferred=" + idIsInferred +
+                ", ipAddress='" + ipAddress + '\'' +
+                ", fwdIpAddresses='" + fwdIpAddresses + '\'' +
+                '}';
     }
 
     /** The user's id. */
