@@ -31,8 +31,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
                            Contact contact, Address address, String timezone, String currency,
                            List<AppInfo> apps, Seo seo, Map<String, String> properties,
                            Map<String, String> compatibilities, Map<String, Availability> availabilities,
-                           Map<String, Blob> blobs, Map<String, String> media,
-                           Boolean closed, Set<Product> products) {
+                           Map<String, String> media, Boolean closed, Set<Product> products) {
 
     	this.id = id;
     	this.alias = alias;
@@ -55,7 +54,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     	this.properties = properties;
     	this.compatibilities = compatibilities;
         this.availabilities = availabilities;
-    	this.blobs = blobs;
     	this.media = media;
     	this.closed = closed;
     	this.products = products;
@@ -106,7 +104,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
                 Objects.equals(properties, that.properties) &&
                 Objects.equals(compatibilities, that.compatibilities) &&
                 Objects.equals(availabilities, that.availabilities) &&
-                Objects.equals(blobs, that.blobs) &&
                 Objects.equals(media, that.media) &&
                 Objects.equals(closed, that.closed) &&
                 Objects.equals(products, that.products);
@@ -114,7 +111,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, alias, affiliateId, externalIds, created, modified, title, description, colorScheme, contact, address, timezone, currency, locale, locales, messages, apps, seo, properties, compatibilities, availabilities, blobs, media, closed, products);
+        return Objects.hash(id, alias, affiliateId, externalIds, created, modified, title, description, colorScheme, contact, address, timezone, currency, locale, locales, messages, apps, seo, properties, compatibilities, availabilities, media, closed, products);
     }
 
     /** The organization's unique id. */
@@ -235,13 +232,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     public Map<String, Availability> availabilities = new LinkedHashMap<>();
 
     /**
-     * Maps blob-types to blobs.
-     * @see BlobTypes
-     */
-    @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, Blob> blobs = new LinkedHashMap<>();
-
-    /**
      * Maps media-types to URLs.
      * @see BlobTypes
      */
@@ -288,7 +278,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
                 ", properties=" + properties +
                 ", compatibilities=" + compatibilities +
                 ", availabilities=" + availabilities +
-                ", blobs=" + blobs +
                 ", media=" + media +
                 ", closed=" + closed +
                 ", products=" + products +
