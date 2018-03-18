@@ -28,14 +28,12 @@ public class SearchResult extends Restaurant {
                         List<AppInfo> apps, Seo seo, Map<String, String> properties,
                         Map<String, String> compatibilities, Map<String, Availability> availabilities,
                         Boolean closed, Set<Product> products,
-                        Map<String, Double> features, List<TopItem> topItems,
-                        Set<String> deliveryTypes, DispatchInfo deliveryInfo) {
+                        Map<String, Double> features, Set<String> deliveryTypes, DispatchInfo deliveryInfo) {
     	super(id, alias, affiliateId, externalIds, created, modified, distributorId, chainId, title, description, contact,
     			address, messages, colorScheme, openTimes, deliveryInfos,
     			timezone, currency, locale, locales, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations,
     			antiFraudDisabled, media, apps, seo, properties, compatibilities, availabilities, closed, products, features);
 
-    	this.topItems = topItems;
     	this.deliveryTypes = deliveryTypes;
     	this.deliveryInfo = deliveryInfo;
     }
@@ -80,7 +78,6 @@ public class SearchResult extends Restaurant {
                 Availability.clone(availabilities),
                 closed, Product.clone(products),
                 ((features != null) ? new LinkedHashMap<>(features) : null),
-                TopItem.clone(topItems),
                 (deliveryTypes != null) ? new LinkedHashSet<>(deliveryTypes): null,
                 (deliveryInfo != null) ? deliveryInfo.clone() : null);
     }
@@ -90,26 +87,16 @@ public class SearchResult extends Restaurant {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-
         SearchResult that = (SearchResult) o;
-
-        if (topItems != null ? !topItems.equals(that.topItems) : that.topItems != null) return false;
-        if (deliveryTypes != null ? !deliveryTypes.equals(that.deliveryTypes) : that.deliveryTypes != null) return false;
-        return deliveryInfo != null ? deliveryInfo.equals(that.deliveryInfo) : that.deliveryInfo == null;
+        return Objects.equals(deliveryTypes, that.deliveryTypes) &&
+                Objects.equals(deliveryInfo, that.deliveryInfo);
     }
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (topItems != null ? topItems.hashCode() : 0);
-        result = 31 * result + (deliveryTypes != null ? deliveryTypes.hashCode() : 0);
-        result = 31 * result + (deliveryInfo != null ? deliveryInfo.hashCode() : 0);
-        return result;
+        return Objects.hash(super.hashCode(), deliveryTypes, deliveryInfo);
     }
 
-    @JsonInclude(Include.NON_DEFAULT)
-    public List<TopItem> topItems = new LinkedList<>();
-    
     /** Supported delivery types (optimization to avoid getting the entire deliveryInfos field). */
     @JsonInclude(Include.NON_DEFAULT)
     public Set<String> deliveryTypes = new LinkedHashSet<>();
