@@ -22,7 +22,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     public Item(String id, LocalizedString title,
 				LocalizedString description, Integer price, List<Variation> variations,
 				Condition displayCondition, Condition condition,
-				Availability availability, String picture, Map<String, Blob> blobs,
+				Availability availability, Map<String, Blob> blobs,
 				Map<String, String> media, Map<String, String> externalIds, Set<String> labels,
 				Map<String, String> properties, Stock stock, Integer maxCommentLength) {
         this.id = id;
@@ -33,7 +33,6 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
         this.displayCondition = displayCondition;
 		this.condition = condition;
         this.availability = availability;
-        this.picture = picture;
         this.blobs = blobs;
         this.media = media;
         this.externalIds = externalIds;
@@ -67,7 +66,6 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
                 (displayCondition != null) ? displayCondition.clone() : null,
                 (condition != null) ? condition.clone() : null,
     			((availability != null) ? availability.clone() : null),
-    			picture,
     			Blob.clone(blobs),
                 ((media != null) ? new LinkedHashMap<>(media) : null),
     			((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
@@ -89,7 +87,6 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
                 Objects.equals(displayCondition, item.displayCondition) &&
                 Objects.equals(condition, item.condition) &&
                 Objects.equals(availability, item.availability) &&
-                Objects.equals(picture, item.picture) &&
                 Objects.equals(blobs, item.blobs) &&
                 Objects.equals(media, item.media) &&
                 Objects.equals(externalIds, item.externalIds) &&
@@ -101,7 +98,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, price, variations, displayCondition, condition, availability, picture, blobs, media, externalIds, labels, properties, stock, maxCommentLength);
+        return Objects.hash(id, title, description, price, variations, displayCondition, condition, availability, blobs, media, externalIds, labels, properties, stock, maxCommentLength);
     }
 
     public int compareTo(Item other) {
@@ -119,7 +116,6 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
                 ", displayCondition=" + displayCondition +
                 ", condition=" + condition +
                 ", availability=" + availability +
-                ", picture='" + picture + '\'' +
                 ", blobs=" + blobs +
                 ", media=" + media +
                 ", externalIds=" + externalIds +
@@ -162,10 +158,6 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     @JsonInclude(Include.NON_DEFAULT)
     public Availability availability = new Availability();
 
-    /** Item picture URL (direct link). */
-    @JsonInclude(Include.NON_NULL)
-    public String picture;
-    
     /**
      * Maps blob-types to blobs.
 	 * @see BlobTypes
