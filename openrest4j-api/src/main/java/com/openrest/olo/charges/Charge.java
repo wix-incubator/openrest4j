@@ -3,9 +3,9 @@ package com.openrest.olo.charges;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.wix.restaurants.conditions.Condition;
 import com.openrest.olo.charges.operators.Operator;
 import com.openrest.v1_1.State;
+import com.wix.restaurants.conditions.Condition;
 import com.wix.restaurants.i18n.LocalizedString;
 
 import java.io.Serializable;
@@ -59,10 +59,10 @@ public class Charge implements Serializable, Cloneable {
     @Override
 	public Charge clone() {
     	return new Charge(type, id, organizationId,
-    			((title != null) ? (LocalizedString) title.clone() : null),
-    			((description != null) ?(LocalizedString) description.clone() : null),
-    			((displayCondition != null) ? (Condition) displayCondition.clone() : null),
-    			((condition != null) ? (Condition) condition.clone() : null),
+    			((title != null) ? title.clone() : null),
+    			((description != null) ? description.clone() : null),
+    			((displayCondition != null) ? displayCondition.clone() : null),
+    			((condition != null) ? condition.clone() : null),
     			((operator != null) ? (Operator) operator.clone() : null),
     			state, mandatory,
     			((properties != null) ? new LinkedHashMap<>(properties) : null));
