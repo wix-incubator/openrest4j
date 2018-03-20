@@ -40,12 +40,11 @@ public class Charge implements Serializable, Cloneable {
 	/** Default constructor for JSON deserialization. */
     public Charge() {}
     
-    public Charge(String type, String id, String organizationId, LocalizedString title, LocalizedString description,
+    public Charge(String type, String id, LocalizedString title, LocalizedString description,
                   Condition displayCondition, Condition condition, Operator operator, String state, Boolean mandatory,
                   Map<String, String> properties) {
         this.type = type;
     	this.id = id;
-    	this.organizationId = organizationId;
     	this.title = title;
     	this.description = description;
     	this.displayCondition = displayCondition;
@@ -58,7 +57,7 @@ public class Charge implements Serializable, Cloneable {
     
     @Override
 	public Charge clone() {
-    	return new Charge(type, id, organizationId,
+    	return new Charge(type, id,
     			((title != null) ? title.clone() : null),
     			((description != null) ? description.clone() : null),
     			((displayCondition != null) ? displayCondition.clone() : null),
@@ -84,38 +83,38 @@ public class Charge implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Charge charge = (Charge) o;
-
-        if (condition != null ? !condition.equals(charge.condition) : charge.condition != null) return false;
-        if (description != null ? !description.equals(charge.description) : charge.description != null) return false;
-        if (displayCondition != null ? !displayCondition.equals(charge.displayCondition) : charge.displayCondition != null) return false;
-        if (id != null ? !id.equals(charge.id) : charge.id != null) return false;
-        if (mandatory != null ? !mandatory.equals(charge.mandatory) : charge.mandatory != null) return false;
-        if (operator != null ? !operator.equals(charge.operator) : charge.operator != null) return false;
-        if (organizationId != null ? !organizationId.equals(charge.organizationId) : charge.organizationId != null) return false;
-        if (properties != null ? !properties.equals(charge.properties) : charge.properties != null) return false;
-        if (state != null ? !state.equals(charge.state) : charge.state != null) return false;
-        if (title != null ? !title.equals(charge.title) : charge.title != null) return false;
-        if (type != null ? !type.equals(charge.type) : charge.type != null) return false;
-
-        return true;
+        return Objects.equals(type, charge.type) &&
+                Objects.equals(id, charge.id) &&
+                Objects.equals(title, charge.title) &&
+                Objects.equals(description, charge.description) &&
+                Objects.equals(displayCondition, charge.displayCondition) &&
+                Objects.equals(condition, charge.condition) &&
+                Objects.equals(operator, charge.operator) &&
+                Objects.equals(state, charge.state) &&
+                Objects.equals(mandatory, charge.mandatory) &&
+                Objects.equals(properties, charge.properties);
     }
 
     @Override
     public int hashCode() {
-        int result = type != null ? type.hashCode() : 0;
-        result = 31 * result + (id != null ? id.hashCode() : 0);
-        result = 31 * result + (organizationId != null ? organizationId.hashCode() : 0);
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (displayCondition != null ? displayCondition.hashCode() : 0);
-        result = 31 * result + (condition != null ? condition.hashCode() : 0);
-        result = 31 * result + (operator != null ? operator.hashCode() : 0);
-        result = 31 * result + (state != null ? state.hashCode() : 0);
-        result = 31 * result + (mandatory != null ? mandatory.hashCode() : 0);
-        result = 31 * result + (properties != null ? properties.hashCode() : 0);
-        return result;
+        return Objects.hash(type, id, title, description, displayCondition, condition, operator, state, mandatory, properties);
+    }
+
+    @Override
+    public String toString() {
+        return "Charge{" +
+                "type='" + type + '\'' +
+                ", id='" + id + '\'' +
+                ", title=" + title +
+                ", description=" + description +
+                ", displayCondition=" + displayCondition +
+                ", condition=" + condition +
+                ", operator=" + operator +
+                ", state='" + state + '\'' +
+                ", mandatory=" + mandatory +
+                ", properties=" + properties +
+                '}';
     }
 
     /** @see Charge#ALL_CHARGE_TYPES */
@@ -125,10 +124,6 @@ public class Charge implements Serializable, Cloneable {
     /** Unique charge id. */
     @JsonInclude(Include.NON_NULL)
     public String id;
-    
-    /** Organization id. */
-    @JsonInclude(Include.NON_NULL)
-    public String organizationId;
     
     /** Title. */
     @JsonInclude(Include.NON_DEFAULT)
