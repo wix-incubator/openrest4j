@@ -3,7 +3,6 @@ package com.openrest.v1_1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.wix.restaurants.availability.Availability;
 import com.wix.restaurants.conditions.Condition;
 import com.wix.restaurants.i18n.LocalizedString;
 
@@ -17,8 +16,7 @@ public class MenuSection implements Serializable, Cloneable {
     public MenuSection(String id, LocalizedString title, LocalizedString description,
                        List<MenuSection> children, List<String> itemIds,
                        Condition displayCondition, Condition condition,
-                       Availability availability,
-                       Map<String, Blob> blobs, Map<String, String> media, Map<String, String> properties) {
+                       Map<String, String> media, Map<String, String> properties) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -26,8 +24,6 @@ public class MenuSection implements Serializable, Cloneable {
         this.itemIds = itemIds;
         this.displayCondition = displayCondition;
         this.condition = condition;
-        this.availability = availability;
-        this.blobs = blobs;
         this.media = media;
         this.properties = properties;
     }
@@ -44,8 +40,6 @@ public class MenuSection implements Serializable, Cloneable {
                 ((itemIds != null) ? new LinkedList<>(itemIds) : null),
                 ((displayCondition != null) ? displayCondition.clone() : null),
                 ((condition != null) ? condition.clone() : null),
-                ((availability != null) ? availability.clone() : null),
-                ((blobs != null) ? new LinkedHashMap<>(blobs) : null),
                 ((media != null) ? new LinkedHashMap<>(media) : null),
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
     }
@@ -74,15 +68,13 @@ public class MenuSection implements Serializable, Cloneable {
                 Objects.equals(itemIds, that.itemIds) &&
                 Objects.equals(displayCondition, that.displayCondition) &&
                 Objects.equals(condition, that.condition) &&
-                Objects.equals(availability, that.availability) &&
-                Objects.equals(blobs, that.blobs) &&
                 Objects.equals(media, that.media) &&
                 Objects.equals(properties, that.properties);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, children, itemIds, displayCondition, condition, availability, blobs, media, properties);
+        return Objects.hash(id, title, description, children, itemIds, displayCondition, condition, media, properties);
     }
 
     @Override
@@ -95,8 +87,6 @@ public class MenuSection implements Serializable, Cloneable {
                 ", itemIds=" + itemIds +
                 ", displayCondition=" + displayCondition +
                 ", condition=" + condition +
-                ", availability=" + availability +
-                ", blobs=" + blobs +
                 ", media=" + media +
                 ", properties=" + properties +
                 '}';
@@ -129,17 +119,6 @@ public class MenuSection implements Serializable, Cloneable {
     /** Condition to order from the section, e.g. you can have a section that's only available for ordering in certain hours. */
     @JsonInclude(Include.NON_NULL)
     public Condition condition;
-
-    /** Time windows in which this section is available. */
-    @JsonInclude(Include.NON_DEFAULT)
-    public Availability availability = new Availability();
-
-    /**
-     * Maps blob-types to blobs.
-     * @see BlobTypes
-     */
-    @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, Blob> blobs = new LinkedHashMap<>();
 
     /**
      * Maps media-types to URLs.
