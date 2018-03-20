@@ -3,7 +3,6 @@ package com.openrest.v1_1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.wix.restaurants.availability.Availability;
 import com.wix.restaurants.conditions.Condition;
 import com.wix.restaurants.i18n.LocalizedString;
 
@@ -22,7 +21,6 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     public Item(String id, LocalizedString title,
 				LocalizedString description, Integer price, List<Variation> variations,
 				Condition displayCondition, Condition condition,
-				Availability availability, Map<String, Blob> blobs,
 				Map<String, String> media, Map<String, String> externalIds, Set<String> labels,
 				Map<String, String> properties, Stock stock, Integer maxCommentLength) {
         this.id = id;
@@ -32,8 +30,6 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
         this.variations = variations;
         this.displayCondition = displayCondition;
 		this.condition = condition;
-        this.availability = availability;
-        this.blobs = blobs;
         this.media = media;
         this.externalIds = externalIds;
         this.labels = labels;
@@ -65,8 +61,6 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     			price, Variation.clone(variations),
                 (displayCondition != null) ? displayCondition.clone() : null,
                 (condition != null) ? condition.clone() : null,
-    			((availability != null) ? availability.clone() : null),
-    			Blob.clone(blobs),
                 ((media != null) ? new LinkedHashMap<>(media) : null),
     			((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
     			((labels != null) ? new LinkedHashSet<>(labels) : null),
@@ -86,8 +80,6 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
                 Objects.equals(variations, item.variations) &&
                 Objects.equals(displayCondition, item.displayCondition) &&
                 Objects.equals(condition, item.condition) &&
-                Objects.equals(availability, item.availability) &&
-                Objects.equals(blobs, item.blobs) &&
                 Objects.equals(media, item.media) &&
                 Objects.equals(externalIds, item.externalIds) &&
                 Objects.equals(labels, item.labels) &&
@@ -98,7 +90,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, price, variations, displayCondition, condition, availability, blobs, media, externalIds, labels, properties, stock, maxCommentLength);
+        return Objects.hash(id, title, description, price, variations, displayCondition, condition, media, externalIds, labels, properties, stock, maxCommentLength);
     }
 
     public int compareTo(Item other) {
@@ -115,8 +107,6 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
                 ", variations=" + variations +
                 ", displayCondition=" + displayCondition +
                 ", condition=" + condition +
-                ", availability=" + availability +
-                ", blobs=" + blobs +
                 ", media=" + media +
                 ", externalIds=" + externalIds +
                 ", labels=" + labels +
@@ -153,17 +143,6 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     /** Condition to order the item, e.g. you can have an item that's only available for ordering in certain hours. */
     @JsonInclude(Include.NON_NULL)
     public Condition condition;
-
-    /** Time windows in which this item is regularly available. */
-    @JsonInclude(Include.NON_DEFAULT)
-    public Availability availability = new Availability();
-
-    /**
-     * Maps blob-types to blobs.
-	 * @see BlobTypes
-     */
-    @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, Blob> blobs = new LinkedHashMap<>();
 
     /**
      * Maps media-types to URLs.
