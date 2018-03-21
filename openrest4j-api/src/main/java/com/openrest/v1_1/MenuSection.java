@@ -125,7 +125,7 @@ public class MenuSection implements Serializable, Cloneable {
      * @see BlobTypes
      */
     @JsonInclude(Include.NON_NULL)
-    public Map<String, String> media;
+    public Map<String, String> media = new LinkedHashMap<>();
 
     /**
      * Map of user-defined extended properties. Developers should use unique

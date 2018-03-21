@@ -149,7 +149,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
      * @see BlobTypes
      */
     @JsonInclude(Include.NON_NULL)
-    public Map<String, String> media;
+    public Map<String, String> media = new LinkedHashMap<>();
 
     /**
      * Map of externally-defined item ids referring to this item.

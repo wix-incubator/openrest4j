@@ -236,7 +236,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
      * @see BlobTypes
      */
     @JsonInclude(Include.NON_NULL)
-    public Map<String, String> media;
+    public Map<String, String> media = new LinkedHashMap<>();
 
     /**
      * The organization is permanently closed, e.g. out of business.
