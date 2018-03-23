@@ -9,6 +9,7 @@ import com.wix.restaurants.availability.Availability;
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /** Online reservations settings. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -37,7 +38,7 @@ public class ReservationsInfo implements Serializable, Cloneable {
         return new ReservationsInfo(
                 pendingApproval,
                 (partySize != null) ? partySize.clone() : null,
-                (availability != null) ? (Availability) availability.clone() : null,
+                (availability != null) ? availability.clone() : null,
                 (futureDelayMins != null) ? futureDelayMins.clone() : null,
                 heldForMins,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
@@ -47,27 +48,30 @@ public class ReservationsInfo implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         ReservationsInfo that = (ReservationsInfo) o;
-
-        if (pendingApproval != null ? !pendingApproval.equals(that.pendingApproval) : that.pendingApproval != null) return false;
-        if (partySize != null ? !partySize.equals(that.partySize) : that.partySize != null) return false;
-        if (availability != null ? !availability.equals(that.availability) : that.availability != null) return false;
-        if (futureDelayMins != null ? !futureDelayMins.equals(that.futureDelayMins) : that.futureDelayMins != null) return false;
-        if (heldForMins != null ? !heldForMins.equals(that.heldForMins) : that.heldForMins != null) return false;
-        return properties != null ? properties.equals(that.properties) : that.properties == null;
-
+        return Objects.equals(pendingApproval, that.pendingApproval) &&
+                Objects.equals(partySize, that.partySize) &&
+                Objects.equals(availability, that.availability) &&
+                Objects.equals(futureDelayMins, that.futureDelayMins) &&
+                Objects.equals(heldForMins, that.heldForMins) &&
+                Objects.equals(properties, that.properties);
     }
 
     @Override
     public int hashCode() {
-        int result = pendingApproval != null ? pendingApproval.hashCode() : 0;
-        result = 31 * result + (partySize != null ? partySize.hashCode() : 0);
-        result = 31 * result + (availability != null ? availability.hashCode() : 0);
-        result = 31 * result + (futureDelayMins != null ? futureDelayMins.hashCode() : 0);
-        result = 31 * result + (heldForMins != null ? heldForMins.hashCode() : 0);
-        result = 31 * result + (properties != null ? properties.hashCode() : 0);
-        return result;
+        return Objects.hash(pendingApproval, partySize, availability, futureDelayMins, heldForMins, properties);
+    }
+
+    @Override
+    public String toString() {
+        return "ReservationsInfo{" +
+                "pendingApproval=" + pendingApproval +
+                ", partySize=" + partySize +
+                ", availability=" + availability +
+                ", futureDelayMins=" + futureDelayMins +
+                ", heldForMins=" + heldForMins +
+                ", properties=" + properties +
+                '}';
     }
 
     /** If true, submitted reservations are not final until manually approved by the restaurant. */
@@ -104,5 +108,5 @@ public class ReservationsInfo implements Serializable, Cloneable {
      * Developers should use unique keys, e.g. "com.example.product".
      */
     @JsonInclude(Include.NON_NULL)
-    public Map<String, String> properties;
+    public Map<String, String> properties = new LinkedHashMap<>();
 }
