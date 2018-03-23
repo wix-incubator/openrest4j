@@ -9,10 +9,7 @@ import com.wix.restaurants.i18n.Locale;
 import com.wix.restaurants.reservations.log.LogEntry;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * A table reservation.
@@ -72,11 +69,11 @@ public class Reservation implements Serializable, Cloneable {
                 timeGuarantee,
                 (time != null) ? (Date) time.clone() : null,
                 (heldUntil != null) ? (Date) heldUntil.clone() : null,
-                (contact != null) ? (Contact) contact.clone() : null,
+                (contact != null) ? contact.clone() : null,
                 partySize, comment, locale,
                 ownerToken, shareToken,
                 status, restaurantStatus, customerStatus,
-                (user != null) ? (User) user.clone() : null,
+                (user != null) ? user.clone() : null,
                 developer, source, platform,
                 LogEntry.clone(log),
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
@@ -86,65 +83,68 @@ public class Reservation implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Reservation that = (Reservation) o;
-
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (externalIds != null ? !externalIds.equals(that.externalIds) : that.externalIds != null) return false;
-        if (created != null ? !created.equals(that.created) : that.created != null) return false;
-        if (modified != null ? !modified.equals(that.modified) : that.modified != null) return false;
-        if (restaurantId != null ? !restaurantId.equals(that.restaurantId) : that.restaurantId != null) return false;
-        if (chainId != null ? !chainId.equals(that.chainId) : that.chainId != null) return false;
-        if (distributorId != null ? !distributorId.equals(that.distributorId) : that.distributorId != null) return false;
-        if (timeGuarantee != null ? !timeGuarantee.equals(that.timeGuarantee) : that.timeGuarantee != null) return false;
-        if (time != null ? !time.equals(that.time) : that.time != null) return false;
-        if (heldUntil != null ? !heldUntil.equals(that.heldUntil) : that.heldUntil != null) return false;
-        if (contact != null ? !contact.equals(that.contact) : that.contact != null) return false;
-        if (partySize != null ? !partySize.equals(that.partySize) : that.partySize != null) return false;
-        if (comment != null ? !comment.equals(that.comment) : that.comment != null) return false;
-        if (locale != null ? !locale.equals(that.locale) : that.locale != null) return false;
-        if (ownerToken != null ? !ownerToken.equals(that.ownerToken) : that.ownerToken != null) return false;
-        if (shareToken != null ? !shareToken.equals(that.shareToken) : that.shareToken != null) return false;
-        if (status != null ? !status.equals(that.status) : that.status != null) return false;
-        if (restaurantStatus != null ? !restaurantStatus.equals(that.restaurantStatus) : that.restaurantStatus != null) return false;
-        if (customerStatus != null ? !customerStatus.equals(that.customerStatus) : that.customerStatus != null) return false;
-        if (user != null ? !user.equals(that.user) : that.user != null) return false;
-        if (developer != null ? !developer.equals(that.developer) : that.developer != null) return false;
-        if (source != null ? !source.equals(that.source) : that.source != null) return false;
-        if (platform != null ? !platform.equals(that.platform) : that.platform != null) return false;
-        if (log != null ? !log.equals(that.log) : that.log != null) return false;
-        return properties != null ? properties.equals(that.properties) : that.properties == null;
-
+        return Objects.equals(id, that.id) &&
+                Objects.equals(externalIds, that.externalIds) &&
+                Objects.equals(created, that.created) &&
+                Objects.equals(modified, that.modified) &&
+                Objects.equals(restaurantId, that.restaurantId) &&
+                Objects.equals(chainId, that.chainId) &&
+                Objects.equals(distributorId, that.distributorId) &&
+                Objects.equals(timeGuarantee, that.timeGuarantee) &&
+                Objects.equals(time, that.time) &&
+                Objects.equals(heldUntil, that.heldUntil) &&
+                Objects.equals(contact, that.contact) &&
+                Objects.equals(partySize, that.partySize) &&
+                Objects.equals(comment, that.comment) &&
+                Objects.equals(locale, that.locale) &&
+                Objects.equals(ownerToken, that.ownerToken) &&
+                Objects.equals(shareToken, that.shareToken) &&
+                Objects.equals(status, that.status) &&
+                Objects.equals(restaurantStatus, that.restaurantStatus) &&
+                Objects.equals(customerStatus, that.customerStatus) &&
+                Objects.equals(user, that.user) &&
+                Objects.equals(developer, that.developer) &&
+                Objects.equals(source, that.source) &&
+                Objects.equals(platform, that.platform) &&
+                Objects.equals(log, that.log) &&
+                Objects.equals(properties, that.properties);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (externalIds != null ? externalIds.hashCode() : 0);
-        result = 31 * result + (created != null ? created.hashCode() : 0);
-        result = 31 * result + (modified != null ? modified.hashCode() : 0);
-        result = 31 * result + (restaurantId != null ? restaurantId.hashCode() : 0);
-        result = 31 * result + (chainId != null ? chainId.hashCode() : 0);
-        result = 31 * result + (distributorId != null ? distributorId.hashCode() : 0);
-        result = 31 * result + (timeGuarantee != null ? timeGuarantee.hashCode() : 0);
-        result = 31 * result + (time != null ? time.hashCode() : 0);
-        result = 31 * result + (heldUntil != null ? heldUntil.hashCode() : 0);
-        result = 31 * result + (contact != null ? contact.hashCode() : 0);
-        result = 31 * result + (partySize != null ? partySize.hashCode() : 0);
-        result = 31 * result + (comment != null ? comment.hashCode() : 0);
-        result = 31 * result + (locale != null ? locale.hashCode() : 0);
-        result = 31 * result + (ownerToken != null ? ownerToken.hashCode() : 0);
-        result = 31 * result + (shareToken != null ? shareToken.hashCode() : 0);
-        result = 31 * result + (status != null ? status.hashCode() : 0);
-        result = 31 * result + (restaurantStatus != null ? restaurantStatus.hashCode() : 0);
-        result = 31 * result + (customerStatus != null ? customerStatus.hashCode() : 0);
-        result = 31 * result + (user != null ? user.hashCode() : 0);
-        result = 31 * result + (developer != null ? developer.hashCode() : 0);
-        result = 31 * result + (source != null ? source.hashCode() : 0);
-        result = 31 * result + (platform != null ? platform.hashCode() : 0);
-        result = 31 * result + (log != null ? log.hashCode() : 0);
-        result = 31 * result + (properties != null ? properties.hashCode() : 0);
-        return result;
+        return Objects.hash(id, externalIds, created, modified, restaurantId, chainId, distributorId, timeGuarantee, time, heldUntil, contact, partySize, comment, locale, ownerToken, shareToken, status, restaurantStatus, customerStatus, user, developer, source, platform, log, properties);
+    }
+
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "id='" + id + '\'' +
+                ", externalIds=" + externalIds +
+                ", created=" + created +
+                ", modified=" + modified +
+                ", restaurantId='" + restaurantId + '\'' +
+                ", chainId='" + chainId + '\'' +
+                ", distributorId='" + distributorId + '\'' +
+                ", timeGuarantee='" + timeGuarantee + '\'' +
+                ", time=" + time +
+                ", heldUntil=" + heldUntil +
+                ", contact=" + contact +
+                ", partySize=" + partySize +
+                ", comment='" + comment + '\'' +
+                ", locale=" + locale +
+                ", ownerToken='" + ownerToken + '\'' +
+                ", shareToken='" + shareToken + '\'' +
+                ", status='" + status + '\'' +
+                ", restaurantStatus='" + restaurantStatus + '\'' +
+                ", customerStatus='" + customerStatus + '\'' +
+                ", user=" + user +
+                ", developer='" + developer + '\'' +
+                ", source='" + source + '\'' +
+                ", platform='" + platform + '\'' +
+                ", log=" + log +
+                ", properties=" + properties +
+                '}';
     }
 
     /** The reservation's unique identifier. */
@@ -158,7 +158,7 @@ public class Reservation implements Serializable, Cloneable {
      * Developers should use unique keys, e.g. "com.example.product".
      */
     @JsonInclude(Include.NON_NULL)
-    public Map<String, String> externalIds;
+    public Map<String, String> externalIds = new LinkedHashMap<>();
 
     /** The reservation's creation timestamp. */
     @JsonInclude(Include.NON_NULL)
@@ -268,12 +268,12 @@ public class Reservation implements Serializable, Cloneable {
 
     /** Change log for this reservation. */
     @JsonInclude(Include.NON_NULL)
-    public List<LogEntry> log;
+    public List<LogEntry> log = new LinkedList<>();
 
     /**
      * Map of user-defined extended properties.
      * Developers should use unique keys, e.g. "com.example.product".
      */
     @JsonInclude(Include.NON_NULL)
-    public Map<String, String> properties;
+    public Map<String, String> properties = new LinkedHashMap<>();
 }
