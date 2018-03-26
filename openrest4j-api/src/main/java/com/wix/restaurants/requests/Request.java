@@ -63,7 +63,6 @@ import java.io.Serializable;
 	@Type(value = GetNotificationsRequest.class, name = GetNotificationsRequest.TYPE),
 	@Type(value = SetNotificationsRequest.class, name = SetNotificationsRequest.TYPE),
 	@Type(value = ExtendAccessTokenRequest.class, name = ExtendAccessTokenRequest.TYPE),
-	@Type(value = SubscribeToMailingListRequest.class, name = SubscribeToMailingListRequest.TYPE),
 	@Type(value = SignUpRequest.class, name = SignUpRequest.TYPE),
 	@Type(value = SignedRequest.class, name = SignedRequest.TYPE),
 	@Type(value = ResetPasswordRequest.class, name = ResetPasswordRequest.TYPE),
