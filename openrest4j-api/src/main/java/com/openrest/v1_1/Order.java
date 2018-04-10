@@ -117,13 +117,12 @@ public class Order implements Serializable, Cloneable {
                 Objects.equals(ref, order.ref) &&
                 Objects.equals(legacyHierarchy, order.legacyHierarchy) &&
                 Objects.equals(properties, order.properties) &&
-                Objects.equals(log, order.log) &&
-                Objects.equals(html, order.html);
+                Objects.equals(log, order.log);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, externalIds, distributorId, chainId, restaurantId, locale, orderItems, comment, price, currency, delivery, contact, payments, takeoutPacks, orderCharges, created, submitAt, received, modified, user, clubMember, status, shareToken, ownerToken, affiliate, developer, source, platform, ref, legacyHierarchy, properties, log, html);
+        return Objects.hash(id, externalIds, distributorId, chainId, restaurantId, locale, orderItems, comment, price, currency, delivery, contact, payments, takeoutPacks, orderCharges, created, submitAt, received, modified, user, clubMember, status, shareToken, ownerToken, affiliate, developer, source, platform, ref, legacyHierarchy, properties, log);
     }
 
     @Override
@@ -161,7 +160,6 @@ public class Order implements Serializable, Cloneable {
                 ", legacyHierarchy=" + legacyHierarchy +
                 ", properties=" + properties +
                 ", log=" + log +
-                ", html='" + html + '\'' +
                 '}';
     }
 
@@ -318,8 +316,4 @@ public class Order implements Serializable, Cloneable {
     /** Change log for this order. */
     @JsonInclude(Include.NON_DEFAULT)
     public List<LogEntry> log = new LinkedList<>();
-    
-    /** The order in HTML format. */
-    @JsonInclude(Include.NON_NULL)
-    public String html;
 }
