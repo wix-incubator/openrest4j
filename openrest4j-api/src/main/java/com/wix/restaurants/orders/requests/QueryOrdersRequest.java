@@ -53,11 +53,6 @@ public class QueryOrdersRequest extends Request {
     @JsonInclude(Include.NON_NULL)
     public ClientId clientId;
     
-    /** Use clientId */
-    @Deprecated
-    @JsonInclude(Include.NON_NULL)
-    public String userId;
-
     /**
      * Order status filter.
      * @see com.wix.restaurants.orders.Statuses
@@ -84,11 +79,6 @@ public class QueryOrdersRequest extends Request {
     @JsonInclude(Include.NON_NULL)
     public String viewMode;
     
-    /** Use viewMode */
-    @Deprecated
-    @JsonInclude(Include.NON_DEFAULT)
-    public Boolean restaurantView = Boolean.FALSE;
-
     /**
      * Optional result ordering.
      * @see com.wix.restaurants.Orderings
