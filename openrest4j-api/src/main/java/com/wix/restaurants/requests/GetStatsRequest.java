@@ -16,7 +16,7 @@ public class GetStatsRequest extends Request {
     public GetStatsRequest() {}
     
     public GetStatsRequest(String accessToken, String distributorId, String chainId, Set<String> restaurantIds,
-    		String timezone, Date since, Date until, String granularity, String source, String platform, String ref) {
+    		String timezone, Date since, Date until, String granularity, String source, String platform) {
     	this.accessToken = accessToken;
     	this.distributorId = distributorId;
     	this.chainId = chainId;
@@ -27,7 +27,6 @@ public class GetStatsRequest extends Request {
     	this.granularity = granularity;
     	this.source = source;
     	this.platform = platform;
-    	this.ref = ref;
     }
     
     @JsonInclude(Include.NON_NULL)
@@ -61,9 +60,4 @@ public class GetStatsRequest extends Request {
     /** @see com.wix.restaurants.Platforms */
     @JsonInclude(Include.NON_NULL)
     public String platform;
-    
-    /** Use source and platform */
-    @Deprecated
-    @JsonInclude(Include.NON_NULL)
-    public String ref;
 }

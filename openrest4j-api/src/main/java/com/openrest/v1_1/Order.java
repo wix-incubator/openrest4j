@@ -22,7 +22,7 @@ public class Order implements Serializable, Cloneable {
             Integer takeoutPacks, List<OrderCharge> orderCharges,
             Date created, Date received, Date modified, Date submitAt,
             User user, ClubMember clubMember, String status, String shareToken, String ownerToken,
-            String affiliate, String developer, String source, String platform, String ref,
+            String affiliate, String developer, String source, String platform,
             Boolean legacyHierarchy, Map<String, String> properties, List<LogEntry> log) {
 
         this.id = id;
@@ -53,7 +53,6 @@ public class Order implements Serializable, Cloneable {
         this.developer = developer;
         this.source = source;
         this.platform = platform;
-        this.ref = ref;
         this.legacyHierarchy = legacyHierarchy;
         this.properties = properties;
         this.log = log;
@@ -76,7 +75,7 @@ public class Order implements Serializable, Cloneable {
                 (submitAt != null) ? (Date) submitAt.clone() : null,
     			((user != null) ? user.clone() : null),
     			((clubMember != null) ? clubMember.clone() : null),
-    			status, shareToken, ownerToken, affiliate, developer, source, platform, ref, legacyHierarchy,
+    			status, shareToken, ownerToken, affiliate, developer, source, platform, legacyHierarchy,
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
     			LogEntry.clone(log));
 	}
@@ -114,7 +113,6 @@ public class Order implements Serializable, Cloneable {
                 Objects.equals(developer, order.developer) &&
                 Objects.equals(source, order.source) &&
                 Objects.equals(platform, order.platform) &&
-                Objects.equals(ref, order.ref) &&
                 Objects.equals(legacyHierarchy, order.legacyHierarchy) &&
                 Objects.equals(properties, order.properties) &&
                 Objects.equals(log, order.log);
@@ -122,7 +120,7 @@ public class Order implements Serializable, Cloneable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, externalIds, distributorId, chainId, restaurantId, locale, orderItems, comment, price, currency, delivery, contact, payments, takeoutPacks, orderCharges, created, submitAt, received, modified, user, clubMember, status, shareToken, ownerToken, affiliate, developer, source, platform, ref, legacyHierarchy, properties, log);
+        return Objects.hash(id, externalIds, distributorId, chainId, restaurantId, locale, orderItems, comment, price, currency, delivery, contact, payments, takeoutPacks, orderCharges, created, submitAt, received, modified, user, clubMember, status, shareToken, ownerToken, affiliate, developer, source, platform, legacyHierarchy, properties, log);
     }
 
     @Override
@@ -156,7 +154,6 @@ public class Order implements Serializable, Cloneable {
                 ", developer='" + developer + '\'' +
                 ", source='" + source + '\'' +
                 ", platform='" + platform + '\'' +
-                ", ref='" + ref + '\'' +
                 ", legacyHierarchy=" + legacyHierarchy +
                 ", properties=" + properties +
                 ", log=" + log +
@@ -291,13 +288,6 @@ public class Order implements Serializable, Cloneable {
      */
     @JsonInclude(Include.NON_NULL)
     public String platform;
-    
-    /**
-     * Affiliate-specific referrer-id for performance tracking, e.g. 
-     * Facebook campaign id, iPhone application id, self-service station id.
-     */
-    @JsonInclude(Include.NON_NULL)
-    public String ref;
     
     /**
      * Whether or not the order was submitted and should be displayed with a

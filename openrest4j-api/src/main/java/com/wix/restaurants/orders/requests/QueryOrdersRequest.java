@@ -19,7 +19,7 @@ public class QueryOrdersRequest extends Request {
     public QueryOrdersRequest() {}
     
     public QueryOrdersRequest(String accessToken, String distributorId, String chainId, Collection<String> restaurantIds, ClientId clientId,
-    		String status, String source, String platform, String ref, Date since, Date until, String query, String viewMode, String ordering, Set<String> fields,
+    		String status, String source, String platform, Date since, Date until, String query, String viewMode, String ordering, Set<String> fields,
     		Integer limit) {
     	this.accessToken = accessToken;
     	this.distributorId = distributorId;
@@ -29,7 +29,6 @@ public class QueryOrdersRequest extends Request {
     	this.status = status;
     	this.source = source;
     	this.platform = platform;
-    	this.ref = ref;
     	this.since = since;
     	this.until = until;
     	this.query = query;
@@ -72,11 +71,6 @@ public class QueryOrdersRequest extends Request {
     @JsonInclude(Include.NON_NULL)
     public String platform;
     
-    /** Use source and platform */
-    @Deprecated
-    @JsonInclude(Include.NON_NULL)
-    public String ref;
-
     @JsonInclude(Include.NON_NULL)
     public Date since;
 
