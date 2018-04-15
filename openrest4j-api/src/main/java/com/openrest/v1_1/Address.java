@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Address implements Serializable, Cloneable {
@@ -47,28 +44,6 @@ public class Address implements Serializable, Cloneable {
                 (properties != null) ? new LinkedHashMap<>(properties) : null);
 	}
 
-    @Override
-    public String toString() {
-        return "Address{" +
-                "formatted='" + formatted + '\'' +
-                ", country='" + country + '\'' +
-                ", city='" + city + '\'' +
-                ", street='" + street + '\'' +
-                ", number='" + number + '\'' +
-                ", apt='" + apt + '\'' +
-                ", floor='" + floor + '\'' +
-                ", entrance='" + entrance + '\'' +
-                ", comment='" + comment + '\'' +
-                ", latLng=" + latLng +
-                ", approximate=" + approximate +
-                ", countryCode='" + countryCode + '\'' +
-                ", postalCode='" + postalCode + '\'' +
-                ", onArrival='" + onArrival + '\'' +
-                ", externalIds=" + externalIds +
-                ", properties=" + properties +
-                '}';
-    }
-
     public static List<Address> clone(List<Address> addresses) {
         if (addresses == null) {
             return null;
@@ -97,7 +72,57 @@ public class Address implements Serializable, Cloneable {
     	
     	return builder.toString();
     }
-    
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return Objects.equals(formatted, address.formatted) &&
+                Objects.equals(country, address.country) &&
+                Objects.equals(city, address.city) &&
+                Objects.equals(street, address.street) &&
+                Objects.equals(number, address.number) &&
+                Objects.equals(apt, address.apt) &&
+                Objects.equals(floor, address.floor) &&
+                Objects.equals(entrance, address.entrance) &&
+                Objects.equals(comment, address.comment) &&
+                Objects.equals(latLng, address.latLng) &&
+                Objects.equals(approximate, address.approximate) &&
+                Objects.equals(countryCode, address.countryCode) &&
+                Objects.equals(postalCode, address.postalCode) &&
+                Objects.equals(onArrival, address.onArrival) &&
+                Objects.equals(externalIds, address.externalIds) &&
+                Objects.equals(properties, address.properties);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(formatted, country, city, street, number, apt, floor, entrance, comment, latLng, approximate, countryCode, postalCode, onArrival, externalIds, properties);
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "formatted='" + formatted + '\'' +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", number='" + number + '\'' +
+                ", apt='" + apt + '\'' +
+                ", floor='" + floor + '\'' +
+                ", entrance='" + entrance + '\'' +
+                ", comment='" + comment + '\'' +
+                ", latLng=" + latLng +
+                ", approximate=" + approximate +
+                ", countryCode='" + countryCode + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", onArrival='" + onArrival + '\'' +
+                ", externalIds=" + externalIds +
+                ", properties=" + properties +
+                '}';
+    }
+
     /** The human-readable address of this location (the reverse geocode of the 'latLng' field). */
     @JsonInclude(Include.NON_NULL)
     public String formatted;
@@ -159,52 +184,4 @@ public class Address implements Serializable, Cloneable {
 
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> properties = new LinkedHashMap<>();
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Address address = (Address) o;
-
-        if (apt != null ? !apt.equals(address.apt) : address.apt != null) return false;
-        if (city != null ? !city.equals(address.city) : address.city != null) return false;
-        if (comment != null ? !comment.equals(address.comment) : address.comment != null) return false;
-        if (country != null ? !country.equals(address.country) : address.country != null) return false;
-        if (countryCode != null ? !countryCode.equals(address.countryCode) : address.countryCode != null) return false;
-        if (entrance != null ? !entrance.equals(address.entrance) : address.entrance != null) return false;
-        if (floor != null ? !floor.equals(address.floor) : address.floor != null) return false;
-        if (formatted != null ? !formatted.equals(address.formatted) : address.formatted != null) return false;
-        if (latLng != null ? !latLng.equals(address.latLng) : address.latLng != null) return false;
-        if (approximate != null ? !approximate.equals(address.approximate) : address.approximate != null) return false;
-        if (number != null ? !number.equals(address.number) : address.number != null) return false;
-        if (postalCode != null ? !postalCode.equals(address.postalCode) : address.postalCode != null) return false;
-        if (onArrival != null ? !onArrival.equals(address.onArrival) : address.onArrival != null) return false;
-        if (externalIds != null ? !externalIds.equals(address.externalIds) : address.externalIds != null) return false;
-        if (properties != null ? !properties.equals(address.properties) : address.properties != null) return false;
-        if (street != null ? !street.equals(address.street) : address.street != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = formatted != null ? formatted.hashCode() : 0;
-        result = 31 * result + (country != null ? country.hashCode() : 0);
-        result = 31 * result + (city != null ? city.hashCode() : 0);
-        result = 31 * result + (street != null ? street.hashCode() : 0);
-        result = 31 * result + (number != null ? number.hashCode() : 0);
-        result = 31 * result + (apt != null ? apt.hashCode() : 0);
-        result = 31 * result + (floor != null ? floor.hashCode() : 0);
-        result = 31 * result + (entrance != null ? entrance.hashCode() : 0);
-        result = 31 * result + (comment != null ? comment.hashCode() : 0);
-        result = 31 * result + (latLng != null ? latLng.hashCode() : 0);
-        result = 31 * result + (approximate != null ? approximate.hashCode() : 0);
-        result = 31 * result + (countryCode != null ? countryCode.hashCode() : 0);
-        result = 31 * result + (postalCode != null ? postalCode.hashCode() : 0);
-        result = 31 * result + (onArrival != null ? onArrival.hashCode() : 0);
-        result = 31 * result + (externalIds != null ? externalIds.hashCode() : 0);
-        result = 31 * result + (properties != null ? properties.hashCode() : 0);
-        return result;
-    }
 }
