@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(
@@ -47,23 +48,16 @@ public abstract class Dispatch implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Dispatch dispatch = (Dispatch) o;
-
-        if (time != null ? !time.equals(dispatch.time) : dispatch.time != null) return false;
-        if (timeGuarantee != null ? !timeGuarantee.equals(dispatch.timeGuarantee) : dispatch.timeGuarantee != null)
-            return false;
-        if (charge != null ? !charge.equals(dispatch.charge) : dispatch.charge != null) return false;
-        return properties != null ? properties.equals(dispatch.properties) : dispatch.properties == null;
+        return Objects.equals(time, dispatch.time) &&
+                Objects.equals(timeGuarantee, dispatch.timeGuarantee) &&
+                Objects.equals(charge, dispatch.charge) &&
+                Objects.equals(properties, dispatch.properties);
     }
 
     @Override
     public int hashCode() {
-        int result = time != null ? time.hashCode() : 0;
-        result = 31 * result + (timeGuarantee != null ? timeGuarantee.hashCode() : 0);
-        result = 31 * result + (charge != null ? charge.hashCode() : 0);
-        result = 31 * result + (properties != null ? properties.hashCode() : 0);
-        return result;
+        return Objects.hash(time, timeGuarantee, charge, properties);
     }
 
     /** Timestamp by which the order will be delivered or ready for pick-up. */

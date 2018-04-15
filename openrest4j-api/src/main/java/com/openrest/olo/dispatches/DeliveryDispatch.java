@@ -7,6 +7,7 @@ import com.openrest.v1_1.Address;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /** Delivery to an address of your choice. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -31,7 +32,7 @@ public class DeliveryDispatch extends Dispatch {
     @Override
     protected DeliveryDispatch cloneImpl() {
         return new DeliveryDispatch(
-                ((address != null) ? (Address) address.clone() : null),
+                ((address != null) ? address.clone() : null),
                 (time != null) ? (Date) time.clone() : null,
                 timeGuarantee, charge,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
@@ -42,17 +43,13 @@ public class DeliveryDispatch extends Dispatch {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-
         DeliveryDispatch that = (DeliveryDispatch) o;
-
-        return address != null ? address.equals(that.address) : that.address == null;
+        return Objects.equals(address, that.address);
     }
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        return result;
+        return Objects.hash(super.hashCode(), address);
     }
 
     /** Address to deliver to. */
