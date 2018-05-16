@@ -90,7 +90,6 @@ import java.io.Serializable;
 	@Type(value = SetGroupStaffRequest.class, name = SetGroupStaffRequest.TYPE),
 	@Type(value = AuthenticateRequest.class, name = AuthenticateRequest.TYPE),
 	@Type(value = SubmitReservationRequest.class, name = SubmitReservationRequest.TYPE),
-	@Type(value = GetReservationRequest.class, name = GetReservationRequest.TYPE),
 	@Type(value = QueryUnhandledReservationsRequest.class, name = QueryUnhandledReservationsRequest.TYPE),
 	@Type(value = QueryModifiedReservationsRequest.class, name = QueryModifiedReservationsRequest.TYPE),
 	@Type(value = QueryReservationsRequest.class, name = QueryReservationsRequest.TYPE),
