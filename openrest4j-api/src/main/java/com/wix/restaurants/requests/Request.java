@@ -91,7 +91,6 @@ import java.io.Serializable;
 	@Type(value = QueryReservationsRequest.class, name = QueryReservationsRequest.TYPE),
 	@Type(value = QueryCustomerReservationsRequest.class, name = QueryCustomerReservationsRequest.TYPE),
 	@Type(value = SetReservationStatusRequest.class, name = SetReservationStatusRequest.TYPE),
-	@Type(value = ConfirmReservationRequest.class, name = ConfirmReservationRequest.TYPE),
 	@Type(value = NotifyReservationRequest.class, name = NotifyReservationRequest.TYPE),
 	@Type(value = JoinChainRequest.class, name = JoinChainRequest.TYPE),
 	@Type(value = GetRoleRequest.class, name = GetRoleRequest.TYPE),
