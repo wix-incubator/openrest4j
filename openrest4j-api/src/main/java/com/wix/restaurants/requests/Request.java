@@ -24,7 +24,6 @@ import java.io.Serializable;
 	@Type(value = DeleteOrganizationRequest.class, name = DeleteOrganizationRequest.TYPE),
 	@Type(value = DeleteCustomerRequest.class, name = DeleteCustomerRequest.TYPE),
 	@Type(value = GetChainsRequest.class, name = GetChainsRequest.TYPE),
-	@Type(value = GetDistributorsRequest.class, name = GetDistributorsRequest.TYPE),
 	@Type(value = GetOrganizationFullRequest.class, name = GetOrganizationFullRequest.TYPE),
 	@Type(value = SearchRequest.class, name = SearchRequest.TYPE),
 	@Type(value = SearchPortalsRequest.class, name = SearchPortalsRequest.TYPE),
