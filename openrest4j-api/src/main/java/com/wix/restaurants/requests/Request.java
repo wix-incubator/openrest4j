@@ -70,7 +70,6 @@ import java.io.Serializable;
 	@Type(value = SetAppRequest.class, name = SetAppRequest.TYPE),
 	@Type(value = QueryAppsRequest.class, name = QueryAppsRequest.TYPE),
 	@Type(value = GetSecretsRequest.class, name = GetSecretsRequest.TYPE),
-	@Type(value = GetFeaturesRequest.class, name = GetFeaturesRequest.TYPE),
 	@Type(value = GetPropertyRequest.class, name = GetPropertyRequest.TYPE),
 	@Type(value = SetPropertyRequest.class, name = SetPropertyRequest.TYPE),
 	@Type(value = ToggleProductRequest.class, name = ToggleProductRequest.TYPE),
