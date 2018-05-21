@@ -52,7 +52,6 @@ import java.io.Serializable;
 	@Type(value = BatchRequest.class, name = BatchRequest.TYPE),
 	@Type(value = GetStaffRequest.class, name = GetStaffRequest.TYPE),
 	@Type(value = SetStaffRequest.class, name = SetStaffRequest.TYPE),
-	@Type(value = GetNotificationsRequest.class, name = GetNotificationsRequest.TYPE),
 	@Type(value = ExtendAccessTokenRequest.class, name = ExtendAccessTokenRequest.TYPE),
 	@Type(value = SignUpRequest.class, name = SignUpRequest.TYPE),
 	@Type(value = SignedRequest.class, name = SignedRequest.TYPE),
