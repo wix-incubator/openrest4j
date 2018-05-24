@@ -2,8 +2,6 @@ package com.wix.restaurants.authorization;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.openrest.v1_1.AcceptedDocument;
-import com.wix.restaurants.authorization.Role;
 
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -16,10 +14,9 @@ public class RolesResponse implements Serializable {
     /** Default constructor for JSON deserialization. */
 	public RolesResponse() {}
 	
-    public RolesResponse(String userId, List<Role> roles, List<AcceptedDocument> accepted) {
+    public RolesResponse(String userId, List<Role> roles) {
     	this.userId = userId;
     	this.roles = roles;
-    	this.accepted = accepted;
     }
 
 	@Override
@@ -28,13 +25,12 @@ public class RolesResponse implements Serializable {
 		if (o == null || getClass() != o.getClass()) return false;
 		RolesResponse that = (RolesResponse) o;
 		return Objects.equals(userId, that.userId) &&
-				Objects.equals(roles, that.roles) &&
-				Objects.equals(accepted, that.accepted);
+				Objects.equals(roles, that.roles);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(userId, roles, accepted);
+		return Objects.hash(userId, roles);
 	}
 
 	@Override
@@ -42,7 +38,6 @@ public class RolesResponse implements Serializable {
 		return "RolesResponse{" +
 				"userId='" + userId + '\'' +
 				", roles=" + roles +
-				", accepted=" + accepted +
 				'}';
 	}
 
@@ -51,8 +46,4 @@ public class RolesResponse implements Serializable {
 
     @JsonInclude(Include.NON_DEFAULT)
 	public List<Role> roles = new LinkedList<>();
-    
-    /** Lists terms of service the user accepted. */
-    @JsonInclude(Include.NON_DEFAULT)
-	public List<AcceptedDocument> accepted = new LinkedList<>();
 }
