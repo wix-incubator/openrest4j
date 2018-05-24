@@ -3,7 +3,11 @@ package com.openrest.olo.notifications;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.wix.restaurants.notifications.Notification;
 
-/** Triggered when a new feedback is received. */
+/**
+ * Triggered when a new feedback is received.
+ * Deprecated on 2018-05-24.
+ */
+@Deprecated
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FeedbackNotification extends Notification {
     public static final String TYPE = "feedback";
