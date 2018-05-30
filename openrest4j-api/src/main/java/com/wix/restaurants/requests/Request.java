@@ -20,7 +20,6 @@ import java.io.Serializable;
 	@Type(value = GetOrganizationRequest.class, name = GetOrganizationRequest.TYPE),
 	@Type(value = GetOrganizationsRequest.class, name = GetOrganizationsRequest.TYPE),
 	@Type(value = SetOrganizationRequest.class, name = SetOrganizationRequest.TYPE),
-	@Type(value = AddOrganizationRequest.class, name = AddOrganizationRequest.TYPE),
 	@Type(value = DeleteOrganizationRequest.class, name = DeleteOrganizationRequest.TYPE),
 	@Type(value = DeleteCustomerRequest.class, name = DeleteCustomerRequest.TYPE),
 	@Type(value = GetOrganizationFullRequest.class, name = GetOrganizationFullRequest.TYPE),
