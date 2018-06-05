@@ -31,7 +31,8 @@ import java.util.Map;
         @Type(value = MultipassPayment.class, name = MultipassPayment.TYPE),
         @Type(value = TenbisPayment.class, name = TenbisPayment.TYPE),
         @Type(value = DebitPayment.class, name = DebitPayment.TYPE),
-        @Type(value = PaypalPayment.class, name = PaypalPayment.TYPE)
+        @Type(value = PaypalPayment.class, name = PaypalPayment.TYPE),
+        @Type(value = CibusPayment.class, name = CibusPayment.TYPE)
 })
 public abstract class Payment implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
