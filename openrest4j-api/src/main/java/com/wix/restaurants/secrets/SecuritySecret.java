@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SecuritySecret implements Serializable, Cloneable {
@@ -21,18 +22,38 @@ public class SecuritySecret implements Serializable, Cloneable {
     }
 
     @Override
-    public Object clone() {
+    public SecuritySecret clone() {
         final Map<String, FraudPreventionInfo> clonedFraudPrevention;
         if (fraudPrevention != null) {
             clonedFraudPrevention = new LinkedHashMap<>(fraudPrevention.size());
             for (Map.Entry<String, FraudPreventionInfo> entry : fraudPrevention.entrySet()) {
-                clonedFraudPrevention.put(entry.getKey(), (entry.getValue() != null) ? (FraudPreventionInfo) entry.getValue().clone() : null);
+                clonedFraudPrevention.put(entry.getKey(), (entry.getValue() != null) ? entry.getValue().clone() : null);
             }
         } else {
             clonedFraudPrevention = null;
         }
 
         return new SecuritySecret(clonedFraudPrevention);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SecuritySecret that = (SecuritySecret) o;
+        return Objects.equals(fraudPrevention, that.fraudPrevention);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fraudPrevention);
+    }
+
+    @Override
+    public String toString() {
+        return "SecuritySecret{" +
+                "fraudPrevention=" + fraudPrevention +
+                '}';
     }
 
     /**

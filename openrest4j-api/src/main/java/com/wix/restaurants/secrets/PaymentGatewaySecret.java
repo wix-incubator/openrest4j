@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PaymentGatewaySecret implements Serializable, Cloneable {
@@ -23,9 +24,31 @@ public class PaymentGatewaySecret implements Serializable, Cloneable {
     }
 
     @Override
-    public Object clone() {
+    public PaymentGatewaySecret clone() {
         return new PaymentGatewaySecret(gatewayId,
                 ((merchantKeys != null) ? new LinkedHashMap<>(merchantKeys) : null));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PaymentGatewaySecret that = (PaymentGatewaySecret) o;
+        return Objects.equals(gatewayId, that.gatewayId) &&
+                Objects.equals(merchantKeys, that.merchantKeys);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(gatewayId, merchantKeys);
+    }
+
+    @Override
+    public String toString() {
+        return "PaymentGatewaySecret{" +
+                "gatewayId='" + gatewayId + '\'' +
+                ", merchantKeys=" + merchantKeys +
+                '}';
     }
 
     /** Payment gateway to use for credit card clearing (null means manual clearing). */

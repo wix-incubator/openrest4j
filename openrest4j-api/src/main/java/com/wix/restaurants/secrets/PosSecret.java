@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PosSecret implements Serializable, Cloneable {
@@ -23,9 +24,31 @@ public class PosSecret implements Serializable, Cloneable {
     }
 
     @Override
-    public Object clone() {
+    public PosSecret clone() {
         return new PosSecret(posId,
                 ((endpointKeys != null) ? new LinkedHashMap<>(endpointKeys) : null));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PosSecret posSecret = (PosSecret) o;
+        return Objects.equals(posId, posSecret.posId) &&
+                Objects.equals(endpointKeys, posSecret.endpointKeys);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(posId, endpointKeys);
+    }
+
+    @Override
+    public String toString() {
+        return "PosSecret{" +
+                "posId='" + posId + '\'' +
+                ", endpointKeys=" + endpointKeys +
+                '}';
     }
 
     /** POS to use for order submission (null means none). */

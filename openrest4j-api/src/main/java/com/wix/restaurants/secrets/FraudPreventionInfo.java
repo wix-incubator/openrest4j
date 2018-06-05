@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FraudPreventionInfo implements Serializable, Cloneable {
@@ -18,7 +19,7 @@ public class FraudPreventionInfo implements Serializable, Cloneable {
     public FraudPreventionInfo() {}
 
     @Override
-    public Object clone() {
+    public FraudPreventionInfo clone() {
         return new FraudPreventionInfo(enabled);
     }
 
@@ -26,15 +27,13 @@ public class FraudPreventionInfo implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         FraudPreventionInfo that = (FraudPreventionInfo) o;
-
-        return enabled != null ? enabled.equals(that.enabled) : that.enabled == null;
+        return Objects.equals(enabled, that.enabled);
     }
 
     @Override
     public int hashCode() {
-        return enabled != null ? enabled.hashCode() : 0;
+        return Objects.hash(enabled);
     }
 
     @Override
