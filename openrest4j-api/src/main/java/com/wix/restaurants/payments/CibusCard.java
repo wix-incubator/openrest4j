@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -22,6 +24,18 @@ public class CibusCard implements Serializable, Cloneable {
     @Override
     public CibusCard clone() {
         return new CibusCard(number, holderName);
+    }
+
+    public static List<CibusCard> clone(List<CibusCard> cards) {
+        if (cards != null) {
+            final List<CibusCard> cloned = new LinkedList<>();
+            for (CibusCard card : cards) {
+                cloned.add((card != null) ? card.clone() : null);
+            }
+            return cloned;
+        } else {
+            return null;
+        }
     }
 
     @Override

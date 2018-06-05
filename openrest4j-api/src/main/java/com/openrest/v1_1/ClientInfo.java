@@ -1,13 +1,14 @@
 package com.openrest.v1_1;
 
 
-import java.io.Serializable;
-import java.util.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.pay.smaug.client.model.CreditCardToken;
+import com.wix.restaurants.payments.CibusCard;
+
+import java.io.Serializable;
+import java.util.*;
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -16,12 +17,14 @@ public class ClientInfo implements Serializable, Cloneable {
     
 	public ClientInfo(List<ClientId> ids, List<Contact> contacts, List<Address> addresses,
                       List<ClubMember> memberships, List<CreditCardToken> cardTokens,
+                      List<CibusCard> cibus,
                       Map<String, String> properties, Map<String, String> comments) {
 		this.ids = ids;
     	this.contacts = contacts;
     	this.addresses = addresses;
     	this.memberships = memberships;
         this.cardTokens = cardTokens;
+        this.cibus = cibus;
     	this.properties = properties;
     	this.comments = comments;
     }
@@ -35,6 +38,7 @@ public class ClientInfo implements Serializable, Cloneable {
                 ClientId.clone(ids), Contact.clone(contacts), Address.clone(addresses),
                 ClubMember.clone(memberships),
                 ((cardTokens != null) ? new LinkedList<>(cardTokens) : null),
+    			CibusCard.clone(cibus),
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
     			((comments != null) ? new LinkedHashMap<>(comments) : null));
 	}
@@ -49,13 +53,14 @@ public class ClientInfo implements Serializable, Cloneable {
                 Objects.equals(addresses, that.addresses) &&
                 Objects.equals(memberships, that.memberships) &&
                 Objects.equals(cardTokens, that.cardTokens) &&
+                Objects.equals(cibus, that.cibus) &&
                 Objects.equals(properties, that.properties) &&
                 Objects.equals(comments, that.comments);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ids, contacts, addresses, memberships, cardTokens, properties, comments);
+        return Objects.hash(ids, contacts, addresses, memberships, cardTokens, cibus, properties, comments);
     }
 
     @Override
@@ -66,6 +71,7 @@ public class ClientInfo implements Serializable, Cloneable {
                 ", addresses=" + addresses +
                 ", memberships=" + memberships +
                 ", cardTokens=" + cardTokens +
+                ", cibus=" + cibus +
                 ", properties=" + properties +
                 ", comments=" + comments +
                 '}';
@@ -90,6 +96,10 @@ public class ClientInfo implements Serializable, Cloneable {
     /** Saved card tokens. */
     @JsonInclude(Include.NON_DEFAULT)
     public List<CreditCardToken> cardTokens = new LinkedList<>();
+
+    /** Saved Cibus cards. */
+    @JsonInclude(Include.NON_DEFAULT)
+    public List<CibusCard> cibus = new LinkedList<>();
 
     /**
      * Map of user-defined extended properties. Developers should use unique
