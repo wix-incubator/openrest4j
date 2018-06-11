@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.wix.restaurants.authorization.requests.GetRoleRequest;
 import com.wix.restaurants.authorization.requests.GetRolesRequest;
 import com.wix.restaurants.orders.requests.*;
 import com.wix.restaurants.reservations.requests.*;
@@ -76,7 +75,6 @@ import java.io.Serializable;
 	@Type(value = QueryCustomerReservationsRequest.class, name = QueryCustomerReservationsRequest.TYPE),
 	@Type(value = SetReservationStatusRequest.class, name = SetReservationStatusRequest.TYPE),
 	@Type(value = JoinChainRequest.class, name = JoinChainRequest.TYPE),
-	@Type(value = GetRoleRequest.class, name = GetRoleRequest.TYPE),
 	@Type(value = SendDashboardAppRequest.class, name = SendDashboardAppRequest.TYPE),
 	@Type(value = ChangeOrganizationLocaleRequest.class, name = ChangeOrganizationLocaleRequest.TYPE)
 })
