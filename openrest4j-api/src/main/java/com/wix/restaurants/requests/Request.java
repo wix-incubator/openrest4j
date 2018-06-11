@@ -31,7 +31,6 @@ import java.io.Serializable;
 	@Type(value = SetOrderPropertiesRequest.class, name = SetOrderPropertiesRequest.TYPE),
 	@Type(value = QueryClubMembersRequest.class, name = QueryClubMembersRequest.TYPE),
 	@Type(value = SaveCardsRequest.class, name = SaveCardsRequest.TYPE),
-	@Type(value = SetMenuRequest.class, name = SetMenuRequest.TYPE),
 	@Type(value = RegisterForPushNotificationsRequest.class, name = RegisterForPushNotificationsRequest.TYPE),
 	@Type(value = RegisterForPushRequest.class, name = RegisterForPushRequest.TYPE),
 	@Type(value = PushRequest.class, name = PushRequest.TYPE),
