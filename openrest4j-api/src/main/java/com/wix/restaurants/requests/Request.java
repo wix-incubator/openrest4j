@@ -27,7 +27,6 @@ import java.io.Serializable;
 	@Type(value = QueryOrdersRequest.class, name = QueryOrdersRequest.TYPE),
     @Type(value = QueryCustomerOrdersRequest.class, name = QueryCustomerOrdersRequest.TYPE),
 	@Type(value = GetOrderRequest.class, name = GetOrderRequest.TYPE),
-	@Type(value = NotifyOrderRequest.class, name = NotifyOrderRequest.TYPE),
 	@Type(value = SubmitOrderRequest.class, name = SubmitOrderRequest.TYPE),
 	@Type(value = SetOrderStatusRequest.class, name = SetOrderStatusRequest.TYPE),
 	@Type(value = SetOrderPropertiesRequest.class, name = SetOrderPropertiesRequest.TYPE),
