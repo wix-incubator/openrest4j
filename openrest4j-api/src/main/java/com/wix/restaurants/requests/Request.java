@@ -16,7 +16,6 @@ import java.io.Serializable;
 	    include = JsonTypeInfo.As.PROPERTY,  
 	    property = "type")  
 @JsonSubTypes({
-	@Type(value = GetOrganizationRequest.class, name = GetOrganizationRequest.TYPE),
 	@Type(value = GetOrganizationsRequest.class, name = GetOrganizationsRequest.TYPE),
 	@Type(value = SetOrganizationRequest.class, name = SetOrganizationRequest.TYPE),
 	@Type(value = DeleteOrganizationRequest.class, name = DeleteOrganizationRequest.TYPE),
