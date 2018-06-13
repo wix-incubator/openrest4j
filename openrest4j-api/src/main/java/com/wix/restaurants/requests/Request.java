@@ -17,13 +17,10 @@ import java.io.Serializable;
 	    property = "type")  
 @JsonSubTypes({
 	@Type(value = GetOrganizationsRequest.class, name = GetOrganizationsRequest.TYPE),
-	@Type(value = SetOrganizationRequest.class, name = SetOrganizationRequest.TYPE),
-	@Type(value = DeleteOrganizationRequest.class, name = DeleteOrganizationRequest.TYPE),
 	@Type(value = DeleteCustomerRequest.class, name = DeleteCustomerRequest.TYPE),
 	@Type(value = GetOrganizationFullRequest.class, name = GetOrganizationFullRequest.TYPE),
 	@Type(value = SearchRequest.class, name = SearchRequest.TYPE),
 	@Type(value = QueryOrdersRequest.class, name = QueryOrdersRequest.TYPE),
-    @Type(value = QueryCustomerOrdersRequest.class, name = QueryCustomerOrdersRequest.TYPE),
 	@Type(value = GetOrderRequest.class, name = GetOrderRequest.TYPE),
 	@Type(value = SubmitOrderRequest.class, name = SubmitOrderRequest.TYPE),
 	@Type(value = SetOrderStatusRequest.class, name = SetOrderStatusRequest.TYPE),
@@ -44,7 +41,6 @@ import java.io.Serializable;
 	@Type(value = SetClientInfoRequest.class, name = SetClientInfoRequest.TYPE),
 	@Type(value = SetClientInfoCommentsRequest.class, name = SetClientInfoCommentsRequest.TYPE),
 	@Type(value = BatchRequest.class, name = BatchRequest.TYPE),
-	@Type(value = ExtendAccessTokenRequest.class, name = ExtendAccessTokenRequest.TYPE),
 	@Type(value = SignUpRequest.class, name = SignUpRequest.TYPE),
 	@Type(value = SignedRequest.class, name = SignedRequest.TYPE),
 	@Type(value = ResetPasswordRequest.class, name = ResetPasswordRequest.TYPE),
@@ -70,11 +66,9 @@ import java.io.Serializable;
 	@Type(value = QueryUnhandledReservationsRequest.class, name = QueryUnhandledReservationsRequest.TYPE),
 	@Type(value = QueryModifiedReservationsRequest.class, name = QueryModifiedReservationsRequest.TYPE),
 	@Type(value = QueryReservationsRequest.class, name = QueryReservationsRequest.TYPE),
-	@Type(value = QueryCustomerReservationsRequest.class, name = QueryCustomerReservationsRequest.TYPE),
 	@Type(value = SetReservationStatusRequest.class, name = SetReservationStatusRequest.TYPE),
 	@Type(value = JoinChainRequest.class, name = JoinChainRequest.TYPE),
-	@Type(value = SendDashboardAppRequest.class, name = SendDashboardAppRequest.TYPE),
-	@Type(value = ChangeOrganizationLocaleRequest.class, name = ChangeOrganizationLocaleRequest.TYPE)
+	@Type(value = SendDashboardAppRequest.class, name = SendDashboardAppRequest.TYPE)
 })
 public abstract class Request implements Serializable {
     private static final long serialVersionUID = 1L;
