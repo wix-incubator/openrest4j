@@ -66,7 +66,6 @@ import java.io.Serializable;
 	@Type(value = QueryModifiedReservationsRequest.class, name = QueryModifiedReservationsRequest.TYPE),
 	@Type(value = QueryReservationsRequest.class, name = QueryReservationsRequest.TYPE),
 	@Type(value = SetReservationStatusRequest.class, name = SetReservationStatusRequest.TYPE),
-	@Type(value = JoinChainRequest.class, name = JoinChainRequest.TYPE),
 	@Type(value = SendDashboardAppRequest.class, name = SendDashboardAppRequest.TYPE)
 })
 public abstract class Request implements Serializable {
