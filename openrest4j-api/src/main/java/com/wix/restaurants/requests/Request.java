@@ -17,7 +17,6 @@ import java.io.Serializable;
 	    property = "type")  
 @JsonSubTypes({
 	@Type(value = GetOrganizationsRequest.class, name = GetOrganizationsRequest.TYPE),
-	@Type(value = DeleteCustomerRequest.class, name = DeleteCustomerRequest.TYPE),
 	@Type(value = GetOrganizationFullRequest.class, name = GetOrganizationFullRequest.TYPE),
 	@Type(value = SearchRequest.class, name = SearchRequest.TYPE),
 	@Type(value = QueryOrdersRequest.class, name = QueryOrdersRequest.TYPE),
