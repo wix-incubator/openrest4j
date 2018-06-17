@@ -19,7 +19,7 @@ public class SearchResult extends Restaurant {
     public SearchResult(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
                         String distributorId, String chainId, LocalizedString title,
                         LocalizedString description, Contact contact, Address address,
-                        Map<String, LocalizedString> messages, ColorScheme colorScheme,
+                        Map<String, LocalizedString> messages,
                         Availability openTimes, List<DispatchInfo> deliveryInfos,
                         String timezone, String currency, Locale locale, Set<Locale> locales,
                         Set<String> paymentTypes, Boolean multiPaymentDisabled, CreditcardsInfo creditcardsInfo,
@@ -30,7 +30,7 @@ public class SearchResult extends Restaurant {
                         Boolean closed, Set<Product> products,
                         Map<String, Double> features, Set<String> deliveryTypes, DispatchInfo deliveryInfo) {
     	super(id, alias, affiliateId, externalIds, created, modified, distributorId, chainId, title, description, contact,
-    			address, messages, colorScheme, openTimes, deliveryInfos,
+    			address, messages, openTimes, deliveryInfos,
     			timezone, currency, locale, locales, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations,
     			antiFraudDisabled, media, apps, seo, properties, compatibilities, availabilities, closed, products, features);
 
@@ -58,7 +58,6 @@ public class SearchResult extends Restaurant {
                 ((contact != null) ? contact.clone() : null),
                 ((address != null) ? address.clone() : null),
                 cloneMessages(messages),
-                ((colorScheme != null) ? (ColorScheme) colorScheme.clone() : null),
                 ((openTimes != null) ? openTimes.clone() : null),
                 DispatchInfo.clone(deliveryInfos),
                 timezone, currency, locale,

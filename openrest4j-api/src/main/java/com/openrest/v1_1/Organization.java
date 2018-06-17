@@ -27,7 +27,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
 
     protected Organization(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
                            LocalizedString title, LocalizedString description,
-                           Locale locale, Set<Locale> locales, Map<String, LocalizedString> messages, ColorScheme colorScheme,
+                           Locale locale, Set<Locale> locales, Map<String, LocalizedString> messages,
                            Contact contact, Address address, String timezone, String currency,
                            List<AppInfo> apps, Seo seo, Map<String, String> properties,
                            Map<String, String> compatibilities, Map<String, Availability> availabilities,
@@ -44,7 +44,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     	this.locale = locale;
     	this.locales = locales;
     	this.messages = messages;
-    	this.colorScheme = colorScheme;
     	this.contact = contact;
     	this.address = address;
     	this.timezone = timezone;
@@ -91,7 +90,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
                 Objects.equals(modified, that.modified) &&
                 Objects.equals(title, that.title) &&
                 Objects.equals(description, that.description) &&
-                Objects.equals(colorScheme, that.colorScheme) &&
                 Objects.equals(contact, that.contact) &&
                 Objects.equals(address, that.address) &&
                 Objects.equals(timezone, that.timezone) &&
@@ -111,7 +109,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, alias, affiliateId, externalIds, created, modified, title, description, colorScheme, contact, address, timezone, currency, locale, locales, messages, apps, seo, properties, compatibilities, availabilities, media, closed, products);
+        return Objects.hash(id, alias, affiliateId, externalIds, created, modified, title, description, contact, address, timezone, currency, locale, locales, messages, apps, seo, properties, compatibilities, availabilities, media, closed, products);
     }
 
     /** The organization's unique id. */
@@ -156,15 +154,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     @JsonInclude(Include.NON_DEFAULT)
     public LocalizedString description = LocalizedString.empty;
     
-    /**
-     * The color scheme.
-     *
-     * Scheduled for deprecation on 2017-12-01.
-     */
-    @Deprecated
-    @JsonInclude(Include.NON_NULL)
-    public ColorScheme colorScheme;
-
     /** The organization's contact. */
     @JsonInclude(Include.NON_NULL)
     public Contact contact;
@@ -265,7 +254,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
                 ", modified=" + modified +
                 ", title=" + title +
                 ", description=" + description +
-                ", colorScheme=" + colorScheme +
                 ", contact=" + contact +
                 ", address=" + address +
                 ", timezone='" + timezone + '\'' +

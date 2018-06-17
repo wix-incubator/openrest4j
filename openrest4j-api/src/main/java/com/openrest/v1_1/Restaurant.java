@@ -60,7 +60,7 @@ public class Restaurant extends Organization {
     public Restaurant(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
                       String distributorId, String chainId, LocalizedString title,
                       LocalizedString description, Contact contact, Address address,
-                      Map<String, LocalizedString> messages, ColorScheme colorScheme,
+                      Map<String, LocalizedString> messages,
                       Availability openTimes, List<DispatchInfo> deliveryInfos,
                       String timezone, String currency, Locale locale, Set<Locale> locales,
                       Set<String> paymentTypes, Boolean multiPaymentDisabled, CreditcardsInfo creditcardsInfo,
@@ -69,7 +69,7 @@ public class Restaurant extends Organization {
                       List<AppInfo> apps, Seo seo, Map<String, String> properties, Map<String, String> compatibilities,
                       Map<String, Availability> availabilities,
                       Boolean closed, Set<Product> products, Map<String, Double> features) {
-    	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
+    	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages,
     			contact, address, timezone, currency, apps, seo, properties, compatibilities,
                 availabilities, media, closed, products);
         
@@ -108,7 +108,6 @@ public class Restaurant extends Organization {
     			((contact != null) ? contact.clone() : null),
     			((address != null) ? address.clone() : null),
     			cloneMessages(messages),
-    			((colorScheme != null) ? (ColorScheme) colorScheme.clone() : null),
     			((openTimes != null) ? openTimes.clone() : null),
                 DispatchInfo.clone(deliveryInfos),
     			timezone, currency, locale,
@@ -153,7 +152,6 @@ public class Restaurant extends Organization {
                 ", modified=" + modified +
                 ", title=" + title +
                 ", description=" + description +
-                ", colorScheme=" + colorScheme +
                 ", contact=" + contact +
                 ", address=" + address +
                 ", timezone='" + timezone + '\'' +

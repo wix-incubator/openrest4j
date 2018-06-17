@@ -20,13 +20,13 @@ public class Distributor extends Organization {
     
     public Distributor(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
 					   LocalizedString title, LocalizedString description,
-					   Locale locale, Set<Locale> locales, Map<String, LocalizedString> messages, ColorScheme colorScheme,
+					   Locale locale, Set<Locale> locales, Map<String, LocalizedString> messages,
 					   Contact contact, Address address, String timezone, String currency,
 					   List<AppInfo> apps, Seo seo,
 					   Map<String, String> properties, Map<String, String> compatibilities,
 					   Map<String, Availability> availabilities, String facebookAppId, String tld,
 					   Map<String, String> media, Boolean closed, Set<Product> products) {
-    	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
+    	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages,
     			contact, address, timezone, currency, apps, seo, properties,
 				compatibilities, availabilities, media, closed, products);
     	
@@ -50,7 +50,6 @@ public class Distributor extends Organization {
 				locale,
 				((locales != null) ? new LinkedHashSet<>(locales) : null),
 				cloneMessages(messages),
-				((colorScheme != null) ? (ColorScheme)colorScheme.clone() : null),
 				((contact != null) ? contact.clone() : null),
 				((address != null) ? address.clone() : null),
 				timezone, currency, AppInfo.clone(apps),
