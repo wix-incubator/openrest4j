@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.openrest.v1_1.Filter;
-import com.openrest.v1_1.LatLng;
 
 import java.util.Set;
 
@@ -28,21 +27,6 @@ public class SearchRequest extends Request {
     
     @JsonInclude(Include.NON_DEFAULT)
     public Filter filter = new Filter();
-    
-    /** Use filter.distributorId */
-    @Deprecated
-    @JsonInclude(Include.NON_NULL)
-    public String distributorId;
-
-    /** Use filter.chainId */
-    @Deprecated
-    @JsonInclude(Include.NON_NULL)
-    public String chainId;
-    
-    /** Use filter.latLng */
-    @Deprecated
-    @JsonInclude(Include.NON_NULL)
-    public LatLng latLng;
     
     @JsonInclude(Include.NON_NULL)
     public Set<String> features;
