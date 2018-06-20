@@ -8,7 +8,6 @@ import com.wix.restaurants.orders.requests.QueryOrdersRequest;
 import com.wix.restaurants.orders.requests.SetOrderStatusRequest;
 import com.wix.restaurants.orders.requests.SubmitOrderRequest;
 import com.wix.restaurants.reservations.requests.QueryModifiedReservationsRequest;
-import com.wix.restaurants.reservations.requests.QueryReservationsRequest;
 import com.wix.restaurants.reservations.requests.SetReservationStatusRequest;
 
 import java.io.Serializable;
@@ -60,7 +59,6 @@ import java.io.Serializable;
 	@Type(value = SetGroupStaffRequest.class, name = SetGroupStaffRequest.TYPE),
 	@Type(value = AuthenticateRequest.class, name = AuthenticateRequest.TYPE),
 	@Type(value = QueryModifiedReservationsRequest.class, name = QueryModifiedReservationsRequest.TYPE),
-	@Type(value = QueryReservationsRequest.class, name = QueryReservationsRequest.TYPE),
 	@Type(value = SetReservationStatusRequest.class, name = SetReservationStatusRequest.TYPE),
 	@Type(value = SendDashboardAppRequest.class, name = SendDashboardAppRequest.TYPE)
 })
