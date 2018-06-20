@@ -35,7 +35,6 @@ import java.io.Serializable;
 	@Type(value = GetAppCredentialsRequest.class, name = GetAppCredentialsRequest.TYPE),
 	@Type(value = SetAppCredentialsRequest.class, name = SetAppCredentialsRequest.TYPE),
 	@Type(value = SetAppMappingRequest.class, name = SetAppMappingRequest.TYPE),
-	@Type(value = SetWixAppMappingRequest.class, name = SetWixAppMappingRequest.TYPE),
 	@Type(value = SetFacebookAppMappingRequest.class, name = SetFacebookAppMappingRequest.TYPE),
 	@Type(value = GetAppMappedObjectRequest.class, name = GetAppMappedObjectRequest.TYPE),
 	@Type(value = GetClientInfoRequest.class, name = GetClientInfoRequest.TYPE),
