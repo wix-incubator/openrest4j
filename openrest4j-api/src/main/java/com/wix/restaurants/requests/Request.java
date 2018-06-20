@@ -15,11 +15,10 @@ import java.io.Serializable;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(
-		use = JsonTypeInfo.Id.NAME,  
-	    include = JsonTypeInfo.As.PROPERTY,  
-	    property = "type")  
+		use = JsonTypeInfo.Id.NAME,
+	    include = JsonTypeInfo.As.PROPERTY,
+	    property = "type")
 @JsonSubTypes({
-	@Type(value = GetOrganizationsRequest.class, name = GetOrganizationsRequest.TYPE),
 	@Type(value = GetOrganizationFullRequest.class, name = GetOrganizationFullRequest.TYPE),
 	@Type(value = SearchRequest.class, name = SearchRequest.TYPE),
 	@Type(value = QueryOrdersRequest.class, name = QueryOrdersRequest.TYPE),
