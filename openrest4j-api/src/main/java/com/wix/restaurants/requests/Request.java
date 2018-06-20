@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.wix.restaurants.authorization.requests.GetRolesRequest;
 import com.wix.restaurants.orders.requests.QueryOrdersRequest;
 import com.wix.restaurants.orders.requests.SetOrderPropertiesRequest;
 import com.wix.restaurants.orders.requests.SetOrderStatusRequest;
@@ -40,7 +39,6 @@ import java.io.Serializable;
 	@Type(value = SetWixAppMappingRequest.class, name = SetWixAppMappingRequest.TYPE),
 	@Type(value = SetFacebookAppMappingRequest.class, name = SetFacebookAppMappingRequest.TYPE),
 	@Type(value = GetAppMappedObjectRequest.class, name = GetAppMappedObjectRequest.TYPE),
-	@Type(value = GetRolesRequest.class, name = GetRolesRequest.TYPE),
 	@Type(value = GetClientInfoRequest.class, name = GetClientInfoRequest.TYPE),
 	@Type(value = SetClientInfoRequest.class, name = SetClientInfoRequest.TYPE),
 	@Type(value = SetClientInfoCommentsRequest.class, name = SetClientInfoCommentsRequest.TYPE),

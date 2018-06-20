@@ -14,8 +14,7 @@ public class RolesResponse implements Serializable {
     /** Default constructor for JSON deserialization. */
 	public RolesResponse() {}
 	
-    public RolesResponse(String userId, List<Role> roles) {
-    	this.userId = userId;
+    public RolesResponse(List<Role> roles) {
     	this.roles = roles;
     }
 
@@ -24,25 +23,20 @@ public class RolesResponse implements Serializable {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		RolesResponse that = (RolesResponse) o;
-		return Objects.equals(userId, that.userId) &&
-				Objects.equals(roles, that.roles);
+		return Objects.equals(roles, that.roles);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(userId, roles);
+		return Objects.hash(roles);
 	}
 
 	@Override
 	public String toString() {
 		return "RolesResponse{" +
-				"userId='" + userId + '\'' +
-				", roles=" + roles +
+				"roles=" + roles +
 				'}';
 	}
-
-    @JsonInclude(Include.NON_NULL)
-	public String userId;
 
     @JsonInclude(Include.NON_DEFAULT)
 	public List<Role> roles = new LinkedList<>();
