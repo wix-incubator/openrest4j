@@ -1,18 +1,17 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import java.io.Serializable;
+
 /** Base class for all OpenRest objects. */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(
-		use = JsonTypeInfo.Id.NAME,  
-	    include = JsonTypeInfo.As.PROPERTY,  
-	    property = "type")  
+		use = JsonTypeInfo.Id.NAME,
+	    property = "type")
 @JsonSubTypes({
 	@Type(value = Restaurant.class, name = Restaurant.TYPE),
 	@Type(value = Chain.class, name = Chain.TYPE),

@@ -16,9 +16,8 @@ import java.util.Map;
 /** A satisfiable condition. */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(
-		use = JsonTypeInfo.Id.NAME,  
-	    include = JsonTypeInfo.As.PROPERTY,  
-	    property = "type")  
+		use = JsonTypeInfo.Id.NAME,
+	    property = "type")
 @JsonSubTypes({
 	@Type(value = TrueCondition.class, name = TrueCondition.TYPE),
 	@Type(value = FalseCondition.class, name = FalseCondition.TYPE),

@@ -1,11 +1,5 @@
 package com.openrest.olo.charges.operators;
 
-import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -13,12 +7,17 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
 /** A calculation for determining charge amounts. */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(
 		use = JsonTypeInfo.Id.NAME,  
-	    include = JsonTypeInfo.As.PROPERTY,  
-	    property = "type")  
+	    property = "type")
 @JsonSubTypes({
 	@Type(value = ValueOperator.class, name = ValueOperator.TYPE),
 	@Type(value = CountItemsOperator.class, name = CountItemsOperator.TYPE),

@@ -14,9 +14,8 @@ import java.util.*;
 /** A group of users, defined by some rule. */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(
-		use = JsonTypeInfo.Id.NAME,  
-	    include = JsonTypeInfo.As.PROPERTY,  
-	    property = "type")  
+		use = JsonTypeInfo.Id.NAME,
+	    property = "type")
 @JsonSubTypes({
 	@Type(value = CodeGroup.class, name = CodeGroup.TYPE),
 	@Type(value = MembersGroup.class, name = MembersGroup.TYPE)

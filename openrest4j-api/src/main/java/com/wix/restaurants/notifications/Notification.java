@@ -21,9 +21,8 @@ import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(
-		use = JsonTypeInfo.Id.NAME,  
-	    include = JsonTypeInfo.As.PROPERTY,  
-	    property = "type")  
+		use = JsonTypeInfo.Id.NAME,
+	    property = "type")
 @JsonSubTypes({
 	@Type(value = NewOrderNotification.class, name = NewOrderNotification.TYPE),
 	@Type(value = SubmittedOrderNotification.class, name = SubmittedOrderNotification.TYPE),
