@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.wix.restaurants.orders.requests.QueryOrdersRequest;
-import com.wix.restaurants.orders.requests.SetOrderPropertiesRequest;
 import com.wix.restaurants.orders.requests.SetOrderStatusRequest;
 import com.wix.restaurants.orders.requests.SubmitOrderRequest;
 import com.wix.restaurants.reservations.requests.QueryModifiedReservationsRequest;
@@ -26,7 +25,6 @@ import java.io.Serializable;
 	@Type(value = QueryOrdersRequest.class, name = QueryOrdersRequest.TYPE),
 	@Type(value = SubmitOrderRequest.class, name = SubmitOrderRequest.TYPE),
 	@Type(value = SetOrderStatusRequest.class, name = SetOrderStatusRequest.TYPE),
-	@Type(value = SetOrderPropertiesRequest.class, name = SetOrderPropertiesRequest.TYPE),
 	@Type(value = QueryClubMembersRequest.class, name = QueryClubMembersRequest.TYPE),
 	@Type(value = SaveCardsRequest.class, name = SaveCardsRequest.TYPE),
 	@Type(value = RegisterForPushNotificationsRequest.class, name = RegisterForPushNotificationsRequest.TYPE),
