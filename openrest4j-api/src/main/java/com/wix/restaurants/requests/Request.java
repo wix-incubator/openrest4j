@@ -28,7 +28,6 @@ import java.io.Serializable;
 	@Type(value = SetFacebookAppMappingRequest.class, name = SetFacebookAppMappingRequest.TYPE),
 	@Type(value = GetAppMappedObjectRequest.class, name = GetAppMappedObjectRequest.TYPE),
 	@Type(value = GetClientInfoRequest.class, name = GetClientInfoRequest.TYPE),
-	@Type(value = SetClientInfoRequest.class, name = SetClientInfoRequest.TYPE),
 	@Type(value = SetClientInfoCommentsRequest.class, name = SetClientInfoCommentsRequest.TYPE),
 	@Type(value = BatchRequest.class, name = BatchRequest.TYPE),
 	@Type(value = SignUpRequest.class, name = SignUpRequest.TYPE),
