@@ -55,8 +55,7 @@ import java.io.Serializable;
 	@Type(value = LeaveGroupRequest.class, name = LeaveGroupRequest.TYPE),
 	@Type(value = GetGroupStaffRequest.class, name = GetGroupStaffRequest.TYPE),
 	@Type(value = SetGroupStaffRequest.class, name = SetGroupStaffRequest.TYPE),
-	@Type(value = AuthenticateRequest.class, name = AuthenticateRequest.TYPE),
-	@Type(value = SendDashboardAppRequest.class, name = SendDashboardAppRequest.TYPE)
+	@Type(value = AuthenticateRequest.class, name = AuthenticateRequest.TYPE)
 })
 public abstract class Request implements Serializable {
     private static final long serialVersionUID = 1L;
