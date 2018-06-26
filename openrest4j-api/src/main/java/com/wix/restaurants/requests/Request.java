@@ -29,7 +29,6 @@ import java.io.Serializable;
 	@Type(value = GetAppMappedObjectRequest.class, name = GetAppMappedObjectRequest.TYPE),
 	@Type(value = GetClientInfoRequest.class, name = GetClientInfoRequest.TYPE),
 	@Type(value = SetClientInfoCommentsRequest.class, name = SetClientInfoCommentsRequest.TYPE),
-	@Type(value = BatchRequest.class, name = BatchRequest.TYPE),
 	@Type(value = SignUpRequest.class, name = SignUpRequest.TYPE),
 	@Type(value = SignedRequest.class, name = SignedRequest.TYPE),
 	@Type(value = ResetPasswordRequest.class, name = ResetPasswordRequest.TYPE),
