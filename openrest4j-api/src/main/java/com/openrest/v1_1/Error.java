@@ -10,12 +10,6 @@ public class Error {
     /** Empty managers list is not allowed. */
     public static final String ERROR_EMPTY_MANAGERS_LIST = "empty_manager_list";
     
-    /** Credit card expired. */
-    public static final String ERROR_CC_EXPIRED = "cc_expired";
-    
-    /** Credit card number is invalid. */
-    public static final String ERROR_INVALID_CC_NUMBER = "invalid_cc_number";
-    
     /** Credit card was rejected. */
     public static final String ERROR_CC_REJECTED = "cc_rejected";
     
