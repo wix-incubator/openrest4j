@@ -16,9 +16,6 @@ public class Error {
     /** Restaurant is currently unavailable, e.g. closed down for the day. */
     public static final String ERROR_UNAVAILABLE = "unavailable";
     
-    /** Delivery method is currently unavailable. */
-    public static final String ERROR_DELIVERY_UNAVAILABLE = "delivery_unavailable";
-    
     /** Item is currently unavailable, e.g. attempt to order a lunch menu item at dinner. */
     public static final String ERROR_ITEM_UNAVAILABLE = "item_unavailable";
     
