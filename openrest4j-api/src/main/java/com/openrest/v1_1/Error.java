@@ -4,9 +4,6 @@ public class Error {
 	/** API used in an unexpected way. Nothing the user can do. */
     public static final String ERROR_INVALID_DATA = "invalid_data";
     
-    /** Empty admin list is not allowed. */
-    public static final String ERROR_EMPTY_ADMIN_LIST = "empty_admin_list";
-    
     /** Credit card was rejected. */
     public static final String ERROR_CC_REJECTED = "cc_rejected";
     
