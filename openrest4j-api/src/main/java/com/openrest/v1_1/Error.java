@@ -22,12 +22,6 @@ public class Error {
     /** User entered illegal date (e.g. 35/5/2010). */
     public static final String ERROR_INVALID_DATE = "invalid_date";
     
-	/**
-	 * Order referred to invalid saved payment, e.g. wrong holderId or
-	 * non-logged user. User should choose a different payment method.
-	 */
-    public static final String ERROR_INVALID_SAVED_PAYMENT = "invalid_saved_payment";
-    
     /** Restaurant is currently unavailable, e.g. closed down for the day. */
     public static final String ERROR_UNAVAILABLE = "unavailable";
     
