@@ -13,12 +13,6 @@ public class Error {
     /** Restaurant is currently unavailable, e.g. closed down for the day. */
     public static final String ERROR_UNAVAILABLE = "unavailable";
     
-    /** Item is currently unavailable, e.g. attempt to order a lunch menu item at dinner. */
-    public static final String ERROR_ITEM_UNAVAILABLE = "item_unavailable";
-    
-    /** Charge is currently unavailable. */
-    public static final String ERROR_CHARGE_UNAVAILABLE = "charge_unavailable";
-    
     /** Address is outside of delivery area. User can try to enter a different address */
     public static final String ERROR_ADDRESS_NOT_IN_RANGE = "address_not_in_range";
     
