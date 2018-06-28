@@ -28,12 +28,6 @@ public class Error {
 	 */
     public static final String ERROR_INVALID_SAVED_PAYMENT = "invalid_saved_payment";
     
-    /**
-     * Order cannot be submitted, probably due to a very recent menu update.
-     * Probably best thing to do is to forget the order (cookie?) and refresh the page.
-     */
-    public static final String ERROR_CANNOT_SUBMIT_ORDER = "cannot_submit_order";
-    
     /** Restaurant is currently unavailable, e.g. closed down for the day. */
     public static final String ERROR_UNAVAILABLE = "unavailable";
     
@@ -82,14 +76,8 @@ public class Error {
      */
     public static final String ERROR_PAYMENT_METHOD_UNAVAILABLE = "payment_method_unavailable";
     
-    /** Multiple users attempted to concurrently change a resource. */
-    public static final String ERROR_CONFLICT = "conflict";
-    
     /** Item is out-of-stock (for managed-inventory items). */
     public static final String ERROR_OUT_OF_STOCK = "out_of_stock";
-
-    /** The request attempted to change immutable data. */
-    public static final String ERROR_IMMUTABLE = "immutable";
 
 	private Error() {}
 }
