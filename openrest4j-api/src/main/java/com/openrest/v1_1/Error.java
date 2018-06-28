@@ -13,9 +13,6 @@ public class Error {
     /** Credit card was rejected. */
     public static final String ERROR_CC_REJECTED = "cc_rejected";
     
-    /** User entered illegal date (e.g. 35/5/2010). */
-    public static final String ERROR_INVALID_DATE = "invalid_date";
-    
     /** Restaurant is currently unavailable, e.g. closed down for the day. */
     public static final String ERROR_UNAVAILABLE = "unavailable";
     
@@ -37,26 +34,14 @@ public class Error {
      */
     public static final String ERROR_NOT_FOUND = "not_found";
     
-    /** Uploaded file is too big. */
-    public static final String ERROR_FILE_SIZE_EXCEEDS_LIMIT = "file_size_exceeds_limit";
-    
     /** User tried to add a resource with an id identical to existing resource. */
     public static final String ERROR_ALREADY_EXISTS = "already_exists";
     
     /** Something really bad happened (e.g. bug or hardware failure). Please try again later. */
     public static final String ERROR_INTERNAL = "internal";
     
-    /** Address could not be resolved. User can try entering a different address. */
-    public static final String ERROR_UNKNOWN_ADDRESS = "unknown_address";
-    
     /** User has no permission to perform the action. Non-clients should probably refresh the page. */
     public static final String ERROR_NO_PERMISSION = "no_permission";
-    
-    /**
-     * User tried to delete a resource (e.g. tag) that is still referenced by other resources.
-     * Delete all references to that resource, and try again.
-     */
-    public static final String ERROR_CANNOT_DELETE_REFERENCED = "cannot_delete_referenced";
     
     /**
      * User tried to pay using a method that isn't allowed by the restaurant (e.g. credit-card in cash-only restaurant).
