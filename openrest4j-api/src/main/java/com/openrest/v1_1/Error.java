@@ -7,9 +7,6 @@ public class Error {
     /** Empty admin list is not allowed. */
     public static final String ERROR_EMPTY_ADMIN_LIST = "empty_admin_list";
     
-    /** Empty managers list is not allowed. */
-    public static final String ERROR_EMPTY_MANAGERS_LIST = "empty_manager_list";
-    
     /** Credit card was rejected. */
     public static final String ERROR_CC_REJECTED = "cc_rejected";
     
