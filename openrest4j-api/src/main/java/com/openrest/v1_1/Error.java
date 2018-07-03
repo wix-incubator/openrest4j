@@ -25,12 +25,6 @@ public class Error {
     /** User has no permission to perform the action. Non-clients should probably refresh the page. */
     public static final String ERROR_NO_PERMISSION = "no_permission";
     
-    /**
-     * User tried to pay using a method that isn't allowed by the restaurant (e.g. credit-card in cash-only restaurant).
-     * Should probably reload the page and try again.
-     */
-    public static final String ERROR_PAYMENT_METHOD_UNAVAILABLE = "payment_method_unavailable";
-    
     /** Item is out-of-stock (for managed-inventory items). */
     public static final String ERROR_OUT_OF_STOCK = "out_of_stock";
 
