@@ -4,9 +4,6 @@ public class Error {
 	/** API used in an unexpected way. Nothing the user can do. */
     public static final String ERROR_INVALID_DATA = "invalid_data";
     
-    /** Credit card was rejected. */
-    public static final String ERROR_CC_REJECTED = "cc_rejected";
-    
     /**
      * Resource not found, probably due to a very recent menu update.
      * User should probably refresh the page.
