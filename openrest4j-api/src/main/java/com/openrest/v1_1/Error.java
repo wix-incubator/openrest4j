@@ -7,9 +7,6 @@ public class Error {
     /** Credit card was rejected. */
     public static final String ERROR_CC_REJECTED = "cc_rejected";
     
-    /** Address is outside of delivery area. User can try to enter a different address */
-    public static final String ERROR_ADDRESS_NOT_IN_RANGE = "address_not_in_range";
-    
     /**
      * Resource not found, probably due to a very recent menu update.
      * User should probably refresh the page.
