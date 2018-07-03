@@ -7,9 +7,6 @@ public class Error {
     /** Credit card was rejected. */
     public static final String ERROR_CC_REJECTED = "cc_rejected";
     
-    /** Restaurant is currently unavailable, e.g. closed down for the day. */
-    public static final String ERROR_UNAVAILABLE = "unavailable";
-    
     /** Address is outside of delivery area. User can try to enter a different address */
     public static final String ERROR_ADDRESS_NOT_IN_RANGE = "address_not_in_range";
     
