@@ -34,7 +34,7 @@ public class DeliveryDispatchInfo extends DispatchInfo {
         return new DeliveryDispatchInfo(
                 ((area != null) ? area.clone() : null),
                 minOrderPrice, charge, delayMins, inactive,
-                ((availability != null) ? (Availability) availability.clone() : null),
+                ((availability != null) ? availability.clone() : null),
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
     }
 

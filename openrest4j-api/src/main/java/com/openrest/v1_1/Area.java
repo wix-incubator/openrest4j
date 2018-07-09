@@ -29,14 +29,14 @@ public class Area implements Serializable, Cloneable {
     	if (polygon != null) {
     		clonedPolygon = new ArrayList<>(polygon.size());
     		for (LatLng latLng : polygon) {
-    			clonedPolygon.add((LatLng) latLng.clone());
+    			clonedPolygon.add(latLng.clone());
     		}
     	} else {
     		clonedPolygon = null;
     	}
     	
     	return new Area(
-    			((title != null) ? (LocalizedString) title.clone()  : null),
+    			((title != null) ? title.clone()  : null),
     			clonedPolygon);
 	}
     
