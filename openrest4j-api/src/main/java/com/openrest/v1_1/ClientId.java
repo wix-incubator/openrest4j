@@ -55,6 +55,16 @@ public class ClientId implements Serializable, Cloneable {
 		return Objects.hash(ns, id, uid, inferred);
 	}
 
+    @Override
+    public String toString() {
+        return "ClientId{" +
+                "ns='" + ns + '\'' +
+                ", id='" + id + '\'' +
+                ", uid='" + uid + '\'' +
+                ", inferred=" + inferred +
+                '}';
+    }
+
     /**
      * The unique id's namespace.
      * @see com.wix.restaurants.ClientNamespaces
