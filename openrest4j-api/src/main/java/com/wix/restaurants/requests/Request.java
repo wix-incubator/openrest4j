@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.wix.restaurants.orders.requests.QueryOrdersRequest;
 import com.wix.restaurants.orders.requests.SetOrderStatusRequest;
 
 import java.io.Serializable;
@@ -14,9 +13,7 @@ import java.io.Serializable;
 		use = JsonTypeInfo.Id.NAME,
 	    property = "type")
 @JsonSubTypes({
-	@Type(value = GetOrganizationFullRequest.class, name = GetOrganizationFullRequest.TYPE),
 	@Type(value = SearchRequest.class, name = SearchRequest.TYPE),
-	@Type(value = QueryOrdersRequest.class, name = QueryOrdersRequest.TYPE),
 	@Type(value = SetOrderStatusRequest.class, name = SetOrderStatusRequest.TYPE),
 	@Type(value = QueryClubMembersRequest.class, name = QueryClubMembersRequest.TYPE),
 	@Type(value = RegisterForPushNotificationsRequest.class, name = RegisterForPushNotificationsRequest.TYPE),
