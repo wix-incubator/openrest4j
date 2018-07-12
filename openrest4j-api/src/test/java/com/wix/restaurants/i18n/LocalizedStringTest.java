@@ -21,7 +21,7 @@ public class LocalizedStringTest {
         final LocalizedString parsed = Json.parse(json, LocalizedString.class);
         assertEquals(lstr, parsed);
     }
- 
+
     @Test
     public void testJsonDeserializationToBasicTypes() {
         final Locale en_US = Locale.fromJavaLocale(java.util.Locale.US);
