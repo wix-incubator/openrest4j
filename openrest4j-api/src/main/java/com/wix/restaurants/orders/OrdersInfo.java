@@ -32,7 +32,7 @@ public class OrdersInfo implements Serializable, Cloneable {
     @Override
     public OrdersInfo clone() {
         return new OrdersInfo(
-                (availability != null) ? (Availability) availability.clone() : null,
+                (availability != null) ? availability.clone() : null,
                 (asap != null) ? asap.clone() : null,
                 (future != null) ? future.clone() : null,
                 maxCommentLength,
