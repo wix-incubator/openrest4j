@@ -44,6 +44,14 @@ public class Notifications implements Serializable, Cloneable {
         return Objects.hash(modified, notifications);
     }
 
+    @Override
+    public String toString() {
+        return "Notifications{" +
+                "modified=" + modified +
+                ", notifications=" + notifications +
+                '}';
+    }
+
     /** The notifications' last modification timestamp. */
     @JsonInclude(Include.NON_NULL)
     public Date modified;
