@@ -23,11 +23,11 @@ public class Chain extends Organization {
 				 Locale locale, Set<Locale> locales, Map<String, LocalizedString> messages,
 				 Contact contact, Address address, String timezone, String currency,
 				 List<AppInfo> apps, Seo seo, Map<String, String> properties,
-				 Map<String, String> compatibilities, Map<String, Availability> availabilities,
+				 Map<String, Availability> availabilities,
 				 Map<String, String> media, Boolean closed, Set<Product> products) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages,
     			contact, address, timezone, currency, apps, seo, properties,
-				compatibilities, availabilities, media, closed, products);
+				availabilities, media, closed, products);
     	
     	this.distributorId = distributorId;
     }
@@ -54,7 +54,6 @@ public class Chain extends Organization {
     			timezone, currency, AppInfo.clone(apps),
     			((seo != null) ? (Seo) seo.clone() : null),
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
-    			((compatibilities != null) ? new LinkedHashMap<>(compatibilities) : null),
 				Availability.clone(availabilities),
 				((media != null) ? new LinkedHashMap<>(media) : null),
     			closed, Product.clone(products));

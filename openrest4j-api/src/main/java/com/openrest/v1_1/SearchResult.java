@@ -26,13 +26,13 @@ public class SearchResult extends Restaurant {
                         DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations,
                         Boolean antiFraudDisabled, Map<String, String> media,
                         List<AppInfo> apps, Seo seo, Map<String, String> properties,
-                        Map<String, String> compatibilities, Map<String, Availability> availabilities,
+                        Map<String, Availability> availabilities,
                         Boolean closed, Set<Product> products,
                         Map<String, Double> features, Set<String> deliveryTypes, DispatchInfo deliveryInfo) {
     	super(id, alias, affiliateId, externalIds, created, modified, distributorId, chainId, title, description, contact,
     			address, messages, openTimes, deliveryInfos,
     			timezone, currency, locale, locales, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations,
-    			antiFraudDisabled, media, apps, seo, properties, compatibilities, availabilities, closed, products, features);
+    			antiFraudDisabled, media, apps, seo, properties, availabilities, closed, products, features);
 
     	this.deliveryTypes = deliveryTypes;
     	this.deliveryInfo = deliveryInfo;
@@ -73,7 +73,6 @@ public class SearchResult extends Restaurant {
                 AppInfo.clone(apps),
                 ((seo != null) ? (Seo) seo.clone() : null),
                 ((properties != null) ? new LinkedHashMap<>(properties) : null),
-                ((compatibilities != null) ? new LinkedHashMap<>(compatibilities) : null),
                 Availability.clone(availabilities),
                 closed, Product.clone(products),
                 ((features != null) ? new LinkedHashMap<>(features) : null),

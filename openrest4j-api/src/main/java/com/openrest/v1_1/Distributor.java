@@ -23,12 +23,12 @@ public class Distributor extends Organization {
 					   Locale locale, Set<Locale> locales, Map<String, LocalizedString> messages,
 					   Contact contact, Address address, String timezone, String currency,
 					   List<AppInfo> apps, Seo seo,
-					   Map<String, String> properties, Map<String, String> compatibilities,
+					   Map<String, String> properties,
 					   Map<String, Availability> availabilities, String facebookAppId, String tld,
 					   Map<String, String> media, Boolean closed, Set<Product> products) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages,
     			contact, address, timezone, currency, apps, seo, properties,
-				compatibilities, availabilities, media, closed, products);
+				availabilities, media, closed, products);
     	
     	this.facebookAppId = facebookAppId;
     	this.tld = tld;
@@ -55,7 +55,6 @@ public class Distributor extends Organization {
 				timezone, currency, AppInfo.clone(apps),
 				((seo != null) ? (Seo) seo.clone() : null),
 				((properties != null) ? new LinkedHashMap<>(properties) : null),
-				((compatibilities != null) ? new LinkedHashMap<>(compatibilities) : null),
 				Availability.clone(availabilities),
 				facebookAppId, tld,
 				((media != null) ? new LinkedHashMap<>(media) : null),
