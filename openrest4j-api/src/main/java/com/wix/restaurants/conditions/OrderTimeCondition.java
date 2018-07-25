@@ -37,7 +37,7 @@ public class OrderTimeCondition extends Condition {
     @Override
     protected OrderTimeCondition cloneImpl() {
         return new OrderTimeCondition(
-                ((availability != null) ? (Availability) availability.clone() : null),
+                ((availability != null) ? availability.clone() : null),
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
     }
 
