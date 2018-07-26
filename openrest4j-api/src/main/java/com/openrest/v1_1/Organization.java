@@ -29,7 +29,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
                            LocalizedString title, LocalizedString description,
                            Locale locale, Set<Locale> locales, Map<String, LocalizedString> messages,
                            Contact contact, Address address, String timezone, String currency,
-                           List<AppInfo> apps, Seo seo, Map<String, String> properties,
+                           List<AppInfo> apps, Map<String, String> properties,
                            Map<String, Availability> availabilities,
                            Map<String, String> media, Boolean closed, Set<Product> products) {
 
@@ -49,7 +49,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     	this.timezone = timezone;
     	this.currency = currency;
     	this.apps = apps;
-    	this.seo = seo;
     	this.properties = properties;
         this.availabilities = availabilities;
     	this.media = media;
@@ -97,7 +96,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
                 Objects.equals(locales, that.locales) &&
                 Objects.equals(messages, that.messages) &&
                 Objects.equals(apps, that.apps) &&
-                Objects.equals(seo, that.seo) &&
                 Objects.equals(properties, that.properties) &&
                 Objects.equals(availabilities, that.availabilities) &&
                 Objects.equals(media, that.media) &&
@@ -107,7 +105,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, alias, affiliateId, externalIds, created, modified, title, description, contact, address, timezone, currency, locale, locales, messages, apps, seo, properties, availabilities, media, closed, products);
+        return Objects.hash(id, alias, affiliateId, externalIds, created, modified, title, description, contact, address, timezone, currency, locale, locales, messages, apps, properties, availabilities, media, closed, products);
     }
 
     /** The organization's unique id. */
@@ -192,10 +190,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     @JsonInclude(Include.NON_DEFAULT)
     public List<AppInfo> apps = new LinkedList<>();
     
-    /** SEO information. */
-    @JsonInclude(Include.NON_NULL)
-    public Seo seo;
-    
     /**
      * Map of user-defined extended properties. Developers should use unique
      * keys, e.g. "com.googlecode.openrestext".
@@ -253,7 +247,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
                 ", locales=" + locales +
                 ", messages=" + messages +
                 ", apps=" + apps +
-                ", seo=" + seo +
                 ", properties=" + properties +
                 ", availabilities=" + availabilities +
                 ", media=" + media +

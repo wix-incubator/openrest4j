@@ -23,11 +23,11 @@ public class Portal extends Organization {
 				  LocalizedString title, LocalizedString description,
 				  Locale locale, Set<Locale> locales, Map<String, LocalizedString> messages,
 				  Contact contact, Address address, String timezone, String currency,
-				  List<AppInfo> apps, Seo seo, Map<String, String> properties,
+				  List<AppInfo> apps, Map<String, String> properties,
 				  Map<String, Availability> availabilities,
 				  Map<String, String> media, Boolean closed, Set<Product> products, List<PortalMenuCategory> categories) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages,
-    			contact, address, timezone, currency, apps, seo, properties,
+    			contact, address, timezone, currency, apps, properties,
 				availabilities, media, closed, products);
     	
     	this.distributorId = distributorId;
@@ -56,7 +56,6 @@ public class Portal extends Organization {
     			((contact != null) ? contact.clone() : null),
     			((address != null) ? address.clone() : null),
     			timezone, currency, AppInfo.clone(apps),
-    			((seo != null) ? (Seo) seo.clone() : null),
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
 				Availability.clone(availabilities),
                 ((media != null) ? new LinkedHashMap<>(media) : null),
