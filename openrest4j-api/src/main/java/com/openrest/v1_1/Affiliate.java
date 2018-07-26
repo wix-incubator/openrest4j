@@ -55,8 +55,7 @@ public class Affiliate extends Organization {
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
 				Availability.clone(availabilities),
 				((media != null) ? new LinkedHashMap<>(media) : null),
-    			close
-				d, Product.clone(products));
+    			closed, Product.clone(products));
 	}
 
 	@Override
