@@ -61,5 +61,5 @@ public class SecuritySecret implements Serializable, Cloneable {
      * @see com.wix.restaurants.Aspects
      */
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public Map<String, FraudPreventionInfo> fraudPrevention;
+    public Map<String, FraudPreventionInfo> fraudPrevention = new LinkedHashMap<>();
 }
