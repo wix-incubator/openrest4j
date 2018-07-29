@@ -2,7 +2,7 @@ package com.wix.restaurants.notifications;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-/** Triggered when an organization is updated. */
+/** Triggered when an organization is changed in some way. */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UpdatedOrganizationNotification extends Notification {
     public static final String TYPE = "updated_organization";
