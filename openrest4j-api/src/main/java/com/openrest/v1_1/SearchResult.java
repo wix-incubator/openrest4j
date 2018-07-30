@@ -25,13 +25,12 @@ public class SearchResult extends Restaurant {
                         Set<String> paymentTypes, Boolean multiPaymentDisabled, CreditcardsInfo creditcardsInfo,
                         DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations,
                         Map<String, String> media, List<AppInfo> apps, Map<String, String> properties,
-                        Map<String, Availability> availabilities,
                         Boolean closed, Set<Product> products,
                         Map<String, Double> features, Set<String> deliveryTypes, DispatchInfo deliveryInfo) {
     	super(id, alias, affiliateId, externalIds, created, modified, distributorId, chainId, title, description, contact,
     			address, messages, openTimes, deliveryInfos,
     			timezone, currency, locale, locales, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations,
-    			media, apps, properties, availabilities, closed, products, features);
+    			media, apps, properties, closed, products, features);
 
     	this.deliveryTypes = deliveryTypes;
     	this.deliveryInfo = deliveryInfo;
@@ -70,7 +69,6 @@ public class SearchResult extends Restaurant {
                 ((media != null) ? new LinkedHashMap<>(media) : null),
                 AppInfo.clone(apps),
                 ((properties != null) ? new LinkedHashMap<>(properties) : null),
-                Availability.clone(availabilities),
                 closed, Product.clone(products),
                 ((features != null) ? new LinkedHashMap<>(features) : null),
                 (deliveryTypes != null) ? new LinkedHashSet<>(deliveryTypes): null,

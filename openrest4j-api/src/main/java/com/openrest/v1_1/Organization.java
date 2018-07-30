@@ -3,7 +3,6 @@ package com.openrest.v1_1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.wix.restaurants.availability.Availability;
 import com.wix.restaurants.i18n.Locale;
 import com.wix.restaurants.i18n.LocalizedString;
 
@@ -30,7 +29,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
                            Locale locale, Set<Locale> locales, Map<String, LocalizedString> messages,
                            Contact contact, Address address, String timezone, String currency,
                            List<AppInfo> apps, Map<String, String> properties,
-                           Map<String, Availability> availabilities,
                            Map<String, String> media, Boolean closed, Set<Product> products) {
 
     	this.id = id;
@@ -50,7 +48,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     	this.currency = currency;
     	this.apps = apps;
     	this.properties = properties;
-        this.availabilities = availabilities;
     	this.media = media;
     	this.closed = closed;
     	this.products = products;
@@ -97,7 +94,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
                 Objects.equals(messages, that.messages) &&
                 Objects.equals(apps, that.apps) &&
                 Objects.equals(properties, that.properties) &&
-                Objects.equals(availabilities, that.availabilities) &&
                 Objects.equals(media, that.media) &&
                 Objects.equals(closed, that.closed) &&
                 Objects.equals(products, that.products);
@@ -105,7 +101,7 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, alias, affiliateId, externalIds, created, modified, title, description, contact, address, timezone, currency, locale, locales, messages, apps, properties, availabilities, media, closed, products);
+        return Objects.hash(id, alias, affiliateId, externalIds, created, modified, title, description, contact, address, timezone, currency, locale, locales, messages, apps, properties, media, closed, products);
     }
 
     /** The organization's unique id. */
@@ -198,14 +194,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
     public Map<String, String> properties = new LinkedHashMap<>();
     
     /**
-     * Availabilities of various aspects in the system, e.g. online ordering.
-     * A non-existent key means "unavailable".
-     * @see com.wix.restaurants.Aspects for possible keys.
-     */
-    @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, Availability> availabilities = new LinkedHashMap<>();
-
-    /**
      * Maps media-types to URLs.
      * @see BlobTypes
      */
@@ -248,7 +236,6 @@ public abstract class Organization extends OpenrestObject implements Cloneable, 
                 ", messages=" + messages +
                 ", apps=" + apps +
                 ", properties=" + properties +
-                ", availabilities=" + availabilities +
                 ", media=" + media +
                 ", closed=" + closed +
                 ", products=" + products +

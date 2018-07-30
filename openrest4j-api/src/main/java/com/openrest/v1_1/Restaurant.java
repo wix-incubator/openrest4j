@@ -64,11 +64,10 @@ public class Restaurant extends Organization {
                       Set<String> paymentTypes, Boolean multiPaymentDisabled, CreditcardsInfo creditcardsInfo,
                       DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations,
                       Map<String, String> media, List<AppInfo> apps, Map<String, String> properties,
-                      Map<String, Availability> availabilities,
                       Boolean closed, Set<Product> products, Map<String, Double> features) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages,
-    			contact, address, timezone, currency, apps, properties,
-                availabilities, media, closed, products);
+                contact, address, timezone, currency, apps, properties,
+                media, closed, products);
         
     	this.distributorId = distributorId;
     	this.chainId = chainId;
@@ -117,7 +116,6 @@ public class Restaurant extends Organization {
                 ((media != null) ? new LinkedHashMap<>(media) : null),
                 AppInfo.clone(apps),
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
-                Availability.clone(availabilities),
     			closed, Product.clone(products),
     			((features != null) ? new LinkedHashMap<>(features) : null));
 	}
@@ -153,7 +151,6 @@ public class Restaurant extends Organization {
                 ", messages=" + messages +
                 ", apps=" + apps +
                 ", properties=" + properties +
-                ", availabilities=" + availabilities +
                 ", media=" + media +
                 ", closed=" + closed +
                 ", products=" + products +

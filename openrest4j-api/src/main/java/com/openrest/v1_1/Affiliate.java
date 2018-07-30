@@ -3,7 +3,6 @@ package com.openrest.v1_1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.wix.restaurants.availability.Availability;
 import com.wix.restaurants.i18n.Locale;
 import com.wix.restaurants.i18n.LocalizedString;
 
@@ -23,11 +22,10 @@ public class Affiliate extends Organization {
 					 Locale locale, Set<Locale> locales, Map<String, LocalizedString> messages,
 					 Contact contact, Address address, String timezone, String currency,
 					 List<AppInfo> apps, Map<String, String> properties,
-					 Map<String, Availability> availabilities,
 					 Map<String, String> media, Boolean closed, Set<Product> products) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages,
     			contact, address, timezone, currency, apps, properties,
-				availabilities, media, closed, products);
+				media, closed, products);
     	
     	this.distributorId = distributorId;
     }
@@ -53,7 +51,6 @@ public class Affiliate extends Organization {
     			((address != null) ? address.clone() : null),
     			timezone, currency, AppInfo.clone(apps),
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
-				Availability.clone(availabilities),
 				((media != null) ? new LinkedHashMap<>(media) : null),
     			closed, Product.clone(products));
 	}
