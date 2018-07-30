@@ -35,7 +35,6 @@ public class Restaurant extends Organization {
         if (deliveriesInfo != null ? !deliveriesInfo.equals(that.deliveriesInfo) : that.deliveriesInfo != null) return false;
         if (orders != null ? !orders.equals(that.orders) : that.orders != null) return false;
         if (reservations != null ? !reservations.equals(that.reservations) : that.reservations != null) return false;
-        if (antiFraudDisabled != null ? !antiFraudDisabled.equals(that.antiFraudDisabled) : that.antiFraudDisabled != null) return false;
         return features != null ? features.equals(that.features) : that.features == null;
     }
 
@@ -52,7 +51,6 @@ public class Restaurant extends Organization {
         result = 31 * result + (deliveriesInfo != null ? deliveriesInfo.hashCode() : 0);
         result = 31 * result + (orders != null ? orders.hashCode() : 0);
         result = 31 * result + (reservations != null ? reservations.hashCode() : 0);
-        result = 31 * result + (antiFraudDisabled != null ? antiFraudDisabled.hashCode() : 0);
         result = 31 * result + (features != null ? features.hashCode() : 0);
         return result;
     }
@@ -65,8 +63,7 @@ public class Restaurant extends Organization {
                       String timezone, String currency, Locale locale, Set<Locale> locales,
                       Set<String> paymentTypes, Boolean multiPaymentDisabled, CreditcardsInfo creditcardsInfo,
                       DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations,
-                      Boolean antiFraudDisabled, Map<String, String> media,
-                      List<AppInfo> apps, Map<String, String> properties,
+                      Map<String, String> media, List<AppInfo> apps, Map<String, String> properties,
                       Map<String, Availability> availabilities,
                       Boolean closed, Set<Product> products, Map<String, Double> features) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages,
@@ -83,7 +80,6 @@ public class Restaurant extends Organization {
         this.deliveriesInfo = deliveriesInfo;
         this.orders = orders;
         this.reservations = reservations;
-        this.antiFraudDisabled = antiFraudDisabled;
         this.features = features;
     }
 
@@ -118,7 +114,6 @@ public class Restaurant extends Organization {
                 ((deliveriesInfo != null) ? deliveriesInfo.clone() : null),
                 ((orders != null) ? orders.clone() : null),
                 ((reservations != null) ? reservations.clone() : null),
-    			antiFraudDisabled,
                 ((media != null) ? new LinkedHashMap<>(media) : null),
                 AppInfo.clone(apps),
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
@@ -140,7 +135,6 @@ public class Restaurant extends Organization {
                 ", deliveriesInfo=" + deliveriesInfo +
                 ", orders=" + orders +
                 ", reservations=" + reservations +
-                ", antiFraudDisabled=" + antiFraudDisabled +
                 ", features=" + features +
                 ", id='" + id + '\'' +
                 ", alias='" + alias + '\'' +
@@ -202,10 +196,6 @@ public class Restaurant extends Organization {
     @JsonInclude(Include.NON_NULL)
     public ReservationsInfo reservations;
 
-    /** Whether or not the fraud prevention feature is turned off. */
-    @JsonInclude(Include.NON_DEFAULT)
-    public Boolean antiFraudDisabled = Boolean.FALSE;
-    
     /**
      * Maps feature-IDs to their values. The values correspond to how strongly the feature
      * is relevant for the restaurant, which influences its position in search results.
