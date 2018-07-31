@@ -7,6 +7,7 @@ import com.wix.restaurants.i18n.LocalizedString;
 
 import java.io.Serializable;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -36,22 +37,16 @@ public class CreditcardsInfo implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         CreditcardsInfo that = (CreditcardsInfo) o;
-
-        if (networks != null ? !networks.equals(that.networks) : that.networks != null) return false;
-        if (fields != null ? !fields.equals(that.fields) : that.fields != null) return false;
-        if (collectionMethod != null ? !collectionMethod.equals(that.collectionMethod) : that.collectionMethod != null) return false;
-        return comment != null ? comment.equals(that.comment) : that.comment == null;
+        return Objects.equals(networks, that.networks) &&
+                Objects.equals(fields, that.fields) &&
+                Objects.equals(collectionMethod, that.collectionMethod) &&
+                Objects.equals(comment, that.comment);
     }
 
     @Override
     public int hashCode() {
-        int result = networks != null ? networks.hashCode() : 0;
-        result = 31 * result + (fields != null ? fields.hashCode() : 0);
-        result = 31 * result + (collectionMethod != null ? collectionMethod.hashCode() : 0);
-        result = 31 * result + (comment != null ? comment.hashCode() : 0);
-        return result;
+        return Objects.hash(networks, fields, collectionMethod, comment);
     }
 
     /** Accepted networks, e.g. "visa", "mastercard", "amex". */
