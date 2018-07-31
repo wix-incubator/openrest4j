@@ -7,7 +7,11 @@ import com.wix.restaurants.notifications.Notification;
 
 import java.util.Objects;
 
-/** Triggered when no one checks for existence of new orders for some duration. */
+/**
+ * Triggered when no one checks for existence of new orders for some duration.
+ * Deprecated on 2018-08-01.
+ */
+@Deprecated
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OfflineNotification extends Notification {
     public static final String TYPE = "offline";

@@ -3,7 +3,11 @@ package com.openrest.olo.notifications;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.wix.restaurants.notifications.Notification;
 
-/** Triggered when a new user subscribes to the organization's mailing list. */
+/**
+ * Triggered when a new user subscribes to the organization's mailing list.
+ * Deprecated on 2018-08-01.
+ */
+@Deprecated
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SubscriptionNotification extends Notification {
     public static final String TYPE = "subscription";
