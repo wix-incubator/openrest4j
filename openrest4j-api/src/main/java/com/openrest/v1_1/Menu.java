@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Menu implements Serializable, Cloneable {
@@ -36,22 +37,16 @@ public class Menu implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Menu menu = (Menu) o;
-
-        if (modified != null ? !modified.equals(menu.modified) : menu.modified != null) return false;
-        if (items != null ? !items.equals(menu.items) : menu.items != null) return false;
-        if (sections != null ? !sections.equals(menu.sections) : menu.sections != null) return false;
-        return !(chargesV2 != null ? !chargesV2.equals(menu.chargesV2) : menu.chargesV2 != null);
+        return Objects.equals(modified, menu.modified) &&
+                Objects.equals(items, menu.items) &&
+                Objects.equals(sections, menu.sections) &&
+                Objects.equals(chargesV2, menu.chargesV2);
     }
 
     @Override
     public int hashCode() {
-        int result = modified != null ? modified.hashCode() : 0;
-        result = 31 * result + (items != null ? items.hashCode() : 0);
-        result = 31 * result + (sections != null ? sections.hashCode() : 0);
-        result = 31 * result + (chargesV2 != null ? chargesV2.hashCode() : 0);
-        return result;
+        return Objects.hash(modified, items, sections, chargesV2);
     }
 
     /** The menu's last modification timestamp. */
