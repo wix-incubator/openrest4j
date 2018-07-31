@@ -8,6 +8,7 @@ import com.wix.restaurants.availability.Availability;
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /** Online ordering settings. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -43,25 +44,17 @@ public class OrdersInfo implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         OrdersInfo that = (OrdersInfo) o;
-
-        if (availability != null ? !availability.equals(that.availability) : that.availability != null) return false;
-        if (asap != null ? !asap.equals(that.asap) : that.asap != null) return false;
-        if (future != null ? !future.equals(that.future) : that.future != null) return false;
-        if (maxCommentLength != null ? !maxCommentLength.equals(that.maxCommentLength) : that.maxCommentLength != null) return false;
-        return properties != null ? properties.equals(that.properties) : that.properties == null;
-
+        return Objects.equals(availability, that.availability) &&
+                Objects.equals(asap, that.asap) &&
+                Objects.equals(future, that.future) &&
+                Objects.equals(maxCommentLength, that.maxCommentLength) &&
+                Objects.equals(properties, that.properties);
     }
 
     @Override
     public int hashCode() {
-        int result = availability != null ? availability.hashCode() : 0;
-        result = 31 * result + (asap != null ? asap.hashCode() : 0);
-        result = 31 * result + (future != null ? future.hashCode() : 0);
-        result = 31 * result + (maxCommentLength != null ? maxCommentLength.hashCode() : 0);
-        result = 31 * result + (properties != null ? properties.hashCode() : 0);
-        return result;
+        return Objects.hash(availability, asap, future, maxCommentLength, properties);
     }
 
     /** The restaurant accepts online orders during these times. */
