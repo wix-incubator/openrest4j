@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import java.io.Serializable;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -36,38 +37,21 @@ public class Product implements Serializable, Cloneable {
 		}
     	return cloned;
     }
-    
+
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((param == null) ? 0 : param.hashCode());
-		return result;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Product product = (Product) o;
+		return Objects.equals(id, product.id) &&
+				Objects.equals(param, product.param);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Product other = (Product) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (param == null) {
-			if (other.param != null)
-				return false;
-		} else if (!param.equals(other.param))
-			return false;
-		return true;
+	public int hashCode() {
+		return Objects.hash(id, param);
 	}
-    
+
     @JsonInclude(Include.NON_NULL)
     public String id;
     
