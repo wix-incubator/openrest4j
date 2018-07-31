@@ -60,17 +60,13 @@ public class Chain extends Organization {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		if (!super.equals(o)) return false;
-
 		Chain chain = (Chain) o;
-
-		return distributorId != null ? distributorId.equals(chain.distributorId) : chain.distributorId == null;
+		return Objects.equals(distributorId, chain.distributorId);
 	}
 
 	@Override
 	public int hashCode() {
-		int result = super.hashCode();
-		result = 31 * result + (distributorId != null ? distributorId.hashCode() : 0);
-		return result;
+		return Objects.hash(super.hashCode(), distributorId);
 	}
 
 	/** The distributor in charge of this chain. */

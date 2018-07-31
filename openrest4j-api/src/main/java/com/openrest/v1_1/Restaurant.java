@@ -17,44 +17,6 @@ public class Restaurant extends Organization {
 	public static final String TYPE = "restaurant";
 	private static final long serialVersionUID = 1L;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-
-        Restaurant that = (Restaurant) o;
-
-        if (distributorId != null ? !distributorId.equals(that.distributorId) : that.distributorId != null) return false;
-        if (chainId != null ? !chainId.equals(that.chainId) : that.chainId != null) return false;
-        if (openTimes != null ? !openTimes.equals(that.openTimes) : that.openTimes != null) return false;
-        if (deliveryInfos != null ? !deliveryInfos.equals(that.deliveryInfos) : that.deliveryInfos != null) return false;
-        if (paymentTypes != null ? !paymentTypes.equals(that.paymentTypes) : that.paymentTypes != null) return false;
-        if (multiPaymentDisabled != null ? !multiPaymentDisabled.equals(that.multiPaymentDisabled) : that.multiPaymentDisabled != null) return false;
-        if (creditcardsInfo != null ? !creditcardsInfo.equals(that.creditcardsInfo) : that.creditcardsInfo != null) return false;
-        if (deliveriesInfo != null ? !deliveriesInfo.equals(that.deliveriesInfo) : that.deliveriesInfo != null) return false;
-        if (orders != null ? !orders.equals(that.orders) : that.orders != null) return false;
-        if (reservations != null ? !reservations.equals(that.reservations) : that.reservations != null) return false;
-        return features != null ? features.equals(that.features) : that.features == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (distributorId != null ? distributorId.hashCode() : 0);
-        result = 31 * result + (chainId != null ? chainId.hashCode() : 0);
-        result = 31 * result + (openTimes != null ? openTimes.hashCode() : 0);
-        result = 31 * result + (deliveryInfos != null ? deliveryInfos.hashCode() : 0);
-        result = 31 * result + (paymentTypes != null ? paymentTypes.hashCode() : 0);
-        result = 31 * result + (multiPaymentDisabled != null ? multiPaymentDisabled.hashCode() : 0);
-        result = 31 * result + (creditcardsInfo != null ? creditcardsInfo.hashCode() : 0);
-        result = 31 * result + (deliveriesInfo != null ? deliveriesInfo.hashCode() : 0);
-        result = 31 * result + (orders != null ? orders.hashCode() : 0);
-        result = 31 * result + (reservations != null ? reservations.hashCode() : 0);
-        result = 31 * result + (features != null ? features.hashCode() : 0);
-        return result;
-    }
-
     public Restaurant(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
                       String distributorId, String chainId, LocalizedString title,
                       LocalizedString description, Contact contact, Address address,
@@ -119,6 +81,30 @@ public class Restaurant extends Organization {
     			closed, Product.clone(products),
     			((features != null) ? new LinkedHashMap<>(features) : null));
 	}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Restaurant that = (Restaurant) o;
+        return Objects.equals(distributorId, that.distributorId) &&
+                Objects.equals(chainId, that.chainId) &&
+                Objects.equals(openTimes, that.openTimes) &&
+                Objects.equals(deliveryInfos, that.deliveryInfos) &&
+                Objects.equals(paymentTypes, that.paymentTypes) &&
+                Objects.equals(multiPaymentDisabled, that.multiPaymentDisabled) &&
+                Objects.equals(creditcardsInfo, that.creditcardsInfo) &&
+                Objects.equals(deliveriesInfo, that.deliveriesInfo) &&
+                Objects.equals(orders, that.orders) &&
+                Objects.equals(reservations, that.reservations) &&
+                Objects.equals(features, that.features);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), distributorId, chainId, openTimes, deliveryInfos, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations, features);
+    }
 
     @Override
     public String toString() {

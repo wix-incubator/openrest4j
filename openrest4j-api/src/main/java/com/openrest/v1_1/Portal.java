@@ -64,21 +64,15 @@ public class Portal extends Organization {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		if (!super.equals(o)) return false;
-
 		Portal portal = (Portal) o;
-
-		if (distributorId != null ? !distributorId.equals(portal.distributorId) : portal.distributorId != null) return false;
-		if (filter != null ? !filter.equals(portal.filter) : portal.filter != null) return false;
-		return categories != null ? categories.equals(portal.categories) : portal.categories == null;
+		return Objects.equals(distributorId, portal.distributorId) &&
+				Objects.equals(filter, portal.filter) &&
+				Objects.equals(categories, portal.categories);
 	}
 
 	@Override
 	public int hashCode() {
-		int result = super.hashCode();
-		result = 31 * result + (distributorId != null ? distributorId.hashCode() : 0);
-		result = 31 * result + (filter != null ? filter.hashCode() : 0);
-		result = 31 * result + (categories != null ? categories.hashCode() : 0);
-		return result;
+		return Objects.hash(super.hashCode(), distributorId, filter, categories);
 	}
 
 	/** The distributor in charge of this portal. */

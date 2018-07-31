@@ -60,17 +60,13 @@ public class Affiliate extends Organization {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		if (!super.equals(o)) return false;
-
 		Affiliate affiliate = (Affiliate) o;
-
-		return distributorId != null ? distributorId.equals(affiliate.distributorId) : affiliate.distributorId == null;
+		return Objects.equals(distributorId, affiliate.distributorId);
 	}
 
 	@Override
 	public int hashCode() {
-		int result = super.hashCode();
-		result = 31 * result + (distributorId != null ? distributorId.hashCode() : 0);
-		return result;
+		return Objects.hash(super.hashCode(), distributorId);
 	}
 
     /** The distributor in charge of this affiliate. */
