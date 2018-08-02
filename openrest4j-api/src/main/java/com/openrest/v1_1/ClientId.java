@@ -8,14 +8,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+// TODO: deprecate in favor of com.wix.restaurants.authentication.model.User
 public class ClientId implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
     
-    public ClientId(String ns, String id, String uid, Boolean inferred) {
+    public ClientId(String ns, String id) {
     	this.ns = ns;
         this.id = id;
-        this.uid = uid;
-        this.inferred = inferred;
     }
     
     /** Default constructor for JSON deserialization. */
@@ -23,7 +22,7 @@ public class ClientId implements Serializable, Cloneable {
     
     @Override
 	public ClientId clone() {
-    	return new ClientId(ns, id, uid, inferred);
+    	return new ClientId(ns, id);
 	}
 
 
@@ -45,14 +44,12 @@ public class ClientId implements Serializable, Cloneable {
 		if (o == null || getClass() != o.getClass()) return false;
 		ClientId clientId = (ClientId) o;
 		return Objects.equals(ns, clientId.ns) &&
-				Objects.equals(id, clientId.id) &&
-				Objects.equals(uid, clientId.uid) &&
-				Objects.equals(inferred, clientId.inferred);
+				Objects.equals(id, clientId.id);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(ns, id, uid, inferred);
+		return Objects.hash(ns, id);
 	}
 
     @Override
@@ -60,8 +57,6 @@ public class ClientId implements Serializable, Cloneable {
         return "ClientId{" +
                 "ns='" + ns + '\'' +
                 ", id='" + id + '\'' +
-                ", uid='" + uid + '\'' +
-                ", inferred=" + inferred +
                 '}';
     }
 
@@ -78,13 +73,4 @@ public class ClientId implements Serializable, Cloneable {
      */
     @JsonInclude(Include.NON_NULL)
     public String id;
-    
-    /** The fully qualified (legacy) namespace|id. */
-    @Deprecated
-    @JsonInclude(Include.NON_NULL)
-    public String uid;
-    
-    /** Whether the id is inferred (as opposed to verified). */
-    @JsonInclude(Include.NON_DEFAULT)
-    public Boolean inferred = Boolean.FALSE;
 }
