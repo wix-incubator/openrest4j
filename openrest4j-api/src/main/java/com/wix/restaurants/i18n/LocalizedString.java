@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Objects;
 
 /** Am immutable localized string. */
 @JsonSerialize(using = LocalizedStringSerializer.class)
@@ -42,15 +43,13 @@ public class LocalizedString implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         LocalizedString that = (LocalizedString) o;
-
-        return localized != null ? localized.equals(that.localized) : that.localized == null;
+        return Objects.equals(localized, that.localized);
     }
 
     @Override
     public int hashCode() {
-        return localized != null ? localized.hashCode() : 0;
+        return Objects.hash(localized);
     }
 
     @Override
