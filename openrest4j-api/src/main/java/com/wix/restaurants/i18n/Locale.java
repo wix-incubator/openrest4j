@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * An immutable locale string, e.g. "en_US", "fr_FR".
@@ -47,15 +48,13 @@ public class Locale implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Locale locale = (Locale) o;
-
-        return languageTag != null ? languageTag.equals(locale.languageTag) : locale.languageTag == null;
+        return Objects.equals(languageTag, locale.languageTag);
     }
 
     @Override
     public int hashCode() {
-        return languageTag != null ? languageTag.hashCode() : 0;
+        return Objects.hash(languageTag);
     }
 
     @Override
