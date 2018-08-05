@@ -28,7 +28,7 @@ public class PremisesDispatchInfo extends DispatchInfo {
     @Override
     protected PremisesDispatchInfo cloneImpl() {
         return new PremisesDispatchInfo(minOrderPrice, charge, delayMins, inactive,
-                ((availability != null) ? (Availability) availability.clone() : null),
+                ((availability != null) ? availability.clone() : null),
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
     }
 }

@@ -28,7 +28,7 @@ public class PickupDispatchInfo extends DispatchInfo {
     @Override
     protected PickupDispatchInfo cloneImpl() {
         return new PickupDispatchInfo(minOrderPrice, charge, delayMins, inactive,
-                ((availability != null) ? (Availability) availability.clone() : null),
+                ((availability != null) ? availability.clone() : null),
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
     }
 }
