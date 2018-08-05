@@ -9,10 +9,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.wix.restaurants.availability.Availability;
 
 import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /** Information regarding a delivery destination: type, area, requirements, etc. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -63,26 +60,18 @@ public abstract class DispatchInfo implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         DispatchInfo that = (DispatchInfo) o;
-
-        if (minOrderPrice != null ? !minOrderPrice.equals(that.minOrderPrice) : that.minOrderPrice != null) return false;
-        if (charge != null ? !charge.equals(that.charge) : that.charge != null) return false;
-        if (delayMins != null ? !delayMins.equals(that.delayMins) : that.delayMins != null) return false;
-        if (inactive != null ? !inactive.equals(that.inactive) : that.inactive != null) return false;
-        if (availability != null ? !availability.equals(that.availability) : that.availability != null) return false;
-        return properties != null ? properties.equals(that.properties) : that.properties == null;
+        return Objects.equals(minOrderPrice, that.minOrderPrice) &&
+                Objects.equals(charge, that.charge) &&
+                Objects.equals(delayMins, that.delayMins) &&
+                Objects.equals(inactive, that.inactive) &&
+                Objects.equals(availability, that.availability) &&
+                Objects.equals(properties, that.properties);
     }
 
     @Override
     public int hashCode() {
-        int result = minOrderPrice != null ? minOrderPrice.hashCode() : 0;
-        result = 31 * result + (charge != null ? charge.hashCode() : 0);
-        result = 31 * result + (delayMins != null ? delayMins.hashCode() : 0);
-        result = 31 * result + (inactive != null ? inactive.hashCode() : 0);
-        result = 31 * result + (availability != null ? availability.hashCode() : 0);
-        result = 31 * result + (properties != null ? properties.hashCode() : 0);
-        return result;
+        return Objects.hash(minOrderPrice, charge, delayMins, inactive, availability, properties);
     }
 
     /**
