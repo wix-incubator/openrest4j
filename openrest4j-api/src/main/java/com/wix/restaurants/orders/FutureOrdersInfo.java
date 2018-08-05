@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.restaurants.IntegerInterval;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /** Settings for future orders. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -30,18 +31,14 @@ public class FutureOrdersInfo implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         FutureOrdersInfo that = (FutureOrdersInfo) o;
-
-        if (disabled != null ? !disabled.equals(that.disabled) : that.disabled != null) return false;
-        return delayMins != null ? delayMins.equals(that.delayMins) : that.delayMins == null;
+        return Objects.equals(disabled, that.disabled) &&
+                Objects.equals(delayMins, that.delayMins);
     }
 
     @Override
     public int hashCode() {
-        int result = disabled != null ? disabled.hashCode() : 0;
-        result = 31 * result + (delayMins != null ? delayMins.hashCode() : 0);
-        return result;
+        return Objects.hash(disabled, delayMins);
     }
 
     /** Whether or not future ordering is disabled. */
