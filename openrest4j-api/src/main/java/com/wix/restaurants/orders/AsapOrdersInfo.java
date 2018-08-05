@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /** Settings for regular (ASAP) orders. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -29,18 +30,14 @@ public class AsapOrdersInfo implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         AsapOrdersInfo that = (AsapOrdersInfo) o;
-
-        if (disabled != null ? !disabled.equals(that.disabled) : that.disabled != null) return false;
-        return preOrderMins != null ? preOrderMins.equals(that.preOrderMins) : that.preOrderMins == null;
+        return Objects.equals(disabled, that.disabled) &&
+                Objects.equals(preOrderMins, that.preOrderMins);
     }
 
     @Override
     public int hashCode() {
-        int result = disabled != null ? disabled.hashCode() : 0;
-        result = 31 * result + (preOrderMins != null ? preOrderMins.hashCode() : 0);
-        return result;
+        return Objects.hash(disabled, preOrderMins);
     }
 
     /** Whether or not ASAP ordering is disabled. */
