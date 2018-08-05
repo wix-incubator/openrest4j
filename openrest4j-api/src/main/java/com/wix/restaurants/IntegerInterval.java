@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class IntegerInterval implements Serializable, Cloneable {
@@ -27,19 +28,22 @@ public class IntegerInterval implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         IntegerInterval that = (IntegerInterval) o;
-
-        if (min != null ? !min.equals(that.min) : that.min != null) return false;
-        return max != null ? max.equals(that.max) : that.max == null;
-
+        return Objects.equals(min, that.min) &&
+                Objects.equals(max, that.max);
     }
 
     @Override
     public int hashCode() {
-        int result = min != null ? min.hashCode() : 0;
-        result = 31 * result + (max != null ? max.hashCode() : 0);
-        return result;
+        return Objects.hash(min, max);
+    }
+
+    @Override
+    public String toString() {
+        return "IntegerInterval{" +
+                "min=" + min +
+                ", max=" + max +
+                '}';
     }
 
     /** Minimum value allowed, or null for no minimum. */
