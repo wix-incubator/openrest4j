@@ -61,6 +61,24 @@ public class AppInfo implements Serializable, Cloneable {
 		return cloned;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AppInfo appInfo = (AppInfo) o;
+        return Objects.equals(type, appInfo.type) &&
+                Objects.equals(platform, appInfo.platform) &&
+                Objects.equals(id, appInfo.id) &&
+                Objects.equals(version, appInfo.version) &&
+                Objects.equals(link, appInfo.link) &&
+                Objects.equals(state, appInfo.state);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, platform, id, version, link, state);
+    }
+
     /** Application type (@see ALL_APP_TYPES) */
     @JsonInclude(Include.NON_NULL)
     public String type;
