@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 /** An area on a map. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -39,7 +40,21 @@ public class Area implements Serializable, Cloneable {
     			((title != null) ? title.clone()  : null),
     			clonedPolygon);
 	}
-    
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Area area = (Area) o;
+		return Objects.equals(title, area.title) &&
+				Objects.equals(polygon, area.polygon);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(title, polygon);
+	}
+
     /** The area's human-readable title in various locales. */
     @JsonInclude(Include.NON_DEFAULT)
     public LocalizedString title = LocalizedString.empty;
@@ -47,35 +62,4 @@ public class Area implements Serializable, Cloneable {
     /** The area (polygon vertices). */
     @JsonInclude(Include.NON_DEFAULT)
     public List<LatLng> polygon = new LinkedList<>();
-    
-    @Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((polygon == null) ? 0 : polygon.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Area other = (Area) obj;
-		if (polygon == null) {
-			if (other.polygon != null)
-				return false;
-		} else if (!polygon.equals(other.polygon))
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		return true;
-	}
 }
