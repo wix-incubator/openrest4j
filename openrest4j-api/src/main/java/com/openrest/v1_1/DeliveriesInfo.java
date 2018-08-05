@@ -41,19 +41,14 @@ public class DeliveriesInfo implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         DeliveriesInfo that = (DeliveriesInfo) o;
-
-        if (approximateAddresses != null ? !approximateAddresses.equals(that.approximateAddresses) : that.approximateAddresses != null) return false;
-        return !(properties != null ? !properties.equals(that.properties) : that.properties != null);
-
+        return Objects.equals(approximateAddresses, that.approximateAddresses) &&
+                Objects.equals(properties, that.properties);
     }
 
     @Override
     public int hashCode() {
-        int result = approximateAddresses != null ? approximateAddresses.hashCode() : 0;
-        result = 31 * result + (properties != null ? properties.hashCode() : 0);
-        return result;
+        return Objects.hash(approximateAddresses, properties);
     }
 
     /**
