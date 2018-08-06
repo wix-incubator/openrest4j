@@ -3,7 +3,7 @@ package com.wix.restaurants.requests;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.openrest.v1_1.ClientId;
+import com.wix.restaurants.authentication.model.User;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SetPasswordRequest extends Request {
@@ -13,7 +13,7 @@ public class SetPasswordRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public SetPasswordRequest() {}
     
-    public SetPasswordRequest(String accessToken, ClientId clientId, String password) {
+    public SetPasswordRequest(String accessToken, User clientId, String password) {
     	this.accessToken = accessToken;
     	this.clientId = clientId;
     	this.password = password;
@@ -23,7 +23,7 @@ public class SetPasswordRequest extends Request {
     public String accessToken;
     
     @JsonInclude(Include.NON_NULL)
-    public ClientId clientId;
+    public User clientId;
     
     @JsonInclude(Include.NON_NULL)
     public String password;

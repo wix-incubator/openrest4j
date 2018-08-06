@@ -64,6 +64,11 @@
             <artifactId>smaug-client-api</artifactId>
             <version>${com.wix.pay.smaug.client.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.wix.restaurants</groupId>
+            <artifactId>wix-restaurants-authentication-api</artifactId>
+            <version>${com.wix.restaurants.authentication.version}</version>
+        </dependency>
 
         <!-- Test Dependencies -->
         <dependency>

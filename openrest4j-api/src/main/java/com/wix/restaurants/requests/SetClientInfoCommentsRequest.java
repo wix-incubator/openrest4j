@@ -3,7 +3,7 @@ package com.wix.restaurants.requests;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.openrest.v1_1.ClientId;
+import com.wix.restaurants.authentication.model.User;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -16,7 +16,7 @@ public class SetClientInfoCommentsRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public SetClientInfoCommentsRequest() {}
     
-    public SetClientInfoCommentsRequest(String accessToken, ClientId clientId, Map<String, String> comments) {
+    public SetClientInfoCommentsRequest(String accessToken, User clientId, Map<String, String> comments) {
     	this.accessToken = accessToken;
     	this.clientId = clientId;
     	this.comments = comments;
@@ -26,7 +26,7 @@ public class SetClientInfoCommentsRequest extends Request {
     public String accessToken;
     
     @JsonInclude(Include.NON_NULL)
-    public ClientId clientId;
+    public User clientId;
     
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> comments = new LinkedHashMap<>();

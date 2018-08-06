@@ -3,7 +3,7 @@ package com.wix.restaurants.requests;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.openrest.v1_1.ClientId;
+import com.wix.restaurants.authentication.model.User;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -16,7 +16,7 @@ public class GetClientInfoRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public GetClientInfoRequest() {}
     
-    public GetClientInfoRequest(String accessToken, ClientId clientId, Set<String> organizationIds) {
+    public GetClientInfoRequest(String accessToken, User clientId, Set<String> organizationIds) {
     	this.accessToken = accessToken;
     	this.clientId = clientId;
     	this.organizationIds = organizationIds;
@@ -27,7 +27,7 @@ public class GetClientInfoRequest extends Request {
     
     /** Optional client-ID (defaults to requesting user if null). */
     @JsonInclude(Include.NON_NULL)
-    public ClientId clientId;
+    public User clientId;
     
     /** Optional organization-ids for displaying ClientInfo.comments. */
     @JsonInclude(Include.NON_DEFAULT)

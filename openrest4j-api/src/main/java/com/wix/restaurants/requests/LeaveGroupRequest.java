@@ -3,7 +3,7 @@ package com.wix.restaurants.requests;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.openrest.v1_1.ClientId;
+import com.wix.restaurants.authentication.model.User;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LeaveGroupRequest extends Request {
@@ -13,7 +13,7 @@ public class LeaveGroupRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public LeaveGroupRequest() {}
     
-    public LeaveGroupRequest(String accessToken, String groupId, ClientId clientId) {
+    public LeaveGroupRequest(String accessToken, String groupId, User clientId) {
     	this.accessToken = accessToken;
     	this.groupId = groupId;
     	this.clientId = clientId;
@@ -26,5 +26,5 @@ public class LeaveGroupRequest extends Request {
     public String groupId;
     
     @JsonInclude(Include.NON_NULL)
-    public ClientId clientId;
+    public User clientId;
 }

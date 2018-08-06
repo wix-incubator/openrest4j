@@ -3,7 +3,7 @@ package com.wix.restaurants.requests;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.openrest.v1_1.ClientId;
+import com.wix.restaurants.authentication.model.User;
 
 import java.util.Set;
 
@@ -15,7 +15,7 @@ public class GetChargeUsageRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public GetChargeUsageRequest() {}
     
-    public GetChargeUsageRequest(String accessToken, ClientId clientId, Set<String> chargeIds) {
+    public GetChargeUsageRequest(String accessToken, User clientId, Set<String> chargeIds) {
     	this.accessToken = accessToken;
     	this.clientId = clientId;
     	this.chargeIds = chargeIds;
@@ -26,7 +26,7 @@ public class GetChargeUsageRequest extends Request {
     
     /** User to query (null means "current user"). */
     @JsonInclude(Include.NON_NULL)
-    public ClientId clientId;
+    public User clientId;
     
     /** Charges to query (null means "all"). */
     @JsonInclude(Include.NON_NULL)

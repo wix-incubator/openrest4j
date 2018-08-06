@@ -16,7 +16,7 @@ public class User implements Serializable, Cloneable {
     public static final String OPENREST_PREFIX = "spice|";
     public static final String PHONE_PREFIX = "tel|";
     
-    public User(ClientId clientId, String ipAddress, String fwdIpAddresses) {
+    public User(com.wix.restaurants.authentication.model.User clientId, String ipAddress, String fwdIpAddresses) {
     	this.clientId = clientId;
         this.ipAddress = ipAddress;
         this.fwdIpAddresses = fwdIpAddresses;
@@ -58,7 +58,7 @@ public class User implements Serializable, Cloneable {
 
     /** The user's id. */
     @JsonInclude(Include.NON_NULL)
-    public ClientId clientId;
+    public com.wix.restaurants.authentication.model.User clientId;
     
     /**
      * The immediate client's IP address. If the real client is separated from the

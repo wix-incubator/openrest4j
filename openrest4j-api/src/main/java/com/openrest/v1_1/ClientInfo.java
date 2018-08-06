@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.pay.smaug.client.model.CreditCardToken;
+import com.wix.restaurants.authentication.model.User;
 import com.wix.restaurants.payments.CibusCard;
 
 import java.io.Serializable;
@@ -15,7 +16,7 @@ import java.util.*;
 public class ClientInfo implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
     
-	public ClientInfo(List<ClientId> ids, List<Contact> contacts, List<Address> addresses,
+	public ClientInfo(List<User> ids, List<Contact> contacts, List<Address> addresses,
                       List<ClubMember> memberships, List<CreditCardToken> cardTokens,
                       List<CibusCard> cibus,
                       Map<String, String> properties, Map<String, String> comments) {
@@ -34,8 +35,19 @@ public class ClientInfo implements Serializable, Cloneable {
     
     @Override
 	public ClientInfo clone() {
+        final List<User> clonedIds;
+        if (ids != null) {
+            clonedIds = new LinkedList<>();
+            for (User id : ids) {
+                clonedIds.add(id != null ? id.clone() : null);
+            }
+        } else {
+            clonedIds = null;
+        }
+
+
     	return new ClientInfo(
-                ClientId.clone(ids), Contact.clone(contacts), Address.clone(addresses),
+                clonedIds, Contact.clone(contacts), Address.clone(addresses),
                 ClubMember.clone(memberships),
                 ((cardTokens != null) ? new LinkedList<>(cardTokens) : null),
     			CibusCard.clone(cibus),
@@ -79,7 +91,7 @@ public class ClientInfo implements Serializable, Cloneable {
 
     /** Saved contact details. */
     @JsonInclude(Include.NON_DEFAULT)
-    public List<ClientId> ids = new LinkedList<>();
+    public List<User> ids = new LinkedList<>();
     
     /** Saved contact details. */
     @JsonInclude(Include.NON_DEFAULT)

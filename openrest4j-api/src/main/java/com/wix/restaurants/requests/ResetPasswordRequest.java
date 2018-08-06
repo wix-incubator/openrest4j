@@ -3,7 +3,7 @@ package com.wix.restaurants.requests;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.openrest.v1_1.ClientId;
+import com.wix.restaurants.authentication.model.User;
 import com.wix.restaurants.i18n.Locale;
 
 
@@ -15,7 +15,7 @@ public class ResetPasswordRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public ResetPasswordRequest() {}
     
-    public ResetPasswordRequest(Locale locale, String distributorId, ClientId clientId) {
+    public ResetPasswordRequest(Locale locale, String distributorId, User clientId) {
     	this.locale = locale;
     	this.distributorId = distributorId;
     	this.clientId = clientId;
@@ -28,5 +28,5 @@ public class ResetPasswordRequest extends Request {
     public String distributorId;
     
     @JsonInclude(Include.NON_NULL)
-    public ClientId clientId;
+    public User clientId;
 }
