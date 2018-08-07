@@ -1,12 +1,13 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderItem implements Serializable, Cloneable {
@@ -56,29 +57,18 @@ public class OrderItem implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         OrderItem orderItem = (OrderItem) o;
-
-        if (comment != null ? !comment.equals(orderItem.comment) : orderItem.comment != null) return false;
-        if (count != null ? !count.equals(orderItem.count) : orderItem.count != null) return false;
-        if (itemId != null ? !itemId.equals(orderItem.itemId) : orderItem.itemId != null) return false;
-        if (price != null ? !price.equals(orderItem.price) : orderItem.price != null) return false;
-        if (variations != null ? !variations.equals(orderItem.variations) : orderItem.variations != null) return false;
-        if (variationsChoices != null ? !variationsChoices.equals(orderItem.variationsChoices) : orderItem.variationsChoices != null)
-            return false;
-
-        return true;
+        return Objects.equals(itemId, orderItem.itemId) &&
+                Objects.equals(variations, orderItem.variations) &&
+                Objects.equals(variationsChoices, orderItem.variationsChoices) &&
+                Objects.equals(comment, orderItem.comment) &&
+                Objects.equals(price, orderItem.price) &&
+                Objects.equals(count, orderItem.count);
     }
 
     @Override
     public int hashCode() {
-        int result = itemId != null ? itemId.hashCode() : 0;
-        result = 31 * result + (variations != null ? variations.hashCode() : 0);
-        result = 31 * result + (variationsChoices != null ? variationsChoices.hashCode() : 0);
-        result = 31 * result + (comment != null ? comment.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (count != null ? count.hashCode() : 0);
-        return result;
+        return Objects.hash(itemId, variations, variationsChoices, comment, price, count);
     }
 
     /** Item id. */
