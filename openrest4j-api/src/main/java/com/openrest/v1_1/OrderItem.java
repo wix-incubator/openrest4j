@@ -27,10 +27,10 @@ public class OrderItem implements Serializable, Cloneable {
     public OrderItem() {}
     
     @Override
-	public Object clone() {
+	public OrderItem clone() {
     	final List<List<OrderItem>> clonedVariationsChoices;
     	if (variationsChoices != null) {
-    		clonedVariationsChoices = new LinkedList<List<OrderItem>>();
+    		clonedVariationsChoices = new LinkedList<>();
     		for (List<OrderItem> orderItems : variationsChoices) {
     			clonedVariationsChoices.add(OrderItem.clone(orderItems));
     		}
@@ -46,9 +46,9 @@ public class OrderItem implements Serializable, Cloneable {
     		return null;
     	}
     	
-    	final List<OrderItem> cloned = new LinkedList<OrderItem>();
+    	final List<OrderItem> cloned = new LinkedList<>();
 		for (OrderItem orderItem : orderItems) {
-			cloned.add((orderItem != null) ? (OrderItem) orderItem.clone() : null);
+			cloned.add((orderItem != null) ? orderItem.clone() : null);
 		}
     	return cloned;
     }
