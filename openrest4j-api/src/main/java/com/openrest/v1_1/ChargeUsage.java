@@ -20,11 +20,11 @@ public class ChargeUsage implements Serializable, Cloneable {
     }
     
     @Override
-	public Object clone() {
-    	return new ChargeUsage((counts != null) ? new LinkedHashMap<String, Integer>(counts) : null);
+	public ChargeUsage clone() {
+    	return new ChargeUsage((counts != null) ? new LinkedHashMap<>(counts) : null);
 	}
     
     /** Maps charge ids to number of times the charge was used. */
     @JsonInclude(Include.NON_DEFAULT)
-    public Map<String, Integer> counts = new LinkedHashMap<String, Integer>();
+    public Map<String, Integer> counts = new LinkedHashMap<>();
 }
