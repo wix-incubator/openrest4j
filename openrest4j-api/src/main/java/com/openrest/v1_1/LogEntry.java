@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 /** An entry in a change-log. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -24,10 +25,10 @@ public class LogEntry implements Serializable, Cloneable {
     public LogEntry() {}
     
     @Override
-	public Object clone() {
+	public LogEntry clone() {
     	return new LogEntry(
                 (timestamp != null) ? (Date) timestamp.clone() : null,
-                ((user != null) ? (User) user.clone() : null), comment);
+                ((user != null) ? user.clone() : null), comment);
 	}
     
     public static List<LogEntry> clone(List<LogEntry> log) {
@@ -37,7 +38,7 @@ public class LogEntry implements Serializable, Cloneable {
     	
     	final List<LogEntry> cloned = new LinkedList<>();
     	for (LogEntry logEntry : log) {
-    		cloned.add((logEntry != null) ? (LogEntry) logEntry.clone() : null);
+    		cloned.add((logEntry != null) ? logEntry.clone() : null);
     	}
     	return cloned;
     }
@@ -46,22 +47,15 @@ public class LogEntry implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         LogEntry logEntry = (LogEntry) o;
-
-        if (comment != null ? !comment.equals(logEntry.comment) : logEntry.comment != null) return false;
-        if (timestamp != null ? !timestamp.equals(logEntry.timestamp) : logEntry.timestamp != null) return false;
-        if (user != null ? !user.equals(logEntry.user) : logEntry.user != null) return false;
-
-        return true;
+        return Objects.equals(timestamp, logEntry.timestamp) &&
+                Objects.equals(user, logEntry.user) &&
+                Objects.equals(comment, logEntry.comment);
     }
 
     @Override
     public int hashCode() {
-        int result = timestamp != null ? timestamp.hashCode() : 0;
-        result = 31 * result + (user != null ? user.hashCode() : 0);
-        result = 31 * result + (comment != null ? comment.hashCode() : 0);
-        return result;
+        return Objects.hash(timestamp, user, comment);
     }
 
     /** The log entry's timestamp. */
