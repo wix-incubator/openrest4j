@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Blob implements Serializable, Cloneable {
@@ -17,7 +18,10 @@ public class Blob implements Serializable, Cloneable {
     	this.id = id;
     	this.url = url;
     }
-    
+
+    /** Default constructor for JSON deserialization. */
+    public Blob() {}
+
     @Override
 	public Blob clone() {
     	return new Blob(id, url);
@@ -41,23 +45,16 @@ public class Blob implements Serializable, Cloneable {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-
 		Blob blob = (Blob) o;
-
-		if (id != null ? !id.equals(blob.id) : blob.id != null) return false;
-		return url != null ? url.equals(blob.url) : blob.url == null;
+		return Objects.equals(id, blob.id) &&
+				Objects.equals(url, blob.url);
 	}
 
 	@Override
 	public int hashCode() {
-		int result = id != null ? id.hashCode() : 0;
-		result = 31 * result + (url != null ? url.hashCode() : 0);
-		return result;
+		return Objects.hash(id, url);
 	}
 
-    /** Default constructor for JSON deserialization. */
-    public Blob() {}
-    
     @JsonInclude(Include.NON_NULL)
     public String id;
     
