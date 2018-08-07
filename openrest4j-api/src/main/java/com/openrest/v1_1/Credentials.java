@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Credentials implements Serializable, Cloneable {
@@ -19,7 +20,7 @@ public class Credentials implements Serializable, Cloneable {
     public Credentials() {}
 
     @Override
-    public Object clone() {
+    public Credentials clone() {
         return new Credentials(username, password);
     }
 
@@ -27,19 +28,14 @@ public class Credentials implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Credentials that = (Credentials) o;
-
-        if (username != null ? !username.equals(that.username) : that.username != null) return false;
-        return !(password != null ? !password.equals(that.password) : that.password != null);
-
+        return Objects.equals(username, that.username) &&
+                Objects.equals(password, that.password);
     }
 
     @Override
     public int hashCode() {
-        int result = username != null ? username.hashCode() : 0;
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        return result;
+        return Objects.hash(username, password);
     }
 
     /** The username. */
