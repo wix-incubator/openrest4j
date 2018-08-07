@@ -1,10 +1,10 @@
 package com.openrest.v1_1;
 
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.io.Serializable;
 
 /** Login information to some system. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -20,7 +20,7 @@ public class Login implements Serializable, Cloneable {
     public Login() {}
     
     @Override
-	public Object clone() {
+	public Login clone() {
 		return new Login(username, password);
 	}
 
