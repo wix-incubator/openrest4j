@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import java.io.Serializable;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -40,63 +41,23 @@ public class Filter implements Serializable, Cloneable {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((restaurantIds == null) ? 0 : restaurantIds.hashCode());
-		result = prime * result + ((chainId == null) ? 0 : chainId.hashCode());
-		result = prime * result
-				+ ((distributorId == null) ? 0 : distributorId.hashCode());
-		result = prime * result
-				+ ((features == null) ? 0 : features.hashCode());
-		result = prime * result + ((latLng == null) ? 0 : latLng.hashCode());
-		result = prime * result + ((radius == null) ? 0 : radius.hashCode());
-		return result;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Filter filter = (Filter) o;
+		return Objects.equals(distributorId, filter.distributorId) &&
+				Objects.equals(chainId, filter.chainId) &&
+				Objects.equals(restaurantIds, filter.restaurantIds) &&
+				Objects.equals(features, filter.features) &&
+				Objects.equals(latLng, filter.latLng) &&
+				Objects.equals(radius, filter.radius);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Filter other = (Filter) obj;
-		if (restaurantIds == null) {
-			if (other.restaurantIds != null)
-				return false;
-		} else if (!restaurantIds.equals(other.restaurantIds))
-			return false;
-		if (chainId == null) {
-			if (other.chainId != null)
-				return false;
-		} else if (!chainId.equals(other.chainId))
-			return false;
-		if (distributorId == null) {
-			if (other.distributorId != null)
-				return false;
-		} else if (!distributorId.equals(other.distributorId))
-			return false;
-		if (features == null) {
-			if (other.features != null)
-				return false;
-		} else if (!features.equals(other.features))
-			return false;
-		if (latLng == null) {
-			if (other.latLng != null)
-				return false;
-		} else if (!latLng.equals(other.latLng))
-			return false;
-		if (radius == null) {
-			if (other.radius != null)
-				return false;
-		} else if (!radius.equals(other.radius))
-			return false;
-		return true;
+	public int hashCode() {
+		return Objects.hash(distributorId, chainId, restaurantIds, features, latLng, radius);
 	}
-    
+
 	/** Exclude restaurants that are not under this distributor */
     @JsonInclude(Include.NON_NULL)
     public String distributorId;
