@@ -13,7 +13,6 @@ import java.io.Serializable;
 		use = JsonTypeInfo.Id.NAME,
 	    property = "type")
 @JsonSubTypes({
-	@Type(value = SearchRequest.class, name = SearchRequest.TYPE),
 	@Type(value = SetOrderStatusRequest.class, name = SetOrderStatusRequest.TYPE),
 	@Type(value = QueryClubMembersRequest.class, name = QueryClubMembersRequest.TYPE),
 	@Type(value = RegisterForPushNotificationsRequest.class, name = RegisterForPushNotificationsRequest.TYPE),

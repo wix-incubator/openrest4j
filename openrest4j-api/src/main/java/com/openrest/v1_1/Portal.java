@@ -18,7 +18,7 @@ public class Portal extends Organization {
     public Portal() {}
     
     public Portal(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
-				  String distributorId, Filter filter,
+				  String distributorId,
 				  LocalizedString title, LocalizedString description,
 				  Locale locale, Set<Locale> locales, Map<String, LocalizedString> messages,
 				  Contact contact, Address address, String timezone, String currency,
@@ -29,7 +29,6 @@ public class Portal extends Organization {
 				media, closed, products);
     	
     	this.distributorId = distributorId;
-    	this.filter = filter;
     	this.categories = categories;
     }
 
@@ -45,7 +44,6 @@ public class Portal extends Organization {
 				(created != null) ? (Date) created.clone() : null,
 				(modified != null) ? (Date) modified.clone() : null,
 				distributorId,
-    			((filter != null) ? filter.clone() : null),
     			((title != null) ? title.clone() : null),
     			((description != null) ? description.clone() : null),
     			locale,
@@ -66,24 +64,19 @@ public class Portal extends Organization {
 		if (!super.equals(o)) return false;
 		Portal portal = (Portal) o;
 		return Objects.equals(distributorId, portal.distributorId) &&
-				Objects.equals(filter, portal.filter) &&
 				Objects.equals(categories, portal.categories);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(super.hashCode(), distributorId, filter, categories);
+		return Objects.hash(super.hashCode(), distributorId, categories);
 	}
 
 	/** The distributor in charge of this portal. */
     @JsonInclude(Include.NON_NULL)
     public String distributorId;
     
-    /** The filter associated with this portal. */
-    @JsonInclude(Include.NON_DEFAULT)
-    public Filter filter = new Filter();
-    
-    /** The filter associated with this portal. */
+    /** The portal's categories. */
     @JsonInclude(Include.NON_DEFAULT)
     public List<PortalMenuCategory> categories = new LinkedList<>();
 }
