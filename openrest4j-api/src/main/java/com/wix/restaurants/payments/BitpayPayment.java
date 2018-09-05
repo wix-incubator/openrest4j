@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /** Payment with Bitcoin via BitPay. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -37,17 +38,13 @@ public class BitpayPayment extends Payment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-
         BitpayPayment that = (BitpayPayment) o;
-
-        return token != null ? token.equals(that.token) : that.token == null;
+        return Objects.equals(token, that.token);
     }
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (token != null ? token.hashCode() : 0);
-        return result;
+        return Objects.hash(super.hashCode(), token);
     }
 
     /** Payment token. */
