@@ -7,6 +7,7 @@ import com.wix.pay.smaug.client.model.CreditCardToken;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 /**
@@ -46,20 +47,14 @@ public class CreditcardPayment extends Payment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-
         CreditcardPayment that = (CreditcardPayment) o;
-
-        if (collectionMethod != null ? !collectionMethod.equals(that.collectionMethod) : that.collectionMethod != null)
-            return false;
-        return cardToken != null ? cardToken.equals(that.cardToken) : that.cardToken == null;
+        return Objects.equals(collectionMethod, that.collectionMethod) &&
+                Objects.equals(cardToken, that.cardToken);
     }
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (collectionMethod != null ? collectionMethod.hashCode() : 0);
-        result = 31 * result + (cardToken != null ? cardToken.hashCode() : 0);
-        return result;
+        return Objects.hash(super.hashCode(), collectionMethod, cardToken);
     }
 
     /**

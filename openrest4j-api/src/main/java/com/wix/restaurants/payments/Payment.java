@@ -8,10 +8,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(
@@ -67,18 +64,14 @@ public abstract class Payment implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Payment payment = (Payment) o;
-
-        if (amount != null ? !amount.equals(payment.amount) : payment.amount != null) return false;
-        return externalIds != null ? externalIds.equals(payment.externalIds) : payment.externalIds == null;
+        return Objects.equals(amount, payment.amount) &&
+                Objects.equals(externalIds, payment.externalIds);
     }
 
     @Override
     public int hashCode() {
-        int result = amount != null ? amount.hashCode() : 0;
-        result = 31 * result + (externalIds != null ? externalIds.hashCode() : 0);
-        return result;
+        return Objects.hash(amount, externalIds);
     }
 
     /** Amount to pay. */
