@@ -28,6 +28,13 @@
                 <role>owner</role>
             </roles>
         </developer>
+        <developer>
+            <name>Alex Gaskin</name>
+            <email>alexanderga@wix.com</email>
+            <roles>
+                <role>owner</role>
+            </roles>
+        </developer>
     </developers>
 	
     <parent>
