@@ -31,7 +31,8 @@ import java.util.Map;
 	@Type(value = OrderTimeCondition.class, name = OrderTimeCondition.TYPE),
 	@Type(value = OrderDeliveryTypeCondition.class, name = OrderDeliveryTypeCondition.TYPE),
 	@Type(value = OrderPlatformCondition.class, name = OrderPlatformCondition.TYPE),
-	@Type(value = OrderSourceCondition.class, name = OrderSourceCondition.TYPE)
+	@Type(value = OrderSourceCondition.class, name = OrderSourceCondition.TYPE),
+	@Type(value = OrderCouponCondition.class, name = OrderCouponCondition.TYPE)
 })
 public abstract class Condition implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
