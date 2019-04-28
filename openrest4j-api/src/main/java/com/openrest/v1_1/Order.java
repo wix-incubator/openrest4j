@@ -14,7 +14,7 @@ import java.util.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Order implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
-    
+
     /** Constructs a previously submitted order from persisted data. */
     public Order(String id, Map<String, String> externalIds, String distributorId, String chainId, String restaurantId,
     		Locale locale, List<OrderItem> orderItems,
@@ -22,7 +22,7 @@ public class Order implements Serializable, Cloneable {
             Integer takeoutPacks, List<OrderCharge> orderCharges,
             Date created, Date received, Date modified, Date submitAt,
             User user, ClubMember clubMember, String status, String shareToken, String ownerToken,
-            String affiliate, String developer, String source, String platform, String coupon,
+            String affiliate, String developer, String source, String platform, Coupon coupon,
             Boolean legacyHierarchy, Map<String, String> properties, List<LogEntry> log) {
 
         this.id = id;
@@ -61,7 +61,7 @@ public class Order implements Serializable, Cloneable {
 
     /** Default constructor for JSON deserialization. */
     public Order() {}
-    
+
     @Override
 	public Order clone() {
     	return new Order(id,
@@ -76,7 +76,9 @@ public class Order implements Serializable, Cloneable {
                 (submitAt != null) ? (Date) submitAt.clone() : null,
     			((user != null) ? user.clone() : null),
     			((clubMember != null) ? clubMember.clone() : null),
-    			status, shareToken, ownerToken, affiliate, developer, source, platform, coupon, legacyHierarchy,
+    			status, shareToken, ownerToken, affiliate, developer, source, platform,
+                ((coupon != null ? coupon.clone() : null)),
+                legacyHierarchy,
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
     			LogEntry.clone(log));
 	}
@@ -166,14 +168,14 @@ public class Order implements Serializable, Cloneable {
     /** The order's unique id. */
     @JsonInclude(Include.NON_NULL)
     public String id;
-    
+
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> externalIds = new LinkedHashMap<>();
 
     /** The distributor's unique id. */
     @JsonInclude(Include.NON_NULL)
     public String distributorId;
-    
+
     /** The chain's unique id (can be null). */
     @JsonInclude(Include.NON_NULL)
     public String chainId;
@@ -181,7 +183,7 @@ public class Order implements Serializable, Cloneable {
     /** The restaurant's unique id. */
     @JsonInclude(Include.NON_NULL)
     public String restaurantId;
-    
+
     /** The order's locale. */
     @JsonInclude(Include.NON_NULL)
     public Locale locale;
@@ -228,14 +230,14 @@ public class Order implements Serializable, Cloneable {
     /** The order's creation timestamp. */
     @JsonInclude(Include.NON_NULL)
     public Date created;
-    
+
     /**
      * When should the order be submitted to the restaurant (null means now).
      * Used in future ordering.
      */
     @JsonInclude(Include.NON_NULL)
     public Date submitAt;
-    
+
     /**
      * Timestamp in which the order was marked as "new" in the system. This may differ from the
      * order's creation timestamp for orders that were pending upon creation.
@@ -250,7 +252,7 @@ public class Order implements Serializable, Cloneable {
     /** The ordering user. */
     @JsonInclude(Include.NON_NULL)
     public User user;
-    
+
     /** The ordering club member. */
     @JsonInclude(Include.NON_NULL)
     public ClubMember clubMember;
@@ -273,11 +275,11 @@ public class Order implements Serializable, Cloneable {
     /** Affiliate-id, for orders that came through affiliate marketing. */
     @JsonInclude(Include.NON_NULL)
     public String affiliate;
-    
+
     /** The client's developer id. */
     @JsonInclude(Include.NON_NULL)
     public String developer;
-    
+
     /**
      * The organization-id from which the customer ordered.
      * @see com.wix.restaurants.Sources
@@ -294,22 +296,22 @@ public class Order implements Serializable, Cloneable {
 
     /** The coupon which the customer used when when ordered. */
     @JsonInclude(Include.NON_NULL)
-    public String coupon;
-    
+    public Coupon coupon;
+
     /**
      * Whether or not the order was submitted and should be displayed with a
      * legacy "2-level hierarchy".
      */
     @JsonInclude(Include.NON_DEFAULT)
     public Boolean legacyHierarchy = Boolean.FALSE;
-    
+
     /**
      * Map of user-defined extended properties. Developers should use unique
      * keys, e.g. "com.googlecode.openrestext".
      */
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> properties = new LinkedHashMap<>();
-    
+
     /** Change log for this order. */
     @JsonInclude(Include.NON_DEFAULT)
     public List<LogEntry> log = new LinkedList<>();
