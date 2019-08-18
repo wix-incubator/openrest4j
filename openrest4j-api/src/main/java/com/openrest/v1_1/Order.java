@@ -122,7 +122,7 @@ public class Order implements Serializable, Cloneable {
                 Objects.equals(legacyHierarchy, order.legacyHierarchy) &&
                 Objects.equals(properties, order.properties) &&
                 Objects.equals(log, order.log) &&
-                Objects.equals(gatewayReturnUrl, order.gatewayReturnUrl) &&;
+                Objects.equals(gatewayReturnUrl, order.gatewayReturnUrl);
     }
 
     @Override
