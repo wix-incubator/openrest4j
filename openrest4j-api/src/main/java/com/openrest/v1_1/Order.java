@@ -57,7 +57,7 @@ public class Order implements Serializable, Cloneable {
         this.legacyHierarchy = legacyHierarchy;
         this.properties = properties;
         this.log = log;
-        this.gatewayReturnUrl = gatewayReturnUrl
+        this.gatewayReturnUrl = gatewayReturnUrl;
     }
 
     /** Default constructor for JSON deserialization. */
