@@ -23,10 +23,11 @@ public class CreditcardPayment extends Payment {
     public CreditcardPayment() {}
 
     public CreditcardPayment(Integer amount, Map<String, String> externalIds,
-                             String collectionMethod, CreditCardToken cardToken) {
+                             String collectionMethod, CreditCardToken cardToken, String nonce) {
         super(amount, externalIds);
         this.collectionMethod = collectionMethod;
         this.cardToken = cardToken;
+        this.nonce = nonce;
     }
 
     @Override
@@ -39,7 +40,8 @@ public class CreditcardPayment extends Payment {
         return new CreditcardPayment(amount,
                 ((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
                 collectionMethod,
-                cardToken);
+                cardToken,
+                nonce);
     }
 
     @Override
@@ -49,12 +51,13 @@ public class CreditcardPayment extends Payment {
         if (!super.equals(o)) return false;
         CreditcardPayment that = (CreditcardPayment) o;
         return Objects.equals(collectionMethod, that.collectionMethod) &&
-                Objects.equals(cardToken, that.cardToken);
+                Objects.equals(cardToken, that.cardToken) &&
+                Objects.equals(nonce, that.nonce);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), collectionMethod, cardToken);
+        return Objects.hash(super.hashCode(), collectionMethod, cardToken, nonce);
     }
 
     /**
@@ -67,4 +70,8 @@ public class CreditcardPayment extends Payment {
     /** Card token (if card is collected online). */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public CreditCardToken cardToken;
+
+    /** The nonce input parameter for the braintree gateway to use when additional 3ds2 authentication is required. */
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public String nonce;
 }
