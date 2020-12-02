@@ -26,7 +26,7 @@ public class Restaurant extends Organization {
                       Set<String> paymentTypes, Boolean multiPaymentDisabled, CreditcardsInfo creditcardsInfo,
                       DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations,
                       Map<String, String> media, List<AppInfo> apps, Map<String, String> properties,
-                      Boolean closed, Set<Product> products, Map<String, Double> features) {
+                      Boolean closed, Set<Product> products, Map<String, Double> features, String currentLocationId) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages,
                 contact, address, timezone, currency, apps, properties,
                 media, closed, products);
@@ -42,6 +42,7 @@ public class Restaurant extends Organization {
         this.orders = orders;
         this.reservations = reservations;
         this.features = features;
+        this.currentLocationId = currentLocationId;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -79,7 +80,8 @@ public class Restaurant extends Organization {
                 AppInfo.clone(apps),
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
     			closed, Product.clone(products),
-    			((features != null) ? new LinkedHashMap<>(features) : null));
+    			((features != null) ? new LinkedHashMap<>(features) : null),
+                currentLocationId);
 	}
 
     @Override
@@ -103,7 +105,7 @@ public class Restaurant extends Organization {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), distributorId, chainId, openTimes, deliveryInfos, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations, features);
+        return Objects.hash(super.hashCode(), distributorId, chainId, openTimes, deliveryInfos, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations, features, currentLocationId);
     }
 
     @Override
@@ -120,6 +122,7 @@ public class Restaurant extends Organization {
                 ", orders=" + orders +
                 ", reservations=" + reservations +
                 ", features=" + features +
+                ", currentLocationId=" + currentLocationId +
                 ", id='" + id + '\'' +
                 ", alias='" + alias + '\'' +
                 ", affiliateId='" + affiliateId + '\'' +
@@ -146,7 +149,11 @@ public class Restaurant extends Organization {
     /** The distributor in charge of this restaurant. */
     @JsonInclude(Include.NON_NULL)
     public String distributorId;
-    
+
+    /** The current location id. */
+    @JsonInclude(Include.NON_NULL)
+    public String currentLocationId;
+
     /** The chain this restaurant is part of. */
     @JsonInclude(Include.NON_NULL)
     public String chainId;
