@@ -39,13 +39,20 @@
                 <role>owner</role>
             </roles>
         </developer>
+        <developer>
+            <name>Itay Herskovits</name>
+            <email>itayhe@wix.com</email>
+            <roles>
+                <role>owner</role>
+            </roles>
+        </developer>
     </developers>
 
 
 	<parent>
 		<groupId>com.wix</groupId>
 		<artifactId>wix-oss-scala-parent</artifactId>
-		<version>0.47.0</version>
+		<version>0.48.0</version>
 		<relativePath />
 	</parent>
 
