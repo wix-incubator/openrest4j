@@ -26,7 +26,7 @@ public class Restaurant extends Organization {
                       Set<String> paymentTypes, Boolean multiPaymentDisabled, CreditcardsInfo creditcardsInfo,
                       DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations,
                       Map<String, String> media, List<AppInfo> apps, Map<String, String> properties,
-                      Boolean closed, Set<Product> products, Map<String, Double> features, String currentLocationId) {
+                      Boolean closed, Set<Product> products, Map<String, Double> features, String currentLocationId, List<Location> locations) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages,
                 contact, address, timezone, currency, apps, properties,
                 media, closed, products);
@@ -43,6 +43,7 @@ public class Restaurant extends Organization {
         this.reservations = reservations;
         this.features = features;
         this.currentLocationId = currentLocationId;
+        this.locations = locations;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -81,7 +82,8 @@ public class Restaurant extends Organization {
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
     			closed, Product.clone(products),
     			((features != null) ? new LinkedHashMap<>(features) : null),
-                currentLocationId);
+                currentLocationId,
+                Location.clone(locations));
 	}
 
     @Override
@@ -100,12 +102,14 @@ public class Restaurant extends Organization {
                 Objects.equals(deliveriesInfo, that.deliveriesInfo) &&
                 Objects.equals(orders, that.orders) &&
                 Objects.equals(reservations, that.reservations) &&
-                Objects.equals(features, that.features);
+                Objects.equals(features, that.features) &&
+                Objects.equals(currentLocationId, that.currentLocationId) &&
+                Objects.equals(locations, that.locations);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), distributorId, chainId, openTimes, deliveryInfos, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations, features, currentLocationId);
+        return Objects.hash(super.hashCode(), distributorId, chainId, openTimes, deliveryInfos, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations, features, currentLocationId, locations);
     }
 
     @Override
@@ -123,6 +127,7 @@ public class Restaurant extends Organization {
                 ", reservations=" + reservations +
                 ", features=" + features +
                 ", currentLocationId=" + currentLocationId +
+                ", locations=" + locations +
                 ", id='" + id + '\'' +
                 ", alias='" + alias + '\'' +
                 ", affiliateId='" + affiliateId + '\'' +
@@ -165,7 +170,7 @@ public class Restaurant extends Organization {
     /** Information regarding the different delivery destinations. */
     @JsonInclude(Include.NON_DEFAULT)
     public List<DispatchInfo> deliveryInfos = new LinkedList<>();
-    
+
     /** Available payment methods. */
     @JsonInclude(Include.NON_DEFAULT)
     public Set<String> paymentTypes = new LinkedHashSet<>();
@@ -186,6 +191,9 @@ public class Restaurant extends Organization {
     @JsonInclude(Include.NON_NULL)
     public ReservationsInfo reservations;
 
+    /** Information regarding the locations of the restaurant. */
+    @JsonInclude(Include.NON_NULL)
+    public List<Location> locations = new LinkedList<>();
     /**
      * Maps feature-IDs to their values. The values correspond to how strongly the feature
      * is relevant for the restaurant, which influences its position in search results.
