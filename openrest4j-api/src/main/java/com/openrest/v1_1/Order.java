@@ -23,7 +23,7 @@ public class Order implements Serializable, Cloneable {
             Date created, Date received, Date modified, Date submitAt,
             User user, ClubMember clubMember, String status, String shareToken, String ownerToken,
             String affiliate, String developer, String source, String platform, Coupon coupon,
-            Boolean legacyHierarchy, Map<String, String> properties, List<LogEntry> log, String gatewayReturnUrl) {
+            Boolean legacyHierarchy, Map<String, String> properties, List<LogEntry> log, String gatewayReturnUrl, String locationId) {
 
         this.id = id;
         this.externalIds = externalIds;
@@ -58,6 +58,7 @@ public class Order implements Serializable, Cloneable {
         this.properties = properties;
         this.log = log;
         this.gatewayReturnUrl = gatewayReturnUrl;
+        this.locationId = locationId;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -82,7 +83,8 @@ public class Order implements Serializable, Cloneable {
                 legacyHierarchy,
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
     			LogEntry.clone(log),
-                gatewayReturnUrl);
+                gatewayReturnUrl,
+                locationId);
 	}
 
     @Override
@@ -122,12 +124,13 @@ public class Order implements Serializable, Cloneable {
                 Objects.equals(legacyHierarchy, order.legacyHierarchy) &&
                 Objects.equals(properties, order.properties) &&
                 Objects.equals(log, order.log) &&
-                Objects.equals(gatewayReturnUrl, order.gatewayReturnUrl);
+                Objects.equals(gatewayReturnUrl, order.gatewayReturnUrl) &&
+                Objects.equals(locationId, order.locationId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, externalIds, distributorId, chainId, restaurantId, locale, orderItems, comment, price, currency, delivery, contact, payments, takeoutPacks, orderCharges, created, submitAt, received, modified, user, clubMember, status, shareToken, ownerToken, affiliate, developer, source, platform, coupon, legacyHierarchy, properties, log, gatewayReturnUrl);
+        return Objects.hash(id, externalIds, distributorId, chainId, restaurantId, locale, orderItems, comment, price, currency, delivery, contact, payments, takeoutPacks, orderCharges, created, submitAt, received, modified, user, clubMember, status, shareToken, ownerToken, affiliate, developer, source, platform, coupon, legacyHierarchy, properties, log, gatewayReturnUrl, locationId);
     }
 
     @Override
@@ -166,6 +169,7 @@ public class Order implements Serializable, Cloneable {
                 ", properties=" + properties +
                 ", log=" + log +
                 ", gatewayReturnUrl=" + gatewayReturnUrl +
+                ", locationId=" + locationId +
                 '}';
     }
 
@@ -325,4 +329,8 @@ public class Order implements Serializable, Cloneable {
      */
     @JsonInclude(Include.NON_NULL)
     public String gatewayReturnUrl;
+
+    /** The location id which the customer used when ordered **/
+    @JsonInclude(Include.NON_NULL)
+    public String locationId;
 }
