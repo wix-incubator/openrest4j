@@ -26,7 +26,8 @@ public class Restaurant extends Organization {
                       Set<String> paymentTypes, Boolean multiPaymentDisabled, CreditcardsInfo creditcardsInfo,
                       DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations,
                       Map<String, String> media, List<AppInfo> apps, Map<String, String> properties,
-                      Boolean closed, Set<Product> products, Map<String, Double> features, String currentLocationId, List<Location> locations) {
+                      Boolean closed, Set<Product> products, Map<String, Double> features, String currentLocationId,
+                      String defaultLocationIdAtTimeOfMigration, LocalizedString locationName, List<Location> locations) {
     	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages,
                 contact, address, timezone, currency, apps, properties,
                 media, closed, products);
@@ -43,6 +44,8 @@ public class Restaurant extends Organization {
         this.reservations = reservations;
         this.features = features;
         this.currentLocationId = currentLocationId;
+        this.defaultLocationIdAtTimeOfMigration = defaultLocationIdAtTimeOfMigration;
+        this.locationName = locationName;
         this.locations = locations;
     }
 
@@ -79,10 +82,12 @@ public class Restaurant extends Organization {
                 ((reservations != null) ? reservations.clone() : null),
                 ((media != null) ? new LinkedHashMap<>(media) : null),
                 AppInfo.clone(apps),
-    			((properties != null) ? new LinkedHashMap<>(properties) : null),
-    			closed, Product.clone(products),
-    			((features != null) ? new LinkedHashMap<>(features) : null),
+                ((properties != null) ? new LinkedHashMap<>(properties) : null),
+                closed, Product.clone(products),
+                ((features != null) ? new LinkedHashMap<>(features) : null),
                 currentLocationId,
+                defaultLocationIdAtTimeOfMigration,
+                ((locationName != null) ? locationName.clone() : null),
                 Location.clone(locations));
 	}
 
@@ -104,12 +109,14 @@ public class Restaurant extends Organization {
                 Objects.equals(reservations, that.reservations) &&
                 Objects.equals(features, that.features) &&
                 Objects.equals(currentLocationId, that.currentLocationId) &&
+                Objects.equals(defaultLocationIdAtTimeOfMigration, that.defaultLocationIdAtTimeOfMigration) &&
+                Objects.equals(locationName, that.locationName) &&
                 Objects.equals(locations, that.locations);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), distributorId, chainId, openTimes, deliveryInfos, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations, features, currentLocationId, locations);
+        return Objects.hash(super.hashCode(), distributorId, chainId, openTimes, deliveryInfos, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations, features, currentLocationId, defaultLocationIdAtTimeOfMigration, locationName, locations);
     }
 
     @Override
@@ -127,6 +134,8 @@ public class Restaurant extends Organization {
                 ", reservations=" + reservations +
                 ", features=" + features +
                 ", currentLocationId=" + currentLocationId +
+                ", defaultLocationIdAtTimeOfMigration=" + defaultLocationIdAtTimeOfMigration +
+                ", locationName=" + locationName +
                 ", locations=" + locations +
                 ", id='" + id + '\'' +
                 ", alias='" + alias + '\'' +
@@ -158,6 +167,14 @@ public class Restaurant extends Organization {
     /** The current location id. */
     @JsonInclude(Include.NON_NULL)
     public String currentLocationId;
+
+    /** The default location id at time of migration. */
+    @JsonInclude(Include.NON_NULL)
+    public String defaultLocationIdAtTimeOfMigration;
+
+    /** The current location name. */
+    @JsonInclude(Include.NON_DEFAULT)
+    public LocalizedString locationName = LocalizedString.empty;
 
     /** The chain this restaurant is part of. */
     @JsonInclude(Include.NON_NULL)
