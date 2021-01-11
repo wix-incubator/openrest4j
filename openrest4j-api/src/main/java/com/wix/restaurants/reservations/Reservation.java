@@ -28,7 +28,8 @@ public class Reservation implements Serializable, Cloneable {
                        String status, String restaurantStatus, String customerStatus,
                        User user,
                        String developer, String source, String platform,
-                       List<LogEntry> log, Map<String, String> properties) {
+                       List<LogEntry> log, Map<String, String> properties,
+                       String locationId) {
         this.id = id;
         this.externalIds = externalIds;
         this.created = created;
@@ -54,6 +55,7 @@ public class Reservation implements Serializable, Cloneable {
         this.platform = platform;
         this.log = log;
         this.properties = properties;
+        this.locationId = locationId;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -76,7 +78,8 @@ public class Reservation implements Serializable, Cloneable {
                 (user != null) ? user.clone() : null,
                 developer, source, platform,
                 LogEntry.clone(log),
-                ((properties != null) ? new LinkedHashMap<>(properties) : null));
+                ((properties != null) ? new LinkedHashMap<>(properties) : null),
+                locationId);
     }
 
     @Override
@@ -108,12 +111,13 @@ public class Reservation implements Serializable, Cloneable {
                 Objects.equals(source, that.source) &&
                 Objects.equals(platform, that.platform) &&
                 Objects.equals(log, that.log) &&
-                Objects.equals(properties, that.properties);
+                Objects.equals(properties, that.properties) &&
+                Objects.equals(locationId, that.locationId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, externalIds, created, modified, restaurantId, chainId, distributorId, timeGuarantee, time, heldUntil, contact, partySize, comment, locale, ownerToken, shareToken, status, restaurantStatus, customerStatus, user, developer, source, platform, log, properties);
+        return Objects.hash(id, externalIds, created, modified, restaurantId, chainId, distributorId, timeGuarantee, time, heldUntil, contact, partySize, comment, locale, ownerToken, shareToken, status, restaurantStatus, customerStatus, user, developer, source, platform, log, properties, locationId);
     }
 
     @Override
@@ -144,6 +148,7 @@ public class Reservation implements Serializable, Cloneable {
                 ", platform='" + platform + '\'' +
                 ", log=" + log +
                 ", properties=" + properties +
+                ", locationId=" + locationId +
                 '}';
     }
 
@@ -276,4 +281,8 @@ public class Reservation implements Serializable, Cloneable {
      */
     @JsonInclude(Include.NON_NULL)
     public Map<String, String> properties = new LinkedHashMap<>();
+
+    /** The location id which the customer used when made the reservation **/
+    @JsonInclude(Include.NON_NULL)
+    public String locationId;
 }
