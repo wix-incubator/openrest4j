@@ -126,8 +126,8 @@ public class Location implements Serializable, Cloneable {
     @JsonInclude(JsonInclude.Include.NON_DEFAULT)
     public LocalizedString name = LocalizedString.empty;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    public LocalizedString description;
+    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
+    public LocalizedString description = LocalizedString.empty;;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean defaultLocation;
