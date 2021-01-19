@@ -15,9 +15,10 @@ public class AddInventoryRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public AddInventoryRequest() {}
     
-    public AddInventoryRequest(String accessToken, String organizationId, Map<String, Integer> counts) {
+    public AddInventoryRequest(String accessToken, String organizationId, String locationId, Map<String, Integer> counts) {
     	this.accessToken = accessToken;
     	this.organizationId = organizationId;
+    	this.locationId = locationId;
     	this.counts = counts;
     }
     
@@ -26,7 +27,10 @@ public class AddInventoryRequest extends Request {
     
     @JsonInclude(Include.NON_NULL)
     public String organizationId;
-    
+
+    @JsonInclude(Include.NON_NULL)
+    public String locationId;
+
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, Integer> counts = new LinkedHashMap<>();
 }
