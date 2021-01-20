@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class GetInventoryRequest extends Request {
 	public static final String TYPE = "get_inventory";
     private static final long serialVersionUID = 1L;
-    
+
     /** Default constructor for JSON deserialization. */
     public GetInventoryRequest() {}
 
@@ -20,10 +20,10 @@ public class GetInventoryRequest extends Request {
     	this.locationId = locationId;
     	this.itemIds = itemIds;
     }
-    
+
     @JsonInclude(Include.NON_NULL)
     public String accessToken;
-    
+
     @JsonInclude(Include.NON_NULL)
     public String organizationId;
 
