@@ -13,10 +13,11 @@ public class GetInventoryRequest extends Request {
     
     /** Default constructor for JSON deserialization. */
     public GetInventoryRequest() {}
-    
-    public GetInventoryRequest(String accessToken, String organizationId, Set<String> itemIds) {
+
+    public GetInventoryRequest(String accessToken, String organizationId, String locationId, Set<String> itemIds) {
     	this.accessToken = accessToken;
     	this.organizationId = organizationId;
+    	this.locationId = locationId;
     	this.itemIds = itemIds;
     }
     
@@ -25,7 +26,10 @@ public class GetInventoryRequest extends Request {
     
     @JsonInclude(Include.NON_NULL)
     public String organizationId;
-    
+
+    @JsonInclude(Include.NON_NULL)
+    public String locationId;
+
     /** Item-ids to query (null means "all"). */
     @JsonInclude(Include.NON_NULL)
     public Set<String> itemIds;
