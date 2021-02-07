@@ -12,6 +12,17 @@ import java.util.Map.Entry;
 public class Contact implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
     
+    public Contact(String firstName, String lastName, String email, String phone, String fax, String wixContactId, String wixMemberId, String wixVisitorId) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.fax = fax;
+        this.wixContactId = wixContactId;
+        this.wixMemberId = wixMemberId;
+        this.wixVisitorId = wixVisitorId;
+    }
+
     public Contact(String firstName, String lastName, String email, String phone, String fax) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -19,13 +30,13 @@ public class Contact implements Serializable, Cloneable {
         this.phone = phone;
         this.fax = fax;
     }
-    
+
     /** Default constructor for JSON deserialization. */
     public Contact() {}
     
     @Override
 	public Contact clone() {
-		return new Contact(firstName, lastName, email, phone, fax);
+		return new Contact(firstName, lastName, email, phone, fax, wixContactId, wixMemberId, wixVisitorId);
 	}
     
     public static Map<String, Contact> clone(Map<String, Contact> contacts) {
@@ -63,15 +74,18 @@ public class Contact implements Serializable, Cloneable {
 				Objects.equals(lastName, contact.lastName) &&
 				Objects.equals(email, contact.email) &&
 				Objects.equals(phone, contact.phone) &&
-				Objects.equals(fax, contact.fax);
+				Objects.equals(fax, contact.fax) &&
+                Object.equals(wixContactId, contact.wixContactId) &&
+                Object.equals(wixMemberId, contact.wixMemberId) &&
+                Object.equals(wixVisitorId, contact.wixVisitorId);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(firstName, lastName, email, phone, fax);
+		return Objects.hash(firstName, lastName, email, phone, fax, wixContactId, wixMemberId, wixVisitorId);
 	}
 
-    @JsonInclude(Include.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
     public String firstName;
 
     @JsonInclude(Include.NON_NULL)
@@ -85,4 +99,13 @@ public class Contact implements Serializable, Cloneable {
     
     @JsonInclude(Include.NON_NULL)
     public String fax;
+
+    @JsonInclude(Include.NON_NULL)
+    public String wixContactId;
+
+    @JsonInclude(Include.NON_NULL)
+    public String wixMemberId;
+
+    @JsonInclude(Include.NON_NULL)
+    public String wixVisitorId;
 }
