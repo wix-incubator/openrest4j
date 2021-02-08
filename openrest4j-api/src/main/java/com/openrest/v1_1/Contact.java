@@ -75,9 +75,9 @@ public class Contact implements Serializable, Cloneable {
 				Objects.equals(email, contact.email) &&
 				Objects.equals(phone, contact.phone) &&
 				Objects.equals(fax, contact.fax) &&
-                Object.equals(wixContactId, contact.wixContactId) &&
-                Object.equals(wixMemberId, contact.wixMemberId) &&
-                Object.equals(wixVisitorId, contact.wixVisitorId);
+                Objects.equals(wixContactId, contact.wixContactId) &&
+                Objects.equals(wixMemberId, contact.wixMemberId) &&
+                Objects.equals(wixVisitorId, contact.wixVisitorId);
 	}
 
 	@Override
