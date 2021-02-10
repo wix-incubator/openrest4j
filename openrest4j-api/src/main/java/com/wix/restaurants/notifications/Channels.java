@@ -43,4 +43,10 @@ public class Channels {
      * param: URL (must be https).
      */
     public static final String webhook = "webhook";
+
+    /**
+     * WixApi.
+     * param: enum operation.
+     */
+    public static final String wixapi = "wixapi";
 }
