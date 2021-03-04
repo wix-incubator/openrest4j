@@ -18,6 +18,11 @@ public class PickupDispatchInfo extends DispatchInfo {
     public PickupDispatchInfo() { }
 
     public PickupDispatchInfo(Integer minOrderPrice, Integer charge, Integer delayMins, Boolean inactive,
+                              Availability availability, Map<String, String> properties) {
+        super(minOrderPrice, charge, delayMins, inactive, availability, properties);
+    }
+
+    public PickupDispatchInfo(Integer minOrderPrice, Integer charge, Integer delayMins, Boolean inactive,
                               Availability availability, Map<String, String> properties, CurbsideInfo curbsideInfo,
                               Boolean withCurbsideInfo) {
         super(minOrderPrice, charge, delayMins, inactive, availability, properties);

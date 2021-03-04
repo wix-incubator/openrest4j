@@ -16,6 +16,10 @@ public class PickupDispatch extends Dispatch {
     /** Default constructor for JSON deserialization. */
     public PickupDispatch() {}
 
+    public PickupDispatch(Date time, String timeGuarantee, Integer charge, Map<String, String> properties) {
+        super(time, timeGuarantee, charge, properties);
+    }
+
     public PickupDispatch(Date time, String timeGuarantee, Integer charge, Map<String, String> properties,
                           String curbsideAdditionalInformation, Boolean isCurbside) {
         super(time, timeGuarantee, charge, properties);
