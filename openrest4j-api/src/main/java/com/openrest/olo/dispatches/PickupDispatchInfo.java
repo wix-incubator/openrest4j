@@ -21,7 +21,7 @@ public class PickupDispatchInfo extends DispatchInfo {
                               Availability availability, Map<String, String> properties, CurbsideInfo curbsideInfo,
                               Boolean withCurbsideInfo) {
         super(minOrderPrice, charge, delayMins, inactive, availability, properties);
-        this.withCurbsideInfo = withCurbSideInfo;
+        this.withCurbsideInfo = withCurbsideInfo;
         this.curbsideInfo = curbsideInfo;
     }
 
