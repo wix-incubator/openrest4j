@@ -24,7 +24,7 @@ public class CashierPayment extends Payment {
 
     public CashierPayment(Integer amount, Map<String, String> externalIds,
                           String paymentMethod, String paymentMethodTitle, String returnUrl,
-                          String paymentDetailsId, String accountId, PublicCreditCard creditCard) {
+                          String paymentDetailsId, String accountId, PublicCreditCard creditCard, Boolean createCashierOrderOnSubmit) {
 
         super(amount, externalIds);
         this.paymentMethod = paymentMethod;
@@ -33,6 +33,7 @@ public class CashierPayment extends Payment {
         this.paymentDetailsId = paymentDetailsId;
         this.accountId = accountId;
         this.creditCard = creditCard;
+        this.createCashierOrderOnSubmit = createCashierOrderOnSubmit;
     }
 
     @Override
@@ -49,7 +50,8 @@ public class CashierPayment extends Payment {
                 returnUrl,
                 paymentDetailsId,
                 accountId,
-                creditCard);
+                creditCard,
+                createCashierOrderOnSubmit);
     }
 
     @Override
@@ -63,12 +65,13 @@ public class CashierPayment extends Payment {
                 Objects.equals(returnUrl, that.returnUrl) &&
                 Objects.equals(paymentDetailsId, that.paymentDetailsId) &&
                 Objects.equals(accountId, that.accountId) &&
-                Objects.equals(creditCard, that.creditCard);
+                Objects.equals(creditCard, that.creditCard) &&
+                Objects.equals(createCashierOrderOnSubmit, that.createCashierOrderOnSubmit);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), paymentMethod, paymentMethodTitle, returnUrl, paymentDetailsId, accountId, creditCard);
+        return Objects.hash(super.hashCode(), paymentMethod, paymentMethodTitle, returnUrl, paymentDetailsId, accountId, creditCard, createCashierOrderOnSubmit);
     }
 
     /** Cashier payment method id. Required for client purposes */
@@ -94,4 +97,7 @@ public class CashierPayment extends Payment {
     /** Public card details (to be used for 'card' payment method). Required for client display purposes. */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public PublicCreditCard creditCard;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Boolean createCashierOrderOnSubmit = Boolean.FALSE;
 }
