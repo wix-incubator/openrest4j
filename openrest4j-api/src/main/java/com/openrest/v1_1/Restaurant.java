@@ -209,7 +209,7 @@ public class Restaurant extends Organization {
     public ReservationsInfo reservations;
 
     /** Information regarding the locations of the restaurant. */
-    @JsonInclude(Include.NON_NULL)
+    @JsonInclude(Include.NON_DEFAULT)
     public List<Location> locations = new LinkedList<>();
     /**
      * Maps feature-IDs to their values. The values correspond to how strongly the feature
