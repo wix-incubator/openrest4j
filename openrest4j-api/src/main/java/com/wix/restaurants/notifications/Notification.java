@@ -36,7 +36,8 @@ import java.util.Objects;
 	@Type(value = LowStockNotification.class, name = LowStockNotification.TYPE),
 	@Type(value = UpdatedReservationNotification.class, name = UpdatedReservationNotification.TYPE),
 	@Type(value = UpdatedOrganizationNotification.class, name = UpdatedOrganizationNotification.TYPE),
-	@Type(value = UpdatedOrderNotification.class, name = UpdatedOrderNotification.TYPE)
+	@Type(value = UpdatedOrderNotification.class, name = UpdatedOrderNotification.TYPE),
+	@Type(value = NewOrganizationNotification.class, name = NewOrganizationNotification.TYPE)
 })
 public abstract class Notification implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
