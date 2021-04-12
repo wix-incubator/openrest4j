@@ -201,9 +201,9 @@ public class Address implements Serializable, Cloneable {
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> properties = new LinkedHashMap<>();
 
-    @JsonInclude(Include.NON_DEFAULT)
+    @JsonInclude(Include.NON_NULL)
     public String addressLine2;
 
-    @JsonInclude(Include.NON_DEFAULT)
+    @JsonInclude(Include.NON_NULL)
     public String label;
 }
