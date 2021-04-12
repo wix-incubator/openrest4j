@@ -16,12 +16,13 @@ public class Address implements Serializable, Cloneable {
                    String countryCode, String postalCode, String onArrival, Map<String, String> externalIds, Map<String, String> properties) {
         new Address(formatted, country, city, street, number, apt, floor, entrance,
                 comment, latLng, approximate, countryCode, postalCode, onArrival,
-                externalIds, properties, null);
+                externalIds, properties, null, null);
     }
 
     public Address(String formatted, String country, String city, String street, String number,
                    String apt, String floor, String entrance, String comment, LatLng latLng, Boolean approximate,
-                   String countryCode, String postalCode, String onArrival, Map<String, String> externalIds, Map<String, String> properties, String addressLine2) {
+                   String countryCode, String postalCode, String onArrival, Map<String, String> externalIds,
+                   Map<String, String> properties, String addressLine2, String label) {
         this.formatted = formatted;
         this.country = country;
         this.city = city;
@@ -39,6 +40,7 @@ public class Address implements Serializable, Cloneable {
         this.externalIds = externalIds;
         this.properties = properties;
         this.addressLine2 = addressLine2;
+        this.label = label;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -51,7 +53,7 @@ public class Address implements Serializable, Cloneable {
     			countryCode, postalCode, onArrival,
                 (externalIds != null) ? new LinkedHashMap<>(externalIds) : null,
                 (properties != null) ? new LinkedHashMap<>(properties) : null,
-                addressLine2);
+                addressLine2, label);
 	}
 
     public static List<Address> clone(List<Address> addresses) {
@@ -104,12 +106,13 @@ public class Address implements Serializable, Cloneable {
                 Objects.equals(onArrival, address.onArrival) &&
                 Objects.equals(externalIds, address.externalIds) &&
                 Objects.equals(properties, address.properties) &&
-                Objects.equals(addressLine2, address.addressLine2);
+                Objects.equals(addressLine2, address.addressLine2) &&
+                Objects.equals(label, address.label);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(formatted, country, city, street, number, apt, floor, entrance, comment, latLng, approximate, countryCode, postalCode, onArrival, externalIds, properties, addressLine2);
+        return Objects.hash(formatted, country, city, street, number, apt, floor, entrance, comment, latLng, approximate, countryCode, postalCode, onArrival, externalIds, properties, addressLine2, label);
     }
 
     @Override
@@ -132,6 +135,7 @@ public class Address implements Serializable, Cloneable {
                 ", externalIds=" + externalIds +
                 ", properties=" + properties +
                 ", addressLine2=" + addressLine2 +
+                ", label=" + label +
                 '}';
     }
 
@@ -199,4 +203,7 @@ public class Address implements Serializable, Cloneable {
 
     @JsonInclude(Include.NON_DEFAULT)
     public String addressLine2;
+
+    @JsonInclude(Include.NON_DEFAULT)
+    public String label;
 }
