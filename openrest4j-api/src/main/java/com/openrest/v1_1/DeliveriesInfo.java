@@ -56,7 +56,7 @@ public class DeliveriesInfo implements Serializable, Cloneable {
      * @see #ALL_APPROXIMATE_ADDRESSES
      */
     @JsonInclude(Include.NON_NULL)
-    public String approximateAddresses;
+    public String approximateAddresses = APPROXIMATE_ADDRESSES_DISALLOW;
 
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> properties = new LinkedHashMap<>();

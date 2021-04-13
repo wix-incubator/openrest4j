@@ -52,5 +52,5 @@ public class FutureOrdersInfo implements Serializable, Cloneable {
      * and at most 7 days in advance.
      */
     @JsonInclude(Include.NON_NULL)
-    public IntegerInterval delayMins;
+    public IntegerInterval delayMins = new IntegerInterval(30, 86400);
 }

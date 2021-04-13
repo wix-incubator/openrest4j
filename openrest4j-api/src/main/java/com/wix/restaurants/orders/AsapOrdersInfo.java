@@ -51,5 +51,5 @@ public class AsapOrdersInfo implements Serializable, Cloneable {
      * @see com.openrest.v1_1.Order#submitAt
      */
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public Integer preOrderMins;
+    public Integer preOrderMins = 60;
 }

@@ -80,14 +80,14 @@ public class ReservationsInfo implements Serializable, Cloneable {
 
     /** Allowed party sizes (minimum is mandatory, and strictly positive). */
     @JsonInclude(Include.NON_NULL)
-    public IntegerInterval partySize;
+    public IntegerInterval partySize = new IntegerInterval(1, 6);
 
     /**
      * The restaurant accepts reservations to these times.
      * @see #futureDelayMins for limitations.
      */
     @JsonInclude(Include.NON_NULL)
-    public Availability availability;
+    public Availability availability = new Availability();
 
     /**
      * Time interval in which future reservations are allowed (minimum is mandatory, and non-negative),

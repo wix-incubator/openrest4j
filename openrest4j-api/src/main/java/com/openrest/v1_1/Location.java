@@ -152,13 +152,12 @@ public class Location implements Serializable, Cloneable {
     public List<DispatchInfo> deliveryInfos = new LinkedList<>();
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public DeliveriesInfo deliveriesInfo;
+    public DeliveriesInfo deliveriesInfo = new DeliveriesInfo();
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public OrdersInfo orders;
+    public OrdersInfo orders = new OrdersInfo();
+
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public ReservationsInfo reservations;
-
-
+    public ReservationsInfo reservations = new ReservationsInfo();
 }
