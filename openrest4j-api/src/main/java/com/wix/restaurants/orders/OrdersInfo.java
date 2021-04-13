@@ -59,15 +59,15 @@ public class OrdersInfo implements Serializable, Cloneable {
 
     /** The restaurant accepts online orders during these times. */
     @JsonInclude(Include.NON_NULL)
-    public Availability availability;
+    public Availability availability = new Availability();
 
     /** Settings for regular (ASAP) orders. */
     @JsonInclude(Include.NON_NULL)
-    public AsapOrdersInfo asap;
+    public AsapOrdersInfo asap = new AsapOrdersInfo();
 
     /** Settings for future orders. */
     @JsonInclude(Include.NON_NULL)
-    public FutureOrdersInfo future;
+    public FutureOrdersInfo future = new FutureOrdersInfo();
 
     /**
      * Maximum allowed length (in characters) for order comment, or null if unlimited.
@@ -83,5 +83,5 @@ public class OrdersInfo implements Serializable, Cloneable {
      * Developers should use unique keys, e.g. "com.example.product".
      */
     @JsonInclude(Include.NON_NULL)
-    public Map<String, String> properties;
+    public Map<String, String> properties = new LinkedHashMap<>();
 }
