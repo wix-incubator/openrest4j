@@ -14,7 +14,7 @@ public class Address implements Serializable, Cloneable {
     public Address(String formatted, String country, String city, String street, String number,
                    String apt, String floor, String entrance, String comment, LatLng latLng, Boolean approximate,
                    String countryCode, String postalCode, String onArrival, Map<String, String> externalIds, Map<String, String> properties) {
-        new Address(formatted, country, city, street, number, apt, floor, entrance,
+        this(formatted, country, city, street, number, apt, floor, entrance,
                 comment, latLng, approximate, countryCode, postalCode, onArrival,
                 externalIds, properties, null, null);
     }
