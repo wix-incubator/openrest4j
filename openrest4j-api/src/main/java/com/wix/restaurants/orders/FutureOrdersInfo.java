@@ -17,14 +17,18 @@ public class FutureOrdersInfo implements Serializable, Cloneable {
     public FutureOrdersInfo() {}
 
     public FutureOrdersInfo(Boolean disabled,
-                            IntegerInterval delayMins) {
+                            IntegerInterval delayMins,
+                            Boolean noAsap,
+                            Integer scheduleAsNewMinutes) {
         this.disabled = disabled;
         this.delayMins = delayMins;
+        this.noAsap = noAsap;
+        this.scheduleAsNewMinutes = scheduleAsNewMinutes;
     }
 
     @Override
     public FutureOrdersInfo clone() {
-        return new FutureOrdersInfo(disabled, delayMins);
+        return new FutureOrdersInfo(disabled, delayMins, noAsap, scheduleAsNewMinutes);
     }
 
     @Override
@@ -33,12 +37,14 @@ public class FutureOrdersInfo implements Serializable, Cloneable {
         if (o == null || getClass() != o.getClass()) return false;
         FutureOrdersInfo that = (FutureOrdersInfo) o;
         return Objects.equals(disabled, that.disabled) &&
-                Objects.equals(delayMins, that.delayMins);
+                Objects.equals(delayMins, that.delayMins) &&
+                Objects.equals(noAsap, that.noAsap) &&
+                Objects.equals(scheduleAsNewMinutes, that.scheduleAsNewMinutes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(disabled, delayMins);
+        return Objects.hash(disabled, delayMins, noAsap, scheduleAsNewMinutes);
     }
 
     /** Whether or not future ordering is disabled. */
@@ -53,4 +59,12 @@ public class FutureOrdersInfo implements Serializable, Cloneable {
      */
     @JsonInclude(Include.NON_NULL)
     public IntegerInterval delayMins = new IntegerInterval(30, 86400);
+
+    /** when shuold future orders appears in my orders **/
+    @JsonInclude(Include.NON_NULL)
+    public Boolean noAsap;
+
+    /** how long before due date **/
+    @JsonInclude(Include.NON_NULL)
+    public Integer scheduleAsNewMinutes;
 }
