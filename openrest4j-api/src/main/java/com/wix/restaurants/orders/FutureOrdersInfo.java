@@ -62,7 +62,7 @@ public class FutureOrdersInfo implements Serializable, Cloneable {
 
     /** when shuold future orders appears in my orders **/
     @JsonInclude(Include.NON_NULL)
-    public Boolean noAsap;
+    public Boolean noAsap = Boolean.FALSE;
 
     /** how long before due date **/
     @JsonInclude(Include.NON_NULL)
