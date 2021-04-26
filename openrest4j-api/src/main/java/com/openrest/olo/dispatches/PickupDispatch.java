@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /** Pickup from the restaurant. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -40,6 +41,16 @@ public class PickupDispatch extends Dispatch {
                 ((properties != null) ? new LinkedHashMap<>(properties) : null),
                 curbsideAdditionalInformation,
                 isCurbside);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        PickupDispatch that = (PickupDispatch) o;
+        return Objects.equals(curbsideAdditionalInformation, that.curbsideAdditionalInformation) &&
+               Objects.equals(isCurbside, that.isCurbside);
     }
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
