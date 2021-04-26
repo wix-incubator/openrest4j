@@ -7,6 +7,7 @@ import com.wix.restaurants.availability.Availability;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /** Pickup from the restaurant. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -42,6 +43,16 @@ public class PickupDispatchInfo extends DispatchInfo {
                 ((properties != null) ? new LinkedHashMap<>(properties) : null),
                 ((curbsideInfo != null) ? curbsideInfo.clone() : null),
                 withCurbsideInfo);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        PickupDispatchInfo that = (PickupDispatchInfo) o;
+        return Objects.equals(withCurbsideInfo, that.withCurbsideInfo) &&
+               Objects.equals(curbsideInfo, that.curbsideInfo);
     }
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
