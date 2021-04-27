@@ -29,7 +29,7 @@ public class CurbsideInfo implements Serializable, Cloneable {
 
     @Override
     public CurbsideInfo clone() {
-        return new CurbsideInfo(this.instructions, this.additionalInformationRequired, this.additionalInformation);
+        return new CurbsideInfo(this.instructions, this.additionalInformationRequired, this.additionalInformation, this.enabled);
     }
 
     @Override
