@@ -55,8 +55,9 @@ public class PickupDispatchInfo extends DispatchInfo {
                Objects.equals(curbsideInfo, that.curbsideInfo);
     }
 
+    @Deprecated
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public Boolean withCurbsideInfo = Boolean.FALSE;
+    public Boolean withCurbsideInfo;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public CurbsideInfo curbsideInfo;

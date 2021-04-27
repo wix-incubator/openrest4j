@@ -15,10 +15,17 @@ public class CurbsideInfo implements Serializable, Cloneable {
     public CurbsideInfo() {}
 
     public CurbsideInfo(String instructions, Boolean additionalInformationRequired, String additionalInformation) {
+        this(instructions, additionalInformationRequired, additionalInformation, null);
+    }
+
+    public CurbsideInfo(String instructions, Boolean additionalInformationRequired, String additionalInformation,
+                        Boolean enabled) {
         this.instructions = instructions;
         this.additionalInformationRequired = additionalInformationRequired;
         this.additionalInformation = additionalInformation;
+        this.enabled = enabled;
     }
+
 
     @Override
     public CurbsideInfo clone() {
@@ -32,12 +39,13 @@ public class CurbsideInfo implements Serializable, Cloneable {
         CurbsideInfo that = (CurbsideInfo) o;
         return Objects.equals(instructions, that.instructions) &&
                Objects.equals(additionalInformationRequired, that.additionalInformationRequired) &&
-               Objects.equals(additionalInformation, that.additionalInformation);
+               Objects.equals(additionalInformation, that.additionalInformation) &&
+               Objects.equals(enabled, that.enabled);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.instructions, this.additionalInformationRequired, this.additionalInformation);
+        return Objects.hash(this.instructions, this.additionalInformationRequired, this.additionalInformation, this.enabled);
     }
 
     @JsonInclude(Include.NON_NULL)
@@ -48,4 +56,7 @@ public class CurbsideInfo implements Serializable, Cloneable {
 
     @JsonInclude(Include.NON_NULL)
     public String additionalInformation;
+
+    @JsonInclude(Include.NON_NULL)
+    public Boolean enabled;
 }
