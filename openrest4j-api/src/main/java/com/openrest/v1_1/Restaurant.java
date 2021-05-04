@@ -185,7 +185,7 @@ public class Restaurant extends Organization {
     public Availability openTimes = new Availability();
 
     /** Information regarding the different delivery destinations. */
-    @JsonInclude(Include.NON_DEFAULT)
+    @JsonInclude(Include.NON_NULL)
     public List<DispatchInfo> deliveryInfos = new LinkedList<>();
 
     /** Available payment methods. */

@@ -148,7 +148,7 @@ public class Location implements Serializable, Cloneable {
     public Availability openTimes = new Availability();
 
     /** Information regarding the different delivery destinations. */
-    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<DispatchInfo> deliveryInfos = new LinkedList<>();
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
