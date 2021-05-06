@@ -22,7 +22,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
 				LocalizedString description, Integer price, List<Variation> variations,
 				Condition displayCondition, Condition condition,
 				Map<String, String> media, Map<String, String> externalIds, Set<String> labels,
-				Map<String, String> properties, Stock stock, Integer maxCommentLength) {
+				Map<String, String> properties, Stock stock, Integer maxCommentLength, Boolean hideSpecialRequest) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -36,6 +36,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
         this.properties = properties;
         this.stock = stock;
         this.maxCommentLength = maxCommentLength;
+        this.hideSpecialRequest = hideSpecialRequest;
     }
 
 	/** Default constructor for JSON deserialization. */
@@ -65,7 +66,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     			((externalIds != null) ? new LinkedHashMap<>(externalIds) : null),
     			((labels != null) ? new LinkedHashSet<>(labels) : null),
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
-    			stock, maxCommentLength);
+    			stock, maxCommentLength, hideSpecialRequest);
 	}
 
     @Override
@@ -85,12 +86,13 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
                 Objects.equals(labels, item.labels) &&
                 Objects.equals(properties, item.properties) &&
                 Objects.equals(stock, item.stock) &&
-                Objects.equals(maxCommentLength, item.maxCommentLength);
+                Objects.equals(maxCommentLength, item.maxCommentLength) &&
+                Objects.equals(hideSpecialRequest, item.hideSpecialRequest);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, price, variations, displayCondition, condition, media, externalIds, labels, properties, stock, maxCommentLength);
+        return Objects.hash(id, title, description, price, variations, displayCondition, condition, media, externalIds, labels, properties, stock, maxCommentLength, hideSpecialRequest);
     }
 
     public int compareTo(Item other) {
@@ -113,6 +115,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
                 ", properties=" + properties +
                 ", stock=" + stock +
                 ", maxCommentLength=" + maxCommentLength +
+                ", hideSpecialRequest=" + hideSpecialRequest +
                 '}';
     }
 
@@ -186,4 +189,7 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
      */
     @JsonInclude(Include.NON_NULL)
     public Integer maxCommentLength;
+
+    @JsonInclude(Include.NON_DEFAULT)
+    public Boolean hideSpecialRequest = Boolean.FALSE;
 }
