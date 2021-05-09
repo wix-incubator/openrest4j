@@ -190,6 +190,6 @@ public class Item implements Serializable, Cloneable, Comparable<Item> {
     @JsonInclude(Include.NON_NULL)
     public Integer maxCommentLength;
 
-    @JsonInclude(Include.NON_DEFAULT)
+    @JsonInclude(Include.NON_NULL)
     public Boolean hideSpecialRequest = Boolean.FALSE;
 }
