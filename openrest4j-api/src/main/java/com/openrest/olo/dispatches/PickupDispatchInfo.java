@@ -3,6 +3,7 @@ package com.openrest.olo.dispatches;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.openrest.v1_1.CurbsideInfo;
+import com.openrest.v1_1.ContactlessDineInInfo;
 import com.wix.restaurants.availability.Availability;
 
 import java.util.LinkedHashMap;
@@ -26,9 +27,16 @@ public class PickupDispatchInfo extends DispatchInfo {
     public PickupDispatchInfo(Integer minOrderPrice, Integer charge, Integer delayMins, Boolean inactive,
                               Availability availability, Map<String, String> properties, CurbsideInfo curbsideInfo,
                               Boolean withCurbsideInfo) {
+        this(minOrderPrice, charge, delayMins, inactive, availability, properties, curbsideInfo, withCurbsideInfo, null);
+    }
+
+    public PickupDispatchInfo(Integer minOrderPrice, Integer charge, Integer delayMins, Boolean inactive,
+                              Availability availability, Map<String, String> properties, CurbsideInfo curbsideInfo,
+                              Boolean withCurbsideInfo, ContactlessDineInInfo contactlessDineInInfo) {
         super(minOrderPrice, charge, delayMins, inactive, availability, properties);
         this.withCurbsideInfo = withCurbsideInfo;
         this.curbsideInfo = curbsideInfo;
+        this.contactlessDineInInfo = contactlessDineInInfo;
     }
 
     @Override
@@ -42,7 +50,8 @@ public class PickupDispatchInfo extends DispatchInfo {
                 ((availability != null) ? availability.clone() : null),
                 ((properties != null) ? new LinkedHashMap<>(properties) : null),
                 ((curbsideInfo != null) ? curbsideInfo.clone() : null),
-                withCurbsideInfo);
+                withCurbsideInfo,
+                ((contactlessDineInInfo != null) ? contactlessDineInInfo.clone() : null));
     }
 
     @Override
@@ -52,7 +61,8 @@ public class PickupDispatchInfo extends DispatchInfo {
         if (!super.equals(o)) return false;
         PickupDispatchInfo that = (PickupDispatchInfo) o;
         return Objects.equals(withCurbsideInfo, that.withCurbsideInfo) &&
-               Objects.equals(curbsideInfo, that.curbsideInfo);
+               Objects.equals(curbsideInfo, that.curbsideInfo) &&
+               Objects.equals(contactlessDineInInfo, that.contactlessDineInInfo);
     }
 
     @Deprecated
@@ -61,4 +71,7 @@ public class PickupDispatchInfo extends DispatchInfo {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public CurbsideInfo curbsideInfo;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public ContactlessDineInInfo contactlessDineInInfo;
 }
