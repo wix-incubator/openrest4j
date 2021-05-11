@@ -3,6 +3,8 @@ package com.openrest.olo.dispatches;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import com.openrest.v1_1.ContactlessDineIn;
+
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -23,9 +25,15 @@ public class PickupDispatch extends Dispatch {
 
     public PickupDispatch(Date time, String timeGuarantee, Integer charge, Map<String, String> properties,
                           String curbsideAdditionalInformation, Boolean isCurbside) {
+        this(time, timeGuarantee, charge, properties, curbsideAdditionalInformation, isCurbside, null);
+    }
+
+    public PickupDispatch(Date time, String timeGuarantee, Integer charge, Map<String, String> properties,
+                          String curbsideAdditionalInformation, Boolean isCurbside, ContactlessDineIn contactlessDineIn) {
         super(time, timeGuarantee, charge, properties);
         this.curbsideAdditionalInformation = curbsideAdditionalInformation;
         this.isCurbside = isCurbside;
+        this.contactlessDineIn = contactlessDineIn;
     }
 
     @Override
@@ -40,7 +48,8 @@ public class PickupDispatch extends Dispatch {
                 timeGuarantee, charge,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null),
                 curbsideAdditionalInformation,
-                isCurbside);
+                isCurbside,
+                ((contactlessDineIn != null) ? contactlessDineIn.clone() : null));
     }
 
     @Override
@@ -50,7 +59,8 @@ public class PickupDispatch extends Dispatch {
         if (!super.equals(o)) return false;
         PickupDispatch that = (PickupDispatch) o;
         return Objects.equals(curbsideAdditionalInformation, that.curbsideAdditionalInformation) &&
-               Objects.equals(isCurbside, that.isCurbside);
+               Objects.equals(isCurbside, that.isCurbside) &&
+               Objects.equals(contactlessDineIn, that.contactlessDineIn);
     }
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -58,4 +68,7 @@ public class PickupDispatch extends Dispatch {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public String curbsideAdditionalInformation;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public ContactlessDineIn contactlessDineIn;
 }
