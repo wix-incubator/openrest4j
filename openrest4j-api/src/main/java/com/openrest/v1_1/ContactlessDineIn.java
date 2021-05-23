@@ -16,7 +16,7 @@ public class ContactlessDineIn implements Serializable, Cloneable {
 
     public ContactlessDineIn(String label, String labelValue) {
         this.label = label;
-        this.labelValue = labelValue
+        this.labelValue = labelValue;
     }
 
     @Override
