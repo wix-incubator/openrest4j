@@ -21,7 +21,7 @@ public class ContactlessDineIn implements Serializable, Cloneable {
 
     @Override
     public ContactlessDineIn clone() {
-        return new ContactlessDineInInfo(this.label, this.labelValue);
+        return new ContactlessDineIn(this.label, this.labelValue);
     }
 
     @Override
