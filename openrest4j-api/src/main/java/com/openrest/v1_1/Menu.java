@@ -54,7 +54,7 @@ public class Menu implements Serializable, Cloneable {
     public Date modified;
 
     /** All menu items. */
-    @JsonInclude(Include.NON_DEFAULT)
+    @JsonInclude(Include.NON_NULL)
     public List<Item> items = new LinkedList<>();
     
     /** Top-level menu sections. */
