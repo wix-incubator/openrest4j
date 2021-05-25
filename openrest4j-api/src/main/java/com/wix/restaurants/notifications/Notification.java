@@ -29,6 +29,7 @@ import java.util.Objects;
 	@Type(value = DelayedOrderNotification.class, name = DelayedOrderNotification.TYPE),
 	@Type(value = AcceptedOrderNotification.class, name = AcceptedOrderNotification.TYPE),
 	@Type(value = CanceledOrderNotification.class, name = CanceledOrderNotification.TYPE),
+	@Type(value = FulfilledOrderNotification.class, name = FulfilledOrderNotification.TYPE),
 	@Type(value = OfflineNotification.class, name = OfflineNotification.TYPE),
 	@Type(value = PosErrorNotification.class, name = PosErrorNotification.TYPE),
 	@Type(value = FeedbackNotification.class, name = FeedbackNotification.TYPE),
