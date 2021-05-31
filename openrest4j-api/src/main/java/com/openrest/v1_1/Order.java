@@ -24,6 +24,22 @@ public class Order implements Serializable, Cloneable {
             User user, ClubMember clubMember, String status, String shareToken, String ownerToken,
             String affiliate, String developer, String source, String platform, Coupon coupon,
             Boolean legacyHierarchy, Map<String, String> properties, List<LogEntry> log, String gatewayReturnUrl, String locationId) {
+        this(id, externalIds, distributorId, chainId, restaurantId, locale, orderItems, comment, price, currency, delivery, contact, payments,
+                takeoutPacks,  orderCharges, created, received, modified, submitAt,
+                user, clubMember, status, shareToken, ownerToken, affiliate, developer, source, platform, coupon,
+                legacyHierarchy, properties, log, gatewayReturnUrl, locationId, null);
+    }
+
+    /** Constructs a previously submitted order from persisted data. */
+    public Order(String id, Map<String, String> externalIds, String distributorId, String chainId, String restaurantId,
+                 Locale locale, List<OrderItem> orderItems,
+                 String comment, Integer price, String currency, Dispatch delivery, Contact contact, List<Payment> payments,
+                 Integer takeoutPacks, List<OrderCharge> orderCharges,
+                 Date created, Date received, Date modified, Date submitAt,
+                 User user, ClubMember clubMember, String status, String shareToken, String ownerToken,
+                 String affiliate, String developer, String source, String platform, Coupon coupon,
+                 Boolean legacyHierarchy, Map<String, String> properties, List<LogEntry> log, String gatewayReturnUrl, String locationId,
+                 Loyalty loyalty) {
 
         this.id = id;
         this.externalIds = externalIds;
@@ -59,6 +75,7 @@ public class Order implements Serializable, Cloneable {
         this.log = log;
         this.gatewayReturnUrl = gatewayReturnUrl;
         this.locationId = locationId;
+        this.loyalty = loyalty;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -84,7 +101,8 @@ public class Order implements Serializable, Cloneable {
     			((properties != null) ? new LinkedHashMap<>(properties) : null),
     			LogEntry.clone(log),
                 gatewayReturnUrl,
-                locationId);
+                locationId,
+                (loyalty != null) ? loyalty.clone() : null);
 	}
 
     @Override
@@ -125,12 +143,13 @@ public class Order implements Serializable, Cloneable {
                 Objects.equals(properties, order.properties) &&
                 Objects.equals(log, order.log) &&
                 Objects.equals(gatewayReturnUrl, order.gatewayReturnUrl) &&
-                Objects.equals(locationId, order.locationId);
+                Objects.equals(locationId, order.locationId) &&
+                Objects.equals(loyalty, order.loyalty);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, externalIds, distributorId, chainId, restaurantId, locale, orderItems, comment, price, currency, delivery, contact, payments, takeoutPacks, orderCharges, created, submitAt, received, modified, user, clubMember, status, shareToken, ownerToken, affiliate, developer, source, platform, coupon, legacyHierarchy, properties, log, gatewayReturnUrl, locationId);
+        return Objects.hash(id, externalIds, distributorId, chainId, restaurantId, locale, orderItems, comment, price, currency, delivery, contact, payments, takeoutPacks, orderCharges, created, submitAt, received, modified, user, clubMember, status, shareToken, ownerToken, affiliate, developer, source, platform, coupon, legacyHierarchy, properties, log, gatewayReturnUrl, locationId, loyalty);
     }
 
     @Override
@@ -170,6 +189,7 @@ public class Order implements Serializable, Cloneable {
                 ", log=" + log +
                 ", gatewayReturnUrl=" + gatewayReturnUrl +
                 ", locationId=" + locationId +
+                ", loyalty=" + loyalty +
                 '}';
     }
 
@@ -333,4 +353,8 @@ public class Order implements Serializable, Cloneable {
     /** The location id which the customer used when ordered **/
     @JsonInclude(Include.NON_NULL)
     public String locationId;
+
+    /** The loyalty summarize that the costumer used when ordered **/
+    @JsonInclude(Include.NON_NULL)
+    public Loyalty loyalty;
 }
