@@ -46,13 +46,13 @@ public class Loyalty implements Serializable, Cloneable {
     public String rewardId;
 
     @JsonInclude(Include.NON_NULL)
-    public Integer moneyAmount;
+    public Integer moneyAmount = 0;
 
     @JsonInclude(Include.NON_NULL)
     public String transactionId;
 
     @JsonInclude(Include.NON_NULL)
-    public Integer points;
+    public Integer points = 0;
 
 
 }
