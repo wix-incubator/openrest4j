@@ -5,11 +5,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.restaurants.IntegerInterval;
 import com.wix.restaurants.availability.Availability;
+import com.wix.restaurants.availability.DateTimeWindow;
 
 import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /** Online reservations settings. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -75,8 +74,8 @@ public class ReservationsInfo implements Serializable, Cloneable {
     }
 
     /** If true, submitted reservations are not final until manually approved by the restaurant. */
-    @JsonInclude(Include.NON_DEFAULT)
-    public Boolean pendingApproval = Boolean.FALSE;
+    @JsonInclude(Include.NON_NULL)
+    public Boolean pendingApproval = Boolean.TRUE;
 
     /** Allowed party sizes (minimum is mandatory, and strictly positive). */
     @JsonInclude(Include.NON_NULL)
@@ -87,7 +86,8 @@ public class ReservationsInfo implements Serializable, Cloneable {
      * @see #futureDelayMins for limitations.
      */
     @JsonInclude(Include.NON_NULL)
-    public Availability availability = new Availability();
+    public Availability availability = new Availability(new LinkedList<>(),
+            new LinkedList<>(Arrays.asList(new DateTimeWindow(null, null, false, "closed", new LinkedHashMap<>()))));
 
     /**
      * Time interval in which future reservations are allowed (minimum is mandatory, and non-negative),
@@ -97,11 +97,11 @@ public class ReservationsInfo implements Serializable, Cloneable {
      * and at most 7 days in advance.
      */
     @JsonInclude(Include.NON_NULL)
-    public IntegerInterval futureDelayMins;
+    public IntegerInterval futureDelayMins = new IntegerInterval(30, 60 * 24 * 30 * 6);
 
     /** How long (in minutes) are tables held for late customers, or null if unlimited. */
     @JsonInclude(Include.NON_NULL)
-    public Integer heldForMins;
+    public Integer heldForMins = 15;
 
     /**
      * Map of user-defined extended properties.
