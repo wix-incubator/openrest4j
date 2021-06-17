@@ -3,6 +3,7 @@ package com.openrest.v1_1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.openrest.olo.dispatches.DispatchInfo;
+import com.openrest.olo.dispatches.PickupDispatchInfo;
 import com.wix.restaurants.availability.Availability;
 import com.wix.restaurants.i18n.LocalizedString;
 import com.wix.restaurants.orders.OrdersInfo;
@@ -119,6 +120,12 @@ public class Location implements Serializable, Cloneable {
                 '}';
     }
 
+    private PickupDispatchInfo deliveryInfosDefault() {
+        PickupDispatchInfo pickupDispatchInfo = new PickupDispatchInfo();
+        pickupDispatchInfo.delayMins = 15;
+        return pickupDispatchInfo;
+    }
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public String id;
 
@@ -149,7 +156,7 @@ public class Location implements Serializable, Cloneable {
 
     /** Information regarding the different delivery destinations. */
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public List<DispatchInfo> deliveryInfos = new LinkedList<>();
+    public List<DispatchInfo> deliveryInfos = new LinkedList<>(Arrays.asList(deliveryInfosDefault()));
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public DeliveriesInfo deliveriesInfo = new DeliveriesInfo();

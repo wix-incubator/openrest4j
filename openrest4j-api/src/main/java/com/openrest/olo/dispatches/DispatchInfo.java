@@ -94,7 +94,7 @@ public abstract class DispatchInfo implements Serializable, Cloneable {
     public Boolean inactive = Boolean.FALSE;
 
     /** Time windows in which this item is regularly available. */
-    @JsonInclude(Include.NON_DEFAULT)
+    @JsonInclude(Include.NON_NULL)
     public Availability availability = new Availability();
 
     /**
