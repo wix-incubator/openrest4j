@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.openrest.olo.dispatches.DispatchInfo;
-import com.openrest.olo.dispatches.PickupDispatchInfo;
 import com.wix.restaurants.availability.Availability;
 import com.wix.restaurants.i18n.Locale;
 import com.wix.restaurants.i18n.LocalizedString;
@@ -161,12 +160,6 @@ public class Restaurant extends Organization {
                 '}';
     }
 
-    private PickupDispatchInfo deliveryInfosDefault() {
-        PickupDispatchInfo pickupDispatchInfo = new PickupDispatchInfo();
-        pickupDispatchInfo.delayMins = 15;
-        return pickupDispatchInfo;
-    }
-
     /** The distributor in charge of this restaurant. */
     @JsonInclude(Include.NON_NULL)
     public String distributorId;
@@ -193,7 +186,7 @@ public class Restaurant extends Organization {
 
     /** Information regarding the different delivery destinations. */
     @JsonInclude(Include.NON_NULL)
-    public List<DispatchInfo> deliveryInfos = new LinkedList<>(Arrays.asList(deliveryInfosDefault()));
+    public List<DispatchInfo> deliveryInfos = new LinkedList<>();
 
     /** Available payment methods. */
     @JsonInclude(Include.NON_DEFAULT)
