@@ -4,10 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wix.restaurants.availability.Availability;
-import com.wix.restaurants.availability.DateTimeWindow;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
 
 /** Online ordering settings. */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -58,8 +59,7 @@ public class OrdersInfo implements Serializable, Cloneable {
 
     /** The restaurant accepts online orders during these times. */
     @JsonInclude(Include.NON_NULL)
-    public Availability availability = new Availability(new LinkedList<>(),
-            new LinkedList<>(Arrays.asList(new DateTimeWindow(null, null, false, null, new LinkedHashMap<>()))));
+    public Availability availability = new Availability();
 
     /** Settings for regular (ASAP) orders. */
     @JsonInclude(Include.NON_NULL)

@@ -48,8 +48,8 @@ public class FutureOrdersInfo implements Serializable, Cloneable {
     }
 
     /** Whether or not future ordering is disabled. */
-    @JsonInclude(Include.NON_NULL)
-    public Boolean disabled = Boolean.TRUE;
+    @JsonInclude(Include.NON_DEFAULT)
+    public Boolean disabled = Boolean.FALSE;
 
     /**
      * Time interval in which future orders are allowed (minimum is mandatory, and non-negative).
@@ -58,9 +58,9 @@ public class FutureOrdersInfo implements Serializable, Cloneable {
      * and at most 7 days in advance.
      */
     @JsonInclude(Include.NON_NULL)
-    public IntegerInterval delayMins = new IntegerInterval(1 * 24 * 60, 7 * 24 * 60);
+    public IntegerInterval delayMins = new IntegerInterval(30, 86400);
 
-    /** when should future orders appears in my orders **/
+    /** when shuold future orders appears in my orders **/
     @JsonInclude(Include.NON_NULL)
     public Boolean noAsap = Boolean.FALSE;
 
