@@ -15,15 +15,21 @@ public class Loyalty implements Serializable, Cloneable {
     public Loyalty() {}
 
     public Loyalty(String rewardId, Integer moneyAmount, String transactionId, Integer points) {
+        this(rewardId, moneyAmount, transactionId, points, 0, 0);
+    }
+
+    public Loyalty(String rewardId, Integer moneyAmount, String transactionId, Integer points, Integer estimatedAccountBalance, Integer estimatedPointsEarned) {
         this.rewardId = rewardId;
         this.moneyAmount = moneyAmount;
         this.transactionId = transactionId;
         this.points = points;
+        this.estimatedAccountBalance = estimatedAccountBalance;
+        this.estimatedPointsEarned = estimatedPointsEarned;
     }
 
     @Override
     public Loyalty clone() {
-        return new Loyalty(rewardId, moneyAmount, transactionId, points);
+        return new Loyalty(rewardId, moneyAmount, transactionId, points, estimatedAccountBalance, estimatedPointsEarned);
     }
 
     @Override
@@ -34,12 +40,14 @@ public class Loyalty implements Serializable, Cloneable {
         return Objects.equals(rewardId, that.rewardId) &&
                Objects.equals(moneyAmount, that.moneyAmount) &&
                Objects.equals(transactionId, that.transactionId) &&
-               Objects.equals(points, that.points);
+               Objects.equals(points, that.points) &&
+               Objects.equals(estimatedAccountBalance, that.estimatedAccountBalance) &&
+               Objects.equals(estimatedPointsEarned, that.estimatedPointsEarned);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rewardId, moneyAmount, transactionId, points);
+        return Objects.hash(rewardId, moneyAmount, transactionId, points, estimatedAccountBalance, estimatedPointsEarned);
     }
 
     @JsonInclude(Include.NON_NULL)
@@ -54,5 +62,10 @@ public class Loyalty implements Serializable, Cloneable {
     @JsonInclude(Include.NON_NULL)
     public Integer points = 0;
 
+    @JsonInclude(Include.NON_NULL)
+    public Integer estimatedAccountBalance = 0;
+
+    @JsonInclude(Include.NON_NULL)
+    public Integer estimatedPointsEarned = 0;
 
 }
