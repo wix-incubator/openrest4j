@@ -28,12 +28,31 @@ public class Restaurant extends Organization {
                       Map<String, String> media, List<AppInfo> apps, Map<String, String> properties,
                       Boolean closed, Set<Product> products, Map<String, Double> features, String currentLocationId,
                       String defaultLocationIdAtTimeOfMigration, LocalizedString locationName, List<Location> locations) {
-    	super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages,
+    	this(id, alias, affiliateId, externalIds, created, modified,
+             distributorId, chainId, title, description, contact, address, messages,
+             openTimes, deliveryInfos, timezone,  currency,  locale,  locales,
+             paymentTypes,  multiPaymentDisabled,  creditcardsInfo,
+             deliveriesInfo, orders, reservations, media, apps, properties,
+             closed, products ,features, currentLocationId, defaultLocationIdAtTimeOfMigration, locationName, locations, null);
+    }
+
+    public Restaurant(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
+                      String distributorId, String chainId, LocalizedString title,
+                      LocalizedString description, Contact contact, Address address,
+                      Map<String, LocalizedString> messages,
+                      Availability openTimes, List<DispatchInfo> deliveryInfos,
+                      String timezone, String currency, Locale locale, Set<Locale> locales,
+                      Set<String> paymentTypes, Boolean multiPaymentDisabled, CreditcardsInfo creditcardsInfo,
+                      DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations,
+                      Map<String, String> media, List<AppInfo> apps, Map<String, String> properties,
+                      Boolean closed, Set<Product> products, Map<String, Double> features, String currentLocationId,
+                      String defaultLocationIdAtTimeOfMigration, LocalizedString locationName, List<Location> locations, String defaultDispatchType) {
+        super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages,
                 contact, address, timezone, currency, apps, properties,
                 media, closed, products);
-        
-    	this.distributorId = distributorId;
-    	this.chainId = chainId;
+
+        this.distributorId = distributorId;
+        this.chainId = chainId;
         this.openTimes = openTimes;
         this.deliveryInfos = deliveryInfos;
         this.paymentTypes = paymentTypes;
@@ -47,7 +66,9 @@ public class Restaurant extends Organization {
         this.defaultLocationIdAtTimeOfMigration = defaultLocationIdAtTimeOfMigration;
         this.locationName = locationName;
         this.locations = locations;
+        this.defaultDispatchType = defaultDispatchType;
     }
+
 
     /** Default constructor for JSON deserialization. */
     public Restaurant() {}
@@ -88,7 +109,8 @@ public class Restaurant extends Organization {
                 currentLocationId,
                 defaultLocationIdAtTimeOfMigration,
                 ((locationName != null) ? locationName.clone() : null),
-                Location.clone(locations));
+                Location.clone(locations),
+                defaultDispatchType);
 	}
 
     @Override
@@ -111,12 +133,13 @@ public class Restaurant extends Organization {
                 Objects.equals(currentLocationId, that.currentLocationId) &&
                 Objects.equals(defaultLocationIdAtTimeOfMigration, that.defaultLocationIdAtTimeOfMigration) &&
                 Objects.equals(locationName, that.locationName) &&
-                Objects.equals(locations, that.locations);
+                Objects.equals(locations, that.locations) &&
+                Objects.equals(defaultDispatchType, that.defaultDispatchType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), distributorId, chainId, openTimes, deliveryInfos, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations, features, currentLocationId, defaultLocationIdAtTimeOfMigration, locationName, locations);
+        return Objects.hash(super.hashCode(), distributorId, chainId, openTimes, deliveryInfos, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations, features, currentLocationId, defaultLocationIdAtTimeOfMigration, locationName, locations, defaultDispatchType);
     }
 
     @Override
@@ -157,6 +180,7 @@ public class Restaurant extends Organization {
                 ", media=" + media +
                 ", closed=" + closed +
                 ", products=" + products +
+                ", defaultDispatchType=" + defaultDispatchType +
                 '}';
     }
 
@@ -220,4 +244,8 @@ public class Restaurant extends Organization {
      */
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, Double> features = new LinkedHashMap<>();
+
+    /** The default dispatch type. */
+    @JsonInclude(Include.NON_NULL)
+    public String defaultDispatchType;
 }
