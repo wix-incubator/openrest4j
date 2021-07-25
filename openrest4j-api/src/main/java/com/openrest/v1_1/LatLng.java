@@ -51,4 +51,10 @@ public class LatLng implements Serializable, Cloneable {
 
     @JsonInclude(Include.NON_NULL)
     public Double lng;
+
+    @JsonInclude(Include.NON_NULL)
+    public String latStr; // required for encryption
+
+    @JsonInclude(Include.NON_NULL)
+    public String lngStr; // required for encryption
 }
