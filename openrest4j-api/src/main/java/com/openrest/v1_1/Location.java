@@ -20,7 +20,7 @@ public class Location implements Serializable, Cloneable {
 
     public Location(String id, LocalizedString name, LocalizedString description, Boolean defaultLocation, Contact contact,
                    Address address, String timezone, Availability openTimes, List<DispatchInfo> deliveryInfos,
-                    DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations) {
+                    DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations, String defaultDispatchType) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -33,6 +33,7 @@ public class Location implements Serializable, Cloneable {
         this.deliveriesInfo = deliveriesInfo;
         this.orders = orders;
         this.reservations = reservations;
+        this.defaultDispatchType = defaultDispatchType;
     }
 
     @Override
@@ -48,7 +49,8 @@ public class Location implements Serializable, Cloneable {
                 DispatchInfo.clone(deliveryInfos),
                 ((deliveriesInfo != null) ? deliveriesInfo.clone() : null),
                 ((orders != null) ? orders.clone() : null),
-                ((reservations != null) ? reservations.clone() : null));
+                ((reservations != null) ? reservations.clone() : null),
+                defaultDispatchType);
     }
 
     public static Map<String, Location> clone(Map<String, Location> locations) {
@@ -93,12 +95,13 @@ public class Location implements Serializable, Cloneable {
                 Objects.equals(deliveryInfos, location.deliveryInfos) &&
                 Objects.equals(deliveriesInfo, location.deliveriesInfo) &&
                 Objects.equals(orders, location.orders) &&
-                Objects.equals(reservations, location.reservations);
+                Objects.equals(reservations, location.reservations) &&
+                Objects.equals(defaultDispatchType, location.defaultDispatchType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, defaultLocation, contact, address, timezone, openTimes, deliveryInfos, deliveriesInfo, orders, reservations);
+        return Objects.hash(id, name, description, defaultLocation, contact, address, timezone, openTimes, deliveryInfos, deliveriesInfo, orders, reservations, defaultDispatchType);
     }
 
     @Override
@@ -116,6 +119,7 @@ public class Location implements Serializable, Cloneable {
                 ", deliveriesInfo=" + deliveriesInfo +
                 ", orders=" + orders +
                 ", reservations=" + reservations +
+                ", defaultDispatchType=" + defaultDispatchType +
                 '}';
     }
 
@@ -160,4 +164,8 @@ public class Location implements Serializable, Cloneable {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public ReservationsInfo reservations = new ReservationsInfo();
+
+    /** The default dispatch type. */
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public String defaultDispatchType;
 }
