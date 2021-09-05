@@ -15,21 +15,26 @@ public class Loyalty implements Serializable, Cloneable {
     public Loyalty() {}
 
     public Loyalty(String rewardId, Integer moneyAmount, String transactionId, Integer points) {
-        this(rewardId, moneyAmount, transactionId, points, 0, 0);
+        this(rewardId, moneyAmount, transactionId, points, 0, 0, null);
     }
 
     public Loyalty(String rewardId, Integer moneyAmount, String transactionId, Integer points, Integer estimatedAccountBalance, Integer estimatedPointsEarned) {
+        this(rewardId, moneyAmount, transactionId, points, estimatedAccountBalance, estimatedPointsEarned, null);
+    }
+
+    public Loyalty(String rewardId, Integer moneyAmount, String transactionId, Integer points, Integer estimatedAccountBalance, Integer estimatedPointsEarned, String rewardRevision) {
         this.rewardId = rewardId;
         this.moneyAmount = moneyAmount;
         this.transactionId = transactionId;
         this.points = points;
         this.estimatedAccountBalance = estimatedAccountBalance;
         this.estimatedPointsEarned = estimatedPointsEarned;
+        this.rewardRevision = rewardRevision;
     }
 
     @Override
     public Loyalty clone() {
-        return new Loyalty(rewardId, moneyAmount, transactionId, points, estimatedAccountBalance, estimatedPointsEarned);
+        return new Loyalty(rewardId, moneyAmount, transactionId, points, estimatedAccountBalance, estimatedPointsEarned, rewardRevision);
     }
 
     @Override
@@ -42,12 +47,13 @@ public class Loyalty implements Serializable, Cloneable {
                Objects.equals(transactionId, that.transactionId) &&
                Objects.equals(points, that.points) &&
                Objects.equals(estimatedAccountBalance, that.estimatedAccountBalance) &&
-               Objects.equals(estimatedPointsEarned, that.estimatedPointsEarned);
+               Objects.equals(estimatedPointsEarned, that.estimatedPointsEarned) &&
+               Objects.equals(rewardRevision, that.rewardRevision);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rewardId, moneyAmount, transactionId, points, estimatedAccountBalance, estimatedPointsEarned);
+        return Objects.hash(rewardId, moneyAmount, transactionId, points, estimatedAccountBalance, estimatedPointsEarned, rewardRevision);
     }
 
     @JsonInclude(Include.NON_NULL)
@@ -67,5 +73,8 @@ public class Loyalty implements Serializable, Cloneable {
 
     @JsonInclude(Include.NON_NULL)
     public Integer estimatedPointsEarned = 0;
+
+    @JsonInclude(Include.NON_NULL)
+    public String rewardRevision;
 
 }
