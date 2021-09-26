@@ -14,14 +14,14 @@ public class DeliveryProviderInfo implements Serializable, Cloneable {
     /** Default constructor for JSON deserialization. */
     public DeliveryProviderInfo() {}
 
-    public DeliveryProviderInfo(String configurationId, Integer restaurantFee) {
+    public DeliveryProviderInfo(String configurationId, Integer restaurantSubsidyFee) {
         this.configurationId = configurationId;
-        this.restaurantFee = restaurantFee;
+        this.restaurantSubsidyFee = restaurantSubsidyFee;
     }
 
     @Override
     public DeliveryProviderInfo clone() {
-        return new DeliveryProviderInfo(configurationId, restaurantFee);
+        return new DeliveryProviderInfo(configurationId, restaurantSubsidyFee);
     }
 
     @Override
@@ -30,17 +30,17 @@ public class DeliveryProviderInfo implements Serializable, Cloneable {
         if (o == null || getClass() != o.getClass()) return false;
         DeliveryProviderInfo that = (DeliveryProviderInfo) o;
         return Objects.equals(configurationId, that.configurationId) &&
-               Objects.equals(restaurantFee, that.restaurantFee);
+               Objects.equals(restaurantSubsidyFee, that.restaurantSubsidyFee);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(configurationId, restaurantFee);
+        return Objects.hash(configurationId, restaurantSubsidyFee);
     }
 
     @JsonInclude(Include.NON_NULL)
     public String configurationId;
 
     @JsonInclude(Include.NON_NULL)
-    public Integer restaurantFee = 0;
+    public Integer restaurantSubsidyFee = 0;
 }
