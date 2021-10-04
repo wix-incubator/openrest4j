@@ -2,6 +2,7 @@ package com.openrest.olo.dispatches;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.openrest.olo.dispatches.DeliveryProvider;
 import com.openrest.v1_1.Address;
 
 import java.util.Date;
@@ -19,9 +20,13 @@ public class DeliveryDispatch extends Dispatch {
     public DeliveryDispatch() {}
 
     public DeliveryDispatch(Address address, Date time, String timeGuarantee, Integer charge, Map<String, String> properties) {
-        super(time, timeGuarantee, charge, properties);
+        this(address, time, timeGuarantee, charge, properties, null);
+    }
 
+    public DeliveryDispatch(Address address, Date time, String timeGuarantee, Integer charge, Map<String, String> properties, DeliveryProvider deliveryProvider) {
+        super(time, timeGuarantee, charge, properties);
         this.address = address;
+        this.deliveryProvider = deliveryProvider;
     }
 
     @Override
@@ -35,7 +40,9 @@ public class DeliveryDispatch extends Dispatch {
                 ((address != null) ? address.clone() : null),
                 (time != null) ? (Date) time.clone() : null,
                 timeGuarantee, charge,
-                ((properties != null) ? new LinkedHashMap<>(properties) : null));
+                ((properties != null) ? new LinkedHashMap<>(properties) : null),
+                ((deliveryProvider != null) ? deliveryProvider.clone() : null)
+                );
     }
 
     @Override
@@ -44,15 +51,19 @@ public class DeliveryDispatch extends Dispatch {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         DeliveryDispatch that = (DeliveryDispatch) o;
-        return Objects.equals(address, that.address);
+        return Objects.equals(address, that.address) &&
+               Objects.equals(deliveryProvider, that.deliveryProvider)  ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), address);
+        return Objects.hash(super.hashCode(), address, deliveryProvider);
     }
 
     /** Address to deliver to. */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public Address address;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public DeliveryProvider deliveryProvider;
 }
