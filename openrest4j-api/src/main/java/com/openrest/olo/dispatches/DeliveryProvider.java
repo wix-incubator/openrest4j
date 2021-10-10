@@ -15,16 +15,17 @@ public class DeliveryProvider implements Serializable, Cloneable {
     /** Default constructor for JSON deserialization. */
     public DeliveryProvider() {}
 
-    public DeliveryProvider(String configurationId, String estimateId, Integer restaurantSubsidyFee, Date pickupTime) {
+    public DeliveryProvider(String configurationId, String estimateId, Integer restaurantSubsidyFee, Date pickupTime, String providerName) {
         this.configurationId = configurationId;
         this.estimateId = estimateId;
         this.restaurantSubsidyFee = restaurantSubsidyFee;
         this.pickupTime = pickupTime;
+        this.providerName = providerName;
     }
 
     @Override
     public DeliveryProvider clone() {
-        return new DeliveryProvider(configurationId, estimateId, restaurantSubsidyFee, pickupTime);
+        return new DeliveryProvider(configurationId, estimateId, restaurantSubsidyFee, pickupTime, providerName);
     }
 
     @Override
@@ -35,12 +36,13 @@ public class DeliveryProvider implements Serializable, Cloneable {
         return Objects.equals(configurationId, that.configurationId) &&
                Objects.equals(estimateId, that.estimateId) &&
                Objects.equals(restaurantSubsidyFee, that.restaurantSubsidyFee) &&
-               Objects.equals(pickupTime, that.pickupTime);
+               Objects.equals(pickupTime, that.pickupTime) &&
+               Objects.equals(providerName, that.providerName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(configurationId, estimateId, restaurantSubsidyFee, pickupTime);
+        return Objects.hash(configurationId, estimateId, restaurantSubsidyFee, pickupTime, providerName);
     }
 
     @JsonInclude(Include.NON_NULL)
@@ -54,4 +56,7 @@ public class DeliveryProvider implements Serializable, Cloneable {
 
     @JsonInclude(Include.NON_NULL)
     public Date pickupTime;
+
+    @JsonInclude(Include.NON_NULL)
+    public String providerName;
 }
