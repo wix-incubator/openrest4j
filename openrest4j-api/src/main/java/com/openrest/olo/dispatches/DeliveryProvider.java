@@ -15,17 +15,18 @@ public class DeliveryProvider implements Serializable, Cloneable {
     /** Default constructor for JSON deserialization. */
     public DeliveryProvider() {}
 
-    public DeliveryProvider(String configurationId, String estimateId, Integer restaurantSubsidyFee, Date pickupTime, String providerName) {
+    public DeliveryProvider(String configurationId, String estimateId, Integer restaurantSubsidyFee, Date pickupTime, String providerName, String providerDeliveryId) {
         this.configurationId = configurationId;
         this.estimateId = estimateId;
         this.restaurantSubsidyFee = restaurantSubsidyFee;
         this.pickupTime = pickupTime;
         this.providerName = providerName;
+        this.providerDeliveryId = providerDeliveryId;
     }
 
     @Override
     public DeliveryProvider clone() {
-        return new DeliveryProvider(configurationId, estimateId, restaurantSubsidyFee, pickupTime, providerName);
+        return new DeliveryProvider(configurationId, estimateId, restaurantSubsidyFee, pickupTime, providerName, providerDeliveryId);
     }
 
     @Override
@@ -37,16 +38,20 @@ public class DeliveryProvider implements Serializable, Cloneable {
                Objects.equals(estimateId, that.estimateId) &&
                Objects.equals(restaurantSubsidyFee, that.restaurantSubsidyFee) &&
                Objects.equals(pickupTime, that.pickupTime) &&
-               Objects.equals(providerName, that.providerName);
+               Objects.equals(pickupTime, that.pickupTime) &&
+               Objects.equals(providerDeliveryId, that.providerDeliveryId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(configurationId, estimateId, restaurantSubsidyFee, pickupTime, providerName);
+        return Objects.hash(configurationId, estimateId, restaurantSubsidyFee, pickupTime, providerName, providerDeliveryId);
     }
 
     @JsonInclude(Include.NON_NULL)
     public String configurationId;
+
+    @JsonInclude(Include.NON_NULL)
+    public String providerDeliveryId;
 
     @JsonInclude(Include.NON_NULL)
     public String estimateId;
