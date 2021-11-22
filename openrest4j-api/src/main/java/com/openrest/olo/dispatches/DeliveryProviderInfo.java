@@ -15,13 +15,18 @@ public class DeliveryProviderInfo implements Serializable, Cloneable {
     public DeliveryProviderInfo() {}
 
     public DeliveryProviderInfo(String configurationId, Integer restaurantSubsidyFee) {
+        this(configurationId, restaurantSubsidyFee, null);
+    }
+
+    public DeliveryProviderInfo(String configurationId, Integer restaurantSubsidyFee, String pickupInstructions) {
         this.configurationId = configurationId;
         this.restaurantSubsidyFee = restaurantSubsidyFee;
+        this.pickupInstructions = pickupInstructions;
     }
 
     @Override
     public DeliveryProviderInfo clone() {
-        return new DeliveryProviderInfo(configurationId, restaurantSubsidyFee);
+        return new DeliveryProviderInfo(configurationId, restaurantSubsidyFee, pickupInstructions);
     }
 
     @Override
@@ -30,12 +35,13 @@ public class DeliveryProviderInfo implements Serializable, Cloneable {
         if (o == null || getClass() != o.getClass()) return false;
         DeliveryProviderInfo that = (DeliveryProviderInfo) o;
         return Objects.equals(configurationId, that.configurationId) &&
-               Objects.equals(restaurantSubsidyFee, that.restaurantSubsidyFee);
+               Objects.equals(restaurantSubsidyFee, that.restaurantSubsidyFee) &&
+               Objects.equals(pickupInstructions, that.pickupInstructions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(configurationId, restaurantSubsidyFee);
+        return Objects.hash(configurationId, restaurantSubsidyFee, pickupInstructions);
     }
 
     @JsonInclude(Include.NON_NULL)
@@ -43,4 +49,7 @@ public class DeliveryProviderInfo implements Serializable, Cloneable {
 
     @JsonInclude(Include.NON_NULL)
     public Integer restaurantSubsidyFee = 0;
+
+    @JsonInclude(Include.NON_NULL)
+    public String pickupInstructions;
 }
