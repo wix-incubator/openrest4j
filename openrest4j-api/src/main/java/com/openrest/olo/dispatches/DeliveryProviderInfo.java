@@ -48,7 +48,7 @@ public class DeliveryProviderInfo implements Serializable, Cloneable {
     public String configurationId;
 
     @JsonInclude(Include.NON_NULL)
-    public Integer restaurantSubsidyFee = 0;
+    public Integer restaurantSubsidyFee;
 
     @JsonInclude(Include.NON_NULL)
     public String pickupInstructions;
