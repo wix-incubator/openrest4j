@@ -16,10 +16,15 @@ public class DeliveryProvider implements Serializable, Cloneable {
     public DeliveryProvider() {}
 
     public DeliveryProvider(String configurationId, String estimateId, Integer restaurantSubsidyFee, Date pickupTime, String providerName, String providerDeliveryId) {
-        this(configurationId, estimateId, restaurantSubsidyFee, pickupTime, providerName, providerDeliveryId, null);
+        this(configurationId, estimateId, restaurantSubsidyFee, pickupTime, providerName, providerDeliveryId, null, null);
     }
 
     public DeliveryProvider(String configurationId, String estimateId, Integer restaurantSubsidyFee, Date pickupTime, String providerName, String providerDeliveryId, String providerIconUrl) {
+        this(configurationId, estimateId, restaurantSubsidyFee, pickupTime, providerName, providerDeliveryId, providerIconUrl, null);
+
+    }
+
+    public DeliveryProvider(String configurationId, String estimateId, Integer restaurantSubsidyFee, Date pickupTime, String providerName, String providerDeliveryId, String providerIconUrl, Date dropOffTime) {
         this.configurationId = configurationId;
         this.estimateId = estimateId;
         this.restaurantSubsidyFee = restaurantSubsidyFee;
@@ -27,11 +32,13 @@ public class DeliveryProvider implements Serializable, Cloneable {
         this.providerName = providerName;
         this.providerDeliveryId = providerDeliveryId;
         this.providerIconUrl = providerIconUrl;
+        this.dropOffTime = dropOffTime;
     }
+
 
     @Override
     public DeliveryProvider clone() {
-        return new DeliveryProvider(configurationId, estimateId, restaurantSubsidyFee, pickupTime, providerName, providerDeliveryId, providerIconUrl);
+        return new DeliveryProvider(configurationId, estimateId, restaurantSubsidyFee, pickupTime, providerName, providerDeliveryId, providerIconUrl, dropOffTime);
     }
 
     @Override
@@ -43,14 +50,15 @@ public class DeliveryProvider implements Serializable, Cloneable {
                Objects.equals(estimateId, that.estimateId) &&
                Objects.equals(restaurantSubsidyFee, that.restaurantSubsidyFee) &&
                Objects.equals(pickupTime, that.pickupTime) &&
-               Objects.equals(pickupTime, that.pickupTime) &&
+               Objects.equals(providerName, that.providerName) &&
                Objects.equals(providerDeliveryId, that.providerDeliveryId) &&
-               Objects.equals(providerIconUrl, that.providerIconUrl);
+               Objects.equals(providerIconUrl, that.providerIconUrl) &&
+               Objects.equals(dropOffTime, that.dropOffTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(configurationId, estimateId, restaurantSubsidyFee, pickupTime, providerName, providerDeliveryId, providerIconUrl);
+        return Objects.hash(configurationId, estimateId, restaurantSubsidyFee, pickupTime, providerName, providerDeliveryId, providerIconUrl, dropOffTime);
     }
 
     @JsonInclude(Include.NON_NULL)
@@ -73,4 +81,7 @@ public class DeliveryProvider implements Serializable, Cloneable {
 
     @JsonInclude(Include.NON_NULL)
     public String providerIconUrl;
+
+    @JsonInclude(Include.NON_NULL)
+    public Date dropOffTime;
 }
