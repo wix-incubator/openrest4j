@@ -24,11 +24,20 @@ public class DeliveryDispatch extends Dispatch {
     }
 
     public DeliveryDispatch(Address address, Date time, String timeGuarantee, Integer charge, Map<String, String> properties, DeliveryProvider deliveryProvider) {
+        this(address, time, timeGuarantee, charge, properties, deliveryProvider, null, null, null, null);
+    }
+
+    public DeliveryDispatch(Address address, Date time, String timeGuarantee, Integer charge, Map<String, String> properties,
+                            DeliveryProvider deliveryProvider, Date pickupWindowStartTime, Date pickupWindowEndTime,
+                            Date dropOffWindowStartTime, Date dropOffWindowEndTime) {
         super(time, timeGuarantee, charge, properties);
         this.address = address;
         this.deliveryProvider = deliveryProvider;
+        this.pickupWindowStartTime = pickupWindowStartTime;
+        this.pickupWindowEndTime = pickupWindowEndTime;
+        this.dropOffWindowStartTime = dropOffWindowStartTime;
+        this.dropOffWindowEndTime = dropOffWindowEndTime;
     }
-
     @Override
     public DeliveryDispatch clone() {
         return cloneImpl();
@@ -66,4 +75,16 @@ public class DeliveryDispatch extends Dispatch {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public DeliveryProvider deliveryProvider;
+
+    @JsonInclude(Include.NON_NULL)
+    public Date pickupWindowStartTime;
+
+    @JsonInclude(Include.NON_NULL)
+    public Date pickupWindowEndTime;
+
+    @JsonInclude(Include.NON_NULL)
+    public Date dropOffWindowStartTime;
+
+    @JsonInclude(Include.NON_NULL)
+    public Date dropOffWindowEndTime;
 }
