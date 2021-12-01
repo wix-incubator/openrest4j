@@ -50,8 +50,12 @@ public class DeliveryDispatch extends Dispatch {
                 (time != null) ? (Date) time.clone() : null,
                 timeGuarantee, charge,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null),
-                ((deliveryProvider != null) ? deliveryProvider.clone() : null)
-                );
+                ((deliveryProvider != null) ? deliveryProvider.clone() : null),
+                (pickupWindowStartTime != null) ? (Date) pickupWindowStartTime.clone() : null,
+                (pickupWindowEndTime != null) ? (Date) pickupWindowEndTime.clone() : null,
+                (dropOffWindowStartTime != null) ? (Date) dropOffWindowStartTime.clone() : null,
+                (dropOffWindowEndTime != null) ? (Date) dropOffWindowEndTime.clone() : null
+        );
     }
 
     @Override
@@ -61,12 +65,18 @@ public class DeliveryDispatch extends Dispatch {
         if (!super.equals(o)) return false;
         DeliveryDispatch that = (DeliveryDispatch) o;
         return Objects.equals(address, that.address) &&
-               Objects.equals(deliveryProvider, that.deliveryProvider)  ;
+                Objects.equals(deliveryProvider, that.deliveryProvider) &&
+                Objects.equals(pickupWindowStartTime, that.pickupWindowStartTime) &&
+                Objects.equals(pickupWindowEndTime, that.pickupWindowEndTime) &&
+                Objects.equals(dropOffWindowStartTime, that.dropOffWindowStartTime) &&
+                Objects.equals(dropOffWindowEndTime, that.dropOffWindowEndTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), address, deliveryProvider);
+        return Objects.hash(super.hashCode(), address, deliveryProvider,
+                pickupWindowStartTime, pickupWindowEndTime,
+                dropOffWindowStartTime, dropOffWindowEndTime);
     }
 
     /** Address to deliver to. */
@@ -76,15 +86,15 @@ public class DeliveryDispatch extends Dispatch {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public DeliveryProvider deliveryProvider;
 
-    @JsonInclude(Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Date pickupWindowStartTime;
 
-    @JsonInclude(Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Date pickupWindowEndTime;
 
-    @JsonInclude(Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Date dropOffWindowStartTime;
 
-    @JsonInclude(Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Date dropOffWindowEndTime;
 }
