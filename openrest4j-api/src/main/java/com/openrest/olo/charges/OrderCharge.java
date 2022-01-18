@@ -1,12 +1,12 @@
 package com.openrest.olo.charges;
 
 import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.wix.restaurants.i18n.LocalizedString;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderCharge implements Serializable, Cloneable {
@@ -16,13 +16,22 @@ public class OrderCharge implements Serializable, Cloneable {
     public OrderCharge() {}
     
     public OrderCharge(String chargeId, Integer amount) {
+        this(chargeId, amount, null, null, null, null);
+    }
+
+    public OrderCharge(String chargeId, Integer amount, String type,
+                       LocalizedString title, LocalizedString description, Map<String, String> properties) {
         this.chargeId = chargeId;
         this.amount = amount;
+        this.type = type;
+        this.title = title;
+        this.description = description;
+        this.properties = properties;
     }
     
     @Override
 	public OrderCharge clone() {
-    	return new OrderCharge(chargeId, amount);
+    	return new OrderCharge(chargeId, amount, type, title, description, properties);
 	}
     
     public static List<OrderCharge> clone(List<OrderCharge> orderCharges) {
@@ -41,20 +50,18 @@ public class OrderCharge implements Serializable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
-        OrderCharge that = (OrderCharge) o;
-
-        if (amount != null ? !amount.equals(that.amount) : that.amount != null) return false;
-        if (chargeId != null ? !chargeId.equals(that.chargeId) : that.chargeId != null) return false;
-
-        return true;
+        OrderCharge orderCharge = (OrderCharge) o;
+        return Objects.equals(chargeId, orderCharge.chargeId) &&
+                Objects.equals(amount, orderCharge.amount) &&
+                Objects.equals(type, orderCharge.type) &&
+                Objects.equals(title, orderCharge.title) &&
+                Objects.equals(description, orderCharge.description) &&
+                Objects.equals(properties, orderCharge.properties);
     }
 
     @Override
     public int hashCode() {
-        int result = chargeId != null ? chargeId.hashCode() : 0;
-        result = 31 * result + (amount != null ? amount.hashCode() : 0);
-        return result;
+        return Objects.hash(chargeId, amount, type, title, description, properties);
     }
 
     /** The charge id. */
@@ -64,4 +71,22 @@ public class OrderCharge implements Serializable, Cloneable {
     /** The amount. */
     @JsonInclude(Include.NON_DEFAULT)
     public Integer amount = 0;
+
+    /** @see Charge#ALL_CHARGE_TYPES */
+    @JsonInclude(Include.NON_NULL)
+    public String type;
+
+    @JsonInclude(Include.NON_DEFAULT)
+    public LocalizedString title = LocalizedString.empty;
+
+    /** Description. */
+    @JsonInclude(Include.NON_DEFAULT)
+    public LocalizedString description = LocalizedString.empty;
+
+    /**
+     * Map of user-defined extended properties. Developers should use unique
+     * keys, e.g. "com.googlecode.openrestext".
+     */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Map<String, String> properties = new LinkedHashMap<>();
 }

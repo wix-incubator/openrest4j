@@ -3,11 +3,10 @@ package com.openrest.v1_1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.wix.restaurants.i18n.LocalizedString;
 
 import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderItem implements Serializable, Cloneable {
@@ -15,12 +14,22 @@ public class OrderItem implements Serializable, Cloneable {
 
     public OrderItem(String itemId, List<Variation> variations, List<List<OrderItem>> variationsChoices,
             String comment, Integer price, Integer count) {
+        this(itemId, variations, variationsChoices, comment, price, count, null, null, null, null);
+    }
+
+    public OrderItem(String itemId, List<Variation> variations, List<List<OrderItem>> variationsChoices,
+                     String comment, Integer price, Integer count, LocalizedString title, LocalizedString description,
+                     Map<String, String> media, Set<String> labels) {
         this.itemId = itemId;
         this.variations = variations;
         this.variationsChoices = variationsChoices;
         this.comment = comment;
         this.price = price;
         this.count = count;
+        this.title = title;
+        this.description = description;
+        this.media = media;
+        this.labels = labels;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -38,7 +47,17 @@ public class OrderItem implements Serializable, Cloneable {
     		clonedVariationsChoices = null;
     	}
 
-    	return new OrderItem(itemId, Variation.clone(variations), clonedVariationsChoices, comment, price, count);
+    	return new OrderItem(
+    	        itemId,
+                Variation.clone(variations),
+                clonedVariationsChoices,
+                comment,
+                price,
+                count,
+                ((title != null) ? title.clone() : null),
+                ((description != null) ? description.clone() : null),
+                ((media != null) ? new LinkedHashMap<>(media) : null),
+                ((labels != null) ? new LinkedHashSet<>(labels) : null));
 	}
     
     public static List<OrderItem> clone(List<OrderItem> orderItems) {
@@ -63,12 +82,16 @@ public class OrderItem implements Serializable, Cloneable {
                 Objects.equals(variationsChoices, orderItem.variationsChoices) &&
                 Objects.equals(comment, orderItem.comment) &&
                 Objects.equals(price, orderItem.price) &&
-                Objects.equals(count, orderItem.count);
+                Objects.equals(count, orderItem.count) &&
+                Objects.equals(title, orderItem.title) &&
+                Objects.equals(description, orderItem.description) &&
+                Objects.equals(media, orderItem.media) &&
+                Objects.equals(labels, orderItem.labels);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(itemId, variations, variationsChoices, comment, price, count);
+        return Objects.hash(itemId, variations, variationsChoices, comment, price, count, title, description, media, labels);
     }
 
     /** Item id. */
@@ -105,4 +128,26 @@ public class OrderItem implements Serializable, Cloneable {
     /** Number of times this order-item was ordered. */
     @JsonInclude(Include.NON_DEFAULT)
     public Integer count = 1;
+
+    /** The item's title in various locales. */
+    @JsonInclude(Include.NON_DEFAULT)
+    public LocalizedString title = LocalizedString.empty;
+
+    /** The item's one line description in various locales. */
+    @JsonInclude(Include.NON_DEFAULT)
+    public LocalizedString description = LocalizedString.empty;
+
+    /**
+     * Maps media-types to URLs.
+     * @see BlobTypes
+     */
+    @JsonInclude(Include.NON_NULL)
+    public Map<String, String> media = new LinkedHashMap<>();
+
+    /**
+     * The item's labels.
+     * @see com.wix.restaurants.Labels
+     */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Set<String> labels = new LinkedHashSet<>();
 }
