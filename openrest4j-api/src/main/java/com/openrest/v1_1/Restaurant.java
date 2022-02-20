@@ -111,7 +111,8 @@ public class Restaurant extends Organization {
                 defaultLocationIdAtTimeOfMigration,
                 ((locationName != null) ? locationName.clone() : null),
                 Location.clone(locations),
-                defaultDispatchType);
+                defaultDispatchType,
+                posProviderId);
 	}
 
     @Override
@@ -135,12 +136,13 @@ public class Restaurant extends Organization {
                 Objects.equals(defaultLocationIdAtTimeOfMigration, that.defaultLocationIdAtTimeOfMigration) &&
                 Objects.equals(locationName, that.locationName) &&
                 Objects.equals(locations, that.locations) &&
-                Objects.equals(defaultDispatchType, that.defaultDispatchType);
+                Objects.equals(defaultDispatchType, that.defaultDispatchType) &&
+                Objects.equals(posProviderId, that.posProviderId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), distributorId, chainId, openTimes, deliveryInfos, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations, features, currentLocationId, defaultLocationIdAtTimeOfMigration, locationName, locations, defaultDispatchType);
+        return Objects.hash(super.hashCode(), distributorId, chainId, openTimes, deliveryInfos, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations, features, currentLocationId, defaultLocationIdAtTimeOfMigration, locationName, locations, defaultDispatchType, posProviderId);
     }
 
     @Override
@@ -182,6 +184,7 @@ public class Restaurant extends Organization {
                 ", closed=" + closed +
                 ", products=" + products +
                 ", defaultDispatchType=" + defaultDispatchType +
+                ", posProviderId=" + posProviderId +
                 '}';
     }
 
