@@ -1,5 +1,9 @@
 package com.wix.restaurants;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 public class TimeGuarantees {
     private TimeGuarantees() {}
 
@@ -8,4 +12,6 @@ public class TimeGuarantees {
 
     /** Guaranteed to happen at about the given timestamp. */
     public static final String approximate = "about";
+
+    public static List validTimeGuarantees = new LinkedList(Arrays.asList(before, approximate));
 }
