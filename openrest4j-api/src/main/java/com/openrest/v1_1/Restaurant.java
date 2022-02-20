@@ -33,7 +33,7 @@ public class Restaurant extends Organization {
              openTimes, deliveryInfos, timezone,  currency,  locale,  locales,
              paymentTypes,  multiPaymentDisabled,  creditcardsInfo,
              deliveriesInfo, orders, reservations, media, apps, properties,
-             closed, products ,features, currentLocationId, defaultLocationIdAtTimeOfMigration, locationName, locations, null);
+             closed, products ,features, currentLocationId, defaultLocationIdAtTimeOfMigration, locationName, locations, null, null);
     }
 
     public Restaurant(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
@@ -46,7 +46,7 @@ public class Restaurant extends Organization {
                       DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations,
                       Map<String, String> media, List<AppInfo> apps, Map<String, String> properties,
                       Boolean closed, Set<Product> products, Map<String, Double> features, String currentLocationId,
-                      String defaultLocationIdAtTimeOfMigration, LocalizedString locationName, List<Location> locations, String defaultDispatchType) {
+                      String defaultLocationIdAtTimeOfMigration, LocalizedString locationName, List<Location> locations, String defaultDispatchType, String posProviderId) {
         super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages,
                 contact, address, timezone, currency, apps, properties,
                 media, closed, products);
@@ -67,6 +67,7 @@ public class Restaurant extends Organization {
         this.locationName = locationName;
         this.locations = locations;
         this.defaultDispatchType = defaultDispatchType;
+        this.posProviderId = posProviderId;
     }
 
 
@@ -248,4 +249,7 @@ public class Restaurant extends Organization {
     /** The default dispatch type. */
     @JsonInclude(Include.NON_NULL)
     public String defaultDispatchType;
+
+    @JsonInclude(Include.NON_NULL)
+    public String posProviderId;
 }
