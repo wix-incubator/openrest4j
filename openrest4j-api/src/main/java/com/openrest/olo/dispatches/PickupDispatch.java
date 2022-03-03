@@ -19,18 +19,18 @@ public class PickupDispatch extends Dispatch {
     /** Default constructor for JSON deserialization. */
     public PickupDispatch() {}
 
-    public PickupDispatch(Date time, String timeGuarantee, Integer charge, Map<String, String> properties) {
-        super(time, timeGuarantee, charge, properties);
+    public PickupDispatch(Date time, String timeGuarantee, Integer charge, Integer delayMins, Map<String, String> properties) {
+        super(time, timeGuarantee, charge, delayMins, properties);
     }
 
-    public PickupDispatch(Date time, String timeGuarantee, Integer charge, Map<String, String> properties,
+    public PickupDispatch(Date time, String timeGuarantee, Integer charge, Integer delayMins, Map<String, String> properties,
                           String curbsideAdditionalInformation, Boolean isCurbside) {
-        this(time, timeGuarantee, charge, properties, curbsideAdditionalInformation, isCurbside, null);
+        this(time, timeGuarantee, charge, delayMins, properties, curbsideAdditionalInformation, isCurbside, null);
     }
 
-    public PickupDispatch(Date time, String timeGuarantee, Integer charge, Map<String, String> properties,
+    public PickupDispatch(Date time, String timeGuarantee, Integer charge, Integer delayMins, Map<String, String> properties,
                           String curbsideAdditionalInformation, Boolean isCurbside, ContactlessDineIn contactlessDineIn) {
-        super(time, timeGuarantee, charge, properties);
+        super(time, timeGuarantee, charge, delayMins, properties);
         this.curbsideAdditionalInformation = curbsideAdditionalInformation;
         this.isCurbside = isCurbside;
         this.contactlessDineIn = contactlessDineIn;
@@ -45,7 +45,7 @@ public class PickupDispatch extends Dispatch {
     protected PickupDispatch cloneImpl() {
         return new PickupDispatch(
                 (time != null) ? (Date) time.clone() : null,
-                timeGuarantee, charge,
+                timeGuarantee, charge, delayMins,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null),
                 curbsideAdditionalInformation,
                 isCurbside,

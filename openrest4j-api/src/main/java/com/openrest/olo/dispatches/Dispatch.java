@@ -29,10 +29,11 @@ public abstract class Dispatch implements Serializable, Cloneable {
     /** Default constructor for JSON deserialization. */
     public Dispatch() {}
 
-    public Dispatch(Date time, String timeGuarantee, Integer charge, Map<String, String> properties) {
+    public Dispatch(Date time, String timeGuarantee, Integer charge, Integer delayMins, Map<String, String> properties) {
         this.time = time;
         this.timeGuarantee = timeGuarantee;
         this.charge = charge;
+        this.delayMins = delayMins;
         this.properties = properties;
     }
 
@@ -51,12 +52,13 @@ public abstract class Dispatch implements Serializable, Cloneable {
         return Objects.equals(time, dispatch.time) &&
                 Objects.equals(timeGuarantee, dispatch.timeGuarantee) &&
                 Objects.equals(charge, dispatch.charge) &&
+                Objects.equals(delayMins, dispatch.delayMins) &&
                 Objects.equals(properties, dispatch.properties);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(time, timeGuarantee, charge, properties);
+        return Objects.hash(time, timeGuarantee, charge, delayMins, properties);
     }
 
     /** Timestamp by which the order will be delivered or ready for pick-up. */
@@ -70,6 +72,10 @@ public abstract class Dispatch implements Serializable, Cloneable {
     /** The delivery charge (in "cents"). */
     @JsonInclude(Include.NON_DEFAULT)
     public Integer charge = 0;
+
+    /** Delivery time (maximum number of minutes till order arrives). */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Integer delayMins = 0;
 
     /**
      * Map of externally-defined ids referring to this payment.
