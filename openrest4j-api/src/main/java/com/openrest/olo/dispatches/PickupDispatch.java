@@ -19,13 +19,18 @@ public class PickupDispatch extends Dispatch {
     /** Default constructor for JSON deserialization. */
     public PickupDispatch() {}
 
-    public PickupDispatch(Date time, String timeGuarantee, Integer charge, Integer delayMins, Map<String, String> properties) {
-        super(time, timeGuarantee, charge, delayMins, properties);
+    public PickupDispatch(Date time, String timeGuarantee, Integer charge, Map<String, String> properties) {
+        super(time, timeGuarantee, charge, properties);
     }
 
-    public PickupDispatch(Date time, String timeGuarantee, Integer charge, Integer delayMins, Map<String, String> properties,
+    public PickupDispatch(Date time, String timeGuarantee, Integer charge, Map<String, String> properties,
                           String curbsideAdditionalInformation, Boolean isCurbside) {
-        this(time, timeGuarantee, charge, delayMins, properties, curbsideAdditionalInformation, isCurbside, null);
+        this(time, timeGuarantee, charge, properties, curbsideAdditionalInformation, isCurbside, null);
+    }
+
+    public PickupDispatch(Date time, String timeGuarantee, Integer charge, Map<String, String> properties,
+                          String curbsideAdditionalInformation, Boolean isCurbside, ContactlessDineIn contactlessDineIn) {
+        this(time, timeGuarantee, charge, null, properties, curbsideAdditionalInformation, isCurbside, contactlessDineIn);
     }
 
     public PickupDispatch(Date time, String timeGuarantee, Integer charge, Integer delayMins, Map<String, String> properties,

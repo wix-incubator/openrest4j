@@ -19,12 +19,18 @@ public class DeliveryDispatch extends Dispatch {
     /** Default constructor for JSON deserialization. */
     public DeliveryDispatch() {}
 
-    public DeliveryDispatch(Address address, Date time, String timeGuarantee, Integer charge, Integer delayMins, Map<String, String> properties) {
-        this(address, time, timeGuarantee, charge, delayMins, properties, null);
+    public DeliveryDispatch(Address address, Date time, String timeGuarantee, Integer charge, Map<String, String> properties) {
+        this(address, time, timeGuarantee, charge, properties, null);
     }
 
-    public DeliveryDispatch(Address address, Date time, String timeGuarantee, Integer charge, Integer delayMins, Map<String, String> properties, DeliveryProvider deliveryProvider) {
-        this(address, time, timeGuarantee, charge, delayMins, properties, deliveryProvider, null, null, null, null);
+    public DeliveryDispatch(Address address, Date time, String timeGuarantee, Integer charge, Map<String, String> properties, DeliveryProvider deliveryProvider) {
+        this(address, time, timeGuarantee, charge, properties, deliveryProvider, null, null, null, null);
+    }
+
+    public DeliveryDispatch(Address address, Date time, String timeGuarantee, Integer charge, Map<String, String> properties,
+                            DeliveryProvider deliveryProvider, Date pickupWindowStartTime, Date pickupWindowEndTime,
+                            Date dropOffWindowStartTime, Date dropOffWindowEndTime) {
+        this(address, time, timeGuarantee, charge, null, properties, deliveryProvider, pickupWindowStartTime, pickupWindowEndTime, dropOffWindowStartTime, dropOffWindowEndTime);
     }
 
     public DeliveryDispatch(Address address, Date time, String timeGuarantee, Integer charge, Integer delayMins, Map<String, String> properties,

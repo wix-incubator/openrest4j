@@ -29,6 +29,10 @@ public abstract class Dispatch implements Serializable, Cloneable {
     /** Default constructor for JSON deserialization. */
     public Dispatch() {}
 
+    public Dispatch(Date time, String timeGuarantee, Integer charge, Map<String, String> properties) {
+        this(time, timeGuarantee, charge, null, properties);
+    }
+
     public Dispatch(Date time, String timeGuarantee, Integer charge, Integer delayMins, Map<String, String> properties) {
         this.time = time;
         this.timeGuarantee = timeGuarantee;

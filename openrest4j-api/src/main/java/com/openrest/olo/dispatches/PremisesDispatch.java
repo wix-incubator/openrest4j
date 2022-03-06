@@ -17,6 +17,10 @@ public class PremisesDispatch extends Dispatch {
     /** Default constructor for JSON deserialization. */
     public PremisesDispatch() {}
 
+    public PremisesDispatch(Date time, String timeGuarantee, Integer charge, String comment, Map<String, String> properties) {
+        this(time, timeGuarantee, charge, null, comment, properties);
+    }
+
     public PremisesDispatch(Date time, String timeGuarantee, Integer charge, Integer delayMins, String comment, Map<String, String> properties) {
         super(time, timeGuarantee, charge, delayMins, properties);
 
