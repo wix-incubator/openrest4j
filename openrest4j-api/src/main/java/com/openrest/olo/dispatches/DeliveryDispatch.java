@@ -30,7 +30,13 @@ public class DeliveryDispatch extends Dispatch {
     public DeliveryDispatch(Address address, Date time, String timeGuarantee, Integer charge, Map<String, String> properties,
                             DeliveryProvider deliveryProvider, Date pickupWindowStartTime, Date pickupWindowEndTime,
                             Date dropOffWindowStartTime, Date dropOffWindowEndTime) {
-        super(time, timeGuarantee, charge, properties);
+        this(address, time, timeGuarantee, charge, null, properties, deliveryProvider, pickupWindowStartTime, pickupWindowEndTime, dropOffWindowStartTime, dropOffWindowEndTime);
+    }
+
+    public DeliveryDispatch(Address address, Date time, String timeGuarantee, Integer charge, Integer delayMins, Map<String, String> properties,
+                            DeliveryProvider deliveryProvider, Date pickupWindowStartTime, Date pickupWindowEndTime,
+                            Date dropOffWindowStartTime, Date dropOffWindowEndTime) {
+        super(time, timeGuarantee, charge, delayMins, properties);
         this.address = address;
         this.deliveryProvider = deliveryProvider;
         this.pickupWindowStartTime = pickupWindowStartTime;
@@ -48,7 +54,7 @@ public class DeliveryDispatch extends Dispatch {
         return new DeliveryDispatch(
                 ((address != null) ? address.clone() : null),
                 (time != null) ? (Date) time.clone() : null,
-                timeGuarantee, charge,
+                timeGuarantee, charge, delayMins,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null),
                 ((deliveryProvider != null) ? deliveryProvider.clone() : null),
                 (pickupWindowStartTime != null) ? (Date) pickupWindowStartTime.clone() : null,

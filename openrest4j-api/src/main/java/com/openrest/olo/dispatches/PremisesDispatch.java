@@ -18,7 +18,11 @@ public class PremisesDispatch extends Dispatch {
     public PremisesDispatch() {}
 
     public PremisesDispatch(Date time, String timeGuarantee, Integer charge, String comment, Map<String, String> properties) {
-        super(time, timeGuarantee, charge, properties);
+        this(time, timeGuarantee, charge, null, comment, properties);
+    }
+
+    public PremisesDispatch(Date time, String timeGuarantee, Integer charge, Integer delayMins, String comment, Map<String, String> properties) {
+        super(time, timeGuarantee, charge, delayMins, properties);
 
         this.comment = comment;
     }
@@ -32,7 +36,7 @@ public class PremisesDispatch extends Dispatch {
     protected PremisesDispatch cloneImpl() {
         return new PremisesDispatch(
                 (time != null) ? (Date) time.clone() : null,
-                timeGuarantee, charge, comment,
+                timeGuarantee, charge, delayMins, comment,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
     }
 
