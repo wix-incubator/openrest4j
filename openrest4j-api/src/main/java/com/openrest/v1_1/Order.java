@@ -152,7 +152,7 @@ public class Order implements Serializable, Cloneable {
                 gatewayReturnUrl,
                 locationId,
                 (loyalty != null) ? loyalty.clone() : null,
-                (posInfo != null) ? posInfo.close() : null);
+                (posInfo != null) ? posInfo.clone() : null);
 	}
 
     @Override
