@@ -14,6 +14,11 @@ public class PosInfo implements Serializable, Cloneable {
     /** Default constructor for JSON deserialization. */
     public PosInfo() {}
 
+    public PosInfo(String posProviderId, String posOrderId) {
+        this.posProviderId = posProviderId;
+        this.posOrderId = posOrderId;
+    }
+
     public PosInfo(String posProviderId, String posOrderId, boolean isPreOrder, String paymentGatewayId, String cashierChargeProviderIdKey) {
         this.posProviderId = posProviderId;
         this.posOrderId = posOrderId;
@@ -21,6 +26,7 @@ public class PosInfo implements Serializable, Cloneable {
         this.paymentGatewayId = paymentGatewayId;
         this.cashierChargeProviderIdKey = cashierChargeProviderIdKey;
     }
+
 
     @Override
     public PosInfo clone() {
