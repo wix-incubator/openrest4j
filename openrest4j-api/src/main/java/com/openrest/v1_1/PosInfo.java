@@ -19,6 +19,14 @@ public class PosInfo implements Serializable, Cloneable {
         this.posOrderId = posOrderId;
     }
 
+    public PosInfo(String posProviderId, String posOrderId, boolean isPreOrder, String paymentGatewayId, String cashierChargeProviderIdKey) {
+        this.posProviderId = posProviderId;
+        this.posOrderId = posOrderId;
+        this.isPreOrder = isPreOrder;
+        this.paymentGatewayId = paymentGatewayId;
+        this.cashierChargeProviderIdKey = cashierChargeProviderIdKey;
+    }
+
     public PosInfo(String posProviderId, String posOrderId, boolean isPreOrder, String paymentGatewayId, String cashierChargeProviderIdKey, PosInfoError posInfoError) {
         this.posProviderId = posProviderId;
         this.posOrderId = posOrderId;
