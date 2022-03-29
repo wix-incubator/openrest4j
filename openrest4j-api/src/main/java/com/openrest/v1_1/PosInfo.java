@@ -19,18 +19,19 @@ public class PosInfo implements Serializable, Cloneable {
         this.posOrderId = posOrderId;
     }
 
-    public PosInfo(String posProviderId, String posOrderId, boolean isPreOrder, String paymentGatewayId, String cashierChargeProviderIdKey) {
+    public PosInfo(String posProviderId, String posOrderId, boolean isPreOrder, String paymentGatewayId, String cashierChargeProviderIdKey, PosInfoError posInfoError) {
         this.posProviderId = posProviderId;
         this.posOrderId = posOrderId;
         this.isPreOrder = isPreOrder;
         this.paymentGatewayId = paymentGatewayId;
         this.cashierChargeProviderIdKey = cashierChargeProviderIdKey;
+        this.posInfoError = posInfoError;
     }
 
 
     @Override
     public PosInfo clone() {
-        return new PosInfo(posProviderId, posOrderId, isPreOrder, paymentGatewayId, cashierChargeProviderIdKey);
+        return new PosInfo(posProviderId, posOrderId, isPreOrder, paymentGatewayId, cashierChargeProviderIdKey, posInfoError);
     }
 
     @Override
@@ -42,12 +43,13 @@ public class PosInfo implements Serializable, Cloneable {
                Objects.equals(posOrderId, that.posOrderId) &&
                Objects.equals(isPreOrder, that.isPreOrder) &&
                Objects.equals(paymentGatewayId, that.paymentGatewayId) &&
-               Objects.equals(cashierChargeProviderIdKey, that.cashierChargeProviderIdKey);
+               Objects.equals(cashierChargeProviderIdKey, that.cashierChargeProviderIdKey) &&
+               Objects.equals(posInfoError, that.posInfoError);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(posProviderId, posOrderId, isPreOrder, paymentGatewayId, cashierChargeProviderIdKey);
+        return Objects.hash(posProviderId, posOrderId, isPreOrder, paymentGatewayId, cashierChargeProviderIdKey, posInfoError);
     }
 
     @JsonInclude(Include.NON_NULL)
@@ -64,4 +66,7 @@ public class PosInfo implements Serializable, Cloneable {
 
     @JsonInclude(Include.NON_NULL)
     public String cashierChargeProviderIdKey;
+
+    @JsonInclude(Include.NON_NULL)
+    public PosInfoError posInfoError;
 }
