@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PosInfo implements Serializable, Cloneable {
@@ -27,19 +27,19 @@ public class PosInfo implements Serializable, Cloneable {
         this.cashierChargeProviderIdKey = cashierChargeProviderIdKey;
     }
 
-    public PosInfo(String posProviderId, String posOrderId, boolean isPreOrder, String paymentGatewayId, String cashierChargeProviderIdKey, PosInfoError posInfoError) {
+    public PosInfo(String posProviderId, String posOrderId, boolean isPreOrder, String paymentGatewayId, String cashierChargeProviderIdKey, List<PosInfoError> posInfoErrors) {
         this.posProviderId = posProviderId;
         this.posOrderId = posOrderId;
         this.isPreOrder = isPreOrder;
         this.paymentGatewayId = paymentGatewayId;
         this.cashierChargeProviderIdKey = cashierChargeProviderIdKey;
-        this.posInfoError = posInfoError;
+        this.posInfoErrors = posInfoErrors;
     }
 
 
     @Override
     public PosInfo clone() {
-        return new PosInfo(posProviderId, posOrderId, isPreOrder, paymentGatewayId, cashierChargeProviderIdKey, posInfoError);
+        return new PosInfo(posProviderId, posOrderId, isPreOrder, paymentGatewayId, cashierChargeProviderIdKey, posInfoErrors);
     }
 
     @Override
@@ -52,12 +52,12 @@ public class PosInfo implements Serializable, Cloneable {
                Objects.equals(isPreOrder, that.isPreOrder) &&
                Objects.equals(paymentGatewayId, that.paymentGatewayId) &&
                Objects.equals(cashierChargeProviderIdKey, that.cashierChargeProviderIdKey) &&
-               Objects.equals(posInfoError, that.posInfoError);
+               Objects.equals(posInfoErrors, that.posInfoErrors);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(posProviderId, posOrderId, isPreOrder, paymentGatewayId, cashierChargeProviderIdKey, posInfoError);
+        return Objects.hash(posProviderId, posOrderId, isPreOrder, paymentGatewayId, cashierChargeProviderIdKey, posInfoErrors);
     }
 
     @JsonInclude(Include.NON_NULL)
@@ -76,5 +76,5 @@ public class PosInfo implements Serializable, Cloneable {
     public String cashierChargeProviderIdKey;
 
     @JsonInclude(Include.NON_NULL)
-    public PosInfoError posInfoError;
+    public List<PosInfoError> posInfoErrors;
 }
