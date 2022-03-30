@@ -27,19 +27,20 @@ public class PosInfo implements Serializable, Cloneable {
         this.cashierChargeProviderIdKey = cashierChargeProviderIdKey;
     }
 
-    public PosInfo(String posProviderId, String posOrderId, boolean isPreOrder, String paymentGatewayId, String cashierChargeProviderIdKey, List<PosInfoError> posInfoErrors) {
+    public PosInfo(String posProviderId, String posOrderId, boolean isPreOrder, String paymentGatewayId, String cashierChargeProviderIdKey, boolean success, List<PosInfoError> posInfoErrors) {
         this.posProviderId = posProviderId;
         this.posOrderId = posOrderId;
         this.isPreOrder = isPreOrder;
         this.paymentGatewayId = paymentGatewayId;
         this.cashierChargeProviderIdKey = cashierChargeProviderIdKey;
+        this.success = success;
         this.posInfoErrors = posInfoErrors;
     }
 
 
     @Override
     public PosInfo clone() {
-        return new PosInfo(posProviderId, posOrderId, isPreOrder, paymentGatewayId, cashierChargeProviderIdKey, posInfoErrors);
+        return new PosInfo(posProviderId, posOrderId, isPreOrder, paymentGatewayId, cashierChargeProviderIdKey, success, posInfoErrors);
     }
 
     @Override
@@ -52,12 +53,13 @@ public class PosInfo implements Serializable, Cloneable {
                Objects.equals(isPreOrder, that.isPreOrder) &&
                Objects.equals(paymentGatewayId, that.paymentGatewayId) &&
                Objects.equals(cashierChargeProviderIdKey, that.cashierChargeProviderIdKey) &&
+               Objects.equals(success, that.success) &&
                Objects.equals(posInfoErrors, that.posInfoErrors);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(posProviderId, posOrderId, isPreOrder, paymentGatewayId, cashierChargeProviderIdKey, posInfoErrors);
+        return Objects.hash(posProviderId, posOrderId, isPreOrder, paymentGatewayId, cashierChargeProviderIdKey, success, posInfoErrors);
     }
 
     @JsonInclude(Include.NON_NULL)
@@ -74,6 +76,9 @@ public class PosInfo implements Serializable, Cloneable {
 
     @JsonInclude(Include.NON_NULL)
     public String cashierChargeProviderIdKey;
+
+    @JsonInclude(Include.NON_NULL)
+    public boolean success;
 
     @JsonInclude(Include.NON_NULL)
     public List<PosInfoError> posInfoErrors;
