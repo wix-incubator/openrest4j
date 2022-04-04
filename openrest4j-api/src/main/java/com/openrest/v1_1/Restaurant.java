@@ -33,7 +33,8 @@ public class Restaurant extends Organization {
              openTimes, deliveryInfos, timezone,  currency,  locale,  locales,
              paymentTypes,  multiPaymentDisabled,  creditcardsInfo,
              deliveriesInfo, orders, reservations, media, apps, properties,
-             closed, products ,features, currentLocationId, defaultLocationIdAtTimeOfMigration, locationName, locations, null, null);
+             closed, products ,features, currentLocationId, defaultLocationIdAtTimeOfMigration, locationName, locations,
+                null, null);
     }
 
     public Restaurant(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
@@ -70,6 +71,42 @@ public class Restaurant extends Organization {
         this.posProviderId = posProviderId;
     }
 
+
+    public Restaurant(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
+                      String distributorId, String chainId, LocalizedString title,
+                      LocalizedString description, Contact contact, Address address,
+                      Map<String, LocalizedString> messages,
+                      Availability openTimes, List<DispatchInfo> deliveryInfos,
+                      String timezone, String currency, Locale locale, Set<Locale> locales,
+                      Set<String> paymentTypes, Boolean multiPaymentDisabled, CreditcardsInfo creditcardsInfo,
+                      DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations,
+                      Map<String, String> media, List<AppInfo> apps, Map<String, String> properties,
+                      Boolean closed, Set<Product> products, Map<String, Double> features, String currentLocationId,
+                      String defaultLocationIdAtTimeOfMigration, LocalizedString locationName, List<Location> locations,
+                      String defaultDispatchType, String posProviderId, Boolean orderConfirmationOnSubmitEnabled) {
+        super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages,
+                contact, address, timezone, currency, apps, properties,
+                media, closed, products);
+
+        this.distributorId = distributorId;
+        this.chainId = chainId;
+        this.openTimes = openTimes;
+        this.deliveryInfos = deliveryInfos;
+        this.paymentTypes = paymentTypes;
+        this.multiPaymentDisabled = multiPaymentDisabled;
+        this.creditcardsInfo = creditcardsInfo;
+        this.deliveriesInfo = deliveriesInfo;
+        this.orders = orders;
+        this.reservations = reservations;
+        this.features = features;
+        this.currentLocationId = currentLocationId;
+        this.defaultLocationIdAtTimeOfMigration = defaultLocationIdAtTimeOfMigration;
+        this.locationName = locationName;
+        this.locations = locations;
+        this.defaultDispatchType = defaultDispatchType;
+        this.posProviderId = posProviderId;
+        this.orderConfirmationOnSubmitEnabled = orderConfirmationOnSubmitEnabled;
+    }
 
     /** Default constructor for JSON deserialization. */
     public Restaurant() {}
@@ -112,7 +149,8 @@ public class Restaurant extends Organization {
                 ((locationName != null) ? locationName.clone() : null),
                 Location.clone(locations),
                 defaultDispatchType,
-                posProviderId);
+                posProviderId,
+                orderConfirmationOnSubmitEnabled);
 	}
 
     @Override
@@ -137,12 +175,16 @@ public class Restaurant extends Organization {
                 Objects.equals(locationName, that.locationName) &&
                 Objects.equals(locations, that.locations) &&
                 Objects.equals(defaultDispatchType, that.defaultDispatchType) &&
-                Objects.equals(posProviderId, that.posProviderId);
+                Objects.equals(posProviderId, that.posProviderId) &&
+                Objects.equals(orderConfirmationOnSubmitEnabled, that.orderConfirmationOnSubmitEnabled);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), distributorId, chainId, openTimes, deliveryInfos, paymentTypes, multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations, features, currentLocationId, defaultLocationIdAtTimeOfMigration, locationName, locations, defaultDispatchType, posProviderId);
+        return Objects.hash(super.hashCode(), distributorId, chainId, openTimes, deliveryInfos, paymentTypes,
+                multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations, features,
+                currentLocationId, defaultLocationIdAtTimeOfMigration, locationName, locations,
+                defaultDispatchType, posProviderId, orderConfirmationOnSubmitEnabled);
     }
 
     @Override
@@ -185,6 +227,7 @@ public class Restaurant extends Organization {
                 ", products=" + products +
                 ", defaultDispatchType=" + defaultDispatchType +
                 ", posProviderId=" + posProviderId +
+                ", orderConfirmationOnSubmitEnabled=" + orderConfirmationOnSubmitEnabled +
                 '}';
     }
 
@@ -255,4 +298,7 @@ public class Restaurant extends Organization {
 
     @JsonInclude(Include.NON_NULL)
     public String posProviderId;
+
+    @JsonInclude(Include.NON_NULL)
+    public Boolean orderConfirmationOnSubmitEnabled = Boolean.TRUE;
 }
