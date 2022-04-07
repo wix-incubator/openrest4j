@@ -62,6 +62,20 @@ public class PosInfo implements Serializable, Cloneable {
         return Objects.hash(posProviderId, posOrderId, isPreOrder, paymentGatewayId, cashierChargeProviderIdKey, success, posInfoErrors);
     }
 
+    @Override
+    public String toString() {
+        return "PosInfo{" +
+            "posProviderId='" + posProviderId + '\'' +
+            ", posOrderId='" + posOrderId + '\'' +
+            ", isPreOrder='" + isPreOrder + '\'' +
+            ", paymentGatewayId='" + paymentGatewayId + '\'' +
+            ", cashierChargeProviderIdKey='" + cashierChargeProviderIdKey + '\'' +
+            ", success'" + success + '\'' +
+            ", posInfoErrors='" + posInfoErrors + '\'' +
+            ", isPreOrder='" + isPreOrder + '\'' +
+            '}';
+    }
+
     @JsonInclude(Include.NON_NULL)
     public String posProviderId;
 

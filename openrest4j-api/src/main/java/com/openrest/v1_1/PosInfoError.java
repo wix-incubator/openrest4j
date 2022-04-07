@@ -36,6 +36,15 @@ public class PosInfoError implements Serializable, Cloneable {
         return Objects.hash(code, message);
     }
 
+    @Override
+    public String toString() {
+        return "PosInfoError{" +
+            "code='" + code + '\'' +
+            ", message='" + message + '\'' +
+            '}';
+    }
+
+
     @JsonInclude(Include.NON_NULL)
     public String code;
 
