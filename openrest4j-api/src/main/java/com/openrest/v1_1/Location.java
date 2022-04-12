@@ -37,6 +37,27 @@ public class Location implements Serializable, Cloneable {
         this.deleted = deleted;
     }
 
+    public Location(String id, LocalizedString name, LocalizedString description, Boolean defaultLocation, Contact contact,
+                    Address address, String timezone, Availability openTimes, List<DispatchInfo> deliveryInfos,
+                    DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations,
+                    String defaultDispatchType, Boolean deleted, Boolean orderConfirmationOnSubmitEnabled) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.defaultLocation = defaultLocation;
+        this.contact = contact;
+        this.openTimes = openTimes;
+        this.address = address;
+        this.timezone = timezone;
+        this.deliveryInfos = deliveryInfos;
+        this.deliveriesInfo = deliveriesInfo;
+        this.orders = orders;
+        this.reservations = reservations;
+        this.defaultDispatchType = defaultDispatchType;
+        this.deleted = deleted;
+        this.orderConfirmationOnSubmitEnabled = orderConfirmationOnSubmitEnabled
+    }
+
     @Override
     public Location clone() {
         return new Location(id,
@@ -52,7 +73,8 @@ public class Location implements Serializable, Cloneable {
                 ((orders != null) ? orders.clone() : null),
                 ((reservations != null) ? reservations.clone() : null),
                 defaultDispatchType,
-                deleted);
+                deleted,
+                orderConfirmationOnSubmitEnabled);
     }
 
     public static Map<String, Location> clone(Map<String, Location> locations) {
@@ -99,12 +121,17 @@ public class Location implements Serializable, Cloneable {
                 Objects.equals(orders, location.orders) &&
                 Objects.equals(reservations, location.reservations) &&
                 Objects.equals(defaultDispatchType, location.defaultDispatchType) &&
-                Objects.equals(deleted, location.deleted);
+                Objects.equals(deleted, location.deleted) &&
+                Objects.equals(orderConfirmationOnSubmitEnabled, location.orderConfirmationOnSubmitEnabled);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, defaultLocation, contact, address, timezone, openTimes, deliveryInfos, deliveriesInfo, orders, reservations, defaultDispatchType, deleted);
+        return Objects.hash(
+                id, name, description, defaultLocation,
+                contact, address, timezone, openTimes,
+                deliveryInfos, deliveriesInfo, orders,
+                reservations, defaultDispatchType, deleted, orderConfirmationOnSubmitEnabled);
     }
 
     @Override
@@ -124,6 +151,7 @@ public class Location implements Serializable, Cloneable {
                 ", reservations=" + reservations +
                 ", defaultDispatchType=" + defaultDispatchType +
                 ", deleted=" + deleted +
+                ", orderConfirmationOnSubmitEnabled=" + orderConfirmationOnSubmitEnabled +
                 '}';
     }
 
@@ -175,4 +203,7 @@ public class Location implements Serializable, Cloneable {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean deleted = false;
+
+    @JsonInclude(Include.NON_NULL)
+    public Boolean orderConfirmationOnSubmitEnabled = Boolean.TRUE;
 }
