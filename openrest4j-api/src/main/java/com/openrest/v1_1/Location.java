@@ -204,6 +204,6 @@ public class Location implements Serializable, Cloneable {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean deleted = false;
 
-    @JsonInclude(Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean orderConfirmationOnSubmitEnabled = Boolean.TRUE;
 }
