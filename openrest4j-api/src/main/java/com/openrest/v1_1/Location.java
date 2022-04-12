@@ -55,7 +55,7 @@ public class Location implements Serializable, Cloneable {
         this.reservations = reservations;
         this.defaultDispatchType = defaultDispatchType;
         this.deleted = deleted;
-        this.orderConfirmationOnSubmitEnabled = orderConfirmationOnSubmitEnabled
+        this.orderConfirmationOnSubmitEnabled = orderConfirmationOnSubmitEnabled;
     }
 
     @Override
