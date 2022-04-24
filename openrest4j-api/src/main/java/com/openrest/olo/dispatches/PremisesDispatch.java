@@ -27,6 +27,12 @@ public class PremisesDispatch extends Dispatch {
         this.comment = comment;
     }
 
+    public PremisesDispatch(Date time, String timeGuarantee, Integer charge, Integer delayMins,
+                            Integer orderPacingDelayInMinutes, String comment, Map<String, String> properties) {
+        this(time, timeGuarantee, charge, delayMins, comment, properties);
+        this.orderPacingDelayInMinutes = orderPacingDelayInMinutes;
+    }
+
     @Override
     public PremisesDispatch clone() {
         return cloneImpl();
@@ -36,7 +42,7 @@ public class PremisesDispatch extends Dispatch {
     protected PremisesDispatch cloneImpl() {
         return new PremisesDispatch(
                 (time != null) ? (Date) time.clone() : null,
-                timeGuarantee, charge, delayMins, comment,
+                timeGuarantee, charge, delayMins, orderPacingDelayInMinutes, comment,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
     }
 

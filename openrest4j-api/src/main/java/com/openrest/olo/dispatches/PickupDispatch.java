@@ -41,6 +41,14 @@ public class PickupDispatch extends Dispatch {
         this.contactlessDineIn = contactlessDineIn;
     }
 
+    public PickupDispatch(Date time, String timeGuarantee, Integer charge, Integer delayMins,
+                          Integer orderPacingDelayInMinutes, Map<String, String> properties,
+                          String curbsideAdditionalInformation, Boolean isCurbside, ContactlessDineIn contactlessDineIn) {
+        this(time, timeGuarantee, charge, delayMins, properties, curbsideAdditionalInformation, isCurbside, contactlessDineIn);
+        this.orderPacingDelayInMinutes = orderPacingDelayInMinutes;
+    }
+
+
     @Override
     public PickupDispatch clone() {
         return cloneImpl();
@@ -50,7 +58,7 @@ public class PickupDispatch extends Dispatch {
     protected PickupDispatch cloneImpl() {
         return new PickupDispatch(
                 (time != null) ? (Date) time.clone() : null,
-                timeGuarantee, charge, delayMins,
+                timeGuarantee, charge, delayMins, orderPacingDelayInMinutes,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null),
                 curbsideAdditionalInformation,
                 isCurbside,

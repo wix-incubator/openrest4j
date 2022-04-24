@@ -23,14 +23,17 @@ public class DeliveryDispatch extends Dispatch {
         this(address, time, timeGuarantee, charge, properties, null);
     }
 
-    public DeliveryDispatch(Address address, Date time, String timeGuarantee, Integer charge, Map<String, String> properties, DeliveryProvider deliveryProvider) {
-        this(address, time, timeGuarantee, charge, properties, deliveryProvider, null, null, null, null);
+    public DeliveryDispatch(Address address, Date time, String timeGuarantee, Integer charge, Map<String, String> properties,
+                            DeliveryProvider deliveryProvider) {
+        this(address, time, timeGuarantee, charge, properties, deliveryProvider,
+                null, null, null, null);
     }
 
     public DeliveryDispatch(Address address, Date time, String timeGuarantee, Integer charge, Map<String, String> properties,
                             DeliveryProvider deliveryProvider, Date pickupWindowStartTime, Date pickupWindowEndTime,
                             Date dropOffWindowStartTime, Date dropOffWindowEndTime) {
-        this(address, time, timeGuarantee, charge, null, properties, deliveryProvider, pickupWindowStartTime, pickupWindowEndTime, dropOffWindowStartTime, dropOffWindowEndTime);
+        this(address, time, timeGuarantee, charge, null, properties, deliveryProvider, pickupWindowStartTime,
+                pickupWindowEndTime, dropOffWindowStartTime, dropOffWindowEndTime);
     }
 
     public DeliveryDispatch(Address address, Date time, String timeGuarantee, Integer charge, Integer delayMins, Map<String, String> properties,
@@ -44,6 +47,16 @@ public class DeliveryDispatch extends Dispatch {
         this.dropOffWindowStartTime = dropOffWindowStartTime;
         this.dropOffWindowEndTime = dropOffWindowEndTime;
     }
+
+    public DeliveryDispatch(Address address, Date time, String timeGuarantee, Integer charge, Integer delayMins,
+                            Integer orderPacingDelayInMinutes, Map<String, String> properties,
+                            DeliveryProvider deliveryProvider, Date pickupWindowStartTime, Date pickupWindowEndTime,
+                            Date dropOffWindowStartTime, Date dropOffWindowEndTime) {
+        this(address, time, timeGuarantee, charge, delayMins, properties, deliveryProvider,
+             pickupWindowStartTime, pickupWindowEndTime, dropOffWindowStartTime, dropOffWindowEndTime);
+        this.orderPacingDelayInMinutes = orderPacingDelayInMinutes;
+    }
+
     @Override
     public DeliveryDispatch clone() {
         return cloneImpl();
@@ -54,7 +67,7 @@ public class DeliveryDispatch extends Dispatch {
         return new DeliveryDispatch(
                 ((address != null) ? address.clone() : null),
                 (time != null) ? (Date) time.clone() : null,
-                timeGuarantee, charge, delayMins,
+                timeGuarantee, charge, delayMins, orderPacingDelayInMinutes,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null),
                 ((deliveryProvider != null) ? deliveryProvider.clone() : null),
                 (pickupWindowStartTime != null) ? (Date) pickupWindowStartTime.clone() : null,

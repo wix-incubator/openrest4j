@@ -30,7 +30,7 @@ public abstract class Dispatch implements Serializable, Cloneable {
     public Dispatch() {}
 
     public Dispatch(Date time, String timeGuarantee, Integer charge, Map<String, String> properties) {
-        this(time, timeGuarantee, charge, null, properties);
+        this(time, timeGuarantee, charge, null, null, properties);
     }
 
     public Dispatch(Date time, String timeGuarantee, Integer charge, Integer delayMins, Map<String, String> properties) {
@@ -38,7 +38,14 @@ public abstract class Dispatch implements Serializable, Cloneable {
         this.timeGuarantee = timeGuarantee;
         this.charge = charge;
         this.delayMins = delayMins;
+        this.orderPacingDelayInMinutes = null;
         this.properties = properties;
+    }
+
+    public Dispatch(Date time, String timeGuarantee, Integer charge, Integer delayMins,
+                    Integer orderPacingDelayInMinutes, Map<String, String> properties) {
+        this(time, timeGuarantee, charge, delayMins, properties);
+        this.orderPacingDelayInMinutes = orderPacingDelayInMinutes;
     }
 
     @Override
@@ -57,12 +64,13 @@ public abstract class Dispatch implements Serializable, Cloneable {
                 Objects.equals(timeGuarantee, dispatch.timeGuarantee) &&
                 Objects.equals(charge, dispatch.charge) &&
                 Objects.equals(delayMins, dispatch.delayMins) &&
+                Objects.equals(orderPacingDelayInMinutes, dispatch.orderPacingDelayInMinutes) &&
                 Objects.equals(properties, dispatch.properties);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(time, timeGuarantee, charge, delayMins, properties);
+        return Objects.hash(time, timeGuarantee, charge, delayMins, orderPacingDelayInMinutes, properties);
     }
 
     /** Timestamp by which the order will be delivered or ready for pick-up. */
@@ -80,6 +88,10 @@ public abstract class Dispatch implements Serializable, Cloneable {
     /** Delivery time (maximum number of minutes till order arrives). */
     @JsonInclude(Include.NON_DEFAULT)
     public Integer delayMins = 0;
+
+    /** The delay returned by the order-pacing service in minutes **/
+    @JsonInclude(Include.NON_DEFAULT)
+    public Integer orderPacingDelayInMinutes = 0;
 
     /**
      * Map of externally-defined ids referring to this payment.
