@@ -32,16 +32,9 @@ public abstract class DispatchInfo implements Serializable, Cloneable {
         this.minOrderPrice = minOrderPrice;
         this.charge = charge;
         this.delayMins = delayMins;
-        this.orderPacingDelayInMinutes = null;
         this.inactive = inactive;
         this.availability = availability;
         this.properties = properties;
-    }
-
-    public DispatchInfo(Integer minOrderPrice, Integer charge, Integer delayMins, Integer orderPacingDelayInMinutes,
-                        Boolean inactive, Availability availability, Map<String, String> properties) {
-        this(minOrderPrice, charge, delayMins, inactive, availability, properties);
-        this.orderPacingDelayInMinutes = orderPacingDelayInMinutes;
     }
 
     @Override
@@ -71,7 +64,6 @@ public abstract class DispatchInfo implements Serializable, Cloneable {
         return Objects.equals(minOrderPrice, that.minOrderPrice) &&
                 Objects.equals(charge, that.charge) &&
                 Objects.equals(delayMins, that.delayMins) &&
-                Objects.equals(orderPacingDelayInMinutes, that.orderPacingDelayInMinutes) &&
                 Objects.equals(inactive, that.inactive) &&
                 Objects.equals(availability, that.availability) &&
                 Objects.equals(properties, that.properties);
@@ -79,7 +71,7 @@ public abstract class DispatchInfo implements Serializable, Cloneable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(minOrderPrice, charge, delayMins, orderPacingDelayInMinutes, inactive, availability, properties);
+        return Objects.hash(minOrderPrice, charge, delayMins, inactive, availability, properties);
     }
 
     /**
@@ -96,10 +88,6 @@ public abstract class DispatchInfo implements Serializable, Cloneable {
     /** Delivery time (maximum number of minutes till order arrives). */
     @JsonInclude(Include.NON_DEFAULT)
     public Integer delayMins = 0;
-
-    /** The delay returned by the order-pacing service in minutes **/
-    @JsonInclude(Include.NON_DEFAULT)
-    public Integer orderPacingDelayInMinutes = 0;
 
     /** Whether the delivery destination is deactivated (i.e. suspended or disabled). */
     @JsonInclude(Include.NON_DEFAULT)

@@ -32,13 +32,6 @@ public class DeliveryDispatchInfo extends DispatchInfo {
         this.deliveryProviderInfo = deliveryProviderInfo;
     }
 
-    public DeliveryDispatchInfo(Area area, Integer minOrderPrice, Integer charge, Integer delayMins,
-                                Integer orderPacingDelayInMinutes, Boolean inactive, Availability availability,
-                                Map<String, String> properties, DeliveryProviderInfo deliveryProviderInfo) {
-        this(area, minOrderPrice, charge, delayMins, inactive, availability, properties, deliveryProviderInfo);
-        this.orderPacingDelayInMinutes = orderPacingDelayInMinutes;
-    }
-
     @Override
     public DeliveryDispatchInfo clone() {
         return cloneImpl();
@@ -48,7 +41,7 @@ public class DeliveryDispatchInfo extends DispatchInfo {
     protected DeliveryDispatchInfo cloneImpl() {
         return new DeliveryDispatchInfo(
                 ((area != null) ? area.clone() : null),
-                minOrderPrice, charge, delayMins, orderPacingDelayInMinutes, inactive,
+                minOrderPrice, charge, delayMins, inactive,
                 ((availability != null) ? availability.clone() : null),
                 ((properties != null) ? new LinkedHashMap<>(properties) : null),
                 ((deliveryProviderInfo != null) ? deliveryProviderInfo.clone() : null));

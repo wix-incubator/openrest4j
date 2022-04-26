@@ -39,16 +39,6 @@ public class PickupDispatchInfo extends DispatchInfo {
         this.contactlessDineInInfo = contactlessDineInInfo;
     }
 
-    public PickupDispatchInfo(Integer minOrderPrice, Integer charge, Integer delayMins, Integer orderPacingDelayInMinutes,
-                              Boolean inactive, Availability availability, Map<String, String> properties, CurbsideInfo curbsideInfo,
-                              Boolean withCurbsideInfo, ContactlessDineInInfo contactlessDineInInfo) {
-        this(minOrderPrice, charge, delayMins, inactive, availability, properties, curbsideInfo, withCurbsideInfo,
-                contactlessDineInInfo);
-        this.orderPacingDelayInMinutes = orderPacingDelayInMinutes;
-    }
-
-
-
     @Override
     public PickupDispatchInfo clone() {
         return cloneImpl();
@@ -56,7 +46,7 @@ public class PickupDispatchInfo extends DispatchInfo {
 
     @Override
     protected PickupDispatchInfo cloneImpl() {
-        return new PickupDispatchInfo(minOrderPrice, charge, delayMins, orderPacingDelayInMinutes, inactive,
+        return new PickupDispatchInfo(minOrderPrice, charge, delayMins, inactive,
                 ((availability != null) ? availability.clone() : null),
                 ((properties != null) ? new LinkedHashMap<>(properties) : null),
                 ((curbsideInfo != null) ? curbsideInfo.clone() : null),
