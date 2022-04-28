@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PosInfoError implements Serializable, Cloneable {
@@ -17,9 +18,16 @@ public class PosInfoError implements Serializable, Cloneable {
         this.message = message;
     }
 
+    public PosInfoError(String code, String message, Map<String, String> params) {
+        this.code = code;
+        this.message = message;
+        this.params = params;
+    }
+
+
     @Override
     public PosInfoError clone() {
-        return new PosInfoError(code, message);
+        return new PosInfoError(code, message, params);
     }
 
     @Override
@@ -28,12 +36,13 @@ public class PosInfoError implements Serializable, Cloneable {
         if (o == null || getClass() != o.getClass()) return false;
         PosInfoError that = (PosInfoError) o;
         return Objects.equals(code, that.code) &&
-               Objects.equals(message, that.message);
+               Objects.equals(message, that.message) &&
+               Objects.equals(params, that.params);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(code, message);
+        return Objects.hash(code, message, params);
     }
 
     @Override
@@ -41,6 +50,7 @@ public class PosInfoError implements Serializable, Cloneable {
         return "PosInfoError{" +
             "code='" + code + '\'' +
             ", message='" + message + '\'' +
+            ", params='" + params + '\'' +
             '}';
     }
 
@@ -50,4 +60,7 @@ public class PosInfoError implements Serializable, Cloneable {
 
     @JsonInclude(Include.NON_NULL)
     public String message;
+
+    @JsonInclude(Include.NON_NULL)
+    public Map<String, String> params;
 }
