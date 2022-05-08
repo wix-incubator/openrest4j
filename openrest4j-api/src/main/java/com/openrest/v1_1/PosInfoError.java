@@ -13,6 +13,8 @@ public class PosInfoError implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
 
     /** Default constructor for JSON deserialization. */
+    public PosInfoError() {}
+
     public PosInfoError(String code, String message) {
         this.code = code;
         this.message = message;
