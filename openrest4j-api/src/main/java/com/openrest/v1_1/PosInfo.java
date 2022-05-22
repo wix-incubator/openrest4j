@@ -37,10 +37,20 @@ public class PosInfo implements Serializable, Cloneable {
         this.posInfoErrors = posInfoErrors;
     }
 
+    public PosInfo(String posProviderId, String posOrderId, String posLocationId, boolean isPreOrder, String paymentGatewayId, String cashierChargeProviderIdKey, boolean success, List<PosInfoError> posInfoErrors) {
+        this.posProviderId = posProviderId;
+        this.posOrderId = posOrderId;
+        this.posLocationId = posLocationId;
+        this.isPreOrder = isPreOrder;
+        this.paymentGatewayId = paymentGatewayId;
+        this.cashierChargeProviderIdKey = cashierChargeProviderIdKey;
+        this.success = success;
+        this.posInfoErrors = posInfoErrors;
+    }
 
     @Override
     public PosInfo clone() {
-        return new PosInfo(posProviderId, posOrderId, isPreOrder, paymentGatewayId, cashierChargeProviderIdKey, success, posInfoErrors);
+        return new PosInfo(posProviderId, posOrderId, posLocationId, isPreOrder, paymentGatewayId, cashierChargeProviderIdKey, success, posInfoErrors);
     }
 
     @Override
@@ -50,6 +60,7 @@ public class PosInfo implements Serializable, Cloneable {
         PosInfo that = (PosInfo) o;
         return Objects.equals(posProviderId, that.posProviderId) &&
                Objects.equals(posOrderId, that.posOrderId) &&
+               Objects.equals(posLocationId, that.posLocationId) &&
                Objects.equals(isPreOrder, that.isPreOrder) &&
                Objects.equals(paymentGatewayId, that.paymentGatewayId) &&
                Objects.equals(cashierChargeProviderIdKey, that.cashierChargeProviderIdKey) &&
@@ -59,7 +70,7 @@ public class PosInfo implements Serializable, Cloneable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(posProviderId, posOrderId, isPreOrder, paymentGatewayId, cashierChargeProviderIdKey, success, posInfoErrors);
+        return Objects.hash(posProviderId, posOrderId, posLocationId, isPreOrder, paymentGatewayId, cashierChargeProviderIdKey, success, posInfoErrors);
     }
 
     @Override
@@ -67,6 +78,7 @@ public class PosInfo implements Serializable, Cloneable {
         return "PosInfo{" +
             "posProviderId='" + posProviderId + '\'' +
             ", posOrderId='" + posOrderId + '\'' +
+            ", posLocationId='" + posLocationId + '\'' +
             ", isPreOrder='" + isPreOrder + '\'' +
             ", paymentGatewayId='" + paymentGatewayId + '\'' +
             ", cashierChargeProviderIdKey='" + cashierChargeProviderIdKey + '\'' +
@@ -81,6 +93,9 @@ public class PosInfo implements Serializable, Cloneable {
 
     @JsonInclude(Include.NON_NULL)
     public String posOrderId;
+
+    @JsonInclude(Include.NON_NULL)
+    public String posLocationId;
 
     @JsonInclude(Include.NON_NULL)
     public boolean isPreOrder;
