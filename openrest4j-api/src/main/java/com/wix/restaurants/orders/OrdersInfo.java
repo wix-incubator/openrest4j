@@ -34,13 +34,13 @@ public class OrdersInfo implements Serializable, Cloneable {
                       AsapOrdersInfo asap,
                       FutureOrdersInfo future,
                       Integer maxCommentLength,
-                      RoundingStrategy roundingStrategy,
+                      RoundingStrategy chargeRoundingStrategy,
                       Map<String, String> properties) {
         this.availability = availability;
         this.asap = asap;
         this.future = future;
         this.maxCommentLength = maxCommentLength;
-        this.roundingStrategy = roundingStrategy;
+        this.chargeRoundingStrategy = chargeRoundingStrategy;
         this.properties = properties;
     }
 
@@ -51,7 +51,7 @@ public class OrdersInfo implements Serializable, Cloneable {
                 (asap != null) ? asap.clone() : null,
                 (future != null) ? future.clone() : null,
                 maxCommentLength,
-                roundingStrategy,
+                chargeRoundingStrategy,
                 ((properties != null) ? new LinkedHashMap<>(properties) : null));
     }
 
@@ -64,13 +64,13 @@ public class OrdersInfo implements Serializable, Cloneable {
                 Objects.equals(asap, that.asap) &&
                 Objects.equals(future, that.future) &&
                 Objects.equals(maxCommentLength, that.maxCommentLength) &&
-                Objects.equals(roundingStrategy, that.roundingStrategy) &&
+                Objects.equals(chargeRoundingStrategy, that.chargeRoundingStrategy) &&
                 Objects.equals(properties, that.properties);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(availability, asap, future, maxCommentLength, roundingStrategy, properties);
+        return Objects.hash(availability, asap, future, maxCommentLength, chargeRoundingStrategy, properties);
     }
 
     /** The restaurant accepts online orders during these times. */
@@ -96,7 +96,7 @@ public class OrdersInfo implements Serializable, Cloneable {
 
     /** Rounding method for charges calculation. */
     @JsonInclude(Include.NON_NULL)
-    public RoundingStrategy roundingStrategy;
+    public RoundingStrategy chargeRoundingStrategy;
 
     /**
      * Map of user-defined extended properties.
