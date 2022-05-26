@@ -34,7 +34,7 @@ public class OrdersInfo implements Serializable, Cloneable {
                       AsapOrdersInfo asap,
                       FutureOrdersInfo future,
                       Integer maxCommentLength,
-                      RoundingStrategy chargeRoundingStrategy,
+                      String chargeRoundingStrategy,
                       Map<String, String> properties) {
         this.availability = availability;
         this.asap = asap;
@@ -96,7 +96,7 @@ public class OrdersInfo implements Serializable, Cloneable {
 
     /** Rounding method for charges calculation. */
     @JsonInclude(Include.NON_NULL)
-    public RoundingStrategy chargeRoundingStrategy;
+    public String chargeRoundingStrategy;
 
     /**
      * Map of user-defined extended properties.
