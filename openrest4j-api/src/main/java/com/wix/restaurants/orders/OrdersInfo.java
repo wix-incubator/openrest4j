@@ -94,7 +94,7 @@ public class OrdersInfo implements Serializable, Cloneable {
     @JsonInclude(Include.NON_NULL)
     public Integer maxCommentLength;
 
-    /** Rounding method for charges calculation. */
+    /** @see com.wix.restaurants.orders.RoundingStrategy */
     @JsonInclude(Include.NON_NULL)
     public String chargeRoundingStrategy;
 
