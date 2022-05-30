@@ -127,6 +127,56 @@ public class Order implements Serializable, Cloneable {
         this.posInfo = posInfo;
     }
 
+    /** Constructs a previously submitted order from persisted data. */
+    public Order(String id, Map<String, String> externalIds, String distributorId, String chainId, String restaurantId,
+                 Locale locale, List<OrderItem> orderItems,
+                 String comment, Integer price, String currency, Dispatch delivery, Contact contact, List<Payment> payments,
+                 Integer takeoutPacks, List<OrderCharge> orderCharges,
+                 Date created, Date received, Date modified, Date submitAt,
+                 User user, ClubMember clubMember, String status, String shareToken, String ownerToken,
+                 String affiliate, String developer, String source, String platform, Coupon coupon,
+                 Boolean legacyHierarchy, Map<String, String> properties, List<LogEntry> log, String gatewayReturnUrl, String locationId,
+                 Loyalty loyalty, PosInfo posInfo, String chargeRoundingStrategy) {
+
+        this.id = id;
+        this.externalIds = externalIds;
+        this.distributorId = distributorId;
+        this.chainId = chainId;
+        this.restaurantId = restaurantId;
+        this.locale = locale;
+        this.orderItems = orderItems;
+        this.comment = comment;
+        this.price = price;
+        this.currency = currency;
+        this.delivery = delivery;
+        this.contact = contact;
+        this.payments = payments;
+        this.takeoutPacks = takeoutPacks;
+        this.orderCharges = orderCharges;
+        this.created = created;
+        this.received = received;
+        this.modified = modified;
+        this.submitAt = submitAt;
+        this.user = user;
+        this.clubMember = clubMember;
+        this.status = status;
+        this.shareToken = shareToken;
+        this.ownerToken = ownerToken;
+        this.affiliate = affiliate;
+        this.developer = developer;
+        this.source = source;
+        this.platform = platform;
+        this.coupon = coupon;
+        this.legacyHierarchy = legacyHierarchy;
+        this.properties = properties;
+        this.log = log;
+        this.gatewayReturnUrl = gatewayReturnUrl;
+        this.locationId = locationId;
+        this.loyalty = loyalty;
+        this.posInfo = posInfo;
+        this.chargeRoundingStrategy = chargeRoundingStrategy;
+    }
+
     /** Default constructor for JSON deserialization. */
     public Order() {}
 
@@ -152,7 +202,8 @@ public class Order implements Serializable, Cloneable {
                 gatewayReturnUrl,
                 locationId,
                 (loyalty != null) ? loyalty.clone() : null,
-                (posInfo != null) ? posInfo.clone() : null);
+                (posInfo != null) ? posInfo.clone() : null,
+                chargeRoundingStrategy);
 	}
 
     @Override
@@ -195,12 +246,13 @@ public class Order implements Serializable, Cloneable {
                 Objects.equals(gatewayReturnUrl, order.gatewayReturnUrl) &&
                 Objects.equals(locationId, order.locationId) &&
                 Objects.equals(loyalty, order.loyalty) &&
-                Objects.equals(posInfo, order.posInfo);
+                Objects.equals(posInfo, order.posInfo) &&
+                Objects.equals(chargeRoundingStrategy, order.chargeRoundingStrategy);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, externalIds, distributorId, chainId, restaurantId, locale, orderItems, comment, price, currency, delivery, contact, payments, takeoutPacks, orderCharges, created, submitAt, received, modified, user, clubMember, status, shareToken, ownerToken, affiliate, developer, source, platform, coupon, legacyHierarchy, properties, log, gatewayReturnUrl, locationId, loyalty, posInfo);
+        return Objects.hash(id, externalIds, distributorId, chainId, restaurantId, locale, orderItems, comment, price, currency, delivery, contact, payments, takeoutPacks, orderCharges, created, submitAt, received, modified, user, clubMember, status, shareToken, ownerToken, affiliate, developer, source, platform, coupon, legacyHierarchy, properties, log, gatewayReturnUrl, locationId, loyalty, posInfo, chargeRoundingStrategy);
     }
 
     @Override
@@ -242,6 +294,7 @@ public class Order implements Serializable, Cloneable {
                 ", locationId=" + locationId +
                 ", loyalty=" + loyalty +
                 ", posInfo=" + posInfo +
+                ", chargeRoundingStrategy=" + chargeRoundingStrategy +
                 '}';
     }
 
@@ -413,4 +466,8 @@ public class Order implements Serializable, Cloneable {
     /** The pos info used when ordered **/
     @JsonInclude(Include.NON_NULL)
     public PosInfo posInfo;
+
+    /** The charge rounding strategy that was used when ordered **/
+    @JsonInclude(Include.NON_NULL)
+    public String chargeRoundingStrategy;
 }
