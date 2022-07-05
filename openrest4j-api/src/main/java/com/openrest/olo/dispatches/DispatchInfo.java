@@ -28,13 +28,14 @@ public abstract class DispatchInfo implements Serializable, Cloneable {
     public DispatchInfo() {}
 
     public DispatchInfo(Integer minOrderPrice, Integer charge, Integer delayMins, Boolean inactive,
-                        Availability availability, Map<String, String> properties) {
+                        Availability availability, Map<String, String> properties, String fulfillmentMethodId) {
         this.minOrderPrice = minOrderPrice;
         this.charge = charge;
         this.delayMins = delayMins;
         this.inactive = inactive;
         this.availability = availability;
         this.properties = properties;
+        this.fulfillmentMethodId = fulfillmentMethodId;
     }
 
     @Override
@@ -66,13 +67,18 @@ public abstract class DispatchInfo implements Serializable, Cloneable {
                 Objects.equals(delayMins, that.delayMins) &&
                 Objects.equals(inactive, that.inactive) &&
                 Objects.equals(availability, that.availability) &&
-                Objects.equals(properties, that.properties);
+                Objects.equals(properties, that.properties) &&
+                Objects.equals(fulfillmentMethodId, that.fulfillmentMethodId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(minOrderPrice, charge, delayMins, inactive, availability, properties);
+        return Objects.hash(minOrderPrice, charge, delayMins, inactive, availability, properties, fulfillmentMethodId);
     }
+
+    /** fulfillmentMethod Id **/
+    @JsonInclude(Include.NON_NULL)
+    public String fulfillmentMethodId;
 
     /**
      * The minimum allowed order price (in "cents"), taking into account all order-items and all charges,
