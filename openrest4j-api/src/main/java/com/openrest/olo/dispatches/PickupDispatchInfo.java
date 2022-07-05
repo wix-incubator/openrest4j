@@ -20,20 +20,20 @@ public class PickupDispatchInfo extends DispatchInfo {
     public PickupDispatchInfo() { }
 
     public PickupDispatchInfo(Integer minOrderPrice, Integer charge, Integer delayMins, Boolean inactive,
-                              Availability availability, Map<String, String> properties) {
-        super(minOrderPrice, charge, delayMins, inactive, availability, properties);
+                              Availability availability, Map<String, String> properties, String fulfillmentMethodId) {
+        super(minOrderPrice, charge, delayMins, inactive, availability, properties, fulfillmentMethodId);
     }
 
     public PickupDispatchInfo(Integer minOrderPrice, Integer charge, Integer delayMins, Boolean inactive,
                               Availability availability, Map<String, String> properties, CurbsideInfo curbsideInfo,
-                              Boolean withCurbsideInfo) {
-        this(minOrderPrice, charge, delayMins, inactive, availability, properties, curbsideInfo, withCurbsideInfo, null);
+                              Boolean withCurbsideInfo, String fulfillmentMethodId) {
+        this(minOrderPrice, charge, delayMins, inactive, availability, properties, curbsideInfo, withCurbsideInfo, null, fulfillmentMethodId);
     }
 
     public PickupDispatchInfo(Integer minOrderPrice, Integer charge, Integer delayMins, Boolean inactive,
                               Availability availability, Map<String, String> properties, CurbsideInfo curbsideInfo,
-                              Boolean withCurbsideInfo, ContactlessDineInInfo contactlessDineInInfo) {
-        super(minOrderPrice, charge, delayMins, inactive, availability, properties);
+                              Boolean withCurbsideInfo, ContactlessDineInInfo contactlessDineInInfo, String fulfillmentMethodId) {
+        super(minOrderPrice, charge, delayMins, inactive, availability, properties, fulfillmentMethodId);
         this.withCurbsideInfo = withCurbsideInfo;
         this.curbsideInfo = curbsideInfo;
         this.contactlessDineInInfo = contactlessDineInInfo;
@@ -51,7 +51,8 @@ public class PickupDispatchInfo extends DispatchInfo {
                 ((properties != null) ? new LinkedHashMap<>(properties) : null),
                 ((curbsideInfo != null) ? curbsideInfo.clone() : null),
                 withCurbsideInfo,
-                ((contactlessDineInInfo != null) ? contactlessDineInInfo.clone() : null));
+                ((contactlessDineInInfo != null) ? contactlessDineInInfo.clone() : null),
+                fulfillmentMethodId);
     }
 
     @Override

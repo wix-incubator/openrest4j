@@ -14,15 +14,16 @@ public class ContactlessDineInInfo implements Serializable, Cloneable {
     /** Default constructor for JSON deserialization. */
     public ContactlessDineInInfo() {}
 
-    public ContactlessDineInInfo(String instructions, String label, Boolean enabled) {
+    public ContactlessDineInInfo(String instructions, String label, Boolean enabled, String fulfillmentMethodId) {
         this.instructions = instructions;
         this.label = label;
         this.enabled = enabled;
+        this.fulfillmentMethodId = fulfillmentMethodId;
     }
 
     @Override
     public ContactlessDineInInfo clone() {
-        return new ContactlessDineInInfo(this.instructions, this.label, this.enabled);
+        return new ContactlessDineInInfo(this.instructions, this.label, this.enabled, this.fulfillmentMethodId);
     }
 
     @Override
@@ -32,13 +33,17 @@ public class ContactlessDineInInfo implements Serializable, Cloneable {
         ContactlessDineInInfo that = (ContactlessDineInInfo) o;
         return Objects.equals(instructions, that.instructions) &&
                 Objects.equals(label, that.label) &&
-                Objects.equals(enabled, that.enabled);
+                Objects.equals(enabled, that.enabled) &&
+                Objects.equals(fulfillmentMethodId, that.fulfillmentMethodId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.instructions, this.label, this.enabled);
+        return Objects.hash(this.instructions, this.label, this.enabled, this.fulfillmentMethodId);
     }
+
+    @JsonInclude(Include.NON_NULL)
+    public String fulfillmentMethodId;
 
     @JsonInclude(Include.NON_NULL)
     public String instructions;

@@ -35,13 +35,15 @@ public class OrdersInfo implements Serializable, Cloneable {
                       FutureOrdersInfo future,
                       Integer maxCommentLength,
                       String chargeRoundingStrategy,
-                      Map<String, String> properties) {
+                      Map<String, String> properties,
+                      String orderPolicyId) {
         this.availability = availability;
         this.asap = asap;
         this.future = future;
         this.maxCommentLength = maxCommentLength;
         this.chargeRoundingStrategy = chargeRoundingStrategy;
         this.properties = properties;
+        this.orderPolicyId = orderPolicyId;
     }
 
     @Override
@@ -52,7 +54,8 @@ public class OrdersInfo implements Serializable, Cloneable {
                 (future != null) ? future.clone() : null,
                 maxCommentLength,
                 chargeRoundingStrategy,
-                ((properties != null) ? new LinkedHashMap<>(properties) : null));
+                ((properties != null) ? new LinkedHashMap<>(properties) : null),
+                orderPolicyId);
     }
 
     @Override
@@ -65,12 +68,14 @@ public class OrdersInfo implements Serializable, Cloneable {
                 Objects.equals(future, that.future) &&
                 Objects.equals(maxCommentLength, that.maxCommentLength) &&
                 Objects.equals(chargeRoundingStrategy, that.chargeRoundingStrategy) &&
-                Objects.equals(properties, that.properties);
+                Objects.equals(properties, that.properties) &&
+                Objects.equals(orderPolicyId, that.orderPolicyId);
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(availability, asap, future, maxCommentLength, chargeRoundingStrategy, properties);
+        return Objects.hash(availability, asap, future, maxCommentLength, chargeRoundingStrategy, properties, orderPolicyId);
     }
 
     /** The restaurant accepts online orders during these times. */
@@ -98,6 +103,8 @@ public class OrdersInfo implements Serializable, Cloneable {
     @JsonInclude(Include.NON_NULL)
     public String chargeRoundingStrategy;
 
+    @JsonInclude(Include.NON_NULL)
+    public String orderPolicyId;
     /**
      * Map of user-defined extended properties.
      * Developers should use unique keys, e.g. "com.example.product".

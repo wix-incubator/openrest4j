@@ -20,7 +20,7 @@ public class Location implements Serializable, Cloneable {
 
     public Location(String id, LocalizedString name, LocalizedString description, Boolean defaultLocation, Contact contact,
                    Address address, String timezone, Availability openTimes, List<DispatchInfo> deliveryInfos,
-                    DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations, String defaultDispatchType, Boolean deleted) {
+                    DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations, String defaultDispatchType, Boolean deleted, String branchId) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -35,12 +35,13 @@ public class Location implements Serializable, Cloneable {
         this.reservations = reservations;
         this.defaultDispatchType = defaultDispatchType;
         this.deleted = deleted;
+        this.branchId = branchId;
     }
 
     public Location(String id, LocalizedString name, LocalizedString description, Boolean defaultLocation, Contact contact,
                     Address address, String timezone, Availability openTimes, List<DispatchInfo> deliveryInfos,
                     DeliveriesInfo deliveriesInfo, OrdersInfo orders, ReservationsInfo reservations,
-                    String defaultDispatchType, Boolean deleted, Boolean orderConfirmationOnSubmitEnabled) {
+                    String defaultDispatchType, Boolean deleted, Boolean orderConfirmationOnSubmitEnabled, String branchId) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -56,6 +57,7 @@ public class Location implements Serializable, Cloneable {
         this.defaultDispatchType = defaultDispatchType;
         this.deleted = deleted;
         this.orderConfirmationOnSubmitEnabled = orderConfirmationOnSubmitEnabled;
+        this.branchId = branchId;
     }
 
     @Override
@@ -74,7 +76,8 @@ public class Location implements Serializable, Cloneable {
                 ((reservations != null) ? reservations.clone() : null),
                 defaultDispatchType,
                 deleted,
-                orderConfirmationOnSubmitEnabled);
+                orderConfirmationOnSubmitEnabled,
+                branchId);
     }
 
     public static Map<String, Location> clone(Map<String, Location> locations) {
@@ -122,7 +125,8 @@ public class Location implements Serializable, Cloneable {
                 Objects.equals(reservations, location.reservations) &&
                 Objects.equals(defaultDispatchType, location.defaultDispatchType) &&
                 Objects.equals(deleted, location.deleted) &&
-                Objects.equals(orderConfirmationOnSubmitEnabled, location.orderConfirmationOnSubmitEnabled);
+                Objects.equals(orderConfirmationOnSubmitEnabled, location.orderConfirmationOnSubmitEnabled) &&
+                Objects.equals(branchId, location.branchId);
     }
 
     @Override
@@ -131,7 +135,7 @@ public class Location implements Serializable, Cloneable {
                 id, name, description, defaultLocation,
                 contact, address, timezone, openTimes,
                 deliveryInfos, deliveriesInfo, orders,
-                reservations, defaultDispatchType, deleted, orderConfirmationOnSubmitEnabled);
+                reservations, defaultDispatchType, deleted, orderConfirmationOnSubmitEnabled, branchId);
     }
 
     @Override
@@ -152,11 +156,15 @@ public class Location implements Serializable, Cloneable {
                 ", defaultDispatchType=" + defaultDispatchType +
                 ", deleted=" + deleted +
                 ", orderConfirmationOnSubmitEnabled=" + orderConfirmationOnSubmitEnabled +
+                ", branchId=" + branchId +
                 '}';
     }
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public String id;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public String branchId;
 
     /** The organization's title in various locales. */
     @JsonInclude(JsonInclude.Include.NON_DEFAULT)
