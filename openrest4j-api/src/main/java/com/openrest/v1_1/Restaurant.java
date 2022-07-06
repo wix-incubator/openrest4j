@@ -34,7 +34,7 @@ public class Restaurant extends Organization {
              paymentTypes,  multiPaymentDisabled,  creditcardsInfo,
              deliveriesInfo, orders, reservations, media, apps, properties,
              closed, products ,features, currentLocationId, defaultLocationIdAtTimeOfMigration, locationName, locations,
-                null, null, null, null);
+                null, null, null);
     }
 
     public Restaurant(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
@@ -48,7 +48,7 @@ public class Restaurant extends Organization {
                       Map<String, String> media, List<AppInfo> apps, Map<String, String> properties,
                       Boolean closed, Set<Product> products, Map<String, Double> features, String currentLocationId,
                       String defaultLocationIdAtTimeOfMigration, LocalizedString locationName, List<Location> locations, String defaultDispatchType, String posProviderId,
-                      String initialBranchId, String defaultBranchId) {
+                      String initialBranchId) {
         super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages,
                 contact, address, timezone, currency, apps, properties,
                 media, closed, products);
@@ -71,7 +71,6 @@ public class Restaurant extends Organization {
         this.defaultDispatchType = defaultDispatchType;
         this.posProviderId = posProviderId;
         this.initialBranchId = initialBranchId;
-        this.defaultBranchId = defaultBranchId;
     }
 
 
@@ -86,7 +85,7 @@ public class Restaurant extends Organization {
                       Map<String, String> media, List<AppInfo> apps, Map<String, String> properties,
                       Boolean closed, Set<Product> products, Map<String, Double> features, String currentLocationId,
                       String defaultLocationIdAtTimeOfMigration, LocalizedString locationName, List<Location> locations,
-                      String defaultDispatchType, String posProviderId, Boolean orderConfirmationOnSubmitEnabled, String initialBranchId, String defaultBranchId) {
+                      String defaultDispatchType, String posProviderId, Boolean orderConfirmationOnSubmitEnabled, String initialBranchId) {
         super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages,
                 contact, address, timezone, currency, apps, properties,
                 media, closed, products);
@@ -110,7 +109,6 @@ public class Restaurant extends Organization {
         this.posProviderId = posProviderId;
         this.orderConfirmationOnSubmitEnabled = orderConfirmationOnSubmitEnabled;
         this.initialBranchId = initialBranchId;
-        this.defaultBranchId = defaultBranchId;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -156,8 +154,7 @@ public class Restaurant extends Organization {
                 defaultDispatchType,
                 posProviderId,
                 orderConfirmationOnSubmitEnabled,
-                initialBranchId,
-                defaultBranchId);
+                initialBranchId);
 	}
 
     @Override
@@ -184,7 +181,6 @@ public class Restaurant extends Organization {
                 Objects.equals(defaultDispatchType, that.defaultDispatchType) &&
                 Objects.equals(posProviderId, that.posProviderId) &&
                 Objects.equals(initialBranchId, that.initialBranchId) &&
-                Objects.equals(defaultBranchId, that.defaultBranchId) &&
                 Objects.equals(orderConfirmationOnSubmitEnabled, that.orderConfirmationOnSubmitEnabled);
     }
 
@@ -193,7 +189,7 @@ public class Restaurant extends Organization {
         return Objects.hash(super.hashCode(), distributorId, chainId, openTimes, deliveryInfos, paymentTypes,
                 multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations, features,
                 currentLocationId, defaultLocationIdAtTimeOfMigration, locationName, locations,
-                defaultDispatchType, posProviderId, orderConfirmationOnSubmitEnabled, initialBranchId, defaultBranchId);
+                defaultDispatchType, posProviderId, orderConfirmationOnSubmitEnabled, initialBranchId);
     }
 
     @Override
@@ -238,7 +234,6 @@ public class Restaurant extends Organization {
                 ", posProviderId=" + posProviderId +
                 ", orderConfirmationOnSubmitEnabled=" + orderConfirmationOnSubmitEnabled +
                 ", initialBranchId=" + initialBranchId +
-                ", defaultBranchId=" + defaultBranchId +
                 '}';
     }
 
@@ -249,10 +244,6 @@ public class Restaurant extends Organization {
     /** The initial branch id. */
     @JsonInclude(Include.NON_NULL)
     public String initialBranchId;
-
-    /** The default branch id. */
-    @JsonInclude(Include.NON_NULL)
-    public String defaultBranchId;
 
     /** The current location id. */
     @JsonInclude(Include.NON_NULL)
