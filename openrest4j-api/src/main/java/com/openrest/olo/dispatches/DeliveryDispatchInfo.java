@@ -21,12 +21,12 @@ public class DeliveryDispatchInfo extends DispatchInfo {
 
     public DeliveryDispatchInfo(Area area, Integer minOrderPrice, Integer charge, Integer delayMins, Boolean inactive,
                                 Availability availability, Map<String, String> properties) {
-        this(area, minOrderPrice, charge, delayMins, inactive, availability, properties, null);
+        this(area, minOrderPrice, charge, delayMins, inactive, availability, properties, null, null);
     }
 
     public DeliveryDispatchInfo(Area area, Integer minOrderPrice, Integer charge, Integer delayMins, Boolean inactive,
-                                Availability availability, Map<String, String> properties, DeliveryProviderInfo deliveryProviderInfo) {
-        super(minOrderPrice, charge, delayMins, inactive, availability, properties);
+                                Availability availability, Map<String, String> properties, DeliveryProviderInfo deliveryProviderInfo, String fulfillmentMethodId) {
+        super(minOrderPrice, charge, delayMins, inactive, availability, properties, fulfillmentMethodId);
 
         this.area = area;
         this.deliveryProviderInfo = deliveryProviderInfo;
@@ -44,7 +44,8 @@ public class DeliveryDispatchInfo extends DispatchInfo {
                 minOrderPrice, charge, delayMins, inactive,
                 ((availability != null) ? availability.clone() : null),
                 ((properties != null) ? new LinkedHashMap<>(properties) : null),
-                ((deliveryProviderInfo != null) ? deliveryProviderInfo.clone() : null));
+                ((deliveryProviderInfo != null) ? deliveryProviderInfo.clone() : null),
+                fulfillmentMethodId);
     }
 
     @Override
