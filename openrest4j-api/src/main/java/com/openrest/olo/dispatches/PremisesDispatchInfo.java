@@ -16,8 +16,8 @@ public class PremisesDispatchInfo extends DispatchInfo {
     public PremisesDispatchInfo() {}
 
     public PremisesDispatchInfo(Integer minOrderPrice, Integer charge, Integer delayMins, Boolean inactive,
-                                Availability availability, Map<String, String> properties) {
-        super(minOrderPrice, charge, delayMins, inactive, availability, properties);
+                                Availability availability, Map<String, String> properties, String fulfillmentMethodId) {
+        super(minOrderPrice, charge, delayMins, inactive, availability, properties, fulfillmentMethodId);
     }
 
     @Override
@@ -29,6 +29,7 @@ public class PremisesDispatchInfo extends DispatchInfo {
     protected PremisesDispatchInfo cloneImpl() {
         return new PremisesDispatchInfo(minOrderPrice, charge, delayMins, inactive,
                 ((availability != null) ? availability.clone() : null),
-                ((properties != null) ? new LinkedHashMap<>(properties) : null));
+                ((properties != null) ? new LinkedHashMap<>(properties) : null),
+                fulfillmentMethodId);
     }
 }
