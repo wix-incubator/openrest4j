@@ -21,9 +21,16 @@ public class ContactlessDineInInfo implements Serializable, Cloneable {
         this.fulfillmentMethodId = fulfillmentMethodId;
     }
 
+    public ContactlessDineInInfo(String instructions, String label, Boolean enabled, String fulfillmentMethodId,
+                                 Integer delayMins) {
+        this(instructions, label, enabled, fulfillmentMethodId);
+        this.delayMins = delayMins;
+    }
+
     @Override
     public ContactlessDineInInfo clone() {
-        return new ContactlessDineInInfo(this.instructions, this.label, this.enabled, this.fulfillmentMethodId);
+        return new ContactlessDineInInfo(this.instructions, this.label, this.enabled, this.fulfillmentMethodId,
+                this.delayMins);
     }
 
     @Override
@@ -34,12 +41,13 @@ public class ContactlessDineInInfo implements Serializable, Cloneable {
         return Objects.equals(instructions, that.instructions) &&
                 Objects.equals(label, that.label) &&
                 Objects.equals(enabled, that.enabled) &&
-                Objects.equals(fulfillmentMethodId, that.fulfillmentMethodId);
+                Objects.equals(fulfillmentMethodId, that.fulfillmentMethodId) &&
+                Objects.equals(delayMins, that.delayMins);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.instructions, this.label, this.enabled, this.fulfillmentMethodId);
+        return Objects.hash(this.instructions, this.label, this.enabled, this.fulfillmentMethodId, this.delayMins);
     }
 
     @JsonInclude(Include.NON_NULL)
@@ -53,4 +61,7 @@ public class ContactlessDineInInfo implements Serializable, Cloneable {
 
     @JsonInclude(Include.NON_NULL)
     public Boolean enabled;
+
+    @JsonInclude(Include.NON_DEFAULT)
+    public Integer delayMins = 0;
 }
