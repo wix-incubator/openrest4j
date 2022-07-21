@@ -318,7 +318,8 @@ public class Restaurant extends Organization {
     @JsonInclude(Include.NON_NULL)
     public Boolean orderConfirmationOnSubmitEnabled = Boolean.TRUE;
 
-    /** The organization's migration timestamp. */
+    /** The organization's migration timestamp - adding branchIds, fulfilment-method ids and order-settings Id */
+
     @JsonInclude(Include.NON_NULL)
     public Date v3IdsMigrateAt;
 }
