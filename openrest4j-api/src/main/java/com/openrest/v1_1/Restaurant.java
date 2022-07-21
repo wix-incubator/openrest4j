@@ -34,7 +34,7 @@ public class Restaurant extends Organization {
              paymentTypes,  multiPaymentDisabled,  creditcardsInfo,
              deliveriesInfo, orders, reservations, media, apps, properties,
              closed, products ,features, currentLocationId, defaultLocationIdAtTimeOfMigration, locationName, locations,
-                null, null, null);
+                null, null, null, null);
     }
 
     public Restaurant(String id, String alias, String affiliateId, Map<String, String> externalIds, Date created, Date modified,
@@ -48,7 +48,7 @@ public class Restaurant extends Organization {
                       Map<String, String> media, List<AppInfo> apps, Map<String, String> properties,
                       Boolean closed, Set<Product> products, Map<String, Double> features, String currentLocationId,
                       String defaultLocationIdAtTimeOfMigration, LocalizedString locationName, List<Location> locations, String defaultDispatchType, String posProviderId,
-                      String zeroLocationsRestaurantLocationsId) {
+                      String zeroLocationsRestaurantLocationsId, Date v3IdsMigrateAt) {
         super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages,
                 contact, address, timezone, currency, apps, properties,
                 media, closed, products);
@@ -71,6 +71,7 @@ public class Restaurant extends Organization {
         this.defaultDispatchType = defaultDispatchType;
         this.posProviderId = posProviderId;
         this.zeroLocationsRestaurantLocationsId = zeroLocationsRestaurantLocationsId;
+        this.v3IdsMigrateAt = v3IdsMigrateAt;
     }
 
 
@@ -86,7 +87,7 @@ public class Restaurant extends Organization {
                       Boolean closed, Set<Product> products, Map<String, Double> features, String currentLocationId,
                       String defaultLocationIdAtTimeOfMigration, LocalizedString locationName, List<Location> locations,
                       String defaultDispatchType, String posProviderId, Boolean orderConfirmationOnSubmitEnabled,
-                      String zeroLocationsRestaurantLocationsId) {
+                      String zeroLocationsRestaurantLocationsId, Date  v3IdsMigrateAt) {
         super(id, alias, affiliateId, externalIds, created, modified, title, description, locale, locales, messages,
                 contact, address, timezone, currency, apps, properties,
                 media, closed, products);
@@ -110,6 +111,7 @@ public class Restaurant extends Organization {
         this.posProviderId = posProviderId;
         this.orderConfirmationOnSubmitEnabled = orderConfirmationOnSubmitEnabled;
         this.zeroLocationsRestaurantLocationsId = zeroLocationsRestaurantLocationsId;
+        this.v3IdsMigrateAt = v3IdsMigrateAt;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -155,7 +157,8 @@ public class Restaurant extends Organization {
                 defaultDispatchType,
                 posProviderId,
                 orderConfirmationOnSubmitEnabled,
-                zeroLocationsRestaurantLocationsId);
+                zeroLocationsRestaurantLocationsId,
+                v3IdsMigrateAt);
 	}
 
     @Override
@@ -182,7 +185,8 @@ public class Restaurant extends Organization {
                 Objects.equals(defaultDispatchType, that.defaultDispatchType) &&
                 Objects.equals(posProviderId, that.posProviderId) &&
                 Objects.equals(zeroLocationsRestaurantLocationsId, that.zeroLocationsRestaurantLocationsId) &&
-                Objects.equals(orderConfirmationOnSubmitEnabled, that.orderConfirmationOnSubmitEnabled);
+                Objects.equals(orderConfirmationOnSubmitEnabled, that.orderConfirmationOnSubmitEnabled) &&
+                Objects.equals(v3IdsMigrateAt, that.v3IdsMigrateAt);
     }
 
     @Override
@@ -190,7 +194,7 @@ public class Restaurant extends Organization {
         return Objects.hash(super.hashCode(), distributorId, chainId, openTimes, deliveryInfos, paymentTypes,
                 multiPaymentDisabled, creditcardsInfo, deliveriesInfo, orders, reservations, features,
                 currentLocationId, defaultLocationIdAtTimeOfMigration, locationName, locations,
-                defaultDispatchType, posProviderId, orderConfirmationOnSubmitEnabled, zeroLocationsRestaurantLocationsId);
+                defaultDispatchType, posProviderId, orderConfirmationOnSubmitEnabled, zeroLocationsRestaurantLocationsId, v3IdsMigrateAt);
     }
 
     @Override
@@ -235,6 +239,7 @@ public class Restaurant extends Organization {
                 ", posProviderId=" + posProviderId +
                 ", orderConfirmationOnSubmitEnabled=" + orderConfirmationOnSubmitEnabled +
                 ", zeroLocationsRestaurantLocationsId=" + zeroLocationsRestaurantLocationsId +
+                ", v3IdsMigrateAt =" + v3IdsMigrateAt +
                 '}';
     }
 
@@ -312,4 +317,9 @@ public class Restaurant extends Organization {
 
     @JsonInclude(Include.NON_NULL)
     public Boolean orderConfirmationOnSubmitEnabled = Boolean.TRUE;
+
+    /** The organization's migration timestamp - adding branchIds, fulfilment-method ids and order-settings Id */
+
+    @JsonInclude(Include.NON_NULL)
+    public Date v3IdsMigrateAt;
 }
