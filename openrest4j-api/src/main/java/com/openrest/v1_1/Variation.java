@@ -28,33 +28,48 @@ public class Variation implements Serializable, Cloneable {
         this.defaults = defaults;
         this.displayType = displayType;
         this.properties = properties;
+        this.variationsMetaData = new LinkedHashMap<>();
     }
 
+    public Variation(LocalizedString title, List<String> itemIds, Integer minNumAllowed,
+                     Integer maxNumAllowed, Map<String, Integer> prices, Set<String> defaults, String displayType,
+                     Map<String, String> properties, Map<String, VariationMetaData> variationsMetaData) {
+        this.title = title;
+        this.itemIds = itemIds;
+        this.minNumAllowed = minNumAllowed;
+        this.maxNumAllowed = maxNumAllowed;
+        this.prices = prices;
+        this.defaults = defaults;
+        this.displayType = displayType;
+        this.properties = properties;
+        this.variationsMetaData = variationsMetaData;
+    }
     /** Default constructor for JSON deserialization. */
     public Variation() {}
-    
+
     @Override
-	public Variation clone() {
-    	return new Variation(
-    			((title != null) ? title.clone() : null),
-    			((itemIds != null) ? new LinkedList<>(itemIds) : null),
-    			minNumAllowed, maxNumAllowed,
-    			((prices != null) ? new LinkedHashMap<>(prices) : null),
-    			((defaults != null) ? new LinkedHashSet<>(defaults) : null),
-    			displayType,
-                ((properties != null) ? new LinkedHashMap<>(properties) : null));
-	}
+    public Variation clone() {
+        return new Variation(
+                ((title != null) ? title.clone() : null),
+                ((itemIds != null) ? new LinkedList<>(itemIds) : null),
+                minNumAllowed, maxNumAllowed,
+                ((prices != null) ? new LinkedHashMap<>(prices) : null),
+                ((defaults != null) ? new LinkedHashSet<>(defaults) : null),
+                displayType,
+                ((properties != null) ? new LinkedHashMap<>(properties) : null),
+                ((variationsMetaData != null) ? new LinkedHashMap<>(variationsMetaData) : null));
+    }
 
     public static List<Variation> clone(List<Variation> variations) {
-    	if (variations == null) {
-    		return null;
-    	}
-    	
-    	final List<Variation> cloned = new LinkedList<>();
-		for (Variation variation : variations) {
-			cloned.add((variation != null) ? variation.clone() : null);
-		}
-		return cloned;
+        if (variations == null) {
+            return null;
+        }
+
+        final List<Variation> cloned = new LinkedList<>();
+        for (Variation variation : variations) {
+            cloned.add((variation != null) ? variation.clone() : null);
+        }
+        return cloned;
     }
 
     @Override
@@ -69,12 +84,13 @@ public class Variation implements Serializable, Cloneable {
                 Objects.equals(prices, variation.prices) &&
                 Objects.equals(defaults, variation.defaults) &&
                 Objects.equals(displayType, variation.displayType) &&
-                Objects.equals(properties, variation.properties);
+                Objects.equals(properties, variation.properties) &&
+                Objects.equals(variationsMetaData, variation.variationsMetaData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, itemIds, minNumAllowed, maxNumAllowed, prices, defaults, displayType, properties);
+        return Objects.hash(title, itemIds, minNumAllowed, maxNumAllowed, prices, defaults, displayType, properties, variationsMetaData);
     }
 
     /** The variations's name in various locales, e.g. "sides", "degree of cooking". */
@@ -84,7 +100,7 @@ public class Variation implements Serializable, Cloneable {
     /** The set's name, e.g. "drink", "sides". */
     @JsonInclude(Include.NON_NULL)
     public List<String> itemIds = new LinkedList<>();
-    
+
     /** Minimum number of items to select. */
     @JsonInclude(Include.NON_DEFAULT)
     public Integer minNumAllowed = 0;
@@ -111,4 +127,10 @@ public class Variation implements Serializable, Cloneable {
      */
     @JsonInclude(Include.NON_DEFAULT)
     public Map<String, String> properties = new LinkedHashMap<>();
+
+    /**
+     * Map of variation metaData - READ ONLY
+     */
+    @JsonInclude(Include.NON_DEFAULT)
+    public Map<String, VariationMetaData> variationsMetaData = new LinkedHashMap<>();
 }
