@@ -17,11 +17,10 @@ import java.util.*;
 public class VariationMetaData implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
 
-    public VariationMetaData(String title, String description, String media, Set<String> labels) {
+    public VariationMetaData(String title, String description, String media) {
         this.title = title;
         this.media = media;
         this.description = description;
-        this.labels = labels;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -29,8 +28,7 @@ public class VariationMetaData implements Serializable, Cloneable {
 
     @Override
     public VariationMetaData clone() {
-        return new VariationMetaData(title, description, media,
-                ((labels != null) ? new LinkedHashMap<>(labels) : null));
+        return new VariationMetaData(title, description, media);
     }
 
     @Override
@@ -40,13 +38,12 @@ public class VariationMetaData implements Serializable, Cloneable {
         VariationMetaData variationMetaData = (VariationMetaData) o;
         return Objects.equals(title, variationMetaData.title) &&
                 Objects.equals(description, variationMetaData.description) &&
-                Objects.equals(media, variationMetaData.media) &&
-                Objects.equals(labels, variationMetaData.labels);
+                Objects.equals(media, variationMetaData.media);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, description, media, labels);
+        return Objects.hash(title, description, media);
     }
 
     /** The item title. */
@@ -60,11 +57,4 @@ public class VariationMetaData implements Serializable, Cloneable {
     /** The item media. */
     @JsonInclude(Include.NON_NULL)
     public String media;
-
-    /**
-     * The item's labels.
-     * @see com.wix.restaurants.Labels
-     */
-    @JsonInclude(Include.NON_DEFAULT)
-    public Set<String> labels = new LinkedHashSet<>();
 }
