@@ -29,7 +29,7 @@ public class VariationMetaData implements Serializable, Cloneable {
 
     @Override
     public VariationMetaData clone() {
-        return new Variation(title, description, media,
+        return new VariationMetaData(title, description, media,
                 ((labels != null) ? new LinkedHashMap<>(labels) : null));
     }
 
