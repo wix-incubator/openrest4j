@@ -40,29 +40,30 @@ import java.util.Objects;
 	@Type(value = UpdatedOrderNotification.class, name = UpdatedOrderNotification.TYPE),
 	@Type(value = NewOrganizationNotification.class, name = NewOrganizationNotification.TYPE),
 	@Type(value = UpdatedMenuNotification.class, name = UpdatedMenuNotification.TYPE),
-	@Type(value = UpdatedSettingsNotification.class, name = UpdatedSettingsNotification.TYPE)
+	@Type(value = UpdatedSettingsNotification.class, name = UpdatedSettingsNotification.TYPE),
+	@Type(value = LocationSettingsUpdatedNotification.class, name = LocationSettingsUpdatedNotification.TYPE)
 })
 public abstract class Notification implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
-    
+
     /** Default constructor for JSON deserialization. */
     public Notification() {}
-    
+
     public Notification(String channelId, String channelParam, String comment, String state) {
     	this.channelId = channelId;
     	this.channelParam = channelParam;
     	this.comment = comment;
     	this.state = state;
     }
-    
+
     @Override
 	public abstract Notification clone();
-    
+
 	public static List<Notification> clone(List<Notification> notifications) {
 		if (notifications == null) {
 			return null;
 		}
-		
+
     	final List<Notification> cloned = new LinkedList<>();
     	for (Notification notification : notifications) {
     		cloned.add((notification != null) ? notification.clone() : null);
@@ -89,15 +90,15 @@ public abstract class Notification implements Serializable, Cloneable {
     /** @see Channels */
     @JsonInclude(Include.NON_NULL)
     public String channelId;
-    
+
     /** @see Channel */
     @JsonInclude(Include.NON_NULL)
     public String channelParam;
-    
+
     /** Free-text comment, e.g. who is notified. */
     @JsonInclude(Include.NON_NULL)
     public String comment;
-    
+
     /** @see State#ALL_STATES */
     @JsonInclude(Include.NON_DEFAULT)
     public String state = State.STATE_OPERATIONAL;
