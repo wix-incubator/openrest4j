@@ -212,7 +212,7 @@ public class Order implements Serializable, Cloneable {
                 (posInfo != null) ? posInfo.clone() : null,
                 chargeRoundingStrategy,
                 restaurantLocationId,
-                serviceFees);
+                new LinkedList<>(serviceFees));
 	}
 
     @Override
@@ -311,7 +311,7 @@ public class Order implements Serializable, Cloneable {
                 ", loyalty=" + loyalty +
                 ", posInfo=" + posInfo +
                 ", chargeRoundingStrategy=" + chargeRoundingStrategy +
-                ", serviceFees =" + serviceFees +
+                ", serviceFees=" + serviceFees +
                 '}';
     }
 
