@@ -14,15 +14,17 @@ public class ServiceFee implements Serializable, Cloneable {
     /** Default constructor for JSON deserialization. */
     public ServiceFee() {}
 
-    public ServiceFee(String id, String name, String amount) {
+    public ServiceFee(String id, String name, String amount, String tax) {
         this.id = id;
         this.name = name;
         this.amount = amount;
+        this.tax = tax;
+
     }
 
     @Override
     public ServiceFee clone() {
-        return new ServiceFee(id, name, amount);
+        return new ServiceFee(id, name, amount, tax);
     }
 
     @Override
@@ -33,12 +35,13 @@ public class ServiceFee implements Serializable, Cloneable {
         ServiceFee serviceFee = (ServiceFee) o;
         return Objects.equals(id, serviceFee.id) &&
                 Objects.equals(name, serviceFee.name) &&
-                Objects.equals(amount, serviceFee.amount);
+                Objects.equals(amount, serviceFee.amount) &&
+                Objects.equals(tax, serviceFee.tax);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, amount);
+        return Objects.hash(id, name, amount, tax);
     }
 
     /** The service fee's unique id. */
@@ -52,4 +55,8 @@ public class ServiceFee implements Serializable, Cloneable {
     /** The service fee's amount value */
     @JsonInclude(Include.NON_NULL)
     public String amount;
+
+    /** The service fee's tax value */
+    @JsonInclude(Include.NON_NULL)
+    public String tax;
 }
