@@ -14,8 +14,8 @@ public class ServiceFee implements Serializable, Cloneable {
     /** Default constructor for JSON deserialization. */
     public ServiceFee() {}
 
-    public ServiceFee(String rule_id, String name, Money fee, Money tax) {
-        this.rule_id = rule_id;
+    public ServiceFee(String ruleId, String name, Money fee, Money tax) {
+        this.ruleId = ruleId;
         this.name = name;
         this.fee = fee;
         this.tax = tax;
@@ -24,7 +24,7 @@ public class ServiceFee implements Serializable, Cloneable {
 
     @Override
     public ServiceFee clone() {
-        return new ServiceFee(rule_id, name, fee, tax);
+        return new ServiceFee(ruleId, name, fee, tax);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class ServiceFee implements Serializable, Cloneable {
         if (o == null || getClass() != o.getClass()) return false;
 
         ServiceFee serviceFee = (ServiceFee) o;
-        return Objects.equals(rule_id, serviceFee.rule_id) &&
+        return Objects.equals(ruleId, serviceFee.ruleId) &&
                 Objects.equals(name, serviceFee.name) &&
                 Objects.equals(fee, serviceFee.fee) &&
                 Objects.equals(tax, serviceFee.tax);
@@ -41,12 +41,12 @@ public class ServiceFee implements Serializable, Cloneable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(rule_id, name, fee, tax);
+        return Objects.hash(ruleId, name, fee, tax);
     }
 
     /** The service fee's unique id. */
     @JsonInclude(Include.NON_NULL)
-    public String rule_id;
+    public String ruleId;
 
     /** The service fee's name */
     @JsonInclude(Include.NON_NULL)
