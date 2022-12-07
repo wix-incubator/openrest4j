@@ -14,15 +14,15 @@ public class Money implements Serializable, Cloneable {
     /** Default constructor for JSON deserialization. */
     public Money() {}
 
-    public Money(Integer value, String formatted_value, String currency) {
+    public Money(Integer value, String formattedValue, String currency) {
         this.value = value;
-        this.formatted_value = formatted_value;
+        this.formattedValue = formattedValue;
         this.currency = currency;
     }
 
     @Override
     public Money clone() {
-        return new Money(value, formatted_value, currency);
+        return new Money(value, formattedValue, currency);
     }
 
     @Override
@@ -32,13 +32,13 @@ public class Money implements Serializable, Cloneable {
 
         Money money = (Money) o;
         return Objects.equals(value, money.value) &&
-               Objects.equals(formatted_value, money.formatted_value) &&
+               Objects.equals(formattedValue, money.formattedValue) &&
                Objects.equals(currency, money.currency);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, formatted_value, currency);
+        return Objects.hash(value, formattedValue, currency);
     }
 
     /** The value of money */
@@ -51,5 +51,5 @@ public class Money implements Serializable, Cloneable {
     
     /** The formatted value of money */
     @JsonInclude(Include.NON_NULL)
-    public String formatted_value;
+    public String formattedValue;
 }
