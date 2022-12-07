@@ -14,7 +14,7 @@ public class Money implements Serializable, Cloneable {
     /** Default constructor for JSON deserialization. */
     public Money() {}
 
-    public Money(Integer value, String formatted_value, String currency) {
+    public Money(String value, String formatted_value, String currency) {
         this.value = value;
         this.formatted_value = formatted_value;
         this.currency = currency;
@@ -43,7 +43,7 @@ public class Money implements Serializable, Cloneable {
 
     /** The value of money */
     @JsonInclude(Include.NON_NULL)
-    public Integer value;
+    public String value;
 
     /** The currency of money */
     @JsonInclude(Include.NON_NULL)
