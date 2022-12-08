@@ -14,12 +14,15 @@ public class ServiceFee implements Serializable, Cloneable {
     /** Default constructor for JSON deserialization. */
     public ServiceFee() {}
 
+    public ServiceFee(String ruleId, String name, Money fee) {
+        this(ruleId, name, fee, null);
+    }
+
     public ServiceFee(String ruleId, String name, Money fee, Money tax) {
         this.ruleId = ruleId;
         this.name = name;
         this.fee = fee;
         this.tax = tax;
-
     }
 
     @Override
